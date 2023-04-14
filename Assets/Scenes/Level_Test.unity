@@ -1820,7 +1820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 705019277, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: moveData.accele
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 705019277, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: jumpData.gravity
@@ -1844,7 +1844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 705019277, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: moveData.firstSpeed
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 705019277, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: jumpData.maxJumpTime
