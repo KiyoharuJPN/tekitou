@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("移動ステータス")]
-    MoveData moveData = new MoveData { firstSpeed = 1f, maxSpeed = 10f, accele = 0.03f };
+    MoveData moveData = new MoveData { firstSpeed = 1f, maxSpeed = 10f, accele = 0.03f, acceleTime = 0.3f};
 
     [SerializeField]
     [Header("ジャンプステータス")]
@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour
         speed = moveData.firstSpeed;
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         moveInput = Input.GetAxis("Horizontal");
@@ -109,7 +107,7 @@ public class PlayerController : MonoBehaviour
             timer = moveData.firstSpeed;
         }
 
-        // キー入力取得
+        // ジャンプキー入力取得
         if (Input.GetKey(KeyCode.Space) && !isJumping && !isFalling)
         {
             isSquatting = true;
@@ -130,19 +128,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //ダッシュ加速
-        if (isMoving && moveData.maxSpeed > speed)
-        {
-            dashTime+= Time.deltaTime;
-
-            if (dashTime > moveData.acceleTime)
-            {
-                speed += moveData.accele;
-                dashTime= 0;
-            }
-        }
-        
-
         if (!isMoving)
         {
             isRun = false;
@@ -161,7 +146,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         //プレイヤーの左右の移動
         rb.velocity = new Vector2(moveInput * speed * timer, rb.velocity.y);
 
@@ -172,6 +156,22 @@ public class PlayerController : MonoBehaviour
         }
         //重力
         Gravity();
+    }
+
+    //移動中の処理（加速等）
+    void Dash()
+    {
+        //ダッシュ加速
+        if (isMoving && moveData.maxSpeed > speed)
+        {
+            dashTime += Time.deltaTime;
+
+            if (dashTime > moveData.acceleTime)
+            {
+                speed += moveData.accele;
+                dashTime = 0;
+            }
+        }
     }
 
     void Jump()
