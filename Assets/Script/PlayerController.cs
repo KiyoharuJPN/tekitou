@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         public float maxSpeed;
         [Tooltip("‰Á‘¬“x")]
         public float accele;
+        [Tooltip("‰Á‘¬•K—vŽžŠÔ")]
         public float acceleTime;
     }
 
