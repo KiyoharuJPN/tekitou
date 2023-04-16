@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
     private bool isLanding = false;
     private bool isSquatting = false;
     private bool isRun = false;
-
     enum Status //プレイヤーの状態
     {
         GROUND = 1, //接地
@@ -108,7 +107,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // ジャンプキー入力取得
-        if (Input.GetKey(KeyCode.Space) && !isJumping && !isFalling)
+        if (Input.GetButton("Jump") && !isJumping && !isFalling)
         {
             isSquatting = true;
             isjump = true;
@@ -117,16 +116,18 @@ public class PlayerController : MonoBehaviour
         //ジャンプ中の処理
         if(isjump) 
         {
-            if(Input.GetKeyUp(KeyCode.Space) || jumpTime >= jumpData.maxJumpTime)
+            if(Input.GetButton("Jump") || jumpTime >= jumpData.maxJumpTime)
             {
                 isjump = false;
 
             }
-            else if (Input.GetKey(KeyCode.Space))
+            else if (Input.GetButton("Jump"))
             {
                 jumpTime += Time.deltaTime;
             }
         }
+
+        Dash();
 
         if (!isMoving)
         {
@@ -179,6 +180,12 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
         isSquatting = false;
         rb.AddForce(transform.up * jumpData.firstSpeed, ForceMode2D.Impulse);
+    }
+
+    //技入力検知・発生
+    void Skill()
+    {
+        switch(Input.GetKeyDown(KeyCode.Escape)) { }
     }
 
     void Gravity()
