@@ -6,31 +6,31 @@ public class movingTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("joystick button 0"))
+        if (Input.GetKeyDown("joystick button 0"))//
         {
             Debug.Log("button0");
         }
-        if (Input.GetKeyDown("joystick button 1"))
+        if (Input.GetKeyDown("joystick button 1"))//
         {
             Debug.Log("button1");
         }
-        if (Input.GetKeyDown("joystick button 2"))
+        if (Input.GetKeyDown("joystick button 2"))//
         {
             Debug.Log("button2");
         }
-        if (Input.GetKeyDown("joystick button 3"))
+        if (Input.GetKeyDown("joystick button 3"))//
         {
             Debug.Log("button3");
         }
-        if (Input.GetKeyDown("joystick button 4"))
+        if (Input.GetKeyDown("joystick button 4"))//
         {
             Debug.Log("button4");
         }
-        if (Input.GetKeyDown("joystick button 5"))
+        if (Input.GetKeyDown("joystick button 5"))//
         {
             Debug.Log("button5");
         }
-        if (Input.GetKeyDown("joystick button 6"))
+        if (Input.GetKeyDown("joystick button 6"))//
         {
             Debug.Log("button6");
         }
@@ -46,5 +46,62 @@ public class movingTest : MonoBehaviour
         {
             Debug.Log("button9");
         }
+        if (Input.GetKeyDown("joystick button 10"))
+        {
+            Debug.Log("button10");
+        }
+        if (Input.GetKeyDown("joystick button 11"))
+        {
+            Debug.Log("button11");
+        }
+        if (Input.GetKeyDown("joystick button 12"))
+        {
+            Debug.Log("button12");
+        }
+        if (Input.GetKeyDown("joystick button 13"))
+        {
+            Debug.Log("button13");
+        }
+        float hori = Input.GetAxis("Horizontal");
+        float vert = Input.GetAxis("Vertical");
+        if ((hori != 0) || (vert != 0))
+        {
+            Debug.Log("stick:" + hori + "," + vert);
+        }
+        //L Stick
+        float lsh = Input.GetAxis("L_Stick_H");
+        float lsv = Input.GetAxis("L_Stick_V");
+        if ((lsh != 0) || (lsv != 0))
+        {
+            Debug.Log("L stick:" + lsh + "," + lsv);
+        }
+        //R Stick
+        float rsh = Input.GetAxis("R_Stick_H");
+        float rsv = Input.GetAxis("R_Stick_V");
+        if ((rsh != 0) || (rsv != 0))
+        {
+            Debug.Log("R stick:" + rsh + "," + rsv);
+        }
+        //D-Pad
+        float dph = Input.GetAxis("D_Pad_H");
+        float dpv = Input.GetAxis("D_Pad_V");
+        if ((dph != 0) || (dpv != 0))
+        {
+            Debug.Log("D Pad:" + dph + "," + dpv);
+        }
+        //Trigger
+        float tri = Input.GetAxis("L_R_Trigger");
+        if (tri > 0)
+        {
+            Debug.Log("L trigger:" + tri);
+        }
+        else if (tri < 0)
+        {
+            Debug.Log("R trigger:" + tri);
+        }
+        /*else
+        {
+            Debug.Log("  trigger:none");
+        }*/
     }
 }
