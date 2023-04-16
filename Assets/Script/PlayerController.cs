@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     struct JumpData
     {
         [Tooltip("初速")]
-        public float firstSpeed; 
+        public float firstSpeed;
         [Tooltip("重力加速度")]
         public float gravity;
         [Tooltip("ジャンプ時間の上限")]
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("移動ステータス")]
-    MoveData moveData = new MoveData { firstSpeed = 1f, maxSpeed = 10f, accele = 0.03f, acceleTime = 0.3f};
+    MoveData moveData = new MoveData { firstSpeed = 1f, maxSpeed = 10f, accele = 0.03f, acceleTime = 0.3f };
 
     [SerializeField]
     [Header("ジャンプステータス")]
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 scale = gameObject.transform.localScale;
 
-            if(moveInput < 0 && scale.x > 0 || moveInput >0 && scale.x < 0)
+            if (moveInput < 0 && scale.x > 0 || moveInput > 0 && scale.x < 0)
             {
                 scale.x *= -1;
             }
@@ -106,28 +106,9 @@ public class PlayerController : MonoBehaviour
             timer = moveData.firstSpeed;
         }
 
-        // ジャンプキー入力取得
-        if (Input.GetButton("Jump") && !isJumping && !isFalling)
-        {
-            isSquatting = true;
-            isjump = true;
-        }
-
-        //ジャンプ中の処理
-        if(isjump) 
-        {
-            if(Input.GetButton("Jump") || jumpTime >= jumpData.maxJumpTime)
-            {
-                isjump = false;
-
-            }
-            else if (Input.GetButton("Jump"))
-            {
-                jumpTime += Time.deltaTime;
-            }
-        }
-
         Dash();
+        JumpBottan();
+        Skill();
 
         if (!isMoving)
         {
@@ -175,6 +156,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void JumpBottan()
+    {
+        // キー入力取得
+        if (Input.GetButton("Jump") && !isJumping && !isFalling)
+        {
+            isSquatting = true;
+            isjump = true;
+        }
+
+        //ジャンプ中の処理
+        if (isjump)
+        {
+            if (!Input.GetButton("Jump") || jumpTime >= jumpData.maxJumpTime)
+            {
+                isjump = false;
+            }
+            else if (Input.GetButton("Jump"))
+            {
+                jumpTime += Time.deltaTime;
+            }
+        }
+
+
+    }
+
     void Jump()
     {
         isJumping = true;
@@ -185,7 +191,11 @@ public class PlayerController : MonoBehaviour
     //技入力検知・発生
     void Skill()
     {
-        switch(Input.GetKeyDown(KeyCode.Escape)) { }
+        //TODO　突き刺し(RTボタンコード不明な為テスト用）
+        if (Input.GetKeyDown("joystick button 5"))
+        {
+            Stabbing._Stabbing(rb);
+        }
     }
 
     void Gravity()
