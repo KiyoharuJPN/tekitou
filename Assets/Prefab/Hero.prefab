@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326e491175a0f6d4daa3aa8a0602f905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 705019279}
   animator: {fileID: 4075973575706176914}
   moveData:
     firstSpeed: 1
@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 6404258948768147526}
   - component: {fileID: 7754554753567388165}
   - component: {fileID: 6806251793667066209}
+  - component: {fileID: 5770775620676262560}
   m_Layer: 5
   m_Name: PointCanvas
   m_TagString: Untagged
@@ -686,6 +687,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5770775620676262560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4810626439199633248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf4ec252beae744891081131d6811e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 5650033150640901299}
+  comboStatus:
+    Distime: 3
 --- !u!1 &5147749466926960328
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: 126.5}
+  m_AnchoredPosition: {x: -400, y: 140}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6105986941420694526
@@ -856,8 +872,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 265.1, y: 32.4}
-  m_SizeDelta: {x: 500, y: 65}
+  m_AnchoredPosition: {x: 165.3, y: 32.4}
+  m_SizeDelta: {x: 250, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3457868180360234062
 CanvasRenderer:
@@ -890,11 +906,11 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 50
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 50
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

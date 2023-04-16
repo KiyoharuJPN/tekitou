@@ -9,10 +9,10 @@ public class Skill
     public enum Type
     {
         NormalAttack,//通常攻撃
-        Stabbing,  //突き刺し
-        Skill1,    //居合切り（仮称）
-        Skill2,    //切り上げ（仮称）
-        ExAttack   //必殺技
+        Stabbing,    //突き刺し
+        IaiCut,      //居合切り（仮称）
+        RoundingUp,  //切り上げ（仮称）
+        ExAttack     //必殺技
     }
 
     public Type type;     　 // 種類

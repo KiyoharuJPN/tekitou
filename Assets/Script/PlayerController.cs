@@ -192,9 +192,17 @@ public class PlayerController : MonoBehaviour
     void Skill()
     {
         //TODO　突き刺し(RTボタンコード不明な為テスト用）
-        if (Input.GetKeyDown("joystick button 5"))
+        if (Input.GetKeyDown("joystick button 6"))
         {
             Stabbing._Stabbing(rb);
+        }
+        if (Input.GetKeyDown("joystick button 5"))
+        {
+            RoundingUp._RoundingUp(rb);
+        }
+        if (Input.GetKeyDown("joystick button 5"))
+        {
+            IaiCut._IaiCut(rb);
         }
     }
 

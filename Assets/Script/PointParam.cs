@@ -10,7 +10,7 @@ public class PointParam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = 0.ToString("d15");
+        text.text = "<size=20>SCORE   </size>" + (point).ToString("d8");
         point = 0;
         point_preb = 0;
     }
@@ -22,7 +22,7 @@ public class PointParam : MonoBehaviour
         //Debug.Log(point);
         if (point != point_preb)
         {
-            text.text = (point).ToString("d15");
+            text.text = "<size=20>SCORE   </size>" + (point).ToString("d8");
             point_preb = point;
         }
     }

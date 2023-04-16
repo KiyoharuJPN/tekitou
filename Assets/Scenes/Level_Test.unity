@@ -1988,6 +1988,18 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2702059118488556425, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_Text
+      value: <size=25>X</size><size=50> 26 </size><size=30>COMBO</size>
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702059118488556425, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702059118488556425, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3510880839671436020, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: hearts.Array.size
       value: 3
@@ -2063,6 +2075,14 @@ PrefabInstance:
     - target: {fileID: 6370244193881206646, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_Offset.y
       value: -0.84492815
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655313571727063838, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655313571727063838, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 148
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 705019279, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
