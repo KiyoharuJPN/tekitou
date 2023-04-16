@@ -106,28 +106,9 @@ public class PlayerController : MonoBehaviour
             timer = moveData.firstSpeed;
         }
 
-        // ジャンプキー入力取得
-        if (Input.GetButton("Jump") && !isJumping && !isFalling)
-        {
-            isSquatting = true;
-            isjump = true;
-        }
-
-        //ジャンプ中の処理
-        if(isjump) 
-        {
-            if(Input.GetButton("Jump") || jumpTime >= jumpData.maxJumpTime)
-            {
-                isjump = false;
-
-            }
-            else if (Input.GetButton("Jump"))
-            {
-                jumpTime += Time.deltaTime;
-            }
-        }
-
         Dash();
+        JumpBottan();
+        Skill();
 
         if (!isMoving)
         {
@@ -175,6 +156,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void JumpBottan()
+    {
+        // キー入力取得
+        if (Input.GetButton("Jump") && !isJumping && !isFalling)
+        {
+            isSquatting = true;
+            isjump = true;
+        }
+
+        //ジャンプ中の処理
+        if (isjump)
+        {
+            if (!Input.GetButton("Jump") || jumpTime >= jumpData.maxJumpTime)
+            {
+                isjump = false;
+            }
+            else if (Input.GetButton("Jump"))
+            {
+                jumpTime += Time.deltaTime;
+            }
+        }
+
+
+    }
+
     void Jump()
     {
         isJumping = true;
@@ -185,7 +191,11 @@ public class PlayerController : MonoBehaviour
     //技入力検知・発生
     void Skill()
     {
-        switch(Input.GetKeyDown(KeyCode.Escape)) { }
+        //TODO　突き刺し(RTボタンコード不明な為テスト用）
+        if (Input.GetKeyDown("joystick button 5"))
+        {
+            Stabbing._Stabbing(rb);
+        }
     }
 
     void Gravity()
