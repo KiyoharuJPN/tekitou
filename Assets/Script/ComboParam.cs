@@ -64,4 +64,9 @@ public class ComboParam : MonoBehaviour
     {
         countCombo = Cb;
     }
+
+    public float GetPowerUp()
+    {
+        return (float)countCombo * (float)0.01;
+    }
 }
