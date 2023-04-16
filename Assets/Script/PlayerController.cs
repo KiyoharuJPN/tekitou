@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private float dashTime;
     [SerializeField]
     bool isjump = false;
+    bool canSecondJump = false;
     float moveInput; //入力値
 
     //アニメーション用
@@ -163,6 +164,7 @@ public class PlayerController : MonoBehaviour
         {
             isSquatting = true;
             isjump = true;
+            canSecondJump = true;
         }
 
         //ジャンプ中の処理
@@ -176,6 +178,18 @@ public class PlayerController : MonoBehaviour
             {
                 jumpTime += Time.deltaTime;
             }
+        }
+
+        //二段ジャンプ
+        if (canSecondJump)
+        {
+            if(Input.GetButtonDown("Jump"))
+            {
+                canSecondJump = false;
+                jumpTime = 0;
+                isjump = true;
+            }
+
         }
 
 
@@ -223,6 +237,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             Invoke("Landingoff", 0.1f);
             jumpTime = 0;
+            canSecondJump = false;
         }
     }
 
