@@ -224,6 +224,7 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown("Jump"))
             {
                 canSecondJump = false;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
                 jumpTime = 0;
                 isjump = true;
             }
@@ -237,7 +238,14 @@ public class PlayerController : MonoBehaviour
     {
         isJumping = true;
         isSquatting = false;
-        rb.AddForce(transform.up * jumpData.firstSpeed, ForceMode2D.Impulse);
+        if (canSecondJump)
+        {
+            rb.AddForce(transform.up * jumpData.firstSpeed, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(transform.up * ((jumpData.firstSpeed / 5) * 4), ForceMode2D.Impulse);
+        }
     }
 
     //ãZì¸óÕåüímÅEî≠ê∂
