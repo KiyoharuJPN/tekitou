@@ -2203,8 +2203,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3510880839671436020, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: HPstatus.FullHP
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510880839671436020, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: hearts.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510880839671436020, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: HPstatus.HeartHight
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3510880839671436020, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: hearts.Array.data[0]

@@ -45,7 +45,7 @@ AnimatorStateMachine:
     m_Position: {x: 1000, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4523276237998236761}
-    m_Position: {x: 970, y: 320, z: 0}
+    m_Position: {x: 1160, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 523857745138194211}
     m_Position: {x: 1030, y: 540, z: 0}
@@ -58,6 +58,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1380792959566777693}
     m_Position: {x: 500, y: 660, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1332509287081446848}
+    m_Position: {x: 500, y: 720, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -4625108149811849718}
+    m_Position: {x: 886.5802, y: 679.53845, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -197,6 +203,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-4625108149811849718
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hero_Ascending
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 0c43656ebaa9f7344b13959b6ef733e5, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-4621246027101564122
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -508,6 +540,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &1332509287081446848
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hero_Knockback
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &1380792959566777693
 AnimatorState:
   serializedVersion: 6
@@ -515,7 +573,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hero_anime_Attack
+  m_Name: Hero_NomalAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

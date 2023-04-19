@@ -292,8 +292,7 @@ public class PlayerController : MonoBehaviour
 
     public void _Attack(Collider2D enemy)
     {
-        Debug.Log("’ÊíUŒ‚");
-        //enemy.GetComponent<Enemy>().Damage();
+        enemy.GetComponent<Enemykari>().Damage();
     }
 
     //‹Z“ü—ÍŒŸ’mE”­¶

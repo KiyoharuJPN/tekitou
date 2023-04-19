@@ -13,4 +13,9 @@ public class Enemykari : MonoBehaviour
     {
         collision.gameObject.GetComponent<PlayerController>().KnockBack(1, this.transform.position, 15 * knockBackValue);
     }
+
+    public void Damage()
+    {
+        Destroy(this.gameObject);
+    }
 }
