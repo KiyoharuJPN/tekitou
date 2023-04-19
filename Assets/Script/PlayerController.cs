@@ -37,6 +37,19 @@ public class PlayerController : MonoBehaviour
         public float maxJumpTime;
     }
 
+    struct KnockBackData
+    {
+        [Tooltip("KnockBackされる期間指定")]
+        public float knockBackTime;
+        //[Tooltip("KnockBackされる速さ")]
+        //public float knockBackForce;
+        [Tooltip("KnockBack可能かどうか")]
+        public bool canKnockBack;
+        //[Tooltip("無敵時間")]
+        //public float invincibiltyTime;
+    }
+
+
     [SerializeField]
     [Header("移動ステータス")]
     MoveData moveData = new MoveData { firstSpeed = 1f, maxSpeed = 10f, accele = 0.03f, acceleTime = 0.3f };
@@ -45,12 +58,24 @@ public class PlayerController : MonoBehaviour
     [Header("ジャンプステータス")]
     JumpData jumpData = new JumpData { firstSpeed = 16f, gravity = 10f, maxJumpTime = 1f };
 
+    [SerializeField]
+    [Header("ノックバックステータス")]
+    KnockBackData knockBack = new() { /*knockBackForce = 50, */knockBackTime = 0.3f, canKnockBack = true };
+    //KnockBack関連
+    Vector2 knockBackDir;   //ノックバックされる方向
+    bool isKnockingBack;    //ノックバックされているかどうか
+    float knockBackCounter; //時間を測るカウンター
+    float knockBackForce;   //ノックバックされる力
+    HPparam hpparam;
+
+
     float timer;
     float jumpTime = 0;
     private float speed;
     private float dashTime;
     [SerializeField]
     bool isjump = false;
+    bool canSecondJump = false;
     float moveInput; //入力値
 
     //デバック要
@@ -78,10 +103,22 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         speed = moveData.firstSpeed;
+
+        hpparam = GameObject.Find("Hero").GetComponentInChildren<HPparam>();
     }
 
     void Update()
     {
+        //ノックバック処理
+        if (knockBack.canKnockBack)
+        {
+            if (isKnockingBack)
+            {
+                KnockingBack();
+                return;
+            }
+        };
+
         moveInput = Input.GetAxis("Horizontal");
 
         isMoving = moveInput != 0;
@@ -137,9 +174,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        //プレイヤーの左右の移動
-        rb.velocity = new Vector2(moveInput * speed * timer, rb.velocity.y);
-        //rb.AddForce(new Vector2(moveInput * 10f, 0), ForceMode2D.Impulse);
+        if (knockBackCounter <= 0)
+        {
+            //プレイヤーの左右の移動
+            rb.velocity = new Vector2(moveInput * speed * timer, rb.velocity.y);
+            //rb.AddForce(new Vector2(moveInput * 10f, 0), ForceMode2D.Impulse);
+        }
 
         //ジャンプ
         if (isjump)
@@ -178,6 +218,7 @@ public class PlayerController : MonoBehaviour
         {
             isSquatting = true;
             isjump = true;
+            canSecondJump = true;
         }
 
         //ジャンプ中の処理
@@ -193,6 +234,19 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //二段ジャンプ
+        if (canSecondJump)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                canSecondJump = false;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                jumpTime = 0;
+                isjump = true;
+            }
+
+        }
+
 
     }
 
@@ -200,7 +254,14 @@ public class PlayerController : MonoBehaviour
     {
         isJumping = true;
         isSquatting = false;
-        rb.AddForce(transform.up * jumpData.firstSpeed, ForceMode2D.Impulse);
+        if (canSecondJump)
+        {
+            rb.AddForce(transform.up * jumpData.firstSpeed, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(transform.up * ((jumpData.firstSpeed / 5) * 4), ForceMode2D.Impulse);
+        }
     }
 
     public void _Attack(Collider2D enemy)
@@ -238,7 +299,10 @@ public class PlayerController : MonoBehaviour
 
     void Gravity()
     {
-        rb.AddForce(new Vector2(0, -jumpData.gravity));
+        if (knockBackCounter <= 0)
+        {
+            rb.AddForce(new Vector2(0, -jumpData.gravity));
+        }
     }
 
     //着地の判定
@@ -253,6 +317,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             Invoke("Landingoff", 0.1f);
             jumpTime = 0;
+            canSecondJump = false;
         }
     }
 
@@ -274,4 +339,46 @@ public class PlayerController : MonoBehaviour
         }
         isAttack = false;
     }
+
+    //KnockBackされたときの処理
+    void KnockingBack()
+    {
+        if (knockBackCounter == knockBack.knockBackTime)
+        {
+            rb.velocity = Vector2.zero;
+        }
+        if (knockBackCounter > 0)
+        {
+            knockBackCounter -= Time.deltaTime;
+            rb.AddForce(new Vector2(knockBackDir.x * knockBackForce, knockBackDir.y * knockBackForce));
+            Debug.Log(new Vector2(knockBackDir.x * knockBackForce, knockBackDir.y * knockBackForce));
+        }
+        else
+        {
+            //rb.velocity = Vector2.zero;
+            isKnockingBack = false;
+        }
+    }
+    //KnockBackされたら呼ぶ関数
+    public void KnockBack(int damage, Vector3 position, float force)
+    {
+        if (knockBackCounter <= 0)
+        {
+            hpparam.SetHP(hpparam.GetHP() - damage);
+            if (hpparam.GetHP() == 0)
+            {
+                //プレイヤーが死ぬ
+            }
+        }
+
+        knockBackCounter = knockBack.knockBackTime;
+        isKnockingBack = true;
+
+        knockBackDir = transform.position - position;
+        knockBackDir.Normalize();
+        knockBackForce = force;
+
+        Debug.Log("emypos: " + position + "\nplayerpos: " + gameObject.transform.position + "\nknockDir: " + knockBackDir);
+    }
+
 }
