@@ -48,6 +48,7 @@ public class ComboParam : MonoBehaviour
         if (time > comboStatus.Distime)//ˆê’èŠÔ‚ª—§‚Â‚Æƒ[ƒ‚É–ß‚·
         {
             countCombo = 0;
+            text.text = "<size=25>X</size><size=50> " + countCombo + " </size><size=30>COMBO</size>";
         }
     }
 

@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
     float knockBackCounter; //時間を測るカウンター
     float knockBackForce;   //ノックバックされる力
     HPparam hpparam;
-
+    PointParam point;
+    ComboParam combo;
 
     float timer;
     float jumpTime = 0;
@@ -105,10 +106,35 @@ public class PlayerController : MonoBehaviour
         speed = moveData.firstSpeed;
 
         hpparam = GameObject.Find("Hero").GetComponentInChildren<HPparam>();
+        point = GameObject.Find("Hero").GetComponentInChildren<PointParam>();
+        combo = GameObject.Find("Hero").GetComponentInChildren<ComboParam>();
     }
 
     void Update()
     {
+
+        /*if (Input.GetKeyDown("1"))
+        {
+            point.SetPoint(point.GetPoint() + 1);
+        }
+
+        if (Input.GetKeyDown("2"))
+        {
+            point.SetPoint(point.GetPoint() - 1);
+        }
+
+        if (Input.GetKeyDown("3"))
+        {
+            combo.SetCombo(combo.GetCombo() + 1);
+        }
+
+        if (Input.GetKeyDown("4"))
+        {
+            combo.SetCombo(combo.GetCombo() - 1);
+        }
+
+        Debug.Log("基礎攻撃力: 15"　+ "攻撃力は"+ (15 +15*combo.GetPowerUp()));
+*/
         //ノックバック処理
         if (knockBack.canKnockBack)
         {
@@ -316,6 +342,7 @@ public class PlayerController : MonoBehaviour
             }
             isJumping = false;
             Invoke("Landingoff", 0.1f);
+            rb.velocity = Vector2.zero;
             jumpTime = 0;
             canSecondJump = false;
         }

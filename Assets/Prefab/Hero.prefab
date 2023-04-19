@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 6404258948768147526}
   - component: {fileID: 7754554753567388165}
   - component: {fileID: 6806251793667066209}
-  - component: {fileID: 5770775620676262560}
+  - component: {fileID: 5976172987493329771}
   m_Layer: 5
   m_Name: PointCanvas
   m_TagString: Untagged
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5770775620676262560
+--- !u!114 &5976172987493329771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -696,12 +696,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4810626439199633248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baf4ec252beae744891081131d6811e5, type: 3}
+  m_Script: {fileID: 11500000, guid: f1a1cecb6010a7a44b895ba1c0b31a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 5650033150640901299}
-  comboStatus:
-    Distime: 3
 --- !u!1 &5147749466926960328
 GameObject:
   m_ObjectHideFlags: 0
