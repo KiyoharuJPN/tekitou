@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
         else { isAttackKay = false; }
 
         //Ø‚èã‚°
-        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack && !isFalling)
+        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
         {
             UpAttack._UpAttack(rb);
             StartCoroutine(_interval());
