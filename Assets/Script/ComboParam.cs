@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class ComboParam : MonoBehaviour
 {
-    public Text text;
+    [Tooltip("表示用テキストボックス")]
+    public Text text;   //リアルタイム更新用テキストボックス
     private int countCombo, CCb_preb;
     private float time;
 
@@ -17,7 +18,7 @@ public class ComboParam : MonoBehaviour
     }
     [SerializeField]
     [Header("Comboステータス")]
-    ComboStatus comboStatus = new ComboStatus { Distime = 5 };
+    ComboStatus comboStatus = new ComboStatus { Distime = 3 };
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +33,11 @@ public class ComboParam : MonoBehaviour
     {
         if (countCombo <= 0) countCombo = 0;//コンボ最小限
         if (countCombo >= 999) countCombo = 999;//コンボ最大限
-        if (countCombo == 0) text.gameObject.SetActive(false);//0の時に画面から消す
+        //if (countCombo == 0) text.gameObject.SetActive(false);//0の時に画面から消す
 
         if (countCombo != 0 && countCombo != CCb_preb || countCombo == 1)//表示コード
         {
-            if (!text.gameObject.activeSelf) text.gameObject.SetActive(true);
+            //if (!text.gameObject.activeSelf) text.gameObject.SetActive(true);
             CCb_preb = countCombo;
             text.text = "<size=25>X</size><size=50> " + countCombo + " </size><size=30>COMBO</size>";
             time = 0;
@@ -44,15 +45,13 @@ public class ComboParam : MonoBehaviour
 
         //Debug.Log("time"+time +"distime"+comboStatus.Distime);
         time += Time.deltaTime;//時間経過の計算
-        if (time > comboStatus.Distime)//一定時間が立つと表示を消す
+        if (time > comboStatus.Distime)//一定時間が立つとゼロに戻す
         {
-            //Debug.Log(1);
             countCombo = 0;
         }
     }
 
 
-    //void
 
 
     //ゲットセット関数
@@ -63,5 +62,10 @@ public class ComboParam : MonoBehaviour
     public void SetCombo(int Cb)
     {
         countCombo = Cb;
+    }
+
+    public float GetPowerUp()
+    {
+        return (float)countCombo * (float)0.05;
     }
 }
