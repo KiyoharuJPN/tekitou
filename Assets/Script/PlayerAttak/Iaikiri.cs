@@ -8,7 +8,7 @@ public class Iaikiri
 {
     public static void _Iaikiri(Rigidbody2D player)
     {
-        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.Skill1);
+        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.IaiCut);
         float distance;
 
         if (player.transform.localScale.x <= 0)
