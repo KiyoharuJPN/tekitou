@@ -313,10 +313,21 @@ public class PlayerController : MonoBehaviour
         else { isAttackKay = false; }
 
         //Ø‚èã‚°
-        
+        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
+        {
+            UpAttack._UpAttack(rb);
+            StartCoroutine(_interval());
+        }
+
+        //“Ë‚«Žh‚µ
+        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8) && !isAttack && isFalling)
+        {
+            Stabbing._Stabbing(rb);
+            StartCoroutine(_interval());
+        }
 
         //‹‡Ø‚è
-        if ((((lsh >= 0.8 || lsh <= -0.8) && isAttackKay) || rsh >= 0.8 )&& !isAttack && !isFalling)
+        if ((((lsh >= 0.8 || lsh <= -0.8) && isAttackKay) || (rsh >= 0.8 || rsh <= -0.8 ))&& !isAttack && !isFalling)
         {
             Iaikiri._Iaikiri(rb);
             StartCoroutine(_interval());
