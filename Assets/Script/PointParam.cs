@@ -10,7 +10,7 @@ public class PointParam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = "<size=20>SCORE   </size>" + (point).ToString("d8");
+        text.text = "<size=20>SCORE   </size>" + (point).ToString("d8");        //スコアボードの初期化
         point = 0;
         point_preb = 0;
     }
@@ -22,11 +22,12 @@ public class PointParam : MonoBehaviour
         //Debug.Log(point);
         if (point != point_preb)
         {
-            text.text = "<size=20>SCORE   </size>" + (point).ToString("d8");
+            text.text = "<size=20>SCORE   </size>" + (point).ToString("d8");   //リアルタイム得点更新
             point_preb = point;
         }
     }
 
+    //ゲットセット関数
     public int GetPoint()
     {
         return point;

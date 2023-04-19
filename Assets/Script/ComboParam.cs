@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class ComboParam : MonoBehaviour
 {
-    public Text text;
+    [Tooltip("表示用テキストボックス")]
+    public Text text;   //リアルタイム更新用テキストボックス
     private int countCombo, CCb_preb;
     private float time;
 
