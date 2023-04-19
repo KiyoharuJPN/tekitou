@@ -69,12 +69,7 @@ public class movingTest : MonoBehaviour
             Debug.Log("stick:" + hori + "," + vert);
         }
         //L Stick
-        float lsh = Input.GetAxis("L_Stick_H");
-        float lsv = Input.GetAxis("L_Stick_V");
-        if ((lsh != 0) || (lsv != 0))
-        {
-            Debug.Log("L stick:" + lsh + "," + lsv);
-        }
+        
         //R Stick
         float rsh = Input.GetAxis("R_Stick_H");
         float rsv = Input.GetAxis("R_Stick_V");

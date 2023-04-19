@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -50,6 +52,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     bool isjump = false;
     float moveInput; //入力値
+
+    //デバック要
+    internal bool isAttack = false;
+    bool isAttackKay = false;
 
     //アニメーション用
     private bool isMoving = false;
@@ -105,7 +111,6 @@ public class PlayerController : MonoBehaviour
         {
             timer = moveData.firstSpeed;
         }
-
         Dash();
         JumpBottan();
         Skill();
@@ -124,12 +129,17 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsLanding", isLanding);
         animator.SetBool("IsSquatting", isSquatting);
         animator.SetBool("IsRun", isRun);
+
+        //デバック用Ray
+        //Ray2D ray = new Ray2D(this.transform.position, new Vector2(1, 0));
+        //Debug.DrawLine(ray.origin, ray.direction * 10, Color.red);
     }
 
     void FixedUpdate()
     {
         //プレイヤーの左右の移動
         rb.velocity = new Vector2(moveInput * speed * timer, rb.velocity.y);
+        //rb.AddForce(new Vector2(moveInput * 10f, 0), ForceMode2D.Impulse);
 
         //ジャンプ
         if (isjump)
@@ -138,6 +148,11 @@ public class PlayerController : MonoBehaviour
         }
         //重力
         Gravity();
+        //if (isAttack)
+        //{
+        //    rb.AddForce(transform.right * 10, ForceMode2D.Impulse);
+        //}
+        
     }
 
     //移動中の処理（加速等）
@@ -188,13 +203,36 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(transform.up * jumpData.firstSpeed, ForceMode2D.Impulse);
     }
 
+    public void _Attack(Collider2D enemy)
+    {
+        Debug.Log("通常攻撃");
+        //enemy.GetComponent<Enemy>().Damage();
+    }
+
     //技入力検知・発生
     void Skill()
     {
-        //TODO　突き刺し(RTボタンコード不明な為テスト用）
-        if (Input.GetKeyDown("joystick button 5"))
+        float lsh = Input.GetAxis("L_Stick_H");
+        float lsv = Input.GetAxis("L_Stick_V");
+        float rsh = Input.GetAxis("R_Stick_H");
+        float rsv = Input.GetAxis("R_Stick_V");
+
+        float tri = Input.GetAxis("L_R_Trigger");
+
+        if (tri > 0)
         {
-            Stabbing._Stabbing(rb);
+            isAttackKay = true;
+        }
+        else { isAttackKay = false; }
+
+        //切り上げ
+        
+
+        //居合切り
+        if ((((lsh >= 0.8 || lsh <= -0.8) && isAttackKay) || rsh >= 0.8 )&& !isAttack && !isFalling)
+        {
+            Iaikiri._Iaikiri(rb);
+            StartCoroutine(_interval());
         }
     }
 
@@ -221,5 +259,19 @@ public class PlayerController : MonoBehaviour
     void Landingoff()
     {
         isLanding = false;
+    }
+
+    //クールタイム用コルーチン
+    IEnumerator _interval()
+    {
+        float time = 2;
+
+        isAttack = true;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        isAttack = false;
     }
 }

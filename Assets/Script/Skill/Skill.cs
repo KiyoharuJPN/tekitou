@@ -20,9 +20,9 @@ public class Skill
     public float distance;   // ˆÚ“®‹——£
     public String skillText; // ƒXƒLƒ‹‚Ìà–¾•¶
 
-    public bool coolTime;
+    public float coolTime;
 
-    public Skill(Type type, float damage, float distance, String skillTxet, bool coolTime)
+    public Skill(Type type, float damage, float distance, String skillTxet, float coolTime)
     {
         this.type = type;
         this.damage = damage;
