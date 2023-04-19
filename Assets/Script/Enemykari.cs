@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class Enemykari : MonoBehaviour
 {
+    [Tooltip("ノックバック値")]
+    public float knockBackValue;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.GetComponent<PlayerController>().KnockBack(1, this.transform.position, 15);
+        collision.gameObject.GetComponent<PlayerController>().KnockBack(1, this.transform.position, 15 * knockBackValue);
     }
 }
