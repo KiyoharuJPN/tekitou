@@ -20,6 +20,20 @@ public class ComboParam : MonoBehaviour
     [Header("Comboステータス")]
     ComboStatus comboStatus = new ComboStatus { Distime = 3 };
 
+    public static ComboParam Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +77,12 @@ public class ComboParam : MonoBehaviour
     public void SetCombo(int Cb)
     {
         countCombo = Cb;
+    }
+
+    //計測時間リセット
+    public void ResetTime()
+    {
+        time = 0;
     }
 
     public float GetPowerUp()

@@ -14,6 +14,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
 
     [System.Serializable]
+    struct StatusData
+    {
+        [Tooltip("体力")]
+        public float hp;
+        [Tooltip("攻撃力")]
+        public float powar;
+    }
+
+    [System.Serializable]
     struct MoveData
     {
         [Tooltip("初期速度")]
@@ -49,6 +58,9 @@ public class PlayerController : MonoBehaviour
         //public float invincibiltyTime;
     }
 
+    [SerializeField]
+    [Header("プレイヤーステータス")]
+    StatusData statusData = new StatusData { hp = 6, powar = 1};
 
     [SerializeField]
     [Header("移動ステータス")]
@@ -204,7 +216,6 @@ public class PlayerController : MonoBehaviour
         {
             //プレイヤーの左右の移動
             rb.velocity = new Vector2(moveInput * speed * timer, rb.velocity.y);
-            //rb.AddForce(new Vector2(moveInput * 10f, 0), ForceMode2D.Impulse);
         }
 
         //ジャンプ
@@ -214,11 +225,6 @@ public class PlayerController : MonoBehaviour
         }
         //重力
         Gravity();
-        //if (isAttack)
-        //{
-        //    rb.AddForce(transform.right * 10, ForceMode2D.Impulse);
-        //}
-        
     }
 
     //移動中の処理（加速等）
@@ -292,7 +298,7 @@ public class PlayerController : MonoBehaviour
 
     public void _Attack(Collider2D enemy)
     {
-        enemy.GetComponent<Enemykari>().Damage();
+        enemy.GetComponent<Enemy>().Damage(statusData.powar);
     }
 
     //技入力検知・発生
