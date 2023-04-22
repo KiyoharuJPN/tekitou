@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 42f3f5b50e3cd804490cc79af61ae886
+guid: 2d83a60fbc514b642a335cf8844b04c2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,23 +100,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Item_1_Coin_10_0
+      name: Item_2_Heart_10_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 464b7d31ba3374e419f5c7d101b10b6e
-      internalID: -1911176918
+      spriteID: 9e7725d4b54e21642bb01b4b4cad3a36
+      internalID: 1814480624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Item_1_Coin_10_1
+      name: Item_2_Heart_10_1
       rect:
         serializedVersion: 2
         x: 320
@@ -151,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b0bab50fb8137344b0811f2d0699d51
-      internalID: -198332980
+      spriteID: f01be7dd1ab55b643b192bb962cc1fd9
+      internalID: -766792813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Item_1_Coin_10_2
+      name: Item_2_Heart_10_2
       rect:
         serializedVersion: 2
         x: 640
@@ -172,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af2363ef7ff7c6943acc9557daa60ff3
-      internalID: -244430185
+      spriteID: f3b4fd2927258884fa83ab569857ab49
+      internalID: 1515627251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Item_1_Coin_10_3
+      name: Item_2_Heart_10_3
       rect:
         serializedVersion: 2
         x: 960
@@ -193,8 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b300bfde0fa5c749b792761451f96fa
-      internalID: -1105421201
+      spriteID: 75fbecf6edd3891449fe3d222b89ac94
+      internalID: -1403466669
       vertices: []
       indices: 
       edges: []
@@ -210,10 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Item_1_Coin_10_2: -244430185
-      Item_1_Coin_10_1: -198332980
-      Item_1_Coin_10_3: -1105421201
-      Item_1_Coin_10_0: -1911176918
+      Item_2_Heart_10_2: 1515627251
+      Item_2_Heart_10_1: -766792813
+      Item_2_Heart_10_3: -1403466669
+      Item_2_Heart_10_0: 1814480624
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
