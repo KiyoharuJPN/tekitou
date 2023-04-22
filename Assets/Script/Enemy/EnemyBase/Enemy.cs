@@ -12,6 +12,10 @@ public class Enemy : MonoBehaviour
 
     float hp;
 
+    //吹っ飛び角度
+    float radian;
+    float angle;
+
     enum moveType
     {
         NotMove, //動かない
@@ -25,6 +29,8 @@ public class Enemy : MonoBehaviour
         //idで指定した敵データ読込
         enemyData = EnemyGeneratar.instance.EnemySet(id);
         hp = enemyData.hp;
+        radian = Mathf.Atan2(enemyData.blowOffAngle.y, enemyData.blowOffAngle.x);
+        angle = radian * 180 / Mathf.PI;
     }
 
     virtual protected void OnCollisionEnter2D(Collision2D col)
@@ -46,7 +52,7 @@ public class Enemy : MonoBehaviour
     {
         hp -= power;
         ComboParam.Instance.ResetTime();
-        Debug.Log(enemyData.charName + "残り体力：" + hp);
+        Debug.Log("残り体力：" + hp);
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);

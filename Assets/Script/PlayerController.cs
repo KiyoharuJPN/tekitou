@@ -424,4 +424,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log("emypos: " + position + "\nplayerpos: " + gameObject.transform.position + "\nknockDir: " + knockBackDir);
     }
 
+    public void Heel(int resilience)
+    {
+        hpparam.SetHP(hpparam.GetHP() + resilience);
+    }
 }
