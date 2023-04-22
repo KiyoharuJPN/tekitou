@@ -238,7 +238,7 @@ public class TitleMenu : MonoBehaviour
     //メニューの動き　　これを無視して?//.getcompeont<Code>().getmove();
     void GameStart()
     {
-        //SceneManager.LoadScene(gameScene);
+        if(gameScene!="")SceneManager.LoadScene(gameScene);
         Debug.Log("ゲーム画面をロードしました。");
     }
 
