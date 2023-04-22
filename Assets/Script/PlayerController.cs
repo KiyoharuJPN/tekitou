@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        /*if (Input.GetKeyDown("1"))
+        if (Input.GetKeyDown("1"))
         {
             point.SetPoint(point.GetPoint() + 1);
         }
@@ -133,8 +133,8 @@ public class PlayerController : MonoBehaviour
             combo.SetCombo(combo.GetCombo() - 1);
         }
 
-        Debug.Log("Šî‘bUŒ‚—Í: 15"@+ "UŒ‚—Í‚Í"+ (15 +15*combo.GetPowerUp()));
-*/
+        Debug.Log("Šî‘bUŒ‚—Í: 15" + "UŒ‚—Í‚Í" + (15 + 15 * combo.GetPowerUp()));
+
         //ƒmƒbƒNƒoƒbƒNˆ—
         if (knockBack.canKnockBack)
         {
