@@ -50,10 +50,12 @@ public class PlayerController : MonoBehaviour
     {
         [Tooltip("KnockBackされる期間指定")]
         public float knockBackTime;
-        //[Tooltip("KnockBackされる速さ")]
-        //public float knockBackForce;
+        [Tooltip("行動不能期間")]
+        public float cantMovingTime;
         [Tooltip("KnockBack可能かどうか")]
         public bool canKnockBack;
+        //[Tooltip("KnockBackされる速さ")]
+        //public float knockBackForce;
         //[Tooltip("無敵時間")]
         //public float invincibiltyTime;
     }
@@ -72,12 +74,13 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("ノックバックステータス")]
-    KnockBackData knockBack = new() { /*knockBackForce = 50, */knockBackTime = 0.3f, canKnockBack = true };
+    KnockBackData knockBack = new() { /*knockBackForce = 50,*/ knockBackTime = .4f, cantMovingTime = .4f, canKnockBack = true };
 
     //KnockBack関連
     Vector2 knockBackDir;   //ノックバックされる方向
     bool isKnockingBack;    //ノックバックされているかどうか
     internal float knockBackCounter; //時間を測るカウンター
+    internal float canMovingCounter;
     float knockBackForce;   //ノックバックされる力
     HPparam hpparam;
 
@@ -134,7 +137,11 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         };
-        
+        if (canMovingCounter >= 0)
+        {
+            canMovingCounter -= Time.deltaTime;
+        }
+
 
         Skill();
 
@@ -239,7 +246,7 @@ public class PlayerController : MonoBehaviour
                 //プレイヤーが死ぬ
             }
         }
-
+        canMovingCounter = knockBack.cantMovingTime;
         knockBackCounter = knockBack.knockBackTime;
         isKnockingBack = true;
 
