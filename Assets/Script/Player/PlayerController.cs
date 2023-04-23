@@ -102,6 +102,28 @@ public class PlayerController : MonoBehaviour
     {
         isFalling = rb.velocity.y < -0.5f;
 
+        /*if (Input.GetKeyDown("1"))
+        {
+            point.SetPoint(point.GetPoint() + 1);
+        }
+
+        if (Input.GetKeyDown("2"))
+        {
+            point.SetPoint(point.GetPoint() - 1);
+        }
+
+        if (Input.GetKeyDown("3"))
+        {
+            combo.SetCombo(combo.GetCombo() + 1);
+        }
+
+        if (Input.GetKeyDown("4"))
+        {
+            combo.SetCombo(combo.GetCombo() - 1);
+        }
+
+        Debug.Log("Šî‘bUŒ‚—Í: 15"@+ "UŒ‚—Í‚Í"+ (15 +15*combo.GetPowerUp()));
+*/
         //ƒmƒbƒNƒoƒbƒNˆ—
         if (knockBack.canKnockBack)
         {

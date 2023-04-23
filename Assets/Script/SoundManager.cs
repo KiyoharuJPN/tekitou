@@ -11,9 +11,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] List<BGMSoundData> bgmSoundDatas;
     [SerializeField] List<SESoundData> seSoundDatas;
 
-    public float masterVolume = 1;
-    public float bgmMasterVolume = 1;
-    public float seMasterVolume = 1;
+    public float masterVolume { get; set; }
+    public float bgmMasterVolume { get; set; }
+    public float seMasterVolume { get; set; }
 
     public static SoundManager Instance { get; private set; }
 
@@ -62,7 +62,7 @@ public class BGMSoundData
     public BGM bgm;
     public AudioClip audioClip;
     [Range(0, 1)]
-    public float volume = 1;
+    public float volume = 0.4f;
 }
 
 //SEƒŠƒXƒg
@@ -82,5 +82,5 @@ public class SESoundData
     public SE se;
     public AudioClip audioClip;
     [Range(0, 1)]
-    public float volume = 1;
+    public float volume = 0.4f;
 }
