@@ -1,14 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 //ãZÅFìÀÇ´éhÇµ
 class Stabbing : MonoBehaviour
 {
-    public static void _Stabbing(Rigidbody2D player)
+    public static async void _Stabbing(PlayerController player)
     {
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.Stabbing);
-        player.AddForce(-player.transform.up * skill.distance, ForceMode2D.Impulse);
-        Debug.Log("ìÀÇ´éhÇµÅI");
+        player.isDropAttack = true;
+        player.animator.SetBool("IsDropAttack", player.isDropAttack);
+        await Task.Delay(200);
+        _Move(player, skill);
+    }
+
+    static void _Move(PlayerController player, Skill skill)
+    {
+        player.rb.AddForce(-player.transform.up * skill.distance, ForceMode2D.Impulse);
     }
 }

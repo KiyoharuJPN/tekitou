@@ -21,9 +21,7 @@ MonoBehaviour:
     speed: 0
     score: 100
     knockBackValue: 1
-    blowOffAngle:
-      x: 0
-      y: 0
+    angle: 60
   - id: 1
     charName: "\u93A7\u4ED8\u304D\u6848\u5C71\u5B50"
     hp: 20
@@ -32,9 +30,7 @@ MonoBehaviour:
     speed: 0
     score: 1000
     knockBackValue: 1
-    blowOffAngle:
-      x: 0
-      y: 0
+    angle: 0
   - id: 
     charName: 
     hp: 0
@@ -43,9 +39,7 @@ MonoBehaviour:
     speed: 0
     score: 0
     knockBackValue: 0
-    blowOffAngle:
-      x: 0
-      y: 0
+    angle: 0
   - id: 
     charName: 
     hp: 0
@@ -54,6 +48,4 @@ MonoBehaviour:
     speed: 0
     score: 0
     knockBackValue: 0
-    blowOffAngle:
-      x: 0
-      y: 0
+    angle: 0

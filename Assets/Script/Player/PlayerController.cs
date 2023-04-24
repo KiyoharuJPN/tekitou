@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         public float maxJumpTime;
     }
 
+    [System.Serializable]
     struct KnockBackData
     {
         [Tooltip("KnockBackされる期間指定")]
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("ジャンプステータス")]
-    internal JumpData jumpData = new JumpData { firstSpeed = 16f, gravity = 10f, maxJumpTime = 1f };
+    internal JumpData jumpData = new() { firstSpeed = 16f, gravity = 10f, maxJumpTime = 1f };
 
     [SerializeField]
     [Header("ノックバックステータス")]
@@ -94,6 +95,8 @@ public class PlayerController : MonoBehaviour
     internal bool isJumping = false;
     internal bool isLanding = false;
     internal bool isSquatting = false;
+    internal bool isUpAttack = false;
+    internal bool isDropAttack = false;
 
     void Start()
     {
@@ -182,14 +185,14 @@ public class PlayerController : MonoBehaviour
         //切り上げ
         if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
         {
-            UpAttack._UpAttack(rb);
+            UpAttack._UpAttack(this);
             StartCoroutine(_interval());
         }
 
         //突き刺し
-        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8) && !isAttack && isFalling)
+        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8) && !isAttack &&(isFalling || isJumping))
         {
-            Stabbing._Stabbing(rb);
+            Stabbing._Stabbing(this);
             StartCoroutine(_interval());
         }
 
@@ -253,6 +256,13 @@ public class PlayerController : MonoBehaviour
         knockBackDir = transform.position - position;
         knockBackDir.Normalize();
         knockBackForce = force;
+    }
+
+    //上昇攻撃でステージにぶつかった時用
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isUpAttack = false;
+        animator.SetBool("IsUpAttack", isUpAttack);
     }
 
     public void AnimationBoolReset()

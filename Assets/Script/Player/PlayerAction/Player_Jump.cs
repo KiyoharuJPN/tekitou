@@ -112,6 +112,10 @@ public class Player_Jump : MonoBehaviour
             player.rb.velocity = Vector2.zero;
             jumpTime = 0;
             canSecondJump = false;
+
+            //“Ë‚«h‚µUŒ‚I‚í‚è
+            player.isDropAttack = false;
+            player.animator.SetBool("IsDropAttack", player.isDropAttack);
         }
     }
 

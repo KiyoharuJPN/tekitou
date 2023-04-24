@@ -24,18 +24,12 @@ public class EnemyData
     public float knockBackValue; //ノックバック値
 
     //吹っ飛び角度
-    [Serializable]
-    public struct BlowOffAngle
-    {
-        public float x;
-        public float y;
-    }
     [SerializeField]
     [Header("吹っ飛び角度")]
-    public BlowOffAngle blowOffAngle;
+    public float angle;
     
     public EnemyData(float hp, float power, moveType type,  float speed,
-                     int score, float knockBackValue, BlowOffAngle blowOffAngle)
+                     int score, float knockBackValue, float angle)
     {
         this.hp = hp;
         this.power = power;
@@ -43,6 +37,6 @@ public class EnemyData
         this.speed = speed;
         this.score = score;
         this.knockBackValue = knockBackValue;
-        this.blowOffAngle = blowOffAngle;
+        this.angle = angle;
     }
 }
