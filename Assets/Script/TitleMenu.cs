@@ -9,27 +9,28 @@ public class TitleMenu : MonoBehaviour
     [Tooltip("タイトル画像を入れてください"),Header("タイトル画像")]
     public GameObject TitleImage;
 
-    public GameObject[] menuobj;
+    public GameObject[] menuobj;            //メニュー画面のオブジェクト
 
-    public GameObject[] optionShow;
+    public GameObject[] optionShow;         //オプション画面のオブジェクト
 
-    public GameObject[] SEoptionShow;
+    public GameObject[] SEoptionShow;       //音声調整画面のオブジェクト
     [Tooltip("SEオプションコントローラを入れてください"), Header("SEオプション画面")]
-    public GameObject SEdisplay;
-    public Slider masterVolume, BGMVolume, SEVolume;
+    public GameObject SEdisplay;            //SEの背景画面
+    public Slider masterVolume, BGMVolume, SEVolume;//音声調整の連動
 
+    //ポインターと一個前のポインター
     int pointer;
     int pointerpreb;
 
-    bool volumeChecking = false, hideKeyChecking = false;
+    bool volumeChecking = false, hideKeyChecking = false;//各種チェック用関数
 
-    //Sound
+    //Sound値の初期化
     public float master = 0.4f, BGM = 0.4f, SE = 0.4f;
 
     private void Start()
     {
-        pointer = 0;
-        OnSelected(menuobj[0]);
+        pointer = 0;            //ポインターの初期化
+        OnSelected(menuobj[0]); //セレクトの初期化
 
         //音声修正
         SoundManager.Instance.masterVolume = master;

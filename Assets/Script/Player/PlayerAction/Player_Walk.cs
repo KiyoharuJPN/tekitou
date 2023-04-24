@@ -72,7 +72,7 @@ public class Player_Walk : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(player.knockBackCounter <= 0) 
+        if(player.canMovingCounter <= 0) 
         {
             //プレイヤーの左右の移動
             player.rb.velocity = new Vector2(moveInput * speed * timer, player.rb.velocity.y);
