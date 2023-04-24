@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 
 public class Enemy : MonoBehaviour
 {
@@ -21,10 +22,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     [Header("吹っ飛び速度")]
     float speed;
-    [SerializeField]
-    [Header("反射回数")]
+    //反射回数
     int num;
 
+    GameObject player;
     enum moveType
     {
         NotMove, //動かない
@@ -42,9 +43,8 @@ public class Enemy : MonoBehaviour
         hp = enemyData.hp;
         enemyRb = GetComponent<Rigidbody2D>();
         enemyRb.isKinematic = false;
-
+        num = enemyData.num;
         forceAngle = enemyData.angle;
-        CalcForceDirection();
     }
 
     virtual protected void OnCollisionEnter2D(Collision2D col)
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
         this.GetComponent<CircleCollider2D>().enabled = true;
         enemyRb.bodyType = RigidbodyType2D.Dynamic;
         enemyRb.constraints = RigidbodyConstraints2D.None;
-        
+        CalcForceDirection();
         //吹っ飛び開始
         BoostSphere();
     }
@@ -113,11 +113,49 @@ public class Enemy : MonoBehaviour
         // 入力された角度をラジアンに変換
         float rad = forceAngle * Mathf.Deg2Rad;
 
+        //オブジェクトを取得
+        player = serchTag(gameObject, "Player");
+
         // それぞれの軸の成分を計算
         float x = Mathf.Cos(rad);
         float y = Mathf.Sin(rad);
 
+        //プレイヤーと自身の位置関係を調査
+        if(player.transform.position.y < this.transform.position.y) 
+        { y = -y; }
+        if(player.transform.position.x > this.transform.position.x) 
+        { x = -x; }
+        
         // Vector3型に格納
         forceDirection = new Vector2(x, y);
+    }
+
+    //指定されたタグの中で最も近いものを取得
+    GameObject serchTag(GameObject nowObj, string tagName)
+    {
+        float tmpDis = 0;           //距離用一時変数
+        float nearDis = 0;          //最も近いオブジェクトの距離
+        //string nearObjName = "";    //オブジェクト名称
+        GameObject targetObj = null; //オブジェクト
+
+        //タグ指定されたオブジェクトを配列で取得する
+        foreach (GameObject obs in GameObject.FindGameObjectsWithTag(tagName))
+        {
+            //自身と取得したオブジェクトの距離を取得
+            tmpDis = Vector3.Distance(obs.transform.position, nowObj.transform.position);
+
+            //オブジェクトの距離が近いか、距離0であればオブジェクト名を取得
+            //一時変数に距離を格納
+            if (nearDis == 0 || nearDis > tmpDis)
+            {
+                nearDis = tmpDis;
+                //nearObjName = obs.name;
+                targetObj = obs;
+            }
+
+        }
+        //最も近かったオブジェクトを返す
+        //return GameObject.Find(nearObjName);
+        return targetObj;
     }
 }

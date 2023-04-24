@@ -23,13 +23,15 @@ public class EnemyData
     public int score;            //入手スコア
     public float knockBackValue; //ノックバック値
 
-    //吹っ飛び角度
     [SerializeField]
     [Header("吹っ飛び角度")]
     public float angle;
-    
+    [SerializeField]
+    [Header("吹っ飛び回数")]
+    public int num;
+
     public EnemyData(float hp, float power, moveType type,  float speed,
-                     int score, float knockBackValue, float angle)
+                     int score, float knockBackValue, float angle, int num)
     {
         this.hp = hp;
         this.power = power;
@@ -38,5 +40,6 @@ public class EnemyData
         this.score = score;
         this.knockBackValue = knockBackValue;
         this.angle = angle;
+        this.num = num;
     }
 }

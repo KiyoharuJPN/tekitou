@@ -22,7 +22,7 @@ public class EnemyGeneratar : MonoBehaviour
             if (enemyData.id == id)
             {
                 return new EnemyData(enemyData.hp, enemyData.power,enemyData.type, enemyData.speed,
-                                     enemyData.score, enemyData.knockBackValue, enemyData.angle);
+                                     enemyData.score, enemyData.knockBackValue, enemyData.angle, enemyData.num);
             }
         }
         return null;
