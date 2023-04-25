@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6054787801465259573}
   - component: {fileID: 4148130789081827724}
   - component: {fileID: 5959837238740694568}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_Scarecrow_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -102,7 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   speed: 0
-  num: 0
 --- !u!61 &6054787801465259573
 BoxCollider2D:
   m_ObjectHideFlags: 0

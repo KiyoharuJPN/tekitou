@@ -91,7 +91,7 @@ public class Player_Jump : MonoBehaviour
     //èdóÕ
     void Gravity()
     {
-        if (player.knockBackCounter <= 0)
+        if (player.knockBackCounter <= 0 || !player.isSideAttack)
         {
             player.rb.AddForce(new Vector2(0, -player.jumpData.gravity));
         }
@@ -103,6 +103,11 @@ public class Player_Jump : MonoBehaviour
     {
         if (collision.CompareTag("Stage"))
         {
+            if (player.isUpAttack)
+            {
+                return;
+            }
+
             if (player.isFalling == true)
             {
                 player.isLanding = true;

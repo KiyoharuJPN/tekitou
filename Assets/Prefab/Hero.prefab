@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1094341086}
   - component: {fileID: 1094341088}
   - component: {fileID: 1094341087}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4075973575706176912}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1094341088
 BoxCollider2D:
@@ -71,7 +71,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983edd3a52e49e541a48727a60627e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackClip: {fileID: 0}
 --- !u!1 &464971517442327902
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +83,7 @@ GameObject:
   - component: {fileID: 5305646349242299553}
   - component: {fileID: 2530805170885883961}
   - component: {fileID: 2609076554956467990}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ComboCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +183,7 @@ GameObject:
   - component: {fileID: 6746676554105344624}
   - component: {fileID: 4854325917241003401}
   - component: {fileID: 324048739765872177}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Line shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,6 +248,78 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3781554596584978093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5826577420891483926}
+  - component: {fileID: 6208804099817314840}
+  - component: {fileID: 3069100790173264682}
+  m_Layer: 8
+  m_Name: SkillAttackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5826577420891483926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3781554596584978093}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.9899998, y: 3.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4075973575706176912}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &6208804099817314840
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3781554596584978093}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &3069100790173264682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3781554596584978093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af700327d8f5c5e43b0af0c121918a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3654066179010914914}
 --- !u!1 &4075973575706176915
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +338,7 @@ GameObject:
   - component: {fileID: 6578985677749316734}
   - component: {fileID: 3880395180289174797}
   - component: {fileID: 1102989637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -288,8 +359,9 @@ Transform:
   m_Children:
   - {fileID: 2934858913727777509}
   - {fileID: 5733741928734961918}
-  - {fileID: 1094341086}
   - {fileID: 3611481649262638934}
+  - {fileID: 1094341086}
+  - {fileID: 5826577420891483926}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -404,7 +476,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.84492815}
+  m_Offset: {x: 0, y: -0.86}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -415,7 +487,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.10985613}
+  m_Size: {x: 0.7, y: 0.1}
   m_EdgeRadius: 0
 --- !u!61 &3160029947171339235
 BoxCollider2D:
@@ -457,9 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   animator: {fileID: 4075973575706176914}
-  statusData:
-    hp: 6
-    powar: 1
+  HP: 0
   moveData:
     firstSpeed: 1
     maxSpeed: 10
@@ -529,7 +599,7 @@ GameObject:
   - component: {fileID: 557643654938839043}
   - component: {fileID: 559865344798086636}
   - component: {fileID: 8665462751171249710}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +677,7 @@ GameObject:
   - component: {fileID: 6197398789642147930}
   - component: {fileID: 3731970744356348442}
   - component: {fileID: 3510880839671436020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HPCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4852574973206771686}
   - component: {fileID: 6105986941420694526}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ComboFile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +851,7 @@ GameObject:
   - component: {fileID: 6655313571727063838}
   - component: {fileID: 3457868180360234062}
   - component: {fileID: 2702059118488556425}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518985439321248206, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3518985439321248206, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -941,9 +1011,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4931310575810934657, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5478843930811772727, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
       propertyPath: m_Name
       value: PointCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478843930811772727, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7579956082873903671, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}

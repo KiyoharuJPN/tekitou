@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7172163719208065316}
   - component: {fileID: 7172163719208065317}
   - component: {fileID: 7172163719208065318}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_Broken Scarecrow
   m_TagString: Enemy
   m_Icon: {fileID: 0}

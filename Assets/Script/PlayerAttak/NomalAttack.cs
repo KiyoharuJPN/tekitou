@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class NomalAttack : MonoBehaviour
 {
-    [SerializeField]
-    [Header("アタックアニメーション")]
-    AnimationClip attackClip;
-
     GameObject player;
     PlayerController playerController;
     Skill skill;
@@ -33,11 +29,11 @@ public class Attack : MonoBehaviour
     //触れている時
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("攻撃可能");
         if (collision.CompareTag("Enemy") && isAttack && isCoolTime)
         {
             //攻撃
-            playerController._Attack(collision);
+            playerController.animator.SetTrigger("IsNomalAttack");
+            playerController._Attack(collision, skill.damage);
             StartCoroutine(_interval());
             isCoolTime = false;
         }
@@ -48,8 +44,6 @@ public class Attack : MonoBehaviour
     {
         isAttack = false;
     }
-
-    
 
     //クールタイム用コルーチン
     IEnumerator _interval()

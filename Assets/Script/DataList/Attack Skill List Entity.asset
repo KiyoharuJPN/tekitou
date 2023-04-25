@@ -25,12 +25,12 @@ MonoBehaviour:
     coolTime: 0
   - type: 2
     damage: 2
-    distance: 10
+    distance: 30
     skillText: 
     coolTime: 0
   - type: 3
     damage: 2
-    distance: 30
+    distance: 20
     skillText: 
     coolTime: 0
   - type: 4

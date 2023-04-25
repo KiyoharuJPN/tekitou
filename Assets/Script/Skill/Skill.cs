@@ -9,9 +9,9 @@ public class Skill
     public enum Type
     {
         NormalAttack,//’ÊíUŒ‚
-        Stabbing,    //“Ë‚«h‚µ
-        IaiCut,      //‹‡Ø‚èi‰¼Ìj
-        RoundingUp,  //Ø‚èã‚°i‰¼Ìj
+        DropAttack,  //‰ºUŒ‚
+        SideAttack,  //‰¡ˆÚ“®UŒ‚
+        UpAttack,    //ã¸UŒ‚
         ExAttack     //•KE‹Z
     }
 

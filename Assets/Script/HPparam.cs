@@ -60,6 +60,16 @@ public class HPparam : MonoBehaviour
     }
     public void SetHP(int hp)
     {
+        if(GetHP() == HPstatus.FullHP)
+        {
+            return;
+        }
+        else if(GetHP() + hp > HPstatus.FullHP)
+        {
+            int resilience = HPstatus.FullHP - GetHP();
+            heals += resilience;
+            return;
+        }
         heals = hp;
     }
 

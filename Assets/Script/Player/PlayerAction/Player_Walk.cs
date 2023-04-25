@@ -72,6 +72,11 @@ public class Player_Walk : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (player.isSideAttack)
+        {
+            return;
+        }
+
         if(player.canMovingCounter <= 0) 
         {
             //プレイヤーの左右の移動

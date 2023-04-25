@@ -76,6 +76,7 @@ public class ComboParam : MonoBehaviour
     }
     public void SetCombo(int Cb)
     {
+        ResetTime();
         countCombo = Cb;
     }
 

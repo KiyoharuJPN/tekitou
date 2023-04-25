@@ -10,16 +10,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Stage
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerAction
+  - PlayerAttackArea
+  - Enemy
+  - PinBallEnemy
+  - Item
+  - BrokenBlock
   - 
   - 
   - 

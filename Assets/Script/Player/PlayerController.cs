@@ -14,15 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] internal Animator animator;
 
     [System.Serializable]
-    struct StatusData
-    {
-        [Tooltip("体力")]
-        public float hp;
-        [Tooltip("攻撃力")]
-        public float powar;
-    }
-
-    [System.Serializable]
     internal struct MoveData
     {
         [Tooltip("初期速度")]
@@ -63,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("プレイヤーステータス")]
-    StatusData statusData = new StatusData { hp = 6, powar = 1};
+    private int HP;
 
     [SerializeField]
     [Header("移動ステータス")]
@@ -77,6 +68,14 @@ public class PlayerController : MonoBehaviour
     [Header("ノックバックステータス")]
     KnockBackData knockBack = new() { /*knockBackForce = 50,*/ knockBackTime = .4f, cantMovingTime = .4f, canKnockBack = true };
 
+    //最終攻撃力格納用変数
+    float _power;
+
+    //SideAttack関連
+    Skill sideAttack;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+
     //KnockBack関連
     Vector2 knockBackDir;   //ノックバックされる方向
     bool isKnockingBack;    //ノックバックされているかどうか
@@ -85,9 +84,11 @@ public class PlayerController : MonoBehaviour
     float knockBackForce;   //ノックバックされる力
     HPparam hpparam;
 
-    //デバック要
+    //入力キー
     internal bool isAttack = false;
     bool isAttackKay = false;
+    //横攻撃の左右判定(trueなら右）
+    bool sideJudge;
 
     //アニメーション用
     internal bool isFalling = false;
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
     internal bool isSquatting = false;
     internal bool isUpAttack = false;
     internal bool isDropAttack = false;
+    internal bool isSideAttack = false;
 
     void Start()
     {
@@ -108,28 +110,8 @@ public class PlayerController : MonoBehaviour
     {
         isFalling = rb.velocity.y < -0.5f;
 
-        /*if (Input.GetKeyDown("1"))
-        {
-            point.SetPoint(point.GetPoint() + 1);
-        }
+        //Debug.Log("基礎攻撃力: 15"　+ "攻撃力は"+ (15 +15*combo.GetPowerUp()));
 
-        if (Input.GetKeyDown("2"))
-        {
-            point.SetPoint(point.GetPoint() - 1);
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            combo.SetCombo(combo.GetCombo() + 1);
-        }
-
-        if (Input.GetKeyDown("4"))
-        {
-            combo.SetCombo(combo.GetCombo() - 1);
-        }
-
-        Debug.Log("基礎攻撃力: 15"　+ "攻撃力は"+ (15 +15*combo.GetPowerUp()));
-*/
         //ノックバック処理
         if (knockBack.canKnockBack)
         {
@@ -145,8 +127,7 @@ public class PlayerController : MonoBehaviour
             canMovingCounter -= Time.deltaTime;
         }
 
-
-        Skill();
+        _Skill();
 
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsFalling", isFalling);
@@ -155,10 +136,10 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsLanding", isLanding);
     }
 
-    public void _Attack(Collider2D enemy)
+    public void _Attack(Collider2D enemy, float powar)
     {
-        animator.SetTrigger("IsNomalAttack");
-        enemy.GetComponent<Enemy>().Damage(statusData.powar);
+        ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
+        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp());
     }
 
     public void _Heel(int resilience)
@@ -167,7 +148,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //技入力検知・発生
-    void Skill()
+    void _Skill()
     {
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
@@ -182,40 +163,35 @@ public class PlayerController : MonoBehaviour
         }
         else { isAttackKay = false; }
 
-        //切り上げ
+        //上昇攻撃
         if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
         {
             UpAttack._UpAttack(this);
             StartCoroutine(_interval());
         }
 
-        //突き刺し
+        //落下攻撃攻撃
         if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8) && !isAttack &&(isFalling || isJumping))
         {
-            Stabbing._Stabbing(this);
+            DownAttack._DownAttack(this);
             StartCoroutine(_interval());
         }
 
-        //居合切り
-        if ((((lsh >= 0.8 || lsh <= -0.8) && isAttackKay) || (rsh >= 0.8 || rsh <= -0.8 ))&& !isAttack && !isFalling)
+        //横移動攻撃
+        if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8)
+            && !isAttack 
+            && !isFalling && !isJumping)
         {
-            Iaikiri._Iaikiri(rb);
-            StartCoroutine(_interval());
+            sideJudge = true;
+            StartCoroutine(SideAttack());
         }
-    }
-
-    //クールタイム用コルーチン
-    IEnumerator _interval()
-    {
-        float time = 2;
-
-        isAttack = true;
-        while (time > 0)
+        else if(((lsh <= -0.8 && isAttackKay) || rsh <= -0.8)
+                && !isAttack
+                && !isFalling & !isJumping)
         {
-            time -= Time.deltaTime;
-            yield return null;
+            sideJudge = false;
+            StartCoroutine(SideAttack());
         }
-        isAttack = false;
     }
 
     //KnockBackされたときの処理
@@ -261,8 +237,8 @@ public class PlayerController : MonoBehaviour
     //上昇攻撃でステージにぶつかった時用
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         isUpAttack = false;
-        animator.SetBool("IsUpAttack", isUpAttack);
     }
 
     public void AnimationBoolReset()
@@ -272,5 +248,80 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
         isLanding = false;
         isSquatting = false;
+    }
+
+    //横攻撃処理
+    private IEnumerator SideAttack()
+    {
+        isAttack = true;
+        isSideAttack = true;
+        animator.SetBool("IsSideAttack", isSideAttack);
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
+        Side(skill);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isSideAttack = false;
+        animator.SetBool("IsSideAttack", isSideAttack);
+        yield return new WaitForSeconds(dashingCooldown);
+        isAttack = false;
+    }
+
+    private void Side(Skill skill)
+    {
+        Vector3 localScale = transform.localScale;
+        if (transform.localScale.x > 0)
+        {
+            if (sideJudge)
+            {
+                rb.velocity = new Vector2(transform.localScale.x * skill.distance, 0f);
+            }
+            else if (!sideJudge)
+            {
+                rb.velocity = new Vector2(-transform.localScale.x * skill.distance, 0f);
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+        }
+        else if(transform.localScale.x < 0)
+        {
+            if (sideJudge)
+            {
+                rb.velocity = new Vector2(-transform.localScale.x * skill.distance, 0f);
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+            else if (!sideJudge)
+            {
+                rb.velocity = new Vector2(transform.localScale.x * skill.distance, 0f);
+            }
+        }
+        Debug.Log(localScale.x);
+    }
+
+    //クールタイム用コルーチン
+    IEnumerator _interval()
+    {
+        float time = 2;
+
+        isAttack = true;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        isAttack = false;
+    }
+
+    //スキルアクション中無敵に使用するメソッド
+    public void SkillActionPlayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+    }
+    //無敵をはがすためのメソッド
+    public void NomalPlayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 }

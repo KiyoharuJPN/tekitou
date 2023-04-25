@@ -1,12 +1,11 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-//ãZÅFìÀÇ´éhÇµ
-class Stabbing : MonoBehaviour
+public class DownAttack : MonoBehaviour
 {
-    public static async void _Stabbing(PlayerController player)
+    public static async void _DownAttack(PlayerController player)
     {
-        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.Stabbing);
+        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
         player.isDropAttack = true;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
         await Task.Delay(200);

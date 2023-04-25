@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour
         CalcForceDirection();
         //êÅÇ¡îÚÇ—äJén
         BoostSphere();
+        gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
     }
 
     void BoostSphere()
