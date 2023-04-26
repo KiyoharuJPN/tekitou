@@ -303,7 +303,7 @@ public class PlayerController : MonoBehaviour
     //クールタイム用コルーチン
     IEnumerator _interval()
     {
-        float time = 2;
+        float time = 1;
 
         isAttack = true;
         while (time > 0)

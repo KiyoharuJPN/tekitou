@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
     {
         hp -= power;
         ComboParam.Instance.ResetTime();
-        Debug.Log("c‚è‘Ì—ÍF" + hp);
+
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);

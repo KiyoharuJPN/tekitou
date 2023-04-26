@@ -113,7 +113,7 @@ public class Player_Jump : MonoBehaviour
                 player.isLanding = true;
             }
             player.isJumping = false;
-            Invoke("Landingoff", 0.1f);
+            
             player.rb.velocity = Vector2.zero;
             jumpTime = 0;
             canSecondJump = false;
@@ -121,6 +121,7 @@ public class Player_Jump : MonoBehaviour
             //ìÀÇ´éhÇµçUåÇèIÇÌÇË
             player.isDropAttack = false;
             player.animator.SetBool("IsDropAttack", player.isDropAttack);
+            Invoke("Landingoff", 0.01f);
         }
     }
 
