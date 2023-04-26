@@ -58,18 +58,14 @@ public class HPparam : MonoBehaviour
     {
         return heals;
     }
+
     public void SetHP(int hp)
     {
-        if(GetHP() == HPstatus.FullHP)
-        {
-            return;
-        }
-        else if(GetHP() + hp > HPstatus.FullHP)
-        {
-            int resilience = HPstatus.FullHP - GetHP();
-            heals += resilience;
-            return;
-        }
+        heals += hp;
+    }
+
+    public void DamageHP(int hp)
+    {
         heals = hp;
     }
 

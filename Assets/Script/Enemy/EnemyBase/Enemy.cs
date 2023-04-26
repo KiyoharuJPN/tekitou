@@ -67,14 +67,14 @@ public class Enemy : MonoBehaviour
     void Attack(Collision2D col)
     {
         col.gameObject.GetComponent<PlayerController>().KnockBack(1, this.transform.position, 15 * enemyData.knockBackValue);
-        //col.gameObject.GetComponent<PlayerController>().Damage(enemyData.p);
+        col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.power);
     }
 
     public void Damage(float power)
     {
         hp -= power;
         ComboParam.Instance.ResetTime();
-        Debug.Log("écÇËëÃóÕÅF" + hp);
+
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
