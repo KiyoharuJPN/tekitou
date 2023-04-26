@@ -49,7 +49,7 @@ public class NomalAttack : MonoBehaviour
     IEnumerator _interval()
     {
         float time = skill.coolTime;
-        
+
         while (time > 0)
         {
             time -= Time.deltaTime;

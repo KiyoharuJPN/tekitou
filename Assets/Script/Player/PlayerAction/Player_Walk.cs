@@ -27,6 +27,7 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("現在のスピード:"+ speed);
         timer += Time.deltaTime;
 
         //移動キー取得
@@ -65,6 +66,7 @@ public class Player_Walk : MonoBehaviour
         {
             dashTime = 0;
             speed = player.moveData.firstSpeed;
+            player.isRun = false;
         }
 
         
@@ -72,7 +74,7 @@ public class Player_Walk : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player.isSideAttack)
+        if (player.isSideAttack || player.isDropAttack)
         {
             return;
         }
@@ -97,6 +99,10 @@ public class Player_Walk : MonoBehaviour
             {
                 speed += player.moveData.accele;
                 dashTime = 0;
+                if (speed >= player.moveData.dashSpeed)
+                {
+                    player.isRun = true;
+                }
             }
         }
     }

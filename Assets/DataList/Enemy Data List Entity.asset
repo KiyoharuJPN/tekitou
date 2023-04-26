@@ -53,3 +53,13 @@ MonoBehaviour:
     knockBackValue: 1
     angle: 10
     num: 0
+  - id: 3
+    charName: "\u58CA\u308C\u305F\u6848\u5C71\u5B50"
+    hp: 2
+    power: 1
+    type: 0
+    speed: 0
+    score: 100
+    knockBackValue: 1
+    angle: 10
+    num: 0

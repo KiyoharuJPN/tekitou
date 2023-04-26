@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  speed: 0
+  speed: 10
 --- !u!61 &1257390288253758582
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.6
+  m_Radius: 0.8
 --- !u!50 &3798518770198218055
 Rigidbody2D:
   serializedVersion: 4

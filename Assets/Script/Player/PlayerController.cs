@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -12,12 +13,18 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] internal Rigidbody2D rb;
     [SerializeField] internal Animator animator;
+    AnimationClip rip;
+
+    [SerializeField]
+    GameObject RunEffect;
 
     [System.Serializable]
-    internal struct MoveData
+    public struct MoveData
     {
         [Tooltip("初期速度")]
         public float firstSpeed;
+        [Tooltip("ダッシュ変化速度")]
+        public float dashSpeed;
         [Tooltip("最高速度")]
         public float maxSpeed;
         [Tooltip("加速度")]
@@ -58,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("移動ステータス")]
-    internal MoveData moveData = new MoveData { firstSpeed = 1f, maxSpeed = 10f, accele = 0.03f, acceleTime = 0.3f };
+    internal MoveData moveData = new MoveData { firstSpeed = 1f,dashSpeed = 3f, maxSpeed = 10f, accele = 0.03f, acceleTime = 0.3f };
 
     [SerializeField]
     [Header("ジャンプステータス")]
@@ -93,6 +100,7 @@ public class PlayerController : MonoBehaviour
     //アニメーション用
     internal bool isFalling = false;
     internal bool isMoving = false;
+    internal bool isRun = false;
     internal bool isJumping = false;
     internal bool isLanding = false;
     internal bool isSquatting = false;
@@ -130,6 +138,7 @@ public class PlayerController : MonoBehaviour
         _Skill();
 
         animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsRun", isRun);
         animator.SetBool("IsFalling", isFalling);
         animator.SetBool("IsJumping", isJumping);
         animator.SetBool("IsSquatting", isSquatting);
@@ -145,6 +154,15 @@ public class PlayerController : MonoBehaviour
     public void _Heel(int resilience)
     {
         hpparam.SetHP(hpparam.GetHP() + resilience);
+    }
+
+    public void _Damage(int power)
+    {
+        hpparam.DamageHP(hpparam.GetHP() - power);
+        if (hpparam.GetHP() <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     //技入力検知・発生
@@ -179,15 +197,13 @@ public class PlayerController : MonoBehaviour
 
         //横移動攻撃
         if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8)
-            && !isAttack 
-            && !isFalling && !isJumping)
+            && !isAttack )
         {
             sideJudge = true;
             StartCoroutine(SideAttack());
         }
         else if(((lsh <= -0.8 && isAttackKay) || rsh <= -0.8)
-                && !isAttack
-                && !isFalling & !isJumping)
+                && !isAttack)
         {
             sideJudge = false;
             StartCoroutine(SideAttack());
@@ -217,14 +233,6 @@ public class PlayerController : MonoBehaviour
     //KnockBackされたら呼ぶ関数
     public void KnockBack(int damage, Vector3 position, float force)
     {
-        if (knockBackCounter <= 0)
-        {
-            hpparam.SetHP(hpparam.GetHP() - damage);
-            if (hpparam.GetHP() == 0)
-            {
-                //プレイヤーが死ぬ
-            }
-        }
         canMovingCounter = knockBack.cantMovingTime;
         knockBackCounter = knockBack.knockBackTime;
         isKnockingBack = true;
@@ -309,8 +317,10 @@ public class PlayerController : MonoBehaviour
         while (time > 0)
         {
             time -= Time.deltaTime;
+            //1フレーム待つ
             yield return null;
         }
+
         isAttack = false;
     }
 
@@ -323,5 +333,19 @@ public class PlayerController : MonoBehaviour
     public void NomalPlayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+
+    //砂埃エフェクト生成
+    public void _RunEffect()
+    {
+        GameObject prefab = 
+        Instantiate(RunEffect, new Vector2(this.transform.position.x, this.transform.position.y - 0.8f), Quaternion.identity);
+        if(gameObject.transform.localScale.x < 0)
+        {
+            Vector2 scale = prefab.transform.localScale;
+            scale.x *= -1f;
+            prefab.transform.localScale = scale;
+        }
+        Destroy(prefab, 0.5f);
     }
 }
