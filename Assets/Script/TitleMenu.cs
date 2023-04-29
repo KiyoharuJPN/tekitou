@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class TitleMenu : MonoBehaviour
     public string gameScene;
     [Tooltip("タイトル画像を入れてください"),Header("タイトル画像")]
     public GameObject TitleImage;
+    [Tooltip("今の選択を示すポインターです"),Header("トライアングルポインター")]
+    public GameObject target;
 
     public GameObject[] menuobj;            //メニュー画面のオブジェクト
 
@@ -22,7 +25,7 @@ public class TitleMenu : MonoBehaviour
     int pointer;
     int pointerpreb;
 
-    bool volumeChecking = false, hideKeyChecking = false;//各種チェック用関数
+    bool volumeChecking = false, hideKeyChecking = false, pointerCheck = true;//各種チェック用関数
 
     //Sound値の初期化
     public float master = 0.4f, BGM = 0.4f, SE = 0.4f;
@@ -30,7 +33,7 @@ public class TitleMenu : MonoBehaviour
     private void Start()
     {
         pointer = 0;            //ポインターの初期化
-        OnSelected(menuobj[0]); //セレクトの初期化
+        //OnSelected(menuobj[0]); //セレクトの初期化
 
         //音声修正
         SoundManager.Instance.masterVolume = master;
@@ -44,24 +47,20 @@ public class TitleMenu : MonoBehaviour
     private void Update()
     {
         //調整キーの設定
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            pointer--;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            pointer++;
-        }
+        //KeyboardChangePoint()
+        StickerChangePointer();
 
-        if(pointer != pointerpreb)//変更されたときの作業
+        //ポインターが変わった時の設定
+        if (pointer != pointerpreb)//変更されたときの作業
         {
             if (menuobj[0].activeSelf)//Menu
             {
                 if (pointer < 0) pointer = menuobj.Length - 1;
                 if (pointer > menuobj.Length - 1) pointer = 0;//上限調整
 
-                OnSelected(menuobj[pointer]);
-                if(pointer !=pointerpreb && pointerpreb != -1) OnDeselected(menuobj[pointerpreb]);
+                target.transform.position = new Vector2(target.transform.position.x, menuobj[pointer].transform.position.y);
+                //OnSelected(menuobj[pointer]);
+                //if(pointer !=pointerpreb && pointerpreb != -1) OnDeselected(menuobj[pointerpreb]);
             }
 
             if (optionShow[0].activeSelf)//Option
@@ -69,9 +68,10 @@ public class TitleMenu : MonoBehaviour
                 if (pointer < 0) pointer = optionShow.Length - 1;
                 if (pointer > optionShow.Length - 1) pointer = 0;//上限調整
 
-                OnSelected(optionShow[pointer]);
-                Debug.Log("p" + pointer + '\n' + "pp" + pointerpreb);
-                if (pointer != pointerpreb && pointerpreb != -1) OnDeselected(optionShow[pointerpreb]);
+                target.transform.position = new Vector2(target.transform.position.x, optionShow[pointer].transform.position.y);
+                //OnSelected(optionShow[pointer]);
+                //Debug.Log("p" + pointer + '\n' + "pp" + pointerpreb);
+                //if (pointer != pointerpreb && pointerpreb != -1) OnDeselected(optionShow[pointerpreb]);
             }
 
             if (SEoptionShow[0].activeSelf)//Sound
@@ -99,7 +99,7 @@ public class TitleMenu : MonoBehaviour
         }
 
 
-
+        Debug.Log(pointerCheck);
 
         //選択キーの設定
         if (Input.GetKeyDown(KeyCode.Space))
@@ -110,20 +110,20 @@ public class TitleMenu : MonoBehaviour
                 {
                     case 0:
                         GameStart();
-                        OnDeselected(menuobj[pointer]);
+                        //OnDeselected(menuobj[pointer]);
                         break;
                     case 1:
                         Option();
-                        OnDeselected(menuobj[pointer]);
+                        //OnDeselected(menuobj[pointer]);
                         break;
                     case 2:
                         Exit();
-                        OnDeselected(menuobj[pointer]);
+                        //OnDeselected(menuobj[pointer]);
                         break;
                     default:
                         if (pointer < menuobj.Length - 1)
                         {
-                            OnDeselected(menuobj[pointer]);
+                            //OnDeselected(menuobj[pointer]);
                             Debug.Log("新しい項目を追加するときはプログラマに頼んでください。");
                         }
                         break;
@@ -142,13 +142,13 @@ public class TitleMenu : MonoBehaviour
                         SEVolume.value = SE = SoundManager.Instance.seMasterVolume;
                         //画面を開く
                         SEOption();
-                        OnDeselected(optionShow[pointer]);
+                        //OnDeselected(optionShow[pointer]);    //この操作はSEOptionに追加しました
                         volumeChecking = true;
                         break;
                     default:
                         if(pointer < optionShow.Length - 1)
                         {
-                            OnDeselected(optionShow[pointer]);
+                            //OnDeselected(optionShow[pointer]);
                             Debug.Log("新しい項目を追加するときはプログラマに頼んでください。");
                         }
                         break;
@@ -162,7 +162,7 @@ public class TitleMenu : MonoBehaviour
                 {
                     case 0:
                         volumeChecking = false;
-                        OnDeselected(SEoptionShow[pointer]);
+                        //OnDeselected(SEoptionShow[pointer]);  //この操作はDeSEOptionに追加しました
                         DeSEOption();
                         break;
                     case 1:
@@ -205,7 +205,7 @@ public class TitleMenu : MonoBehaviour
             //option
             if (optionShow[0].activeSelf)
             {
-                OnDeselected(optionShow[pointer]);
+                //OnDeselected(optionShow[pointer]);    //この操作はDeSEOptionに追加しました
                 DeOption();
             }
 
@@ -278,11 +278,14 @@ public class TitleMenu : MonoBehaviour
         {
             optionShow[i].SetActive(false);
         }
+
+        target.SetActive(false);
         SEdisplay.SetActive(true);
         for ( int i = 0; i < SEoptionShow.Length; i++)
         {
             SEoptionShow[i].SetActive(true);
         }
+        OnSelected(SEoptionShow[0]);
     }
     void DeSEOption()
     {
@@ -291,7 +294,9 @@ public class TitleMenu : MonoBehaviour
             SEoptionShow[i].SetActive(false);
         }
         SEdisplay.SetActive(false);
-
+        OnDeselected(SEoptionShow[0]);
+        
+        target.SetActive(true);
         TitleImage.SetActive(true);
         for (int i = 0; i < optionShow.Length; i++)
         {
@@ -350,7 +355,43 @@ public class TitleMenu : MonoBehaviour
 
 
 
-
+    //調整キーの設定
+    //void KeyboardChangePoint()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.W))
+    //    {
+    //        pointer--;
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        pointer++;
+    //    }
+    //}
+    void StickerChangePointer()
+    {
+        if (Input.GetAxis("Vertical") > 0 && pointerCheck)
+        {
+            pointerCheck = false;
+            PointerMoveWait();
+            pointer--;
+        }
+        if (Input.GetAxis("Vertical") < 0 && pointerCheck)
+        {
+            pointerCheck = false;
+            PointerMoveWait();
+            pointer++;
+        }
+        if (Input.GetAxis("Vertical") == 0)
+        {
+            pointerCheck = true;
+        }
+    }
+    IEnumerator PointerMoveWait()
+    {
+        Debug.Log(1);
+        yield return new WaitForSeconds(0.5f);
+        pointerCheck = true;
+    }
 
 
     //内部動き
