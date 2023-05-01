@@ -27,7 +27,6 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("現在のスピード:"+ speed);
         timer += Time.deltaTime;
 
         //移動キー取得
