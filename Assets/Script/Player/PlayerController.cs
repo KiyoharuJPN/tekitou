@@ -36,10 +36,12 @@ public class PlayerController : MonoBehaviour
     [System.Serializable]
     internal struct JumpData
     {
-        [Tooltip("初速")]
-        public float firstSpeed;
-        [Tooltip("重力加速度")]
+        [Tooltip("速度")]
+        public float speed;
+        [Tooltip("重力加")]
         public float gravity;
+        [Tooltip("ジャンプ可能高さ")]
+        public float jumpHeight;
         [Tooltip("ジャンプ時間の上限")]
         public float maxJumpTime;
     }
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("ジャンプステータス")]
-    internal JumpData jumpData = new() { firstSpeed = 16f, gravity = 10f, maxJumpTime = 1f };
+    internal JumpData jumpData = new() { speed = 16f, gravity = 10f,jumpHeight = 5f, maxJumpTime = 1f };
 
     [SerializeField]
     [Header("ノックバックステータス")]
@@ -244,8 +246,7 @@ public class PlayerController : MonoBehaviour
 
     //上昇攻撃でステージにぶつかった時用
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
+    {  
         isUpAttack = false;
     }
 

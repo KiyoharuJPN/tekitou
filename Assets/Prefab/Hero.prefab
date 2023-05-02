@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1094341088}
   - component: {fileID: 1094341087}
   m_Layer: 8
-  m_Name: AttackArea
+  m_Name: NomalAttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3781554596584978093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9899998, y: 3.51, z: 0}
+  m_LocalPosition: {x: -0.01, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,10 +288,10 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3781554596584978093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -305,7 +305,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &3069100790173264682
 MonoBehaviour:
@@ -331,9 +331,9 @@ GameObject:
   - component: {fileID: 4075973575706176912}
   - component: {fileID: 4075973575706176913}
   - component: {fileID: 4075973575706176914}
-  - component: {fileID: 705019280}
   - component: {fileID: 6370244193881206646}
   - component: {fileID: 3160029947171339235}
+  - component: {fileID: 705019280}
   - component: {fileID: 3654066179010914914}
   - component: {fileID: 6578985677749316734}
   - component: {fileID: 3880395180289174797}
@@ -437,32 +437,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &705019280
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4075973575706176915}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 408ad963fe8d6b14a999d90c4abf2453, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 3.2}
-    newSize: {x: 3.2, y: 3.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.8}
-  m_EdgeRadius: 0
 --- !u!61 &6370244193881206646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -487,7 +461,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.1}
+  m_Size: {x: 0.6, y: 0.1}
   m_EdgeRadius: 0
 --- !u!61 &3160029947171339235
 BoxCollider2D:
@@ -515,6 +489,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.1}
   m_EdgeRadius: 0
+--- !u!61 &705019280
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075973575706176915}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 408ad963fe8d6b14a999d90c4abf2453, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.2, y: 3.2}
+    newSize: {x: 3.2, y: 3.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 1.8}
+  m_EdgeRadius: 0
 --- !u!114 &3654066179010914914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,23 +527,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0a20995b519f84992c801192965f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 1102989637}
   animator: {fileID: 4075973575706176914}
-  RunEffect: {fileID: 0}
-  HP: 0
+  RunEffect: {fileID: 2273230203940035460, guid: f46ef36528a7b554a8c416e33d0db47b, type: 3}
+  HP: 10
   moveData:
     firstSpeed: 1
-    dashSpeed: 3
+    dashSpeed: 1.2
     maxSpeed: 10
     accele: 0.03
     acceleTime: 0.3
   jumpData:
-    firstSpeed: 16
-    gravity: 10
-    maxJumpTime: 1
+    speed: 10
+    gravity: 15
+    jumpHeight: 4
+    maxJumpTime: 0.3
   knockBack:
-    knockBackTime: 0.4
-    cantMovingTime: 0.4
+    knockBackTime: 0.2
+    cantMovingTime: 0.1
     canKnockBack: 1
 --- !u!114 &6578985677749316734
 MonoBehaviour:
@@ -585,7 +586,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 408ad963fe8d6b14a999d90c4abf2453, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1

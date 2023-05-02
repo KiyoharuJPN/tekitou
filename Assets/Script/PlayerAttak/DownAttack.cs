@@ -12,8 +12,10 @@ public class DownAttack : MonoBehaviour
         _Move(player, skill);
     }
 
-    static void _Move(PlayerController player, Skill skill)
+    static async void _Move(PlayerController player, Skill skill)
     {
+        player.rb.velocity = new Vector2(0, 0);
+        await Task.Delay(200);
         player.rb.AddForce(-player.transform.up * skill.distance, ForceMode2D.Impulse);
     }
 }

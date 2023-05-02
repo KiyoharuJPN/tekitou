@@ -1,6 +1,7 @@
 using System.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -36,15 +37,24 @@ public class Enemy : MonoBehaviour
 
     bool isDestroy;
 
+    private Transform _transform;
+
+    // 前フレームのワールド位置
+    private Vector2 _prevPosition;
+
     private void Start()
     {
         //idで指定した敵データ読込
         enemyData = EnemyGeneratar.instance.EnemySet(id);
         hp = enemyData.hp;
         enemyRb = GetComponent<Rigidbody2D>();
-        enemyRb.isKinematic = false;
+        //enemyRb.isKinematic = false;
         num = enemyData.num;
         forceAngle = enemyData.angle;
+
+        //吹っ飛び中に使用
+        _transform = transform;
+        _prevPosition = _transform.position;
     }
 
     virtual protected void OnCollisionEnter2D(Collision2D col)
@@ -61,6 +71,23 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void Update()
+    {
+        //吹っ飛び中以外は行わない
+        if (!isDestroy)
+            return;
+
+        // 現在フレームのワールド位置
+        Vector2 position = _transform.position;
+
+        Vector3 diff = (position - _prevPosition);
+
+        this.transform.rotation = Quaternion.FromToRotation(Vector3.up, diff);
+
+        // 次のUpdateで使うための前フレーム位置更新
+        //_prevPosition = position;      
     }
 
     //攻撃
@@ -97,6 +124,7 @@ public class Enemy : MonoBehaviour
         CalcForceDirection();
         //吹っ飛び開始
         BoostSphere();
+        isDestroy = true;
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
     }
 
@@ -122,7 +150,7 @@ public class Enemy : MonoBehaviour
         float y = Mathf.Sin(rad);
 
         //プレイヤーと自身の位置関係を調査
-        if(player.transform.position.y + 1f < this.transform.position.y) 
+        if(player.transform.position.y < this.transform.position.y) 
         { y = -y; }
         if(player.transform.position.x > this.transform.position.x) 
         { x = -x; }
