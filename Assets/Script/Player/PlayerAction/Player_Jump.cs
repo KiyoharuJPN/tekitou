@@ -11,9 +11,8 @@ public class Player_Jump : MonoBehaviour
     bool isjump = false;
     bool canSecondJump = false;
 
-    //アニメーション用
-
-    
+    //ジャンプした際の位置
+    float jumpPos;
 
     void Start()
     {
@@ -23,41 +22,55 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ジャンプキー取得
         JumpBottan();
+
+        //ジャンプ処理
+        if (isjump && player.knockBackCounter <= 0)
+        {
+            if (jumpPos + player.jumpData.jumpHeight < player.transform.position.y)
+            {
+                player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y * 0.2f);
+                isjump = false;
+            }
+
+            Jump();
+        }
+
+        
     }
 
     private void FixedUpdate()
     {
-        //ジャンプ
-        if (isjump && player.knockBackCounter <= 0)
-        {
-            Jump();
-        }
-
         //重力
         Gravity();
     }
 
     void JumpBottan()
     {
-        // キー入力取得
-        if (Input.GetButton("Jump") && !player.isJumping && !player.isFalling)
-        {
-            player.isSquatting = true;
-            isjump = true;
-            canSecondJump = true;
-        }
-
         //二段ジャンプ
         if (canSecondJump)
         {
+
             if (Input.GetButtonDown("Jump"))
             {
                 canSecondJump = false;
+                jumpPos = this.transform.position.y;
                 player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
                 jumpTime = 0;
                 isjump = true;
             }
+        }
+
+        //一回目ジャンプ
+        if (Input.GetButtonDown("Jump") && !player.isJumping && !player.isFalling && !canSecondJump)
+        {
+            player.isSquatting = true;
+            player.animator.SetBool("IsSquatting", player.isSquatting);
+            //ジャンプ前位置格納
+            jumpPos = this.transform.position.y;
+            isjump = true;
+            canSecondJump = true;
         }
 
         //ジャンプ中の処理
@@ -66,9 +79,11 @@ public class Player_Jump : MonoBehaviour
             if (!Input.GetButton("Jump") || jumpTime >= player.jumpData.maxJumpTime)
             {
                 isjump = false;
+                jumpTime = 0;
             }
-            else if (Input.GetButton("Jump"))
+            else if (Input.GetButton("Jump") && jumpTime <= player.jumpData.maxJumpTime)
             {
+                Debug.Log("ジャンプキー長押し中");
                 jumpTime += Time.deltaTime;
             }
         }
@@ -77,14 +92,17 @@ public class Player_Jump : MonoBehaviour
     void Jump()
     {
         player.isJumping = true;
-        player.isSquatting = false;
+        //
+
         if (canSecondJump)
         {
-            player.rb.AddForce(transform.up * player.jumpData.firstSpeed, ForceMode2D.Impulse);
+            player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime);
+            //player.rb.AddForce(transform.up * player.jumpData.speed, ForceMode2D.Impulse);
         }
         else
         {
-            player.rb.AddForce(transform.up * ((player.jumpData.firstSpeed / 5) * 4), ForceMode2D.Impulse);
+            player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime);
+            //player.rb.AddForce(transform.up * ((player.jumpData.speed / 5) * 4), ForceMode2D.Impulse);
         }
     }
 
@@ -112,6 +130,7 @@ public class Player_Jump : MonoBehaviour
             {
                 player.isLanding = true;
             }
+            player.isSquatting = false;
             player.isJumping = false;
             
             player.rb.velocity = Vector2.zero;

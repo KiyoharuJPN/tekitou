@@ -30,6 +30,7 @@ public class Player_Walk : MonoBehaviour
         timer += Time.deltaTime;
 
         //ˆÚ“®ƒL[æ“¾
+
         moveInput = Input.GetAxis("Horizontal");
 
         player.isMoving = moveInput != 0;
@@ -41,7 +42,7 @@ public class Player_Walk : MonoBehaviour
 
         //‰æ‘œ‚Ì”½“]
         //ˆÚ“®•ûŒü‚É‡‚í‚¹‚Ä‰æ‘œ‚Ì”½“]
-        if (player.isMoving)
+        if (player.isMoving && !player.isAttack)
         {
             Vector3 scale = gameObject.transform.localScale;
 
