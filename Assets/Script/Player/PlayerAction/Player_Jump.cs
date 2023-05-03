@@ -138,7 +138,10 @@ public class Player_Jump : MonoBehaviour
             canSecondJump = false;
 
             //ìÀÇ´éhÇµçUåÇèIÇÌÇË
-            Invoke("DropAttackOff", 0.5f);
+            if (player.isDropAttack)
+            {
+                Invoke("DropAttackOff", 0.5f);
+            };
             
             Invoke("Landingoff", 0.01f);
         }
@@ -151,6 +154,7 @@ public class Player_Jump : MonoBehaviour
 
     private void DropAttackOff()
     {
+        CameraShake.instance._CameraShake(2);
         player.isDropAttack = false;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
     }
