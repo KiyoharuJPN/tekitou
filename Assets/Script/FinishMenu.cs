@@ -7,25 +7,41 @@ public class FinishMenu : MonoBehaviour
 {
     [Tooltip("目標のシーンネームを書いてください")]
     public string SceneName;
-    [Tooltip("次のシーンに移動するまでの時間")]
-    //public float waitSecond = 1f;
+
+    [System.Serializable]
+    struct FadeOutOption
+    {
+        [Tooltip("フェードアウトの開始時間")]
+        public float waitSecondTry, wateSecondTitle;
+        [Tooltip("フェードアウトの持続時間")]
+        public float fadeOutSpeedTry, fadeOutSpeedTitle;
+    }
+    public float mouseMoveWait = 1f;
 
     //ターゲット
     public GameObject target, fadeOut;
     public GameObject[] Finishobj;
     public Animator animator;
+    
 
     bool pointerCheck = true, canChangePointer = true, canChoose = true;
     bool isRetry = false, isBack = false;
-    float animWait;
+    float animWait,animSpeed,vertical;
 
+    //float timeCount;
     //ポインター
     int pointer = 0, pointerpreb = -1;
+
+
+    [SerializeField]
+    [Header("フェードアウト設定")]
+    FadeOutOption fadeOutOption = new() { waitSecondTry = 1f, wateSecondTitle = 1f, fadeOutSpeedTry = 10f, fadeOutSpeedTitle = 10f};
 
     
     // Update is called once per frame
     void Update()
     {
+        
         //調整キーの設定
         if (canChangePointer)
         {
@@ -40,9 +56,11 @@ public class FinishMenu : MonoBehaviour
 
         animator.SetBool("IsRetry", isRetry);
         animator.SetBool("IsBack", isBack);
+
+        //Debug.Log(Input.GetAxis("Vertical")+"MOUSEIN"+pointerCheck);
     }
 
-
+    
     //実行項目
     void TryAgain()
     {
@@ -53,20 +71,22 @@ public class FinishMenu : MonoBehaviour
     {
         if (SceneName != "") SceneManager.LoadScene(SceneName);
     }
-    IEnumerator PointerMoveWait()
+    /*IEnumerator PointerMoveWait()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(mouseMoveWait);
         pointerCheck = true;
-    }
-    IEnumerator Wait(int pointer, float waitSecond)
+        //Debug.Log("=========================================================================================");
+    }*/
+    IEnumerator Wait(int pointer, float waitSecond, float fadeOutSpeed)
     {
         OnSelected(Finishobj[pointer]);
         for (float i = waitSecond; i >= 0; i -= Time.deltaTime)
         {
             yield return null;
         }
-        for (float i = 0; i <= 1; i += Time.deltaTime)
+        for (float i = 0; i <= 1; i += fadeOutSpeed)
         {
+            Debug.Log(i);
             fadeOut.GetComponent<Image>().color = new Color(0, 0, 0, i);
             yield return null ;
         }
@@ -88,19 +108,22 @@ public class FinishMenu : MonoBehaviour
     //調整キーの設定
     void ChangePointer()
     {
-        if (Input.GetAxis("Vertical") > 0 && pointerCheck)
+        vertical = Input.GetAxis("Vertical");
+        /*if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Vertical") < vertical) vertical = 0;
+        if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Vertical") > vertical) vertical = 0;*/
+        if (vertical > 0 && pointerCheck)
         {
-            PointerMoveWait();
+            //StartCoroutine(PointerMoveWait());
             pointer--;
             pointerCheck = false;
         }
-        if (Input.GetAxis("Vertical") < 0 && pointerCheck)
+        if (vertical < 0 && pointerCheck)
         {
-            PointerMoveWait();
+            //StartCoroutine(PointerMoveWait());
             pointer++;
             pointerCheck = false;
         }
-        if (Input.GetAxis("Vertical") == 0)
+        if (vertical == 0)
         {
             pointerCheck = true;
         }
@@ -110,8 +133,8 @@ public class FinishMenu : MonoBehaviour
     {
         if (pointer != pointerpreb)
         {
-            if (pointer < 0) pointer = 0;// Finishobj.Length - 1;
-            if (pointer > Finishobj.Length - 1) pointer = Finishobj.Length - 1;//0;
+            if (pointer < 0) pointer = Finishobj.Length - 1;// Finishobj.Length - 1;
+            if (pointer > Finishobj.Length - 1) pointer = 0;//0;
 
             target.transform.position = new Vector2(target.transform.position.x, Finishobj[pointer].transform.position.y);
 
@@ -132,17 +155,20 @@ public class FinishMenu : MonoBehaviour
             {
                 case 0:
                     isRetry = true;
-                    animWait = 1f;
+                    animWait = fadeOutOption.waitSecondTry;
+                    animSpeed = fadeOutOption.fadeOutSpeedTry;
                     break;
                 case 1:
                     isBack = true;
-                    animWait = 1f;
+                    animWait = fadeOutOption.wateSecondTitle;
+                    animSpeed = fadeOutOption.fadeOutSpeedTitle;
                     break;
                 default:
                     Debug.Log("新しい項目の追加はプログラマに頼んでください。");
                     break;
             }
-            StartCoroutine(Wait(pointer, animWait));
+            Debug.Log(animSpeed);
+            StartCoroutine(Wait(pointer, animWait, animSpeed));
             canChangePointer = false;
             canChoose = false;
         }
@@ -153,8 +179,8 @@ public class FinishMenu : MonoBehaviour
     {
         obj.GetComponentInChildren<Text>().color = Color.yellow;             //UIの色修正
     }
-    void OnDeselected(GameObject obj)
+/*    void OnDeselected(GameObject obj)
     {
         obj.GetComponentInChildren<Text>().color = new Color(255, 255, 255); //色を戻す
-    }
+    }*/
 }

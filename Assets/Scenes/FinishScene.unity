@@ -358,12 +358,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: TitleScene
+  mouseMoveWait: 0.35
   target: {fileID: 2069894175}
   fadeOut: {fileID: 2108990816}
   Finishobj:
   - {fileID: 231095923}
   - {fileID: 1497916567}
   animator: {fileID: 1883329962}
+  fadeOutOption:
+    waitSecondTry: 1
+    wateSecondTitle: 2
+    fadeOutSpeedTry: 0.001
+    fadeOutSpeedTitle: 0.001
 --- !u!114 &589136333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1197,14 +1203,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 428a7860c8473b24190c1b29c2862f99, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
