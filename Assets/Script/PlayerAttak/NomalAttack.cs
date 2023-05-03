@@ -12,6 +12,8 @@ public class NomalAttack : MonoBehaviour
     bool isAttack = false;
     bool isCoolTime = true;
 
+    Collider2D enemyCollider2D;
+
     private void Start()
     {
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
@@ -23,13 +25,24 @@ public class NomalAttack : MonoBehaviour
     //UŒ‚”ÍˆÍ‚É“ü‚Á‚½
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        isAttack = true; 
+        isAttack = true;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("joystick button 2") && isCoolTime && !playerController.isNomalAttackKay)
+        {
+            playerController.animator.SetTrigger("IsNomalAttack");
+            //playerController._Attack(, skill.damage);
+            StartCoroutine(_interval());
+            isCoolTime = false;
+        }
     }
 
     //G‚ê‚Ä‚¢‚é
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && isAttack && isCoolTime)
+        if (collision.CompareTag("Enemy") && isAttack && isCoolTime && playerController.isNomalAttackKay)
         {
             //UŒ‚
             playerController.animator.SetTrigger("IsNomalAttack");
@@ -37,6 +50,7 @@ public class NomalAttack : MonoBehaviour
             StartCoroutine(_interval());
             isCoolTime = false;
         }
+        
     }
 
     //UŒ‚”ÍˆÍ‚©‚ç“G‚ª‚¢‚È‚­‚È‚Á‚½

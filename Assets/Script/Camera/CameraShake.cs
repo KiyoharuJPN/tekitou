@@ -7,6 +7,29 @@ public class CameraShake : MonoBehaviour
     [SerializeField]
     [Header("カメラオブジェクト")]
     GameObject CAMERA;
+
+    /// <summary>
+    /// 揺れ情報
+    /// </summary>
+    [System.Serializable]
+    public struct ShakeInfo
+    {
+        [Tooltip("揺れ時間")]
+        public float Duration;
+        [Tooltip("揺れの強さ")]
+        public float Strength;
+        [Tooltip("どのくらい振動するか")]
+        public float Vibrato;
+    }
+
+    [SerializeField]
+    [Header("画面揺れに関する")]
+    public ShakeInfo _shakeInfo;
+
+    private Vector2 _initPosition; // 初期位置
+    public bool _isDoShake;       // 揺れ実行中か？
+    private float _totalShakeTime; // 揺れ経過時間   
+
     public static CameraShake instance;
 
     int flag = 0;
@@ -26,27 +49,19 @@ public class CameraShake : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(flag);
-        switch (flag) 
+        if (flag == 2) 
         {
-            
-            case 1:
-                goto case 3;
-            case 3:
-                CAMERA.transform.Translate(0, 30 * Time.deltaTime, 0);        
-                if (CAMERA.transform.position.y >= 1.0f)
-                    flag++;
-                break;
-            case 2:
-                CAMERA.transform.Translate(0, -30 * Time.deltaTime, 0);
-                if (CAMERA.transform.position.y <= -1.0f)
-                    flag++;
-                break;
-            case 4:
-                CAMERA.transform.Translate(-30 * Time.deltaTime, 0, 0);
-                if (CAMERA.transform.position.x <= 0)
-                    flag = 0;
-                break;
+            _isDoShake = true;
+            CAMERA.transform.Translate(0, _shakeInfo.Strength * Time.deltaTime, 0);
+            CAMERA.transform.Translate(0, -_shakeInfo.Strength * Time.deltaTime, 0);
+            _totalShakeTime += Time.deltaTime;
+            if (_shakeInfo.Vibrato < _totalShakeTime)
+            {
+
+                flag = 0;
+                _totalShakeTime = 0;
+                _isDoShake = false;
+            }
         }
     }
 }

@@ -78,12 +78,12 @@ public class movingTest : MonoBehaviour
             Debug.Log("R stick:" + rsh + "," + rsv);
         }
         //D-Pad
-        float dph = Input.GetAxis("D_Pad_H");
-        float dpv = Input.GetAxis("D_Pad_V");
-        if ((dph != 0) || (dpv != 0))
-        {
-            Debug.Log("D Pad:" + dph + "," + dpv);
-        }
+        //float dph = Input.GetAxis("D_Pad_H");
+        //float dpv = Input.GetAxis("D_Pad_V");
+        //if ((dph != 0) || (dpv != 0))
+        //{
+        //    Debug.Log("D Pad:" + dph + "," + dpv);
+        //}
         //Trigger
         float tri = Input.GetAxis("L_R_Trigger");
         if (tri > 0)
