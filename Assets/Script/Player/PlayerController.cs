@@ -258,7 +258,8 @@ public class PlayerController : MonoBehaviour
         if (knockBackCounter > 0)
         {
             knockBackCounter -= Time.deltaTime;
-            rb.AddForce(new Vector2(knockBackDir.x * knockBackForce, knockBackDir.y * knockBackForce));
+            //簡単に説明すると下は上下に飛ばさないコードです。
+            rb.AddForce(new Vector2((knockBackDir.y * knockBackForce > 5 || knockBackDir.y * knockBackForce < -5) ? ((knockBackDir.x < 0) ? -Mathf.Abs(knockBackDir.y * knockBackForce) : Math.Abs(knockBackDir.y * knockBackForce)) : knockBackDir.x * knockBackForce, ((knockBackDir.y * knockBackForce> 5 || knockBackDir.y * knockBackForce < -5)? knockBackDir.y : knockBackDir.y * knockBackForce)));//横だけ飛ばされるコード      簡単に説明すると上と下は５よりでかくなると飛ばされない、左右に関して上下が５以上になると百パーセント横から触ったということじゃないのが分かるので、上下の飛ばす力で左右の方向を与えて飛ばさせる。                                                        //(knockBackDir.y * knockBackForce > 7 || knockBackDir.y * knockBackForce < -7) ? knockBackDir.y * knockBackForce : knockBackDir.x * knockBackForce, (knockBackDir.y * knockBackForce > 3 || knockBackDir.y * knockBackForce < -3) ? knockBackDir.y : knockBackDir.y * knockBackForce)
             Debug.Log(new Vector2(knockBackDir.x * knockBackForce, knockBackDir.y * knockBackForce));
         }
         else
