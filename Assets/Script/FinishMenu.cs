@@ -133,8 +133,8 @@ public class FinishMenu : MonoBehaviour
     {
         if (pointer != pointerpreb)
         {
-            if (pointer < 0) pointer = Finishobj.Length - 1;// Finishobj.Length - 1;
-            if (pointer > Finishobj.Length - 1) pointer = 0;//0;
+            if (pointer < 0) pointer = 0;// Finishobj.Length - 1;
+            if (pointer > Finishobj.Length - 1) pointer = Finishobj.Length - 1;//0;
 
             target.transform.position = new Vector2(target.transform.position.x, Finishobj[pointer].transform.position.y);
 
