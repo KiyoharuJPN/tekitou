@@ -26,7 +26,7 @@ public class FinishMenu : MonoBehaviour
 
     bool pointerCheck = true, canChangePointer = true, canChoose = true;
     bool isRetry = false, isBack = false;
-    float animWait,animSpeed,vertical;
+    float animWait,animSpeed;
 
     //float timeCount;
     //ポインター
@@ -108,22 +108,21 @@ public class FinishMenu : MonoBehaviour
     //調整キーの設定
     void ChangePointer()
     {
-        vertical = Input.GetAxis("Vertical");
         /*if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Vertical") < vertical) vertical = 0;
         if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Vertical") > vertical) vertical = 0;*/
-        if (vertical > 0 && pointerCheck)
+        if (Input.GetAxis("Vertical") > 0 && pointerCheck)
         {
             //StartCoroutine(PointerMoveWait());
             pointer--;
             pointerCheck = false;
         }
-        if (vertical < 0 && pointerCheck)
+        if (Input.GetAxis("Vertical") < 0 && pointerCheck)
         {
             //StartCoroutine(PointerMoveWait());
             pointer++;
             pointerCheck = false;
         }
-        if (vertical == 0)
+        if (Input.GetAxis("Vertical") == 0)
         {
             pointerCheck = true;
         }
