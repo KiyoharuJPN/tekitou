@@ -3689,6 +3689,18 @@ PrefabInstance:
       propertyPath: moveData.firstSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: shake
+      value: 
+      objectReference: {fileID: 2054291373}
+    - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: _shakeInfo.Duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: _shakeInfo.Strength
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -22134,7 +22146,6 @@ MonoBehaviour:
     Duration: 0
     Strength: 30
     Vibrato: 2
-  _isDoShake: 0
 --- !u!1001 &2061898756
 PrefabInstance:
   m_ObjectHideFlags: 0

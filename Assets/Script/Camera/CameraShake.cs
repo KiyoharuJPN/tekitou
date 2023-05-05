@@ -26,42 +26,32 @@ public class CameraShake : MonoBehaviour
     [Header("‰æ–Ê—h‚ê‚ÉŠÖ‚·‚é")]
     public ShakeInfo _shakeInfo;
 
-    private Vector2 _initPosition; // ‰ŠúˆÊ’u
-    public bool _isDoShake;       // —h‚êÀs’†‚©H
-    private float _totalShakeTime; // —h‚êŒo‰ßŠÔ   
+    internal bool _isDoShake = false;
 
-    public static CameraShake instance;
-
-    int flag = 0;
-
-    private void Awake()
+    public void Shake(float duration, float magnitude)
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        StartCoroutine(DoShake(duration, magnitude));
     }
 
-    public void _CameraShake(int flag)
+    private IEnumerator DoShake(float duration, float magnitude)
     {
-        this.flag = flag;
-    }
+        var pos = transform.localPosition;
 
-    private void Update()
-    {
-        if (flag == 2) 
+        var elapsed = 0f;
+        _isDoShake = true;
+
+        while (elapsed < duration)
         {
-            _isDoShake = true;
-            CAMERA.transform.Translate(0, _shakeInfo.Strength * Time.deltaTime, 0);
-            CAMERA.transform.Translate(0, -_shakeInfo.Strength * Time.deltaTime, 0);
-            _totalShakeTime += Time.deltaTime;
-            if (_shakeInfo.Vibrato < _totalShakeTime)
-            {
+            var y = pos.y + Random.Range(-1f, 1f) * magnitude;
 
-                flag = 0;
-                _totalShakeTime = 0;
-                _isDoShake = false;
-            }
+            transform.localPosition = new Vector3(pos.x, y, pos.z);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
         }
+
+        _isDoShake = false;
+        transform.localPosition = pos;
     }
 }

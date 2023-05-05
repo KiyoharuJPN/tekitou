@@ -14,6 +14,22 @@ public class Player_Jump : MonoBehaviour
     //ƒWƒƒƒ“ƒv‚µ‚½Û‚ÌˆÊ’u
     float jumpPos;
 
+    //ƒJƒƒ‰—h‚êi“Ë‚«h‚µI—¹‚Ég—pj
+    [System.Serializable]
+    public struct ShakeInfo
+    {
+        [Tooltip("—h‚êŠÔ")]
+        public float Duration;
+        [Tooltip("—h‚ê‚Ì‹­‚³")]
+        public float Strength;
+    }
+
+    [SerializeField]
+    [Header("‰æ–Ê—h‚ê‚ÉŠÖ‚·‚é")]
+    public ShakeInfo _shakeInfo;
+
+    public CameraShake shake;
+
     void Start()
     {
         player = this.gameObject.GetComponent<PlayerController>();
@@ -140,6 +156,7 @@ public class Player_Jump : MonoBehaviour
             //“Ë‚«h‚µUŒ‚I‚í‚è
             if (player.isDropAttack)
             {
+                shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
                 Invoke("DropAttackOff", 0.5f);
             };
             
@@ -154,7 +171,7 @@ public class Player_Jump : MonoBehaviour
 
     private void DropAttackOff()
     {
-        CameraShake.instance._CameraShake(2);
+        
         player.isDropAttack = false;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
     }
