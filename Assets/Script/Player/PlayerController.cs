@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject RunEffect;
 
+    [SerializeField]
+    GameObject JumpEffect;
+
     [System.Serializable]
     public struct MoveData
     {
@@ -381,6 +384,25 @@ public class PlayerController : MonoBehaviour
             scale.x *= -1f;
             prefab.transform.localScale = scale;
         }
-        Destroy(prefab, 0.5f);
+        _EfectDestroy(prefab, 0.3f);
+    }
+
+    //ダブルジャンプエフェクト生成
+    public void _JumpEffect()
+    {
+        GameObject prefab =
+        Instantiate(JumpEffect, new Vector2(this.transform.position.x, this.transform.position.y - 0.8f), Quaternion.identity);
+        if (gameObject.transform.localScale.x < 0)
+        {
+            Vector2 scale = prefab.transform.localScale;
+            scale.x *= -1f;
+            prefab.transform.localScale = scale;
+        }
+        _EfectDestroy(prefab, 0.2f);
+    }
+
+    void _EfectDestroy(GameObject prefab, float time)
+    {
+        Destroy(prefab, 0.45f);
     }
 }

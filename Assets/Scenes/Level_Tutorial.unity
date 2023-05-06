@@ -3695,11 +3695,11 @@ PrefabInstance:
       objectReference: {fileID: 2054291373}
     - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: _shakeInfo.Duration
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: _shakeInfo.Strength
-      value: 0.1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_RootOrder

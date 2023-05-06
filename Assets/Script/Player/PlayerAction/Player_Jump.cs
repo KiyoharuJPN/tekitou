@@ -70,6 +70,7 @@ public class Player_Jump : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
+                player.animator.SetTrigger("IsSecondJump");
                 canSecondJump = false;
                 jumpPos = this.transform.position.y;
                 player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
