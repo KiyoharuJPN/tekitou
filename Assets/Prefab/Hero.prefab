@@ -530,6 +530,7 @@ MonoBehaviour:
   rb: {fileID: 1102989637}
   animator: {fileID: 4075973575706176914}
   RunEffect: {fileID: 2273230203940035460, guid: f46ef36528a7b554a8c416e33d0db47b, type: 3}
+  JumpEffect: {fileID: 0}
   HP: 10
   moveData:
     firstSpeed: 1
@@ -546,6 +547,7 @@ MonoBehaviour:
     knockBackTime: 0.2
     cantMovingTime: 0.1
     canKnockBack: 1
+  nomalAttackobj: {fileID: 0}
 --- !u!114 &6578985677749316734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +572,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b7d1e2efe38fb46830d48981b879b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shakeInfo:
+    Duration: 0
+    Strength: 0
+  shake: {fileID: 0}
 --- !u!50 &1102989637
 Rigidbody2D:
   serializedVersion: 4
@@ -922,7 +928,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <size=25>X</size><size=50> 26 </size><size=30>COMBO</size>
+  m_Text: <size=25>X</size><size=50> 0 </size><size=30>COMBO</size>
 --- !u!1001 &201393078792611480
 PrefabInstance:
   m_ObjectHideFlags: 0
