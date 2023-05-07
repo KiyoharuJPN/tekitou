@@ -171,6 +171,7 @@ public class PlayerController : MonoBehaviour
         hpparam.DamageHP(hpparam.GetHP() - power);
         if (hpparam.GetHP() <= 0)
         {
+            SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -204,6 +205,7 @@ public class PlayerController : MonoBehaviour
         //ã¸UŒ‚
         if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
         {
+            SoundManager.Instance.PlaySE(SESoundData.SE.UpAttack);
             UpAttack._UpAttack(this);
             StartCoroutine(_interval());
         }

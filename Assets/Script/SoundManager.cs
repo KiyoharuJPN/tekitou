@@ -23,6 +23,12 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            //勝手に修正が入らないためリリース版でコメントアウト或いは削除してください。
+            masterVolume = 0.4f;
+            seMasterVolume = 0.4f;
+            bgmMasterVolume = 0.4f;
+            //勝手に修正が入らないためリリース版でコメントアウト或いは削除してください。
         }
         else
         {
@@ -55,8 +61,11 @@ public class BGMSoundData
     public enum BGM
     {
         Title,
-        Dungeon,
-        Hoge,
+        Tutorial,
+        Stage1,
+        Stage2,
+        GoalBGM,
+        GameOver,
     }
 
     public BGM bgm;
@@ -71,12 +80,39 @@ public class SESoundData
 {
     public enum SE
     { 
-        support_1, //誘導マーカー設置
-        support_2, //射撃
-        support_3, //バリア展開
-        Fighter_Damage,　//戦闘機被弾
-        Enemy_Bullet,    //敵の球発射
-        Enemy_hit,　　　//敵撃破
+        //プレイヤーサウンド
+        Dash,                   //ダッシュオン
+        Jump,                   //飛ぶ
+        AirJump,                //空中Jump
+        AutoAttack,　           //自動攻撃
+        UpAttack,               //上昇攻撃
+        DropAttack,　　　       //下降攻撃
+        DropAttackLand,         //下降攻撃着地時
+        SideAttack,
+        PlayerGetHit,
+        PlayerDead,
+        ExAttack,
+        LargeSwordCut,          //大剣できる
+        PowerCharge,
+        LastAttack,
+        //環境音
+        GoalSE,
+        GetHeart,
+        GetCoin,
+        //モンスターサウンド
+        MonsterGetHit,
+        MonsterKnock,
+        MonsterDead,
+        ClawToKill,
+        HeavyLand,
+        SummonSlime,
+        BossDown,
+        ShootMagicBall,
+        ForefootHeavyAttack,
+        DragonRoar,
+        DragonBlaze,
+        RockDropOff,
+        RockBreak,
     }
 
     public SE se;
