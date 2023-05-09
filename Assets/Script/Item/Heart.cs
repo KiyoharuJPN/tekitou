@@ -11,6 +11,7 @@ public class Heart : Item
     }
     override protected void OnTriggerEnter2D(Collider2D collision)
     {
+        SoundManager.Instance.PlaySE(SESoundData.SE.GetHeart);
         player.GetComponent<PlayerController>()._Heel(itemData.resilience);
         base.OnTriggerEnter2D(collision);
     }

@@ -530,7 +530,6 @@ MonoBehaviour:
   rb: {fileID: 1102989637}
   animator: {fileID: 4075973575706176914}
   RunEffect: {fileID: 2273230203940035460, guid: f46ef36528a7b554a8c416e33d0db47b, type: 3}
-  JumpEffect: {fileID: 8371524048519115905, guid: 77b9677fcc866eb4fb4a85fbca4099cc, type: 3}
   HP: 10
   moveData:
     firstSpeed: 1
@@ -928,7 +927,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <size=25>X</size><size=50> 26 </size><size=30>COMBO</size>
+  m_Text: <size=25>X</size><size=50> 0 </size><size=30>COMBO</size>
 --- !u!1001 &201393078792611480
 PrefabInstance:
   m_ObjectHideFlags: 0

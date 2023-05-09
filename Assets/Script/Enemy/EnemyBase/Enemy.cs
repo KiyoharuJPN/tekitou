@@ -10,39 +10,39 @@ using UnityEngine.UIElements;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    string id;
-    EnemyData enemyData;
-    Rigidbody2D enemyRb;
+    protected string id;
+    protected EnemyData enemyData;
+    protected Rigidbody2D enemyRb;
 
-    float hp;
+    protected float hp;
 
     //吹っ飛び角度
-    float forceAngle;
-    Vector2 forceDirection = new Vector3(1.0f, 1.0f);
+    protected float forceAngle;
+    protected Vector2 forceDirection = new Vector3(1.0f, 1.0f);
 
     [SerializeField]
     [Header("吹っ飛び速度")]
-    float speed;
+    protected float speed;
     //反射回数
-    int num;
+    protected int num;
 
-    GameObject player;
-    enum moveType
+    protected GameObject player;
+    protected enum moveType
     {
         NotMove, //動かない
         Move,    //動く
         FlyMove　//飛ぶ
     }
-    moveType type;
+    protected moveType type;
 
-    bool isDestroy;
+    protected bool isDestroy;
 
-    private Transform _transform;
+    protected Transform _transform;
 
     // 前フレームのワールド位置
-    private Vector2 _prevPosition;
+    protected Vector2 _prevPosition;
 
-    private void Start()
+    protected virtual void Start()
     {
         //idで指定した敵データ読込
         enemyData = EnemyGeneratar.instance.EnemySet(id);
@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Update()
+    virtual protected void Update()
     {
         //吹っ飛び中以外は行わない
         if (!isDestroy)
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
     }
 
     //攻撃
-    void Attack(Collision2D col)
+    protected void Attack(Collision2D col)
     {
         col.gameObject.GetComponent<PlayerController>().KnockBack(1, this.transform.position, 15 * enemyData.knockBackValue);
         col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.power);
@@ -109,12 +109,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void EnemyMove()
+    protected void EnemyMove()
     {
         
     }
 
-    void _Destroy()
+    protected void _Destroy()
     {
         //反射用のコライダーに変更
         this.GetComponent<BoxCollider2D>().enabled = false;
@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
     }
 
-    void BoostSphere()
+    protected void BoostSphere()
     {
         // 向きと力の計算
         Vector2 force = speed * forceDirection;
@@ -137,7 +137,7 @@ public class Enemy : MonoBehaviour
         enemyRb.velocity = force;
     }
 
-    void CalcForceDirection()
+    protected void CalcForceDirection()
     {
         // 入力された角度をラジアンに変換
         float rad = forceAngle * Mathf.Deg2Rad;
@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour
     }
 
     //指定されたタグの中で最も近いものを取得
-    GameObject serchTag(GameObject nowObj, string tagName)
+    protected GameObject serchTag(GameObject nowObj, string tagName)
     {
         float tmpDis = 0;           //距離用一時変数
         float nearDis = 0;          //最も近いオブジェクトの距離
