@@ -27,8 +27,8 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
 
+        timer += Time.deltaTime;
         //移動キー取得
 
         moveInput = Input.GetAxis("Horizontal");
@@ -91,7 +91,7 @@ public class Player_Walk : MonoBehaviour
     void Dash()
     {
         //ダッシュ加速
-        if (player.isMoving && player.moveData.maxSpeed > speed)
+        if (player.isMoving && player.moveData.maxSpeed <= speed)
         {
             dashTime += Time.deltaTime;
 

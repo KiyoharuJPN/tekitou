@@ -38880,6 +38880,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: JumpEffect
+      value: 
+      objectReference: {fileID: 8371524048519115905, guid: 77b9677fcc866eb4fb4a85fbca4099cc, type: 3}
+    - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: nomalAttackobj
       value: 
       objectReference: {fileID: 1402918604}
@@ -38902,7 +38906,7 @@ PrefabInstance:
     - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: shake
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 621046455}
     - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: _shakeInfo.Duration
       value: 0.2
@@ -38921,7 +38925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.77
+      value: 1.82
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_LocalPosition.z

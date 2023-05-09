@@ -158,7 +158,7 @@ public class Player_Jump : MonoBehaviour
             if (player.isDropAttack)
             {
                 shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
-                Invoke("DropAttackOff", 0.5f);
+                Invoke(nameof(DropAttackOff), 0.5f);
             };
             
             Invoke("Landingoff", 0.01f);
