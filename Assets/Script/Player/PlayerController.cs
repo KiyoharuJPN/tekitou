@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] internal Rigidbody2D rb;
     [SerializeField] internal Animator animator;
-    AnimationClip rip;
+
+    [SerializeField] LayerMask groundLayerMask;
+    static readonly string GroundTag = "Ground"; //地面タグ
+    
 
     [SerializeField]
     GameObject RunEffect;
@@ -26,6 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         [Tooltip("初期速度")]
         public float firstSpeed;
+        [Tooltip("ジャンプ中移動速度")]
+        public float jumpFirstSpeed;
         [Tooltip("ダッシュ変化速度")]
         public float dashSpeed;
         [Tooltip("最高速度")]
@@ -41,10 +46,12 @@ public class PlayerController : MonoBehaviour
     {
         [Tooltip("速度")]
         public float speed;
-        [Tooltip("重力加")]
+        [Tooltip("落下速度")]
         public float gravity;
         [Tooltip("ジャンプ可能高さ")]
         public float jumpHeight;
+        [Tooltip("2段目ジャンプ可能高さ")]
+        public float secondJumpHeight;
         [Tooltip("ジャンプ時間の上限")]
         public float maxJumpTime;
     }
@@ -126,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        isFalling = rb.velocity.y < -0.5f;
+        
 
         //Debug.Log("基礎攻撃力: 15"　+ "攻撃力は"+ (15 +15*combo.GetPowerUp()));
 

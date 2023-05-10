@@ -68,8 +68,6 @@ public class Player_Walk : MonoBehaviour
             speed = player.moveData.firstSpeed;
             player.isRun = false;
         }
-
-        
     }
 
     private void FixedUpdate()
@@ -79,7 +77,15 @@ public class Player_Walk : MonoBehaviour
             return;
         }
 
-        if(player.canMovingCounter <= 0) 
+        //ジャンプ中の横移動
+        if (player.canMovingCounter <= 0 && (player.isJumping || player.isFalling))
+        {
+            speed = player.moveData.jumpFirstSpeed;
+            player.rb.velocity = new Vector2(moveInput * speed * timer, player.rb.velocity.y);
+            return;
+        }
+
+        if (player.canMovingCounter <= 0) 
         {
             //プレイヤーの左右の移動
             player.rb.velocity = new Vector2(moveInput * speed * timer, player.rb.velocity.y);
