@@ -7,7 +7,7 @@ public class Player_Jump : MonoBehaviour
 {
     PlayerController player;
     bool isGrounded = false; //接地フラグ
-    const float FALL_VELOCITY = 0.3f; //落下中判定用定数（characterのVilocityがこれより大きい場合true）
+    const float FALL_VELOCITY = 0.4f; //落下中判定用定数（characterのVilocityがこれより大きい場合true）
 
     float jumpTime = 0;
     bool isjump = false;
@@ -42,11 +42,13 @@ public class Player_Jump : MonoBehaviour
     {
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 
-        //ジャンプ処理
-        if (player.isJumping && player.knockBackCounter <= 0)
+        //ジャンプ高さ制限処理
+        if (player.isJumping && player.knockBackCounter <= 0 && !player.isUpAttack)
         {
             if (jumpPos + jumpHight <= player.transform.position.y)
             {
+                Debug.Log("高さ制限中");
+                player.isJumping = false;
                 player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
                 isjump = false;
             }
@@ -58,12 +60,9 @@ public class Player_Jump : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (player.isAttack) return;
         Jump();
-        //重力
-        if (player.rb.velocity.y <= 0) 
-        {
-            Gravity();
-        }
+        Gravity();
     }
 
     void JumpBottan()
@@ -115,23 +114,22 @@ public class Player_Jump : MonoBehaviour
     {
         if (!isjump) return;
         player.isJumping = true;
-        if (canSecondJump)
+        if (Input.GetButton("Jump"))
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime);
         }
-        else
+
+        if (Input.GetButtonUp("Jump"))
         {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime);
+            player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime * 0.5f);
         }
     }
 
     //重力
     void Gravity()
     {
-        if (!player.isAttack)
-        {
-            player.rb.AddForce(new Vector2(0, -player.jumpData.gravity));
-        }
+        Vector2 myGravity = new Vector2(0, -player.jumpData.gravity * 2);
+        player.rb.AddForce(myGravity);
     }
 
 

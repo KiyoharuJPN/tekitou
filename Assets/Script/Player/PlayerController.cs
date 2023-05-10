@@ -14,10 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] internal Rigidbody2D rb;
     [SerializeField] internal Animator animator;
 
-    [SerializeField] LayerMask groundLayerMask;
-    static readonly string GroundTag = "Ground"; //ínñ É^ÉO
-    
-
     [SerializeField]
     GameObject RunEffect;
 
