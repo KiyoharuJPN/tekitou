@@ -16,12 +16,11 @@ public class EnemyData
         FlyMove　//飛ぶ
     }
 
-    public float hp;           //体力
-    public float power;     //攻撃力
-    public moveType type;      //行動種類
-    public float speed;        //素早さ
-    public int score;            //入手スコア
-    public float knockBackValue; //ノックバック値
+    public float hp;                //体力
+    public int score;               //入手スコア
+    public float attackPower;       //攻撃力
+    public float power;             //接触ダメージ
+    public float knockBackValue;    //ノックバック値
 
     [SerializeField]
     [Header("吹っ飛び角度")]
@@ -30,16 +29,22 @@ public class EnemyData
     [Header("吹っ飛び回数")]
     public int num;
 
-    public EnemyData(float hp, float power, moveType type,  float speed,
-                     int score, float knockBackValue, float angle, int num)
+    public moveType type;           //行動種類
+    public float speed;             //素早さ
+
+
+    public EnemyData(float hp, int score, float attackPower, float power,
+                     float knockBackValue, float angle, int num, moveType type,  
+                     float speed)
     {
         this.hp = hp;
-        this.power = power;
-        this.type = type;
-        this.speed = speed;
         this.score = score;
+        this.attackPower = attackPower;
+        this.power = power;
         this.knockBackValue = knockBackValue;
         this.angle = angle;
         this.num = num;
+        this.type = type;
+        this.speed = speed;
     }
 }

@@ -2,17 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : MonoBehaviour
+public class Goblin : Enemy
 {
-    // Start is called before the first frame update
-    void Start()
+    Animator animator;
+
+    public bool IsBlowing = false, IsMoving = false, IsAttacking = false;
+    protected override void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        base.Start();
+    }
+    protected override void Update()
+    {
+        Movement();
+        Attacking();
+
+
+
+        animator.SetBool("IsAttacking", IsAttacking);
+        animator.SetBool("IsMoving", IsMoving);
+        animator.SetBool("IsBlowing", IsBlowing);
+        if (isDestroy) IsBlowing = true;
+        if (!isDestroy) IsBlowing = false;
+        base.Update();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Movement()
     {
-        
+        //ƒSƒuƒŠƒ“‚Ì“®‚«
+
+    }
+
+    void Attacking()
+    {
+
     }
 }
