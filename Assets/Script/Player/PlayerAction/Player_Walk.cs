@@ -10,7 +10,9 @@ public class Player_Walk : MonoBehaviour
     PlayerController player;
 
     //変数
-    private float speed;　　//現在のスピード
+    private float xSpeed = 0.0f;
+
+    private float dashSpeed;
     private float dashTime; //ダッシュしている時間
     float moveInput; //移動キー入力
     
@@ -22,54 +24,19 @@ public class Player_Walk : MonoBehaviour
     private void Start()
     {
         player = this.gameObject.GetComponent<PlayerController>();
-        speed = player.moveData.firstSpeed;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-
-        //移動キー取得
-
-        moveInput = Input.GetAxis("Horizontal");
-
-        player.isMoving = moveInput != 0;
-
-        if (moveInput > 0 && moveInput < 0)
-        {
-            dashTime += Time.deltaTime;
-        }
-
-        //画像の反転
-        //移動方向に合わせて画像の反転
-        if (player.isMoving && !player.isAttack)
-        {
-            Vector3 scale = gameObject.transform.localScale;
-
-            if (moveInput < 0 && scale.x > 0 || moveInput > 0 && scale.x < 0)
-            {
-                scale.x *= -1;
-            }
-
-            gameObject.transform.localScale = scale;
-
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            timer = player.moveData.firstSpeed;
-        }
-
+        MoveKay();
         Dash();
 
         if (!player.isMoving)
         {
             dashTime = 0;
-            speed = player.moveData.firstSpeed;
+            dashSpeed = 0.0f;
             player.isRun = false;
         }
-
-        
     }
 
     private void FixedUpdate()
@@ -79,31 +46,89 @@ public class Player_Walk : MonoBehaviour
             return;
         }
 
-        if(player.canMovingCounter <= 0) 
+        if (player.canMovingCounter <= 0) 
         {
             //プレイヤーの左右の移動
-            player.rb.velocity = new Vector2(moveInput * speed * timer, player.rb.velocity.y);
+            player.rb.velocity = new Vector2(xSpeed + dashSpeed, player.rb.velocity.y);
+        }
+    }
+
+    //キー入力されたら移動する
+    private void MoveKay()
+    {
+        //移動キー取得
+        moveInput = Input.GetAxis("Horizontal");
+
+        if (moveInput > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            xSpeed = JumpCheck();
 
         }
+        else if (moveInput < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            xSpeed = -JumpCheck();
+        }
+        else
+        {
+            xSpeed = 0.0f;
+        }
+
+        player.isMoving = moveInput != 0;
+    }
+
+    //ジャンプ中かどうか
+    float JumpCheck()
+    {
+        if(player.isJumping || player.isFalling)
+        {
+            return player.moveData.jumpFirstSpeed;
+        }
+        else { return player.moveData.firstSpeed; }
     }
 
     //移動中の加速等
     void Dash()
     {
         //ダッシュ加速
-        if (player.isMoving && player.moveData.maxSpeed > speed)
+        if (player.isMoving 
+            && ((player.moveData.maxSpeed >= (xSpeed + dashSpeed)) 
+            && (-player.moveData.maxSpeed <= (xSpeed + dashSpeed))))
         {
             dashTime += Time.deltaTime;
-
+            
             if (dashTime > player.moveData.acceleTime)
             {
-                speed += player.moveData.accele;
+                Debug.Log("加速");
+                dashSpeed += DirectionChack();
                 dashTime = 0;
-                if (speed >= player.moveData.dashSpeed)
+                if ((xSpeed + dashSpeed) >= player.moveData.dashSpeed)
                 {
                     player.isRun = true;
                 }
             }
         }
+    }
+
+    float DirectionChack()
+    {
+        if (moveInput > 0)
+        {
+            if ((xSpeed + dashSpeed) >= player.moveData.dashSpeed)
+            {
+                player.isRun = true;
+            }
+            return player.moveData.accele;
+        }
+        else if (moveInput < 0)
+        {
+            if ((xSpeed + dashSpeed) <= -player.moveData.dashSpeed)
+            {
+                player.isRun = true;
+            }
+            return -player.moveData.accele;
+        }
+        else return 0.0f;
     }
 }

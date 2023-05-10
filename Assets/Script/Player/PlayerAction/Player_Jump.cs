@@ -6,10 +6,13 @@ using static PlayerController;
 public class Player_Jump : MonoBehaviour
 {
     PlayerController player;
+    bool isGrounded = false; //接地フラグ
+    const float FALL_VELOCITY = 0.4f; //落下中判定用定数（characterのVilocityがこれより大きい場合true）
 
     float jumpTime = 0;
     bool isjump = false;
     bool canSecondJump = false;
+    float jumpHight;
 
     //ジャンプした際の位置
     float jumpPos;
@@ -27,7 +30,6 @@ public class Player_Jump : MonoBehaviour
     [SerializeField]
     [Header("画面揺れに関する")]
     public ShakeInfo _shakeInfo;
-
     public CameraShake shake;
 
     void Start()
@@ -38,27 +40,28 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ジャンプキー取得
-        JumpBottan();
+        player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 
-        //ジャンプ処理
-        if (isjump && player.knockBackCounter <= 0)
+        //ジャンプ高さ制限処理
+        if (player.isJumping && player.knockBackCounter <= 0 && !player.isUpAttack)
         {
-            if (jumpPos + player.jumpData.jumpHeight < player.transform.position.y)
+            if (jumpPos + jumpHight <= player.transform.position.y)
             {
-                player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y * 0.2f);
+                Debug.Log("高さ制限中");
+                player.isJumping = false;
+                player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
                 isjump = false;
             }
-
-            Jump();
         }
 
-        
+        //ジャンプキー取得
+        JumpBottan();
     }
 
     private void FixedUpdate()
     {
-        //重力
+        if (player.isAttack) return;
+        Jump();
         Gravity();
     }
 
@@ -72,6 +75,7 @@ public class Player_Jump : MonoBehaviour
             {
                 player.animator.SetTrigger("IsSecondJump");
                 canSecondJump = false;
+                jumpHight = player.jumpData.secondJumpHeight;
                 jumpPos = this.transform.position.y;
                 player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
                 jumpTime = 0;
@@ -84,6 +88,7 @@ public class Player_Jump : MonoBehaviour
         {
             player.isSquatting = true;
             player.animator.SetBool("IsSquatting", player.isSquatting);
+            jumpHight = player.jumpData.jumpHeight;
             //ジャンプ前位置格納
             jumpPos = this.transform.position.y;
             isjump = true;
@@ -100,7 +105,6 @@ public class Player_Jump : MonoBehaviour
             }
             else if (Input.GetButton("Jump") && jumpTime <= player.jumpData.maxJumpTime)
             {
-                Debug.Log("ジャンプキー長押し中");
                 jumpTime += Time.deltaTime;
             }
         }
@@ -108,28 +112,24 @@ public class Player_Jump : MonoBehaviour
 
     void Jump()
     {
+        if (!isjump) return;
         player.isJumping = true;
-        //
-
-        if (canSecondJump)
+        if (Input.GetButton("Jump"))
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime);
-            //player.rb.AddForce(transform.up * player.jumpData.speed, ForceMode2D.Impulse);
         }
-        else
+
+        if (Input.GetButtonUp("Jump"))
         {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime);
-            //player.rb.AddForce(transform.up * ((player.jumpData.speed / 5) * 4), ForceMode2D.Impulse);
+            player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime * 0.5f);
         }
     }
 
     //重力
     void Gravity()
     {
-        if (player.knockBackCounter <= 0 || !player.isSideAttack)
-        {
-            player.rb.AddForce(new Vector2(0, -player.jumpData.gravity));
-        }
+        Vector2 myGravity = new Vector2(0, -player.jumpData.gravity * 2);
+        player.rb.AddForce(myGravity);
     }
 
 
@@ -142,7 +142,6 @@ public class Player_Jump : MonoBehaviour
             {
                 return;
             }
-
             if (player.isFalling == true)
             {
                 player.isLanding = true;
@@ -158,10 +157,10 @@ public class Player_Jump : MonoBehaviour
             if (player.isDropAttack)
             {
                 shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
-                Invoke("DropAttackOff", 0.5f);
+                Invoke(nameof(DropAttackOff), 0.5f);
             };
             
-            Invoke("Landingoff", 0.01f);
+            Invoke("Landingoff", 0.1f);
         }
     }
 
@@ -172,7 +171,6 @@ public class Player_Jump : MonoBehaviour
 
     private void DropAttackOff()
     {
-        
         player.isDropAttack = false;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
     }
