@@ -27,8 +27,12 @@ public class Slime : Enemy
     }
     override protected void Update()
     {
-        if(!IsBlowing) SlimeMove();
-
+        //‰æ–Ê“à‚É‚ ‚é
+        if (OnCamera)
+        {
+            //”ò‚Î‚³‚ê‚Ä‚È‚¢ŒÀ‚è
+            if (!IsBlowing) SlimeMove();
+        }
         //TestTime += Time.deltaTime;
         //Debug.Log("moving:" + IsMoving + "\nsecond:" + TestTime);
 
@@ -92,4 +96,6 @@ public class Slime : Enemy
         IsMoving = false;
         moveHideFlag = false;
     }
+
+
 }

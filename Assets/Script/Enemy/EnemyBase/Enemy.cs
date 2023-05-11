@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     }
     protected moveType type;
 
-    protected bool isDestroy;
+    protected bool isDestroy, OnCamera = false;
 
     protected Transform _transform;
 
@@ -186,5 +186,14 @@ public class Enemy : MonoBehaviour
         //最も近かったオブジェクトを返す
         //return GameObject.Find(nearObjName);
         return targetObj;
+    }
+    //画面に入ったどうかをチェック
+    protected void OnBecameVisible()
+    {
+        OnCamera = true;
+    }
+    protected void OnBecameInvisible()
+    {
+        OnCamera = false;
     }
 }

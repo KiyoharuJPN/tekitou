@@ -14,9 +14,16 @@ public class Goblin : Enemy
     }
     protected override void Update()
     {
-        Movement();
-        Attacking();
-
+        //‰æ–Ê“à‚É‚ ‚é
+        if (OnCamera)
+        {
+            //”ò‚Î‚³‚ê‚Ä‚È‚¢ŒÀ‚è
+            if (!isDestroy)
+            {
+                Movement();
+                Attacking();
+            }
+        }
 
 
         animator.SetBool("IsAttacking", IsAttacking);
