@@ -6,9 +6,13 @@ public class Goblin : Enemy
 {
     Animator animator;
 
-    public bool IsBlowing = false, IsMoving = false, IsAttacking = false;
+    //public float speed;
+
+    bool IsBlowing = false, IsMoving = false, IsAttacking = false;
+    private float moveSpeed;
     protected override void Start()
     {
+        moveSpeed = speed * 0.001f;
         animator = GetComponent<Animator>();
         base.Start();
     }
@@ -37,11 +41,15 @@ public class Goblin : Enemy
     void Movement()
     {
         //ƒSƒuƒŠƒ“‚Ì“®‚«
-
+        
+        //ŠR”»’f
+        
+        //ˆÚ“®
     }
 
     void Attacking()
     {
-
+        //UŒ‚‚·‚é‚Æ‚«‚Ì“®‚«
+        
     }
 }

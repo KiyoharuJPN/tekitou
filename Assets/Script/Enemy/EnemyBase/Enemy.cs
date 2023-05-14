@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour
         
     }
 
-    protected void _Destroy()
+    protected virtual void _Destroy()
     {
         //反射用のコライダーに変更
         this.GetComponent<BoxCollider2D>().enabled = false;
