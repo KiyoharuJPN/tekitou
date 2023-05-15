@@ -6,7 +6,13 @@ public class Enemy_Bird : Enemy
 {
     Animator animator;
 
+    public float movingSpeed = 0.5f;
+    [Header("ˆÚ“®”ÍˆÍ")]
+    public float moveArea = 10f;
+
+
     bool IsMoving = false, IsAttacking = false, IsBlowing = false;
+    float moveSpeed;
 
 
     protected override void Start()
@@ -19,7 +25,7 @@ public class Enemy_Bird : Enemy
     {
         if (OnCamera)
         {
-            Moving();
+            Movement();
             Attacking();
         }
 
@@ -32,9 +38,13 @@ public class Enemy_Bird : Enemy
         base.Update();
     }
 
-    void Moving()
+    void Movement()
     {
-
+        //ˆÚ“®
+        if (IsMoving)
+        {
+            enemyRb.velocity = new Vector2(moveSpeed, enemyRb.velocity.y);
+        }
     }
 
     void Attacking()

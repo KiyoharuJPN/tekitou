@@ -614,9 +614,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1102989637}
   animator: {fileID: 4075973575706176914}
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   RunEffect: {fileID: 2273230203940035460, guid: f46ef36528a7b554a8c416e33d0db47b, type: 3}
   JumpEffect: {fileID: 8371524048519115905, guid: 77b9677fcc866eb4fb4a85fbca4099cc, type: 3}
   HP: 10
