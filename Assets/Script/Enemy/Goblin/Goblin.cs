@@ -9,7 +9,7 @@ public class Goblin : Enemy
     public float movingSpeed;
     public float idleTime = 2.4f;
 
-    //float x = 1,y = 1;
+    float x = 1,y = 1;
 
     bool IsBlowing = false, IsMoving = true, IsAttacking = false, AttackChecking = true;
     float moveSpeed;
