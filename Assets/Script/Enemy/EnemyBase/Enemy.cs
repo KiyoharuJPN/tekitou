@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
     //çUåÇ
     protected void Attack(Collision2D col)
     {
-        col.gameObject.GetComponent<PlayerController>().KnockBack(1, this.transform.position, 15 * enemyData.knockBackValue);
+        col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
         col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.power);
     }
 

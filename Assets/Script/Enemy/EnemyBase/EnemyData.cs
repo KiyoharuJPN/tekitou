@@ -18,7 +18,7 @@ public class EnemyData
 
     public float hp;                //体力
     public int score;               //入手スコア
-    public float attackPower;       //攻撃力
+    public int attackPower;       //攻撃力
     public float power;             //接触ダメージ
     public float knockBackValue;    //ノックバック値
 
@@ -33,7 +33,7 @@ public class EnemyData
     public float speed;             //素早さ
 
 
-    public EnemyData(float hp, int score, float attackPower, float power,
+    public EnemyData(float hp, int score, int attackPower, float power,
                      float knockBackValue, float angle, int num, moveType type,  
                      float speed)
     {

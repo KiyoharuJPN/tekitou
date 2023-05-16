@@ -21,8 +21,8 @@ TagManager:
   - Item
   - BrokenBlock
   - BrokenBlockArea
-  - 
-  - 
+  - EnemyAttackArea
+  - EnemyAttack
   - 
   - 
   - 

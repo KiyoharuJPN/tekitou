@@ -277,7 +277,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     //KnockBackÇ≥ÇÍÇΩÇÁåƒÇ‘ä÷êî
-    public void KnockBack(int damage, Vector3 position, float force)
+    public void KnockBack(Vector3 position, float force)
     {
         canMovingCounter = knockBack.cantMovingTime;
         knockBackCounter = knockBack.knockBackTime;

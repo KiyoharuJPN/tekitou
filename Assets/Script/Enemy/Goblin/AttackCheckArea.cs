@@ -2,11 +2,21 @@ using UnityEngine;
 
 public class AttackCheckArea : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Update()
     {
-        Debug.Log("111111111111111111111111111111111111");
-        if (collision.transform.CompareTag("Player")){
+        if(transform.GetComponentInParent<Goblin>().GetIsBlowing())
+            gameObject.SetActive(false);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
             transform.GetComponentInParent<Goblin>().PlayerInAttackArea();
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.transform.CompareTag("Player")&& transform.GetComponentInParent<Goblin>().GetIsMoving())
+            transform.GetComponentInParent<Goblin>().PlayerInAttackArea();
     }
 }

@@ -16,7 +16,7 @@ public class Toge : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
 
-            collision.gameObject.GetComponent<PlayerController>().KnockBack(1, this.transform.position, 15 * knockBackValue);
+            collision.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * knockBackValue);
             collision.gameObject.GetComponent<PlayerController>()._Damage(damage);
         }
     }
