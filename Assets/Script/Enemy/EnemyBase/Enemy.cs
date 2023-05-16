@@ -19,10 +19,8 @@ public class Enemy : MonoBehaviour
     //吹っ飛び角度
     protected float forceAngle;
     protected Vector2 forceDirection = new Vector3(1.0f, 1.0f);
-
-    [SerializeField]
-    [Header("吹っ飛び速度")]
-    protected float speed;
+    const float speed = 15f;     //吹っ飛び速度
+    protected float rotateSpeed = 10f;//吹っ飛び回転速度
     //反射回数
     protected int num;
 
@@ -79,15 +77,13 @@ public class Enemy : MonoBehaviour
         if (!isDestroy)
             return;
 
-        // 現在フレームのワールド位置
-        Vector2 position = _transform.position;
+        
 
-        Vector3 diff = (position - _prevPosition);
-
-        this.transform.rotation = Quaternion.FromToRotation(Vector3.up, diff);
-
-        // 次のUpdateで使うための前フレーム位置更新
-        //_prevPosition = position;      
+        //吹っ飛び中の回転
+        if (isDestroy)
+        {
+            EnemyRotate();
+        }
     }
 
     //攻撃
@@ -120,6 +116,7 @@ public class Enemy : MonoBehaviour
         this.GetComponent<BoxCollider2D>().enabled = false;
         this.GetComponent<CircleCollider2D>().enabled = true;
         enemyRb.bodyType = RigidbodyType2D.Dynamic;
+        enemyRb.gravityScale = 0;
         enemyRb.constraints = RigidbodyConstraints2D.None;
         CalcForceDirection();
         //吹っ飛び開始
@@ -128,6 +125,7 @@ public class Enemy : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
     }
 
+    //吹っ飛び発生
     protected void BoostSphere()
     {
         // 向きと力の計算
@@ -135,6 +133,22 @@ public class Enemy : MonoBehaviour
 
         // 力を加えるメソッド
         enemyRb.velocity = force;
+    }
+
+    //吹っ飛び中回転
+    private void EnemyRotate()
+    {
+        //右方向に動いている
+        if (enemyRb.velocity.x > 0.1)
+        {
+            this.transform.Rotate(0, 0, -rotateSpeed);
+        }
+        //左方向に動いている
+        else if (enemyRb.velocity.x < -0.1)
+        {
+            this.transform.Rotate(0, 0, rotateSpeed);
+        }
+
     }
 
     protected void CalcForceDirection()
