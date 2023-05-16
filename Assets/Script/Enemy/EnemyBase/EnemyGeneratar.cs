@@ -21,8 +21,9 @@ public class EnemyGeneratar : MonoBehaviour
         {
             if (enemyData.id == id)
             {
-                return new EnemyData(enemyData.hp, enemyData.power,enemyData.type, enemyData.speed,
-                                     enemyData.score, enemyData.knockBackValue, enemyData.angle, enemyData.num);
+                return new EnemyData(enemyData.hp, enemyData.score, enemyData.attackPower, enemyData.power, 
+                                     enemyData.knockBackValue, enemyData.angle, enemyData.num, enemyData.type, 
+                                     enemyData.speed);
             }
         }
         return null;

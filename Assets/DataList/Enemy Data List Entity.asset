@@ -16,60 +16,88 @@ MonoBehaviour:
   - id: 0
     charName: "\u6848\u5C71\u5B50"
     hp: 2
-    power: 0
-    type: 0
-    speed: 0
     score: 100
+    attackPower: 0
+    power: 0
     knockBackValue: 1
     angle: 60
     num: 0
+    type: 0
+    speed: 0
   - id: 1
     charName: "\u93A7\u4ED8\u304D\u6848\u5C71\u5B50"
     hp: 20
-    power: 1
-    type: 0
-    speed: 0
     score: 1000
+    attackPower: 0
+    power: 1
     knockBackValue: 1
     angle: 0
     num: 0
+    type: 0
+    speed: 0
   - id: 2
     charName: "\u7684"
     hp: 2
-    power: 1
-    type: 0
-    speed: 0
     score: 100
+    attackPower: 0
+    power: 1
     knockBackValue: 1
     angle: 50
     num: 0
+    type: 0
+    speed: 0
   - id: 3
     charName: "\u58CA\u308C\u305F\u6848\u5C71\u5B50"
     hp: 2
-    power: 1
-    type: 0
-    speed: 0
     score: 100
+    attackPower: 0
+    power: 1
     knockBackValue: 1
     angle: 10
     num: 0
+    type: 0
+    speed: 0
   - id: 4
     charName: "\u6575A"
     hp: 1
-    power: 1
-    type: 0
-    speed: 0
     score: 100
+    attackPower: 0
+    power: 1
     knockBackValue: 1
     angle: 45
     num: 5
+    type: 0
+    speed: 0
   - id: 5
     charName: "\u30B9\u30E9\u30A4\u30E0"
     hp: 2
-    power: 1
-    type: 0
-    speed: 0
     score: 200
+    attackPower: 0
+    power: 1
     knockBackValue: 1
     angle: 60
     num: 8
+    type: 0
+    speed: 0
+  - id: 6
+    charName: "\u30B4\u30D6\u30EA\u30F3"
+    hp: 5
+    score: 500
+    attackPower: 2
+    power: 1
+    knockBackValue: 2
+    angle: 30
+    num: 6
+    type: 0
+    speed: 0
+  - id: 7
+    charName: "\u9CE5"
+    hp: 2
+    score: 200
+    attackPower: 1
+    power: 1
+    knockBackValue: 1
+    angle: 50
+    num: 5
+    type: 0
+    speed: 0
