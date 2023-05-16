@@ -17,7 +17,7 @@ MonoBehaviour:
     damage: 1
     distance: 0
     skillText: "\u901A\u5E38\u653B\u6483"
-    coolTime: 0.1
+    coolTime: 0.3
   - type: 1
     damage: 2
     distance: 30

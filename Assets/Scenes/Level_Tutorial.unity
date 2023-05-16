@@ -3851,11 +3851,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.97
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.77
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4668,6 +4668,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1649560698}
     m_Modifications:
+    - target: {fileID: 5959837238740694568, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6054787801465259575, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6890,7 +6894,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
-  speed: 20
   movingSpeed: 0.8
   idleTime: 2.4
 --- !u!61 &1476541150
