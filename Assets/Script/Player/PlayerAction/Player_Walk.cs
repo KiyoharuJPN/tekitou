@@ -18,6 +18,8 @@ public class Player_Walk : MonoBehaviour
     
     float timer;
 
+    bool isDash = false;
+
     //アニメーション用変数
     
 
@@ -33,6 +35,7 @@ public class Player_Walk : MonoBehaviour
 
         if (!player.isMoving)
         {
+            isDash = false;
             dashTime = 0;
             dashSpeed = 0.0f;
             player.isRun = false;
@@ -100,15 +103,21 @@ public class Player_Walk : MonoBehaviour
             
             if (dashTime > player.moveData.acceleTime)
             {
-                Debug.Log("加速");
+                
                 dashSpeed += DirectionChack();
                 dashTime = 0;
                 if ((xSpeed + dashSpeed) >= player.moveData.dashSpeed)
                 {
                     player.isRun = true;
+                    if (!isDash)
+                    {
+                        //player.playerSE._DashSE();
+                        isDash = true;
+                    }
                 }
             }
         }
+        
     }
 
     float DirectionChack()

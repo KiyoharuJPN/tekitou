@@ -6973,6 +6973,7 @@ MonoBehaviour:
   id: 6
   movingSpeed: 0.8
   idleTime: 2.4
+  GoblinAttack: {fileID: 0}
 --- !u!61 &1476541150
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21021,7 +21022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1619931896
 Transform:
   m_ObjectHideFlags: 0

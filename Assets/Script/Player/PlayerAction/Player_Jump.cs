@@ -9,6 +9,10 @@ public class Player_Jump : MonoBehaviour
     bool isGrounded = false; //接地フラグ
     const float FALL_VELOCITY = 0.4f; //落下中判定用定数（characterのVilocityがこれより大きい場合true）
 
+    [Header("すり抜床か判定するか")]
+    public bool checkPlatformGroud = true;
+    private string platformTag = "GroundPlatform";
+
     float jumpTime = 0;
     bool isjump = false;
     bool canSecondJump = false;
@@ -42,17 +46,7 @@ public class Player_Jump : MonoBehaviour
     {
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 
-        //ジャンプ高さ制限処理
-        if (player.isJumping && player.knockBackCounter <= 0 && !player.isUpAttack)
-        {
-            if (jumpPos + jumpHight <= player.transform.position.y)
-            {
-                Debug.Log("高さ制限中");
-                player.isJumping = false;
-                player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
-                isjump = false;
-            }
-        }
+        
 
         //ジャンプキー取得
         JumpBottan();
@@ -60,7 +54,6 @@ public class Player_Jump : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player.isAttack) return;
         Jump();
         Gravity();
     }
@@ -114,6 +107,18 @@ public class Player_Jump : MonoBehaviour
     {
         if (!isjump) return;
         player.isJumping = true;
+
+        //ジャンプ高さ制限処理
+        if (player.isJumping && player.knockBackCounter <= 0 && !player.isUpAttack)
+        {
+            if (jumpPos + jumpHight <= player.transform.position.y)
+            {
+                player.isJumping = false;
+                player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
+                isjump = false;
+            }
+        }
+        
         if (Input.GetButton("Jump"))
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpData.speed + jumpTime * Time.deltaTime);
