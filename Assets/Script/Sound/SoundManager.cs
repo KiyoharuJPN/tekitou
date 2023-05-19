@@ -79,7 +79,7 @@ public class BGMSoundData
 public class SESoundData
 {
     public enum SE
-    { 
+    {
         //プレイヤーサウンド
         Dash,                   //ダッシュオン
         Jump,                   //飛ぶ
