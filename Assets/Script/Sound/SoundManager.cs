@@ -34,6 +34,7 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 
     public void PlayBGM(BGMSoundData.BGM bgm)
@@ -86,6 +87,7 @@ public class SESoundData
         AirJump,                //‹ó’†Jump
         AutoAttack,@           //©“®UŒ‚
         UpAttack,               //ã¸UŒ‚
+        DropAttackStart,        //‰º~UŒ‚ŠJn
         DropAttack,@@@       //‰º~UŒ‚
         DropAttackLand,         //‰º~UŒ‚’…’n
         SideAttack,

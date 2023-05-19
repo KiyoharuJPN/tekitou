@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] internal Rigidbody2D rb;
     [SerializeField] internal Animator animator;
+    internal PlayerSE playerSE;
 
     [SerializeField]
     GameObject RunEffect;
@@ -123,6 +124,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerSE = GetComponent<PlayerSE>();
         rb = GetComponent<Rigidbody2D>();
         hpparam = GameObject.Find("Hero").GetComponentInChildren<HPparam>();
     }
@@ -208,7 +210,6 @@ public class PlayerController : MonoBehaviour
         //ã¸UŒ‚
         if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
         {
-            SoundManager.Instance.PlaySE(SESoundData.SE.UpAttack);
             UpAttack._UpAttack(this);
             StartCoroutine(_interval());
         }
