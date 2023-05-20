@@ -16,7 +16,7 @@ public class Slime : Enemy
     Animator animator;      //敵のアニメ関数
     float movingHeight, movingWidth;    //移動に関する内部関数
     //チェック用内部関数
-    bool IsBlowing = false, IsMoving = false, moveHideFlag = false, LRmove = false;
+    bool /*IsBlowing = false, IsMoving = false, */moveHideFlag = false, LRmove = false;
 
     //float TestTime = 0f;
     override protected void Start()

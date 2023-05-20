@@ -17,10 +17,8 @@ public class Goblin : Enemy
     //float x = 1,y = 1;
 
     //チェック用内部関数
-    bool IsBlowing = false, IsMoving = true, IsAttacking = false, AttackChecking = true, PlayerNotAttacked = true;
-
-    //移動速度内部関数
-    float moveSpeed;        
+    bool AttackChecking = true, PlayerNotAttacked = true;
+    
 
     protected override void Start()
     {
@@ -129,47 +127,6 @@ public class Goblin : Enemy
             AttackChecking = false;
             StartCoroutine(Attacking());
         }
-    }
-
-    //外から今の移動状態を確認
-    public bool GetIsMoving()
-    {
-        return IsMoving;
-    }
-
-    //外から今の吹き飛ばし状態確認
-    public bool GetIsBlowing()
-    {
-        return IsBlowing;
-    }
-
-    //ゴブリンの移動方向を変える
-    public void TurnAround()
-    {
-        bool InCheck = true;
-        if(transform.localScale.x == 1f && InCheck)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-            InCheck = false;
-        }
-        if(transform.localScale.x == -1f && InCheck)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-            //InCheck = false;
-        }
-        moveSpeed *= -1;
-    }
-
-    //攻撃力を外で取得する
-    public int GetGoblinDamage()
-    {
-        return enemyData.attackPower;
-    }
-    
-    //ノックバック力を外で取得する/
-    public float GetGoblinKnockBackForce()
-    {
-        return enemyData.knockBackValue;
     }
 
     public bool GetPlayerAttacked()

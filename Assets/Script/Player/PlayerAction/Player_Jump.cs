@@ -6,8 +6,8 @@ using static PlayerController;
 public class Player_Jump : MonoBehaviour
 {
     PlayerController player;
-    bool isGrounded = false; //接地フラグ
-    const float FALL_VELOCITY = 0.4f; //落下中判定用定数（characterのVilocityがこれより大きい場合true）
+    bool isGrounded = false;            //接地フラグ
+    const float FALL_VELOCITY = 0.4f;   //落下中判定用定数（characterのVilocityがこれより大きい場合true）
 
     [Header("すり抜床か判定するか")]
     public bool checkPlatformGroud = true;

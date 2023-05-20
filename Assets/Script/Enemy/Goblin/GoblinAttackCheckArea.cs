@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackCheckArea : MonoBehaviour
+public class GoblinAttackCheckArea : MonoBehaviour
 {
     private void Update()
     {

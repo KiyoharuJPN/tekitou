@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoblinAttack : MonoBehaviour
@@ -9,8 +7,8 @@ public class GoblinAttack : MonoBehaviour
         if (collision.CompareTag("Player") && GetComponentInParent<Goblin>().GetPlayerAttacked())
         {
             GetComponentInParent<Goblin>().SetPlayerAttacked(false);
-            collision.GetComponent<PlayerController>().KnockBack(transform.position, GetComponentInParent<Goblin>().GetGoblinKnockBackForce());
-            collision.GetComponent<PlayerController>()._Damage(GetComponentInParent<Goblin>().GetGoblinDamage());
+            collision.GetComponent<PlayerController>().KnockBack(transform.position, GetComponentInParent<Goblin>().GetKnockBackForce());
+            collision.GetComponent<PlayerController>()._Damage(GetComponentInParent<Goblin>().GetDamage());
         }
     }
 }

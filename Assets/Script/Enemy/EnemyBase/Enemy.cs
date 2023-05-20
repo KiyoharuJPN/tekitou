@@ -2,6 +2,7 @@ using System.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -14,6 +15,11 @@ public class Enemy : MonoBehaviour
     protected EnemyData enemyData;
     protected Rigidbody2D enemyRb;
 
+    //移動速度内部関数
+    protected float moveSpeed;
+    //チェック用内部関数
+    protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false;
+
     protected float hp;
 
     //吹っ飛び角度
@@ -25,6 +31,9 @@ public class Enemy : MonoBehaviour
     protected int num;
 
     protected GameObject player;
+
+    //敵の点滅
+    SpriteRenderer sprite;
     protected enum moveType
     {
         NotMove, //動かない
@@ -53,6 +62,9 @@ public class Enemy : MonoBehaviour
         //吹っ飛び中に使用
         _transform = transform;
         _prevPosition = _transform.position;
+
+        //敵の点滅
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     virtual protected void OnCollisionEnter2D(Collision2D col)
@@ -89,15 +101,22 @@ public class Enemy : MonoBehaviour
     //攻撃
     protected void Attack(Collision2D col)
     {
-        col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
-        col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.power);
+        if (!HadAttack)
+        {
+            //攻撃クールダウンタイム
+            HadAttack = true;
+            StartCoroutine(HadAttackReset());
+            //ダメージとノックバック
+            col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
+            col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.power);
+        }
     }
 
     public void Damage(float power)
     {
         hp -= power;
         ComboParam.Instance.ResetTime();
-
+        HadDamaged();
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
@@ -209,5 +228,83 @@ public class Enemy : MonoBehaviour
     protected void OnBecameInvisible()
     {
         OnCamera = false;
+    }
+
+
+
+    //移動方向の回転
+    public virtual void TurnAround()
+    {
+        bool InCheck = true;
+        if (transform.localScale.x == 1f && InCheck)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            InCheck = false;
+        }
+        if (transform.localScale.x == -1f && InCheck)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+            //InCheck = false;
+        }
+        moveSpeed *= -1;
+    }
+
+    //外から今の移動状態を確認
+    public bool GetIsMoving()
+    {
+        return IsMoving;
+    }
+
+    //外から今の吹き飛ばし状態確認
+    public bool GetIsBlowing()
+    {
+        return IsBlowing;
+    }
+
+    //攻撃力を外で取得する
+    public int GetDamage()
+    {
+        return enemyData.attackPower;
+    }
+
+    //ノックバック力を外で取得する/
+    public float GetKnockBackForce()
+    {
+        return enemyData.knockBackValue;
+    }
+
+    //攻撃クールダウン
+    protected IEnumerator HadAttackReset()
+    {
+        var n = 20;
+        while(n > 0)
+        {
+            n--;
+            yield return new WaitForSeconds(0.01f);
+        }
+        HadAttack = false;
+    }
+
+    protected IEnumerator HadDamaged()
+    {
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
     }
 }

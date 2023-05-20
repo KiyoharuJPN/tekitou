@@ -6,13 +6,13 @@ public class GroundCheckArea : MonoBehaviour
 {
     private void Update()
     {
-        if (transform.GetComponentInParent<Goblin>().GetIsBlowing())
+        if (transform.GetComponentInParent<Enemy>().GetIsBlowing())
             gameObject.SetActive(false);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Stage"))
-            GetComponentInParent<Goblin>().TurnAround();
+            GetComponentInParent<Enemy>().TurnAround();
     }
 }
