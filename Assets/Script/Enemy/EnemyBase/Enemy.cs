@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
     protected int num;
 
     protected GameObject player;
+
+    //敵の点滅
+    SpriteRenderer sprite;
     protected enum moveType
     {
         NotMove, //動かない
@@ -59,6 +62,9 @@ public class Enemy : MonoBehaviour
         //吹っ飛び中に使用
         _transform = transform;
         _prevPosition = _transform.position;
+
+        //敵の点滅
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     virtual protected void OnCollisionEnter2D(Collision2D col)
@@ -110,7 +116,7 @@ public class Enemy : MonoBehaviour
     {
         hp -= power;
         ComboParam.Instance.ResetTime();
-
+        HadDamaged();
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
@@ -277,5 +283,28 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         HadAttack = false;
+    }
+
+    protected IEnumerator HadDamaged()
+    {
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        sprite.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        sprite.color = new Color(1, 1, 1);
     }
 }
