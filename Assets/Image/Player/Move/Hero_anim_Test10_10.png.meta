@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 13158269f5dcb1e4ea6ae3e938105d7c
+guid: c7ab42a479ce8ce4cb84cef48ac3e1bb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,7 +63,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -141,7 +140,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_anim_Test12_10_0
+      name: Hero_anim_Test10_10_0
       rect:
         serializedVersion: 2
         x: 0
@@ -155,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a97ddf85ad8d6294da8de62682f5ae61
-      internalID: 465641897
+      spriteID: 4f0fd8258e1548346921421819477163
+      internalID: 1179331731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_anim_Test12_10_1
+      name: Hero_anim_Test10_10_1
       rect:
         serializedVersion: 2
         x: 320
@@ -176,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f1476787afb3364f8e41a97aef32840
-      internalID: -1268019715
+      spriteID: 68040f50c5ded2841aaac202ca28e232
+      internalID: 82328163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_anim_Test12_10_2
+      name: Hero_anim_Test10_10_2
       rect:
         serializedVersion: 2
         x: 640
@@ -197,14 +196,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f8c59e7f5b053c41a114a8ecf183c33
-      internalID: 877250525
+      spriteID: 8154805417a4a804fb4423f80175394d
+      internalID: -1767916526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_anim_Test12_10_3
+      name: Hero_anim_Test10_10_3
       rect:
         serializedVersion: 2
         x: 960
@@ -218,176 +217,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39bebeac8286fd9488cbd35eb94bc0c6
-      internalID: -1388434300
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_4
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f5bc705b3500e0429de80bc9b10a76b
-      internalID: -628359741
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_5
-      rect:
-        serializedVersion: 2
-        x: 1600
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a758add99a125b49bb52c5f29c00cb0
-      internalID: -2030683797
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_6
-      rect:
-        serializedVersion: 2
-        x: 1920
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d817a8bfd6979a74f8af720ea627e5b7
-      internalID: 1274348501
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_7
-      rect:
-        serializedVersion: 2
-        x: 2240
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6fbdf95c4e66b2f40b7d112abcfe3e43
-      internalID: 2126531889
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_8
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9180618eea1eb8640b0c3f229dd4410e
-      internalID: 1807398538
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_9
-      rect:
-        serializedVersion: 2
-        x: 2880
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f85b90db6450d8245bd5935063e2a546
-      internalID: 1599427666
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_10
-      rect:
-        serializedVersion: 2
-        x: 3200
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c242d1de5af89bd428caf88d6e07d10e
-      internalID: 836315261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hero_anim_Test12_10_11
-      rect:
-        serializedVersion: 2
-        x: 3520
-        y: 0
-        width: 320
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af92bba3441ff544ab6b8f86d328c109
-      internalID: -205405751
+      spriteID: 68096b262f1299a4b88e5c1ad6860ac7
+      internalID: 2041358390
       vertices: []
       indices: 
       edges: []
@@ -403,18 +234,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hero_anim_Test12_10_2: 877250525
-      Hero_anim_Test12_10_3: -1388434300
-      Hero_anim_Test12_10_4: -628359741
-      Hero_anim_Test12_10_6: 1274348501
-      Hero_anim_Test12_10_10: 836315261
-      Hero_anim_Test12_10_1: -1268019715
-      Hero_anim_Test12_10_5: -2030683797
-      Hero_anim_Test12_10_8: 1807398538
-      Hero_anim_Test12_10_9: 1599427666
-      Hero_anim_Test12_10_7: 2126531889
-      Hero_anim_Test12_10_11: -205405751
-      Hero_anim_Test12_10_0: 465641897
+      Hero_anim_Test10_10_0: 1179331731
+      Hero_anim_Test10_10_3: 2041358390
+      Hero_anim_Test10_10_2: -1767916526
+      Hero_anim_Test10_10_1: 82328163
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

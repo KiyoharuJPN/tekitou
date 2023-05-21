@@ -103,11 +103,7 @@ public class PlayerController : MonoBehaviour
     //入力キー
     internal bool isAttack = false;
     bool isAttackKay = false;
-    //通常攻撃切り替え（ture:自動　false:手動）
-    internal bool isNomalAttackKay = true;
-    bool isCoolTimeKay = true;
-    //通常攻撃デバック用オブジェクト
-    public GameObject nomalAttackobj;
+
     //横攻撃の左右判定(trueなら右）
     bool sideJudge;
 
@@ -198,14 +194,6 @@ public class PlayerController : MonoBehaviour
             
         }
         else { isAttackKay = false; }
-        if(tri < 0)
-        {
-            isCoolTimeKay = true;
-        }
-        else
-        {
-            isCoolTimeKay = false;
-        }
 
         //上昇攻撃
         if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
@@ -235,25 +223,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SideAttack());
         }
 
-        //通常攻撃方法切り替え
-        if(tri < -0.8 && isCoolTimeKay && !isAttack)
-        {
-            if (isNomalAttackKay)
-            {
-                isNomalAttackKay = false;
-
-                //デバック
-                nomalAttackobj.SetActive(false);
-            }
-            else
-            {
-                isNomalAttackKay = true;
-                //デバック
-                nomalAttackobj.SetActive(true);
-            }
-            Debug.Log("通常攻撃切り替え");
-            StartCoroutine(_interval());
-        }
     }
 
     //KnockBackされたときの処理
