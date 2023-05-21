@@ -21,51 +21,38 @@ public class NomalAttack : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
     }
 
-
-    //UŒ‚”ÍˆÍ‚É“ü‚Á‚½
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        isAttack = true;
-    }
-
     private void Update()
     {
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
-        if (Input.GetKeyDown("joystick button 2") && isCoolTime && !playerController.isNomalAttackKay)
+        if (Input.GetKeyDown("joystick button 2") && isCoolTime)
         {
             playerController.animator.SetTrigger("IsNomalAttack");
             if (enemyCollision != null)
             {
                 playerController._Attack(enemyCollision, skill.damage);
-                
+                ExAttackParam.Instance.AddGauge();
             }
             StartCoroutine(_interval());
         }
 
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ
-        if (Input.GetKey("joystick button 2") && isCoolTime && !playerController.isNomalAttackKay)
+        if (Input.GetKey("joystick button 2") && isCoolTime)
         {
             playerController.animator.SetTrigger("IsNomalAttack");
             if (enemyCollision != null)
             {
                 playerController._Attack(enemyCollision, skill.damage);
-
+                ExAttackParam.Instance.AddGauge();
             }
             StartCoroutine(_interval());
         }
     }
 
-    //G‚ê‚Ä‚¢‚é
-    private void OnTriggerStay2D(Collider2D collision)
+    //UŒ‚”ÍˆÍ‚É“ü‚Á‚½
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        isAttack = true;
         enemyCollision = collision;
-        if (collision.CompareTag("Enemy") && isAttack && isCoolTime && playerController.isNomalAttackKay)
-        {
-            //UŒ‚
-            playerController.animator.SetTrigger("IsNomalAttack");
-            playerController._Attack(collision, skill.damage);
-            StartCoroutine(_interval());
-        }
     }
 
     //UŒ‚”ÍˆÍ‚©‚ç“G‚ª‚¢‚È‚­‚È‚Á‚½
