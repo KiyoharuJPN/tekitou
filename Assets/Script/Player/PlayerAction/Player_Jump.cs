@@ -46,10 +46,10 @@ public class Player_Jump : MonoBehaviour
     {
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 
-        
+
 
         //ジャンプキー取得
-        JumpBottan();
+        if (player.canMove) JumpBottan();
     }
 
     private void FixedUpdate()

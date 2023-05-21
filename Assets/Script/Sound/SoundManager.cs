@@ -115,6 +115,7 @@ public class SESoundData
         DragonBlaze,
         RockDropOff,
         RockBreak,
+        KingSlimeLanding,
     }
 
     public SE se;

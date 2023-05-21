@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     //移動速度内部関数
     protected float moveSpeed;
     //チェック用内部関数
-    protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false;
+    protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false, hadDamaged = false;
 
     protected float hp;
 
@@ -116,7 +116,11 @@ public class Enemy : MonoBehaviour
     {
         hp -= power;
         ComboParam.Instance.ResetTime();
-        HadDamaged();
+        if (!hadDamaged)
+        {
+            StartCoroutine(HadDamaged());
+            hadDamaged = true;
+        }
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
@@ -298,13 +302,6 @@ public class Enemy : MonoBehaviour
         sprite.color = new Color(1, .3f, .3f);
         yield return new WaitForSeconds(.1f);
         sprite.color = new Color(1, 1, 1);
-        yield return new WaitForSeconds(.05f);
-        sprite.color = new Color(1, .3f, .3f);
-        yield return new WaitForSeconds(.1f);
-        sprite.color = new Color(1, 1, 1);
-        yield return new WaitForSeconds(.05f);
-        sprite.color = new Color(1, .3f, .3f);
-        yield return new WaitForSeconds(.1f);
-        sprite.color = new Color(1, 1, 1);
+        hadDamaged = false;
     }
 }

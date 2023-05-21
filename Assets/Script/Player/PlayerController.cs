@@ -118,6 +118,9 @@ public class PlayerController : MonoBehaviour
     internal bool isDropAttack = false;
     internal bool isSideAttack = false;
 
+    //boss”»’è—p
+    internal bool canMove = true;
+
     void Start()
     {
         playerSE = GetComponent<PlayerSE>();
@@ -146,7 +149,7 @@ public class PlayerController : MonoBehaviour
             canMovingCounter -= Time.deltaTime;
         }
 
-        _Skill();
+        if (canMove) _Skill();
 
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsRun", isRun);
@@ -379,5 +382,10 @@ public class PlayerController : MonoBehaviour
     void _EfectDestroy(GameObject prefab, float time)
     {
         Destroy(prefab, 0.45f);
+    }
+
+    public void SetCanMove(bool cM)
+    {
+        canMove = cM;
     }
 }
