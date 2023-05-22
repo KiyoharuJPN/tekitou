@@ -36,7 +36,7 @@ public class NomalAttack : MonoBehaviour
         }
 
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ
-        if (Input.GetKey("joystick button 2") && isCoolTime)
+        if (Input.GetKey("joystick button 2") && isCoolTime || Input.GetKey(KeyCode.Mouse0) && isCoolTime)
         {
             playerController.animator.SetTrigger("IsNomalAttack");
             if (enemyCollision != null)

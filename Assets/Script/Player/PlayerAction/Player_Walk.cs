@@ -30,8 +30,11 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
-        MoveKay();
-        Dash();
+        if (player.canMove)
+        {
+            MoveKay();
+            Dash();
+        }
 
         if (!player.isMoving)
         {
