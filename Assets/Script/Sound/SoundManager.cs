@@ -93,8 +93,10 @@ public class SESoundData
         SideAttack,
         PlayerGetHit,
         PlayerDead,
-        ExAttack,
-        LargeSwordCut,          //‘åŒ•‚Å‚«‚é
+        ExAttack_CutIn,
+        ExAttack_Wind,
+        ExAttack_Hit,
+        ExAttack_PowerCharge,
         PowerCharge,
         LastAttack,
         //ŠÂ‹«‰¹

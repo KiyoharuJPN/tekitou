@@ -1,8 +1,8 @@
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     GameObject JumpEffect;
+
+    [SerializeField]
+    GameObject ExAttackHitEffect;
+
+    [SerializeField]
+    GameObject ExAttackLastEffect;
 
     [System.Serializable]
     public struct MoveData
@@ -107,6 +113,10 @@ public class PlayerController : MonoBehaviour
     //横攻撃の左右判定(trueなら右）
     bool sideJudge;
 
+    //必殺技時に取得する・保存する為のEnemyList[
+    [SerializeField]
+    internal List<GameObject> enemylist = new List<GameObject>();
+
     //アニメーション用
     internal bool isFalling = false;
     internal bool isMoving = false;
@@ -117,6 +127,7 @@ public class PlayerController : MonoBehaviour
     internal bool isUpAttack = false;
     internal bool isDropAttack = false;
     internal bool isSideAttack = false;
+    internal bool isExAttack = false;
 
     //boss判定用
     internal bool canMove = true;
@@ -130,9 +141,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
-
-        //Debug.Log("基礎攻撃力: 15"　+ "攻撃力は"+ (15 +15*combo.GetPowerUp()));
+        if (isExAttack)
+        {
+            rb.velocity = Vector2.zero;
+        }
 
         //ノックバック処理
         if (knockBack.canKnockBack)
@@ -226,6 +238,18 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SideAttack());
         }
 
+        //必殺技
+        if (Input.GetKey("joystick button 4") && Input.GetKey("joystick button 5"))
+        {
+            if (ExAttackParam.Instance.GetIsExAttack) 
+            {
+                isExAttack = true;
+                animator.SetBool("IsExAttack", isExAttack);
+                ExAttackParam.Instance._EXAttack();
+                ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
+            }
+        }
+
     }
 
     //KnockBackされたときの処理
@@ -294,6 +318,7 @@ public class PlayerController : MonoBehaviour
         isAttack = false;
     }
 
+    //横攻撃
     private void Side(Skill skill)
     {
         Vector3 localScale = transform.localScale;
@@ -325,6 +350,41 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //必殺技
+    public void ExAttackStart()
+    {
+        Debug.Log("必殺技実行");
+        animator.SetTrigger("ExAttack");
+    }
+
+    //ヒット時（アニメーションから呼ぶ）
+    public void _ExAttackHit()
+    {
+        //エフェクト生成
+        foreach (var enemy in enemylist)
+        {
+            _HitEfect(enemy);
+        }
+        //ダメージ処理（現在では実装未定）
+
+    }
+
+    public void ExAttackHitCheck()
+    {
+        if(enemylist.Count == 0)
+        {
+            ExAttackEnd();
+        }
+    }
+
+    //必殺技で使用したEnemyをリセット
+    public void ExAttackEnd()
+    {
+        isExAttack = false;
+        enemylist.Clear();
+        animator.SetBool("IsExAttack", isExAttack);
+    }
+
     //クールタイム用コルーチン
     IEnumerator _interval()
     {
@@ -340,6 +400,8 @@ public class PlayerController : MonoBehaviour
         isAttack = false;
     }
 
+
+
     //スキルアクション中無敵に使用するメソッド
     public void SkillActionPlayer()
     {
@@ -350,6 +412,8 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.layer = LayerMask.NameToLayer("Player");
     }
+
+
 
     //砂埃エフェクト生成
     public void _RunEffect()
@@ -379,9 +443,35 @@ public class PlayerController : MonoBehaviour
         _EfectDestroy(prefab, 0.2f);
     }
 
+    private void _HitEfect(GameObject enemy)
+    {
+        GameObject prefab =
+        Instantiate(ExAttackHitEffect, new Vector2(enemy.transform.position.x, enemy.transform.position.y), Quaternion.identity);
+        var angle = UnityEngine.Random.Range(0, 360);
+        prefab.transform.Rotate(new Vector3(0,0,angle));
+        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Hit);
+        _EfectDestroy(prefab, 0.2f);
+    }
+
+    public void _ExAttackLastEffect()
+    {
+        GameObject prefab;
+        if (gameObject.transform.localScale.x < 0)
+        {
+            prefab =
+            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x - 12f, this.transform.position.y), Quaternion.identity);
+        }
+        else
+        {
+            prefab =
+            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x + 12f, this.transform.position.y), Quaternion.identity);
+        }
+        _EfectDestroy(prefab, 0.3f);
+    }
+
     void _EfectDestroy(GameObject prefab, float time)
     {
-        Destroy(prefab, 0.45f);
+        Destroy(prefab, time);
     }
 
     public void SetCanMove(bool cM)

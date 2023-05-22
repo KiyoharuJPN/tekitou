@@ -48,18 +48,31 @@ public class ExAttackParam : MonoBehaviour
         exGauge.fillAmount = 0f;
     }
 
-    private void FixedUpdate()
+    //必殺技を発動した際呼ぶ
+    public void _EXAttack()
     {
-        if(gauge == _exAttack)
-        {
-            exAttackText.GetComponent<Image>().enabled = true;
-        }
+        exAttackText.GetComponent<Image>().enabled = false;
+        exGauge.fillAmount = 0f;
+        _exAttack = 0;
+        isExAttack = false;
+        
     }
 
     public void AddGauge()
     {
-        Debug.Log("必殺技ゲージが溜まった");
-        exGauge.fillAmount += 1f / gauge;
-        _exAttack++;
+        //exGauge.fillAmount += 1f / gauge;
+        //_exAttack++;
+
+        //デバッグ用
+        exGauge.fillAmount = 1f;
+        _exAttack += 80;
+
+        if (gauge == _exAttack)
+        {
+            exAttackText.GetComponent<Image>().enabled = true;
+            isExAttack = true;
+        }
+
+        
     }
 }

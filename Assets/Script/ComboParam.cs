@@ -48,15 +48,6 @@ public class ComboParam : MonoBehaviour
         time = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        //if (countCombo == 0) text.gameObject.SetActive(false);//0の時に画面から消す
-
-
-    }
-
     //ゲットセット関数
     public int GetCombo()
     {
@@ -67,8 +58,10 @@ public class ComboParam : MonoBehaviour
     {
         if (countCombo == 0)
         {
+            
             StartCoroutine(_ComboTime());
         }
+
         countCombo = Cb;
         if (countCombo <= 0) countCombo = 0;//コンボ最小限
         if (countCombo >= 999) countCombo = 999;//コンボ最大限
@@ -97,6 +90,7 @@ public class ComboParam : MonoBehaviour
 
     IEnumerator _ComboTime()
     {
+        Debug.Log("コンボ開始");
         while (time < comboStatus.Distime)
         {
             time += Time.deltaTime;
@@ -105,6 +99,7 @@ public class ComboParam : MonoBehaviour
         }
 
         countCombo = 0;
+        time = 0;
         string SpriteText = countCombo.ToString();
         text.text = "<sprite=" + SpriteText + ">";
     }

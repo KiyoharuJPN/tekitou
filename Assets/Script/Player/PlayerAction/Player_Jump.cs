@@ -44,9 +44,8 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.isExAttack) return;
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
-
-
 
         //ジャンプキー取得
         if (player.canMove) JumpBottan();
@@ -54,6 +53,7 @@ public class Player_Jump : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (player.isExAttack) return;
         Jump();
         Gravity();
     }

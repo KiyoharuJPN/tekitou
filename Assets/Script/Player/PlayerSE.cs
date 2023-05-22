@@ -53,4 +53,16 @@ public class PlayerSE : MonoBehaviour
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.PlayerGetHit);
     }
+
+
+
+    public void _ExAttack_Wind()
+    {
+        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Wind);
+    }
+    
+    public void _ExAttack_PowerCharge()
+    {
+        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_PowerCharge);
+    }
 }
