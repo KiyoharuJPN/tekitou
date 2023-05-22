@@ -47,7 +47,7 @@ public class Player_Walk : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player.isSideAttack || player.isDropAttack)
+        if (player.isSideAttack || player.isDropAttack || player.isExAttack)
         {
             return;
         }
