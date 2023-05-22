@@ -109,5 +109,12 @@ public class Slime : Enemy
         moveHideFlag = false;
     }
 
-
+    private void FixedUpdate()
+    {
+        Gravity();
+    }
+    protected override void Gravity()
+    {
+        enemyRb.AddForce(new Vector2(0, -5f));
+    }
 }
