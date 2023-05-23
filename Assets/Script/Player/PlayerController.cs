@@ -459,12 +459,12 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.localScale.x < 0)
         {
             prefab =
-            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x - 12f, this.transform.position.y), Quaternion.identity);
+            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x - 6f, this.transform.position.y), Quaternion.identity);
         }
         else
         {
             prefab =
-            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x + 12f, this.transform.position.y), Quaternion.identity);
+            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x + 6f, this.transform.position.y), Quaternion.identity);
         }
         _EfectDestroy(prefab, 0.3f);
     }
