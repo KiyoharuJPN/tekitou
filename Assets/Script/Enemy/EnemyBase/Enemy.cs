@@ -304,4 +304,11 @@ public class Enemy : MonoBehaviour
         sprite.color = new Color(1, 1, 1);
         hadDamaged = false;
     }
+
+
+    //èdóÕ
+    protected virtual void Gravity()
+    {
+        enemyRb.AddForce(new Vector2(0, -5));
+    }
 }

@@ -49,6 +49,11 @@ public class Goblin : Enemy
         base.Update();
     }
 
+    private void FixedUpdate()
+    {
+        Gravity();
+    }
+
     //ƒSƒuƒŠƒ“‚Ì“®‚«
     void Movement()
     {

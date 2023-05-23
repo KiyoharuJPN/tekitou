@@ -30,11 +30,9 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
-        if (player.canMove)
-        {
-            MoveKay();
-            Dash();
-        }
+        
+        MoveKay();
+        Dash();
 
         if (!player.isMoving)
         {
@@ -63,7 +61,13 @@ public class Player_Walk : MonoBehaviour
     private void MoveKay()
     {
         //ˆÚ“®ƒL[Žæ“¾
-        moveInput = Input.GetAxis("Horizontal");
+        if (player.canMove) moveInput = Input.GetAxis("Horizontal");
+        if (!player.canMove)
+        {
+            moveInput = 0;
+            player.rb.velocity = (new Vector2(0, player.rb.velocity.y));
+        }
+
 
         if (moveInput > 0)
         {
