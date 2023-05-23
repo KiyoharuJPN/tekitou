@@ -26,7 +26,7 @@ MonoBehaviour:
     speed: 0
   - id: 1
     charName: "\u93A7\u4ED8\u304D\u6848\u5C71\u5B50"
-    hp: 20
+    hp: 3
     score: 1000
     attackPower: 0
     power: 1
