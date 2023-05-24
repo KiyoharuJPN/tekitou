@@ -24,6 +24,9 @@ public class ComboParam : MonoBehaviour
     [SerializeField]
     Image comboTimeGage;
 
+    [SerializeField]
+    PlayerController player;
+
     public static ComboParam Instance { get; private set; }
 
     private void Awake()
@@ -90,12 +93,18 @@ public class ComboParam : MonoBehaviour
 
     IEnumerator _ComboTime()
     {
-        Debug.Log("コンボ開始");
         while (time < comboStatus.Distime)
         {
-            time += Time.deltaTime;
-            comboTimeGage.fillAmount -= 1.0f / comboStatus.Distime * Time.deltaTime;
-            yield return null;
+            if (player.isExAttack)
+            {
+                yield return null;
+            }
+            else
+            {
+                time += Time.deltaTime;
+                comboTimeGage.fillAmount -= 1.0f / comboStatus.Distime * Time.deltaTime;
+                yield return null;
+            }
         }
 
         countCombo = 0;

@@ -45,6 +45,31 @@ public class SoundManager : MonoBehaviour
         bgmAudioSource.Play();
     }
 
+    public void BGMLoopSwich()
+    {
+        if (bgmAudioSource.loop)
+        {
+            bgmAudioSource.loop = false;
+        }
+        else if(!bgmAudioSource.loop)
+        {
+            bgmAudioSource.loop = true;
+        }
+    }
+
+    //BGM終了確認
+    public bool BGMEnd()
+    {
+        if (bgmAudioSource.isPlaying)
+        {
+            return true; 
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     public void PlaySE(SESoundData.SE se)
     {
@@ -66,7 +91,8 @@ public class BGMSoundData
     {
         Title,
         Tutorial,
-        Stage1,
+        Stage1_intro,
+        Stage1_roop,
         Stage2,
         GoalBGM,
         GameOver,
@@ -77,6 +103,8 @@ public class BGMSoundData
     [Range(0, 1)]
     public float volume = 0.4f;
 }
+
+
 
 //SEリスト
 [System.Serializable]
@@ -121,6 +149,8 @@ public class SESoundData
         RockDropOff,
         RockBreak,
         KingSlimeLanding,
+        //BGMイントロ
+        
         KingSlimeSummon,
     }
 
