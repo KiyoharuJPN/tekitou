@@ -39942,7 +39942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.5
+      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41668,6 +41668,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 3086247454851273935, guid: 076d4a137267cd845bf18b4228f5410e, type: 3}
+      propertyPath: moveArea
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3086247454851273972, guid: 076d4a137267cd845bf18b4228f5410e, type: 3}
       propertyPath: m_Name
       value: Enemy_Bird
@@ -42077,7 +42081,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621046454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 1.9, z: -10}
+  m_LocalPosition: {x: 247, y: 1.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43433,11 +43437,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3309150140585010816, guid: 6031fcd4b15dd6444825ac5687f02629, type: 3}
       propertyPath: m_Size.x
-      value: 1.06
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3309150140585010816, guid: 6031fcd4b15dd6444825ac5687f02629, type: 3}
       propertyPath: m_Size.y
-      value: 1.09
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3309150140585010818, guid: 6031fcd4b15dd6444825ac5687f02629, type: 3}
       propertyPath: m_Name
@@ -46740,7 +46744,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965658565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 1.9, z: -10}
+  m_LocalPosition: {x: 247, y: 1.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
