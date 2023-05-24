@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isExAttack)
+        if (isExAttack || isWarpDoor)
         {
             rb.velocity = Vector2.zero;
         }
