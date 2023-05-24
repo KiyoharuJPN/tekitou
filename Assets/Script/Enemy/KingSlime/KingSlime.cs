@@ -7,6 +7,26 @@ public class KingSlime : Enemy
     [Header("移動する時の高さと距離")]
     public float moveHeightForce, moveWidthForce, AttackHeight = 8;
     public GameObject summonSlime;
+    
+    public BoxCollider2D attackCheckArea;
+    CircleCollider2D knockbackAttackCircle;
+
+    //揺れ関連
+    [System.Serializable]
+    public struct ShakeInfo
+    {
+        [Tooltip("揺れ時間")]
+        public float Duration;
+        [Tooltip("揺れの強さ")]
+        public float Strength;
+    }
+
+    [SerializeField]
+    [Header("画面揺れに関する")]
+    public ShakeInfo _shakeInfo;
+    CameraShake shake;
+
+
 
     Animator animator;                                                  //敵のアニメ関数
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
@@ -22,6 +42,8 @@ public class KingSlime : Enemy
         movingWidth = -moveWidthForce;
         summonPosX = -5f;
         summonPosY = 1;
+        knockbackAttackCircle = GetComponent<CircleCollider2D>();
+        if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         base.Start();
     }
 
@@ -44,7 +66,6 @@ public class KingSlime : Enemy
             gameObject.layer = LayerMask.NameToLayer("DeadBoss");
             //KingSlimeBlowing();   //特別の動きをするために用意した関数 
         }
-        Debug.Log(AttackMode);
         //アニメーション関数の代入
         animator.SetBool("IsMoving", IsMoving);
         animator.SetInteger("AttackMode", AttackMode);
@@ -77,25 +98,33 @@ public class KingSlime : Enemy
         NormalAttackAnimation = 0;
         Vector3 PlayerPos = playerObj.transform.position + new Vector3(0, AttackHeight, 0);
         var AttackMoveSpeed = (float)Math.Sqrt(((PlayerPos.x - transform.position.x) * (PlayerPos.x - transform.position.x)) + (PlayerPos.y - transform.position.y) * (PlayerPos.y - transform.position.y));
-        AttackMoveSpeed /= 50;
+        AttackMoveSpeed /= 25;
+        if (playerObj.transform.position.x > gameObject.transform.position.x && movingWidth < 0) TurnAround();
+        if (playerObj.transform.position.x < gameObject.transform.position.x && movingWidth > 0) TurnAround();
+        yield return new WaitForSeconds(0.25f);
         NoGravity = true;
         var i = 0;
-        while(i < 50)
+        while(i < 25)
         {
             this.transform.position = Vector2.MoveTowards(transform.position, PlayerPos, AttackMoveSpeed);
             i++;
             yield return new WaitForSeconds(0.01f);
         }
+        enemyRb.velocity = Vector2.zero;
         yield return new WaitForSeconds(0.8f);
         NoGravity = false;
-        enemyRb.AddForce(new Vector2(0, -10),ForceMode2D.Impulse);
+        enemyRb.AddForce(new Vector2(0, -40),ForceMode2D.Impulse);
+        knockbackAttackCircle.enabled = true;
         KSNormalAttackLanding = true;
     }
     IEnumerator KSBossAtack2()
     {
+        knockbackAttackCircle.enabled = false;
         SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
+        shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
         NormalAttackAnimation++;
         yield return new WaitForSeconds(1);
+        /*attackCheckArea.SetActive(false);*/
         StartCoroutine(KSBossAtack3());
     }
     IEnumerator KSBossAtack3()
@@ -103,6 +132,7 @@ public class KingSlime : Enemy
         NormalAttackAnimation++;
 
         yield return new WaitForSeconds(0.75f);
+
         IsAttacking = false;
         IsMoving = true;
         KSattackingCheck = true;
@@ -169,11 +199,30 @@ public class KingSlime : Enemy
     //コライダーやトリガーなどのチェック関数
     protected override void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Stage") && KSNormalAttackLanding)
+        if (GetComponent<KingSlime>().enabled)
         {
-            StartCoroutine(KSBossAtack2());
+            if (col.gameObject.CompareTag("Stage") && KSNormalAttackLanding)
+            {
+                KSNormalAttackLanding = false;
+                StartCoroutine(KSBossAtack2());
+            }
+            base.OnCollisionEnter2D(col);
         }
-        base.OnCollisionEnter2D(col);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (GetComponent<KingSlime>().enabled)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                //攻撃クールダウンタイム
+                HadAttack = true;
+                StartCoroutine(HadAttackReset());
+                //ダメージとノックバック
+                collision.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
+                collision.GetComponent<PlayerController>()._Damage((int)enemyData.power * 4);
+            }
+        }
     }
 
 
@@ -198,6 +247,18 @@ public class KingSlime : Enemy
         summonPosX *= -1;
     }
 
+    public void PlayerInAttackArea(Collider2D col)
+    {
+        if (!HadAttack)
+        {
+            //攻撃クールダウンタイム
+            HadAttack = true;
+            StartCoroutine(HadAttackReset());
+            //ダメージとノックバック
+            col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
+            col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.attackPower);
+        }
+    }
 
 
     //常に動くけど触らなくてもいいコードをここに
@@ -209,5 +270,9 @@ public class KingSlime : Enemy
     protected override void Gravity()
     {
         enemyRb.AddForce(new Vector2(0, -10f));
+    }
+    protected override void _Destroy()
+    {
+        isDestroy = true;
     }
 }
