@@ -4753,14 +4753,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1619931896}
     m_Modifications:
-    - target: {fileID: 6259610633585901153, guid: c8598fde399ed9846af0637fa3696332, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259610633585901159, guid: c8598fde399ed9846af0637fa3696332, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6259610633585901160, guid: c8598fde399ed9846af0637fa3696332, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4771,7 +4763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6259610633585901160, guid: c8598fde399ed9846af0637fa3696332, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.5
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 6259610633585901160, guid: c8598fde399ed9846af0637fa3696332, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6627,11 +6619,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: seSoundDatas.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: seSoundDatas.Array.data[6].se
       value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[7].se
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: seSoundDatas.Array.data[6].volume
@@ -6645,6 +6641,10 @@ PrefabInstance:
       propertyPath: seSoundDatas.Array.data[6].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 33337a9df47712b45a25d51b8374db1c, type: 3}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[7].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 45d47d215281b614f9617deb6d96ae7d, type: 3}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -23225,7 +23225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5930087360783694397, guid: a88c59a7cf6968e42903dce14654580e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a88c59a7cf6968e42903dce14654580e, type: 3}

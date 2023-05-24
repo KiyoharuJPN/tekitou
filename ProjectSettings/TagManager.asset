@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Stage
   - Enemy
-  - GroundPlatform
   layers:
   - Default
   - TransparentFX
@@ -24,7 +23,7 @@ TagManager:
   - BrokenBlockArea
   - EnemyAttackArea
   - EnemyAttack
-  - Warp_Door
+  - DeadBoss
   - 
   - 
   - 

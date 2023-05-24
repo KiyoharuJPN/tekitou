@@ -33,7 +33,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
         animationControler = 0;
         animator = GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody2D>();
-        shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        if(shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
     }
 
     private void Update()
@@ -45,18 +45,22 @@ public class KingSlimeSummonAnimation : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Stage"))
+        if (GetComponent<KingSlimeSummonAnimation>().enabled)
         {
-            animationControler++;
-            SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
-        }
-        if(animationControler == 1)
-        {
-            Invoke("Animation_3", 1.1f);
-        }
-        if(animationControler == 4)
-        {
-            Invoke("AnimationPlayed", 0.2f);
+            if (collision.gameObject.CompareTag("Stage"))
+            {
+                animationControler++;
+                SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
+                shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
+            }
+            if (animationControler == 1)
+            {
+                Invoke("Animation_3", 1.1f);
+            }
+            if (animationControler == 4)
+            {
+                Invoke("AnimationPlayed", 0.2f);
+            }
         }
     }
 
