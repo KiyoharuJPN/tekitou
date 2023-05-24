@@ -16,7 +16,7 @@ public class Slime : Enemy
     Animator animator;      //敵のアニメ関数
     float movingHeight, movingWidth;    //移動に関する内部関数
     //チェック用内部関数
-    bool /*IsBlowing = false, IsMoving = false, */moveHideFlag = false, LRmove = false;
+    bool /*IsBlowing = false, IsMoving = false, */moveHideFlag = false, BossSummon = false, BossTurn = false;
 
     //float TestTime = 0f;
     override protected void Start()
@@ -26,6 +26,7 @@ public class Slime : Enemy
         movingHeight = moveHeight;
         //自分用アニメーターの代入
         animator = GetComponent<Animator>();
+        IsMoving = false;
         ///敵のscriptに基づく
         base.Start();
     }
@@ -56,18 +57,6 @@ public class Slime : Enemy
         //着地計算
 
 
-        //移動中 壁に当たった時の反転処理
-        if (IsMoving)
-        {
-            if (enemyRb.velocity.x == 0 && LRmove)
-            {
-                Vector2 scale = this.transform.localScale;
-                scale.x *= -1;
-                this.transform.localScale = scale;
-                movingWidth *= -1;
-                LRmove = false;
-            }
-        }
 
         //一秒の待ち処理
         if (IsMoving && !moveHideFlag)
@@ -76,8 +65,6 @@ public class Slime : Enemy
             StartCoroutine(SetMoveFalse());
             //移動処理。
             enemyRb.AddForce(new Vector2(movingWidth, movingHeight), ForceMode2D.Impulse);
-            LRmove = true;
-            StartCoroutine(Landing());
         }
         if (!IsMoving && !moveHideFlag)
         {
@@ -88,12 +75,6 @@ public class Slime : Enemy
         
     }
 
-    //着地までの時間待ちと移動中の確認
-    IEnumerator Landing()
-    {
-        yield return new WaitForSeconds(0.5f);
-        LRmove = false;
-    }
     //一秒待って移動可能にする
     IEnumerator SetMoveTrue()
     {
@@ -109,6 +90,18 @@ public class Slime : Enemy
         moveHideFlag = false;
     }
 
+    protected override void OnCollisionEnter2D(Collision2D col)
+    {
+        if (!IsMoving && col.gameObject.CompareTag("Stage") && BossSummon)
+        {
+            if(BossTurn) movingWidth *= -1;
+            BossSummon = false;
+            moveHideFlag = false;
+            IsMoving = true;
+        }
+        if (col.gameObject.CompareTag("Stage")) enemyRb.velocity = Vector2.zero;
+        base.OnCollisionEnter2D(col);
+    }
     private void FixedUpdate()
     {
         Gravity();
@@ -116,5 +109,23 @@ public class Slime : Enemy
     protected override void Gravity()
     {
         enemyRb.AddForce(new Vector2(0, -5f));
+    }
+    public void SetIsMoving(bool im)
+    {
+        IsMoving = im;
+        moveHideFlag = true;
+        BossSummon = true;
+    }
+    public void SummonSlimeTurn()
+    {
+        Vector2 scale = this.transform.localScale;
+        scale.x *= -1;
+        this.transform.localScale = scale;
+        BossTurn = true;
+    }
+    public override void TurnAround()
+    {
+        movingWidth *= -1;
+        base.TurnAround();
     }
 }

@@ -189,6 +189,7 @@ MonoBehaviour:
   id: 8
   moveHeightForce: 3
   moveWidthForce: 3
+  summonSlime: {fileID: 0}
 --- !u!114 &6259610633585901153
 MonoBehaviour:
   m_ObjectHideFlags: 0
