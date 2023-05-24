@@ -6,12 +6,30 @@ using UnityEngine;
 public class WarpDoor : MonoBehaviour
 {
     [SerializeField] internal Animator animator;
+    [SerializeField] FadeImage fade;
+    [SerializeField] CameraManager camera;
+
+    [SerializeField]
+    GameObject BottonUi;
+    GameObject bottonUiPrefab;
+    bool isBottonUi;
 
     GameObject warpPoint;
 
     private void Start()
     {
         warpPoint = transform.Find("WarpPoint").gameObject;
+        isBottonUi = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 6 && !isBottonUi)
+        {
+            isBottonUi = true;
+            _BottonUi(collision);
+        };
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -22,16 +40,52 @@ public class WarpDoor : MonoBehaviour
         float lsv = Input.GetAxis("L_Stick_V");
         if (lsv >= 0.8)
         {
+            Destroy(bottonUiPrefab);
+            bottonUiPrefab = null;
             animator.SetTrigger("DoorOpen");
-
-            //TODO　現在ではフェードインを未実装の為コルーチンで実装、修正予定
+            collision.GetComponent<PlayerController>().WarpDoor();
             StartCoroutine(PlayerWarp(3.0f, collision));
         }
     }
 
-    IEnumerator PlayerWarp(float delay,Collider2D collider)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        yield return new WaitForSeconds(delay);
-        collider.transform.position = warpPoint.transform.position;
+        Destroy(bottonUiPrefab);
+        bottonUiPrefab = null;
+        isBottonUi = false;
+    }
+
+    void _BottonUi(Collider2D player)
+    {
+        Debug.Log(player.name);
+        bottonUiPrefab =
+        Instantiate(BottonUi, new Vector2(player.transform.position.x, player.transform.position.y + 2f), Quaternion.identity);
+
+        bottonUiPrefab.transform.parent = player.transform;
+    }
+
+    IEnumerator PlayerWarp(float delay,Collider2D player)
+    {
+        yield return new WaitForSeconds(delay);//渡された時間待機
+
+        //フェードアウト開始
+        fade.StartFadeOut();
+        while (!fade.IsFadeOutComplete())
+        {
+            yield return null;
+        }
+        //フェードアウト終了
+
+        player.transform.position = warpPoint.transform.position;
+        camera.ChengeCameraArea_Boss();
+        yield return new WaitForSeconds(1f);//渡された時間待機
+
+        //フェードイン開始
+        fade.StartFadeIn();
+        while (!fade.IsFadeOutComplete())
+        {
+            yield return null;
+        }
+        player.GetComponent<PlayerController>().WarpDoorEnd();
     }
 }

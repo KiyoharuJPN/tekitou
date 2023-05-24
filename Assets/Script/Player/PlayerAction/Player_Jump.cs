@@ -13,9 +13,9 @@ public class Player_Jump : MonoBehaviour
     public bool checkPlatformGroud = true;
     private string platformTag = "GroundPlatform";
 
-    float jumpTime = 0;
+    internal float jumpTime = 0;
     bool isjump = false;
-    bool canSecondJump = false;
+    internal bool canSecondJump = false;
     float jumpHight;
 
     //ジャンプした際の位置
@@ -44,7 +44,9 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.isExAttack) return;
+        //停止
+        if (player.isExAttack || player.isWarpDoor) return;
+
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 
         //ジャンプキー取得
@@ -54,6 +56,7 @@ public class Player_Jump : MonoBehaviour
     private void FixedUpdate()
     {
         if (player.isExAttack) return;
+
         Jump();
         Gravity();
     }
@@ -106,6 +109,7 @@ public class Player_Jump : MonoBehaviour
     void Jump()
     {
         if (!isjump) return;
+
         player.isJumping = true;
 
         //ジャンプ高さ制限処理
@@ -135,48 +139,5 @@ public class Player_Jump : MonoBehaviour
     {
         Vector2 myGravity = new Vector2(0, -player.jumpData.gravity * 2);
         player.rb.AddForce(myGravity);
-    }
-
-
-    //着地の判定
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Stage"))
-        {
-            if (player.isUpAttack)
-            {
-                return;
-            }
-            if (player.isFalling == true)
-            {
-                player.isLanding = true;
-            }
-            player.isSquatting = false;
-            player.isJumping = false;
-            
-            player.rb.velocity = Vector2.zero;
-            jumpTime = 0;
-            canSecondJump = false;
-
-            //突き刺し攻撃終わり
-            if (player.isDropAttack)
-            {
-                shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
-                Invoke(nameof(DropAttackOff), 0.5f);
-            };
-            
-            Invoke("Landingoff", 0.1f);
-        }
-    }
-
-    void Landingoff()
-    {
-        player.isLanding = false;
-    }
-
-    private void DropAttackOff()
-    {
-        player.isDropAttack = false;
-        player.animator.SetBool("IsDropAttack", player.isDropAttack);
     }
 }

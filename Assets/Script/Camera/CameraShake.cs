@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,23 +9,7 @@ public class CameraShake : MonoBehaviour
     [Header("ƒJƒƒ‰ƒIƒuƒWƒFƒNƒg")]
     GameObject CAMERA;
 
-    /// <summary>
-    /// —h‚êî•ñ
-    /// </summary>
-    [System.Serializable]
-    public struct ShakeInfo
-    {
-        [Tooltip("—h‚êŠÔ")]
-        public float Duration;
-        [Tooltip("—h‚ê‚Ì‹­‚³")]
-        public float Strength;
-        [Tooltip("‚Ç‚Ì‚­‚ç‚¢U“®‚·‚é‚©")]
-        public float Vibrato;
-    }
 
-    [SerializeField]
-    [Header("‰æ–Ê—h‚ê‚ÉŠÖ‚·‚é")]
-    public ShakeInfo _shakeInfo;
 
     internal bool _isDoShake = false;
 
@@ -35,6 +20,7 @@ public class CameraShake : MonoBehaviour
 
     private IEnumerator DoShake(float duration, float magnitude)
     {
+        this.gameObject.GetComponent<CinemachineBrain>().enabled = false;
         var pos = transform.localPosition;
 
         var elapsed = 0f;
@@ -53,5 +39,6 @@ public class CameraShake : MonoBehaviour
 
         _isDoShake = false;
         transform.localPosition = pos;
+        this.gameObject.GetComponent<CinemachineBrain>().enabled = true;
     }
 }

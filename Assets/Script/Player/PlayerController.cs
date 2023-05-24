@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
     internal bool isDropAttack = false;
     internal bool isSideAttack = false;
     internal bool isExAttack = false;
+    internal bool isWarpDoor = false;
 
     //boss判定用
     internal bool canMove = true;
@@ -214,14 +215,14 @@ public class PlayerController : MonoBehaviour
         if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
         {
             UpAttack._UpAttack(this);
-            StartCoroutine(_interval());
+            isAttack = true;
         }
 
         //落下攻撃攻撃
         if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8) && !isAttack &&(isFalling || isJumping))
         {
             DownAttack._DownAttack(this);
-            StartCoroutine(_interval());
+            isAttack = true;
         }
 
         //横移動攻撃
@@ -385,23 +386,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsExAttack", isExAttack);
     }
 
-    //クールタイム用コルーチン
-    IEnumerator _interval()
-    {
-        float time = 1;
-
-        isAttack = true;
-        while (time > 0)
-        {
-            time -= Time.deltaTime;
-            //1フレーム待つ
-            yield return null;
-        }
-        isAttack = false;
-    }
-
-
-
     //スキルアクション中無敵に使用するメソッド
     public void SkillActionPlayer()
     {
@@ -413,8 +397,11 @@ public class PlayerController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
-
-
+    //スキルアクション終了メソッド
+    public void SkillAttackEnd()
+    {
+        isAttack = false;
+    }
     //砂埃エフェクト生成
     public void _RunEffect()
     {
@@ -450,6 +437,7 @@ public class PlayerController : MonoBehaviour
         var angle = UnityEngine.Random.Range(0, 360);
         prefab.transform.Rotate(new Vector3(0,0,angle));
         SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Hit);
+        ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         _EfectDestroy(prefab, 0.2f);
     }
 
@@ -459,12 +447,12 @@ public class PlayerController : MonoBehaviour
         if (gameObject.transform.localScale.x < 0)
         {
             prefab =
-            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x - 6f, this.transform.position.y), Quaternion.identity);
+            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x - 4f, this.transform.position.y), Quaternion.identity);
         }
         else
         {
             prefab =
-            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x + 6f, this.transform.position.y), Quaternion.identity);
+            Instantiate(ExAttackLastEffect, new Vector2(this.transform.position.x + 4f, this.transform.position.y), Quaternion.identity);
         }
         _EfectDestroy(prefab, 0.3f);
     }
@@ -477,5 +465,18 @@ public class PlayerController : MonoBehaviour
     public void SetCanMove(bool cM)
     {
         canMove = cM;
+    }
+
+    internal void WarpDoor()
+    {
+        isWarpDoor = true;
+        animator.SetBool("IsWarpDoor", isWarpDoor);
+        animator.SetTrigger("WarpDoor");
+    }
+
+    internal void WarpDoorEnd()
+    {
+        isWarpDoor = false;
+        animator.SetBool("IsWarpDoor", isWarpDoor);
     }
 }

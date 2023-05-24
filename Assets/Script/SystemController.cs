@@ -33,10 +33,6 @@ public class SystemController : MonoBehaviour
         }
     }
 
-
-
-
-
     //色んなゲットセット関数
     public string GetLastScene()//シーンゲット
     {
