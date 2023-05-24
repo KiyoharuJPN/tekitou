@@ -65,4 +65,9 @@ public class PlayerSE : MonoBehaviour
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_PowerCharge);
     }
+
+    public void _ExAttack_LastSE()
+    {
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+    }
 }
