@@ -44,7 +44,7 @@ public class WarpDoor : MonoBehaviour
             bottonUiPrefab = null;
             animator.SetTrigger("DoorOpen");
             collision.GetComponent<PlayerController>().WarpDoor();
-            StartCoroutine(PlayerWarp(3.0f, collision));
+            StartCoroutine(PlayerWarp(1.0f, collision));
         }
     }
 
