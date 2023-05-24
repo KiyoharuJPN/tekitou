@@ -121,6 +121,7 @@ public class SESoundData
         RockDropOff,
         RockBreak,
         KingSlimeLanding,
+        KingSlimeSummon,
     }
 
     public SE se;

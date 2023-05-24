@@ -6,6 +6,7 @@ public class KingSlime : Enemy
 {
     [Header("移動する時の高さと距離")]
     public float moveHeightForce, moveWidthForce;
+    public GameObject summonSlime;
 
     Animator animator;                                          //敵のアニメ関数
     float movingHeight, movingWidth;                            //移動に関する内部関数
@@ -41,7 +42,7 @@ public class KingSlime : Enemy
 
         //アニメーション関数の代入
         animator.SetBool("IsMoving", IsMoving);
-        animator.SetInteger("AtttackMode", AttackMode);
+        animator.SetInteger("AttackMode", AttackMode);
         animator.SetBool("IsBlowing", isDestroy);
         animator.SetBool("IsAnimation",false);
     }
@@ -57,11 +58,9 @@ public class KingSlime : Enemy
                 case 0:
                     //KSBossAtack();
                     KSBossSummon();
-                    AttackMode = 1;
                     break;
                 case 1:
                     KSBossSummon();
-                    AttackMode = 0;
                     break;
             }
         }
@@ -70,12 +69,27 @@ public class KingSlime : Enemy
     {
         yield return null;
         IsMoving = true;
+        AttackMode = 1;
     }
     IEnumerator KSBossSummon()
     {
-        yield return null;
+        SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeSummon);
+        if (GameObject.Find("Hero").transform.position.x > gameObject.transform.position.x && movingWidth < 0) TurnAround();
+        if (GameObject.Find("Hero").transform.position.x < gameObject.transform.position.x && movingWidth > 0) TurnAround();
+        yield return new WaitForSeconds(0.333f);
+        var newSlime1 = Instantiate(summonSlime);
+        newSlime1.GetComponent<Rigidbody2D>().AddForce(new Vector2(3, 5),ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.335f);
+        var newSlime2 = Instantiate(summonSlime);
+        newSlime1.GetComponent<Rigidbody2D>().AddForce(new Vector2(4, 6), ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.335f);
+        var newSlime3 = Instantiate(summonSlime);
+        newSlime1.GetComponent<Rigidbody2D>().AddForce(new Vector2(5, 7), ForceMode2D.Impulse);
+        yield return new WaitForSeconds(1.76f);
         IsMoving = true;
+        AttackMode = 0;
     }
+
 
 
     //キングスライムの移動
