@@ -5,83 +5,127 @@ using UnityEngine;
 public class KingSlime : Enemy
 {
     [Header("移動する時の高さと距離")]
-    public float moveHeight, moveWidth;
+    public float moveHeightForce, moveWidthForce;
 
-    Animator animator;                          //敵のアニメ関数
-    float movingHeight, movingWidth;            //移動に関する内部関数
-    bool moveHideFlag = false, LRmove = false;  //判断用内部関数
+    Animator animator;                                          //敵のアニメ関数
+    float movingHeight, movingWidth;                            //移動に関する内部関数
+    bool KSmovingCheck = true, KSattackingCheck = true;        //判断用内部関数
+    int movingCheck = 0, AttackMode = 0;
     protected override void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();    //アニメーター代入
+
+        movingHeight = moveHeightForce;
+        movingWidth = -moveWidthForce;
         base.Start();
     }
 
     protected override void Update()
     {
-        KingSlimeMoving();
+        if (!IsBlowing)
+        {
+            //移動関連
+            if(IsMoving)KingSlimeMoving();
+            //攻撃関連
+            if(IsAttacking)KingSlimeAttack();
+        }
 
 
+        //倒されることを確認しているのはEnemyのメイン関数で行われています
+        if (isDestroy && !IsBlowing)
+        {   //倒されたら他のレイヤーの影響を受けないようにするDeadBossLayer
+            IsBlowing = true;
+            gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+            //KingSlimeBlowing();   //特別の動きをするために用意した関数 
+        }
 
+        //アニメーション関数の代入
         animator.SetBool("IsMoving", IsMoving);
+        animator.SetInteger("AtttackMode", AttackMode);
+        animator.SetBool("IsBlowing", isDestroy);
+        animator.SetBool("IsAnimation",false);
     }
 
-    void KingSlimeMoving()
+    //キングスライムの攻撃
+    void KingSlimeAttack()
     {
-        //着地計算
-
-
-        //移動中 壁に当たった時の反転処理
-        if (IsMoving)
+        if (KSattackingCheck)
         {
-            if (enemyRb.velocity.x == 0 && LRmove)
+            KSattackingCheck = false;
+            switch (AttackMode)
             {
-                Vector2 scale = this.transform.localScale;
-                scale.x *= -1;
-                this.transform.localScale = scale;
-                movingWidth *= -1;
-                LRmove = false;
+                case 0:
+                    //KSBossAtack();
+                    KSBossSummon();
+                    AttackMode = 1;
+                    break;
+                case 1:
+                    KSBossSummon();
+                    AttackMode = 0;
+                    break;
             }
         }
-
-        //一秒の待ち処理
-        if (IsMoving && !moveHideFlag)
-        {
-            moveHideFlag = true;
-            StartCoroutine(SetMoveFalse());
-            //移動処理。
-            enemyRb.AddForce(new Vector2(movingWidth, movingHeight), ForceMode2D.Impulse);
-            LRmove = true;
-            StartCoroutine(Landing());
-        }
-        if (!IsMoving && !moveHideFlag)
-        {
-            moveHideFlag = true;
-            StartCoroutine(SetMoveTrue());
-        }
-
     }
-
-    //着地までの時間待ちと移動中の確認
-    IEnumerator Landing()
+    IEnumerator KSBossAtack()
     {
-        yield return new WaitForSeconds(0.5f);
-        LRmove = false;
-    }
-    //一秒待って移動可能にする
-    IEnumerator SetMoveTrue()
-    {
-        yield return new WaitForSeconds(1f);
+        yield return null;
         IsMoving = true;
-        moveHideFlag = false;
     }
-    //一秒待って移動不可にする
-    IEnumerator SetMoveFalse()
+    IEnumerator KSBossSummon()
     {
-        yield return new WaitForSeconds(1f);
-        IsMoving = false;
-        moveHideFlag = false;
+        yield return null;
+        IsMoving = true;
     }
 
+
+    //キングスライムの移動
+    void KingSlimeMoving()
+    {
+        if (KSmovingCheck)
+        {
+            KSmovingCheck = false;
+            StartCoroutine(KSMovingAnim());
+        }
+    }
+    IEnumerator KSMovingAnim()
+    {
+        movingCheck++;
+        yield return new WaitForSeconds(0.5f);
+        enemyRb.AddForce(new Vector2(movingWidth, movingHeight),ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.75f);
+        if (movingCheck == 4)
+        {
+            movingCheck = 0;
+            IsMoving = false;
+            IsAttacking = true;
+        }
+        KSmovingCheck = true;
+    }
+
+    
+
+
+
+    //壁に当たったら移動量を保ったまま回転を行う
+    public override void TurnAround()
+    {
+        bool InCheck = true;
+        if (transform.localScale.x == 1f && InCheck)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            InCheck = false;
+        }
+        if (transform.localScale.x == -1f && InCheck)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+            //InCheck = false;
+        }
+        enemyRb.velocity = new Vector2(enemyRb.velocity.x * -1,enemyRb.velocity.y);
+        movingWidth *= -1;
+    }
+
+
+    //重力関連
     private void FixedUpdate()
     {
         Gravity();
