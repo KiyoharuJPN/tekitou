@@ -1492,6 +1492,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 3.7333333
+    functionName: _ExAttack_LastSE
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 4.4166665
     functionName: ExAttackEnd
     data: 
