@@ -165,7 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 5
-  speed: 25
+  moveHeight: 3
+  moveWidth: 2
 --- !u!95 &1370193731701165689
 Animator:
   serializedVersion: 4
