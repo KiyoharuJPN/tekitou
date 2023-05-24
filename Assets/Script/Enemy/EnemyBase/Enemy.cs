@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         {
             Attack(col);
         }
-        if (col.gameObject.CompareTag("Stage"))
+        if (col.gameObject.CompareTag("Stage") && isDestroy)
         {
             num--;
             if (num == 0)

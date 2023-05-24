@@ -151,6 +151,7 @@ public class SESoundData
         KingSlimeLanding,
         //BGMƒCƒ“ƒgƒ
         
+        KingSlimeSummon,
     }
 
     public SE se;
