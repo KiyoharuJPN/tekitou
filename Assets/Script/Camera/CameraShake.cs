@@ -9,16 +9,13 @@ public class CameraShake : MonoBehaviour
     [Header("カメラオブジェクト")]
     GameObject CAMERA;
 
-
-
     internal bool _isDoShake = false;
 
-    public void Shake(float duration, float magnitude)
+    public void Shake(float duration, float magnitude, bool vertical, bool horizontal)
     {
-        StartCoroutine(DoShake(duration, magnitude));
+        StartCoroutine(DoShake(duration, magnitude, vertical, horizontal));
     }
-
-    private IEnumerator DoShake(float duration, float magnitude)
+    private IEnumerator DoShake(float duration, float magnitude, bool vertical, bool horizontal)
     {
         this.gameObject.GetComponent<CinemachineBrain>().enabled = false;
         var pos = transform.localPosition;
@@ -28,9 +25,19 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            var y = pos.y + Random.Range(-1f, 1f) * magnitude;
+            var x = pos.x;
+            var y = pos.y;
 
-            transform.localPosition = new Vector3(pos.x, y, pos.z);
+            if (vertical)
+            {
+                x = pos.x + Random.Range(-1f, 1f) * magnitude;
+            }
+            if (horizontal)
+            {
+                y = pos.y + Random.Range(-1f, -1f) * magnitude;
+            }
+
+            transform.localPosition = new Vector3(x, y, pos.z);
 
             elapsed += Time.deltaTime;
 

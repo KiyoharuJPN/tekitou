@@ -117,6 +117,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     internal List<GameObject> enemylist = new List<GameObject>();
 
+    //ダメージカメラ処理
+    [SerializeField]
+    CameraShake shake;
+
     //アニメーション用
     internal bool isFalling = false;
     internal bool isMoving = false;
@@ -192,6 +196,7 @@ public class PlayerController : MonoBehaviour
     public void _Damage(int power)
     {
         hpparam.DamageHP(hpparam.GetHP() - power);
+        shake.Shake(0.2f, 0.3f, true, true);
         if (hpparam.GetHP() <= 0)
         {
             SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
