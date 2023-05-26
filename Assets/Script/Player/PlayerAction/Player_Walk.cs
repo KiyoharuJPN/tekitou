@@ -54,6 +54,7 @@ public class Player_Walk : MonoBehaviour
         {
             //プレイヤーの左右の移動
             player.rb.velocity = new Vector2(xSpeed + dashSpeed, player.rb.velocity.y);
+            //player.parallaxBackground.StartScroll(player.transform.position);
         }
     }
 

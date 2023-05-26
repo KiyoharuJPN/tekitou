@@ -121,7 +121,7 @@ public class KingSlime : Enemy
     {
         knockbackAttackCircle.enabled = false;
         SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
-        shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
+        shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength,false,true);
         NormalAttackAnimation++;
         yield return new WaitForSeconds(1);
         /*attackCheckArea.SetActive(false);*/
