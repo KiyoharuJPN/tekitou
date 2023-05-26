@@ -56,7 +56,7 @@ public class KingSlime : Enemy
             if (IsMoving)KingSlimeMoving();
         }
 
-
+        if(Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
 
         //倒されることを確認しているのはEnemyのメイン関数で行われています
         if (isDestroy && !IsBlowing)
