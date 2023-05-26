@@ -90,6 +90,10 @@ public class PlayerController : MonoBehaviour
     [Header("ノックバックステータス")]
     KnockBackData knockBack = new() { /*knockBackForce = 50,*/ knockBackTime = .4f, cantMovingTime = .4f, canKnockBack = true };
 
+    //背景
+    [SerializeField]
+    internal ParallaxBackground parallaxBackground;
+
     //最終攻撃力格納用変数
     float _power;
 
@@ -196,7 +200,7 @@ public class PlayerController : MonoBehaviour
     public void _Damage(int power)
     {
         hpparam.DamageHP(hpparam.GetHP() - power);
-        shake.Shake(0.2f, 0.3f, true, true);
+        shake.Shake(0.2f, 0.8f, true, true);
         if (hpparam.GetHP() <= 0)
         {
             SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
