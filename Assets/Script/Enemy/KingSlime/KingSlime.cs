@@ -119,12 +119,61 @@ public class KingSlime : Enemy
     }
     IEnumerator KSBossAtack2()
     {
-        knockbackAttackCircle.enabled = false;
         SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength);
+        knockbackAttackCircle.enabled = false;
         NormalAttackAnimation++;
-        yield return new WaitForSeconds(1);
-        /*attackCheckArea.SetActive(false);*/
+        int i = 0;
+        while(i < 5)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.2f);
+        attackCheckArea.size = new Vector2(6.86f, 3.8f);
+        attackCheckArea.enabled = true;
+        while (i < 10)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, 0.05f);
+        attackCheckArea.size = new Vector2(8f, 4.3f);
+        while (i < 15)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, 1.55f);
+        attackCheckArea.size = new Vector2(8f, 7.3f);
+        while (i < 25)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.1f);
+        attackCheckArea.size = new Vector2(7f, 4f);
+        while (i < 29)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.1f);
+        attackCheckArea.size = new Vector2(9f, 4f);
+        while (i < 33)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        while (i < 37)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.1f);
+        attackCheckArea.size = new Vector2(10f, 4f);
+        while (i < 41)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.enabled = false;
+        while (i < 55)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
         StartCoroutine(KSBossAtack3());
     }
     IEnumerator KSBossAtack3()
@@ -255,7 +304,7 @@ public class KingSlime : Enemy
             HadAttack = true;
             StartCoroutine(HadAttackReset());
             //ダメージとノックバック
-            col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
+            col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * enemyData.knockBackValue);
             col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.attackPower);
         }
     }
