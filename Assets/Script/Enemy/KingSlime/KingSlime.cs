@@ -9,7 +9,7 @@ public class KingSlime : Enemy
     public GameObject summonSlime;
     
     public BoxCollider2D attackCheckArea;
-    CircleCollider2D knockbackAttackCircle;
+    public CircleCollider2D knockbackAttackCircle;
 
     //揺れ関連
     [System.Serializable]
@@ -31,7 +31,7 @@ public class KingSlime : Enemy
     Animator animator;                                                  //敵のアニメ関数
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
-        , NoGravity = false;                                //判断用内部関数
+        , NoGravity = false;                                            //判断用内部関数
     int movingCheck = 0, AttackMode = 0, NormalAttackAnimation;         //チェック用int関数
     GameObject playerObj;                                               //プレイヤーオブジェクト宣言
     protected override void Start()
@@ -42,7 +42,6 @@ public class KingSlime : Enemy
         movingWidth = -moveWidthForce;
         summonPosX = -5f;
         summonPosY = 1;
-        knockbackAttackCircle = GetComponent<CircleCollider2D>();
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         base.Start();
     }
@@ -57,7 +56,7 @@ public class KingSlime : Enemy
             if (IsMoving)KingSlimeMoving();
         }
 
-
+        if(Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
 
         //倒されることを確認しているのはEnemyのメイン関数で行われています
         if (isDestroy && !IsBlowing)
@@ -113,18 +112,78 @@ public class KingSlime : Enemy
         enemyRb.velocity = Vector2.zero;
         yield return new WaitForSeconds(0.8f);
         NoGravity = false;
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         enemyRb.AddForce(new Vector2(0, -40),ForceMode2D.Impulse);
         knockbackAttackCircle.enabled = true;
         KSNormalAttackLanding = true;
     }
     IEnumerator KSBossAtack2()
     {
-        knockbackAttackCircle.enabled = false;
         SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
-        shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength,false,true);
+        shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
+        knockbackAttackCircle.enabled = false;
         NormalAttackAnimation++;
-        yield return new WaitForSeconds(1);
-        /*attackCheckArea.SetActive(false);*/
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        int i = 0;
+        while(i < 5)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.2f);
+        attackCheckArea.size = new Vector2(6.86f, 3.8f);
+        attackCheckArea.enabled = true;
+        while (i < 10)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, 0.05f);
+        attackCheckArea.size = new Vector2(8f, 4.3f);
+        while (i < 15)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, 1.55f);
+        attackCheckArea.size = new Vector2(8f, 7.3f);
+        while (i < 25)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.1f);
+        attackCheckArea.size = new Vector2(7f, 4f);
+        while (i < 29)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.1f);
+        attackCheckArea.size = new Vector2(9f, 4f);
+        while (i < 33)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        while (i < 37)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.offset = new Vector2(0, -0.1f);
+        attackCheckArea.size = new Vector2(10f, 4f);
+        while (i < 41)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        attackCheckArea.enabled = false;
+        while (i < 55)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
         StartCoroutine(KSBossAtack3());
     }
     IEnumerator KSBossAtack3()
@@ -209,21 +268,21 @@ public class KingSlime : Enemy
             base.OnCollisionEnter2D(col);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (GetComponent<KingSlime>().enabled)
-        {
-            if (collision.CompareTag("Player"))
-            {
-                //攻撃クールダウンタイム
-                HadAttack = true;
-                StartCoroutine(HadAttackReset());
-                //ダメージとノックバック
-                collision.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
-                collision.GetComponent<PlayerController>()._Damage((int)enemyData.power * 4);
-            }
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (GetComponent<KingSlime>().enabled)
+    //    {
+    //        if (collision.CompareTag("Player"))
+    //        {
+    //            //攻撃クールダウンタイム
+    //            HadAttack = true;
+    //            StartCoroutine(HadAttackReset());
+    //            //ダメージとノックバック
+    //            collision.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * enemyData.knockBackValue);
+    //            collision.GetComponent<PlayerController>()._Damage(enemyData.attackPower * 4);
+    //        }
+    //    }
+    //}
 
 
 
@@ -255,8 +314,8 @@ public class KingSlime : Enemy
             HadAttack = true;
             StartCoroutine(HadAttackReset());
             //ダメージとノックバック
-            col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
-            col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.attackPower);
+            col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * enemyData.knockBackValue);
+            col.gameObject.GetComponent<PlayerController>()._Damage(enemyData.attackPower);
         }
     }
 

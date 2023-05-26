@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 85724217}
   - component: {fileID: 85724219}
   - component: {fileID: 9100562809031480908}
+  - component: {fileID: 3563092138790404470}
   m_Layer: 9
   m_Name: AttackCheckArea
   m_TagString: Untagged
@@ -40,13 +41,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85724216}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.21777403}
+  m_Offset: {x: 0, y: -0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +58,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.897104, y: 3.7575681}
+  m_Size: {x: 9, y: 4}
   m_EdgeRadius: 0
 --- !u!114 &9100562809031480908
 MonoBehaviour:
@@ -71,6 +72,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78fd3ad1b85ba9d48b503b1aa093676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3563092138790404470
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85724216}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1.848876}
+  serializedVersion: 2
+  m_Radius: 2.7998214
 --- !u!1 &6259610633585901161
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +280,8 @@ MonoBehaviour:
   moveWidthForce: 3
   AttackHeight: 8
   summonSlime: {fileID: 1370193731701165691, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
-  attackCheckArea: {fileID: 85724216}
+  attackCheckArea: {fileID: 85724219}
+  knockbackAttackCircle: {fileID: 3563092138790404470}
   _shakeInfo:
     Duration: 0
     Strength: 0
@@ -280,8 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shakeInfo:
-    Duration: 0.2
-    Strength: 0.9
+    Duration: 0.1
+    Strength: 0.1
 --- !u!1 &7294653932298096155
 GameObject:
   m_ObjectHideFlags: 0

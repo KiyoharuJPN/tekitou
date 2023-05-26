@@ -17,4 +17,5 @@ public class KingSlimeAttackCheckArea : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
 }

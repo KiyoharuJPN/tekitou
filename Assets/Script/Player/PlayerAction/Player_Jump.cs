@@ -48,6 +48,7 @@ public class Player_Jump : MonoBehaviour
         if (player.isExAttack || player.isWarpDoor) return;
 
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
+        //if(Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
 
         //ジャンプキー取得
         if (player.canMove) JumpBottan();

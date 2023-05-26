@@ -218,7 +218,6 @@ public class Enemy_Bird : Enemy
             //íπçUåÇ
             AttackChecking = false;
             StartCoroutine(Attacking());
-            Debug.Log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             InAttack = true;
         }
         return InAttack;
