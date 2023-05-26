@@ -36,7 +36,7 @@ public class PlayerSE : MonoBehaviour
 
     public void _DownAttackFallSE()
     {
-        SoundManager.Instance.PlaySE(SESoundData.SE.DropAttack);
+        SoundManager.Instance.PlaySE(SESoundData.SE.DropAttackFall);
     }
 
     public void _DownAttackEndSE()

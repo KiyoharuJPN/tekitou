@@ -51,7 +51,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
             {
                 animationControler++;
                 SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
-                shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength,false,true);
+                shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength,true,true);
             }
             if (animationControler == 1)
             {

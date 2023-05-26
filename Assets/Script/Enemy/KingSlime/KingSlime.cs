@@ -48,6 +48,7 @@ public class KingSlime : Enemy
 
     protected override void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         if (!IsBlowing)
         {
             //攻撃関連
@@ -56,8 +57,7 @@ public class KingSlime : Enemy
             if (IsMoving)KingSlimeMoving();
         }
 
-        if(Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-
+        
         //倒されることを確認しているのはEnemyのメイン関数で行われています
         if (isDestroy && !IsBlowing)
         {   //倒されたら他のレイヤーの影響を受けないようにするDeadBossLayer
@@ -333,5 +333,6 @@ public class KingSlime : Enemy
     protected override void _Destroy()
     {
         isDestroy = true;
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
     }
 }

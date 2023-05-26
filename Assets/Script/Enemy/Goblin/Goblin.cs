@@ -82,6 +82,7 @@ public class Goblin : Enemy
             i++;
             yield return new WaitForSeconds(0.01f);
         }
+        SoundManager.Instance.PlaySE(SESoundData.SE.SwingDownClub);
         GoblinAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-.55f, 1.05f);
         GoblinAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.4f, 1f);
         GoblinAttack.SetActive(true);

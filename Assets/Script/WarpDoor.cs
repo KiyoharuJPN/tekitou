@@ -38,7 +38,7 @@ public class WarpDoor : MonoBehaviour
         if (collision.gameObject.layer != 6) return;
 
         float lsv = Input.GetAxis("L_Stick_V");
-        if (lsv >= 0.8)
+        if (lsv >= 0.8 || Input.GetKeyDown(KeyCode.K))
         {
             Destroy(bottonUiPrefab);
             bottonUiPrefab = null;

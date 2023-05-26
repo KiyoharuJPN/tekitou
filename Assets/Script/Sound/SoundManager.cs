@@ -74,11 +74,13 @@ public class SoundManager : MonoBehaviour
     public void PlaySE(SESoundData.SE se)
     {
         SESoundData data = seSoundDatas.Find(data => data.se == se);
-        if(data != null)
+        /*if(data != null)
         {
             seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
             seAudioSource.PlayOneShot(data.audioClip);
-        }
+        }*/
+        seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
+        seAudioSource.PlayOneShot(data.audioClip);
     }
 
 }
@@ -90,12 +92,16 @@ public class BGMSoundData
     public enum BGM
     {
         Title,
-        Tutorial,
+        Tutorial_intro,
+        Tutorial_roop,
         Stage1_intro,
         Stage1_roop,
-        Stage2,
-        GoalBGM,
+        //Stage2,//削除
+        Result,
         GameOver,
+        KingSlimeBoss_intro,
+        KingSlimeBoss_roop,
+        //GoalBGM,//削除
     }
 
     public BGM bgm;
@@ -119,39 +125,45 @@ public class SESoundData
         AutoAttack,　           //自動攻撃
         UpAttack,               //上昇攻撃
         DropAttackStart,        //下降攻撃開始
-        DropAttack,　　　       //下降攻撃
+        //DropAttack,　　　       //下降攻撃
+        DropAttackFall,         //下降攻撃落下中
         DropAttackLand,         //下降攻撃着地時
-        SideAttack,
-        PlayerGetHit,
-        PlayerDead,
-        ExAttack_CutIn,
-        ExAttack_Wind,
-        ExAttack_Hit,
-        ExAttack_PowerCharge,
-        PowerCharge,
-        LastAttack,
+        SideAttack,             //横攻撃
+        PlayerGetHit,           //被弾
+        PlayerDead,             //死亡時
+        ExAttack_CutIn,         //必殺技使用時
+        ExAttack_Wind,          //大剣風切り音
+        ExAttack_Hit,           //大剣攻撃ヒット音
+        ExAttack_PowerCharge,   //力をチャージ
+        //LastAttack,             //最後の一撃（実質削除）
         //環境音
-        GoalSE,
-        GetHeart,
-        GetCoin,
+        GoalSE,                 //ゴール時
+        GetHeart,               //ハート取得
+        GetCoin,                //コイン取得
         //モンスターサウンド
-        MonsterGetHit,
-        MonsterKnock,
-        MonsterDead,
-        ClawToKill,
-        HeavyLand,
-        SummonSlime,
-        BossDown,
-        ShootMagicBall,
-        ForefootHeavyAttack,
-        DragonRoar,
-        DragonBlaze,
-        RockDropOff,
-        RockBreak,
-        KingSlimeLanding,
+        MonsterGetHit,          //敵被弾
+        MonsterKnock,           //吹き飛び
+        MonsterDead,            //敵消滅
+        SwingDownClub,          //こん棒を振り下ろす
+        //CutWithNails,           //爪できる（実質削除）
+        //HeavyLand,              //地面に強く着地
+        KingSlimeLanding,       //キングスライム着地
+        KingSlimeSummon,        //スライム召喚
+        BossDown,               //ボス撃破
+        //ShootMagicBall,       //削除
+        //ForefootHeavyAttack,  //削除
+/*        DragonRoar,             //ドラゴンの咆哮（実質削除）
+        DragonBlaze,            //炎を吐く（実質削除）
+        RockDropOff,            //岩の落下（実質削除）
+        RockBreak,              //岩を砕ける音（実質削除）
+        WaggingTailPowerful,    //勢いよくしっぽを振る（実質削除）*/
+        BirdChirping,           //鳥の鳴き声
+        Door,                   //扉
+
+
         //BGMイントロ
-        
-        KingSlimeSummon,
+
+
     }
 
     public SE se;

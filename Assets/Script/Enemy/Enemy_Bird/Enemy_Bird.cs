@@ -86,6 +86,7 @@ public class Enemy_Bird : Enemy
             i++;
             yield return new WaitForSeconds(0.01f);
         }
+        SoundManager.Instance.PlaySE(SESoundData.SE.BirdChirping);
         monster_upper.offset = new Vector2(0f, 0.35f);
         monster_upper.size = new Vector2(3.1f, 1.3f);
         monster_lower.offset = new Vector2(-0.3f, -0.5f);

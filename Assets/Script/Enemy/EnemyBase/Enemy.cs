@@ -78,6 +78,7 @@ public class Enemy : MonoBehaviour
             num--;
             if (num == 0)
             {
+                SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
                 Destroy(gameObject);
             }
         }
@@ -112,8 +113,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Damage(float power)
+    public virtual void Damage(float power)
     {
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         hp -= power;
         ComboParam.Instance.ResetTime();
         if (!hadDamaged)
@@ -145,6 +147,7 @@ public class Enemy : MonoBehaviour
         //êÅÇ¡îÚÇ—äJén
         BoostSphere();
         isDestroy = true;
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
     }
 
