@@ -40,7 +40,7 @@ public class Player_IsGround : MonoBehaviour
             //“Ë‚«h‚µUŒ‚I‚í‚è
             if (player.isDropAttack)
             {
-                jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength);
+                jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
                 Invoke(nameof(DropAttackOff), 0.5f);
             };
 
