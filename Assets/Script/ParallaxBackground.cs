@@ -11,7 +11,7 @@ public class ParallaxBackground : MonoBehaviour
     //あらかじめ各画像を紐付けしておく。
     [Header("背景画像 (0が最奥、順に手前)")]
     [SerializeField]
-    Sprite[] backgroundSprites = new Sprite[6];
+    Sprite[] backgroundSprites = new Sprite[7];
 
     //左右スクロール対応の場合は、各X値を-1920(1画像幅分)に設定してください。
     [Header("背景画像のオフセット (ズラす値)(左右スクロール対応の場合は1画像分、左にズラす)")]
@@ -128,9 +128,6 @@ public class ParallaxBackground : MonoBehaviour
     //背景画像をスクロールしたい場合にコレを呼ぶ。引数にはプレイヤーの位置を渡す(位置差でなく)。
     public void StartScroll(Vector3 playerPosition)
     {
-        //「右スクロールのみに対応」モードの時、プレイヤーが左に進んだ場合は無視する。
-        if (imageMax == 2 && playerPosition.x - previousPlayerPosition.x < 0)
-            return;
 
         //1画像分進んだ時、スクロールが繋がるように良い感じに戻している。
         for (int i = 0; i < backgroundMax; i++)

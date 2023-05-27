@@ -42399,6 +42399,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf7a5cd261ee0545a44b4ad93479b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &626781774 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7281289739213828368, guid: 6bd00a3e6f191de46be599c3e7b317ab, type: 3}
+  m_PrefabInstance: {fileID: 7281289739700607914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642089084
 GameObject:
   m_ObjectHideFlags: 0
@@ -45459,6 +45464,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.size
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[24].se
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[24].volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[24].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 75944389d1e802f47ad539feece3b301, type: 3}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -49433,10 +49454,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gimmick_Warp Door
       objectReference: {fileID: 0}
-    - target: {fileID: 3120454149288359096, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
-      propertyPath: m_Size.y
-      value: 4.86
-      objectReference: {fileID: 0}
     - target: {fileID: 3120454149288359097, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
       propertyPath: fade
       value: 
@@ -49445,10 +49462,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 621046460}
-    - target: {fileID: 3120454149288359097, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
-      propertyPath: BottonUi
-      value: 
-      objectReference: {fileID: 87303157342926741, guid: bc7f0420d10f2dc4bb67de688497038f, type: 3}
     - target: {fileID: 3120454149288359100, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -49493,14 +49506,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3120454150786839525, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.59
-      objectReference: {fileID: 0}
-    - target: {fileID: 3120454150786839525, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.67
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
 --- !u!4 &2048295921 stripped
@@ -49527,7 +49532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2051295584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49578,13 +49583,13 @@ MonoBehaviour:
   scrollDuration: 1
   scrollSpeedMax: 1000
   backgroundsRt:
-  - {fileID: 952660200}
-  - {fileID: 931139980}
-  - {fileID: 915045677}
-  - {fileID: 1998323778}
-  - {fileID: 529245318}
-  - {fileID: 1935210479}
-  - {fileID: 642089085}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   backgroundMax: 7
   backgroundScrollValues:
   - 0
@@ -49594,7 +49599,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  parallaxBackgroundRectMask2D: {fileID: 1312739695}
+  parallaxBackgroundRectMask2D: {fileID: 0}
   scrollVelocities:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
@@ -49653,7 +49658,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 626781774}
   m_PlaneDistance: 30
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -49662,7 +49667,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &2051295588
 RectTransform:
