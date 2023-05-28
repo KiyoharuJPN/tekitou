@@ -69,5 +69,6 @@ public class Player_IsGround : MonoBehaviour
     {
         player.isDropAttack = false;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
+        player.isAttack = false;
     }
 }

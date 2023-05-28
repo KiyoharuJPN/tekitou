@@ -11,6 +11,8 @@ public class WarpDoor : MonoBehaviour
 
     [SerializeField]
     GameObject BottonUi;
+    [SerializeField]
+    GameObject inPoint;
     GameObject bottonUiPrefab;
     bool isBottonUi;
 
@@ -43,7 +45,7 @@ public class WarpDoor : MonoBehaviour
             Destroy(bottonUiPrefab);
             bottonUiPrefab = null;
             animator.SetTrigger("DoorOpen");
-            collision.GetComponent<PlayerController>().WarpDoor();
+            collision.GetComponent<PlayerController>().WarpDoor(inPoint.transform);
             StartCoroutine(PlayerWarp(1.0f, collision));
         }
     }

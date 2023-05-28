@@ -30,7 +30,11 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
-        
+        if (player.isSideAttack || player.isDropAttack || player.isExAttack || player.isWarpDoor)
+        {
+            return;
+        }
+
         MoveKay();
         Dash();
 

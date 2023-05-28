@@ -1,11 +1,9 @@
-using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -99,7 +97,7 @@ public class PlayerController : MonoBehaviour
     internal bool canUpAttack = true;
 
     //SideAttack関連
-    private float dashingTime = 0.2f;
+    const float dashingTime = 0.2f;
 
     //KnockBack関連
     Vector2 knockBackDir;   //ノックバックされる方向
@@ -154,7 +152,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
 
         if (isExAttack || isWarpDoor)
         {
@@ -310,7 +307,7 @@ public class PlayerController : MonoBehaviour
         isUpAttack = false;
     }
 
-    //横攻撃
+    //横攻撃左右判定
     private void Side(Skill skill)
     {
         Vector3 localScale = transform.localScale;
@@ -319,12 +316,14 @@ public class PlayerController : MonoBehaviour
             if (sideJudge)
             {
                 rb.velocity = new Vector2(transform.localScale.x * skill.distance, 0f);
+                StartScroll();
             }
             else if (!sideJudge)
             {
                 rb.velocity = new Vector2(-transform.localScale.x * skill.distance, 0f);
                 localScale.x *= -1f;
                 transform.localScale = localScale;
+                StartScroll();
             }
         }
         else if (transform.localScale.x < 0)
@@ -334,12 +333,15 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(-transform.localScale.x * skill.distance, 0f);
                 localScale.x *= -1f;
                 transform.localScale = localScale;
+                StartScroll();
             }
             else if (!sideJudge)
             {
                 rb.velocity = new Vector2(transform.localScale.x * skill.distance, 0f);
+                StartScroll();
             }
         }
+        
     }
 
     //横攻撃処理
@@ -445,6 +447,7 @@ public class PlayerController : MonoBehaviour
 
     internal void _HitEfect(Transform enemy, int angle)
     {
+        Debug.Log(angle);
         GameObject prefab =
         Instantiate(ExAttackHitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
         prefab.transform.Rotate(new Vector3(0,0,angle));
@@ -478,9 +481,12 @@ public class PlayerController : MonoBehaviour
         canMove = cM;
     }
 
-    internal void WarpDoor()
+    internal void WarpDoor(Transform door)
     {
         isWarpDoor = true;
+        var doorPosX = door.position.x;
+        var doorPosY = door.position.y;
+        this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);
         animator.SetBool("IsWarpDoor", isWarpDoor);
         animator.SetTrigger("WarpDoor");
     }
@@ -489,5 +495,14 @@ public class PlayerController : MonoBehaviour
     {
         isWarpDoor = false;
         animator.SetBool("IsWarpDoor", isWarpDoor);
+    }
+
+    //背景スクロール処理
+    private void StartScroll()
+    {
+        if (parallaxBackground != null)
+        {
+            parallaxBackground.StartScroll(this.transform.position);
+        }
     }
 }

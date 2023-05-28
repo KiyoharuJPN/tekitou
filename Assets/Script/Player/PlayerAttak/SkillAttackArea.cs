@@ -39,15 +39,13 @@ public class SkillAttackArea : MonoBehaviour
             player._Attack(Enemy, skill.damage);
             if (player.transform.localScale.x == 1)
             {
-                player._HitEfect(Enemy.transform, skill.hitEffectAngle);
+                player._HitEfect(Enemy.transform, -skill.hitEffectAngle);
             }
-            else if(player.transform.localScale.x == -1) 
+            else
             {
                 player._HitEfect(Enemy.transform, skill.hitEffectAngle);
             }
-            
-            
         }
-        
+        ExAttackParam.Instance.AddGauge();
     }
 }
