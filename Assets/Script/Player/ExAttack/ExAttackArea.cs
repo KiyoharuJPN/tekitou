@@ -6,8 +6,6 @@ public class ExAttackArea : MonoBehaviour
 {
     PlayerController player;
 
-    
-
     private void Start()
     {
         player = transform.parent.gameObject.GetComponent<PlayerController>();

@@ -9,27 +9,45 @@ public class SkillAttackArea : MonoBehaviour
     PlayerController player;
 
     //UŒ‚”ÍˆÍ‚É“ü‚Á‚½
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && !player.enemylist.Contains(other.gameObject))
         {
-            //UŒ‚
-            if(player.isUpAttack)//ã¸UŒ‚
+            player.enemylist.Add(other.gameObject);
+            HitDamage(other);
+        }
+    }
+
+    void HitDamage(Collider2D Enemy)
+    {
+        //UŒ‚
+        if (player.isUpAttack)//ã¸UŒ‚
+        {
+            Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
+            player._Attack(Enemy, skill.damage);
+            player._HitEfect(Enemy.transform, skill.hitEffectAngle);
+        }
+        if (player.isSideAttack)//‰¡UŒ‚
+        {
+            Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
+            player._Attack(Enemy, skill.damage);
+            player._HitEfect(Enemy.transform, skill.hitEffectAngle);
+        }
+        if (player.isDropAttack)//‰ºUŒ‚
+        {
+            Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
+            player._Attack(Enemy, skill.damage);
+            if (player.transform.localScale.x == 1)
             {
-                Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
-                player._Attack(collision, skill.damage);
+                player._HitEfect(Enemy.transform, skill.hitEffectAngle);
             }
-            if(player.isSideAttack)//‰¡UŒ‚
+            else if(player.transform.localScale.x == -1) 
             {
-                Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
-                player._Attack(collision, skill.damage);
-            }
-            if (player.isDropAttack)//‰ºUŒ‚
-            {
-                Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
-                player._Attack(collision, skill.damage);
+                player._HitEfect(Enemy.transform, skill.hitEffectAngle);
             }
             
+            
         }
+        
     }
 }

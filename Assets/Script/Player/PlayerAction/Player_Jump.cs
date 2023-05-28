@@ -15,7 +15,9 @@ public class Player_Jump : MonoBehaviour
 
     internal float jumpTime = 0;
     bool isjump = false;
+    internal bool FarstJump;
     internal bool canSecondJump = false;
+    internal bool isSecondJump = false;
     float jumpHight;
 
     //ジャンプした際の位置
@@ -48,10 +50,15 @@ public class Player_Jump : MonoBehaviour
         if (player.isExAttack || player.isWarpDoor) return;
 
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
-        //if(Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
+        if (player.isFalling)
+        {
+            FarstJump = false;
+        }
+
+        if(player.isUpAttack && !isSecondJump) canSecondJump = true;
 
         //ジャンプキー取得
-        if (player.canMove) JumpBottan();
+        if (player.canMove && !player.isAttack) JumpBottan();
     }
 
     private void FixedUpdate()
@@ -72,6 +79,7 @@ public class Player_Jump : MonoBehaviour
             {
                 player.animator.SetTrigger("IsSecondJump");
                 canSecondJump = false;
+                isSecondJump = true;
                 jumpHight = player.jumpData.secondJumpHeight;
                 jumpPos = this.transform.position.y;
                 player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
@@ -81,15 +89,15 @@ public class Player_Jump : MonoBehaviour
         }
 
         //一回目ジャンプ
-        if (Input.GetButtonDown("Jump") && !player.isJumping && !player.isFalling && !canSecondJump)
+        if (Input.GetButtonDown("Jump") && FarstJump && !canSecondJump)
         {
             player.isSquatting = true;
+            FarstJump = false;
             player.animator.SetBool("IsSquatting", player.isSquatting);
             jumpHight = player.jumpData.jumpHeight;
             //ジャンプ前位置格納
             jumpPos = this.transform.position.y;
             isjump = true;
-            canSecondJump = true;
         }
 
         //ジャンプ中の処理
