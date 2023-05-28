@@ -150,6 +150,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(isAttack);
         //デバック用シーンリセット
         if(Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -199,6 +200,7 @@ public class PlayerController : MonoBehaviour
 
     public void _Damage(int power)
     {
+
         hpparam.DamageHP(hpparam.GetHP() - power);
         shake.Shake(0.2f, 0.8f, true, true);
         if (hpparam.GetHP() <= 0)
@@ -275,17 +277,16 @@ public class PlayerController : MonoBehaviour
         if (knockBackCounter == knockBack.knockBackTime)
         {
             rb.velocity = Vector2.zero;
+            isAttack = false;
         }
         if (knockBackCounter > 0)
         {
             knockBackCounter -= Time.deltaTime;
             //簡単に説明すると下は上下に飛ばさないコードです。
-            rb.AddForce(new Vector2((knockBackDir.y * knockBackForce > 5 || knockBackDir.y * knockBackForce < -5) ? ((knockBackDir.x < 0) ? -Mathf.Abs(knockBackDir.y * knockBackForce) : Math.Abs(knockBackDir.y * knockBackForce)) : knockBackDir.x * knockBackForce, ((knockBackDir.y * knockBackForce> 5 || knockBackDir.y * knockBackForce < -5)? knockBackDir.y : knockBackDir.y * knockBackForce)));//横だけ飛ばされるコード      簡単に説明すると上と下は５よりでかくなると飛ばされない、左右に関して上下が５以上になると百パーセント横から触ったということじゃないのが分かるので、上下の飛ばす力で左右の方向を与えて飛ばさせる。                                                        //(knockBackDir.y * knockBackForce > 7 || knockBackDir.y * knockBackForce < -7) ? knockBackDir.y * knockBackForce : knockBackDir.x * knockBackForce, (knockBackDir.y * knockBackForce > 3 || knockBackDir.y * knockBackForce < -3) ? knockBackDir.y : knockBackDir.y * knockBackForce)
-            Debug.Log(new Vector2(knockBackDir.x * knockBackForce, knockBackDir.y * knockBackForce));
+            rb.AddForce(new Vector2((knockBackDir.y * knockBackForce > 5 || knockBackDir.y * knockBackForce < -5) ? ((knockBackDir.x < 0) ? -Mathf.Abs(knockBackDir.y * knockBackForce) : Math.Abs(knockBackDir.y * knockBackForce)) : knockBackDir.x * knockBackForce, ((knockBackDir.y * knockBackForce> 5 || knockBackDir.y * knockBackForce < -5)? knockBackDir.y : knockBackDir.y * knockBackForce)));//横だけ飛ばされるコード      簡単に説明すると上と下は５よりでかくなると飛ばされない、左右に関して上下が５以上になると百パーセント横から触ったということじゃないのが分かるので、上下の飛ばす力で左右の方向を与えて飛ばさせる。
         }
         else
         {
-            //rb.velocity = Vector2.zero;
             isKnockingBack = false;
         }
     }
@@ -330,7 +331,6 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = originalGravity;
         isSideAttack = false;
         animator.SetBool("IsSideAttack", isSideAttack);
-        yield return new WaitForSeconds(dashingCooldown);
         isAttack = false;
     }
 
