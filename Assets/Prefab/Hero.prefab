@@ -613,7 +613,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -675,5 +675,6 @@ MonoBehaviour:
   - {fileID: 476824139690690350, guid: 22538386d6d4fc146b0f019c62cc8350, type: 3}
   HPstatus:
     FullHP: 6
-    HeartHight: 200
-    HeartWidth: 30
+    HeartHight: 0.7
+    HeartWidth: 0.04
+    HeartLeftJustified: 0.03
