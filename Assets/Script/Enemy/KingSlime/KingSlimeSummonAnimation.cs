@@ -22,11 +22,14 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
+    public GameObject WallCheck;
+
     //AnimationŠÖ˜A
     Animator animator;
     int animationControler;
     bool IsAnimation = true;
     Rigidbody2D enemyRb;
+
 
     private void Start()
     {
@@ -89,6 +92,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
         IsAnimation = false;
         animator.SetBool("IsAnimation", IsAnimation);
         Debug.Log("++++++++++++++++++++++++++++++++++++++++++");
+        WallCheck.SetActive(true);
         gameObject.GetComponent<KingSlimeSummonAnimation>().enabled = false;
     }
 

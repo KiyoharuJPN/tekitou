@@ -56,7 +56,6 @@ public class KingSlime : Enemy
             //移動関連
             if (IsMoving)KingSlimeMoving();
         }
-
         
         //倒されることを確認しているのはEnemyのメイン関数で行われています
         if (isDestroy && !IsBlowing)
@@ -70,7 +69,7 @@ public class KingSlime : Enemy
         animator.SetInteger("AttackMode", AttackMode);
         animator.SetInteger("NormalAttackAnimation", NormalAttackAnimation);
         animator.SetBool("IsBlowing", isDestroy);
-        animator.SetBool("IsAnimation",false);
+        if(IsMoving)animator.SetBool("IsAnimation",false);
     }
 
     //内部動き関連の関数をここに
@@ -301,7 +300,7 @@ public class KingSlime : Enemy
             transform.localScale = new Vector3(1f, 1f, 1f);
             //InCheck = false;
         }
-        enemyRb.velocity = new Vector2(enemyRb.velocity.x * -1,enemyRb.velocity.y);
+        enemyRb.velocity = new Vector2(enemyRb.velocity.x * -1, enemyRb.velocity.y);
         movingWidth *= -1;
         summonPosX *= -1;
     }

@@ -60,7 +60,7 @@ public class Slime : Enemy
     {
         //’…’nŒvŽZ
 
-        Debug.Log(MovingAnim);
+        //Debug.Log(MovingAnim);
 
         if(IsMoving && movingCheck!=0)movingCheck = 0;
         if (!IsMoving)

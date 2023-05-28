@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isAttack);
+        //Debug.Log(isAttack);
         //デバック用シーンリセット
         if(Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
