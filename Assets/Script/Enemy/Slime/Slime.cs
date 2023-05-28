@@ -14,9 +14,10 @@ public class Slime : Enemy
     public float moveHeight, moveWidth;
 
     Animator animator;      //敵のアニメ関数
-    float movingHeight, movingWidth;    //移動に関する内部関数
+    float movingHeight, movingWidth, movingCheck;    //移動に関する内部関数
     //チェック用内部関数
-    bool /*IsBlowing = false, IsMoving = false, */moveHideFlag = false, BossSummon = false, BossTurn = false;
+    bool /*IsBlowing = false, IsMoving = false, */BossSummon = false, BossTurn = false;
+    int MovingAnim = 0;
 
     //float TestTime = 0f;
     override protected void Start()
@@ -32,6 +33,8 @@ public class Slime : Enemy
     }
     override protected void Update()
     {
+        if(enemyRb.velocity.y <-0.1)MovingAnim = 1;
+        IsMoving = enemyRb.velocity != Vector2.zero;
         //画面内にある
         if (OnCamera)
         {
@@ -43,6 +46,7 @@ public class Slime : Enemy
 
 
         //アニメーターの設定
+        animator.SetInteger("MovingAnim", MovingAnim);
         animator.SetBool("IsMoving", IsMoving);
         animator.SetBool("IsBlowing", IsBlowing);
         //状態の変更
@@ -56,38 +60,28 @@ public class Slime : Enemy
     {
         //着地計算
 
+        Debug.Log(MovingAnim);
 
-
-        //一秒の待ち処理
-        if (IsMoving && !moveHideFlag)
+        if(IsMoving && movingCheck!=0)movingCheck = 0;
+        if (!IsMoving)
         {
-            moveHideFlag = true;
-            StartCoroutine(SetMoveFalse());
-            //移動処理。
-            enemyRb.AddForce(new Vector2(movingWidth, movingHeight), ForceMode2D.Impulse);
-        }
-        if (!IsMoving && !moveHideFlag)
-        {
-            moveHideFlag = true;
-            StartCoroutine(SetMoveTrue());
+            movingCheck += Time.deltaTime;
+            if(movingCheck > 1)
+            {
+                movingCheck = 0;
+                enemyRb.AddForce(new Vector2(movingWidth, movingHeight), ForceMode2D.Impulse);
+            }
         }
 
         
     }
 
-    //一秒待って移動可能にする
-    IEnumerator SetMoveTrue()
-    {
-        yield return new WaitForSeconds(1f);
-        IsMoving = true;
-        moveHideFlag = false;
-    }
-    //一秒待って移動不可にする
+    //0.1秒待って移動不可にする
     IEnumerator SetMoveFalse ()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         IsMoving = false;
-        moveHideFlag = false;
+        MovingAnim = 0;
     }
 
     protected override void OnCollisionEnter2D(Collision2D col)
@@ -96,24 +90,35 @@ public class Slime : Enemy
         {
             if(BossTurn) movingWidth *= -1;
             BossSummon = false;
-            moveHideFlag = false;
-            IsMoving = true;
+            enemyRb.AddForce(new Vector2(movingWidth, movingHeight), ForceMode2D.Impulse);
         }
-        if (col.gameObject.CompareTag("Stage")) enemyRb.velocity = Vector2.zero;
         base.OnCollisionEnter2D(col);
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (!isDestroy)
+        {
+            if (col.CompareTag("Stage") && MovingAnim == 1)
+            {
+                MovingAnim = 2;
+                enemyRb.velocity = Vector2.zero;
+                StartCoroutine(SetMoveFalse());
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         Gravity();
     }
     protected override void Gravity()
     {
-        enemyRb.AddForce(new Vector2(0, -5f));
+        enemyRb.AddForce(new Vector2(0, -10f));
     }
     public void SetIsMoving(bool im)
     {
         IsMoving = im;
-        moveHideFlag = true;
         BossSummon = true;
     }
     public void SummonSlimeTurn()

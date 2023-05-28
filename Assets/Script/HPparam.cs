@@ -14,15 +14,17 @@ public class HPparam : MonoBehaviour
     {
         [Tooltip("HP総量")]
         public int FullHP;
-        [Tooltip("画面の下からハートまでの距離")]
+        [Tooltip("画面の下からハートまでの距離"), Range(0, 1)]
         public float HeartHight;
-        [Tooltip("画面の左からハートまでの距離")]
+        [Tooltip("画面の左からハートまでの距離"), Range(0, 0.1f)]
         public float HeartWidth;
+        [Tooltip("画面の左からハートまでの距離"), Range(0, 0.1f)]
+        public float HeartLeftJustified;
         //公開Status追加用
     }
     [SerializeField]
     [Header("HPステータス")]
-    HPStatus HPstatus = new HPStatus { FullHP = 10, HeartHight = 360, HeartWidth = 20};
+    HPStatus HPstatus = new HPStatus { FullHP = 10, HeartHight = 0.7f, HeartWidth = 0.04f, HeartLeftJustified = 0.03f};
 
     private void Start()
     {
@@ -32,10 +34,10 @@ public class HPparam : MonoBehaviour
         var parent = this.transform;
         for (int i = 0; i < HPstatus.FullHP / 2; i++)
         {
-            Instantiate(hearts[2], new Vector3(HPstatus.HeartWidth + (i * 30), HPstatus.HeartHight, 0), Quaternion.identity, parent);//空欄ハートの作成
-            heart[i * 2] = Instantiate(hearts[1], new Vector3(HPstatus.HeartWidth + (i * 30), HPstatus.HeartHight, 0), Quaternion.identity, parent);//ハーフハートの作成
-            if (i == 0) heart[1] = Instantiate(hearts[0], new Vector3(HPstatus.HeartWidth + (i * 30), HPstatus.HeartHight, 0), Quaternion.identity, parent);//ハートの作成
-            if (i != 0) heart[i * 2 + 1] = Instantiate(hearts[0], new Vector3(HPstatus.HeartWidth + (i * 30), HPstatus.HeartHight, 0), Quaternion.identity, parent);
+            Instantiate(hearts[2], new Vector3((i * Screen.width * HPstatus.HeartWidth) + Screen.width * HPstatus.HeartLeftJustified, Screen.height * HPstatus.HeartHight, 0), Quaternion.identity, parent);//空欄ハートの作成
+            heart[i * 2] = Instantiate(hearts[1], new Vector3((i * Screen.width * HPstatus.HeartWidth) + Screen.width * HPstatus.HeartLeftJustified, Screen.height * HPstatus.HeartHight, 0), Quaternion.identity, parent);//ハーフハートの作成
+            if (i == 0) heart[1] = Instantiate(hearts[0], new Vector3((i * Screen.width * HPstatus.HeartWidth) + Screen.width * HPstatus.HeartLeftJustified, Screen.height * HPstatus.HeartHight, 0), Quaternion.identity, parent);//ハートの作成
+            if (i != 0) heart[i * 2 + 1] = Instantiate(hearts[0], new Vector3((i * Screen.width * HPstatus.HeartWidth) + Screen.width * HPstatus.HeartLeftJustified, Screen.height * HPstatus.HeartHight, 0), Quaternion.identity, parent);
         }
     }
 
