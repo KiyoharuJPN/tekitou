@@ -4,5 +4,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class SkillListEntity : ScriptableObject
 {
-    public List<Skill> skillList = new List<Skill>();
+    public List<Skill> skillList = new();
 }

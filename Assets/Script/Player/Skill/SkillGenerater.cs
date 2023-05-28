@@ -21,7 +21,7 @@ public class SkillGenerater : MonoBehaviour
         {
             if (skill.type == type)
             {
-                return new Skill(skill.type, skill.damage, skill.distance, skill.skillText, skill.coolTime);
+                return new Skill(skill.type, skill.damage, skill.distance, skill.skillText, skill.hitEffectAngle,skill.coolTime);
             }
         }
         return null;

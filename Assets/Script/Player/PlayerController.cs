@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -94,13 +95,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     internal ParallaxBackground parallaxBackground;
 
-    //最終攻撃力格納用変数
-    float _power;
+    //上昇攻撃多重発生防止用bool
+    internal bool canUpAttack = true;
 
     //SideAttack関連
-    Skill sideAttack;
     private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
 
     //KnockBack関連
     Vector2 knockBackDir;   //ノックバックされる方向
@@ -150,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(isAttack);
+
         //デバック用シーンリセット
         if(Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -229,14 +228,17 @@ public class PlayerController : MonoBehaviour
         else { isAttackKay = false; }
 
         //上昇攻撃
-        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) && !isAttack)
+        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) 
+            && !isAttack && canUpAttack)
         {
+            canUpAttack = false;
             UpAttack._UpAttack(this);
             isAttack = true;
         }
 
         //落下攻撃攻撃
-        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8) && !isAttack &&(isFalling || isJumping))
+        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8)
+            && !isAttack && (isFalling || isJumping) && !isDropAttack)
         {
             DownAttack._DownAttack(this);
             isAttack = true;
@@ -244,13 +246,13 @@ public class PlayerController : MonoBehaviour
 
         //横移動攻撃
         if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8)
-            && !isAttack )
+            && !isAttack && !isSideAttack)
         {
             sideJudge = true;
             StartCoroutine(SideAttack());
         }
         else if(((lsh <= -0.8 && isAttackKay) || rsh <= -0.8)
-                && !isAttack)
+                && !isAttack && !isSideAttack)
         {
             sideJudge = false;
             StartCoroutine(SideAttack());
@@ -308,32 +310,6 @@ public class PlayerController : MonoBehaviour
         isUpAttack = false;
     }
 
-    public void AnimationBoolReset()
-    {
-        isFalling = false;
-        isMoving = false;
-        isJumping = false;
-        isLanding = false;
-        isSquatting = false;
-    }
-
-    //横攻撃処理
-    private IEnumerator SideAttack()
-    {
-        isAttack = true;
-        isSideAttack = true;
-        animator.SetBool("IsSideAttack", isSideAttack);
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
-        Side(skill);
-        yield return new WaitForSeconds(dashingTime);
-        rb.gravityScale = originalGravity;
-        isSideAttack = false;
-        animator.SetBool("IsSideAttack", isSideAttack);
-        isAttack = false;
-    }
-
     //横攻撃
     private void Side(Skill skill)
     {
@@ -351,7 +327,7 @@ public class PlayerController : MonoBehaviour
                 transform.localScale = localScale;
             }
         }
-        else if(transform.localScale.x < 0)
+        else if (transform.localScale.x < 0)
         {
             if (sideJudge)
             {
@@ -366,6 +342,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //横攻撃処理
+    private IEnumerator SideAttack()
+    {
+        isAttack = true;
+        isSideAttack = true;
+        animator.SetBool("IsSideAttack", isSideAttack);
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
+        Side(skill);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isSideAttack = false;
+        animator.SetBool("IsSideAttack", isSideAttack);
+        enemylist.Clear();
+        isAttack = false;
+    }
+
+    
+
     //必殺技
     public void ExAttackStart()
     {
@@ -379,7 +375,9 @@ public class PlayerController : MonoBehaviour
         //エフェクト生成
         foreach (var enemy in enemylist)
         {
-            _HitEfect(enemy);
+            _HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
+            ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
+
         }
         //ダメージ処理（現在では実装未定）
 
@@ -445,14 +443,12 @@ public class PlayerController : MonoBehaviour
         _EfectDestroy(prefab, 0.2f);
     }
 
-    private void _HitEfect(GameObject enemy)
+    internal void _HitEfect(Transform enemy, int angle)
     {
         GameObject prefab =
-        Instantiate(ExAttackHitEffect, new Vector2(enemy.transform.position.x, enemy.transform.position.y), Quaternion.identity);
-        var angle = UnityEngine.Random.Range(0, 360);
+        Instantiate(ExAttackHitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
         prefab.transform.Rotate(new Vector3(0,0,angle));
         SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Hit);
-        ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         _EfectDestroy(prefab, 0.2f);
     }
 

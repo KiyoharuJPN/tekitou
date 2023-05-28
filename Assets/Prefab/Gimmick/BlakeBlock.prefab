@@ -73,7 +73,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.07, y: 1.06}
   m_EdgeRadius: 0
 --- !u!1 &3309150141685845585
 GameObject:
@@ -4900,7 +4900,7 @@ GameObject:
   - component: {fileID: 3309150141793018019}
   m_Layer: 12
   m_Name: Block_Broken blocks
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4996,5 +4996,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.07, y: 1.07}
   m_EdgeRadius: 0
