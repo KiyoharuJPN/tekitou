@@ -88,6 +88,7 @@ public class WarpDoor : MonoBehaviour
         {
             yield return null;
         }
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
         player.GetComponent<PlayerController>().WarpDoorEnd();
     }
 }
