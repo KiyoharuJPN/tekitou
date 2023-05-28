@@ -8,6 +8,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource bgmAudioSource;
     [SerializeField] AudioSource seAudioSource;
 
+    AudioSource introAudioSource;
+    AudioSource loopAudioSource;
+
     [SerializeField] List<BGMSoundData> bgmSoundDatas;
     [SerializeField] List<SESoundData> seSoundDatas;
 
@@ -24,6 +27,15 @@ public class SoundManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            introAudioSource = bgmAudioSource;
+            loopAudioSource = bgmAudioSource;
+
+            introAudioSource.loop = false;
+            introAudioSource.playOnAwake = false;
+
+            loopAudioSource.loop = true;
+            loopAudioSource.playOnAwake = false;
+
             //勝手に修正が入らないためリリース版でコメントアウト或いは削除してください。
             masterVolume = 0.4f;
             seMasterVolume = 0.4f;
@@ -37,39 +49,48 @@ public class SoundManager : MonoBehaviour
         
     }
 
-    public void PlayBGM(BGMSoundData.BGM bgm)
+    //playBGM
+    //注意：Resetの様にイントロ・ループが存在しない場合は、bgm_loopをnoneで呼び出す
+    public void PlayBGM(BGMSoundData.BGM bgm_intro, BGMSoundData.BGM bgm_loop)
     {
-        BGMSoundData data = bgmSoundDatas.Find(data => data.bgm == bgm);
-        bgmAudioSource.clip = data.audioClip;
-        bgmAudioSource.volume = data.volume * bgmMasterVolume * masterVolume;
-        bgmAudioSource.Play();
-    }
-
-    public void BGMLoopSwich()
-    {
-        if (bgmAudioSource.loop)
+        if(bgm_loop == BGMSoundData.BGM.none)
         {
-            bgmAudioSource.loop = false;
-        }
-        else if(!bgmAudioSource.loop)
-        {
-            bgmAudioSource.loop = true;
-        }
-    }
-
-    //BGM終了確認
-    public bool BGMEnd()
-    {
-        if (bgmAudioSource.isPlaying)
-        {
-            return true; 
+            BGMSoundData data = bgmSoundDatas.Find(data => data.bgm == bgm_intro);
+            bgmAudioSource.volume = data.volume * bgmMasterVolume * masterVolume;
+            bgmAudioSource.clip = data.audioClip;
+            bgmAudioSource.Play();
         }
         else
         {
-            return false;
+            BGMSoundData data_intro = bgmSoundDatas.Find(data => data.bgm == bgm_intro);
+            BGMSoundData data_loop = bgmSoundDatas.Find(data => data.bgm == bgm_loop);
+
+            introAudioSource.clip = data_intro.audioClip;
+            loopAudioSource.clip = data_loop.audioClip;
+
+            bgmAudioSource.volume = data_intro.volume * bgmMasterVolume * masterVolume;
+
+            bgmAudioSource.Play();
+            bgmAudioSource.PlayScheduled(AudioSettings.dspTime + loopAudioSource.clip.length);
         }
     }
 
+    public void StopBGM()
+    {
+        if (introAudioSource == null || loopAudioSource == null)
+        {
+            return;
+        }
+
+        if (introAudioSource.isPlaying)
+        {
+            introAudioSource.Stop();
+        }
+        else if (loopAudioSource.isPlaying)
+        {
+            loopAudioSource.Stop();
+        }
+    }
 
     public void PlaySE(SESoundData.SE se)
     {
@@ -96,12 +117,11 @@ public class BGMSoundData
         Tutorial_roop,
         Stage1_intro,
         Stage1_roop,
-        //Stage2,//削除
         Result,
         GameOver,
         KingSlimeBoss_intro,
         KingSlimeBoss_roop,
-        //GoalBGM,//削除
+        none //Resultの様なイントロ・ループがないBGMを呼び出す際の片方
     }
 
     public BGM bgm;

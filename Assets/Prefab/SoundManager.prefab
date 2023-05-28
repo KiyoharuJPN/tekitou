@@ -278,10 +278,10 @@ MonoBehaviour:
     audioClip: {fileID: 0}
     volume: 0.4
   - bgm: 1
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: d9ff1b1ca063fde4aa9956218364bc80, type: 3}
     volume: 0.4
   - bgm: 2
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: e0199d3828d618f4a827449289cf19c8, type: 3}
     volume: 0.4
   - bgm: 3
     audioClip: {fileID: 8300000, guid: bb48296ce9b7dc34a89762ea3e6830dc, type: 3}
@@ -290,16 +290,16 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: a73997de965c66040b87e8fc15702eef, type: 3}
     volume: 0.4
   - bgm: 5
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: fde70bb3a313ac641af92f98d017b22b, type: 3}
     volume: 0.4
   - bgm: 6
     audioClip: {fileID: 0}
     volume: 0.4
   - bgm: 7
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 46296e7be2b244446a45680f114a6d72, type: 3}
     volume: 0.4
   - bgm: 8
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 9a68d20a80d5850458336a68d13c30ff, type: 3}
     volume: 0.4
   seSoundDatas:
   - se: 0
@@ -321,67 +321,64 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 6303726c59ed7a846b3fdfe50b43c5b3, type: 3}
     volume: 0.4
   - se: 7
-    audioClip: {fileID: 8300000, guid: 23d46a256dfc63e4c8b8ba6a56df9b38, type: 3}
-    volume: 0.4
-  - se: 8
     audioClip: {fileID: 8300000, guid: a3123554a96eef1419c0c8a61029f630, type: 3}
     volume: 0.4
-  - se: 9
+  - se: 8
     audioClip: {fileID: 8300000, guid: d421cbc1d3168494fad3626d78102d62, type: 3}
     volume: 0.4
-  - se: 10
+  - se: 9
     audioClip: {fileID: 8300000, guid: 3786220ab296819458a0059c591b4e68, type: 3}
     volume: 0.4
-  - se: 11
+  - se: 10
     audioClip: {fileID: 8300000, guid: 46db26039df18924ab6fe8059154db65, type: 3}
     volume: 0.4
-  - se: 12
+  - se: 11
     audioClip: {fileID: 8300000, guid: f1808fcd11c610a43b69474be21aec85, type: 3}
     volume: 0.4
-  - se: 13
+  - se: 12
     audioClip: {fileID: 8300000, guid: 3664321a30737ab4d82c97761f797535, type: 3}
     volume: 0.4
-  - se: 14
+  - se: 13
     audioClip: {fileID: 8300000, guid: ed011ba58c1704a4086f7709d224c849, type: 3}
     volume: 0.4
-  - se: 15
+  - se: 14
     audioClip: {fileID: 8300000, guid: 038f6575d823812438dd752accbbf177, type: 3}
     volume: 0.4
-  - se: 17
-    audioClip: {fileID: 8300000, guid: 07ae41ad18478664d8d2b1a3d6ae0689, type: 3}
-    volume: 0.4
-  - se: 18
-    audioClip: {fileID: 8300000, guid: 75944389d1e802f47ad539feece3b301, type: 3}
-    volume: 0.4
-  - se: 19
-    audioClip: {fileID: 8300000, guid: c3c63b25e44b14745a8b0522c83d75c5, type: 3}
-    volume: 0.4
-  - se: 20
+  - se: 15
     audioClip: {fileID: 8300000, guid: 237b81425c286c844aca0dcc99ea6a72, type: 3}
     volume: 0.4
-  - se: 21
+  - se: 17
+    audioClip: {fileID: 8300000, guid: c3c63b25e44b14745a8b0522c83d75c5, type: 3}
+    volume: 0.4
+  - se: 18
+    audioClip: {fileID: 8300000, guid: 237b81425c286c844aca0dcc99ea6a72, type: 3}
+    volume: 0.4
+  - se: 19
     audioClip: {fileID: 8300000, guid: e929186e114e3a24f9b7cc21841018c8, type: 3}
     volume: 0.4
-  - se: 22
+  - se: 20
     audioClip: {fileID: 8300000, guid: b5526c9fa78ed6e4387d9537921cc9a0, type: 3}
     volume: 0.4
-  - se: 23
+  - se: 21
     audioClip: {fileID: 8300000, guid: 12e4baab653303347b29a6da5b5ac728, type: 3}
     volume: 0.4
-  - se: 27
+  - se: 22
     audioClip: {fileID: 8300000, guid: 45d47d215281b614f9617deb6d96ae7d, type: 3}
     volume: 0.4
-  - se: 26
+  - se: 23
     audioClip: {fileID: 8300000, guid: 9c50a59eff73d0140bae7e2bef663b5b, type: 3}
     volume: 0.4
-  - se: 28
-    audioClip: {fileID: 8300000, guid: 7a676c1ed5c52ed4ca3cdfb589a573c9, type: 3}
+  - se: 26
+    audioClip: {fileID: 8300000, guid: 07ae41ad18478664d8d2b1a3d6ae0689, type: 3}
     volume: 0.4
-  - se: 29
+  - se: 25
     audioClip: {fileID: 8300000, guid: efbf115d0b3c8214fa5e2d6fe1e1625a, type: 3}
     volume: 0.4
-  - se: 30
-    audioClip: {fileID: 8300000, guid: 07ae41ad18478664d8d2b1a3d6ae0689, type: 3}
+  - se: 16
+    audioClip: {fileID: 8300000, guid: 75944389d1e802f47ad539feece3b301, type: 3}
+    volume: 0.4
+  - se: 24
+    audioClip: {fileID: 8300000, guid: 7a676c1ed5c52ed4ca3cdfb589a573c9, type: 3}
     volume: 0.4
 --- !u!1 &5644327851398467931
 GameObject:
@@ -429,7 +426,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
