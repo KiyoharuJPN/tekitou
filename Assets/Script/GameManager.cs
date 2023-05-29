@@ -12,6 +12,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int ID;
 
+    GameObject[] enemys;
+    List<GameObject> enemyList = new List<GameObject>();
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         switch (ID)
@@ -32,7 +50,36 @@ public class GameManager : MonoBehaviour
                 BGMStart_GameOver();
                 break;
         }
-        
+    }
+
+    public void PlayerExAttack_Start()
+    {
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject gameObj in enemys)
+        {
+            enemyList.Add(gameObj);
+            gameObj.GetComponent<Enemy>().PlaeyrExAttack_Start();
+        }
+    }
+
+    public void PlayerExAttack_HitEnemyEnd(List<GameObject> hitEnemyList, float powar)
+    {
+        foreach (GameObject gameObj in hitEnemyList)
+        {
+            gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
+            enemyList.Remove(gameObj);
+        }
+    }
+
+    public void PlayerExAttack_End()
+    {
+        foreach (GameObject gameObj in enemyList)
+        {
+            gameObj.GetComponent<Enemy>().PlaeyrExAttack_End();
+        }
+        enemys = null;
+        enemyList.Clear();
     }
 
     private void BGMStart_Title()

@@ -31,6 +31,7 @@ public class NomalAttack : MonoBehaviour
             {
                 playerController._Attack(enemyCollision, skill.damage);
                 ExAttackParam.Instance.AddGauge();
+                playerController._HitEfect(enemyCollision.transform, skill.hitEffectAngle);
             }
             StartCoroutine(_interval());
         }
@@ -43,6 +44,7 @@ public class NomalAttack : MonoBehaviour
             {
                 playerController._Attack(enemyCollision, skill.damage);
                 ExAttackParam.Instance.AddGauge();
+                playerController._HitEfect(enemyCollision.transform, skill.hitEffectAngle);
             }
             StartCoroutine(_interval());
         }

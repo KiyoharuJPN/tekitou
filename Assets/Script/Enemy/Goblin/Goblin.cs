@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Goblin : Enemy
 {
-    Animator animator;
-
     [Tooltip("移動速度")]
     public float movingSpeed;
     [Tooltip("待ち時間の設定")]
@@ -23,7 +21,6 @@ public class Goblin : Enemy
     protected override void Start()
     {
         moveSpeed = movingSpeed * -1;           //移動速度の方向修正
-        animator = GetComponent<Animator>();    //自分用アニメーターの代入
         base.Start();                           //敵のscriptに基づく
     }
     protected override void Update()
@@ -36,7 +33,6 @@ public class Goblin : Enemy
             {
                 Movement();
             }
-            
         }
         //アニメ
         animator.SetBool("IsAttacking", IsAttacking);
@@ -49,8 +45,9 @@ public class Goblin : Enemy
         base.Update();
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        if (isPlayerExAttack) return;
         Gravity();
     }
 

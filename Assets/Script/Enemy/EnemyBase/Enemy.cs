@@ -10,6 +10,8 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+    protected Animator animator;
+
     [SerializeField]
     protected string id;
     protected EnemyData enemyData;
@@ -19,6 +21,9 @@ public class Enemy : MonoBehaviour
     protected float moveSpeed;
     //チェック用内部関数
     protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false, hadDamaged = false;
+
+    //プレイヤー必殺技中かどうか
+    public bool isPlayerExAttack;
 
     protected float hp;
 
@@ -59,6 +64,8 @@ public class Enemy : MonoBehaviour
         num = enemyData.num;
         forceAngle = enemyData.angle;
 
+        animator = GetComponent<Animator>();
+
         //吹っ飛び中に使用
         _transform = transform;
         _prevPosition = _transform.position;
@@ -69,6 +76,7 @@ public class Enemy : MonoBehaviour
 
     virtual protected void OnCollisionEnter2D(Collision2D col)
     {
+
         if (col.gameObject.CompareTag("Player"))
         {
             Attack(col);
@@ -86,17 +94,27 @@ public class Enemy : MonoBehaviour
 
     virtual protected void Update()
     {
+        if (isPlayerExAttack)
+        {
+            this.transform.Rotate(0, 0, 0);
+            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            return;
+        }
+
         //吹っ飛び中以外は行わない
         if (!isDestroy)
             return;
-
-        
 
         //吹っ飛び中の回転
         if (isDestroy)
         {
             EnemyRotate();
         }
+    }
+
+    virtual protected void FixedUpdate()
+    {
+        if (isPlayerExAttack) return;
     }
 
     //攻撃
@@ -313,5 +331,27 @@ public class Enemy : MonoBehaviour
     protected virtual void Gravity()
     {
         enemyRb.AddForce(new Vector2(0, -5));
+    }
+
+    public virtual void PlaeyrExAttack_Start() 
+    {
+        isPlayerExAttack = true;
+        enemyRb.velocity = Vector2.zero;
+        animator.speed = 0;
+    }
+
+    //必殺技が当たっていた場合
+    public virtual void PlaeyrExAttack_HitEnemyEnd(float powar)
+    {
+        animator.speed = 1;
+        isPlayerExAttack = false;
+        Damage(powar);
+    }
+
+    //当たっていない場合
+    public virtual void PlaeyrExAttack_End()
+    {
+        animator.speed = 1;
+        isPlayerExAttack = false;
     }
 }

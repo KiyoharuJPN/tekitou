@@ -199,7 +199,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1}
+  m_Size: {x: 0.7, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &1855558371
 MonoBehaviour:
@@ -297,7 +297,6 @@ GameObject:
   - component: {fileID: 4075973575706176912}
   - component: {fileID: 4075973575706176913}
   - component: {fileID: 4075973575706176914}
-  - component: {fileID: 6370244193881206646}
   - component: {fileID: 705019280}
   - component: {fileID: 3654066179010914914}
   - component: {fileID: 6578985677749316734}
@@ -403,32 +402,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &6370244193881206646
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4075973575706176915}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.86}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 3.2}
-    newSize: {x: 3.2, y: 3.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1}
-  m_EdgeRadius: 0
 --- !u!61 &705019280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -675,6 +648,6 @@ MonoBehaviour:
   - {fileID: 476824139690690350, guid: 22538386d6d4fc146b0f019c62cc8350, type: 3}
   HPstatus:
     FullHP: 6
-    HeartHight: 0.7
+    HeartHight: 0.65
     HeartWidth: 0.04
     HeartLeftJustified: 0.03

@@ -13,7 +13,6 @@ public class Slime : Enemy
     [Header("移動する時の高さと距離")]
     public float moveHeight, moveWidth;
 
-    Animator animator;      //敵のアニメ関数
     float movingHeight, movingWidth, movingCheck;    //移動に関する内部関数
     //チェック用内部関数
     bool /*IsBlowing = false, IsMoving = false, */BossSummon = false, BossTurn = false;
@@ -24,16 +23,17 @@ public class Slime : Enemy
     {
         //移動関係の内部関数に代入
         movingWidth = moveWidth * -1;
-        movingHeight = moveHeight;
-        //自分用アニメーターの代入
-        animator = GetComponent<Animator>();
+        movingHeight = moveHeight;        
         IsMoving = false;
         ///敵のscriptに基づく
         base.Start();
     }
     override protected void Update()
     {
-        if(enemyRb.velocity.y <-0.1)MovingAnim = 1;
+        //敵のscriptに基づく
+        base.Update();
+
+        if (enemyRb.velocity.y <-0.1)MovingAnim = 1;
         IsMoving = enemyRb.velocity != Vector2.zero;
         //画面内にある
         if (OnCamera)
@@ -52,8 +52,7 @@ public class Slime : Enemy
         //状態の変更
         if (isDestroy) IsBlowing = true;
         if (!isDestroy) IsBlowing = false;
-        //敵のscriptに基づく
-        base.Update();
+        
     }
 
     void SlimeMove()
@@ -108,10 +107,12 @@ public class Slime : Enemy
         }
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        if (isPlayerExAttack) return;
         Gravity();
     }
+
     protected override void Gravity()
     {
         enemyRb.AddForce(new Vector2(0, -10f));

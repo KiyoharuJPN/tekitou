@@ -26,17 +26,14 @@ public class KingSlime : Enemy
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
-
-
-    Animator animator;                                                  //敵のアニメ関数
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
         , NoGravity = false;                                            //判断用内部関数
     int movingCheck = 0, AttackMode = 0, NormalAttackAnimation;         //チェック用int関数
-    GameObject playerObj;                                               //プレイヤーオブジェクト宣言
+    GameObject playerObj;                                  //プレイヤーオブジェクト宣言
+
     protected override void Start()
     {
-        animator = GetComponent<Animator>();    //アニメーター代入
         playerObj = GameObject.Find("Hero");    //プレイヤーオブジェクト
         movingHeight = moveHeightForce;
         movingWidth = -moveWidthForce;
@@ -48,6 +45,12 @@ public class KingSlime : Enemy
 
     protected override void Update()
     {
+        if (isPlayerExAttack)
+        {
+            enemyRb.velocity = Vector2.zero;
+            return;
+        }
+
         //if (Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         if (!IsBlowing)
         {

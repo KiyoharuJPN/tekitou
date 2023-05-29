@@ -263,6 +263,7 @@ public class PlayerController : MonoBehaviour
                 isExAttack = true;
                 animator.SetBool("IsExAttack", isExAttack);
                 ExAttackParam.Instance._EXAttack();
+                GameManager.Instance.PlayerExAttack_Start();
                 ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
             }
         }
@@ -372,17 +373,26 @@ public class PlayerController : MonoBehaviour
     }
 
     //ヒット時（アニメーションから呼ぶ）
-    public void _ExAttackHit()
+    public void _ExAttackHitEffect()
     {
         //エフェクト生成
         foreach (var enemy in enemylist)
         {
             _HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
-
         }
-        //ダメージ処理（現在では実装未定）
+    }
 
+    public void _ExAttackHitEnemyDamage()
+    {
+        //ダメージ処理
+        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.ExAttack); ;
+        GameManager.Instance.PlayerExAttack_HitEnemyEnd(enemylist ,skill.damage);
+        foreach (var enemy in enemylist)
+        {
+            _HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
+            ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
+        }
     }
 
     public void ExAttackHitCheck()
@@ -399,6 +409,7 @@ public class PlayerController : MonoBehaviour
         isExAttack = false;
         enemylist.Clear();
         animator.SetBool("IsExAttack", isExAttack);
+        GameManager.Instance.PlayerExAttack_End();
     }
 
     //スキルアクション中無敵に使用するメソッド

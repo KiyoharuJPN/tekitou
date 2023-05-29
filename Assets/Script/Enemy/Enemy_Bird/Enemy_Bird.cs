@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Enemy_Bird : Enemy
 {
-    Animator animator;                              //アニメーション用
-
     [Tooltip("移動速度")]
     public float movingSpeed = 0.5f;                //移動速度
     [Header("移動範囲")]
@@ -30,7 +28,6 @@ public class Enemy_Bird : Enemy
     {
         MovingArea = gameObject.transform.position;
         moveSpeed = movingSpeed * -1;
-        animator = GetComponent<Animator>();
         base.Start();
     }
 
