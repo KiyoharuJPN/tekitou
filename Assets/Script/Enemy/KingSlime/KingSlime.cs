@@ -270,6 +270,17 @@ public class KingSlime : Enemy
             base.OnCollisionEnter2D(col);
         }
     }
+    protected override void OnCollisionStay2D(Collision2D col)
+    {
+        if (GetComponent<KingSlime>().enabled)
+        {
+            if (col.gameObject.CompareTag("Stage") && KSNormalAttackLanding && enemyRb.velocity == Vector2.zero)
+            {
+                KSNormalAttackLanding = false;
+                StartCoroutine(KSBossAtack2());
+            }
+        }
+    }
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
     //    if (GetComponent<KingSlime>().enabled)
