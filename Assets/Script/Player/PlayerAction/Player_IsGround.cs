@@ -20,12 +20,9 @@ public class Player_IsGround : MonoBehaviour
     //íÖínÇÃîªíË
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Stage"))
+        if (collision.CompareTag("Stage") && !player.isUpAttack)
         {
-            if (player.isUpAttack && player.isDropAttack)
-            {
-                return;
-            }
+            Debug.Log("íÖínèàóù");
             if (player.isFalling == true)
             {
                 player.isLanding = true;
@@ -34,8 +31,9 @@ public class Player_IsGround : MonoBehaviour
             player.isJumping = false;
 
             player.rb.velocity = Vector2.zero;
-            player.canUpAttack = true;
+
             jumpData.jumpTime = 0;
+            player.canUpAttack = true;
 
             jumpData.canSecondJump = false;
             jumpData.isSecondJump = false;
@@ -46,7 +44,6 @@ public class Player_IsGround : MonoBehaviour
                 jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
                 Invoke(nameof(DropAttackOff), 0.5f);
             };
-
             Invoke(nameof(Landingoff), 0.1f);
         }
     }
@@ -55,14 +52,15 @@ public class Player_IsGround : MonoBehaviour
     {
         if (collision.CompareTag("Stage"))
         {
+            jumpData.FarstJump = false;
             jumpData.canSecondJump = true;
         }
     }
 
     void Landingoff()
     {
-        player.isLanding = false;
         jumpData.FarstJump = true;
+        player.isLanding = false;
     }
 
     void DropAttackOff()

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] internal Rigidbody2D rb;
     [SerializeField] internal Animator animator;
     internal PlayerSE playerSE;
+    Player_Jump jump;
 
     [SerializeField]
     GameObject RunEffect;
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
 
     //SideAttack関連
     const float dashingTime = 0.2f;
+    bool canSideAttack = true;
 
     //KnockBack関連
     Vector2 knockBackDir;   //ノックバックされる方向
@@ -142,14 +144,14 @@ public class PlayerController : MonoBehaviour
     {
         playerSE = GetComponent<PlayerSE>();
         rb = GetComponent<Rigidbody2D>();
+        jump = GetComponent<Player_Jump>();
         hpparam = GameObject.Find("Hero").GetComponentInChildren<HPparam>();
     }
 
     void Update()
     {
-
         //デバック用シーンリセット
-        if(Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -229,7 +231,7 @@ public class PlayerController : MonoBehaviour
             && !isAttack && canUpAttack)
         {
             canUpAttack = false;
-            UpAttack._UpAttack(this);
+            jump.UpAttack();
             isAttack = true;
         }
 
@@ -243,14 +245,16 @@ public class PlayerController : MonoBehaviour
 
         //横移動攻撃
         if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8)
-            && !isAttack && !isSideAttack)
+            && !isAttack && !isSideAttack && canSideAttack)
         {
+            canSideAttack = false;
             sideJudge = true;
             StartCoroutine(SideAttack());
         }
         else if(((lsh <= -0.8 && isAttackKay) || rsh <= -0.8)
-                && !isAttack && !isSideAttack)
+                && !isAttack && !isSideAttack && canSideAttack)
         {
+            canSideAttack = false;
             sideJudge = false;
             StartCoroutine(SideAttack());
         }
@@ -361,6 +365,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsSideAttack", isSideAttack);
         enemylist.Clear();
         isAttack = false;
+        yield return new WaitForSeconds(skill.coolTime);
+        canSideAttack = true;
     }
 
     
@@ -458,7 +464,6 @@ public class PlayerController : MonoBehaviour
 
     internal void _HitEfect(Transform enemy, int angle)
     {
-        Debug.Log(angle);
         GameObject prefab =
         Instantiate(ExAttackHitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
         prefab.transform.Rotate(new Vector3(0,0,angle));
