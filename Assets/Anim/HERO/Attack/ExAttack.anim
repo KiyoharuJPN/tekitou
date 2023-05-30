@@ -1416,56 +1416,56 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.5666667
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.6
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.6333333
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.6666666
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.7
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.7333333
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.7666667
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.8
-    functionName: _ExAttackHit
+    functionName: _ExAttackHitEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -1487,6 +1487,13 @@ AnimationClip:
     messageOptions: 0
   - time: 3.7
     functionName: _ExAttackLastEffect
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.7166667
+    functionName: _ExAttackHitEnemyDamage
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
