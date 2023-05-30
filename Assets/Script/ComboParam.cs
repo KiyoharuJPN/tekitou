@@ -27,6 +27,8 @@ public class ComboParam : MonoBehaviour
     [SerializeField]
     PlayerController player;
 
+    bool comboStop = false;
+
     public static ComboParam Instance { get; private set; }
 
     private void Awake()
@@ -59,15 +61,16 @@ public class ComboParam : MonoBehaviour
 
     public void SetCombo(int Cb)
     {
+        
         if (countCombo == 0)
         {
-            
             StartCoroutine(_ComboTime());
         }
 
         countCombo = Cb;
         if (countCombo <= 0) countCombo = 0;//コンボ最小限
         if (countCombo >= 999) countCombo = 999;//コンボ最大限
+        GameManager.Instance.AddMaxComobo(countCombo);
 
         string SpriteText = countCombo.ToString();
         text.text = "";
@@ -77,6 +80,16 @@ public class ComboParam : MonoBehaviour
 
         ResetTime();
         
+    }
+
+    public void ComboStop()
+    {
+        comboStop = true;
+    }
+
+    public void ComboResume()
+    {
+        comboStop = false;
     }
 
     //計測時間リセット
@@ -95,7 +108,7 @@ public class ComboParam : MonoBehaviour
     {
         while (time < comboStatus.Distime)
         {
-            if (player.isExAttack || player.isWarpDoor || !player.canMove)
+            if (player.isExAttack || player.isWarpDoor || !player.canMove || comboStop)
             {
                 yield return null;
             }

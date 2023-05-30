@@ -59,7 +59,6 @@ public class WarpDoor : MonoBehaviour
 
     void _BottonUi(Collider2D player)
     {
-        Debug.Log(player.name);
         bottonUiPrefab =
         Instantiate(BottonUi, new Vector2(player.transform.position.x, player.transform.position.y + 2f), Quaternion.identity);
 

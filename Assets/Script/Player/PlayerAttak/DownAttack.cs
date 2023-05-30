@@ -8,7 +8,7 @@ public class DownAttack : MonoBehaviour
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
         player.isDropAttack = true;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
-        await Task.Delay(200);
+        await Task.Delay(300);
         _Move(player, skill);
     }
 

@@ -22,7 +22,6 @@ public class Player_IsGround : MonoBehaviour
     {
         if (collision.CompareTag("Stage") && !player.isUpAttack)
         {
-            Debug.Log("’…’nˆ—");
             if (player.isFalling == true)
             {
                 player.isLanding = true;

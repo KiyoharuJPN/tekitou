@@ -5,75 +5,28 @@ using UnityEngine;
 
 public class NomalAttack : MonoBehaviour
 {
-    GameObject player;
-    PlayerController playerController;
+    [SerializeField]
+    PlayerController player;
     Skill skill;
-
-    bool isAttack = false;
-    bool isCoolTime = true;
-
-    Collider2D enemyCollision;
 
     private void Start()
     {
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-        player = transform.parent.gameObject;
-        playerController = player.GetComponent<PlayerController>();
-    }
-
-    private void Update()
-    {
-        //Žè“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
-        if (Input.GetKeyDown("joystick button 2") && isCoolTime)
-        {
-            playerController.animator.SetTrigger("IsNomalAttack");
-            if (enemyCollision != null)
-            {
-                playerController._Attack(enemyCollision, skill.damage);
-                ExAttackParam.Instance.AddGauge();
-                playerController._HitEfect(enemyCollision.transform, skill.hitEffectAngle);
-            }
-            StartCoroutine(_interval());
-        }
-
-        //Žè“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ
-        if (Input.GetKey("joystick button 2") && isCoolTime || Input.GetKey(KeyCode.Mouse0) && isCoolTime)
-        {
-            playerController.animator.SetTrigger("IsNomalAttack");
-            if (enemyCollision != null)
-            {
-                playerController._Attack(enemyCollision, skill.damage);
-                ExAttackParam.Instance.AddGauge();
-                playerController._HitEfect(enemyCollision.transform, skill.hitEffectAngle);
-            }
-            StartCoroutine(_interval());
-        }
     }
 
     //UŒ‚”ÍˆÍ‚É“ü‚Á‚½Žž
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        isAttack = true;
-        enemyCollision = collision;
-    }
-
-    //UŒ‚”ÍˆÍ‚©‚ç“G‚ª‚¢‚È‚­‚È‚Á‚½Žž
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isAttack = false;
-        enemyCollision = null;
-    }
-
-    //ƒN[ƒ‹ƒ^ƒCƒ€—pƒRƒ‹[ƒ`ƒ“
-    IEnumerator _interval()
-    {
-        float time = skill.coolTime;
-        isCoolTime = false;
-        while (time > 0)
+        if (other.CompareTag("Enemy") && !player.enemylist.Contains(other.gameObject))
         {
-            time -= Time.deltaTime;
-            yield return null;
+            player.enemylist.Add(other.gameObject);
+            HitDamage(other);
         }
-        isCoolTime = true;
+    }
+
+    void HitDamage(Collider2D Enemy)
+    {
+        player._Attack(Enemy, skill.damage);
+        player._HitEfect(Enemy.transform, skill.hitEffectAngle);
     }
 }

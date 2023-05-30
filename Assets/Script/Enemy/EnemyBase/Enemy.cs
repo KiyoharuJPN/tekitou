@@ -162,6 +162,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void _Destroy()
     {
+        GameManager.Instance.AddKillEnemy();
         //反射用のコライダーに変更
         this.GetComponent<BoxCollider2D>().enabled = false;
         this.GetComponent<CircleCollider2D>().enabled = true;
@@ -340,7 +341,7 @@ public class Enemy : MonoBehaviour
         enemyRb.AddForce(new Vector2(0, -5));
     }
 
-    public virtual void PlaeyrExAttack_Start() 
+    public virtual void EnemyStop() 
     {
         isPlayerExAttack = true;
         enemyRb.velocity = Vector2.zero;

@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  isPlayerExAttack: 0
 --- !u!61 &6054787801465259573
 BoxCollider2D:
   m_ObjectHideFlags: 0

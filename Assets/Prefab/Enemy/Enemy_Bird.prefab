@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 7
+  isPlayerExAttack: 0
   movingSpeed: 3
   moveArea: 20
   LRMove: 0

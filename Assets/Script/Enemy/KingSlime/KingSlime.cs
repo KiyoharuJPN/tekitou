@@ -255,7 +255,13 @@ public class KingSlime : Enemy
         KSmovingCheck = true;
     }
 
-
+    //キングスライム死亡時に呼ぶ関数
+    public void Boss_Down()
+    {
+        ComboParam.Instance.ComboStop();
+        GameManager.Instance.PlayerExAttack_Start();
+        GameManager.Instance.Result_Start(1);
+    }
 
     //コライダーやトリガーなどのチェック関数
     protected override void OnCollisionEnter2D(Collision2D col)

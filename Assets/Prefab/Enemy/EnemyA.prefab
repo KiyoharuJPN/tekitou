@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 4
+  isPlayerExAttack: 0
 --- !u!50 &4186489159880560722
 Rigidbody2D:
   serializedVersion: 4

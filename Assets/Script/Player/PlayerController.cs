@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -94,6 +95,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     internal ParallaxBackground parallaxBackground;
 
+    //通常攻撃再使用確認
+    bool canNomalAttack = true;
+
     //上昇攻撃多重発生防止用bool
     internal bool canUpAttack = true;
 
@@ -163,6 +167,7 @@ public class PlayerController : MonoBehaviour
         //ノックバック処理
         if (knockBack.canKnockBack)
         {
+            
             if (isKnockingBack)
             {
                 KnockingBack();
@@ -170,6 +175,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         };
+
         if (canMovingCounter >= 0)
         {
             canMovingCounter -= Time.deltaTime;
@@ -226,6 +232,8 @@ public class PlayerController : MonoBehaviour
         }
         else { isAttackKay = false; }
 
+        
+
         //上昇攻撃
         if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) 
             && !isAttack && canUpAttack)
@@ -272,6 +280,22 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //手動攻撃：攻撃ボタンが押されせたとき
+        if (Input.GetKeyDown("joystick button 2") && canNomalAttack)
+        {
+            canNomalAttack = false;
+            animator.SetTrigger("IsNomalAttack");
+            var skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
+            StartCoroutine(_interval(skill.coolTime));
+        }
+
+        if (Input.GetKey("joystick button 2") && canNomalAttack)
+        {
+            canNomalAttack = false;
+            animator.SetTrigger("IsNomalAttack");
+            var skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
+            StartCoroutine(_interval(skill.coolTime));
+        }
     }
 
     //KnockBackされたときの処理
@@ -369,8 +393,6 @@ public class PlayerController : MonoBehaviour
         canSideAttack = true;
     }
 
-    
-
     //必殺技
     public void ExAttackStart()
     {
@@ -434,6 +456,7 @@ public class PlayerController : MonoBehaviour
     {
         isAttack = false;
     }
+
     //砂埃エフェクト生成
     public void _RunEffect()
     {
@@ -520,5 +543,19 @@ public class PlayerController : MonoBehaviour
         {
             parallaxBackground.StartScroll(this.transform.position);
         }
+    }
+
+    //クールタイム用コルーチン
+    IEnumerator _interval(float coolTime)
+    {
+        
+        float time = coolTime;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        enemylist.Clear();
+        canNomalAttack = true;
     }
 }

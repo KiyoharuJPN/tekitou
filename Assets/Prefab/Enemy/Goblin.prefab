@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
+  isPlayerExAttack: 0
   movingSpeed: 0.8
   idleTime: 2.4
   GoblinAttack: {fileID: 6548554274772095305}

@@ -51,7 +51,6 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(FarstJump);
         //í‚é~
         if (player.isExAttack || player.isWarpDoor) return;
 

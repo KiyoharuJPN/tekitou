@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,9 +12,14 @@ public class GameManager : MonoBehaviour
     [Range(0, 4)]
     [SerializeField]
     int ID;
+    [SerializeField]
+    PlayerController player;
 
     GameObject[] enemys;
     List<GameObject> enemyList = new List<GameObject>();
+
+    private int maxCombo;
+    private int killEnemy;
 
     public static GameManager Instance { get; private set; }
 
@@ -32,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        maxCombo = 0;
+        killEnemy = 0;
         switch (ID)
         {
             case 0:
@@ -44,12 +52,30 @@ public class GameManager : MonoBehaviour
                 BGMStart_Stage1();
                 break;
             case 3:
-                BGMStart_Result();
-                break;
-            case 4:
                 BGMStart_GameOver();
                 break;
         }
+    }
+
+    public void AddMaxComobo(int combo)
+    {
+        if( combo > maxCombo)
+        {
+            maxCombo = combo;
+        }
+    }
+
+    public void AddKillEnemy()
+    {
+        killEnemy++;
+    }
+
+    public void Result_Start(int StageID)
+    {
+        player.canMove = false;
+        Result.Instance.Result_Set(StageID, 
+            PointParam.Instance.GetPoint(), maxCombo, killEnemy);
+        StartCoroutine(Result_True());
     }
 
     public void PlayerExAttack_Start()
@@ -59,7 +85,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject gameObj in enemys)
         {
             enemyList.Add(gameObj);
-            gameObj.GetComponent<Enemy>().PlaeyrExAttack_Start();
+            gameObj.GetComponent<Enemy>().EnemyStop();
         }
     }
 
@@ -103,4 +129,10 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver, BGMSoundData.BGM.none);
     }
 
+    IEnumerator Result_True()
+    {
+        yield return new WaitForSeconds(1f);
+        BGMStart_Result();
+        Result.Instance.Result_Start();
+    }
 }

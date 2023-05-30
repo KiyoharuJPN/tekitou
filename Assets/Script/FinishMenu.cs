@@ -86,7 +86,6 @@ public class FinishMenu : MonoBehaviour
         }
         for (float i = 0; i <= 1; i += fadeOutSpeed)
         {
-            Debug.Log(i);
             fadeOut.GetComponent<Image>().color = new Color(0, 0, 0, i);
             yield return null ;
         }
