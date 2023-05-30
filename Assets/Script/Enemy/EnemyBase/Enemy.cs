@@ -91,6 +91,13 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    virtual protected void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+            enemyRb.velocity = Vector2.zero;
+        }
+    }
 
     virtual protected void Update()
     {
