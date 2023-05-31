@@ -12,13 +12,16 @@ public class TitleMenu : MonoBehaviour
 
     public GameObject[] menuobj;            //メニュー画面のオブジェクト
 
+    [Header("背景画像のサイズ")]
     [SerializeField]
-    GameObject backGround;
+    Vector2 backgroundSpriteSizes = new Vector2(1500, 2000);
+    [SerializeField]
+    GameObject[] backGround;
     [SerializeField]
     Animator player;
 
     [SerializeField]
-    FadeImage fade;
+    LoadFadeImage fade;
 
     //ポインターと一個前のポインター
     int pointer;
@@ -158,6 +161,7 @@ public class TitleMenu : MonoBehaviour
     IEnumerator Scene_Start()
     {
         player.SetTrigger("Start");
+        SoundManager.Instance.PlaySE(SESoundData.SE.GoalSE);
         yield return new WaitForSeconds(2.4f);
 
         fade.StartFadeOut();
@@ -168,7 +172,6 @@ public class TitleMenu : MonoBehaviour
 
         if (gameScene != "") SceneManager.LoadScene(gameScene);
     }
-
 
     //内部動き
     void OnSelected(GameObject obj)

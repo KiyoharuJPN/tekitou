@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ResultAnyKay : MonoBehaviour
 {
-    Result result;
+    public Result result;
+
+    public string loadScene = "";
 
     private void Awake()
     {
@@ -14,6 +16,7 @@ public class ResultAnyKay : MonoBehaviour
 
     private void Start()
     {
+        loadScene = SceneData.Instance.referer;
         result = this.GetComponent<Result>();
     }
 
@@ -26,6 +29,8 @@ public class ResultAnyKay : MonoBehaviour
             || Input.GetKeyDown("joystick button 2")
             || Input.GetKeyDown("joystick button 3"))//
         {
+            if (SceneData.Instance.referer == "Stage1") SceneManager.LoadScene("Ending");
+
             SceneManager.LoadScene("Load");
         }
     }
