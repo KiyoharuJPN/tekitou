@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class TitleMenu : MonoBehaviour
 {
@@ -33,13 +34,13 @@ public class TitleMenu : MonoBehaviour
     {
         SceneData.Instance.referer = "Title";
         pointer = 0;            //ポインターの初期化
-        //OnSelected(menuobj[0]); //セレクトの初期化
 
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
     }
 
     private void Update()
     {
+        //BackGroundMove();
         //調整キーの設定
         //KeyboardChangePoint()
         if(!upDownLock) StickerChangePointer();
@@ -116,14 +117,38 @@ public class TitleMenu : MonoBehaviour
         }
     }
 
+    //private void BackGroundMove()
+    //{
+    //    //1画像分進んだ時、スクロールが繋がるように良い感じに戻している。
+    //    for (int i = 0; i < backgroundMax; i++)
+    //    {
+    //        backgroundScrollValues[i] -= (playerPosition.x - previousPlayerPosition.x) * scrollRates[i];
+
+    //        if (backgroundSpriteSizes.x < backgroundsRt[i].anchoredPosition.x)
+    //        {
+    //            backgroundScrollValues[i] -= backgroundSpriteSizes.x;
+    //            tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
+    //            backgroundsRt[i].anchoredPosition -= tempBackgroundsPosition;
+    //        }
+    //        else if (backgroundsRt[i].anchoredPosition.x < -backgroundSpriteSizes.x)
+    //        {
+    //            backgroundScrollValues[i] += backgroundSpriteSizes.x;
+    //            tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
+    //            backgroundsRt[i].anchoredPosition += tempBackgroundsPosition;
+    //        }
+    //    }
+    //}
+
     //メニューの動き
     void GameStart()
     {
+        upDownLock = true;
         StartCoroutine(Scene_Start());
     }
 
     void Exit()
     {
+        upDownLock = true;
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
 #else
@@ -131,18 +156,6 @@ public class TitleMenu : MonoBehaviour
 #endif
     }
 
-    //調整キーの設定
-    //void KeyboardChangePoint()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.W))
-    //    {
-    //        pointer--;
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.S))
-    //    {
-    //        pointer++;
-    //    }
-    //}
     void StickerChangePointer()
     {
         if (Input.GetAxis("Vertical") > 0 && pointerCheck)

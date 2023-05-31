@@ -37,6 +37,7 @@ public class WarpDoor : MonoBehaviour
             Destroy(bottonUiPrefab);
             bottonUiPrefab = null;
             animator.SetTrigger("DoorOpen");
+            SoundManager.Instance.PlaySE(SESoundData.SE.Door);
             player.GetComponent<PlayerController>().WarpDoor(inPoint.transform);
             StartCoroutine(PlayerWarp(1.0f, player));
         }
@@ -76,12 +77,13 @@ public class WarpDoor : MonoBehaviour
 
         //フェードアウト開始
         fade.StartFadeOut();
+        
         while (!fade.IsFadeOutComplete())
         {
             yield return null;
         }
         //フェードアウト終了
-
+        ComboParam.Instance.ResetTime();
         player.transform.position = warpPoint.transform.position;
         camera.ChengeCameraArea_Boss();
         yield return new WaitForSeconds(1f);//渡された時間待機
