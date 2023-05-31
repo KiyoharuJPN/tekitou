@@ -27,6 +27,8 @@ public class ComboParam : MonoBehaviour
     [SerializeField]
     PlayerController player;
 
+
+    bool isCombo;
     bool comboStop = false;
 
     public static ComboParam Instance { get; private set; }
@@ -95,6 +97,7 @@ public class ComboParam : MonoBehaviour
     //計測時間リセット
     public void ResetTime()
     {
+        if (countCombo == 0) return;
         time = 0;
         comboTimeGage.fillAmount = 1.0f;
     }
