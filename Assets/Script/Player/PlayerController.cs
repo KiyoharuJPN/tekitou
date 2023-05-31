@@ -153,10 +153,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //デバック用シーンリセット
-        if (Input.GetKeyDown(KeyCode.R)) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
 
         if (isExAttack || isWarpDoor)
         {

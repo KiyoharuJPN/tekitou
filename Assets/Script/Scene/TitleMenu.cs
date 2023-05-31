@@ -13,16 +13,16 @@ public class TitleMenu : MonoBehaviour
 
     public GameObject[] menuobj;            //メニュー画面のオブジェクト
 
-    [Header("背景画像のサイズ")]
     [SerializeField]
-    Vector2 backgroundSpriteSizes = new Vector2(1500, 2000);
-    [SerializeField]
-    GameObject[] backGround;
+    GameObject backGround;
+
     [SerializeField]
     Animator player;
 
     [SerializeField]
     LoadFadeImage fade;
+
+    bool canStart = true;
 
     //ポインターと一個前のポインター
     int pointer;
@@ -32,19 +32,18 @@ public class TitleMenu : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         SceneData.Instance.referer = "Title";
         pointer = 0;            //ポインターの初期化
-
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
     }
 
     private void Update()
     {
-        //BackGroundMove();
+        BackGroundMove();
         //調整キーの設定
-        //KeyboardChangePoint()
         if(!upDownLock) StickerChangePointer();
-
+        
         //ポインターが変わった時の設定
         if (pointer != pointerpreb)//変更されたときの作業
         {
@@ -115,35 +114,27 @@ public class TitleMenu : MonoBehaviour
             }
             inlineVolumeChecking = false;
         }
+
+        if (!SoundManager.Instance.isPlayBGM())
+        {
+            StartCoroutine(PlayBGM());
+        }
+        
     }
 
-    //private void BackGroundMove()
-    //{
-    //    //1画像分進んだ時、スクロールが繋がるように良い感じに戻している。
-    //    for (int i = 0; i < backgroundMax; i++)
-    //    {
-    //        backgroundScrollValues[i] -= (playerPosition.x - previousPlayerPosition.x) * scrollRates[i];
+    private void BackGroundMove()
+    {
 
-    //        if (backgroundSpriteSizes.x < backgroundsRt[i].anchoredPosition.x)
-    //        {
-    //            backgroundScrollValues[i] -= backgroundSpriteSizes.x;
-    //            tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
-    //            backgroundsRt[i].anchoredPosition -= tempBackgroundsPosition;
-    //        }
-    //        else if (backgroundsRt[i].anchoredPosition.x < -backgroundSpriteSizes.x)
-    //        {
-    //            backgroundScrollValues[i] += backgroundSpriteSizes.x;
-    //            tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
-    //            backgroundsRt[i].anchoredPosition += tempBackgroundsPosition;
-    //        }
-    //    }
-    //}
+        backGround.transform.position -= new Vector3(Time.deltaTime * 10f, 0);
+    }
 
     //メニューの動き
     void GameStart()
     {
+        if (!canStart) return;
         upDownLock = true;
         StartCoroutine(Scene_Start());
+        canStart = false;
     }
 
     void Exit()
@@ -197,5 +188,11 @@ public class TitleMenu : MonoBehaviour
     void OnDeselected(GameObject obj)
     {
         obj.GetComponent<Image>().color = new Color(255, 255, 255); //色を戻す
+    }
+
+    IEnumerator PlayBGM()
+    {
+        yield return new WaitForSeconds(2f);
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
     }
 }

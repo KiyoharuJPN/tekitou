@@ -76,6 +76,8 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    
+
     public void StopBGM()
     {
         if (introAudioSource == null || loopAudioSource == null)
@@ -103,6 +105,11 @@ public class SoundManager : MonoBehaviour
         }*/
         seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
         seAudioSource.PlayOneShot(data.audioClip);
+    }
+
+    public bool isPlayBGM()
+    {
+        return bgmAudioSource.isPlaying;
     }
 
 }

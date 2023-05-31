@@ -49,22 +49,6 @@ public class ExAttackParam : MonoBehaviour
         exGauge.fillAmount = 0f;
     }
 
-    //デバック用
-    private void Update()
-    {
-        //Debug用コード
-        if(Input.GetKeyUp(KeyCode.S)) 
-        {
-            _exAttack = 80;
-            exGauge.fillAmount = 1f;
-            if (gauge == _exAttack)
-            {
-                exAttackText.GetComponent<Image>().enabled = true;
-                isExAttack = true;
-            }
-        }
-    }
-
     //必殺技を発動した際呼ぶ
     public void _EXAttack()
     {
