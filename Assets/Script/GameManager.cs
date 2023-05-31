@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
@@ -37,6 +38,14 @@ public class GameManager : MonoBehaviour
     {
         maxCombo = 0;
         killEnemy = 0;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown("joystick button 7")) 
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 
     public void PlayBGM(int ID)
@@ -127,6 +136,11 @@ public class GameManager : MonoBehaviour
             gameObj.GetComponent<Enemy>().Stop_End();
         }
         enemys = null;
+        enemyList.Clear();
+    }
+
+    public void ClearEnemyList()
+    {
         enemyList.Clear();
     }
 

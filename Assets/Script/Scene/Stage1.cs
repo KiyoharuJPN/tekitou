@@ -8,11 +8,11 @@ public class Stage1 : MonoBehaviour
     {
         SceneData.Instance.referer = "Stage1";
     }
-    // Start is called before the first frame update
+
     void Start()
     {
+        GameManager.Instance.ClearEnemyList();
+        GameManager.Instance.PlayBGM(2);
         Cursor.visible = false;
-        ExAttackParam.Instance.SetGage(SceneData.Instance.ExGage);
-        GameManager.Instance.PlayBGM(2);   
     }
 }

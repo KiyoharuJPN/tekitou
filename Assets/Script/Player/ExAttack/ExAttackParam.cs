@@ -61,8 +61,7 @@ public class ExAttackParam : MonoBehaviour
 
     public void AddGauge()
     {
-        if (_exAttack > gauge) { return; };
-
+        if (_exAttack >= gauge) return;
         exGauge.fillAmount += 1f / gauge;
         _exAttack++;
 
@@ -80,10 +79,25 @@ public class ExAttackParam : MonoBehaviour
 
     internal void SetGage(int backSceneExGage)
     {
-        for(int i = 0;i < backSceneExGage; i++)
-        {
-            AddGauge();
-        } 
+        _exAttack = 0;
+        exGauge.fillAmount = 0;
+        _SetGage(backSceneExGage);
+    }
 
+    IEnumerator _SetGage(int i) 
+    {
+        for (int j = 1;j <= i; j++)
+        {
+            if (_exAttack >= gauge) break;
+            exGauge.fillAmount += 1f / gauge;
+            _exAttack++;
+
+            if (gauge == _exAttack)
+            {
+                exAttackText.GetComponent<Image>().enabled = true;
+                isExAttack = true;
+            }
+            yield return null;
+        }
     }
 }

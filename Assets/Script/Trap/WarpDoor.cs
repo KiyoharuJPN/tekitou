@@ -73,22 +73,22 @@ public class WarpDoor : MonoBehaviour
 
     IEnumerator PlayerWarp(float delay,Collider2D player)
     {
-        yield return new WaitForSeconds(delay);//“n‚³‚ê‚½ŠÔ‘Ò‹@
+        yield return new WaitForSeconds(delay);//æ¸¡ã•ã‚ŒãŸæ™‚é–“å¾…æ©Ÿ
 
-        //ƒtƒF[ƒhƒAƒEƒgŠJn
+        //ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆé–‹å§‹
         fade.StartFadeOut();
         
         while (!fade.IsFadeOutComplete())
         {
             yield return null;
         }
-        //ƒtƒF[ƒhƒAƒEƒgI—¹
+        //ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆçµ‚äº†
         ComboParam.Instance.ResetTime();
         player.transform.position = warpPoint.transform.position;
         camera.ChengeCameraArea_Boss();
-        yield return new WaitForSeconds(1f);//“n‚³‚ê‚½ŠÔ‘Ò‹@
+        yield return new WaitForSeconds(1f);//æ¸¡ã•ã‚ŒãŸæ™‚é–“å¾…æ©Ÿ
 
-        //ƒtƒF[ƒhƒCƒ“ŠJn
+        //ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³é–‹å§‹
         fade.StartFadeIn();
         while (!fade.IsFadeOutComplete())
         {

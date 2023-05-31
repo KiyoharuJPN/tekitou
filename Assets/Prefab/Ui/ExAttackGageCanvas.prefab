@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  gauge: 80
+  gauge: 50
   exGauge: {fileID: 3385752765591092380}
   exAttackText: {fileID: 3385752765072197465}
 --- !u!1 &3385752765072197465

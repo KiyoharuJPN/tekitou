@@ -162,7 +162,6 @@ public class Result : MonoBehaviour
     IEnumerator AnyKey()
     {
         yield return new WaitForSeconds(5f);
-        SceneData.Instance.ExGage =  ExAttackParam.Instance.GetGage();
         anyKay.enabled = true;
         PreesAnyKey.enabled = true;
         canAnyKey = true;
