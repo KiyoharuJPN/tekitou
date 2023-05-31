@@ -52,9 +52,6 @@ public class Slime : Enemy
         //ó‘Ô‚Ì•ÏX
         if (isDestroy) IsBlowing = true;
         if (!isDestroy) IsBlowing = false;
-
-
-        Debug.Log(movingWidth);
     }
 
     void SlimeMove()

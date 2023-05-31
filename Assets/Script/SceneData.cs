@@ -8,5 +8,4 @@ public class SceneData
 
     public string referer = string.Empty;
 
-    public int ExGage = 0;
 }

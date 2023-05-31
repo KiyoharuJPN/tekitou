@@ -47,7 +47,10 @@ public class FinishMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("joystick button 7"))
+        {
+            SceneManager.LoadScene("Title");
+        }
         //調整キーの設定
         if (canChangePointer)
         {
@@ -183,7 +186,6 @@ public class FinishMenu : MonoBehaviour
                     Debug.Log("新しい項目の追加はプログラマに頼んでください。");
                     break;
             }
-            Debug.Log(animSpeed);
             StartCoroutine(Wait(pointer, animWait, animSpeed));
             canChangePointer = false;
             canChoose = false;
