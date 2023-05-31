@@ -11,6 +11,7 @@ public class Stage1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         ExAttackParam.Instance.SetGage(SceneData.Instance.ExGage);
         GameManager.Instance.PlayBGM(2);   
     }

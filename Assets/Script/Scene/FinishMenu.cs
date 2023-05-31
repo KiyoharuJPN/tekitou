@@ -39,6 +39,7 @@ public class FinishMenu : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver_intro, BGMSoundData.BGM.GameOver_roop);
     }
 
@@ -81,7 +82,7 @@ public class FinishMenu : MonoBehaviour
     }
     void BackTitle()
     {
-        if (SceneName != "") SceneManager.LoadScene(SceneName);
+        if (SceneName != "") SceneManager.LoadScene("Title");
     }
     /*IEnumerator PointerMoveWait()
     {

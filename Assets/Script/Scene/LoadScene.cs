@@ -36,18 +36,18 @@ public class LoadScene : MonoBehaviour
 
     private void Start()
     {
-        
+        Cursor.visible = false;
         loadSceneTextBox.sprite = null;
         if (SceneData.Instance.referer == "Title")
         {
-            obj = (GameObject)Instantiate(loadSceneImage[0], this.transform.position, Quaternion.identity);
+            obj = (GameObject)Instantiate(loadSceneImage[0], BackGround.transform.position, Quaternion.identity);
             obj.transform.parent = BackGround.transform;
             loadSceneTextBox.sprite = loadSceneText[0];
             loadScene = "Level_Tutorial";
         }
         else if (SceneData.Instance.referer == "Tutorial")
         {
-            obj = (GameObject)Instantiate(loadSceneImage[1], this.transform.position, Quaternion.identity);
+            obj = (GameObject)Instantiate(loadSceneImage[1], BackGround.transform.position, Quaternion.identity);
             obj.transform.parent = BackGround.transform;
             loadSceneTextBox.sprite = loadSceneText[1];
             loadScene = "Level_Stage1";

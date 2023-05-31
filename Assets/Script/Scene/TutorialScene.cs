@@ -10,6 +10,7 @@ public class TutorialScene : MonoBehaviour
     }
     private void Start()
     {
+        Cursor.visible = false;
         GameManager.Instance.PlayBGM(1);
     }
 }

@@ -29,8 +29,11 @@ public class ResultAnyKay : MonoBehaviour
             || Input.GetKeyDown("joystick button 2")
             || Input.GetKeyDown("joystick button 3"))//
         {
-            if (loadScene == "Stage1") SceneManager.LoadScene("Ending");Å@return;
-
+            if (loadScene == "Stage1")
+            {
+                SceneManager.LoadScene("Ending");
+                return;
+            }
             SceneManager.LoadScene("Load");
         }
     }
