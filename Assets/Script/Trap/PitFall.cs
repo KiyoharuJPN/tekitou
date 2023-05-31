@@ -7,7 +7,7 @@ public class PitFall : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("FinishScene");
         }
         else
         {

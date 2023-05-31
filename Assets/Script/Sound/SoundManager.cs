@@ -56,6 +56,7 @@ public class SoundManager : MonoBehaviour
         if(bgm_loop == BGMSoundData.BGM.none)
         {
             BGMSoundData data = bgmSoundDatas.Find(data => data.bgm == bgm_intro);
+            bgmAudioSource.loop = false;
             bgmAudioSource.volume = data.volume * bgmMasterVolume * masterVolume;
             bgmAudioSource.clip = data.audioClip;
             bgmAudioSource.Play();
@@ -69,7 +70,7 @@ public class SoundManager : MonoBehaviour
             loopAudioSource.clip = data_loop.audioClip;
 
             bgmAudioSource.volume = data_intro.volume * bgmMasterVolume * masterVolume;
-
+            bgmAudioSource.loop = true;
             bgmAudioSource.Play();
             bgmAudioSource.PlayScheduled(AudioSettings.dspTime + loopAudioSource.clip.length);
         }

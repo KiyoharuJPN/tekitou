@@ -341,7 +341,7 @@ public class KingSlime : Enemy
 
     //常に動くけど触らなくてもいいコードをここに
     //重力関連
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
         if(!NoGravity)Gravity();
     }

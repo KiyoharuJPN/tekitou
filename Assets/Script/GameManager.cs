@@ -8,10 +8,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("シーンID（0:タイトル,1:チュートリアル,2:ステージ1,3:リザルト,4:ゲームオーバー")]
-    [Range(0, 4)]
-    [SerializeField]
-    int ID;
+
     [SerializeField]
     PlayerController player;
 
@@ -40,6 +37,10 @@ public class GameManager : MonoBehaviour
     {
         maxCombo = 0;
         killEnemy = 0;
+    }
+
+    public void PlayBGM(int ID)
+    {
         switch (ID)
         {
             case 0:
@@ -78,6 +79,27 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Result_True());
     }
 
+    public void EnemyStop_Start()
+    {
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject gameObj in enemys)
+        {
+            enemyList.Add(gameObj);
+            gameObj.GetComponent<Enemy>().EnemyStop();
+        }
+    }
+    public void EnemyStop_End()
+    {
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject gameObj in enemys)
+        {
+            enemyList.Add(gameObj);
+            gameObj.GetComponent<Enemy>().Stop_End();
+        }
+    }
+
     public void PlayerExAttack_Start()
     {
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
@@ -102,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject gameObj in enemyList)
         {
-            gameObj.GetComponent<Enemy>().PlaeyrExAttack_End();
+            gameObj.GetComponent<Enemy>().Stop_End();
         }
         enemys = null;
         enemyList.Clear();

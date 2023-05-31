@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -194,6 +193,7 @@ public class PlayerController : MonoBehaviour
     public void _Attack(Collider2D enemy, float powar)
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
+        ExAttackParam.Instance.AddGauge();
         enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp());
     }
 
@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
         if (hpparam.GetHP() <= 0)
         {
             SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("FinishScene");
         }
     }
 
@@ -534,6 +534,16 @@ public class PlayerController : MonoBehaviour
     {
         isWarpDoor = false;
         animator.SetBool("IsWarpDoor", isWarpDoor);
+    }
+
+    internal void GoolDoor(Transform door)
+    {
+        isWarpDoor = true;
+        var doorPosX = door.position.x;
+        var doorPosY = door.position.y;
+        this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);
+        animator.SetTrigger("GoolDoor");
+        SoundManager.Instance.PlaySE(SESoundData.SE.GoalSE);
     }
 
     //”wŒiƒXƒNƒ[ƒ‹ˆ—
