@@ -91,7 +91,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         IsAnimation = false;
         animator.SetBool("IsAnimation", IsAnimation);
-        Debug.Log("++++++++++++++++++++++++++++++++++++++++++");
+        //Debug.Log("++++++++++++++++++++++++++++++++++++++++++");
         WallCheck.SetActive(true);
         gameObject.GetComponent<KingSlimeSummonAnimation>().enabled = false;
     }

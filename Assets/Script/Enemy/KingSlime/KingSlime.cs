@@ -28,9 +28,14 @@ public class KingSlime : Enemy
 
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
-        , NoGravity = false;                                            //判断用内部関数
+        , NoGravity = false, ExSkillCheck = false, inExSkillCheck = false
+        , ExSkillFalling = false;                                            //判断用内部関数
     int movingCheck = 0, AttackMode = 0, NormalAttackAnimation;         //チェック用int関数
     GameObject playerObj;                                  //プレイヤーオブジェクト宣言
+
+
+    //コールチーンよう判断関数
+    bool inKSBossAtack1, inKSBossAtack2, inKSBossAtack3, inKSBossSummon, inKSMovingAnim;
 
     protected override void Start()
     {
@@ -45,19 +50,52 @@ public class KingSlime : Enemy
 
     protected override void Update()
     {
+        //Ex関係のアニメーション
+        animator.SetBool("ExSkillFalling", ExSkillFalling);
+        animator.SetBool("ExSkillCheck", ExSkillCheck);
+        if (ExSkillCheck)
+        {
+            if (!inExSkillCheck)
+            {
+                inExSkillCheck = true;
+                StopAllCoroutines();
+                ClearCoroutines();
+            }
+            enemyRb.velocity = Vector2.zero;
+            if (!isPlayerExAttack)
+            {
+                ExSkillCheck = false;
+                StartCoroutine(SkillWait());
+            }
+            return;
+        }
         if (isPlayerExAttack)
         {
+            ExSkillCheck = true;
             enemyRb.velocity = Vector2.zero;
             return;
         }
-
+        if (inExSkillCheck)
+        {
+            ExSkillFalling = enemyRb.velocity != Vector2.zero;
+            if (ExSkillFalling)
+            {
+                StopAllCoroutines();
+                return;
+            }
+            else
+            {
+                StartCoroutine(SkillWait());
+            }
+            
+        }
         //if (Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         if (!IsBlowing)
         {
             //攻撃関連
             if (IsAttacking) KingSlimeAttack();
             //移動関連
-            if (IsMoving)KingSlimeMoving();
+            if (IsMoving && !inExSkillCheck)KingSlimeMoving();
         }
         
         //倒されることを確認しているのはEnemyのメイン関数で行われています
@@ -76,6 +114,11 @@ public class KingSlime : Enemy
     }
 
     //内部動き関連の関数をここに
+    IEnumerator SkillWait()
+    {
+        yield return new WaitForSeconds(0.1f);
+        inExSkillCheck = false;
+    }
     //キングスライムの攻撃用関数
     //ノーマル攻撃関数
     void KingSlimeAttack()
@@ -96,6 +139,7 @@ public class KingSlime : Enemy
     }
     IEnumerator KSBossAtack1()
     {
+        inKSBossAtack1 = true;
         NormalAttackAnimation = 0;
         Vector3 PlayerPos = playerObj.transform.position + new Vector3(0, AttackHeight, 0);
         var AttackMoveSpeed = (float)Math.Sqrt(((PlayerPos.x - transform.position.x) * (PlayerPos.x - transform.position.x)) + (PlayerPos.y - transform.position.y) * (PlayerPos.y - transform.position.y));
@@ -118,9 +162,11 @@ public class KingSlime : Enemy
         enemyRb.AddForce(new Vector2(0, -40),ForceMode2D.Impulse);
         knockbackAttackCircle.enabled = true;
         KSNormalAttackLanding = true;
+        inKSBossAtack1 = false;
     }
     IEnumerator KSBossAtack2()
     {
+        inKSBossAtack2 = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         knockbackAttackCircle.enabled = false;
@@ -187,9 +233,11 @@ public class KingSlime : Enemy
             yield return new WaitForSeconds(0.01f);
         }
         StartCoroutine(KSBossAtack3());
+        inKSBossAtack2 = false;
     }
     IEnumerator KSBossAtack3()
     {
+        inKSBossAtack3 = true;
         NormalAttackAnimation++;
 
         yield return new WaitForSeconds(0.75f);
@@ -199,10 +247,12 @@ public class KingSlime : Enemy
         KSattackingCheck = true;
         AttackMode = 1;
         NormalAttackAnimation = 0;
+        inKSBossAtack3 = false;
     }
     //召喚攻撃関数
     IEnumerator KSBossSummon()
     {
+        inKSBossSummon = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeSummon);
         if (playerObj.transform.position.x > gameObject.transform.position.x && movingWidth < 0) TurnAround();
         if (playerObj.transform.position.x < gameObject.transform.position.x && movingWidth > 0) TurnAround();
@@ -227,6 +277,7 @@ public class KingSlime : Enemy
         IsMoving = true;
         KSattackingCheck = true;
         AttackMode = 0;
+        inKSBossSummon = false;
     }
 
 
@@ -242,6 +293,7 @@ public class KingSlime : Enemy
     }
     IEnumerator KSMovingAnim()
     {
+        inKSMovingAnim = true;
         movingCheck++;
         yield return new WaitForSeconds(0.5f);
         enemyRb.AddForce(new Vector2(movingWidth, movingHeight),ForceMode2D.Impulse);
@@ -253,6 +305,7 @@ public class KingSlime : Enemy
             IsAttacking = true;
         }
         KSmovingCheck = true;
+        inKSMovingAnim = false;
     }
 
     //キングスライム死亡時に呼ぶ関数
@@ -306,7 +359,7 @@ public class KingSlime : Enemy
 
 
     //外部修正用変数をここに
-    //壁に当たったら移動量を保ったまま回転を行う
+    //壁に当たったら移動量を保ったまま回転を行うs
     public override void TurnAround()
     {
         bool InCheck = true;
@@ -353,5 +406,58 @@ public class KingSlime : Enemy
     {
         isDestroy = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = true;
+    }
+
+    void ClearCoroutines()
+    {
+        if (inKSBossAtack1)
+        {
+            inKSBossAtack1 = false;
+            NoGravity = false;
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
+            knockbackAttackCircle.enabled = false;
+            KSNormalAttackLanding = false;
+            IsAttacking = false;
+            IsMoving = true;
+            KSattackingCheck = true;
+            AttackMode = 0;
+        }
+        if (inKSBossAtack2)
+        {
+            inKSBossAtack2 = false;
+            NormalAttackAnimation = 0;
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
+            knockbackAttackCircle.enabled = false;
+            KSNormalAttackLanding = false;
+            attackCheckArea.enabled = false;
+            IsAttacking = false;
+            IsMoving = true;
+            KSattackingCheck = true;
+            AttackMode = 0;
+        }
+        if (inKSBossAtack3)
+        {
+            inKSBossAtack3 = false;
+            NormalAttackAnimation = 0;
+            IsAttacking = false;
+            IsMoving = true;
+            KSattackingCheck = true;
+            AttackMode = 0;
+        }
+        if (inKSBossSummon)
+        {
+            inKSBossSummon = false;
+            IsAttacking = false;
+            IsMoving = true;
+            KSattackingCheck = true;
+            AttackMode = 0;
+        }
+        if (inKSMovingAnim)
+        {
+            movingCheck = 0;
+            KSmovingCheck = true;
+        }
     }
 }

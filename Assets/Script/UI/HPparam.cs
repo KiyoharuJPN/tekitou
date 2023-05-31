@@ -63,7 +63,7 @@ public class HPparam : MonoBehaviour
 
     public void SetHP(int hp)
     {
-        heals += hp;
+        heals = hp;
     }
 
     public void DamageHP(int hp)
