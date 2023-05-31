@@ -7,4 +7,6 @@ public class SceneData
     public readonly static SceneData Instance = new SceneData();
 
     public string referer = string.Empty;
+
+    public int ExGage = 0;
 }

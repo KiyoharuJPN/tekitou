@@ -9,6 +9,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     GameObject CMvcam;
 
+
+    [SerializeField]
+    private GameObject cameraArea_Tutorial;
     [SerializeField]
     private GameObject cameraArea_Nomal;
     [SerializeField]
@@ -16,8 +19,20 @@ public class CameraManager : MonoBehaviour
 
     void Start()
     {
+        if(SceneData.Instance.referer == "Tutorial")
+        {
+            ChengeCameraArea_Tutorial();
+        }
+        else if(SceneData.Instance.referer == "Stage1")
+        {
+            ChengeCameraArea_Nomal();
+        }
+    }
+    internal void ChengeCameraArea_Tutorial()
+    {
         CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Nomal.GetComponent<PolygonCollider2D>();
     }
+
 
     internal void ChengeCameraArea_Nomal()
     {

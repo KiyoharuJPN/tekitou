@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -76,6 +77,8 @@ public class ExAttackParam : MonoBehaviour
 
     public void AddGauge()
     {
+        if (_exAttack > gauge) { return; };
+
         exGauge.fillAmount += 1f / gauge;
         _exAttack++;
 
@@ -84,5 +87,19 @@ public class ExAttackParam : MonoBehaviour
             exAttackText.GetComponent<Image>().enabled = true;
             isExAttack = true;
         }
+    }
+
+    internal int GetGage()
+    {
+        return _exAttack;
+    }
+
+    internal void SetGage(int backSceneExGage)
+    {
+        for(int i = 0;i < backSceneExGage; i++)
+        {
+            AddGauge();
+        } 
+
     }
 }

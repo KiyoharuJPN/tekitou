@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Stage1 : MonoBehaviour
 {
+    private void Awake()
+    {
+        SceneData.Instance.referer = "Stage1";
+    }
     // Start is called before the first frame update
     void Start()
     {
-        SceneData.Instance.referer = "Stage1";
+        ExAttackParam.Instance.SetGage(SceneData.Instance.ExGage);
         GameManager.Instance.PlayBGM(2);   
     }
 }

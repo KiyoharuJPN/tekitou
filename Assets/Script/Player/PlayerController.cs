@@ -166,7 +166,6 @@ public class PlayerController : MonoBehaviour
         //ノックバック処理
         if (knockBack.canKnockBack)
         {
-            
             if (isKnockingBack)
             {
                 KnockingBack();
@@ -455,6 +454,7 @@ public class PlayerController : MonoBehaviour
     public void SkillAttackEnd()
     {
         isAttack = false;
+        enemylist.Clear();
     }
 
     //砂埃エフェクト生成
