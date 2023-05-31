@@ -31,7 +31,7 @@ public class WarpDoor : MonoBehaviour
         if (player == null) return;
 
         float lsv = Input.GetAxis("L_Stick_V");
-        if ((lsv >= 0.8 || Input.GetKey(KeyCode.K)) && canDoor)
+        if (lsv >= 0.8 && canDoor)
         {
             canDoor = false;
             Destroy(bottonUiPrefab);
