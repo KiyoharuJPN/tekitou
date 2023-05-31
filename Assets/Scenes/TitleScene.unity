@@ -3704,6 +3704,10 @@ PrefabInstance:
       value: SoundManager
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4510ef051b67e024f8827e984d7c6229, type: 3}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: bgmSoundDatas.Array.data[6].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: bb48296ce9b7dc34a89762ea3e6830dc, type: 3}

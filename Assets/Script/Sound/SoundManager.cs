@@ -119,7 +119,8 @@ public class BGMSoundData
         Stage1_intro,
         Stage1_roop,
         Result,
-        GameOver,
+        GameOver_intro,
+        GameOver_roop,
         KingSlimeBoss_intro,
         KingSlimeBoss_roop,
         none //Resultの様なイントロ・ループがないBGMを呼び出す際の片方

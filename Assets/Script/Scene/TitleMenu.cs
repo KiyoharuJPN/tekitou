@@ -36,6 +36,8 @@ public class TitleMenu : MonoBehaviour
         pointer = 0;            //ポインターの初期化
         //OnSelected(menuobj[0]); //セレクトの初期化
 
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
+
         //音声修正
         SoundManager.Instance.masterVolume = master;
         SoundManager.Instance.bgmMasterVolume = BGM;

@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
     }
     private void BGMStart_GameOver()
     {
-        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver, BGMSoundData.BGM.none);
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver_intro, BGMSoundData.BGM.GameOver_roop);
     }
 
     IEnumerator Result_True()

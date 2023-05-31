@@ -39,7 +39,7 @@ public class FinishMenu : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.PlayBGM(3);
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver_intro, BGMSoundData.BGM.GameOver_roop);
     }
 
 
