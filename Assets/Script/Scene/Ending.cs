@@ -9,11 +9,12 @@ public class Ending : MonoBehaviour
     FadeImage fade;
     void Update()
     {
-        if (fade.IsFadeInComplete()) return;
-        if ((Input.GetKeyDown("joystick button 0")
+        Debug.Log(fade.IsFadeInComplete());
+        if (!fade.IsFadeInComplete()) return;
+        if (Input.GetKeyDown("joystick button 0")
             || Input.GetKeyDown("joystick button 1")
             || Input.GetKeyDown("joystick button 2")
-            || Input.GetKeyDown("joystick button 3")))
+            || Input.GetKeyDown("joystick button 3") || Input.anyKeyDown)
         {
             SceneManager.LoadScene("Title");
         }        
