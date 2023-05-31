@@ -27,7 +27,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     //AnimationŠÖ˜A
     Animator animator;
     int animationControler;
-    bool IsAnimation = true;
+    bool IsAnimation = true, StageCheck = false, anim3 =true,anim4 = true;
     Rigidbody2D enemyRb;
 
 
@@ -50,20 +50,31 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     {
         if (GetComponent<KingSlimeSummonAnimation>().enabled)
         {
-            if (collision.gameObject.CompareTag("Stage"))
+            if (collision.gameObject.CompareTag("Stage") && !StageCheck)
             {
+                StageCheck = true;
+                Debug.Log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 animationControler++;
                 SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
                 shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength,true,true);
             }
-            if (animationControler == 1)
+            if (animationControler == 1 && anim3)
             {
+                anim3 = false;
                 Invoke("Animation_3", 1.1f);
             }
-            if (animationControler == 4)
+            if (animationControler == 4 && anim4)
             {
+                anim4 = false;
                 Invoke("AnimationPlayed", 0.2f);
             }
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (GetComponent<KingSlimeSummonAnimation>().enabled)
+        {
+            StageCheck = false;
         }
     }
 

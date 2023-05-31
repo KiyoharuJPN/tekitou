@@ -164,6 +164,7 @@ public class FinishMenu : MonoBehaviour
             switch (pointer)
             {
                 case 0:
+                    SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_CutIn);
                     isRetry = true;
                     animWait = fadeOutOption.waitSecondTry;
                     animSpeed = fadeOutOption.fadeOutSpeedTry;
