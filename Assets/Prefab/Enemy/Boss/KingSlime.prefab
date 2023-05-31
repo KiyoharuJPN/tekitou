@@ -208,7 +208,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6259610633585901161}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -281,6 +281,7 @@ MonoBehaviour:
   moveWidthForce: 3
   AttackHeight: 8
   summonSlime: {fileID: 1370193731701165691, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+  wallCheck: {fileID: 7294653932298096155}
   attackCheckArea: {fileID: 85724219}
   knockbackAttackCircle: {fileID: 3563092138790404470}
   _shakeInfo:

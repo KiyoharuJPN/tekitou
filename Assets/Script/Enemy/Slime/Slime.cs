@@ -52,7 +52,9 @@ public class Slime : Enemy
         //èÛë‘ÇÃïœçX
         if (isDestroy) IsBlowing = true;
         if (!isDestroy) IsBlowing = false;
-        
+
+
+        Debug.Log(movingWidth);
     }
 
     void SlimeMove()
@@ -87,9 +89,8 @@ public class Slime : Enemy
     {
         if (!IsMoving && col.gameObject.CompareTag("Stage") && BossSummon)
         {
-            if(BossTurn) movingWidth *= -1;
             BossSummon = false;
-            enemyRb.AddForce(new Vector2(movingWidth, movingHeight), ForceMode2D.Impulse);
+            if (BossTurn) movingWidth *= -1;
         }
         base.OnCollisionEnter2D(col);
     }

@@ -83,15 +83,6 @@ public class FadeImage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            StartFadeOut();
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            StartFadeIn();
-        }
 
         if (frameCount > 2)
         {
