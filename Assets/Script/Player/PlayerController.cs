@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(_interval(skill.coolTime));
         }
 
-        if (Input.GetKey("joystick button 2") && canNomalAttack)
+        if (Input.GetKey("joystick button 2") && canNomalAttack || Input.GetKey(KeyCode.Mouse0) && canNomalAttack)
         {
             canNomalAttack = false;
             animator.SetTrigger("IsNomalAttack");
