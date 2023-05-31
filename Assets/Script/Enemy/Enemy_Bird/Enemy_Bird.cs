@@ -185,8 +185,8 @@ public class Enemy_Bird : Enemy
         //下のコライダーを削除
         monster_lower.enabled = false;
         //上部のコライダーを再配置
-        monster_upper.offset = new Vector2(0f, 0.1f);
-        monster_upper.size = new Vector2(3.1f, 2f);
+        monster_upper.offset = new Vector2(0f, -0.4f);
+        monster_upper.size = new Vector2(3.45f, 2.44f);
     }
     void AttackAnim()
     {
