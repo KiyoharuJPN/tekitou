@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //•KŽE‹Z
-        if (Input.GetKey("joystick button 4") && Input.GetKey("joystick button 5"))
+        if (Input.GetKey("joystick button 4") && Input.GetKey("joystick button 5") || Input.GetKeyDown(KeyCode.L))
         {
             if (ExAttackParam.Instance.GetIsExAttack) 
             {
