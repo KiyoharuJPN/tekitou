@@ -17,8 +17,16 @@ public class LoadScene : MonoBehaviour
     Sprite[] loadSceneText;
 
     [SerializeField]
+    GameObject BackGround;
+    [SerializeField]
+    GameObject[] loadSceneImage;
+    GameObject obj;
+
+
+    [SerializeField]
     LoadFadeImage fade;
     string loadScene;
+    
 
     //ロードシーン待機時間
     const float time = 2f;
@@ -28,14 +36,19 @@ public class LoadScene : MonoBehaviour
 
     private void Start()
     {
+        
         loadSceneTextBox.sprite = null;
         if (SceneData.Instance.referer == "Title")
         {
+            obj = (GameObject)Instantiate(loadSceneImage[0], this.transform.position, Quaternion.identity);
+            obj.transform.parent = BackGround.transform;
             loadSceneTextBox.sprite = loadSceneText[0];
             loadScene = "Level_Tutorial";
         }
         else if (SceneData.Instance.referer == "Tutorial")
         {
+            obj = (GameObject)Instantiate(loadSceneImage[1], this.transform.position, Quaternion.identity);
+            obj.transform.parent = BackGround.transform;
             loadSceneTextBox.sprite = loadSceneText[1];
             loadScene = "Level_Stage1";
         }

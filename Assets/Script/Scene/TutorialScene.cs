@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class TutorialScene : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         SceneData.Instance.referer = "Tutorial";
+    }
+    private void Start()
+    {
         GameManager.Instance.PlayBGM(1);
     }
 }

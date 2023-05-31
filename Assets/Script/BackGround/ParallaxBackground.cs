@@ -11,7 +11,7 @@ public class ParallaxBackground : MonoBehaviour
     //あらかじめ各画像を紐付けしておく。
     [Header("背景画像 (0が最奥、順に手前)")]
     [SerializeField]
-    Sprite[] backgroundSprites = new Sprite[7];
+    Sprite[] backgroundSprites;
 
     [Header("背景画像のオフセット (ズラす値)")]
     [SerializeField]
@@ -23,11 +23,7 @@ public class ParallaxBackground : MonoBehaviour
 
     [Header("背景画像のスクロール率 (0が最奥、順に手前)")]
     [SerializeField]
-    float[] scrollRates = new float[] {
-        1.0f,
-        3.0f,
-        5.0f,
-    };
+    float[] scrollRates;
 
     [Header("スクロール時間")]
     [Range(0.1f, 3.0f)]
@@ -47,7 +43,6 @@ public class ParallaxBackground : MonoBehaviour
     RectTransform[] backgroundsRt;
 
     //背景画像数。
-    [HideInInspector]
     [SerializeField]
     int backgroundMax;
 
@@ -77,8 +72,6 @@ public class ParallaxBackground : MonoBehaviour
 
     //一時的に使用。
     Vector2 tempBackgroundsPosition;
-
-
 
     void Awake()
     {

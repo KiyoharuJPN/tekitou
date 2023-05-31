@@ -275,32 +275,35 @@ MonoBehaviour:
   seAudioSource: {fileID: 5644327850911644899}
   bgmSoundDatas:
   - bgm: 0
-    audioClip: {fileID: 0}
-    volume: 0.4
+    audioClip: {fileID: 8300000, guid: 4510ef051b67e024f8827e984d7c6229, type: 3}
+    volume: 0.1
   - bgm: 1
     audioClip: {fileID: 8300000, guid: d9ff1b1ca063fde4aa9956218364bc80, type: 3}
-    volume: 0.4
+    volume: 0.1
   - bgm: 2
     audioClip: {fileID: 8300000, guid: e0199d3828d618f4a827449289cf19c8, type: 3}
-    volume: 0.4
+    volume: 0.1
   - bgm: 3
     audioClip: {fileID: 8300000, guid: bb48296ce9b7dc34a89762ea3e6830dc, type: 3}
-    volume: 0.4
+    volume: 0.1
   - bgm: 4
     audioClip: {fileID: 8300000, guid: a73997de965c66040b87e8fc15702eef, type: 3}
-    volume: 0.4
+    volume: 0.1
   - bgm: 5
     audioClip: {fileID: 8300000, guid: fde70bb3a313ac641af92f98d017b22b, type: 3}
-    volume: 0.4
+    volume: 0.2
   - bgm: 6
-    audioClip: {fileID: 0}
-    volume: 0.4
+    audioClip: {fileID: 8300000, guid: 2a5ad563b24069c42b41a2501d6a1805, type: 3}
+    volume: 0.1
   - bgm: 7
-    audioClip: {fileID: 8300000, guid: 46296e7be2b244446a45680f114a6d72, type: 3}
-    volume: 0.4
+    audioClip: {fileID: 8300000, guid: 648bb645c20d1a44ba3f5ae455263fd9, type: 3}
+    volume: 0.1
   - bgm: 8
+    audioClip: {fileID: 8300000, guid: 46296e7be2b244446a45680f114a6d72, type: 3}
+    volume: 0.1
+  - bgm: 9
     audioClip: {fileID: 8300000, guid: 9a68d20a80d5850458336a68d13c30ff, type: 3}
-    volume: 0.4
+    volume: 0.1
   seSoundDatas:
   - se: 0
     audioClip: {fileID: 8300000, guid: 747d5b27b64ce0c44921601903991165, type: 3}
