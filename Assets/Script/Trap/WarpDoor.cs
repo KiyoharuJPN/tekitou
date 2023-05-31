@@ -18,40 +18,45 @@ public class WarpDoor : MonoBehaviour
 
     GameObject warpPoint;
 
+    Collider2D player;
+    bool canDoor = true;
     private void Start()
     {
         warpPoint = transform.Find("WarpPoint").gameObject;
         isBottonUi = false;
     }
 
+    private void Update()
+    {
+        if (player == null) return;
+
+        float lsv = Input.GetAxis("L_Stick_V");
+        if ((lsv >= 0.8 || Input.GetKeyDown(KeyCode.K)) && canDoor)
+        {
+            canDoor = false;
+            Destroy(bottonUiPrefab);
+            bottonUiPrefab = null;
+            animator.SetTrigger("DoorOpen");
+            player.GetComponent<PlayerController>().WarpDoor(inPoint.transform);
+            StartCoroutine(PlayerWarp(1.0f, player));
+        }
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 6 && !isBottonUi)
         {
+            player = collision;
             isBottonUi = true;
             _BottonUi(collision);
+            
         };
-
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //衝突している物のレイヤーがPlayer(6番レイヤー）でなければ returnする
-        if (collision.gameObject.layer != 6) return;
-
-        float lsv = Input.GetAxis("L_Stick_V");
-        if (lsv >= 0.8 || Input.GetKeyDown(KeyCode.K))
-        {
-            Destroy(bottonUiPrefab);
-            bottonUiPrefab = null;
-            animator.SetTrigger("DoorOpen");
-            collision.GetComponent<PlayerController>().WarpDoor(inPoint.transform);
-            StartCoroutine(PlayerWarp(1.0f, collision));
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        player = null;
         Destroy(bottonUiPrefab);
         bottonUiPrefab = null;
         isBottonUi = false;

@@ -32,6 +32,7 @@ public class TitleMenu : MonoBehaviour
 
     private void Start()
     {
+        SceneData.Instance.referer = "Title";
         pointer = 0;            //ポインターの初期化
         //OnSelected(menuobj[0]); //セレクトの初期化
 

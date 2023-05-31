@@ -37,7 +37,12 @@ public class FinishMenu : MonoBehaviour
     [Header("フェードアウト設定")]
     FadeOutOption fadeOutOption = new() { waitSecondTry = 1f, wateSecondTitle = 1f, fadeOutSpeedTry = 10f, fadeOutSpeedTitle = 10f};
 
-    
+    private void Start()
+    {
+        GameManager.Instance.PlayBGM(3);
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -65,7 +70,14 @@ public class FinishMenu : MonoBehaviour
     void TryAgain()
     {
         //Debug.Log(SystemController.Instance.GetLastScene());
-        SceneManager.LoadScene(SystemController.Instance.GetLastScene());
+        if (SceneData.Instance.referer == "Tutorial")
+        {
+            SceneManager.LoadScene("Level_Tutorial");
+        }
+        else if (SceneData.Instance.referer == "Stage1")
+        {
+            SceneManager.LoadScene("Level_Stage1");
+        }
     }
     void BackTitle()
     {

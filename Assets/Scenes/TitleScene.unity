@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1592c684e35355b4ba64c9e9f664e402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene: FinishScene
+  gameScene: Load
   TitleImage: {fileID: 1148033706}
   target: {fileID: 1639849795}
   menuobj:
@@ -3703,6 +3703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[6].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bb48296ce9b7dc34a89762ea3e6830dc, type: 3}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_RootOrder
       value: 4

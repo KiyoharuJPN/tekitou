@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: 510eafe54ba547c40b61e29cdf6b3a1e
   - enabled: 1
-    path: Assets/Scenes/Level_Test.unity
-    guid: 2d7a348d8c01430438122f2a14430cfa
+    path: Assets/Scenes/Level_Tutorial.unity
+    guid: cf2785a233b8dd34eaae072f3af3013b
+  - enabled: 1
+    path: Assets/Scenes/Load.unity
+    guid: 33f320307aa94e24c95e23292519d225
+  - enabled: 1
+    path: Assets/Scenes/Level_Stage1.unity
+    guid: 21ed1e8d7f270894582d0d3810c744ee
   - enabled: 1
     path: Assets/Scenes/FinishScene.unity
     guid: 799ce78f7c10a294a8a12b40f1c35b34

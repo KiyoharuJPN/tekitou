@@ -104,7 +104,10 @@ public class Enemy : MonoBehaviour
         if (isPlayerExAttack)
         {
             this.transform.Rotate(0, 0, 0);
-            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            if (enemyRb.bodyType != RigidbodyType2D.Static)
+            {
+                this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
             return;
         }
 
@@ -345,21 +348,31 @@ public class Enemy : MonoBehaviour
     {
         isPlayerExAttack = true;
         enemyRb.velocity = Vector2.zero;
-        animator.speed = 0;
+        if(animator != null)
+        {
+            animator.speed = 0;
+        }
     }
 
     //ïKéEãZÇ™ìñÇΩÇ¡ÇƒÇ¢ÇΩèÍçá
     public virtual void PlaeyrExAttack_HitEnemyEnd(float powar)
     {
-        animator.speed = 1;
+        if (animator != null)
+        {
+            animator.speed = 0;
+        }
         isPlayerExAttack = false;
         Damage(powar);
     }
 
     //ìñÇΩÇ¡ÇƒÇ¢Ç»Ç¢èÍçá
-    public virtual void PlaeyrExAttack_End()
+    public virtual void Stop_End()
     {
-        animator.speed = 1;
+        isPlayerExAttack = false;
+        if (animator != null)
+        {
+            animator.speed = 0;
+        }
         isPlayerExAttack = false;
     }
 }

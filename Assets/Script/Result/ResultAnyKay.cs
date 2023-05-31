@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResultAnyKay : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class ResultAnyKay : MonoBehaviour
             || Input.GetKeyDown("joystick button 2")
             || Input.GetKeyDown("joystick button 3"))//
         {
-            Debug.Log("éüÇÃÉVÅ[ÉìÇ÷");
+            SceneManager.LoadScene("Load");
         }
     }
 }
