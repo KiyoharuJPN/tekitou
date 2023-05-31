@@ -11,6 +11,8 @@ public class KingSlime : Enemy
     public BoxCollider2D attackCheckArea;
     public CircleCollider2D knockbackAttackCircle;
 
+
+
     //óhÇÍä÷òA
     [System.Serializable]
     public struct ShakeInfo
@@ -238,6 +240,7 @@ public class KingSlime : Enemy
     }
     IEnumerator KSBossAtack3()
     {
+        SkillTurnAround = true;
         inKSBossAtack3 = true;
         NormalAttackAnimation++;
 
@@ -249,6 +252,8 @@ public class KingSlime : Enemy
         AttackMode = 1;
         NormalAttackAnimation = 0;
         inKSBossAtack3 = false;
+        SkillTurnAround = false;
+        
     }
     //è¢ä´çUåÇä÷êî
     IEnumerator KSBossSummon()
@@ -392,6 +397,14 @@ public class KingSlime : Enemy
             col.gameObject.GetComponent<PlayerController>()._Damage(enemyData.attackPower);
         }
     }
+    public bool GetSkillTurnAround()
+    {
+        return SkillTurnAround;
+    }
+    public void SetSkillTurnAround(bool sta)
+    {
+        SkillTurnAround = sta;
+    }
 
 
     //èÌÇ…ìÆÇ≠ÇØÇ«êGÇÁÇ»Ç≠ÇƒÇ‡Ç¢Ç¢ÉRÅ[ÉhÇÇ±Ç±Ç…
@@ -425,6 +438,7 @@ public class KingSlime : Enemy
             IsMoving = true;
             KSattackingCheck = true;
             AttackMode = 0;
+            wallCheck.SetActive(true);
         }
         if (inKSBossAtack2)
         {
@@ -438,6 +452,7 @@ public class KingSlime : Enemy
             IsMoving = true;
             KSattackingCheck = true;
             AttackMode = 0;
+            wallCheck.SetActive(true);
         }
         if (inKSBossAtack3)
         {
@@ -447,6 +462,8 @@ public class KingSlime : Enemy
             IsMoving = true;
             KSattackingCheck = true;
             AttackMode = 0;
+            wallCheck.SetActive(true);
+            SkillTurnAround = false;
         }
         if (inKSBossSummon)
         {

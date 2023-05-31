@@ -12,7 +12,17 @@ public class KingSlimeWallCheckArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("---------------------------------------------------------------------------");
         if (collision.CompareTag("Stage"))
             GetComponentInParent<KingSlime>().TurnAround();
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        if (collision.CompareTag("Stage") || GetComponentInParent<KingSlime>().GetSkillTurnAround())
+        {
+            GetComponentInParent<KingSlime>().SetSkillTurnAround(false);
+            GetComponentInParent<KingSlime>().TurnAround();
+        }
     }
 }
