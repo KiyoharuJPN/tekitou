@@ -105,12 +105,16 @@ public class FinishMenu : MonoBehaviour
             fadeOut.GetComponent<Image>().color = new Color(0, 0, 0, i);
             yield return null ;
         }
+        Debug.Log(pointer);
+
         switch (pointer)
         {
             case 0:
                 TryAgain();
                 break;
             case 1:
+                Debug.Log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
                 BackTitle();
                 break;
             default:
