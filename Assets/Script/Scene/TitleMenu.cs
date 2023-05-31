@@ -124,8 +124,11 @@ public class TitleMenu : MonoBehaviour
 
     void Exit()
     {
-        Application.Quit();
-        Debug.Log("ゲームから抜けました。");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 
     //調整キーの設定

@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e31ad5c743f9bc44f82aad4cf9c3daff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fade: {fileID: 0}
+  fade: {fileID: 2075401042}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +399,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033779187}
   m_CullTransparentMesh: 1
+--- !u!114 &2075401042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6114365387811335011, guid: 708c2f82cf563784ea0230f6f3d70da0, type: 3}
+  m_PrefabInstance: {fileID: 2083887033}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e2502acb2406a4893e7f22809105c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2079572999
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +580,10 @@ PrefabInstance:
     - target: {fileID: 6114365387534627405, guid: 708c2f82cf563784ea0230f6f3d70da0, type: 3}
       propertyPath: m_Name
       value: FadeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114365387811335011, guid: 708c2f82cf563784ea0230f6f3d70da0, type: 3}
+      propertyPath: firstFadeInComp
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 708c2f82cf563784ea0230f6f3d70da0, type: 3}

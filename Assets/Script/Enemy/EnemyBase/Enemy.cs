@@ -359,7 +359,7 @@ public class Enemy : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.speed = 0;
+            animator.speed = 1;
         }
         isPlayerExAttack = false;
         Damage(powar);
