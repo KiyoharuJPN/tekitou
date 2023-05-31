@@ -6,7 +6,7 @@ public class KingSlime : Enemy
 {
     [Header("à⁄ìÆÇ∑ÇÈéûÇÃçÇÇ≥Ç∆ãóó£")]
     public float moveHeightForce, moveWidthForce, AttackHeight = 8;
-    public GameObject summonSlime;
+    public GameObject summonSlime, wallCheck;
     
     public BoxCollider2D attackCheckArea;
     public CircleCollider2D knockbackAttackCircle;
@@ -139,6 +139,7 @@ public class KingSlime : Enemy
     }
     IEnumerator KSBossAtack1()
     {
+        wallCheck.SetActive(false);
         inKSBossAtack1 = true;
         NormalAttackAnimation = 0;
         Vector3 PlayerPos = playerObj.transform.position + new Vector3(0, AttackHeight, 0);
@@ -287,6 +288,7 @@ public class KingSlime : Enemy
     {
         if (KSmovingCheck)
         {
+            wallCheck.SetActive(true);
             KSmovingCheck = false;
             StartCoroutine(KSMovingAnim());
         }
