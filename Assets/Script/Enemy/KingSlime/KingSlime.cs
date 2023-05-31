@@ -29,7 +29,7 @@ public class KingSlime : Enemy
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
         , NoGravity = false, ExSkillCheck = false, inExSkillCheck = false
-        , ExSkillFalling = false;                                            //判断用内部関数
+        , ExSkillFalling = false, SkillTurnAround = false;                                            //判断用内部関数
     int movingCheck = 0, AttackMode = 0, NormalAttackAnimation;         //チェック用int関数
     GameObject playerObj;                                  //プレイヤーオブジェクト宣言
 
