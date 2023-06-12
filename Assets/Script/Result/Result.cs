@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class Result : MonoBehaviour
     }
     [SerializeField]
     public List<ClearStageList> clearStageList = new List<ClearStageList>();
+
+    [SerializeField]
+    Canvas canvas;
 
     //クリアランク
     [SerializeField]
@@ -68,7 +72,7 @@ public class Result : MonoBehaviour
     void Start()
     {
         anyKay = this.GetComponent<ResultAnyKay>();
-        this.GetComponent<Canvas>().enabled = false;
+        canvas.enabled = false;
         //クリアランク・ステージ名初期化
         ClearStage_NameBar.sprite = null;
         RankBox.sprite = null;
@@ -155,7 +159,7 @@ public class Result : MonoBehaviour
 
     public void Result_Start()
     {
-        this.GetComponent<Canvas>().enabled = true;
+        canvas.enabled = true;
         StartCoroutine(AnyKey());
     }
 

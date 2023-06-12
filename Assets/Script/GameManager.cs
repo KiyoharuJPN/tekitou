@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
 
     public void EnemyStop_Start()
     {
+        enemyList.Clear();
+        enemys = null;
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach (GameObject gameObj in enemys)

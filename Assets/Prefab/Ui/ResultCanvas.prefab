@@ -357,6 +357,7 @@ MonoBehaviour:
     ClearStage_Image: {fileID: 21300000, guid: 8533dd70b4bcdc848a54584117f15f02, type: 3}
   - CleatStage_ID: 1
     ClearStage_Image: {fileID: 21300000, guid: 22511da00125b284c9c40d27709f2168, type: 3}
+  canvas: {fileID: 8622814929294617242}
   RankBox: {fileID: 8622814929990625963}
   RankImageList:
   - {fileID: 21300000, guid: 68a2c9bf0d0051d46acfcf55430c4b05, type: 3}
@@ -379,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ea0fde556bd964d8d59eec64928f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  result: {fileID: 0}
+  result: {fileID: 8622814929294617239}
   loadScene: 
 --- !u!1 &8622814929306781472
 GameObject:
