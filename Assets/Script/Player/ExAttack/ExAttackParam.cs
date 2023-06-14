@@ -77,16 +77,22 @@ public class ExAttackParam : MonoBehaviour
         return _exAttack;
     }
 
-    internal void SetGage(int backSceneExGage)
+    internal void SetGage(int exGageNum)
     {
-        _exAttack = 0;
-        exGauge.fillAmount = 0;
-        _SetGage(backSceneExGage);
+        if (_exAttack >= gauge) return;
+        exGauge.fillAmount = 1f;
+        _exAttack = exGageNum;
+
+        if (gauge == _exAttack)
+        {
+            exAttackText.GetComponent<Image>().enabled = true;
+            isExAttack = true;
+        }
     }
 
     IEnumerator _SetGage(int i) 
     {
-        for (int j = 1;j <= i; j++)
+        for (int j = 0;j < i; j++)
         {
             if (_exAttack >= gauge) break;
             exGauge.fillAmount += 1f / gauge;

@@ -77,33 +77,10 @@ public class Player_Jump : MonoBehaviour
 
     void JumpBottan()
     {
-        //二段ジャンプ
-        if (canSecondJump)
+        //ジャンプキー入力
+        if (Input.GetButtonDown("Jump"))
         {
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                player.animator.SetTrigger("IsSecondJump");
-                canSecondJump = false;
-                isSecondJump = true;
-                jumpHight = player.jumpData.secondJumpHeight;
-                jumpPos = this.transform.position.y;
-                player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
-                jumpTime = 0;
-                isjump = true;
-            }
-        }
-
-        //一回目ジャンプ
-        if (Input.GetButtonDown("Jump") && FarstJump && !canSecondJump)
-        {
-            player.isSquatting = true;
-            FarstJump = false;
-            player.animator.SetBool("IsSquatting", player.isSquatting);
-            jumpHight = player.jumpData.jumpHeight;
-            //ジャンプ前位置格納
-            jumpPos = this.transform.position.y;
-            isjump = true;
+            JumpSet();
         }
 
         //ジャンプ中の処理
@@ -121,6 +98,36 @@ public class Player_Jump : MonoBehaviour
         }
     }
 
+    //ジャンプ使用変数へのセット
+    internal void JumpSet()
+    {
+        //ジャンプ1段目
+        if (FarstJump && !canSecondJump)
+        {
+            player.isSquatting = true;
+            FarstJump = false;
+            player.animator.SetBool("IsSquatting", player.isSquatting);
+            jumpHight = player.jumpData.jumpHeight;
+            //ジャンプ前位置格納
+            jumpPos = this.transform.position.y;
+            isjump = true;
+        }
+        //ジャンプ2段目
+        else if(canSecondJump)
+        {
+            player.animator.SetTrigger("IsSecondJump");
+            canSecondJump = false;
+            isSecondJump = true;
+            jumpHight = player.jumpData.secondJumpHeight;
+            //ジャンプ前位置格納
+            jumpPos = this.transform.position.y;
+            player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
+            jumpTime = 0;
+            isjump = true;
+        }
+    }
+
+    //ジャンプ移動処理
     void Jump()
     {
         if (!isjump) return;

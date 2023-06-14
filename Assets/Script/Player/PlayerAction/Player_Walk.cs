@@ -10,7 +10,7 @@ public class Player_Walk : MonoBehaviour
 
     private float dashSpeed;
     private float dashTime; //ダッシュしている時間
-    float moveInput; //移動キー入力
+    internal float moveInput; //移動キー入力
     
     float timer;
 

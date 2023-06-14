@@ -227,39 +227,26 @@ public class PlayerController : MonoBehaviour
         }
         else { isAttackKay = false; }
 
-        
-
         //è„è∏çUåÇ
-        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8) 
-            && !isAttack && canUpAttack)
+        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8))
         {
-            canUpAttack = false;
-            jump.UpAttack();
-            isAttack = true;
+            AttackAction("UpAttack");
         }
 
         //óéâ∫çUåÇçUåÇ
-        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8)
-            && !isAttack && (isFalling || isJumping) && !isDropAttack)
+        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8))
         {
-            DownAttack._DownAttack(this);
-            isAttack = true;
+            AttackAction("DawnAttack");
         }
 
         //â°à⁄ìÆçUåÇ
-        if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8)
-            && !isAttack && !isSideAttack && canSideAttack)
+        if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8))
         {
-            canSideAttack = false;
-            sideJudge = true;
-            StartCoroutine(SideAttack());
+            AttackAction("SideAttack_right");
         }
-        else if(((lsh <= -0.8 && isAttackKay) || rsh <= -0.8)
-                && !isAttack && !isSideAttack && canSideAttack)
+        else if(((lsh <= -0.8 && isAttackKay) || rsh <= -0.8))
         {
-            canSideAttack = false;
-            sideJudge = false;
-            StartCoroutine(SideAttack());
+            AttackAction("SideAttack_left");
         }
 
         //ïKéEãZ
@@ -267,29 +254,69 @@ public class PlayerController : MonoBehaviour
         {
             if (ExAttackParam.Instance.GetIsExAttack) 
             {
-                isExAttack = true;
-                animator.SetBool("IsExAttack", isExAttack);
-                ExAttackParam.Instance._EXAttack();
-                GameManager.Instance.PlayerExAttack_Start();
-                ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
+                AttackAction("ExAttack");
             }
         }
 
         //éËìÆçUåÇÅFçUåÇÉ{É^ÉìÇ™âüÇ≥ÇÍÇπÇΩÇ∆Ç´
         if (Input.GetKeyDown("joystick button 2") && canNomalAttack)
         {
-            canNomalAttack = false;
-            animator.SetTrigger("IsNomalAttack");
-            var skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-            StartCoroutine(_interval(skill.coolTime));
+            AttackAction("NomalAttack");
         }
 
         if (Input.GetKey("joystick button 2") && canNomalAttack)
         {
-            canNomalAttack = false;
-            animator.SetTrigger("IsNomalAttack");
-            var skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-            StartCoroutine(_interval(skill.coolTime));
+            AttackAction("NomalAttack");
+        }
+    }
+
+    internal void AttackAction(string actionName)
+    {
+        //TODO åªç›ÇÕÉXÉLÉãíÜÇ…ExÉAÉ^ÉbÉNÇçsÇ§Ç∆ÉoÉOÇÈÇÃÇ≈èCê≥ïKê{
+        switch (actionName)
+        {
+            case "UpAttack":
+                if (isAttack || !canUpAttack) break;
+                canUpAttack = false;
+                jump.UpAttack();
+                isAttack = true;
+                break;
+
+            case "DawnAttack":
+                if (isAttack && (!isFalling || !isJumping) && isDropAttack) break;
+                DownAttack._DownAttack(this);
+                isAttack = true;
+                break;
+
+            case "SideAttack_right":
+                if(isAttack && isSideAttack && !canSideAttack) break;
+                canSideAttack = false;
+                sideJudge = true;
+                StartCoroutine(SideAttack());
+                break;
+
+            case "SideAttack_left":
+                if (isAttack && isSideAttack && !canSideAttack) break;
+                canSideAttack = false;
+                sideJudge = false;
+                StartCoroutine(SideAttack());
+                break;
+
+            case "ExAttack":
+                isExAttack = true;
+                animator.SetBool("IsExAttack", isExAttack);
+                ExAttackParam.Instance._EXAttack();
+                GameManager.Instance.PlayerExAttack_Start();
+                ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
+                break;
+
+            case "NomalAttack":
+                if(!canNomalAttack) break;
+                canNomalAttack = false;
+                animator.SetTrigger("IsNomalAttack");
+                var skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
+                StartCoroutine(_interval(skill.coolTime));
+                break;
         }
     }
 
