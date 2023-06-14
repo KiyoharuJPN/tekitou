@@ -115,7 +115,7 @@ public class DebugPlayer : DebugBase
         }
 
         //ƒ^ƒCƒgƒ‹‚Ö
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (SceneManager.GetActiveScene().name != "Level_Testing" && Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Title");
         }

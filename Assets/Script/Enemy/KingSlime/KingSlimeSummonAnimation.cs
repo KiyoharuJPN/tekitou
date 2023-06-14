@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class KingSlimeSummonAnimation : MonoBehaviour
 {
-    //SEŠÖ˜A
-    //‚Ü‚¾‚È‚¢
     
     //—h‚êŠÖ˜A
     [System.Serializable]
