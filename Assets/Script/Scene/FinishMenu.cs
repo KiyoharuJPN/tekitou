@@ -19,7 +19,8 @@ public class FinishMenu : MonoBehaviour
     public float mouseMoveWait = 1f;
 
     //ターゲット
-    public GameObject target, fadeOut;
+    public GameObject target;
+    public FadeImage fade;
     public GameObject[] Finishobj;
     public Animator animator;
     
@@ -100,11 +101,14 @@ public class FinishMenu : MonoBehaviour
         {
             yield return null;
         }
-        for (float i = 0; i <= 1; i += fadeOutSpeed)
+        //フェードアウト開始
+        fade.StartFadeOut();
+
+        while (!fade.IsFadeOutComplete())
         {
-            fadeOut.GetComponent<Image>().color = new Color(0, 0, 0, i);
-            yield return null ;
+            yield return null;
         }
+
         Debug.Log(pointer);
 
         switch (pointer)
