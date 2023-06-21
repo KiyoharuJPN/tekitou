@@ -78,7 +78,7 @@ public class Enemy_Bird : Enemy
 
         //攻撃するときの動き
         int i = 0;
-        while (i < 7)
+        while (i < 3)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -94,7 +94,7 @@ public class Enemy_Bird : Enemy
         BirdAttack.SetActive(true);
         BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.85f, -0.65f);
         BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.5f, 1.4f);
-        while (i < 14)
+        while (i < 8)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -104,7 +104,7 @@ public class Enemy_Bird : Enemy
         //monster_lower.enabled = false;
         BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.75f, -0.9f);
         BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.6f);
-        while (i < 21)
+        while (i < 13)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -113,7 +113,7 @@ public class Enemy_Bird : Enemy
         //monster_upper.size = new Vector2(3f, 1.95f);
         BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.7f, -1.15f);
         BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.9f, 1.11f);
-        while (i < 28)
+        while (i < 18)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -124,7 +124,7 @@ public class Enemy_Bird : Enemy
         //monster_lower.enabled = true;
         //monster_lower.offset = new Vector2(-0.4f, -0.54f);
         //monster_lower.size = new Vector2(1.04f, 1.72f);
-        while (i < 35)
+        while (i < 23)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -135,7 +135,7 @@ public class Enemy_Bird : Enemy
         //monster_upper.size = new Vector2(3.24f, 1.93f);
         //monster_lower.offset = new Vector2(-0.35f, -0.5f);
         //monster_lower.size = new Vector2(0.94f, 1.64f);
-        while (i < 42)
+        while (i < 28)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -146,7 +146,7 @@ public class Enemy_Bird : Enemy
         //monster_upper.size = new Vector2(3.05f, 1.24f);
         //monster_lower.offset = new Vector2(-0.33f, -0.53f);
         //monster_lower.size = new Vector2(0.90f, 1.69f);
-        while (i < 49)
+        while (i < 33)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -155,7 +155,7 @@ public class Enemy_Bird : Enemy
         //monster_upper.size = new Vector2(3f, 1.8f);
         //monster_lower.offset = new Vector2(-0.33f, -0.83f);
         //monster_lower.size = new Vector2(0.90f, 1.58f);
-        while (i < 56)
+        while (i < 38)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -164,7 +164,7 @@ public class Enemy_Bird : Enemy
         //monster_upper.size = new Vector2(3f, 1.82f);
         //monster_lower.offset = new Vector2(-0.33f, -0.83f);
         //monster_lower.size = new Vector2(0.90f, 1.58f);
-        while (i < 63)
+        while (i < 43)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -175,7 +175,7 @@ public class Enemy_Bird : Enemy
         //monster_lower.size = new Vector2(1f, 1.35f);
         AttackChecking = true;
         BirdAttackArea.SetActive(true);
-        while (i < 70)
+        while (i < 48)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -192,14 +192,14 @@ public class Enemy_Bird : Enemy
         //下のコライダーを削除
         //monster_lower.enabled = false;
         //上部のコライダーを再配置
-        monster_upper.offset = new Vector2(0f, -0.4f);
-        monster_upper.size = new Vector2(3.45f, 2.44f);
+        monster_upper.offset = new Vector2(0f, 0.1f);
+        monster_upper.size = new Vector2(3.1f, 2.0f);
     }
     void AttackAnim()
     {
         //上部のコライダーを再配置
-        monster_upper.offset = new Vector2(0f,0.08f);
-        monster_upper.size = new Vector2(3.45f, 3.4f);
+        monster_upper.offset = new Vector2(0f, 0.1f);
+        monster_upper.size = new Vector2(3.1f, 2.0f);
         ////下のコライダーをせいせいして再配置
         //monster_lower.offset = new Vector2(-.3f, -.5f);
         //monster_lower.size = new Vector2(1.42f, 1.6f);
@@ -215,17 +215,26 @@ public class Enemy_Bird : Enemy
     public bool PlayerInAttackArea()
     {
         var InAttack = false;
-        if (IsMoving && AttackChecking && !HadAttack)
+        if (IsMoving && AttackChecking)
         {
-            //接触ダメージをいったんなしにする
-            HadAttack = true;
-            StartCoroutine(HadAttackReset());
             //鳥攻撃
             AttackChecking = false;
             StartCoroutine(Attacking());
             InAttack = true;
         }
         return InAttack;
+    }
+
+    public bool HadAttacked()
+    {
+        if (!HadAttack)
+        {
+            //接触ダメージをいったんなしにする
+            HadAttack = true;
+            StartCoroutine(HadAttackReset());
+            return true;
+        }
+        return false;
     }
 
     public bool GetPlayerAttacked()

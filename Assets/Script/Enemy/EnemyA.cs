@@ -31,4 +31,5 @@ public class EnemyA : Enemy
         //“G‚Ìscript‚ÉŠî‚Ã‚­
         base.Update();
     }
+
 }

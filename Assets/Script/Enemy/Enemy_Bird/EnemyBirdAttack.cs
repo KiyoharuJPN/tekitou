@@ -6,9 +6,12 @@ public class EnemyBirdAttack : MonoBehaviour
     {
         if (collision.CompareTag("Player") && GetComponentInParent<Enemy_Bird>().GetPlayerAttacked())
         {
-            GetComponentInParent<Enemy_Bird>().SetPlayerAttacked(false);
-            collision.GetComponent<PlayerController>().KnockBack(transform.position, GetComponentInParent<Enemy_Bird>().GetKnockBackForce());
-            collision.GetComponent<PlayerController>()._Damage(GetComponentInParent<Enemy_Bird>().GetDamage());
+            if (GetComponentInParent<Enemy_Bird>().HadAttacked())
+            {
+                GetComponentInParent<Enemy_Bird>().SetPlayerAttacked(false);
+                collision.GetComponent<PlayerController>().KnockBack(transform.position, GetComponentInParent<Enemy_Bird>().GetKnockBackForce());
+                collision.GetComponent<PlayerController>()._Damage(GetComponentInParent<Enemy_Bird>().GetDamage());
+            }
         }
     }
 }
