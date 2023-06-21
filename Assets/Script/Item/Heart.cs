@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Heart : Item
 {
-    GameObject player;
+    //GameObject player;
 
-    bool inCheck = false;
-    private void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
+    //private void Start()
+    //{
+    //    //player = GameObject.FindWithTag("Player");
+    //}
     override protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!inCheck)
-        {
-            inCheck = true;
+        if (collision.CompareTag("Player")) 
+        { 
             Debug.Log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             SoundManager.Instance.PlaySE(SESoundData.SE.GetHeart);
-            player.GetComponent<PlayerController>()._Heel(itemData.resilience);
+            collision.GetComponent<PlayerController>()._Heel(itemData.resilience);
             base.OnTriggerEnter2D(collision);
         }
     }
