@@ -9,7 +9,6 @@ public class DownAttack
     public static async void _DownAttack(PlayerController player)
     {
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
-       
         player.isDropAttack = true;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
         await Task.Delay(300);
