@@ -2527,7 +2527,7 @@ Transform:
   m_Children:
   - {fileID: 1609596985}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &536327468
 Tilemap:
@@ -7688,11 +7688,7 @@ PrefabInstance:
     - target: {fileID: 854406889428429381, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
       propertyPath: p_obj
       value: 
-      objectReference: {fileID: 1886297207}
-    - target: {fileID: 854406889783310850, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
-      propertyPath: p_obj
-      value: 
-      objectReference: {fileID: 1886297207}
+      objectReference: {fileID: 1952311582}
     - target: {fileID: 854406889783310853, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -8045,7 +8041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8922,7 +8918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8251476473879665652, guid: 3ef8866cf055af74fa3343ac6f61fd1b, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8251476473879665652, guid: 3ef8866cf055af74fa3343ac6f61fd1b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -25206,6 +25202,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1447750696888637240, guid: 5a4c82d4c26aa9e448c07ab6da22bbe5, type: 3}
   m_PrefabInstance: {fileID: 1939122959}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1952311582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 854406889783310905, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
+  m_PrefabInstance: {fileID: 1365874735}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1958677041
 GameObject:
   m_ObjectHideFlags: 0
@@ -25536,7 +25537,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
   m_PrefabInstance: {fileID: 1546071439}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886297207}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0a20995b519f84992c801192965f60, type: 3}

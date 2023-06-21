@@ -182,7 +182,7 @@ MonoBehaviour:
     1\n\u3000\u4F53\u529B\u6E80\u30BF\u30F3\u3000\u3000: 2\n\u3000\u30B9\u30C6\u30FC\u30B8\u30EA\u30BB\u30C3\u30C8:
     3\n\u3000\u30B3\u30F3\u30DC1\u6E1B\u5C11\u3000 : 4\n\u3000\u30B3\u30F3\u30DC1\u8FFD\u52A0\u3000
     : 5\n\u3000\u30B3\u30F3\u30DC10\u6E1B\u5C11   : 6\n\u3000\u30B3\u30F3\u30DC10\u8FFD\u52A0  
-    : 7\n\n\u30BF\u30A4\u30C8\u30EB\u3078\u3000: ESC\n\u30E1\u30CB\u30E5\u30FC\u8868\u793A\u30FB\u975E\u8868 
+    : 7\n\n\u30BF\u30A4\u30C8\u30EB\u3078\u3000: ESC\n\u30E1\u30CB\u30E5\u30FCOn/Off 
     : 0\u30AD\u30FC"
 --- !u!1 &854406889667012771
 GameObject:
@@ -457,8 +457,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5404\u72B6\u614B\u8868\u793A(\u9069\u5B9C\u8FFD\u52A0\uFF09\n\n\u30D7\u30EC\u30A4\u30E4\u30FC\u72B6\u614B\n
-    Position\u3000: X\n\u3000\u3000\u3000           Y\n\n\n\n"
+  m_Text: "\u5404\u72B6\u614B\u8868\u793A(\u9069\u5B9C\u8FFD\u52A0\uFF09\n\n\u30D7\u30EC\u30A4\u30E4\u30FC\u72B6\u614B\nPosition\u3000:
+    X\n\u3000\u3000\u3000           Y\n\n\n\n"
 --- !u!1 &854406890432236879
 GameObject:
   m_ObjectHideFlags: 0
