@@ -391,6 +391,7 @@ public class PlayerController : MonoBehaviour
     {
         isExAttack = false;
         enemylist.Clear();
+        NomalPlayer();
         animator.SetBool("IsExAttack", isExAttack);
         GameManager.Instance.PlayerExAttack_End();
     }
