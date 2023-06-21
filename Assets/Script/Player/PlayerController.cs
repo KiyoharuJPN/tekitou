@@ -97,12 +97,15 @@ public class PlayerController : MonoBehaviour
     //通常攻撃再使用確認
     bool canNomalAttack = true;
 
-    //上昇攻撃多重発生防止用bool
+    //技関係Bool関連（is:その技中か　can:その技が使用可能か）
+    internal bool isUpAttack = false;
     internal bool canUpAttack = true;
-
-    //SideAttack関連
-    const float dashingTime = 0.2f;
-    bool canSideAttack = true;
+    internal bool isDropAttack = false;
+    internal bool canDropAttack = true;
+    internal bool isSideAttack = false;
+    internal bool canSideAttack = true;
+    internal bool isExAttack = false;
+    
 
     //KnockBack関連
     Vector2 knockBackDir;   //ノックバックされる方向
@@ -116,11 +119,7 @@ public class PlayerController : MonoBehaviour
     internal bool isAttack = false;
     bool isAttackKay = false;
 
-    //横攻撃の左右判定(trueなら右）
-    bool sideJudge;
-
     //必殺技時に取得する・保存する為のEnemyList[
-    [SerializeField]
     internal List<GameObject> enemylist = new List<GameObject>();
 
     //ダメージカメラ処理
@@ -134,11 +133,8 @@ public class PlayerController : MonoBehaviour
     internal bool isJumping = false;
     internal bool isLanding = false;
     internal bool isSquatting = false;
-    internal bool isUpAttack = false;
-    internal bool isDropAttack = false;
-    internal bool isSideAttack = false;
-    internal bool isExAttack = false;
     internal bool isWarpDoor = false;
+    internal int attckType;
 
     //boss判定用
     internal bool canMove = true;
@@ -157,6 +153,7 @@ public class PlayerController : MonoBehaviour
         if (isExAttack || isWarpDoor)
         {
             rb.velocity = Vector2.zero;
+            gameObject.layer = LayerMask.NameToLayer("PlayerAction");
         }
 
         //ノックバック処理
@@ -176,6 +173,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (canMove) _Skill();
+        BackgroundScroll();
 
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsRun", isRun);
@@ -209,7 +207,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //技入力検知・発生
+    //技入力検知
     void _Skill()
     {
         float lsh = Input.GetAxis("L_Stick_H");
@@ -232,13 +230,11 @@ public class PlayerController : MonoBehaviour
         {
             AttackAction("UpAttack");
         }
-
         //落下攻撃攻撃
         if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8))
         {
             AttackAction("DawnAttack");
         }
-
         //横移動攻撃
         if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8))
         {
@@ -248,7 +244,6 @@ public class PlayerController : MonoBehaviour
         {
             AttackAction("SideAttack_left");
         }
-
         //必殺技
         if (Input.GetKey("joystick button 4") && Input.GetKey("joystick button 5"))
         {
@@ -257,13 +252,11 @@ public class PlayerController : MonoBehaviour
                 AttackAction("ExAttack");
             }
         }
-
         //手動攻撃：攻撃ボタンが押されせたとき
         if (Input.GetKeyDown("joystick button 2") && canNomalAttack)
         {
             AttackAction("NomalAttack");
         }
-
         if (Input.GetKey("joystick button 2") && canNomalAttack)
         {
             AttackAction("NomalAttack");
@@ -283,23 +276,22 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case "DawnAttack":
-                if (isAttack && (!isFalling || !isJumping) && isDropAttack) break;
+                if (isAttack || !(isFalling || isJumping) || !canDropAttack) break;
+                canDropAttack = false;
                 DownAttack._DownAttack(this);
                 isAttack = true;
                 break;
 
             case "SideAttack_right":
-                if(isAttack && isSideAttack && !canSideAttack) break;
+                if(isAttack || !canSideAttack) break;
                 canSideAttack = false;
-                sideJudge = true;
-                StartCoroutine(SideAttack());
+                SideAttack.SideAttackStart(this, true, this);
                 break;
 
             case "SideAttack_left":
-                if (isAttack && isSideAttack && !canSideAttack) break;
+                if (isAttack || !canSideAttack) break;
                 canSideAttack = false;
-                sideJudge = false;
-                StartCoroutine(SideAttack());
+                SideAttack.SideAttackStart(this, false, this);
                 break;
 
             case "ExAttack":
@@ -315,7 +307,11 @@ public class PlayerController : MonoBehaviour
                 canNomalAttack = false;
                 animator.SetTrigger("IsNomalAttack");
                 var skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-                StartCoroutine(_interval(skill.coolTime));
+                if(isFalling || isJumping) //空中通常攻撃の場合
+                {
+                    StartCoroutine(_interval(0.5f));
+                }
+                else StartCoroutine(_interval(skill.coolTime));
                 break;
         }
     }
@@ -340,6 +336,7 @@ public class PlayerController : MonoBehaviour
             isKnockingBack = false;
         }
     }
+
     //KnockBackされたら呼ぶ関数
     public void KnockBack(Vector3 position, float force)
     {
@@ -352,77 +349,14 @@ public class PlayerController : MonoBehaviour
         knockBackForce = force;
     }
 
-    //上昇攻撃でステージにぶつかった時用
-    private void OnTriggerEnter2D(Collider2D collision)
-    {  
-        isUpAttack = false;
-    }
-
-    //横攻撃左右判定
-    private void Side(Skill skill)
-    {
-        Vector3 localScale = transform.localScale;
-        if (transform.localScale.x > 0)
-        {
-            if (sideJudge)
-            {
-                rb.velocity = new Vector2(transform.localScale.x * skill.distance, 0f);
-                StartScroll();
-            }
-            else if (!sideJudge)
-            {
-                rb.velocity = new Vector2(-transform.localScale.x * skill.distance, 0f);
-                localScale.x *= -1f;
-                transform.localScale = localScale;
-                StartScroll();
-            }
-        }
-        else if (transform.localScale.x < 0)
-        {
-            if (sideJudge)
-            {
-                rb.velocity = new Vector2(-transform.localScale.x * skill.distance, 0f);
-                localScale.x *= -1f;
-                transform.localScale = localScale;
-                StartScroll();
-            }
-            else if (!sideJudge)
-            {
-                rb.velocity = new Vector2(transform.localScale.x * skill.distance, 0f);
-                StartScroll();
-            }
-        }
-        
-    }
-
-    //横攻撃処理
-    private IEnumerator SideAttack()
-    {
-        isAttack = true;
-        isSideAttack = true;
-        animator.SetBool("IsSideAttack", isSideAttack);
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
-        Side(skill);
-        yield return new WaitForSeconds(dashingTime);
-        rb.gravityScale = originalGravity;
-        isSideAttack = false;
-        animator.SetBool("IsSideAttack", isSideAttack);
-        enemylist.Clear();
-        isAttack = false;
-        yield return new WaitForSeconds(skill.coolTime);
-        canSideAttack = true;
-    }
-
     //必殺技
     public void ExAttackStart()
     {
-        Debug.Log("必殺技実行");
         animator.SetTrigger("ExAttack");
     }
 
-    //ヒット時（アニメーションから呼ぶ）
+    //---------------------------------------
+    //必殺技処理（アニメーションから呼ぶ）
     public void _ExAttackHitEffect()
     {
         //エフェクト生成
@@ -432,7 +366,6 @@ public class PlayerController : MonoBehaviour
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         }
     }
-
     public void _ExAttackHitEnemyDamage()
     {
         //ダメージ処理
@@ -444,7 +377,6 @@ public class PlayerController : MonoBehaviour
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         }
     }
-
     public void ExAttackHitCheck()
     {
         if(enemylist.Count == 0)
@@ -452,6 +384,7 @@ public class PlayerController : MonoBehaviour
             ExAttackEnd();
         }
     }
+    //---------------------------------------
 
     //必殺技で使用したEnemyをリセット
     public void ExAttackEnd()
@@ -570,7 +503,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //背景スクロール処理
-    private void StartScroll()
+    private void BackgroundScroll()
     {
         if (parallaxBackground != null)
         {

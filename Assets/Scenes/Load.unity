@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 2135804936}
   - component: {fileID: 2135804937}
   m_Layer: 5
-  m_Name: LoadSceCanvas
+  m_Name: LoadSceneCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -744,6 +744,7 @@ MonoBehaviour:
   - {fileID: 6642811417903670798, guid: 5827f937b9eb02e4caa99b35b63dbaa0, type: 3}
   - {fileID: 1614635713241564183, guid: 9bac71fb168db2347ae427aaffb2539d, type: 3}
   fade: {fileID: 6114365387962428608}
+  time: 2
 --- !u!222 &2135804937
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 89eeefefa9a1fb3479ca78091d5bcb4e
+guid: ded8a9a5428fc014c98968a2297b6d6c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_Skill_Ascending attack_10_0
+      name: Hero_Skill_Drop attack_2_10_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81fb0bf558984e6418d6c944da84604b
-      internalID: -571177451
+      spriteID: 8e249115d5999804ebbc7f75343b5323
+      internalID: -915791840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Skill_Ascending attack_10_1
+      name: Hero_Skill_Drop attack_2_10_1
       rect:
         serializedVersion: 2
         x: 320
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f035cf17614e66e48bb3bfa3dad51be6
-      internalID: -14879368
+      spriteID: 7590b61fe9dff2e42ba965338c38ca4c
+      internalID: 97480879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Skill_Ascending attack_10_2
+      name: Hero_Skill_Drop attack_2_10_2
       rect:
         serializedVersion: 2
         x: 640
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7e8e9b19eec4d8409a5b05a26080820
-      internalID: 724191928
+      spriteID: f967e236e6e7ce24ea3aa8cae094aa9c
+      internalID: -761438971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Skill_Ascending attack_10_3
+      name: Hero_Skill_Drop attack_2_10_3
       rect:
         serializedVersion: 2
         x: 960
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0dc3b2948b0d7b4281b08bc5bba14cb
-      internalID: -1433267590
+      spriteID: 5a4575372b383244b810cb2ea955d78c
+      internalID: 422936470
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Skill_Ascending attack_10_4
+      name: Hero_Skill_Drop attack_2_10_4
       rect:
         serializedVersion: 2
         x: 1280
@@ -202,8 +202,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9f8559cc530f7e4fa5878582b8adf13
-      internalID: -1867183829
+      spriteID: c196ee172ecb4dd42b0e32c7ab4364e1
+      internalID: -506494962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hero_Skill_Drop attack_2_10_5
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c792d56639f81428653e296574f371
+      internalID: -1823215824
       vertices: []
       indices: 
       edges: []
@@ -219,11 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hero_Skill_Ascending attack_10_2: 724191928
-      Hero_Skill_Ascending attack_10_1: -14879368
-      Hero_Skill_Ascending attack_10_4: -1867183829
-      Hero_Skill_Ascending attack_10_0: -571177451
-      Hero_Skill_Ascending attack_10_3: -1433267590
+      Hero_Skill_Drop attack_2_10_3: 422936470
+      Hero_Skill_Drop attack_2_10_4: -506494962
+      Hero_Skill_Drop attack_2_10_5: -1823215824
+      Hero_Skill_Drop attack_2_10_1: 97480879
+      Hero_Skill_Drop attack_2_10_0: -915791840
+      Hero_Skill_Drop attack_2_10_2: -761438971
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

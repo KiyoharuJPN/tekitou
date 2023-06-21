@@ -26,10 +26,12 @@ public class LoadScene : MonoBehaviour
     [SerializeField]
     LoadFadeImage fade;
     string loadScene;
-    
+
 
     //ロードシーン待機時間
-    const float time = 2f;
+    [SerializeField]
+    [Header("ロード待機時間")]
+    public float time = 2f;
 
     //多重発生防止bool
     bool canLoadScene = true;

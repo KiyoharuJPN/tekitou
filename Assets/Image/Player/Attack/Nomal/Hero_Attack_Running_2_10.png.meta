@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c82d8d44a58e8d4fb86c2240f3a83f6
+guid: e56eae4607ef7374f883f8526e2280f5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_Attack_Standing_10_0
+      name: Hero_Attack_Running_2_10_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4019dd43f6e52f45bf5de88dd83fd2f
-      internalID: -752543883
+      spriteID: a45c7cb4821bca8498c61554d1906e50
+      internalID: 1120216306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Attack_Standing_10_1
+      name: Hero_Attack_Running_2_10_1
       rect:
         serializedVersion: 2
         x: 320
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de5e5a2fc0ce75949b0280d6cfcdf2ac
-      internalID: -703746460
+      spriteID: a86216752ab476f4c9c86ebbc2360564
+      internalID: -513733216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hero_Attack_Standing_10_2
+      name: Hero_Attack_Running_2_10_2
       rect:
         serializedVersion: 2
         x: 640
@@ -160,8 +160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d585dd8328c45bf4f83e073b57f44ac1
-      internalID: 417129669
+      spriteID: 620284c61bc193a45a919efd67bce1f0
+      internalID: -1823597048
       vertices: []
       indices: 
       edges: []
@@ -177,9 +177,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hero_Attack_Standing_10_1: -703746460
-      Hero_Attack_Standing_10_2: 417129669
-      Hero_Attack_Standing_10_0: -752543883
+      Hero_Attack_Running_2_10_0: 1120216306
+      Hero_Attack_Running_2_10_1: -513733216
+      Hero_Attack_Running_2_10_2: -1823597048
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

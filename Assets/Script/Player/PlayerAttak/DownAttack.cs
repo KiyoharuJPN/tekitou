@@ -1,18 +1,22 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class DownAttack : MonoBehaviour
+public class DownAttack
 {
+    //î≠ê∂éûÇÃî˜è„è∏íl
+    const float upDistance = 5f;
+
     public static async void _DownAttack(PlayerController player)
     {
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
+       
         player.isDropAttack = true;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
         await Task.Delay(300);
         _Move(player, skill);
     }
 
-    static async void _Move(PlayerController player, Skill skill)
+    public static async void _Move(PlayerController player, Skill skill)
     {
         player.rb.velocity = new Vector2(0, 0);
         await Task.Delay(200);
