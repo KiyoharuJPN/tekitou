@@ -96,6 +96,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     //“®‰æ‚ªI‚í‚Á‚½‚ç•’Ê‚Ì“GScript‚ÉˆÚ‚·B
     void AnimationPlayed()
     {
+        
         gameObject.GetComponent<KingSlime>().enabled = true;
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         IsAnimation = false;
