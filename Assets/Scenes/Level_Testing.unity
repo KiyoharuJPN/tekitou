@@ -26285,10 +26285,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 411055618}
     m_Modifications:
-    - target: {fileID: 4636583091372101442, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
-      propertyPath: m_Name
-      value: BossHPAnimation
-      objectReference: {fileID: 0}
     - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -26336,10 +26332,6 @@ PrefabInstance:
     - target: {fileID: 6259610633585901161, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
       propertyPath: m_Name
       value: KingSlime(HPbar)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8296157368862126617, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
-      propertyPath: m_Name
-      value: BossHPbar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}

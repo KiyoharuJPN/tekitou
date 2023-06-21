@@ -10,6 +10,7 @@ public class KingSlime : Enemy
     
     public BoxCollider2D attackCheckArea;
     public CircleCollider2D knockbackAttackCircle;
+    public BossHPBar HPBar;
 
 
 
@@ -34,7 +35,6 @@ public class KingSlime : Enemy
         , ExSkillFalling = false, SkillTurnAround = false;                                            //判断用内部関数
     int movingCheck = 0, AttackMode = 0, NormalAttackAnimation;         //チェック用int関数
     GameObject playerObj;                                  //プレイヤーオブジェクト宣言
-
 
     //コールチーンよう判断関数
     bool inKSBossAtack1, inKSBossAtack2, inKSBossAtack3, inKSBossSummon, inKSMovingAnim;
@@ -417,12 +417,40 @@ public class KingSlime : Enemy
     {
         enemyRb.AddForce(new Vector2(0, -10f));
     }
+
     protected override void _Destroy()
     {
         isDestroy = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
+    }
+
+    public override void Damage(float power)
+    {
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
+        hp -= power;
+        //HPゲージを使用しているかどうか
+        if (HPBar != null)
+        {
+            HPBar.ReductionHP();
+        }
+        else
+        {
+            Debug.Log("HPBarはまだ入れてないです。もしHPBar付きで試したい場合はHPBarを付けてから試してください。");
+        }
+
+        ComboParam.Instance.ResetTime();
+        if (!hadDamaged)
+        {
+            StartCoroutine(HadDamaged());
+            hadDamaged = true;
+        }
+        if (hp <= 0)
+        {
+            PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
+            _Destroy();
+        }
     }
 
     void ClearCoroutines()

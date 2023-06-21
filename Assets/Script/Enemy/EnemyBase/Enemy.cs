@@ -375,4 +375,15 @@ public class Enemy : MonoBehaviour
         }
         isPlayerExAttack = false;
     }
+
+    //HP‚ÆFullHP‚ÌŠl“¾
+    public float GetEnemyHP()
+    {
+        return hp;
+    }
+    public float GetEnemyFullHP()
+    {
+        Debug.Log(1);
+        return enemyData.hp;
+    }
 }

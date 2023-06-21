@@ -28,6 +28,9 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     bool IsAnimation = true, StageCheck = false, anim3 =true,anim4 = true;
     Rigidbody2D enemyRb;
 
+    [Header("HPGauge‚Ì•\¦")]
+    [SerializeField]
+    GameObject HPBar;
 
     private void Start()
     {
@@ -39,7 +42,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(animationControler);
+        //Debug.Log(animationControler);
         animator.SetInteger("AnimationControler", animationControler);
         animator.SetBool("IsAnimation", IsAnimation);
     }
@@ -96,7 +99,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     //“®‰æ‚ªI‚í‚Á‚½‚ç•’Ê‚Ì“GScript‚ÉˆÚ‚·B
     void AnimationPlayed()
     {
-        
+        HPBar.SetActive(true);
         gameObject.GetComponent<KingSlime>().enabled = true;
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         IsAnimation = false;
