@@ -24,7 +24,7 @@ public class Player_Jump : MonoBehaviour
     //ジャンプした際の位置
     float jumpPos;
 
-    bool canUpAttack = false;
+    bool isUpAttack = false;
     Skill UpAttackStatus;
 
     //カメラ揺れ（突き刺し終了時に使用）
@@ -66,7 +66,7 @@ public class Player_Jump : MonoBehaviour
     private void FixedUpdate()
     {
         if (player.isExAttack) return;
-        if (canUpAttack)
+        if (isUpAttack)
         {
             UpAttackMove();
             return;
@@ -111,6 +111,7 @@ public class Player_Jump : MonoBehaviour
             //ジャンプ前位置格納
             jumpPos = this.transform.position.y;
             isjump = true;
+            player.playerSE._JumpSE();
         }
         //ジャンプ2段目
         else if(canSecondJump)
@@ -152,7 +153,7 @@ public class Player_Jump : MonoBehaviour
         jumpPos = this.transform.position.y;
         jumpHight = 3f;
         await Task.Delay(200);
-        canUpAttack = true;
+        isUpAttack = true;
         StartCoroutine(UpAttackEnd());
     }
 
@@ -171,7 +172,7 @@ public class Player_Jump : MonoBehaviour
             yield return null;
         }
 
-        canUpAttack = false;
+        isUpAttack = false;
         player.isUpAttack = false;
         player.animator.SetBool("IsUpAttack", player.isUpAttack);
     }

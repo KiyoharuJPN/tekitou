@@ -26,7 +26,7 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
-        if (player.isSideAttack || player.isDropAttack 
+        if (player.isSideAttack || !player.canDropAttack 
             || player.isExAttack || player.isWarpDoor || player.isUpAttack)
         {
             return;

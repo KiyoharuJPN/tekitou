@@ -38,9 +38,11 @@ public class Player_IsGround : MonoBehaviour
             jumpData.isSecondJump = false;
 
             //ìÀÇ´éhÇµçUåÇèIÇÌÇË
-            if (player.isDropAttack || player.isAttack)
+            if (player.isDropAttack)
             {
                 jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
+                player.isDropAttack = false;
+                player.animator.SetBool("IsDropAttack", player.isDropAttack);
                 Invoke(nameof(DropAttackOff), 0.5f);
             };
             Invoke(nameof(Landingoff), 0.1f);
@@ -64,8 +66,7 @@ public class Player_IsGround : MonoBehaviour
 
     void DropAttackOff()
     {
-        player.isDropAttack = false;
-        player.animator.SetBool("IsDropAttack", player.isDropAttack);
         player.isAttack = false;
+        player.canDropAttack = true;
     }
 }

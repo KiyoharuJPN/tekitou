@@ -15,6 +15,9 @@ public class LoadFadeImage : MonoBehaviour
     private bool compFadeIn = false;
     public bool compFadeOut = false;
 
+    [SerializeField]
+    float fadeTime = 1f;
+
     /// <summary>
     /// フェードインを開始する
     /// </summary>
@@ -99,7 +102,7 @@ public class LoadFadeImage : MonoBehaviour
     private void FadeInUpdate()
     {
         //フェード中
-        if (timer < 1f)
+        if (timer < fadeTime)
         {
             img.color = new Color(0, 0, 0, 1 - timer);
         }
@@ -113,7 +116,7 @@ public class LoadFadeImage : MonoBehaviour
     //フェードアウト中
     private void FadeOutUpdate()
     {
-        if (timer < 1f)
+        if (timer < fadeTime)
         {
             img.color = new Color(0, 0, 0, timer);
         }
