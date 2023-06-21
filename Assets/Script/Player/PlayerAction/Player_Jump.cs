@@ -60,7 +60,7 @@ public class Player_Jump : MonoBehaviour
         if(player.isUpAttack && !isSecondJump) canSecondJump = true;
 
         //ジャンプキー取得
-        if (player.canMove && !player.isAttack) JumpBottan();
+        if (player.canMove || !player.isAttack) JumpBottan();
     }
 
     private void FixedUpdate()
