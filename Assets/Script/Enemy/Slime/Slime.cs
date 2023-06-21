@@ -132,4 +132,14 @@ public class Slime : Enemy
         movingWidth *= -1;
         base.TurnAround();
     }
+
+    public float GetBossHP()
+    {
+        return hp;
+    }
+
+    public float GetBossFullHP()
+    {
+        return enemyData.hp;
+    }
 }

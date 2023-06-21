@@ -2092,6 +2092,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1369451369}
+  - {fileID: 5489072068453652903}
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8724,7 +8725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1369451369
 Transform:
   m_ObjectHideFlags: 0
@@ -26277,6 +26278,76 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &5489072068453652902
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 411055618}
+    m_Modifications:
+    - target: {fileID: 4636583091372101442, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_Name
+      value: BossHPAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259610633585901161, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_Name
+      value: KingSlime(HPbar)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296157368862126617, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+      propertyPath: m_Name
+      value: BossHPbar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+--- !u!4 &5489072068453652903 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6259610633585901160, guid: ee1812c1a44f0fe4fb6e48399708decc, type: 3}
+  m_PrefabInstance: {fileID: 5489072068453652902}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6142128196712105576
 Transform:
   m_ObjectHideFlags: 0
