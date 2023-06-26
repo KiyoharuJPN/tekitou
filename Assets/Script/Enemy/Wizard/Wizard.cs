@@ -5,23 +5,31 @@ using UnityEngine;
 public class Wizard : Enemy
 {
     [Tooltip("wizardが扱う攻撃")]
-    public GameObject Wizard_MagicBall;
+    public GameObject Wizard_MagicBall,WMBAttackPos;
+    [Tooltip("攻撃距離")]
+    public int Distance = 15;
+    [Tooltip("攻撃スピード")]
+    public float MagicSpeed = 5;
 
     //プレイヤーのオブジェクト
     GameObject playerObj;
-
+    Vector2 direction;
 
 
     protected override void Start()
     {
         //playerのオブジェクトを取得する
         playerObj = GameObject.Find("Hero");
+        direction = new Vector2(MagicSpeed, 0);
 
         base.Start();
     }
 
     protected override void Update()
     {
+        //敵のscriptに基づく
+        base.Update();
+
         //飛ばされていない限り動きを続く
         if (!isDestroy)
         {
@@ -44,7 +52,18 @@ public class Wizard : Enemy
         //プレイヤー位置を判断して、回転を行う
         LookForPlayer();
 
-
+        //プレイヤーが範囲内に入った時
+        if(Mathf.Abs(gameObject.transform.position.x - playerObj.transform.position.x) < Distance)
+        {
+            //攻撃モーションを行う
+            if (!IsAttacking) IsAttacking = true;
+        }
+        else
+        {
+            //待機モーション
+            if (IsAttacking) IsAttacking = false;
+        }
+        
     }
 
 
@@ -58,7 +77,23 @@ public class Wizard : Enemy
     {
         //方向回転だけ
         gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-
+    }
+    //外部じゃないけど、方向を変える時に使わなければならないコードなので並んでみた。
+    //攻撃方向を反転する
+    void TurnADAround()
+    {
+        var check = true;
+        //攻撃する方向を変更する
+        if (direction.x > 0 && check)
+        {
+            direction = new Vector2(-MagicSpeed, 0);
+            check = false;
+        }
+        if (direction.x < 0 && check)
+        {
+            direction = new Vector2(MagicSpeed, 0);
+            //check = false;
+        }
     }
 
 
@@ -71,9 +106,11 @@ public class Wizard : Enemy
         if (playerObj.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x > 0)
         {
             TurnAround();
+            TurnADAround();
         }else if(playerObj.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x < 0)
         {
             TurnAround();
+            TurnADAround();
         }
     }
     //重力関連
@@ -85,5 +122,12 @@ public class Wizard : Enemy
         {
             enemyRb.velocity = Vector3.zero;
         }
+    }
+    //攻撃用関数
+    void ShotMagicBall()
+    {
+        GameObject Magic = ObjectPool.Instance.GetObject(Wizard_MagicBall);
+        Magic.transform.position = WMBAttackPos.transform.position;
+        Magic.GetComponent<Wizard_MagicBall>().AKForce(enemyData.attackPower, enemyData.knockBackValue, direction);
     }
 }

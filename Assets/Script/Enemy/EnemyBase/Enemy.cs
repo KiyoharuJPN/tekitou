@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false, hadDamaged = false;
 
     //プレイヤー必殺技中かどうか
+    [System.NonSerialized]
     public bool isPlayerExAttack;
 
     protected float hp;
