@@ -1,29 +1,42 @@
+using System.Collections;
 using UnityEngine;
 
-public class NomalAttack : MonoBehaviour
+public class NomalAttack
 {
-    [SerializeField]
-    PlayerController player;
-    Skill skill;
+    static Skill skill;
+    //空中時のクールタイム
+    const float airCoolTime = 0.5f;
 
-    private void Start()
+    public static void NomalAttackStart(PlayerController player)
     {
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
+        player.canNomalAttack = false;
+        player.animator.SetTrigger("IsNomalAttack");
+        player.isAttack = true;
     }
 
-    //攻撃範囲に入った時
-    private void OnTriggerEnter2D(Collider2D other)
+    public static void AttackCool(PlayerController player, MonoBehaviour mono)
     {
-        if (other.CompareTag("Enemy") && !player.enemylist.Contains(other.gameObject))
+        if (player.isFalling || player.isJumping) //空中通常攻撃の場合
         {
-            player.enemylist.Add(other.gameObject);
-            HitDamage(other);
+            mono.StartCoroutine(_NomalAttackInterval(airCoolTime, player));
         }
+        else mono.StartCoroutine(_NomalAttackInterval(skill.coolTime, player));
     }
 
-    void HitDamage(Collider2D Enemy)
+    //クールタイム用コルーチン
+    static IEnumerator _NomalAttackInterval(float coolTime, PlayerController player)
     {
-        player._Attack(Enemy, skill.damage);
-        player._HitEfect(Enemy.transform, skill.hitEffectAngle);
+        float time = coolTime;
+
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+
+        player.isAttack = false;
+        player.enemylist.Clear();
+        player.canNomalAttack = true;
     }
 }

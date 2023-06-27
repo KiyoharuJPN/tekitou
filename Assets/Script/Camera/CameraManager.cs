@@ -30,7 +30,7 @@ public class CameraManager : MonoBehaviour
     }
     internal void ChengeCameraArea_Tutorial()
     {
-        CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Nomal.GetComponent<PolygonCollider2D>();
+        CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Tutorial.GetComponent<PolygonCollider2D>();
     }
 
 

@@ -59465,6 +59465,14 @@ PrefabInstance:
       propertyPath: parallaxBackground
       value: 
       objectReference: {fileID: 569224488}
+    - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: knockBack.knockBackTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: knockBack.cantMovingTime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: shake
       value: 

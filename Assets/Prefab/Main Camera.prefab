@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CMvcam: {fileID: 0}
+  cameraArea_Tutorial: {fileID: 610407288508818684, guid: ce626e4253907a0439e9b14e638f3f50, type: 3}
   cameraArea_Nomal: {fileID: 5950224617204178710, guid: 800809eeb018dba49996240ae79cbc5a, type: 3}
   cameraArea_Boss: {fileID: 8238288887400494910, guid: 9de8c391060cbbf40b9f11900cefe772, type: 3}
 --- !u!114 &7281289739213828374
