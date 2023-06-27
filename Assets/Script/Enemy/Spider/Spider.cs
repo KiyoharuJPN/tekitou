@@ -11,7 +11,7 @@ public class Spider : Enemy
     {
         base.Start();
         //ˆÚ“®‘¬“x‚ğ“à•”ŠÖ”‚É‘ã“ü
-        moveSpeed = MoveSpeed;
+        moveSpeed = -MoveSpeed;
     }
 
     protected override void Update()
@@ -59,6 +59,7 @@ public class Spider : Enemy
     public override void TurnAround()
     {
         base.TurnAround();
+        enemyRb.velocity = Vector2.zero;
     }
     public override void PlayerInAttackArea()
     {
