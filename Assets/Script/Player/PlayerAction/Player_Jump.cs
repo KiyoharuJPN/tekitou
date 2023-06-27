@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerController;
 
@@ -15,16 +16,17 @@ public class Player_Jump : MonoBehaviour
     private string platformTag = "GroundPlatform";
 
     internal float jumpTime = 0;
-    bool isjump = false;
+    internal bool isjump = false;
     internal bool FarstJump;
     internal bool canSecondJump = false;
     internal bool isSecondJump = false;
-    float jumpHight;
+    internal float jumpHight;
 
     //ジャンプした際の位置
-    float jumpPos;
+    internal float jumpPos;
 
-    bool isUpAttack = false;
+    internal const float upAttackHight = 2f;
+    internal bool isUpAttack = false;
     Skill UpAttackStatus;
 
     //カメラ揺れ（突き刺し終了時に使用）
@@ -66,9 +68,8 @@ public class Player_Jump : MonoBehaviour
     private void FixedUpdate()
     {
         if (player.isExAttack) return;
-        if (isUpAttack)
+        if (isUpAttack || player.isDropAttack || player.isSideAttack)
         {
-            UpAttackMove();
             return;
         }
         Jump();
@@ -146,43 +147,20 @@ public class Player_Jump : MonoBehaviour
         }
     }
 
-    public async void UpAttack()
-    {
-        player.isUpAttack = true;
-        player.animator.SetBool("IsUpAttack", player.isUpAttack);
-        jumpPos = this.transform.position.y;
-        jumpHight = 3f;
-        await Task.Delay(200);
-        isUpAttack = true;
-        StartCoroutine(UpAttackEnd());
-    }
-
-    void UpAttackMove()
-    {
-        player.rb.velocity = new Vector2(0, HeigetLimt(jumpPos, jumpHight, UpAttackStatus.distance) + jumpTime * Time.deltaTime);
-    }
-
-    private IEnumerator UpAttackEnd()
-    {
-        var time = 0.4f;
-
-        while (time > 0)
-        {
-            time -= Time.deltaTime;
-            yield return null;
-        }
-
-        isUpAttack = false;
-        player.isUpAttack = false;
-        player.animator.SetBool("IsUpAttack", player.isUpAttack);
-    }
-
     //上昇制限処理
-    float HeigetLimt(float _jumpPos, float _jumpHeight, float distance)
+    internal float HeigetLimt(float _jumpPos, float _jumpHeight, float distance)
     {
         if (_jumpPos + _jumpHeight <= player.transform.position.y)
         {
-            return distance * 0.3f;
+            if (isUpAttack)
+            {
+                UpAttack.UpAttackEnd(player, this);
+                return distance * 0.1f;
+            }
+            else
+            {
+                return distance * 0.3f;
+            }
         }
         else
         {

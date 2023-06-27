@@ -1,13 +1,15 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class DownAttack
+public class DropAttack
 {
     //î≠ê∂éûÇÃî˜è„è∏íl
     const float upDistance = 5f;
 
-    public static async void _DownAttack(PlayerController player)
+    public static async void DropAttackStart(PlayerController player)
     {
+        player.canDropAttack = false;
+        player.isAttack = true;
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
         player.isDropAttack = true;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);

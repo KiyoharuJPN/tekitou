@@ -44,8 +44,12 @@ public class Player_IsGround : MonoBehaviour
                 player.isDropAttack = false;
                 player.animator.SetBool("IsDropAttack", player.isDropAttack);
                 Invoke(nameof(DropAttackOff), 0.5f);
-            };
-            Invoke(nameof(Landingoff), 0.1f);
+            }
+            else 
+            {
+                Invoke(nameof(Landingoff), 0.1f);
+            }
+            
         }
     }
 
@@ -68,5 +72,6 @@ public class Player_IsGround : MonoBehaviour
     {
         player.isAttack = false;
         player.canDropAttack = true;
+        Landingoff();
     }
 }

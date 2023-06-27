@@ -20,11 +20,11 @@ public class ExAttackParam : MonoBehaviour
     [SerializeField]
     GameObject exAttackText;
 
-    private bool isExAttack;
+    private bool canExAttack;
 
-    public bool GetIsExAttack
+    public bool GetCanExAttack
     {
-        get { return isExAttack; }
+        get { return canExAttack; }
     }
 
     int _exAttack;
@@ -55,7 +55,7 @@ public class ExAttackParam : MonoBehaviour
         exAttackText.GetComponent<Image>().enabled = false;
         exGauge.fillAmount = 0f;
         _exAttack = 0;
-        isExAttack = false;
+        canExAttack = false;
         
     }
 
@@ -68,7 +68,7 @@ public class ExAttackParam : MonoBehaviour
         if (gauge == _exAttack)
         {
             exAttackText.GetComponent<Image>().enabled = true;
-            isExAttack = true;
+            canExAttack = true;
         }
     }
 
@@ -86,7 +86,7 @@ public class ExAttackParam : MonoBehaviour
         if (gauge == _exAttack)
         {
             exAttackText.GetComponent<Image>().enabled = true;
-            isExAttack = true;
+            canExAttack = true;
         }
     }
 
@@ -101,7 +101,7 @@ public class ExAttackParam : MonoBehaviour
             if (gauge == _exAttack)
             {
                 exAttackText.GetComponent<Image>().enabled = true;
-                isExAttack = true;
+                canExAttack = true;
             }
             yield return null;
         }

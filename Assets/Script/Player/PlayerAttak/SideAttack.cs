@@ -15,6 +15,7 @@ public class SideAttack:MonoBehaviour
     public static IEnumerator _SideAttack(PlayerController player, bool sideJudge)
     {
         //アニメーションセット
+        player.canSideAttack = false;
         player.isAttack = true;
         player.isSideAttack = true;
         player.animator.SetBool("IsSideAttack", player.isSideAttack);

@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
     internal ParallaxBackground parallaxBackground;
 
     //通常攻撃再使用確認
-    bool canNomalAttack = true;
+    internal bool canNomalAttack = true;
 
     //技関係Bool関連（is:その技中か　can:その技が使用可能か）
     internal bool isUpAttack = false;
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     internal bool isSideAttack = false;
     internal bool canSideAttack = true;
     internal bool isExAttack = false;
-    
+    internal bool canExAttack = false;
 
     //KnockBack関連
     Vector2 knockBackDir;   //ノックバックされる方向
@@ -163,6 +163,11 @@ public class PlayerController : MonoBehaviour
             {
                 KnockingBack();
                 animator.SetBool("IsknockBack", isKnockingBack);
+                if (!canNomalAttack)
+                {
+                    isAttack = false;
+                    canNomalAttack = true;
+                }
                 return;
             }
         };
@@ -187,6 +192,7 @@ public class PlayerController : MonoBehaviour
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
+        if(ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
         enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp());
     }
 
@@ -214,9 +220,7 @@ public class PlayerController : MonoBehaviour
         float lsv = Input.GetAxis("L_Stick_V");
         float rsh = Input.GetAxis("R_Stick_H");
         float rsv = Input.GetAxis("R_Stick_V");
-
         float tri = Input.GetAxis("L_R_Trigger");
-
 
         if (tri > 0)
         {
@@ -245,19 +249,19 @@ public class PlayerController : MonoBehaviour
             AttackAction("SideAttack_left");
         }
         //必殺技
-        if (Input.GetKey("joystick button 4") && Input.GetKey("joystick button 5"))
+        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5))
         {
-            if (ExAttackParam.Instance.GetIsExAttack) 
+            if (!isAttack && canExAttack) 
             {
                 AttackAction("ExAttack");
             }
         }
         //手動攻撃：攻撃ボタンが押されせたとき
-        if (Input.GetKeyDown("joystick button 2") && canNomalAttack)
+        if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack)
         {
             AttackAction("NomalAttack");
         }
-        if (Input.GetKey("joystick button 2") && canNomalAttack)
+        if (Input.GetKey(KeyCode.JoystickButton2) && canNomalAttack)
         {
             AttackAction("NomalAttack");
         }
@@ -270,27 +274,21 @@ public class PlayerController : MonoBehaviour
         {
             case "UpAttack":
                 if (isAttack || !canUpAttack) break;
-                canUpAttack = false;
-                jump.UpAttack();
-                isAttack = true;
+                UpAttack.UpAttackStart(this, jump,this);
                 break;
 
             case "DawnAttack":
                 if (isAttack || !(isFalling || isJumping) || !canDropAttack) break;
-                canDropAttack = false;
-                DownAttack._DownAttack(this);
-                isAttack = true;
+                DropAttack.DropAttackStart(this);
                 break;
 
             case "SideAttack_right":
                 if(isAttack || !canSideAttack) break;
-                canSideAttack = false;
                 SideAttack.SideAttackStart(this, true, this);
                 break;
 
             case "SideAttack_left":
                 if (isAttack || !canSideAttack) break;
-                canSideAttack = false;
                 SideAttack.SideAttackStart(this, false, this);
                 break;
 
@@ -303,17 +301,17 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case "NomalAttack":
-                if(!canNomalAttack) break;
-                canNomalAttack = false;
-                animator.SetTrigger("IsNomalAttack");
-                var skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-                if(isFalling || isJumping) //空中通常攻撃の場合
-                {
-                    StartCoroutine(_interval(0.5f));
-                }
-                else StartCoroutine(_interval(skill.coolTime));
+                if(isAttack || !canNomalAttack) break;
+                NomalAttack.NomalAttackStart(this);
                 break;
         }
+    }
+
+    //通常攻撃終了
+    void _NomalAttackEnd()
+    {
+        isAttack = false;
+        NomalAttack.AttackCool(this,this);
     }
 
     //KnockBackされたときの処理
@@ -384,8 +382,6 @@ public class PlayerController : MonoBehaviour
             ExAttackEnd();
         }
     }
-    //---------------------------------------
-
     //必殺技で使用したEnemyをリセット
     public void ExAttackEnd()
     {
@@ -395,6 +391,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsExAttack", isExAttack);
         GameManager.Instance.PlayerExAttack_End();
     }
+    //---------------------------------------
 
     //スキルアクション中無敵に使用するメソッド
     public void SkillActionPlayer()
@@ -510,19 +507,5 @@ public class PlayerController : MonoBehaviour
         {
             parallaxBackground.StartScroll(this.transform.position);
         }
-    }
-
-    //クールタイム用コルーチン
-    IEnumerator _interval(float coolTime)
-    {
-        
-        float time = coolTime;
-        while (time > 0)
-        {
-            time -= Time.deltaTime;
-            yield return null;
-        }
-        enemylist.Clear();
-        canNomalAttack = true;
     }
 }
