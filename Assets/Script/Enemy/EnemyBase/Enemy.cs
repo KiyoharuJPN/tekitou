@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     //移動速度内部関数
     protected float moveSpeed;
     //チェック用内部関数
-    protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false, hadDamaged = false;
+    protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false, hadDamaged = false, PlayerNotAttacked = true, AttackChecking = true;
 
     //プレイヤー必殺技中かどうか
     [System.NonSerialized]
@@ -295,7 +295,7 @@ public class Enemy : MonoBehaviour
     //外から今の吹き飛ばし状態確認
     public bool GetIsBlowing()
     {
-        return IsBlowing;
+        return isDestroy;
     }
 
     //攻撃力を外で取得する
@@ -308,6 +308,26 @@ public class Enemy : MonoBehaviour
     public float GetKnockBackForce()
     {
         return enemyData.knockBackValue;
+    }
+
+    //プレイヤーが攻撃エリアに要る時の動き（AttackCheckAreaから呼ばれる）
+    public virtual void PlayerInAttackArea()
+    {
+        //trueの修正は各スクリプトで書いてください。
+        if (IsMoving && AttackChecking)
+        {
+            AttackChecking = false;
+        }
+    }
+    //攻撃されたどうかをチェック
+    public virtual bool GetPlayerAttacked()
+    {
+        //trueの修正は各スクリプトで書いてください。
+        return PlayerNotAttacked;
+    }
+    public virtual void SetPlayerAttacked(bool PNA)
+    {
+        PlayerNotAttacked = PNA;
     }
 
     //攻撃クールダウン
