@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false, hadDamaged = false;
 
     //ƒvƒŒƒCƒ„[•KE‹Z’†‚©‚Ç‚¤‚©
+    [System.NonSerialized]
     public bool isPlayerExAttack;
 
     protected float hp;
@@ -374,5 +375,16 @@ public class Enemy : MonoBehaviour
             animator.speed = 1;
         }
         isPlayerExAttack = false;
+    }
+
+    //HP‚ÆFullHP‚ÌŠl“¾
+    public float GetEnemyHP()
+    {
+        return hp;
+    }
+    public float GetEnemyFullHP()
+    {
+        Debug.Log(1);
+        return enemyData.hp;
     }
 }

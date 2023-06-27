@@ -74,9 +74,9 @@ public class PlayerController : MonoBehaviour
         //public float invincibiltyTime;
     }
 
-    [SerializeField]
-    [Header("プレイヤーステータス")]
-    private int HP;
+    //[SerializeField]
+    //[Header("プレイヤーステータス")]
+    //private int HP;
 
     [SerializeField]
     [Header("移動ステータス")]
