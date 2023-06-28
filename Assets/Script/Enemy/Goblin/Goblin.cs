@@ -15,8 +15,8 @@ public class Goblin : Enemy
     //float x = 1,y = 1;
 
     //チェック用内部関数
-    bool AttackChecking = true, PlayerNotAttacked = true;
-    
+    //bool AttackChecking = true, PlayerNotAttacked = true;
+
 
     protected override void Start()
     {
@@ -123,7 +123,7 @@ public class Goblin : Enemy
     }
 
     //プレイヤーが攻撃エリアに要る時の動き（AttackCheckAreaから呼ばれる）
-    public void PlayerInAttackArea()
+    public override void PlayerInAttackArea()
     {
         if (IsMoving&&AttackChecking)
         {
@@ -132,11 +132,11 @@ public class Goblin : Enemy
         }
     }
 
-    public bool GetPlayerAttacked()
+    public override bool GetPlayerAttacked()
     {
         return PlayerNotAttacked;
     }
-    public void SetPlayerAttacked(bool PNA)
+    public override void SetPlayerAttacked(bool PNA)
     {
         PlayerNotAttacked = PNA;
     }

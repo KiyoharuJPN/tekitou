@@ -76,6 +76,7 @@ public class Wizard_MagicBall : MonoBehaviour
         //    yield return new WaitForSeconds(0.01f);
         //}
         yield return new WaitForSeconds(time);
+        
         if (clearWMB)
         {
             clearWMB = false;

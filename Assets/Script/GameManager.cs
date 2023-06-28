@@ -118,7 +118,14 @@ public class GameManager : MonoBehaviour
         foreach (GameObject gameObj in enemys)
         {
             enemyList.Add(gameObj);
-            gameObj.GetComponent<Enemy>().EnemyStop();
+            if (gameObj.GetComponent<Enemy>())
+            {
+                gameObj.GetComponent<Enemy>().EnemyStop();
+            }
+            else
+            {
+                gameObj.GetComponent<Projectile>().EnemyStop();
+            }
         }
     }
 
@@ -135,7 +142,15 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject gameObj in enemyList)
         {
-            gameObj.GetComponent<Enemy>().Stop_End();
+            
+            if (gameObj.GetComponent<Enemy>())
+            {
+                gameObj.GetComponent<Enemy>().Stop_End();
+            }
+            else
+            {
+                gameObj.GetComponent<Projectile>().Stop_End();
+            }
         }
         enemys = null;
         enemyList.Clear();
