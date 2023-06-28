@@ -51,7 +51,7 @@ public class Spider : Enemy
 
 
 
-    //アニメーション用関数
+    //コルーチン用関数
 
 
 

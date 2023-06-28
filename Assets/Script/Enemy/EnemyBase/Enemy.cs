@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            enemyRb.velocity = Vector2.zero;
+            enemyRb.velocity = new Vector2(0,enemyRb.velocity.y);
         }
     }
 

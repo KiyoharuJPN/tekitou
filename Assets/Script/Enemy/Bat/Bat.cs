@@ -29,8 +29,8 @@ public class Bat : Enemy
         BatStartPos = transform.position;
         BatEndPos = new Vector2(BatStartPos.x + MoveDistance, BatStartPos.y);
         //移動速度を代入する
-        LeftSpeed = new Vector2(-MoveSpeed, 0f);
-        RightSpeed = new Vector2(MoveSpeed, 0f);
+        LeftSpeed = new Vector2(-Mathf.Abs(MoveSpeed), 0f);
+        RightSpeed = new Vector2(Mathf.Abs(MoveSpeed), 0f);
         //もし最初から右へ行こうとしたら右に向かせる
         if (BatEndPos.x > transform.position.x) transform.localScale = new Vector2(-1, 1);
     }
