@@ -300,7 +300,6 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.PlayerExAttack_Start();
                 ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
                 break;
-
             case "NomalAttack":
                 if(isAttack || !canNomalAttack) break;
                 NomalAttack.NomalAttackStart(this);

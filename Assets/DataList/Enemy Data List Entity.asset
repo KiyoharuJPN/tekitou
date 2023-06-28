@@ -44,7 +44,7 @@ MonoBehaviour:
     knockBackValue: 1
     angle: 50
     num: 0
-    type: 0
+    type: 1
     speed: 0
   - id: 3
     charName: "\u58CA\u308C\u305F\u6848\u5C71\u5B50"
@@ -99,7 +99,7 @@ MonoBehaviour:
     knockBackValue: 1
     angle: 50
     num: 5
-    type: 0
+    type: 1
     speed: 0
   - id: 8
     charName: "\u30AD\u30F3\u30B0\u30B9\u30E9\u30A4\u30E0"
@@ -121,7 +121,7 @@ MonoBehaviour:
     knockBackValue: 1
     angle: 45
     num: 5
-    type: 0
+    type: 1
     speed: 0
   - id: 10
     charName: "\u9B54\u6CD5\u4F7F\u3044"

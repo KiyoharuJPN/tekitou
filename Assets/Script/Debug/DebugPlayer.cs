@@ -11,6 +11,8 @@ public class DebugPlayer : DebugBase
     internal Canvas debugCanvas;
 
     bool canEnabled = true;
+
+    bool canTimeScele = false;
     private void Update()
     {
         ControllerKeyBoard();
@@ -113,6 +115,16 @@ public class DebugPlayer : DebugBase
             }
             canEnabled = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9) && canTimeScele)
+        {
+            Time.timeScale = 0.5f;
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha9) && !canTimeScele)
+        {
+            Time.timeScale = 1f;
+        }
+
 
         //ƒ^ƒCƒgƒ‹‚Ö
         if (SceneManager.GetActiveScene().name != "Level_Testing" && Input.GetKeyDown(KeyCode.Escape))

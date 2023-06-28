@@ -116,9 +116,10 @@ public class Enemy : MonoBehaviour
         if (!isDestroy)
             return;
 
-        //‚Á”ò‚Ñ’†‚Ì‰ñ“]
+        //‚Á”ò‚Ñ’†‚Ìˆ—
         if (isDestroy)
         {
+            BoostSphere();
             EnemyRotate();
         }
     }
@@ -175,7 +176,7 @@ public class Enemy : MonoBehaviour
         enemyRb.constraints = RigidbodyConstraints2D.None;
         CalcForceDirection();
         //‚Á”ò‚ÑŠJn
-        BoostSphere();
+        
         isDestroy = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
