@@ -220,8 +220,11 @@ public class Enemy : MonoBehaviour
         float y = Mathf.Sin(rad);
 
         //プレイヤーと自身の位置関係を調査
-        if(player.transform.position.y  + 0.3f < this.transform.position.y) 
-        { y = -y; }
+        if (enemyData.type == EnemyData.EnemyType.FlyEnemy)
+        {
+            if (player.transform.position.y + 0.3f < this.transform.position.y)
+            { y = -y; }
+        }
         if(player.transform.position.x > this.transform.position.x) 
         { x = -x; }
         

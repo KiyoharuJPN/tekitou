@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
         if (isExAttack || isWarpDoor)
         {
             rb.velocity = Vector2.zero;
@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
-        if(ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
+        
         enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp());
     }
 
@@ -294,6 +294,7 @@ public class PlayerController : MonoBehaviour
 
             case "ExAttack":
                 isExAttack = true;
+                canExAttack = false;
                 animator.SetBool("IsExAttack", isExAttack);
                 ExAttackParam.Instance._EXAttack();
                 GameManager.Instance.PlayerExAttack_Start();

@@ -9,11 +9,10 @@ public class EnemyData
 
     public string charName;    //キャラクターの名前
 
-    public enum moveType
+    public enum EnemyType
     {
-        NotMove, //動かない
-        Move,    //動く
-        FlyMove　//飛ぶ
+        GrundEnemy,    //動く
+        FlyEnemy　//飛ぶ
     }
 
     public float hp;                //体力
@@ -29,12 +28,12 @@ public class EnemyData
     [Header("吹っ飛び回数")]
     public int num;
 
-    public moveType type;           //行動種類
+    public EnemyType type;           //行動種類
     public float speed;             //素早さ
 
 
     public EnemyData(float hp, int score, int attackPower, float power,
-                     float knockBackValue, float angle, int num, moveType type,  
+                     float knockBackValue, float angle, int num, EnemyType type,  
                      float speed)
     {
         this.hp = hp;
