@@ -303,6 +303,7 @@ public class PlayerController : MonoBehaviour
             case "NomalAttack":
                 if(isAttack || !canNomalAttack) break;
                 NomalAttack.NomalAttackStart(this);
+                Debug.Log(AnimationCipsTime.GetAnimationTime(animator, AnimationCipsTime.ClipType.NomalAttack_Jump));
                 break;
         }
     }

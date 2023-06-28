@@ -116,13 +116,9 @@ public class DebugPlayer : DebugBase
             canEnabled = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha9) && canTimeScele)
+        if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            Time.timeScale = 0.5f;
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha9) && !canTimeScele)
-        {
-            Time.timeScale = 1f;
+            Time.timeScale = 0.3f;
         }
 
 
