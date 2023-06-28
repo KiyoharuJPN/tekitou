@@ -118,7 +118,7 @@ public class Wizard : Enemy
     {
         base.FixedUpdate();
         Gravity();
-        if(enemyRb.velocity.y > 0)
+        if(enemyRb.velocity.y > 0 && !isDestroy)
         {
             enemyRb.velocity = Vector3.zero;
         }
