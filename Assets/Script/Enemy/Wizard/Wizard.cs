@@ -66,11 +66,6 @@ public class Wizard : Enemy
         
     }
 
-
-
-
-
-
     //ŠO•”Ú‘±—pŠÖ”
     //•ûŒü”½“]
     public override void TurnAround()
