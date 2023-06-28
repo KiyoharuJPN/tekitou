@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
+    protected bool isPlayerExAttack = false;
     public virtual void EnemyStop()
     {
         //isPlayerExAttack = true;

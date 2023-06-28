@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wizard_MagicBall : MonoBehaviour
+public class Wizard_MagicBall : Projectile
 {
     ////同時複数の魔術師の攻撃を食らうことを消すように
     //[System.NonSerialized]
@@ -15,12 +15,16 @@ public class Wizard_MagicBall : MonoBehaviour
 
     //レジッドボディ
     Rigidbody2D WMBRb;
+    //アニメーター（エクススキル用）
+    Animator animator;
 
+    Vector2 primarySpeed;
     bool clearWMB = true;
 
     private void Awake()
     {
         WMBRb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
     }
     private void OnEnable()
@@ -95,4 +99,27 @@ public class Wizard_MagicBall : MonoBehaviour
     //        }
     //        WizardHadAttack = false;
     //    }
+
+
+    //外部関数
+    public override void EnemyStop()
+    {
+        isPlayerExAttack = true;
+        primarySpeed = WMBRb.velocity;
+        WMBRb.velocity = Vector2.zero;
+        if (animator != null)
+        {
+            animator.speed = 0;
+        }
+    }
+    public override void Stop_End()
+    {
+        isPlayerExAttack = false;
+        if (animator != null)
+        {
+            animator.speed = 1;
+        }
+        WMBRb.velocity = primarySpeed;
+        isPlayerExAttack = false;
+    }
 }
