@@ -1,17 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
-
-    [SerializeField]
-    PlayerController player;
+    
+    public FadeImage fade;
+    public PlayerController player;
 
     GameObject[] enemys;
     List<GameObject> enemyList = new List<GameObject>();
@@ -48,8 +44,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PlayBGM(int ID)
+    public void PlayStart(int ID)
     {
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        fade = GameObject.FindWithTag("FadeImage").GetComponent<FadeImage>();
+
         switch (ID)
         {
             case 0:
@@ -65,6 +64,12 @@ public class GameManager : MonoBehaviour
                 BGMStart_GameOver();
                 break;
         }
+    }
+
+    //ƒvƒŒƒCƒ„[Ž€–SŽžˆ—
+    public void PlayerDeath()
+    {
+        StartCoroutine(_PlyerDeath());
     }
 
     public void AddMaxComobo(int combo)
@@ -187,5 +192,31 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         BGMStart_Result();
         Result.Instance.Result_Start();
+    }
+
+    private IEnumerator _PlyerDeath() 
+    {
+        Time.timeScale = 0.3f;
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1f;
+
+        fade.StartFadeOut();
+
+        while (!fade.IsFadeOutComplete())
+        {
+            yield return null;
+        }
+
+        if (SceneData.Instance.stock >= 1)
+        {
+            SceneData.Instance.stock--;
+            SceneData.Instance.revival = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            SceneData.Instance.revival = false;
+            SceneManager.LoadScene("FinishScene");
+        }
     }
 }

@@ -208,8 +208,12 @@ public class PlayerController : MonoBehaviour
         shake.Shake(0.2f, 0.8f, true, true);
         if (hpparam.GetHP() <= 0)
         {
+            gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+            isKnockingBack = false;
             SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
-            SceneManager.LoadScene("FinishScene");
+            animator.Play("Death");
+            shake.Shake(0.2f, 1f, true, true);
+            GameManager.Instance.PlayerDeath();
         }
     }
 

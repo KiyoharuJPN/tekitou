@@ -143,7 +143,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 6548554273560688661}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4946ab5ec7328864db5e2c8715843be7, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
-  isPlayerExAttack: 0
   movingSpeed: 0.8
   idleTime: 2.4
   GoblinAttack: {fileID: 6548554274772095305}
