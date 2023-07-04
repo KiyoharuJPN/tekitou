@@ -11,6 +11,6 @@ public class TutorialScene : MonoBehaviour
     private void Start()
     {
         Cursor.visible = false;
-        GameManager.Instance.PlayBGM(1);
+        GameManager.Instance.PlayStart(1);
     }
 }

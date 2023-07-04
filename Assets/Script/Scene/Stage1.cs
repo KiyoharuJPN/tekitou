@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage1 : MonoBehaviour
+public class Stage1 : StageCtrl
 {
+    const string stageName = "Stage1";
+
     private void Awake()
     {
-        SceneData.Instance.referer = "Stage1";
+        SceneData.Instance.referer = stageName;
     }
 
-    void Start()
+    protected override void Start()
     {
         GameManager.Instance.ClearEnemyList();
-        GameManager.Instance.PlayBGM(2);
+        GameManager.Instance.PlayStart(2);
         Cursor.visible = false;
+
+        base.Start();
     }
 }

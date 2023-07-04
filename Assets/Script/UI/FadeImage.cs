@@ -5,7 +5,13 @@ using UnityEngine.UI;
 
 public class FadeImage : MonoBehaviour
 {
-    [Header("最初からフェードインが完了しているかどうか")] public bool firstFadeInComp;
+    [Header("最初からフェードインが完了しているかどうか")] 
+    public bool firstFadeInComp;
+
+    [Header("残機image")]
+    [SerializeField] Sprite[] stockImgs;
+    [Header("残機表示用image")]
+    [SerializeField] Image stockImg;
 
     private Image img = null;
     private int frameCount = 0;
@@ -13,7 +19,7 @@ public class FadeImage : MonoBehaviour
     private bool fadeIn = false;
     private bool fadeOut = false;
     private bool compFadeIn = false;
-    public bool compFadeOut = false;
+    private bool compFadeOut = false;
 
     /// <summary>
     /// フェードインを開始する
@@ -30,6 +36,26 @@ public class FadeImage : MonoBehaviour
         img.fillOrigin = (int)Image.OriginHorizontal.Right;
         img.fillAmount = 1;
         img.raycastTarget = true;
+    }
+
+    /// <summary>
+    /// 復活時のフェードイン
+    /// </summary>
+    public void RevivalFadeIn()
+    {
+        stockImg.enabled = true;
+        if (fadeIn || fadeOut)
+        {
+            return;
+        }
+        compFadeIn = false;
+        timer = 0.0f;
+        img.fillOrigin = (int)Image.OriginHorizontal.Right;
+        img.fillAmount = 1;
+        img.raycastTarget = true;
+        stockImg.fillOrigin = (int)Image.OriginHorizontal.Right;
+        stockImg.fillAmount = 1;
+        StartCoroutine(RevivalFadeInUpdate());
     }
 
     /// <summary>
@@ -56,6 +82,7 @@ public class FadeImage : MonoBehaviour
         img.fillOrigin = (int)Image.OriginHorizontal.Left;
         img.fillAmount = 0f;
         img.raycastTarget = true;
+        
     }
 
     /// <summary>
@@ -70,11 +97,18 @@ public class FadeImage : MonoBehaviour
     void Start()
     {
         img = GetComponent<Image>();
+        
+
         if (firstFadeInComp)
         {
             FadeInComplete();
         }
-        else
+        else if(SceneData.Instance.revival)
+        {
+            stockImg.sprite = stockImgs[SceneData.Instance.stock + 1];
+            RevivalFadeIn();
+        }
+        else 
         {
             StartFadeIn();
         }
@@ -86,7 +120,7 @@ public class FadeImage : MonoBehaviour
 
         if (frameCount > 2)
         {
-            if (fadeIn)
+            if (fadeIn && !SceneData.Instance.revival)
             {
                 FadeInUpdate();
             }
@@ -145,5 +179,36 @@ public class FadeImage : MonoBehaviour
         timer = 0f;
         fadeOut = false;
         compFadeOut = true;
+    }
+
+    //復活時のフェードイン処理
+    IEnumerator RevivalFadeInUpdate()
+    {
+        yield return new WaitForSeconds(1f);
+        stockImg.sprite = stockImgs[SceneData.Instance.stock];
+        yield return new WaitForSeconds(1f);
+
+        while (true) 
+        {
+            //フェード中
+            if (timer < 1f)
+            {
+                img.fillAmount -= 1f * Time.deltaTime;
+                if(img.fillAmount < 0.625f && img.fillAmount > 0.375f)
+                {
+                    stockImg.fillAmount -= (1f * Time.deltaTime) * 4;
+                }
+            }
+            //フェードが完了したとき
+            else
+            {
+                FadeInComplete();
+                break;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        compFadeIn = true;
     }
 }
