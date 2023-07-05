@@ -9496,6 +9496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5b4edc1295aa44ae0afd5c33127b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fade: {fileID: 0}
   player: {fileID: 2046069427}
 --- !u!4 &1491049943
 Transform:
@@ -9793,8 +9794,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6114365387811335011, guid: 708c2f82cf563784ea0230f6f3d70da0, type: 3}
-      propertyPath: firstFadeInComp
+    - target: {fileID: 6114365387811335010, guid: 708c2f82cf563784ea0230f6f3d70da0, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114365387811335010, guid: 708c2f82cf563784ea0230f6f3d70da0, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -25420,6 +25425,10 @@ PrefabInstance:
       propertyPath: p_obj
       value: 
       objectReference: {fileID: 1367833987}
+    - target: {fileID: 854406889783310852, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 854406889783310853, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -26279,7 +26288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 407148583342513145, guid: e38628aba5447854e926292fd1056f4a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 407148583342513148, guid: e38628aba5447854e926292fd1056f4a, type: 3}
       propertyPath: m_Radius
@@ -26622,6 +26631,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 411055618}
     m_Modifications:
+    - target: {fileID: 6308638242716181028, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: m_Size.x
+      value: 3.0878983
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308638242716181028, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.23437786
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308638243278198791, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: m_Size.x
+      value: 2.010172
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308638243278198791, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.6972151
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308638243278198794, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -26632,7 +26661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26669,10 +26698,6 @@ PrefabInstance:
     - target: {fileID: 6308638243396857262, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_Name
       value: Spider
-      objectReference: {fileID: 0}
-    - target: {fileID: 6308638243396857262, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}

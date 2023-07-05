@@ -7,6 +7,10 @@ public class Spider : Enemy
     [Tooltip("移動速度")]
     public float MoveSpeed = 4;
 
+    public GameObject SpiderAttackCheckArea, SpiderAttack;
+
+    Coroutine attack;
+
     protected override void Start()
     {
         base.Start();
@@ -24,8 +28,8 @@ public class Spider : Enemy
         }
 
         //アニメーターの設定
-        //animator.SetBool("IsMoving", IsMoving);
-        //animator.SetBool("IsBlowing", isDestroy);
+        animator.SetBool("IsWalking", IsMoving);
+        animator.SetBool("IsBlowing", isDestroy);
     }
     //敵の動き関数
     void Movement()
@@ -34,25 +38,41 @@ public class Spider : Enemy
         {
             Moving();
         }
-        else
-        {
-            Attacking();
-        }
     }
     void Moving()
     {
-        enemyRb.AddForce(new Vector2(moveSpeed, 0));
-        Debug.Log(moveSpeed);
-    }
-    void Attacking()
-    {
-
+        if(enemyRb.velocity == Vector2.zero)
+        {
+            enemyRb.velocity = new Vector2(moveSpeed, 0);
+        }
     }
 
 
 
     //コルーチン用関数
-
+    IEnumerator SpiderAttacking()
+    {
+        var i = 0;
+        while (i < 15)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        SpiderAttack.SetActive(true);
+        while(i < 22)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        SpiderAttack.SetActive(false);
+        while (i < 60)
+        {
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+        SpiderAttackCheckArea.SetActive(true);
+        IsMoving = true;
+    }
 
 
     //外部関数
@@ -64,6 +84,11 @@ public class Spider : Enemy
     public override void PlayerInAttackArea()
     {
         base.PlayerInAttackArea();
+        PlayerNotAttacked = true;
+        IsMoving = false;
+        attack = StartCoroutine(SpiderAttacking());
+        enemyRb.velocity = Vector2.zero;
+        SpiderAttackCheckArea.SetActive(false);
     }
 
 
