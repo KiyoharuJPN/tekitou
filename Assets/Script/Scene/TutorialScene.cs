@@ -1,16 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialScene : MonoBehaviour
+public class TutorialScene : StageCtrl
 {
+    const string stageName = "Tutorial";
+
     private void Awake()
     {
-        SceneData.Instance.referer = "Tutorial";
+        SceneData.Instance.referer = stageName;
     }
-    private void Start()
+
+    protected override void Start()
     {
-        Cursor.visible = false;
+        GameManager.Instance.ClearEnemyList();
         GameManager.Instance.PlayStart(1);
+        Cursor.visible = false;
+
+        base.Start();
     }
 }

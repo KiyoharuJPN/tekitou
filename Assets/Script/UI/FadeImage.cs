@@ -166,6 +166,7 @@ public class FadeImage : MonoBehaviour
     {
         img.fillAmount = 0f;
         img.raycastTarget = false;
+        stockImg.fillAmount = 0f;
         timer = 0f;
         fadeIn = false;
         compFadeIn = true;

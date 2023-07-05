@@ -447,7 +447,6 @@ MonoBehaviour:
   JumpEffect: {fileID: 8371524048519115905, guid: 77b9677fcc866eb4fb4a85fbca4099cc, type: 3}
   ExAttackHitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
   ExAttackLastEffect: {fileID: 4126853831982605864, guid: eaca4da37c1a35449968f0c7f926d495, type: 3}
-  HP: 10
   moveData:
     firstSpeed: 4
     jumpFirstSpeed: 6
@@ -462,11 +461,10 @@ MonoBehaviour:
     secondJumpHeight: 2.5
     maxJumpTime: 0.3
   knockBack:
-    knockBackTime: 0.2
-    cantMovingTime: 0.1
+    knockBackTime: 0.4
+    cantMovingTime: 0.001
     canKnockBack: 1
   parallaxBackground: {fileID: 0}
-  enemylist: []
   shake: {fileID: 0}
 --- !u!114 &6578985677749316734
 MonoBehaviour:
