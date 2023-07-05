@@ -8,6 +8,7 @@ public class SceneData
 
     //プレイヤー残機
     public int stock = 2;
+    public static int MAX_STOCK = 2;
 
     //復活時確認用Bool
     public bool revival = false;

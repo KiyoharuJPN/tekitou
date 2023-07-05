@@ -27,6 +27,10 @@ public class LoadScene : MonoBehaviour
     LoadFadeImage fade;
     string loadScene;
 
+    [SerializeField, Header("プレイヤー残機表示Image")]
+    Image stockImg;
+    [SerializeField, Header("残機画像")]
+    Sprite[] stockImgs;
 
     //ロードシーン待機時間
     [SerializeField]
@@ -69,6 +73,8 @@ public class LoadScene : MonoBehaviour
                 loadScene = "Level_Stage1";
             }
         }
+
+        stockImg.sprite = stockImgs[SceneData.Instance.stock];
     }
 
     // Start is called before the first frame update
@@ -96,6 +102,7 @@ public class LoadScene : MonoBehaviour
         {
             yield return null;
         }
+        SceneData.Instance.revival = false;
         SceneManager.LoadScene(loadScene);
     }
 }
