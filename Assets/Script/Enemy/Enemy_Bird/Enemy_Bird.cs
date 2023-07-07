@@ -21,7 +21,6 @@ public class Enemy_Bird : Enemy
 
 
     //ì‡ïîä÷êî
-    bool AttackChecking = true, PlayerNotAttacked = true;
     Vector2 MovingArea;
 
     protected override void Start()
@@ -212,7 +211,7 @@ public class Enemy_Bird : Enemy
         base.TurnAround();
     }
 
-    public bool PlayerInAttackArea()
+    public override bool  PlayerInAttackArea()
     {
         var InAttack = false;
         if (IsMoving && AttackChecking)
@@ -235,15 +234,6 @@ public class Enemy_Bird : Enemy
             return true;
         }
         return false;
-    }
-
-    public bool GetPlayerAttacked()
-    {
-        return PlayerNotAttacked;
-    }
-    public void SetPlayerAttacked(bool PNA)
-    {
-        PlayerNotAttacked = PNA;
     }
 
 

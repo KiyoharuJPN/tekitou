@@ -81,14 +81,23 @@ public class Spider : Enemy
         base.TurnAround();
         enemyRb.velocity = Vector2.zero;
     }
-    public override void PlayerInAttackArea()
+    public override bool PlayerInAttackArea()
     {
-        base.PlayerInAttackArea();
-        PlayerNotAttacked = true;
-        IsMoving = false;
-        attack = StartCoroutine(SpiderAttacking());
-        enemyRb.velocity = Vector2.zero;
-        SpiderAttackCheckArea.SetActive(false);
+        var InAttack = false;
+        //trueの修正は各スクリプトで書いてください。
+        if (IsMoving && AttackChecking)
+        {
+            AttackChecking = false;
+            //Spider
+            PlayerNotAttacked = true;
+            IsMoving = false;
+            attack = StartCoroutine(SpiderAttacking());
+            enemyRb.velocity = Vector2.zero;
+            SpiderAttackCheckArea.SetActive(false);
+            //Spider
+            InAttack = true;
+        }
+        return InAttack;
     }
 
 

@@ -350,13 +350,17 @@ public class Enemy : MonoBehaviour
     }
 
     //プレイヤーが攻撃エリアに要る時の動き（AttackCheckAreaから呼ばれる）
-    public virtual void PlayerInAttackArea()
+    public virtual bool PlayerInAttackArea()
     {
+        var InAttack = false;
         //trueの修正は各スクリプトで書いてください。
         if (IsMoving && AttackChecking)
         {
             AttackChecking = false;
+            //コルーチン関数をここで作ります
+            InAttack = true;
         }
+        return InAttack;
     }
     //攻撃されたどうかをチェック
     public virtual bool GetPlayerAttacked()
