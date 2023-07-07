@@ -31,10 +31,16 @@ public class Enemy : MonoBehaviour
     //吹っ飛び角度
     protected float forceAngle;
     protected Vector2 forceDirection = new Vector3(1.0f, 1.0f);
-    const float speed = 15f;     //吹っ飛び速度
+    [SerializeField, Header("吹っ飛び速度")]
+    protected float speed = 15f;     //吹っ飛び速度
+    //吹っ飛び中の煙エフェクト
+    private GameObject smokeEffect;
+    private float effectInterval = 0.5f;
     protected float rotateSpeed = 10f;//吹っ飛び回転速度
+
     //反射回数
-    protected int num;
+    int maxReflexNum;
+    internal int reflexNum;
 
     protected GameObject player;
 
@@ -61,8 +67,8 @@ public class Enemy : MonoBehaviour
         enemyData = EnemyGeneratar.instance.EnemySet(id);
         hp = enemyData.hp;
         enemyRb = GetComponent<Rigidbody2D>();
-        //enemyRb.isKinematic = false;
-        num = enemyData.num;
+        maxReflexNum = enemyData.num;
+        reflexNum = maxReflexNum;
         forceAngle = enemyData.angle;
 
         animator = GetComponent<Animator>();
@@ -70,6 +76,9 @@ public class Enemy : MonoBehaviour
         //吹っ飛び中に使用
         _transform = transform;
         _prevPosition = _transform.position;
+        speed = EnemyGeneratar.instance.speed;
+        smokeEffect = EnemyGeneratar.instance.smokeEffect;
+        effectInterval = EnemyGeneratar.instance.effectInterval;
 
         //敵の点滅
         sprite = GetComponent<SpriteRenderer>();
@@ -84,14 +93,15 @@ public class Enemy : MonoBehaviour
         }
         if (col.gameObject.CompareTag("Stage") && isDestroy)
         {
-            num--;
-            if (num == 0)
+            reflexNum--;
+            if (reflexNum == 0)
             {
                 SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
                 Destroy(gameObject);
             }
         }
     }
+
     virtual protected void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))
@@ -145,9 +155,21 @@ public class Enemy : MonoBehaviour
 
     public virtual void Damage(float power)
     {
+        //既に死亡状態の場合
+        if (isDestroy)
+        {
+            SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
+            ComboParam.Instance.ResetTime();
+            reflexNum = maxReflexNum;
+            CalcForceDirection();
+            BoostSphere();
+            return;
+        }
+
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
-        hp -= power;
         ComboParam.Instance.ResetTime();
+        hp -= power;
+        
         if (!hadDamaged)
         {
             StartCoroutine(HadDamaged());
@@ -156,7 +178,7 @@ public class Enemy : MonoBehaviour
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
-            _Destroy();
+            Destroy();
         }
     }
 
@@ -165,7 +187,7 @@ public class Enemy : MonoBehaviour
         
     }
 
-    protected virtual void _Destroy()
+    protected virtual void Destroy()
     {
         GameManager.Instance.AddKillEnemy();
         //反射用のコライダーに変更
@@ -180,6 +202,10 @@ public class Enemy : MonoBehaviour
         isDestroy = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
+        if(smokeEffect != null)
+        {
+            StartCoroutine(BlowAwayEffect());
+        }
     }
 
     //吹っ飛び発生
@@ -205,7 +231,16 @@ public class Enemy : MonoBehaviour
         {
             this.transform.Rotate(0, 0, rotateSpeed);
         }
+    }
 
+    //吹き飛び中のエフェクト生成
+    private IEnumerator BlowAwayEffect()
+    {
+        yield return new WaitForSeconds(effectInterval);
+        GameObject obj =  Instantiate(smokeEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+        StartCoroutine(BlowAwayEffect());
+        yield return new WaitForSeconds(0.25f);
+        Destroy(obj);
     }
 
     protected void CalcForceDirection()
@@ -221,7 +256,7 @@ public class Enemy : MonoBehaviour
         float y = Mathf.Sin(rad);
 
         //プレイヤーと自身の位置関係を調査
-        if (enemyData.type == EnemyData.EnemyType.FlyEnemy)
+        if (enemyData.type == EnemyData.EnemyType.FlyEnemy || isDestroy)
         {
             if (player.transform.position.y + 0.3f < this.transform.position.y)
             { y = -y; }
@@ -390,7 +425,7 @@ public class Enemy : MonoBehaviour
         Damage(powar);
     }
 
-    //当たっていない場合
+    //停止処理解除
     public virtual void Stop_End()
     {
         isPlayerExAttack = false;
@@ -408,7 +443,6 @@ public class Enemy : MonoBehaviour
     }
     public float GetEnemyFullHP()
     {
-        Debug.Log(1);
         return enemyData.hp;
     }
 }

@@ -418,7 +418,7 @@ public class KingSlime : Enemy
         enemyRb.AddForce(new Vector2(0, -10f));
     }
 
-    protected override void _Destroy()
+    protected override void Destroy()
     {
         isDestroy = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
@@ -449,7 +449,7 @@ public class KingSlime : Enemy
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
-            _Destroy();
+            Destroy();
         }
     }
 
