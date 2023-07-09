@@ -109,10 +109,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 170
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 110
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -128,12 +128,12 @@ TextureImporter:
       name: Gimmick_Slip Through Floor_10_1
       rect:
         serializedVersion: 2
-        x: 170
+        x: 110
         y: 0
-        width: 519
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 110
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -149,12 +149,12 @@ TextureImporter:
       name: Gimmick_Slip Through Floor_10_2
       rect:
         serializedVersion: 2
-        x: 689
+        x: 220
         y: 0
-        width: 271
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 110
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,6 +162,111 @@ TextureImporter:
       bones: []
       spriteID: bd77a8e35b506ce42bb1671f62735c09
       internalID: 165489014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gimmick_Slip Through Floor_10_3
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 110
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c32b4eb2bfe08e448953e41b71d653b
+      internalID: 1694155557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gimmick_Slip Through Floor_10_4
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 0
+        width: 110
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6c7168a30e2cf44083bb27ab4e8b317
+      internalID: -1744103161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gimmick_Slip Through Floor_10_5
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 0
+        width: 110
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd54b513ecacf0e42851b69fb31cf777
+      internalID: 1670320803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gimmick_Slip Through Floor_10_6
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0
+        width: 110
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e487513cce9a57246a10a4c55b8436bc
+      internalID: -65151279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gimmick_Slip Through Floor_10_7
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 0
+        width: 110
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e575ac4948b626b469e5d9386aab152c
+      internalID: -1314912774
       vertices: []
       indices: 
       edges: []
@@ -177,8 +282,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Gimmick_Slip Through Floor_10_7: -1314912774
       Gimmick_Slip Through Floor_10_1: -842688000
+      Gimmick_Slip Through Floor_10_6: -65151279
+      Gimmick_Slip Through Floor_10_4: -1744103161
+      Gimmick_Slip Through Floor_10_5: 1670320803
       Gimmick_Slip Through Floor_10_0: 1490215408
+      Gimmick_Slip Through Floor_10_3: 1694155557
       Gimmick_Slip Through Floor_10_2: 165489014
   spritePackingTag: 
   pSDRemoveMatte: 0

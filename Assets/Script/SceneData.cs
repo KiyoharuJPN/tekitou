@@ -15,4 +15,10 @@ public class SceneData
 
     //’†ŠÔ’n“_‹N“®ó‘Ô
     public bool wayPoint = false;
+
+    public void DataReset()
+    {
+        stock = MAX_STOCK;
+        wayPoint = false;
+    }
 }

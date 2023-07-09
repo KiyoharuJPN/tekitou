@@ -169,6 +169,7 @@ public class SESoundData
         GoalSE,                 //ゴール時
         GetHeart,               //ハート取得
         GetCoin,                //コイン取得
+        //
         //モンスターサウンド
         MonsterGetHit,          //敵被弾
         MonsterKnock,           //吹き飛び
@@ -188,7 +189,7 @@ public class SESoundData
         WaggingTailPowerful,    //勢いよくしっぽを振る（実質削除）*/
         BirdChirping,           //鳥の鳴き声
         Door,                   //扉
-
+        HalfPoint,              //中間地点起動
 
         //BGMイントロ
 

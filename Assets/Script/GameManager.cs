@@ -66,6 +66,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //プレイヤー停止処理
+    public void PlayerStop()
+    {
+        player.canMove = false;
+    }
+    public void PlayerMove()
+    {
+        player.canMove = true;
+    }
+
     //プレイヤー死亡時処理
     public void PlayerDeath()
     {

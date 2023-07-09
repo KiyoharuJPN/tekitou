@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System;
+using Unity.VisualScripting;
 
 public class TitleMenu : MonoBehaviour
 {
@@ -30,16 +30,61 @@ public class TitleMenu : MonoBehaviour
 
     bool volumeChecking = false, inlineVolumeChecking = false, hideKeyChecking = false, pointerCheck = true, upDownLock = false;//各種チェック用関数
 
+    //デモムービー再生状態
+    [SerializeField, Header("videoPlayer")]
+    UnityEngine.Video.VideoPlayer videoPlayer;
+    [SerializeField, Header("DmoVideoImage")]
+    RawImage videoImage;
+    [SerializeField, Header("PreesAnyKeyObj")]
+    GameObject preeskey;
+    [SerializeField, Header("デモムービー移行必要時間")]
+    float demoVideoMoveTime = 40f;
+    [SerializeField, Header("デモムービー表示時間")]
+    float demoVideoTime = 20f;
+    bool isDemoVideo = false;
+    bool canDemoVideo = true;
+    float demoTimer;
+
     private void Start()
     {
         Cursor.visible = false;
         SceneData.Instance.referer = "Title";
         pointer = 0;            //ポインターの初期化
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
+        videoImage.enabled = false;
+        videoPlayer.enabled = false;
     }
 
     private void Update()
     {
+
+        if (!SoundManager.Instance.isPlayBGM())
+        {
+            StartCoroutine(PlayBGM());
+        }
+
+        //デモムービー中
+        if (isDemoVideo)
+        {
+            DemoMove();
+            return;
+        }
+
+        if (!InputKeyCheck.GetAnyKey())
+        {
+            Debug.Log("キーは入力されていない");
+            demoTimer += Time.deltaTime;
+            if (demoTimer >= demoVideoMoveTime)
+                isDemoVideo = true;
+        }
+        else if(InputKeyCheck.GetAnyKey())
+        {
+
+            Debug.Log("キーは入力されている");
+            demoTimer = 0;
+        }
+
+        
         BackGroundMove();
         //調整キーの設定
         if(!upDownLock) StickerChangePointer();
@@ -47,6 +92,7 @@ public class TitleMenu : MonoBehaviour
         //ポインターが変わった時の設定
         if (pointer != pointerpreb)//変更されたときの作業
         {
+            demoTimer = 0;
             if (menuobj[0].activeSelf)//Menu
             {
                 if (pointer < 0) pointer = 0;// menuobj.Length - 1;
@@ -115,11 +161,17 @@ public class TitleMenu : MonoBehaviour
             inlineVolumeChecking = false;
         }
 
-        if (!SoundManager.Instance.isPlayBGM())
-        {
-            StartCoroutine(PlayBGM());
-        }
         
+    }
+
+    private void DemoMove()
+    {
+        demoTimer = 0;
+        if(canDemoVideo)
+        {
+            canDemoVideo = false;
+            StartCoroutine(DemoVideoPlay());
+        }
     }
 
     private void BackGroundMove()
@@ -168,10 +220,12 @@ public class TitleMenu : MonoBehaviour
     IEnumerator Scene_Start()
     {
         player.SetTrigger("Start");
-        SoundManager.Instance.PlaySE(SESoundData.SE.GoalSE);
+        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_CutIn);
         yield return new WaitForSeconds(2.4f);
 
         fade.StartFadeOut();
+        SceneData.Instance.DataReset();
+
         while (!fade.IsFadeOutComplete()) 
         {
             yield return null;
@@ -194,5 +248,64 @@ public class TitleMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
+    }
+
+    IEnumerator DemoVideoPlay()
+    {
+        
+        //フェードアウト開始
+        fade.StartFadeOut();
+        while (!fade.IsFadeOutComplete())
+        {
+            //キーが押されたら終了
+            if (InputKeyCheck.GetAnyKey())
+            {
+                Debug.Log("ムービー終了");
+                DemoVideoEnd(); yield break;
+            }
+            yield return null;
+        }
+        Debug.Log("ムービー開始");
+        videoImage.enabled = true;
+        videoPlayer.enabled = true;
+        videoPlayer.Play();
+        preeskey.SetActive(true);
+
+        fade.StartFadeIn();
+        while (!fade.IsFadeInComplete()) 
+        {
+            if (InputKeyCheck.GetAnyKey()) { DemoVideoEnd(); yield break; }
+            yield return null;
+        }
+
+        while(demoTimer <= demoVideoTime) 
+        {
+            demoTimer += Time.deltaTime;
+            if (InputKeyCheck.GetAnyKey()) { DemoVideoEnd(); yield break; }
+            yield return null;
+        };
+
+        while (!fade.IsFadeOutComplete())
+        {
+            yield return null;
+        }
+        fade.StartFadeIn();
+        while (!fade.IsFadeInComplete())
+        {
+            yield return null;
+        }
+        DemoVideoEnd();
+    }
+
+    private void DemoVideoEnd()
+    {
+        fade.FadeStop();
+        preeskey.SetActive(false);
+        videoImage.enabled = false;
+        videoPlayer.Stop();
+        videoPlayer.enabled = false;
+        demoTimer = 0;
+        isDemoVideo = false;
+        canDemoVideo = true;
     }
 }

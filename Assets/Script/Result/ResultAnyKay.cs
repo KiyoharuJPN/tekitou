@@ -7,7 +7,7 @@ public class ResultAnyKay : MonoBehaviour
 {
     public Result result;
 
-    public string loadScene = "";
+    string loadScene = "";
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class ResultAnyKay : MonoBehaviour
             || Input.GetKeyDown("joystick button 2")
             || Input.GetKeyDown("joystick button 3"))//
         {
-            if (loadScene == "Stage1")
+            if (loadScene == "Stage2")
             {
                 SceneManager.LoadScene("Ending");
                 return;

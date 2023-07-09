@@ -51,7 +51,6 @@ public class WarpDoor : MonoBehaviour
             player = collision;
             isBottonUi = true;
             _BottonUi(collision);
-            
         };
     }
 

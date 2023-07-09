@@ -118,7 +118,8 @@ public class DebugPlayer : DebugBase
 
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            Time.timeScale = 0.3f;
+            SceneData.Instance.referer = "Stage2";
+            SceneManager.LoadScene("Load");
         }
 
 

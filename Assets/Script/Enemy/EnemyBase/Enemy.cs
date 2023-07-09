@@ -54,7 +54,8 @@ public class Enemy : MonoBehaviour
     }
     protected moveType type;
 
-    protected bool isDestroy, OnCamera = false;
+    protected bool isDestroy = false;
+    protected bool OnCamera = false;
 
     protected Transform _transform;
 

@@ -347,7 +347,7 @@ MonoBehaviour:
   - se: 14
     audioClip: {fileID: 8300000, guid: 038f6575d823812438dd752accbbf177, type: 3}
     volume: 0.4
-  - se: 15
+  - se: 11
     audioClip: {fileID: 8300000, guid: f1808fcd11c610a43b69474be21aec85, type: 3}
     volume: 0.4
   - se: 17
@@ -373,12 +373,9 @@ MonoBehaviour:
     volume: 0.4
   - se: 26
     audioClip: {fileID: 8300000, guid: 07ae41ad18478664d8d2b1a3d6ae0689, type: 3}
-    volume: 0.4
+    volume: 0.424
   - se: 25
     audioClip: {fileID: 8300000, guid: efbf115d0b3c8214fa5e2d6fe1e1625a, type: 3}
-    volume: 0.4
-  - se: 16
-    audioClip: {fileID: 8300000, guid: 75944389d1e802f47ad539feece3b301, type: 3}
     volume: 0.4
   - se: 24
     audioClip: {fileID: 8300000, guid: 7a676c1ed5c52ed4ca3cdfb589a573c9, type: 3}
@@ -386,6 +383,15 @@ MonoBehaviour:
   - se: 6
     audioClip: {fileID: 8300000, guid: 23d46a256dfc63e4c8b8ba6a56df9b38, type: 3}
     volume: 0.4
+  - se: 27
+    audioClip: {fileID: 8300000, guid: 6da3a89e9eef08a4781f2d0bee24f986, type: 3}
+    volume: 0.8
+  - se: 15
+    audioClip: {fileID: 8300000, guid: 1c26d748dee4d904abdbb1b56696f23d, type: 3}
+    volume: 0.8
+  - se: 16
+    audioClip: {fileID: 8300000, guid: 75944389d1e802f47ad539feece3b301, type: 3}
+    volume: 0.8
 --- !u!1 &5644327851398467931
 GameObject:
   m_ObjectHideFlags: 0

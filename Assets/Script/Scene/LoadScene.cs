@@ -67,10 +67,10 @@ public class LoadScene : MonoBehaviour
             }
             else
             {
-                obj = (GameObject)Instantiate(loadSceneImage[1], BackGround.transform.position, Quaternion.identity);
+                obj = (GameObject)Instantiate(loadSceneImage[2], BackGround.transform.position, Quaternion.identity);
                 obj.transform.parent = BackGround.transform;
-                loadSceneTextBox.sprite = loadSceneText[1];
-                loadScene = "Level_Stage1";
+                loadSceneTextBox.sprite = loadSceneText[2];
+                loadScene = "Level_Stage2";
             }
         }
 

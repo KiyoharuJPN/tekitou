@@ -81,7 +81,6 @@ public class ComboParam : MonoBehaviour
         }
 
         ResetTime();
-        
     }
 
     public void ComboStop()

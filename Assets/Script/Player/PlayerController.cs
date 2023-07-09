@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
+        if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
             rb.velocity = Vector2.zero;
@@ -176,8 +176,8 @@ public class PlayerController : MonoBehaviour
         {
             canMovingCounter -= Time.deltaTime;
         }
+        _Skill();
 
-        if (canMove) _Skill();
         BackgroundScroll();
 
         animator.SetBool("IsMoving", isMoving);
@@ -192,8 +192,8 @@ public class PlayerController : MonoBehaviour
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
-        
-        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp());
+        if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
+        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp());   
     }
 
     public void _Heel(int resilience)
