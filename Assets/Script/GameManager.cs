@@ -63,6 +63,9 @@ public class GameManager : MonoBehaviour
             case 3:
                 BGMStart_GameOver();
                 break;
+            case 4:
+                BGMStart_Stage2();
+                break;
         }
     }
 
@@ -187,6 +190,10 @@ public class GameManager : MonoBehaviour
     private void BGMStart_Stage1()
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage1_intro, BGMSoundData.BGM.Stage1_roop);
+    }
+    private void BGMStart_Stage2()
+    {
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
     }
     private void BGMStart_Result()
     {

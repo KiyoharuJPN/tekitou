@@ -48,3 +48,4 @@ MonoBehaviour:
   speed: 15
   smokeEffect: {fileID: 4681276365246036701, guid: 29af5ee6789868749b2c2245dc780e3c, type: 3}
   effectInterval: 0.5
+  deathEffect: {fileID: 9154329713119241770, guid: 8a94318f973429f439255977a869362d, type: 3}

@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour
     protected float speed = 15f;     //吹っ飛び速度
     //吹っ飛び中の煙エフェクト
     private GameObject smokeEffect;
+    //消滅時エフェクト
+    private GameObject deathEffect;
     private float effectInterval = 0.5f;
     protected float rotateSpeed = 10f;//吹っ飛び回転速度
 
@@ -81,6 +83,9 @@ public class Enemy : MonoBehaviour
         smokeEffect = EnemyGeneratar.instance.smokeEffect;
         effectInterval = EnemyGeneratar.instance.effectInterval;
 
+        //消滅時に使用
+        deathEffect = EnemyGeneratar.instance.deathEffect;
+
         //敵の点滅
         sprite = GetComponent<SpriteRenderer>();
     }
@@ -98,6 +103,7 @@ public class Enemy : MonoBehaviour
             if (reflexNum == 0)
             {
                 SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
+                GameObject obj = Instantiate(deathEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
                 Destroy(gameObject);
             }
         }
@@ -179,6 +185,7 @@ public class Enemy : MonoBehaviour
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
+            
             Destroy();
         }
     }

@@ -130,7 +130,9 @@ public class BGMSoundData
         GameOver_roop,
         KingSlimeBoss_intro,
         KingSlimeBoss_roop,
-        none //Resultの様なイントロ・ループがないBGMを呼び出す際の片方
+        none, //Resultの様なイントロ・ループがないBGMを呼び出す際の引数２
+        Stage2_intro,
+        Stage2_roop
     }
 
     public BGM bgm;

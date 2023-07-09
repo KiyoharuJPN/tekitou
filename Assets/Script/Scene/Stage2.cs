@@ -14,7 +14,7 @@ public class Stage2 : StageCtrl
     protected override void Start()
     {
         GameManager.Instance.ClearEnemyList();
-        GameManager.Instance.PlayStart(2);
+        GameManager.Instance.PlayStart(4);
         Cursor.visible = false;
 
         base.Start();

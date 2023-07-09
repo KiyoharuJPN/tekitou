@@ -12,7 +12,8 @@ public class EnemyGeneratar : MonoBehaviour
     public GameObject smokeEffect;
     [SerializeField, Header("煙エフェクト発生間隔")]
     public float effectInterval = 0.5f;
-
+    [SerializeField, Header("消滅時エフェクト")]
+    public GameObject deathEffect;
     public static EnemyGeneratar instance;
 
     private void Awake()
