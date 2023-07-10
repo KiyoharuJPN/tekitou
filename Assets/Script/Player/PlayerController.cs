@@ -150,6 +150,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -235,21 +236,21 @@ public class PlayerController : MonoBehaviour
         else { isAttackKay = false; }
 
         //ã¸UŒ‚
-        if (((lsv >= 0.8 && isAttackKay) || rsv >= 0.8))
+        if (((lsv >= 0.9 && isAttackKay) || rsv >= 0.8))
         {
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
-        if (((lsv <= -0.8 && isAttackKay) || rsv <= -0.8))
+        if (((lsv <= -0.9 && isAttackKay) || rsv <= -0.8))
         {
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
-        if (((lsh >= 0.8 && isAttackKay) || rsh >= 0.8))
+        if (((lsh >= 0.9 && isAttackKay) || rsh >= 0.8))
         {
             AttackAction("SideAttack_right");
         }
-        else if(((lsh <= -0.8 && isAttackKay) || rsh <= -0.8))
+        else if(((lsh <= -0.9 && isAttackKay) || rsh <= -0.8))
         {
             AttackAction("SideAttack_left");
         }
@@ -264,13 +265,11 @@ public class PlayerController : MonoBehaviour
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
         if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack)
         {
-            Debug.Log("’ÊíUŒ‚“ü—Í");
             //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack");
         }
         if (Input.GetKey(KeyCode.JoystickButton2) && canNomalAttack)
         {
-            Debug.Log("’ÊíUŒ‚’·‰Ÿ‚µ’†");
             //’ÊíUŒ‚’·‰Ÿ‚µ’†
             AttackAction("NomalAttack");
         }
@@ -287,7 +286,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case "DawnAttack":
-                if (isAttack || !(isFalling || isJumping) || !canDropAttack) break;
+                if (isAttack || !canDropAttack) break;
                 DropAttack.DropAttackStart(this);
                 break;
 
@@ -302,6 +301,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case "ExAttack":
+                if (isAttack || !canExAttack) break;
                 isExAttack = true;
                 canExAttack = false;
                 animator.SetBool("IsExAttack", isExAttack);
