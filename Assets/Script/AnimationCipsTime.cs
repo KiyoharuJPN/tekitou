@@ -10,14 +10,13 @@ public class AnimationCipsTime
         ExAttack,
         WarpDoor,
         HeroGool,
-        NomalAttack_Jump,
         NomalAttack_Stage,
-        NomalAtttack_Run,
+        NomalAttack_Jump,
         Hero_UpAttack_Start,
         Hero_DropAttack_Start,
         Hero_SideAttack_Start,
         Hero_UpAttack_End,
-
+        Hero_DropAttack_End
     }
 
     static public float GetAnimationTime(Animator animator, ClipType type)

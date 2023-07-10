@@ -103,6 +103,7 @@ public class LoadScene : MonoBehaviour
             yield return null;
         }
         SceneData.Instance.revival = false;
+        SceneData.Instance.wayPoint = false;
         SceneManager.LoadScene(loadScene);
     }
 }

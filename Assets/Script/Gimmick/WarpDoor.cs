@@ -7,7 +7,7 @@ public class WarpDoor : MonoBehaviour
 {
     [SerializeField] internal Animator animator;
     [SerializeField] FadeImage fade;
-    [SerializeField] CameraManager camera;
+    [SerializeField] private new CameraManager camera;
 
     [SerializeField]
     GameObject BottonUi;

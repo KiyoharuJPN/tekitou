@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
     internal ParallaxBackground parallaxBackground;
 
     //’ÊíUŒ‚Äg—pŠm”F
+    internal bool isNomalAttack = false;
     internal bool canNomalAttack = true;
 
     //‹ZŠÖŒWBoolŠÖ˜Aiis:‚»‚Ì‹Z’†‚©@can:‚»‚Ì‹Z‚ªg—p‰Â”\‚©j
@@ -263,10 +264,14 @@ public class PlayerController : MonoBehaviour
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
         if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack)
         {
+            Debug.Log("’ÊíUŒ‚“ü—Í");
+            //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack");
         }
         if (Input.GetKey(KeyCode.JoystickButton2) && canNomalAttack)
         {
+            Debug.Log("’ÊíUŒ‚’·‰Ÿ‚µ’†");
+            //’ÊíUŒ‚’·‰Ÿ‚µ’†
             AttackAction("NomalAttack");
         }
     }
@@ -305,18 +310,11 @@ public class PlayerController : MonoBehaviour
                 ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
                 break;
             case "NomalAttack":
-                if(isAttack || !canNomalAttack) break;
+                if(isAttack || !canNomalAttack || isNomalAttack) break;
                 NomalAttack.NomalAttackStart(this);
-                Debug.Log(AnimationCipsTime.GetAnimationTime(animator, AnimationCipsTime.ClipType.NomalAttack_Jump));
+                NomalAttack.AttackCool(this, this);
                 break;
         }
-    }
-
-    //’ÊíUŒ‚I—¹
-    void _NomalAttackEnd()
-    {
-        isAttack = false;
-        NomalAttack.AttackCool(this,this);
     }
 
     //KnockBack‚³‚ê‚½‚Æ‚«‚Ìˆ—
