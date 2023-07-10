@@ -94,9 +94,12 @@ public class Enemy : MonoBehaviour
     }
     virtual protected void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (!isDestroy)
         {
-            enemyRb.velocity = new Vector2(0,enemyRb.velocity.y);
+            if (col.gameObject.CompareTag("Player"))
+            {
+                enemyRb.velocity = new Vector2(0, enemyRb.velocity.y);
+            }
         }
     }
 
@@ -127,6 +130,7 @@ public class Enemy : MonoBehaviour
     virtual protected void FixedUpdate()
     {
         if (isPlayerExAttack) return;
+        Gravity();
     }
 
     //çUåÇ
@@ -415,4 +419,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(1);
         return enemyData.hp;
     }
+
+
+
 }

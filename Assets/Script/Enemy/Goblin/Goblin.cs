@@ -123,13 +123,16 @@ public class Goblin : Enemy
     }
 
     //プレイヤーが攻撃エリアに要る時の動き（AttackCheckAreaから呼ばれる）
-    public override void PlayerInAttackArea()
+    public override bool PlayerInAttackArea()
     {
+        var InAttack = false;
         if (IsMoving&&AttackChecking)
         {
             AttackChecking = false;
             StartCoroutine(Attacking());
+            InAttack = true;
         }
+        return InAttack;
     }
 
     public override bool GetPlayerAttacked()

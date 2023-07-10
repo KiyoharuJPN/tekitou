@@ -113,7 +113,7 @@ public class Wizard : Enemy
     {
         base.FixedUpdate();
         Gravity();
-        if(enemyRb.velocity.y > 0 && !isDestroy)
+        if (enemyRb.velocity.y > 0 && !isDestroy)
         {
             enemyRb.velocity = Vector3.zero;
         }
@@ -121,6 +121,7 @@ public class Wizard : Enemy
     //çUåÇópä÷êî
     void ShotMagicBall()
     {
+        SoundManager.Instance.PlaySE(SESoundData.SE.ShootMagicBall);
         GameObject Magic = ObjectPool.Instance.GetObject(Wizard_MagicBall);
         Magic.transform.position = WMBAttackPos.transform.position;
         Magic.GetComponent<Wizard_MagicBall>().AKForce(enemyData.attackPower, enemyData.knockBackValue, direction);

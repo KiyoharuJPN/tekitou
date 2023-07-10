@@ -151,13 +151,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 407148583342513145}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4946ab5ec7328864db5e2c8715843be7, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1504817, y: 0}
+  m_Offset: {x: -0.1504817, y: -0.4234605}
   serializedVersion: 2
-  m_Radius: 0.7531104
+  m_Radius: 1.1765709
 --- !u!61 &407148583342513149
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   Wizard_MagicBall: {fileID: 3335520675696244365, guid: d0e03f6349c97d949b338ff1a9612cab, type: 3}
   WMBAttackPos: {fileID: 407148582751952771}
   Distance: 15
+  MagicSpeed: 5
 --- !u!95 &407148583342513147
 Animator:
   serializedVersion: 4

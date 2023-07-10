@@ -30,10 +30,11 @@ public class Slime : Enemy
     }
     override protected void Update()
     {
+        Debug.Log(enemyRb.velocity.y);
         //“G‚Ìscript‚ÉŠî‚Ã‚­
         base.Update();
 
-        if (enemyRb.velocity.y <-0.1)MovingAnim = 1;
+        if (enemyRb.velocity.y <-1)MovingAnim = 1;
         IsMoving = enemyRb.velocity != Vector2.zero;
         //‰æ–Ê“à‚É‚ ‚é
         if (OnCamera)
@@ -77,8 +78,8 @@ public class Slime : Enemy
     //0.1•b‘Ò‚Á‚ÄˆÚ“®•s‰Â‚É‚·‚é
     IEnumerator SetMoveFalse ()
     {
-        yield return new WaitForSeconds(0.1f);
-        IsMoving = false;
+        yield return new WaitForSeconds(0.5f);
+        //IsMoving = false;
         MovingAnim = 0;
     }
 
@@ -99,7 +100,7 @@ public class Slime : Enemy
             if (col.CompareTag("Stage") && MovingAnim == 1)
             {
                 MovingAnim = 2;
-                enemyRb.velocity = Vector2.zero;
+                if(enemyRb.velocity.y !< 0) enemyRb.velocity = Vector2.zero;
                 StartCoroutine(SetMoveFalse());
             }
         }
