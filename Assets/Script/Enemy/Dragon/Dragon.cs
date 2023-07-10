@@ -431,7 +431,7 @@ public class Dragon : Enemy
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
-            _Destroy();
+            Destroy();
         }
     }
 
@@ -472,7 +472,7 @@ public class Dragon : Enemy
 
 
     //“à•”ŠÖ”
-    protected override void _Destroy()
+    protected override void Destroy()
     {
         GameManager.Instance.AddKillEnemy();
         this.GetComponent<BoxCollider2D>().enabled = false;
