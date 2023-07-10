@@ -469,13 +469,21 @@ public class Dragon : Enemy
         }
     }
 
+    //キングスライム死亡時に呼ぶ関数
+    public void Boss_Down()
+    {
+        ComboParam.Instance.ComboStop();
+        GameManager.Instance.PlayerExAttack_Start();
+        GameManager.Instance.Result_Start(1);
+    }
+
 
 
     //内部関数
     protected override void Destroy()
     {
         GameManager.Instance.AddKillEnemy();
-        this.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         isDestroy = true;
         //扉の出現を内部で実装するときにここに書けば実装できる
     }
