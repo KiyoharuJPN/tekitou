@@ -491,6 +491,7 @@ public class PlayerController : MonoBehaviour
     {
         isWarpDoor = false;
         animator.SetBool("IsWarpDoor", isWarpDoor);
+        NomalPlayer();
     }
 
     internal void GoolDoor(Transform door)
