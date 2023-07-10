@@ -1537,8 +1537,8 @@ MonoBehaviour:
   videoPlayer: {fileID: 1642989327}
   videoImage: {fileID: 1642989328}
   preeskey: {fileID: 814439037}
-  demoVideoMoveTime: 5
-  demoVideoTime: 10
+  demoVideoMoveTime: 40
+  demoVideoTime: 20
 --- !u!1 &1518416184
 GameObject:
   m_ObjectHideFlags: 0

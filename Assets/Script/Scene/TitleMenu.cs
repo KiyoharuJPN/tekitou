@@ -72,7 +72,6 @@ public class TitleMenu : MonoBehaviour
 
         if (!InputKeyCheck.GetAnyKey())
         {
-            Debug.Log("実行中");
             demoTimer += Time.deltaTime;
             if (demoTimer >= demoVideoMoveTime)
                 isDemoVideo = true;
@@ -97,7 +96,7 @@ public class TitleMenu : MonoBehaviour
                 if (pointer > menuobj.Length - 1) pointer = menuobj.Length - 1;// 0;//上限調整
 
                 target.transform.position = new Vector2(target.transform.position.x, menuobj[pointer].transform.position.y);
-                OnSelected(menuobj[pointer]);
+                //OnSelected(menuobj[pointer]);
                 //if(pointer !=pointerpreb && pointerpreb != -1) OnDeselected(menuobj[pointerpreb]);
             }
 
@@ -114,11 +113,11 @@ public class TitleMenu : MonoBehaviour
                 {
                     case 0:
                         GameStart();
-                        OnDeselected(menuobj[pointer]);
+                        //OnDeselected(menuobj[pointer]);
                         break;
                     case 1:
                         Exit();
-                        OnDeselected(menuobj[pointer]);
+                        //OnDeselected(menuobj[pointer]);
                         break;
                     default:
                         if (pointer < menuobj.Length - 1)
@@ -257,12 +256,10 @@ public class TitleMenu : MonoBehaviour
             //キーが押されたら終了
             if (InputKeyCheck.GetAnyKey())
             {
-                Debug.Log("ムービー終了");
                 DemoVideoEnd(); yield break;
             }
             yield return null;
         }
-        Debug.Log("ムービー開始");
         videoImage.enabled = true;
         videoPlayer.enabled = true;
         videoPlayer.Play();
@@ -277,22 +274,21 @@ public class TitleMenu : MonoBehaviour
 
         while(demoTimer <= demoVideoTime) 
         {
-            Debug.Log(demoTimer +"+"+demoVideoTime);
             demoTimer += Time.deltaTime;
             if (InputKeyCheck.GetAnyKey()) { DemoVideoEnd(); yield break; }
             yield return null;
         };
-
+        fade.StartFadeOut();
         while (!fade.IsFadeOutComplete())
         {
             yield return null;
         }
+        DemoVideoEnd();
         fade.StartFadeIn();
         while (!fade.IsFadeInComplete())
         {
             yield return null;
         }
-        DemoVideoEnd();
     }
 
     private void DemoVideoEnd()
