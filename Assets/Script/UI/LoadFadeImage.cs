@@ -104,7 +104,7 @@ public class LoadFadeImage : MonoBehaviour
         //フェード中
         if (timer < fadeTime)
         {
-            img.color = new Color(0, 0, 0, 1 - timer);
+            img.color = new Color(0, 0, 0, img.color.a - 1 * Time.deltaTime);
         }
         //フェードが完了したとき
         else
@@ -118,7 +118,7 @@ public class LoadFadeImage : MonoBehaviour
     {
         if (timer < fadeTime)
         {
-            img.color = new Color(0, 0, 0, timer);
+            img.color = new Color(0, 0, 0, img.color.a + 1 * Time.deltaTime);
         }
         else
         {
@@ -144,6 +144,18 @@ public class LoadFadeImage : MonoBehaviour
         img.raycastTarget = false;
         timer = 0f;
         fadeOut = false;
+        compFadeOut = true;
+    }
+
+    //フェードイン・アウトキャンセル
+    public void FadeStop()
+    {
+        img.color = new Color(0, 0, 0, 0);
+        img.raycastTarget = false;
+        timer = 0f;
+        fadeIn = false;
+        fadeOut = false;
+        compFadeIn = true;
         compFadeOut = true;
     }
 }

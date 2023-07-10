@@ -48,6 +48,7 @@ public class FadeImage : MonoBehaviour
         {
             return;
         }
+        fadeIn = true;
         compFadeIn = false;
         timer = 0.0f;
         img.fillOrigin = (int)Image.OriginHorizontal.Right;
@@ -55,6 +56,7 @@ public class FadeImage : MonoBehaviour
         img.raycastTarget = true;
         stockImg.fillOrigin = (int)Image.OriginHorizontal.Right;
         stockImg.fillAmount = 1;
+        GameManager.Instance.PlayerStop();
         StartCoroutine(RevivalFadeInUpdate());
     }
 
@@ -209,7 +211,8 @@ public class FadeImage : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-
+        SceneData.Instance.revival = false;
+        GameManager.Instance.PlayerMove();
         compFadeIn = true;
     }
 }

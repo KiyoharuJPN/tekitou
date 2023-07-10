@@ -130,7 +130,9 @@ public class BGMSoundData
         GameOver_roop,
         KingSlimeBoss_intro,
         KingSlimeBoss_roop,
-        none //Resultの様なイントロ・ループがないBGMを呼び出す際の片方
+        none, //Resultの様なイントロ・ループがないBGMを呼び出す際の引数２
+        Stage2_intro,
+        Stage2_roop
     }
 
     public BGM bgm;
@@ -169,6 +171,7 @@ public class SESoundData
         GoalSE,                 //ゴール時
         GetHeart,               //ハート取得
         GetCoin,                //コイン取得
+        //
         //モンスターサウンド
         MonsterGetHit,          //敵被弾
         MonsterKnock,           //吹き飛び
@@ -188,7 +191,7 @@ public class SESoundData
         WaggingTailPowerful,    //勢いよくしっぽを振る
         BirdChirping,           //鳥の鳴き声
         Door,                   //扉
-
+        HalfPoint,              //中間地点起動
 
         //BGMイントロ
 

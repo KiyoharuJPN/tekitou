@@ -7,7 +7,7 @@ public class WarpDoor : MonoBehaviour
 {
     [SerializeField] internal Animator animator;
     [SerializeField] FadeImage fade;
-    [SerializeField] CameraManager camera;
+    [SerializeField] private new CameraManager camera;
 
     [SerializeField]
     GameObject BottonUi;
@@ -51,7 +51,6 @@ public class WarpDoor : MonoBehaviour
             player = collision;
             isBottonUi = true;
             _BottonUi(collision);
-            
         };
     }
 
@@ -87,7 +86,7 @@ public class WarpDoor : MonoBehaviour
         player.transform.position = warpPoint.transform.position;
         camera.ChengeCameraArea_Boss();
         yield return new WaitForSeconds(1f);//渡された時間待機
-
+        Debug.Log("フェードイン開始");
         //フェードイン開始
         fade.StartFadeIn();
         while (!fade.IsFadeOutComplete())

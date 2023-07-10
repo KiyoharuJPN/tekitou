@@ -28,6 +28,7 @@ public class WayPoint : MonoBehaviour
             isWayPoint = true;
             animator.SetTrigger("IsWayPoint");
             SceneData.Instance.wayPoint = true;
+            SoundManager.Instance.PlaySE(SESoundData.SE.HalfPoint);
             this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             this.enabled = false;
         }

@@ -63,7 +63,20 @@ public class GameManager : MonoBehaviour
             case 3:
                 BGMStart_GameOver();
                 break;
+            case 4:
+                BGMStart_Stage2();
+                break;
         }
+    }
+
+    //プレイヤー停止処理
+    public void PlayerStop()
+    {
+        player.canMove = false;
+    }
+    public void PlayerMove()
+    {
+        player.canMove = true;
     }
 
     //プレイヤー死亡時処理
@@ -177,6 +190,10 @@ public class GameManager : MonoBehaviour
     private void BGMStart_Stage1()
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage1_intro, BGMSoundData.BGM.Stage1_roop);
+    }
+    private void BGMStart_Stage2()
+    {
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
     }
     private void BGMStart_Result()
     {

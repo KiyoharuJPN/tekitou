@@ -13,7 +13,6 @@ public class Player_Jump : MonoBehaviour
 
     [Header("すり抜床か判定するか")]
     public bool checkPlatformGroud = true;
-    private string platformTag = "GroundPlatform";
 
     internal float jumpTime = 0;
     internal bool isjump = false;
@@ -62,7 +61,7 @@ public class Player_Jump : MonoBehaviour
         if(player.isUpAttack && !isSecondJump) canSecondJump = true;
 
         //ジャンプキー取得
-        if (player.canMove || !player.isAttack) JumpBottan();
+        if (player.canMove && !player.isAttack) JumpBottan();
     }
 
     private void FixedUpdate()
@@ -70,6 +69,7 @@ public class Player_Jump : MonoBehaviour
         if (player.isExAttack) return;
         if (isUpAttack || player.isDropAttack || player.isSideAttack)
         {
+            isjump = false;
             return;
         }
         Jump();

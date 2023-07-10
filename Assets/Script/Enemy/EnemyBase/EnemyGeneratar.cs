@@ -5,6 +5,15 @@ public class EnemyGeneratar : MonoBehaviour
     [SerializeField]
     EnemyListEntity EnemyListEntity;
 
+    [SerializeField, Header("吹っ飛び速度")]
+    public float speed = 15f;
+    //吹っ飛び中の煙エフェクト
+    [SerializeField, Header("吹き飛び中の煙エフェクト")]
+    public GameObject smokeEffect;
+    [SerializeField, Header("煙エフェクト発生間隔")]
+    public float effectInterval = 0.5f;
+    [SerializeField, Header("消滅時エフェクト")]
+    public GameObject deathEffect;
     public static EnemyGeneratar instance;
 
     private void Awake()

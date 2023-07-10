@@ -11,7 +11,8 @@ public class NomalAttack
     {
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
         player.canNomalAttack = false;
-        player.animator.SetTrigger("IsNomalAttack");
+        player.isNomalAttack = true;
+        player.animator.SetBool("IsNomalAttack", player.isNomalAttack);
         
         player.isAttack = true;
     }
@@ -20,14 +21,20 @@ public class NomalAttack
     {
         if (player.isFalling || player.isJumping) //空中通常攻撃の場合
         {
-            mono.StartCoroutine(_NomalAttackInterval(airCoolTime, player));
+            mono.StartCoroutine(_NomalAttackInterval(airCoolTime + AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Jump), player));
+            Debug.Log(airCoolTime + AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Jump), player);
         }
-        else mono.StartCoroutine(_NomalAttackInterval(skill.coolTime, player));
+        else
+        {
+            mono.StartCoroutine(_NomalAttackInterval(AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Stage), player));
+            Debug.Log(AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Stage), player);
+        }
     }
 
     //クールタイム用コルーチン
     static IEnumerator _NomalAttackInterval(float coolTime, PlayerController player)
     {
+        player.isNomalAttack = false;
         float time = coolTime;
 
         while (time > 0)
@@ -37,6 +44,7 @@ public class NomalAttack
         }
 
         player.isAttack = false;
+        player.animator.SetBool("IsNomalAttack", player.isNomalAttack);
         player.enemylist.Clear();
         player.canNomalAttack = true;
     }

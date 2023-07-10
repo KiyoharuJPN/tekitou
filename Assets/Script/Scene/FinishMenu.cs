@@ -84,6 +84,7 @@ public class FinishMenu : MonoBehaviour
             SceneManager.LoadScene("Level_Stage1");
         }
         SceneData.Instance.stock = 2;
+        SceneData.Instance.wayPoint = false;
     }
     void BackTitle()
     {

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Player_IsGround : MonoBehaviour
@@ -43,14 +45,20 @@ public class Player_IsGround : MonoBehaviour
                 jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
                 player.isDropAttack = false;
                 player.animator.SetBool("IsDropAttack", player.isDropAttack);
-                Invoke(nameof(DropAttackOff), 0.5f);
             }
-            else 
-            {
-                Invoke(nameof(Landingoff), 0.1f);
-            }
-            
+            StartCoroutine(Interval(0.1f));
         }
+    }
+
+    IEnumerator Interval(float time)
+    {
+        if (!player.canDropAttack)
+        {
+            time += AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.Hero_DropAttack_End);
+        }
+        yield return new WaitForSeconds(time);
+
+        Landingoff();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -66,12 +74,7 @@ public class Player_IsGround : MonoBehaviour
     {
         jumpData.FarstJump = true;
         player.isLanding = false;
-    }
-
-    void DropAttackOff()
-    {
         player.isAttack = false;
         player.canDropAttack = true;
-        Landingoff();
     }
 }

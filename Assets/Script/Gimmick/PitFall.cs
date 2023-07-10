@@ -7,7 +7,8 @@ public class PitFall : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            SceneManager.LoadScene("FinishScene");
+            SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
+            GameManager.Instance.PlayerDeath();
         }
         else
         {
