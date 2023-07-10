@@ -72,15 +72,13 @@ public class TitleMenu : MonoBehaviour
 
         if (!InputKeyCheck.GetAnyKey())
         {
-            Debug.Log("キーは入力されていない");
+            Debug.Log("実行中");
             demoTimer += Time.deltaTime;
             if (demoTimer >= demoVideoMoveTime)
                 isDemoVideo = true;
         }
         else if(InputKeyCheck.GetAnyKey())
         {
-
-            Debug.Log("キーは入力されている");
             demoTimer = 0;
         }
 
@@ -99,7 +97,7 @@ public class TitleMenu : MonoBehaviour
                 if (pointer > menuobj.Length - 1) pointer = menuobj.Length - 1;// 0;//上限調整
 
                 target.transform.position = new Vector2(target.transform.position.x, menuobj[pointer].transform.position.y);
-                //OnSelected(menuobj[pointer]);
+                OnSelected(menuobj[pointer]);
                 //if(pointer !=pointerpreb && pointerpreb != -1) OnDeselected(menuobj[pointerpreb]);
             }
 
@@ -116,11 +114,11 @@ public class TitleMenu : MonoBehaviour
                 {
                     case 0:
                         GameStart();
-                        //OnDeselected(menuobj[pointer]);
+                        OnDeselected(menuobj[pointer]);
                         break;
                     case 1:
                         Exit();
-                        //OnDeselected(menuobj[pointer]);
+                        OnDeselected(menuobj[pointer]);
                         break;
                     default:
                         if (pointer < menuobj.Length - 1)
@@ -166,7 +164,6 @@ public class TitleMenu : MonoBehaviour
 
     private void DemoMove()
     {
-        demoTimer = 0;
         if(canDemoVideo)
         {
             canDemoVideo = false;
@@ -252,7 +249,7 @@ public class TitleMenu : MonoBehaviour
 
     IEnumerator DemoVideoPlay()
     {
-        
+        demoTimer = 0;
         //フェードアウト開始
         fade.StartFadeOut();
         while (!fade.IsFadeOutComplete())
@@ -280,6 +277,7 @@ public class TitleMenu : MonoBehaviour
 
         while(demoTimer <= demoVideoTime) 
         {
+            Debug.Log(demoTimer +"+"+demoVideoTime);
             demoTimer += Time.deltaTime;
             if (InputKeyCheck.GetAnyKey()) { DemoVideoEnd(); yield break; }
             yield return null;

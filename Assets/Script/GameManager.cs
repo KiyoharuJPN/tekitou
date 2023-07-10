@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+
         if(Input.GetKeyDown("joystick button 7")) 
         {
             SceneManager.LoadScene("Title");

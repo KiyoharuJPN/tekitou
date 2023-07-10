@@ -83,6 +83,10 @@ public class FinishMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Level_Stage1");
         }
+        else if (SceneData.Instance.referer == "Stage2")
+        {
+            SceneManager.LoadScene("Level_Stage2");
+        }
         SceneData.Instance.stock = 2;
         SceneData.Instance.wayPoint = false;
     }

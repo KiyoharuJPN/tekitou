@@ -67,7 +67,7 @@ public class Player_Jump : MonoBehaviour
     private void FixedUpdate()
     {
         if (player.isExAttack) return;
-        if (isUpAttack || player.isDropAttack || player.isSideAttack)
+        if (isUpAttack || !player.canDropAttack || player.isSideAttack)
         {
             isjump = false;
             return;
