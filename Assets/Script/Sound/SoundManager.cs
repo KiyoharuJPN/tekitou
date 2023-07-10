@@ -182,13 +182,13 @@ public class SESoundData
         KingSlimeLanding,       //キングスライム着地
         KingSlimeSummon,        //スライム召喚
         BossDown,               //ボス撃破
-        //ShootMagicBall,       //削除
-        //ForefootHeavyAttack,  //削除
-/*        DragonRoar,             //ドラゴンの咆哮（実質削除）
-        DragonBlaze,            //炎を吐く（実質削除）
-        RockDropOff,            //岩の落下（実質削除）
-        RockBreak,              //岩を砕ける音（実質削除）
-        WaggingTailPowerful,    //勢いよくしっぽを振る（実質削除）*/
+        ShootMagicBall,         //魔法の弾を飛ばす
+        ForefootHeavyAttack,    //前足を勢いよく振り下ろす（ゴブリン攻撃音使用）
+        DragonRoar,             //ドラゴンの咆哮
+        DragonBlaze,            //炎を吐く
+        RockDropOff,            //岩の落下
+        RockBreak,              //岩を砕ける音
+        WaggingTailPowerful,    //勢いよくしっぽを振る
         BirdChirping,           //鳥の鳴き声
         Door,                   //扉
         HalfPoint,              //中間地点起動

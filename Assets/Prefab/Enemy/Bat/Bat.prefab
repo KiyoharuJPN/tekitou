@@ -201,7 +201,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &781626350735882294
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781626350735882290}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 4946ab5ec7328864db5e2c8715843be7, type: 2}
   m_IsTrigger: 0
@@ -257,5 +257,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 9
-  MoveDistance: 10
-  MoveSpeed: 5
+  MoveDistance: -5
+  MoveSpeed: 3

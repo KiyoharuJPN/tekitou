@@ -59,6 +59,7 @@ public class Spider : Enemy
             yield return new WaitForSeconds(0.01f);
         }
         SpiderAttack.SetActive(true);
+        SoundManager.Instance.PlaySE(SESoundData.SE.ForefootHeavyAttack);
         while(i < 22)
         {
             i++;
@@ -72,6 +73,7 @@ public class Spider : Enemy
         }
         SpiderAttackCheckArea.SetActive(true);
         IsMoving = true;
+        AttackChecking = true;
     }
 
 

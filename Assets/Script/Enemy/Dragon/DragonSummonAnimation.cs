@@ -19,18 +19,24 @@ public class DragonSummonAnimation : MonoBehaviour
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
+    //召喚関連
+    public float waitSecond;
+    bool summon = true;
 
+    public GameObject WallCheck;
 
     //Animation関連
     Animator animator;
-    int animationControler;
+    int AnimController = 0;
     bool IsAnimation = true;//, StageCheck = false, anim3 = true, anim4 = true;
     Rigidbody2D enemyRb;
 
+    [Header("HPGaugeの表示")]
+    [SerializeField]
+    GameObject HPBar;
 
     private void Start()
     {
-        animationControler = 0;
         animator = GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody2D>();
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
@@ -38,8 +44,7 @@ public class DragonSummonAnimation : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(animationControler);
-        animator.SetInteger("AnimationControler", animationControler);
+        animator.SetInteger("AnimController", AnimController);
         animator.SetBool("IsAnimation", IsAnimation);
     }
 
@@ -51,6 +56,54 @@ public class DragonSummonAnimation : MonoBehaviour
         IsAnimation = false;
         animator.SetBool("IsAnimation", IsAnimation);
         //Debug.Log("++++++++++++++++++++++++++++++++++++++++++");
+        //壁のチェック
+        if(WallCheck!=null)WallCheck.SetActive(true);
         gameObject.GetComponent<DragonSummonAnimation>().enabled = false;
     }
+
+    //ボス登場アニメーション
+    IEnumerator BossSummonAnim1()
+    {
+        AnimController = 1;
+        yield return new WaitForSeconds(1);
+        SoundManager.Instance.PlaySE(SESoundData.SE.DragonRoar);
+        shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
+        yield return new WaitForSeconds(2);
+        HPBar.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        AnimationPlayed();
+
+    }
+
+
+    //初見召喚部分
+    IEnumerator BossSummon()
+    {
+        yield return new WaitForSeconds(waitSecond);
+        StartCoroutine(BossSummonAnim1());
+    }
+
+    //プレイヤーを止める処理
+    private void OnBecameVisible()
+    {
+        if(GetComponent<DragonSummonAnimation>().enabled == true)
+        {
+            if (summon)
+            {
+                summon = false;
+                StartCoroutine(BossSummon());
+                GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(false);
+            }
+        }
+    }
+    //重力付け
+    private void FixedUpdate()
+    {
+        Gravity();
+    }
+    void Gravity()
+    {
+        enemyRb.AddForce(new Vector2(0, -5));
+    }
+
 }
