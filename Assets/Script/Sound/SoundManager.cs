@@ -14,9 +14,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] List<BGMSoundData> bgmSoundDatas;
     [SerializeField] List<SESoundData> seSoundDatas;
 
-    public float masterVolume { get; set; }
-    public float bgmMasterVolume { get; set; }
-    public float seMasterVolume { get; set; }
+    public float masterVolume;
+    public float bgmMasterVolume;
+    public float seMasterVolume;
 
     public static SoundManager Instance { get; private set; }
 
@@ -35,12 +35,6 @@ public class SoundManager : MonoBehaviour
 
             loopAudioSource.loop = true;
             loopAudioSource.playOnAwake = false;
-
-            //勝手に修正が入らないためリリース版でコメントアウト或いは削除してください。
-            masterVolume = 0.4f;
-            seMasterVolume = 0.4f;
-            bgmMasterVolume = 0.4f;
-            //勝手に修正が入らないためリリース版でコメントアウト或いは削除してください。
         }
         else
         {

@@ -30,7 +30,6 @@ public class Player_IsGround : MonoBehaviour
             }
             player.isSquatting = false;
             player.isJumping = false;
-            
 
             player.rb.velocity = Vector2.zero;
 
@@ -57,6 +56,11 @@ public class Player_IsGround : MonoBehaviour
         {
             time += AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.Hero_DropAttack_End);
         }
+        if (player.isAttack)
+        {
+            player.isAttack = false;
+        }
+
         yield return new WaitForSeconds(time);
 
         Landingoff();

@@ -179,7 +179,8 @@ public class PlayerController : MonoBehaviour
         {
             canMovingCounter -= Time.deltaTime;
         }
-        _Skill();
+        if (!isLanding) { _Skill(); }
+        
 
         BackgroundScroll();
 
@@ -233,7 +234,6 @@ public class PlayerController : MonoBehaviour
         if (tri > 0)
         {
             isAttackKay = true;
-            
         }
         else { isAttackKay = false; }
 
