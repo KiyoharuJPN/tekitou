@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour
     internal bool isSquatting = false;
     internal bool isWarpDoor = false;
     internal int attckType;
+    internal bool isGround = false;
 
     //boss”»’è—p
     internal bool canMove = true;
@@ -188,6 +189,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsJumping", isJumping);
         animator.SetBool("IsSquatting", isSquatting);
         animator.SetBool("IsLanding", isLanding);
+        animator.SetBool("IsGround", isGround);
     }
 
     public void _Attack(Collider2D enemy, float powar)

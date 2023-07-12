@@ -30,6 +30,7 @@ public class Player_IsGround : MonoBehaviour
             }
             player.isSquatting = false;
             player.isJumping = false;
+            
 
             player.rb.velocity = Vector2.zero;
 
@@ -65,6 +66,7 @@ public class Player_IsGround : MonoBehaviour
     {
         if (collision.CompareTag("Stage"))
         {
+            player.isGround = false;
             jumpData.FarstJump = false;
             jumpData.canSecondJump = true;
         }
@@ -72,6 +74,7 @@ public class Player_IsGround : MonoBehaviour
 
     void Landingoff()
     {
+        player.isGround = true;
         jumpData.FarstJump = true;
         player.isLanding = false;
         player.isAttack = false;
