@@ -70,7 +70,8 @@ public class BossHPBar : MonoBehaviour
                 if (!HPdecreasing)
                 {
                     HPdecreasing = true;
-                    StartCoroutine(DecreaseHP());
+                    //ƒoƒOƒƒO‘Î‰ž
+                    if (currentHP>0) StartCoroutine(DecreaseHP());
                 }
             }
         }

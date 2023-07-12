@@ -98,8 +98,10 @@ public class Dragon : Enemy
     protected override void Update()
     {
         base.Update();
+
         //animatorの設定
         animator.SetBool("IsBlowing", isDestroy);
+        if (isDestroy) return;
 
         //敵のパターンをランダムで選択
         if (PatternOver)
