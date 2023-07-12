@@ -113,6 +113,10 @@ public class Enemy : MonoBehaviour
     {
         if (!isDestroy)
         {
+            if (col.gameObject.CompareTag("Player")&&!HadAttack)
+            {
+                Attack(col);
+            }
             if (col.gameObject.CompareTag("Player"))
             {
                 enemyRb.velocity = new Vector2(0, enemyRb.velocity.y);

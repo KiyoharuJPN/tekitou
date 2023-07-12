@@ -13,7 +13,7 @@ public class PlayerSE : MonoBehaviour
     public void _JumpSE()
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.Jump);
-        Debug.Log(SoundManager.Instance);
+        //Debug.Log(SoundManager.Instance);
     }
     public void _SecondJumpSE()
     {

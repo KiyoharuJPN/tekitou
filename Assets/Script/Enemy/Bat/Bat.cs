@@ -50,7 +50,7 @@ public class Bat : Enemy
             {
                 //‰æ–ÊŠO‚É‚¢‚é‚Æ‚«‚ÍŽ~‚Ü‚ç‚¹‚é
                 enemyRb.velocity = Vector2.zero;
-                Debug.Log(3);
+                //Debug.Log(3);
             }
         }
         
