@@ -422,47 +422,65 @@ public class Dragon : Enemy
         AnimationController = 3;        //animator調整（必須）
         animator.SetInteger("AnimationController", AnimationController);
 
-        //攻撃力とノックバックを変える
-        var attackdam = enemyData.power;
-        enemyData.power = 2;
-        var knockbackval = enemyData.knockBackValue;
-        enemyData.knockBackValue = 100;
+        isSlewAttacking = true;
+        ////攻撃力とノックバックを変える
+        //var attackdam = enemyData.power;
+        //enemyData.power = 2;
+        //var knockbackval = enemyData.knockBackValue;
+        //enemyData.knockBackValue = 100;
 
         float animcheck = 0;
-        while(animcheck < 15)
+        while(animcheck < 88)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        EnemyCollider.offset = new Vector2(1.45f, -1.2f);
-        EnemyCollider.size = new Vector2(9.6f, 4);
-        while(animcheck < 23)
+        //ドラゴンコライダー
+        EnemyCollider.offset = new Vector2(0.67f, -1.6f);
+        EnemyCollider.size = new Vector2(7.3f, 3.18f);
+        //攻撃チェックArea
+        dragonAttackCheckArea.offset = new Vector2(1.34f, -1.2f);
+        dragonAttackCheckArea.size = new Vector2(9.3f, 4f);
+        dragonAttackCheckArea.gameObject.SetActive(true);
+        while(animcheck < 96)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        EnemyCollider.offset = new Vector2(-3.9f, -1.2f);
-        EnemyCollider.size = new Vector2(10, 4);
-        while (animcheck < 31)
+        EnemyCollider.offset = new Vector2(-3.3f, -1.6f);
+        EnemyCollider.size = new Vector2(7, 3.18f);
+        //攻撃チェックArea
+        dragonAttackCheckArea.offset = new Vector2(-3.9f, -1.2f);
+        dragonAttackCheckArea.size = new Vector2(10, 4f);
+        while (animcheck < 104)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        EnemyCollider.size = new Vector2(11.3f, 4);
-        while (animcheck < 39)
+        EnemyCollider.offset = new Vector2(-1.7f, -1.6f);
+        EnemyCollider.size = new Vector2(6.65f, 3.18f);
+        //攻撃チェックArea
+        dragonAttackCheckArea.offset = new Vector2(-4.9f, -1.2f);
+        dragonAttackCheckArea.size = new Vector2(8.2f, 4f);
+        while (animcheck < 112)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
+        dragonAttackCheckArea.gameObject.SetActive(false);
+        ResetAttackCheckArea();
         ResetBoxCollider2D();
-        while (animcheck < 65)
+        while (animcheck < 150)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        //攻撃力とノックバックを戻す
-        enemyData.power = attackdam;
-        enemyData.knockBackValue = knockbackval;
+        ////攻撃力とノックバックを戻す
+        //enemyData.power = attackdam;
+        //enemyData.knockBackValue = knockbackval;
+        isSlewAttacking = false;
+
+
         //アニメの終わり（必須）
         animator.SetInteger("AnimationController", -1);
         NotInAnim = true;                   //次の動きに移動できるようにする
@@ -615,8 +633,16 @@ public class Dragon : Enemy
                 col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 30);
                 col.gameObject.GetComponent<PlayerController>()._Damage(2);
             }
-            
-            
+
+            if (isSlewAttacking)
+            {
+                //攻撃クールダウンタイム
+                HadAttack = true;
+                StartCoroutine(HadAttackReset());
+                //FlameBracingのダメージとノックバック
+                col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 30);
+                col.gameObject.GetComponent<PlayerController>()._Damage(2);
+            }
         }
     }
 
