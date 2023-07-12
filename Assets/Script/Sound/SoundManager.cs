@@ -51,7 +51,7 @@ public class SoundManager : MonoBehaviour
         {
             BGMSoundData data = bgmSoundDatas.Find(data => data.bgm == bgm_intro);
             bgmAudioSource.loop = false;
-            bgmAudioSource.volume = data.volume * bgmMasterVolume * masterVolume;
+            bgmAudioSource.volume = bgmMasterVolume * masterVolume;
             bgmAudioSource.clip = data.audioClip;
             bgmAudioSource.Play();
         }
@@ -63,7 +63,7 @@ public class SoundManager : MonoBehaviour
             introAudioSource.clip = data_intro.audioClip;
             loopAudioSource.clip = data_loop.audioClip;
 
-            bgmAudioSource.volume = data_intro.volume * bgmMasterVolume * masterVolume;
+            bgmAudioSource.volume = bgmMasterVolume * masterVolume;
             bgmAudioSource.loop = true;
             bgmAudioSource.Play();
             bgmAudioSource.PlayScheduled(AudioSettings.dspTime + loopAudioSource.clip.length);
@@ -97,7 +97,7 @@ public class SoundManager : MonoBehaviour
             seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
             seAudioSource.PlayOneShot(data.audioClip);
         }*/
-        seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
+        seAudioSource.volume = seMasterVolume * masterVolume;
         seAudioSource.PlayOneShot(data.audioClip);
     }
 

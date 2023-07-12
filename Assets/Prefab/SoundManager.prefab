@@ -276,19 +276,19 @@ MonoBehaviour:
   bgmSoundDatas:
   - bgm: 0
     audioClip: {fileID: 8300000, guid: 4510ef051b67e024f8827e984d7c6229, type: 3}
-    volume: 0.1
+    volume: 1
   - bgm: 1
     audioClip: {fileID: 8300000, guid: d9ff1b1ca063fde4aa9956218364bc80, type: 3}
-    volume: 0.1
+    volume: 1
   - bgm: 2
     audioClip: {fileID: 8300000, guid: e0199d3828d618f4a827449289cf19c8, type: 3}
-    volume: 0.1
+    volume: 1
   - bgm: 3
     audioClip: {fileID: 8300000, guid: bb48296ce9b7dc34a89762ea3e6830dc, type: 3}
-    volume: 0.1
+    volume: 1
   - bgm: 4
     audioClip: {fileID: 8300000, guid: a73997de965c66040b87e8fc15702eef, type: 3}
-    volume: 0.1
+    volume: 1
   - bgm: 5
     audioClip: {fileID: 8300000, guid: fde70bb3a313ac641af92f98d017b22b, type: 3}
     volume: 1
@@ -303,12 +303,6 @@ MonoBehaviour:
     volume: 1
   - bgm: 9
     audioClip: {fileID: 8300000, guid: 9a68d20a80d5850458336a68d13c30ff, type: 3}
-    volume: 1
-  - bgm: 11
-    audioClip: {fileID: 8300000, guid: 27e886f7fc7602140a95e6aefd7bc234, type: 3}
-    volume: 1
-  - bgm: 12
-    audioClip: {fileID: 8300000, guid: 06b0c83d50f6e5e4790db776f0b4a3cc, type: 3}
     volume: 1
   seSoundDatas:
   - se: 0
@@ -426,8 +420,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 6da3a89e9eef08a4781f2d0bee24f986, type: 3}
     volume: 1
   masterVolume: 1
-  bgmMasterVolume: 2.5
-  seMasterVolume: 0.4
+  bgmMasterVolume: 0.5
+  seMasterVolume: 1
 --- !u!1 &5644327851398467931
 GameObject:
   m_ObjectHideFlags: 0
