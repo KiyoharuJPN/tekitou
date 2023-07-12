@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 8
+  speed: 15
   moveHeightForce: 3
   moveWidthForce: 3
   AttackHeight: 8
@@ -470,6 +471,14 @@ PrefabInstance:
     - target: {fileID: 8312298754847659851, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
       propertyPath: m_Name
       value: BossHPBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056471604131598449, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
+      propertyPath: FillSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056471604131598449, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
+      propertyPath: DecreaseSpeed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}

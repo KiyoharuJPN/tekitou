@@ -39,13 +39,23 @@ public class Wizard_MagicBall : Projectile
         if (collision.CompareTag("Player"))
         {
             Attack(collision);
+            if (clearWMB)
+            {
+                clearWMB = false;
+                ObjectPool.Instance.PushObject(gameObject);
+            }
         }
 
-        if (clearWMB)
+        if (collision.CompareTag("Stage"))
         {
-            clearWMB = false;
-            ObjectPool.Instance.PushObject(gameObject);
+            if (clearWMB)
+            {
+                clearWMB = false;
+                ObjectPool.Instance.PushObject(gameObject);
+            }
         }
+
+        
     }
 
     //攻撃力とノックバック力の設定及び進行方向の初期化

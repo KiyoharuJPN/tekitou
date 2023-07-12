@@ -256,46 +256,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[7].bgm
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[8].bgm
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[9].bgm
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[6].volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[9].volume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[6].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2a5ad563b24069c42b41a2501d6a1805, type: 3}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[7].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 648bb645c20d1a44ba3f5ae455263fd9, type: 3}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[8].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 46296e7be2b244446a45680f114a6d72, type: 3}
-    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
-      propertyPath: bgmSoundDatas.Array.data[9].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 9a68d20a80d5850458336a68d13c30ff, type: 3}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_RootOrder
       value: 4
