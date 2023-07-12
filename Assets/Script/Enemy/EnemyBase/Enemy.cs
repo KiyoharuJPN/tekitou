@@ -388,7 +388,7 @@ public class Enemy : MonoBehaviour
     //攻撃クールダウン
     protected IEnumerator HadAttackReset()
     {
-        var n = 20;
+        var n = 50;
         while(n > 0)
         {
             n--;
