@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 909705656c4adf44ca7c3bad3010428a
+guid: 9f6b0436806e67947a62520e4477dc86
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -140,54 +140,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_Dragon_Breath_3_10_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1920
-        width: 2560
-        height: 640
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ccb2a31b567c31344879e278644b7199
-      internalID: -1704609877
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Dragon_Breath_3_10_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1280
-        width: 2560
-        height: 640
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e526626e9ec5ed04c9f6423a12d8ea27
-      internalID: -2048098862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Dragon_Breath_3_10_2
+      name: Enemy_Dragon_Rotation_4_10_0
       rect:
         serializedVersion: 2
         x: 0
         y: 640
-        width: 2560
+        width: 1280
         height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -196,19 +154,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e12b780d0eaa280488475a6d7106c5ab
-      internalID: -1104532103
+      spriteID: d03182f683fe2fa40b5655b9e3867d0d
+      internalID: 2147210935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Dragon_Breath_3_10_3
+      name: Enemy_Dragon_Rotation_4_10_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2560
+        x: 1280
+        y: 640
+        width: 1280
         height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -217,8 +175,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c493af7f3798c744b9aee1f76e6114e1
-      internalID: -1510757762
+      spriteID: 25655e68bca46424f83d0e29d3b27940
+      internalID: 841412807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Dragon_Rotation_4_10_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1280
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c2b36398cea784184dc18618ff71f2
+      internalID: -1347631159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Dragon_Rotation_4_10_3
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 1280
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42943942f232ec94cb6522e1a19489c9
+      internalID: -903686083
       vertices: []
       indices: 
       edges: []
@@ -234,10 +234,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_Dragon_Breath_3_10_0: -1704609877
-      Enemy_Dragon_Breath_3_10_1: -2048098862
-      Enemy_Dragon_Breath_3_10_3: -1510757762
-      Enemy_Dragon_Breath_3_10_2: -1104532103
+      Enemy_Dragon_Rotation_4_10_3: -903686083
+      Enemy_Dragon_Rotation_4_10_0: 2147210935
+      Enemy_Dragon_Rotation_4_10_1: 841412807
+      Enemy_Dragon_Rotation_4_10_2: -1347631159
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
