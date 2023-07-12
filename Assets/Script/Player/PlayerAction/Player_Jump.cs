@@ -62,6 +62,12 @@ public class Player_Jump : MonoBehaviour
 
         //ジャンプキー取得
         if (player.canMove && !player.isAttack) JumpBottan();
+
+        if (isjump && player.isAttack) {
+            isjump = false;
+            jumpTime = 0;
+        };
+
     }
 
     private void FixedUpdate()
@@ -78,24 +84,26 @@ public class Player_Jump : MonoBehaviour
 
     void JumpBottan()
     {
-        //ジャンプキー入力
-        if (Input.GetButtonDown("Jump"))
-        {
-            JumpSet();
-        }
 
         //ジャンプ中の処理
         if (isjump)
         {
             if (!Input.GetButton("Jump") || jumpTime >= player.jumpData.maxJumpTime)
             {
+                Debug.Log("ジャンプ終了");
                 isjump = false;
                 jumpTime = 0;
             }
-            else if (Input.GetButton("Jump") && jumpTime <= player.jumpData.maxJumpTime)
+            else if(Input.GetButton("Jump") && jumpTime <= player.jumpData.maxJumpTime)
             {
                 jumpTime += Time.deltaTime;
             }
+        }
+
+        //ジャンプキー入力
+        if (Input.GetButtonDown("Jump"))
+        {
+            JumpSet();
         }
     }
 
@@ -105,6 +113,7 @@ public class Player_Jump : MonoBehaviour
         //ジャンプ1段目
         if (FarstJump && !canSecondJump)
         {
+            
             player.isSquatting = true;
             FarstJump = false;
             player.animator.SetBool("IsSquatting", player.isSquatting);
@@ -117,6 +126,8 @@ public class Player_Jump : MonoBehaviour
         //ジャンプ2段目
         else if(canSecondJump)
         {
+
+            Debug.Log("ダブルジャンプボタン入力");
             player.animator.SetTrigger("IsSecondJump");
             canSecondJump = false;
             isSecondJump = true;

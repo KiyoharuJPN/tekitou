@@ -30,7 +30,6 @@ public class Slime : Enemy
     }
     override protected void Update()
     {
-        Debug.Log(enemyRb.velocity.y);
         //“G‚Ìscript‚ÉŠî‚Ã‚­
         base.Update();
 
