@@ -39,7 +39,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2493369053805205941}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -59,11 +59,11 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 263, y: 4.7}
       - {x: 100, y: 4.7}
-      - {x: 100, y: -13}
-      - {x: 88, y: -13}
+      - {x: 100, y: -2.5}
+      - {x: 91, y: -2.5}
       - {x: 88, y: -2.5}
-      - {x: 46, y: -2.5}
-      - {x: 46, y: 6.9}
+      - {x: 50, y: -2.5}
+      - {x: 50, y: 6.9}
       - {x: -25, y: 6.9}
       - {x: -25, y: -8}
       - {x: 24, y: -8}

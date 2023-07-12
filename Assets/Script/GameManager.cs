@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +10,7 @@ public class GameManager : MonoBehaviour
     
     public FadeImage fade;
     public PlayerController player;
+    PauseMenu pauseMenu;
 
     GameObject[] enemys;
     List<GameObject> enemyList = new List<GameObject>();
@@ -28,20 +31,37 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 
     void Start()
     {
         maxCombo = 0;
         killEnemy = 0;
+        if (SceneData.Instance.referer == "Title")
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
     {
-
-        if(Input.GetKeyDown("joystick button 7")) 
+        //É|Å[ÉYâÊñ 
+        if (Input.GetKeyDown("joystick button 7")) 
         {
-            SceneManager.LoadScene("Title");
+            if (!pauseMenu.PauseCheck())
+            {
+                player.canMove = false;
+                pauseMenu.PauseStart();
+            }
+            else if (pauseMenu.PauseCheck())
+            {
+                pauseMenu.BackGame();
+            }
+        }
+        if (pauseMenu.PauseCheck())
+        {
+            pauseMenu.MenuUpdata();
         }
     }
 
@@ -49,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         fade = GameObject.FindWithTag("FadeImage").GetComponent<FadeImage>();
+        pauseMenu = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
 
         switch (ID)
         {
@@ -214,6 +235,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator _PlyerDeath() 
     {
+        player.canMove = false;
         Time.timeScale = 0.3f;
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1f;
@@ -236,5 +258,10 @@ public class GameManager : MonoBehaviour
             SceneData.Instance.revival = false;
             SceneManager.LoadScene("FinishScene");
         }
+    }
+
+    internal void PauseBack()
+    {
+        player.canMove = true;
     }
 }
