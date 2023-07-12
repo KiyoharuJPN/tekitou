@@ -470,7 +470,7 @@ public class Dragon : Enemy
         dragonAttackCheckArea.gameObject.SetActive(false);
         ResetAttackCheckArea();
         ResetBoxCollider2D();
-        while (animcheck < 120)
+        while (animcheck < 150)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
