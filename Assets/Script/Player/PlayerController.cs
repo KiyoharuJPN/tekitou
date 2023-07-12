@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
         playerSE = GetComponent<PlayerSE>();
         rb = GetComponent<Rigidbody2D>();
         jump = GetComponent<Player_Jump>();
-        hpparam = GameObject.Find("Hero").GetComponentInChildren<HPparam>();
+        hpparam = GameObject.Find("UI").GetComponentInChildren<HPparam>();
     }
 
     void Update()
