@@ -277,7 +277,6 @@ public class PlayerController : MonoBehaviour
 
     internal void AttackAction(string actionName)
     {
-        //TODO 現在はスキル中にExアタックを行うとバグるので修正必須
         switch (actionName)
         {
             case "UpAttack":
@@ -480,6 +479,8 @@ public class PlayerController : MonoBehaviour
     internal void WarpDoor(Transform door)
     {
         isWarpDoor = true;
+        isRun = false;
+        animator.SetBool("IsRun", isRun);
         var doorPosX = door.position.x;
         var doorPosY = door.position.y;
         this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);
@@ -489,6 +490,7 @@ public class PlayerController : MonoBehaviour
 
     internal void WarpDoorEnd()
     {
+
         isWarpDoor = false;
         animator.SetBool("IsWarpDoor", isWarpDoor);
         NomalPlayer();

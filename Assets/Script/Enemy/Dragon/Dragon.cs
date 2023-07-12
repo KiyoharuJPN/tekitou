@@ -241,7 +241,6 @@ public class Dragon : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
