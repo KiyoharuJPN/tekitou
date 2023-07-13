@@ -308,7 +308,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 27e886f7fc7602140a95e6aefd7bc234, type: 3}
     volume: 1
   - bgm: 12
-    audioClip: {fileID: 8300000, guid: 9a68d20a80d5850458336a68d13c30ff, type: 3}
+    audioClip: {fileID: 8300000, guid: 06b0c83d50f6e5e4790db776f0b4a3cc, type: 3}
     volume: 1
   seSoundDatas:
   - se: 0

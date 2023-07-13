@@ -113,6 +113,8 @@ public class TutorialScene : StageCtrl
                 if (EnemyDeathCheck())
                 {
                     Destroy(stopTiles[5]);
+                    player.isTJump = true;
+                    player.isTAirJump = true;
                     return true;
                 }
                 break;
