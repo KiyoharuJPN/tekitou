@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     //移動速度内部関数
     protected float moveSpeed;
     //チェック用内部関数
-    protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, HadAttack = false, hadDamaged = false, PlayerNotAttacked = true, AttackChecking = true;
+    protected bool IsBlowing = false, IsMoving = true, IsAttacking = false, hadDamaged = false, PlayerNotAttacked = true, HadAttack = false, AttackChecking = true;
 
     //プレイヤー必殺技中かどうか
     [System.NonSerialized]
@@ -392,7 +392,7 @@ public class Enemy : MonoBehaviour
     //攻撃クールダウン
     protected IEnumerator HadAttackReset()
     {
-        var n = 50;
+        var n = 100;
         while(n > 0)
         {
             n--;
