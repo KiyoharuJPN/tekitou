@@ -55,7 +55,6 @@ public class Tutorial_Jump : Player_Jump
         {
             if (!Input.GetButton("Jump") || jumpTime >= Tutroialplayer.jumpData.maxJumpTime)
             {
-                Debug.Log("ƒWƒƒƒ“ƒvI—¹");
                 isjump = false;
                 jumpTime = 0;
             }
