@@ -461,7 +461,7 @@ MonoBehaviour:
     maxJumpTime: 0.3
   knockBack:
     knockBackTime: 0.4
-    cantMovingTime: 0.01
+    cantMovingTime: 0.001
     canKnockBack: 1
   parallaxBackground: {fileID: 0}
   shake: {fileID: 0}
