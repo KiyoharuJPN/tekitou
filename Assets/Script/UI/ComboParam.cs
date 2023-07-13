@@ -64,7 +64,7 @@ public class ComboParam : MonoBehaviour
     public void SetCombo(int Cb)
     {
         
-        if (countCombo == 0)
+        if (countCombo == 0 || SceneData.Instance.referer == "Tutorial")
         {
             StartCoroutine(_ComboTime());
         }

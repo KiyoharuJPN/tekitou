@@ -309,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 8251476475733928170}
   comboStatus:
-    Distime: 3
+    Distime: 5
   comboTimeGage: {fileID: 8251476474237596171}
   player: {fileID: 0}
 --- !u!1 &8251476474237596169

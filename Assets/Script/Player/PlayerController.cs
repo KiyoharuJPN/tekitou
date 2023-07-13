@@ -13,19 +13,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] internal Rigidbody2D rb;
     [SerializeField] internal Animator animator;
     internal PlayerSE playerSE;
-    Player_Jump jump;
+    internal Player_Jump jump;
 
     [SerializeField]
-    GameObject RunEffect;
+    internal GameObject RunEffect;
 
     [SerializeField]
-    GameObject JumpEffect;
+    internal GameObject JumpEffect;
 
     [SerializeField]
-    GameObject ExAttackHitEffect;
+    internal GameObject ExAttackHitEffect;
 
     [SerializeField]
-    GameObject ExAttackLastEffect;
+    internal GameObject ExAttackLastEffect;
 
     [System.Serializable]
     public struct MoveData
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [System.Serializable]
-    struct KnockBackData
+    internal struct KnockBackData
     {
         [Tooltip("KnockBackされる期間指定")]
         public float knockBackTime;
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("ノックバックステータス")]
-    KnockBackData knockBack = new() { /*knockBackForce = 50,*/ knockBackTime = .4f, cantMovingTime = .4f, canKnockBack = true };
+    internal KnockBackData knockBack = new() { /*knockBackForce = 50,*/ knockBackTime = .4f, cantMovingTime = .4f, canKnockBack = true };
 
     //背景
     [SerializeField]
@@ -109,23 +109,23 @@ public class PlayerController : MonoBehaviour
     internal bool canExAttack = false;
 
     //KnockBack関連
-    Vector2 knockBackDir;   //ノックバックされる方向
-    bool isKnockingBack;    //ノックバックされているかどうか
+    internal Vector2 knockBackDir;   //ノックバックされる方向
+    internal bool isKnockingBack;    //ノックバックされているかどうか
     internal float knockBackCounter; //時間を測るカウンター
     internal float canMovingCounter;
-    float knockBackForce;   //ノックバックされる力
-    HPparam hpparam;
+    internal float knockBackForce;   //ノックバックされる力
+    internal HPparam hpparam;
 
     //入力キー
     internal bool isAttack = false;
-    bool isAttackKay = false;
+    internal bool isAttackKay = false;
 
     //必殺技時に取得する・保存する為のEnemyList[
     internal List<GameObject> enemylist = new List<GameObject>();
 
     //ダメージカメラ処理
     [SerializeField]
-    CameraShake shake;
+    internal CameraShake shake;
 
     //アニメーション用
     internal bool isFalling = false;
@@ -482,6 +482,7 @@ public class PlayerController : MonoBehaviour
     {
         isWarpDoor = true;
         isRun = false;
+        isMoving = false;
         animator.SetBool("IsRun", isRun);
         var doorPosX = door.position.x;
         var doorPosY = door.position.y;

@@ -419,6 +419,12 @@ MonoBehaviour:
   - se: 34
     audioClip: {fileID: 8300000, guid: 6da3a89e9eef08a4781f2d0bee24f986, type: 3}
     volume: 1
+  - se: 34
+    audioClip: {fileID: 8300000, guid: 6da3a89e9eef08a4781f2d0bee24f986, type: 3}
+    volume: 1
+  - se: 35
+    audioClip: {fileID: 8300000, guid: 867a49547573e4d4a8164c45f26b35aa, type: 3}
+    volume: 1
   masterVolume: 1
   bgmMasterVolume: 0.5
   seMasterVolume: 1

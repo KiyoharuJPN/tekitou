@@ -187,7 +187,8 @@ public class SESoundData
         Door,                   //扉
         HalfPoint,              //中間地点起動
 
-        //BGMイントロ
+        //チュートリアル正解音
+        tutorialCorrect
 
 
     }

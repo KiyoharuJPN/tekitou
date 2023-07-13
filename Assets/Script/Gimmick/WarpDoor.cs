@@ -86,14 +86,17 @@ public class WarpDoor : MonoBehaviour
         player.transform.position = warpPoint.transform.position;
         camera.ChengeCameraArea_Boss();
         yield return new WaitForSeconds(1f);//渡された時間待機
-        Debug.Log("フェードイン開始");
         //フェードイン開始
         fade.StartFadeIn();
         while (!fade.IsFadeOutComplete())
         {
             yield return null;
         }
-        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
+        if(SceneData.Instance.referer != "Tutorial")
+        {
+            SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
+        }
+
         player.GetComponent<PlayerController>().WarpDoorEnd();
     }
 }

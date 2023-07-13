@@ -653,7 +653,7 @@ public class Dragon : Enemy
     {
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();
-        GameManager.Instance.Result_Start(1);
+        GameManager.Instance.Result_Start(2);
     }
 
 

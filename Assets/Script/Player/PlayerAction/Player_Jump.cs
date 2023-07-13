@@ -43,7 +43,7 @@ public class Player_Jump : MonoBehaviour
     public ShakeInfo _shakeInfo;
     public CameraShake shake;
 
-    void Start()
+    protected virtual void Start()
     {
         player = this.gameObject.GetComponent<PlayerController>();
         UpAttackStatus = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
