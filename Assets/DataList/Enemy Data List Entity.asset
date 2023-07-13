@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemyDataList:
   - id: 0
     charName: "\u6848\u5C71\u5B50"
-    hp: 2
+    hp: 1
     score: 100
     attackPower: 0
     power: 0
@@ -26,10 +26,10 @@ MonoBehaviour:
     speed: 0
   - id: 1
     charName: "\u93A7\u4ED8\u304D\u6848\u5C71\u5B50"
-    hp: 3
+    hp: 5
     score: 1000
     attackPower: 0
-    power: 1
+    power: 0
     knockBackValue: 2
     angle: 0
     num: 0
@@ -37,10 +37,10 @@ MonoBehaviour:
     speed: 0
   - id: 2
     charName: "\u7684"
-    hp: 2
+    hp: 1
     score: 100
     attackPower: 0
-    power: 1
+    power: 0
     knockBackValue: 2
     angle: 50
     num: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
     speed: 0
   - id: 3
     charName: "\u58CA\u308C\u305F\u6848\u5C71\u5B50"
-    hp: 2
+    hp: 1
     score: 100
     attackPower: 0
     power: 0

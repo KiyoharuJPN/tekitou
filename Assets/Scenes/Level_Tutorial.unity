@@ -7340,6 +7340,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6054787801465259575, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
   m_PrefabInstance: {fileID: 619130554}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &640766531 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1257390288253758586, guid: 933bccfa942060846bd78e804083a8ff, type: 3}
+  m_PrefabInstance: {fileID: 1122892139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642212410
 GameObject:
   m_ObjectHideFlags: 0
@@ -34397,7 +34402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 426013074}
-  enemys: []
+  enemys:
+  - {fileID: 2088521265}
 --- !u!61 &1915413290
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36195,7 +36201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 426013074}
-  enemys: []
+  enemys:
+  - {fileID: 640766531}
 --- !u!61 &2042508007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36288,6 +36295,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3309150140585010819, guid: 6031fcd4b15dd6444825ac5687f02629, type: 3}
   m_PrefabInstance: {fileID: 2068894797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2088521265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1257390288253758586, guid: 933bccfa942060846bd78e804083a8ff, type: 3}
+  m_PrefabInstance: {fileID: 1350317551}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2099746870
 PrefabInstance:

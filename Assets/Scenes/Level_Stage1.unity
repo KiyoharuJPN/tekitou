@@ -59403,6 +59403,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: shake
+      value: 
+      objectReference: {fileID: 621046464}
+    - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: parallaxBackground
+      value: 
+      objectReference: {fileID: 569224488}
+    - target: {fileID: 3880395180289174797, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: shake
+      value: 
+      objectReference: {fileID: 621046464}
     - target: {fileID: 4075973575706176912, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -61947,6 +61959,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edf7a5cd261ee0545a44b4ad93479b21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &621046464 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7133389109148824416, guid: 68872c1cdfdb4f047aa6117efe0b3440, type: 3}
+  m_PrefabInstance: {fileID: 7133389108527815127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383cf86738219ca44a52e95bfb12afa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &656181779
@@ -69960,6 +69983,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4075973575706176915, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
   m_PrefabInstance: {fileID: 176392270}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2134018524 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4075973575706176914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+  m_PrefabInstance: {fileID: 176392270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2884359607908892611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70788,6 +70816,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 787591354}
     m_Modifications:
+    - target: {fileID: 8801034262499123333, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2134018524}
     - target: {fileID: 8801034262499123337, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
       propertyPath: m_Pivot.x
       value: 0

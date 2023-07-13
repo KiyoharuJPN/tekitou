@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Tutorial_Jump : Player_Jump
 {
-    TutorialPlayer player;
+    TutorialPlayer Tutroialplayer;
     const float FALL_VELOCITY = 0.4f;   //落下中判定用定数（characterのVilocityがこれより大きい場合true）
 
     override protected void Start()
     {
-        player = this.gameObject.GetComponent<TutorialPlayer>();
+        Tutroialplayer = this.gameObject.GetComponent<TutorialPlayer>();
         base.Start();
     }
 
@@ -18,16 +18,16 @@ public class Tutorial_Jump : Player_Jump
     {
 
         //停止
-        if (player.isExAttack || player.isWarpDoor) return;
+        if (Tutroialplayer.isExAttack || Tutroialplayer.isWarpDoor) return;
 
-        player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
+        Tutroialplayer.isFalling = Tutroialplayer.rb.velocity.y < -FALL_VELOCITY;
 
-        if (player.isUpAttack && !isSecondJump) canSecondJump = true;
+        if (Tutroialplayer.isUpAttack && !isSecondJump) canSecondJump = true;
 
         //ジャンプキー取得
-        if (player.canMove && !player.isAttack && player.isTJump) JumpBottan();
+        if (Tutroialplayer.canMove && !Tutroialplayer.isAttack && Tutroialplayer.isTJump) JumpBottan();
 
-        if (isjump && player.isAttack)
+        if (isjump && Tutroialplayer.isAttack)
         {
             isjump = false;
             jumpTime = 0;
@@ -37,8 +37,8 @@ public class Tutorial_Jump : Player_Jump
 
     private void FixedUpdate()
     {
-        if (player.isExAttack) return;
-        if (isUpAttack || !player.canDropAttack || player.isSideAttack)
+        if (Tutroialplayer.isExAttack) return;
+        if (isUpAttack || !Tutroialplayer.canDropAttack || Tutroialplayer.isSideAttack)
         {
             isjump = false;
             return;
@@ -53,13 +53,13 @@ public class Tutorial_Jump : Player_Jump
         //ジャンプ中の処理
         if (isjump)
         {
-            if (!Input.GetButton("Jump") || jumpTime >= player.jumpData.maxJumpTime)
+            if (!Input.GetButton("Jump") || jumpTime >= Tutroialplayer.jumpData.maxJumpTime)
             {
                 Debug.Log("ジャンプ終了");
                 isjump = false;
                 jumpTime = 0;
             }
-            else if (Input.GetButton("Jump") && jumpTime <= player.jumpData.maxJumpTime)
+            else if (Input.GetButton("Jump") && jumpTime <= Tutroialplayer.jumpData.maxJumpTime)
             {
                 jumpTime += Time.deltaTime;
             }
@@ -79,25 +79,25 @@ public class Tutorial_Jump : Player_Jump
         if (FarstJump && !canSecondJump)
         {
 
-            player.isSquatting = true;
+            Tutroialplayer.isSquatting = true;
             FarstJump = false;
-            player.animator.SetBool("IsSquatting", player.isSquatting);
-            jumpHight = player.jumpData.jumpHeight;
+            Tutroialplayer.animator.SetBool("IsSquatting", Tutroialplayer.isSquatting);
+            jumpHight = Tutroialplayer.jumpData.jumpHeight;
             //ジャンプ前位置格納
             jumpPos = this.transform.position.y;
             isjump = true;
-            player.playerSE._JumpSE();
+            Tutroialplayer.playerSE._JumpSE();
         }
         //ジャンプ2段目
-        else if (canSecondJump && player.isTAirJump)
+        else if (canSecondJump && Tutroialplayer.isTAirJump)
         {
-            player.animator.SetTrigger("IsSecondJump");
+            Tutroialplayer.animator.SetTrigger("IsSecondJump");
             canSecondJump = false;
             isSecondJump = true;
-            jumpHight = player.jumpData.secondJumpHeight;
+            jumpHight = Tutroialplayer.jumpData.secondJumpHeight;
             //ジャンプ前位置格納
             jumpPos = this.transform.position.y;
-            player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
+            Tutroialplayer.rb.velocity = new Vector2(Tutroialplayer.rb.velocity.x, 0);
             jumpTime = 0;
             isjump = true;
         }
@@ -108,23 +108,23 @@ public class Tutorial_Jump : Player_Jump
     {
         if (!isjump) return;
 
-        player.isJumping = true;
+        Tutroialplayer.isJumping = true;
 
         if (Input.GetButton("Jump"))
         {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, player.jumpData.speed) + jumpTime * Time.deltaTime);
+            Tutroialplayer.rb.velocity = new Vector2(Tutroialplayer.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, Tutroialplayer.jumpData.speed) + jumpTime * Time.deltaTime);
         }
 
         if (Input.GetButtonUp("Jump"))
         {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, player.jumpData.speed) + jumpTime * Time.deltaTime * 0.5f);
+            Tutroialplayer.rb.velocity = new Vector2(Tutroialplayer.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, Tutroialplayer.jumpData.speed) + jumpTime * Time.deltaTime * 0.5f);
         }
     }
 
     //重力
     void Gravity()
     {
-        Vector2 myGravity = new Vector2(0, -player.jumpData.gravity * 2);
-        player.rb.AddForce(myGravity);
+        Vector2 myGravity = new Vector2(0, -Tutroialplayer.jumpData.gravity * 2);
+        Tutroialplayer.rb.AddForce(myGravity);
     }
 }
