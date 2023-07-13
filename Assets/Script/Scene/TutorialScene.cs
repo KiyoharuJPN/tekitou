@@ -13,6 +13,7 @@ public class TutorialScene : StageCtrl
     int num = 0;
 
     bool stepStart;
+    bool goal = false;
 
     [SerializeField, Header("進行不能壁")]
     GameObject[] stopTiles;
@@ -54,7 +55,7 @@ public class TutorialScene : StageCtrl
         {
             stepStart = false;
             tutorialPanels[num].transform.Find("UI_Correct").GetComponent<SpriteRenderer>().enabled = true;
-            if (tutorialPanels.Length > num)
+            if (!goal)
             {
                 tutorialPanels[num + 1].GetComponent<SpriteRenderer>().enabled = true;
             }
@@ -111,13 +112,14 @@ public class TutorialScene : StageCtrl
             case 6:
                 if (EnemyDeathCheck())
                 {
+                    Destroy(stopTiles[5]);
                     return true;
                 }
                 break;
             case 7:
                 if (EnemyDeathCheck())
                 {
-                    Destroy(stopTiles[5]);
+                    Destroy(stopTiles[6]);
                     ComboParam.Instance.SetCombo(0);
                     return true;
                 }
@@ -125,21 +127,21 @@ public class TutorialScene : StageCtrl
             case 8:
                 if (ComboParam.Instance.GetCombo() >= 5)
                 {
-                    Destroy(stopTiles[6]);
+                    Destroy(stopTiles[7]);
                     return true;
                 }
                 break;
             case 9:
                 if (EnemyDeathCheck())
                 {
-                    Destroy(stopTiles[7]);
+                    Destroy(stopTiles[8]);
                     return true;
                 }
                 break;
             case 10:
                 if (EnemyDeathCheck())
                 {
-                    Destroy(stopTiles[8]);
+                    Destroy(stopTiles[9]);
                     ComboParam.Instance.ComboResume();
                     return true;
                 }
@@ -147,8 +149,13 @@ public class TutorialScene : StageCtrl
             case 11:
                 if (EnemyDeathCheck())
                 {
-                    Destroy(stopTiles[9]);
+                    Destroy(stopTiles[10]);
+                    goal = true;
                     return true;
+                }
+                else if (!player.canExAttack) {
+                    ExAttackParam.Instance.SetGage(50);
+                    player.canExAttack = true;
                 }
                 break;
         }

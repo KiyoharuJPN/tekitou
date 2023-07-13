@@ -19,7 +19,7 @@ public class ComboParam : MonoBehaviour
     }
     [SerializeField]
     [Header("Comboステータス")]
-    ComboStatus comboStatus = new ComboStatus { Distime = 3 };
+    ComboStatus comboStatus = new ComboStatus { Distime = 5 };
 
     [SerializeField]
     Image comboTimeGage;

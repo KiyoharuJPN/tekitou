@@ -111,7 +111,7 @@ public class TutorialPlayer : PlayerController
         //•KŽE‹Z
         if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5) )
         {
-            if (!isAttack && canExAttack && isTExAttack) 
+            if (!isAttack && canExAttack && isTExAttack && !isExAttack) 
             {
                 AttackAction("ExAttack");
             }

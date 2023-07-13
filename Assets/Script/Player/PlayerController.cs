@@ -279,6 +279,7 @@ public class PlayerController : MonoBehaviour
 
     internal void AttackAction(string actionName)
     {
+        if (isExAttack) return;
         switch (actionName)
         {
             case "UpAttack":
