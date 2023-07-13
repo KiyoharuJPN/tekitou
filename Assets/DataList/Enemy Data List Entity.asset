@@ -19,7 +19,7 @@ MonoBehaviour:
     score: 100
     attackPower: 0
     power: 0
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 60
     num: 0
     type: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     score: 1000
     attackPower: 0
     power: 0
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 0
     num: 0
     type: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
     score: 100
     attackPower: 0
     power: 0
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 50
     num: 0
     type: 1
@@ -52,7 +52,7 @@ MonoBehaviour:
     score: 100
     attackPower: 0
     power: 0
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 10
     num: 0
     type: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
     score: 100
     attackPower: 0
     power: 1
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 45
     num: 5
     type: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
     score: 200
     attackPower: 0
     power: 1
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 60
     num: 8
     type: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
     score: 500
     attackPower: 2
     power: 1
-    knockBackValue: 4
+    knockBackValue: 3
     angle: 30
     num: 6
     type: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
     score: 5000
     attackPower: 2
     power: 1
-    knockBackValue: 6
+    knockBackValue: 5
     angle: 0
     num: 0
     type: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
     score: 200
     attackPower: 0
     power: 1
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 45
     num: 5
     type: 1
@@ -129,7 +129,7 @@ MonoBehaviour:
     score: 400
     attackPower: 2
     power: 1
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 80
     num: 6
     type: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
     score: 500
     attackPower: 2
     power: 1
-    knockBackValue: 4
+    knockBackValue: 3
     angle: 30
     num: 8
     type: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
     score: 6000
     attackPower: 1
     power: 1
-    knockBackValue: 2
+    knockBackValue: 1
     angle: 0
     num: 0
     type: 0
