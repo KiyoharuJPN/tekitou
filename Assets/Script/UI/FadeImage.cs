@@ -21,6 +21,9 @@ public class FadeImage : MonoBehaviour
     private bool compFadeIn = false;
     private bool compFadeOut = false;
 
+    [SerializeField]
+    float fadeTime = 1f;
+
     /// <summary>
     /// フェードインを開始する
     /// </summary>
@@ -138,7 +141,7 @@ public class FadeImage : MonoBehaviour
     private void FadeInUpdate()
     {
         //フェード中
-        if (timer < 1f)
+        if (timer < fadeTime)
         {
             img.fillAmount -= 1f * Time.deltaTime;
         }
@@ -152,7 +155,7 @@ public class FadeImage : MonoBehaviour
     //フェードアウト中
     private void FadeOutUpdate()
     {
-        if (timer < 1f)
+        if (timer < fadeTime)
         {
             img.fillAmount += 1f * Time.deltaTime;
         }

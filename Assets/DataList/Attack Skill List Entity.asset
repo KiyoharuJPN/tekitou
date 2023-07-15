@@ -30,7 +30,7 @@ MonoBehaviour:
     distance: 30
     skillText: 
     hitEffectAngle: 90
-    coolTime: 0.5
+    coolTime: 0.25
   - type: 3
     damage: 2
     distance: 15

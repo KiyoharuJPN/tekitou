@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8edc0b14dabffb141acb040dada14557
+guid: deb1b41581c4b8c4a9874c4c62d5a7fd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Tutorial_Upper_1_5_0
+      name: UI_Tutorial_Crush_L_2_5_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1470e12aee1922d4bbf67f582199a82a
-      internalID: 1800377566
+      spriteID: cded17e0df47521469923bd7b03c9935
+      internalID: -1866690940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Upper_1_5_1
+      name: UI_Tutorial_Crush_L_2_5_1
       rect:
         serializedVersion: 2
         x: 640
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9d7ed2d6cdebf440a22e0807622af52
-      internalID: -894377894
+      spriteID: 8aca7d65adc010347a9ce0182fa2c0e0
+      internalID: -19009957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Upper_1_5_2
+      name: UI_Tutorial_Crush_L_2_5_2
       rect:
         serializedVersion: 2
         x: 0
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e5e4830b75eb8a439f1f511651a0af4
-      internalID: 1599537249
+      spriteID: 31d9d390cfe894e42bce52116ac225d6
+      internalID: 1504201023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Upper_1_5_3
+      name: UI_Tutorial_Crush_L_2_5_3
       rect:
         serializedVersion: 2
         x: 640
@@ -181,8 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96b58b4ba733c954397243a31f9490fc
-      internalID: -1068461119
+      spriteID: 0bf77e9c18fdfd048a1d1876bc57a4c5
+      internalID: 2116558042
       vertices: []
       indices: 
       edges: []
@@ -198,10 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_Tutorial_Upper_1_5_3: -1068461119
-      UI_Tutorial_Upper_1_5_0: 1800377566
-      UI_Tutorial_Upper_1_5_1: -894377894
-      UI_Tutorial_Upper_1_5_2: 1599537249
+      UI_Tutorial_Crush_L_2_5_1: -19009957
+      UI_Tutorial_Crush_L_2_5_2: 1504201023
+      UI_Tutorial_Crush_L_2_5_3: 2116558042
+      UI_Tutorial_Crush_L_2_5_0: -1866690940
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

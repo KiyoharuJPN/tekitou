@@ -19,6 +19,7 @@ public class SideAttack:MonoBehaviour
         player.isAttack = true;
         player.isSideAttack = true;
         player.animator.SetBool("IsSideAttack", player.isSideAttack);
+        player.animator.Play("Hero_SideAttack_Start");
 
         float originalGravity = player.rb.gravityScale;
         player.rb.gravityScale = 0f;

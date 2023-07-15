@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private int maxCombo;
     private int killEnemy;
+    private bool canPause = false;
 
     public static GameManager Instance { get; private set; }
 
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //ポーズ画面
-        if (Input.GetKeyDown("joystick button 7")) 
+        if (Input.GetKeyDown("joystick button 7") && canPause) 
         {
             if (!pauseMenu.PauseCheck())
             {
@@ -89,6 +90,8 @@ public class GameManager : MonoBehaviour
                 BGMStart_Stage2();
                 break;
         }
+
+        canPause = true;
     }
 
     //プレイヤー停止処理
@@ -123,6 +126,7 @@ public class GameManager : MonoBehaviour
     public void Result_Start(int StageID)
     {
         player.canMove = false;
+        canPause = false;
         Result.Instance.Result_Set(StageID, 
             PointParam.Instance.GetPoint(), maxCombo, killEnemy);
         StartCoroutine(Result_True());

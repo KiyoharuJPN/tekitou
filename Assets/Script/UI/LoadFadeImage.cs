@@ -105,6 +105,7 @@ public class LoadFadeImage : MonoBehaviour
         if (timer < fadeTime)
         {
             img.color = new Color(0, 0, 0, img.color.a - 1 * Time.deltaTime);
+            img.color = new Color(0, 0, 0, img.color.a - 1 * Time.deltaTime);
         }
         //フェードが完了したとき
         else
@@ -118,6 +119,7 @@ public class LoadFadeImage : MonoBehaviour
     {
         if (timer < fadeTime)
         {
+            img.color = new Color(0, 0, 0, img.color.a + 1 * Time.deltaTime);
             img.color = new Color(0, 0, 0, img.color.a + 1 * Time.deltaTime);
         }
         else

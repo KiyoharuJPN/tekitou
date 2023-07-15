@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 27ca0b035bc86a14aa015bf400356e5f
+guid: 6383a24a1361ac94ba76d331c5bb027e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Tutorial_Crush_1_5_0
+      name: UI_Tutorial_Upper_Vice_2_5_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32dda00ffdb40f84aa52416d6001675f
-      internalID: -1343652372
+      spriteID: fbc379c02cbf6564a9cc2d301109d75f
+      internalID: -1731202966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Crush_1_5_1
+      name: UI_Tutorial_Upper_Vice_2_5_1
       rect:
         serializedVersion: 2
         x: 640
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8759f6fcef1ae0f4aa9c0d358f54e29a
-      internalID: -1725821748
+      spriteID: d14a6f545c82bf940be6a4879fd94068
+      internalID: 1869426549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Crush_1_5_2
+      name: UI_Tutorial_Upper_Vice_2_5_2
       rect:
         serializedVersion: 2
         x: 0
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14fef0e1a8190e741a4b961fb11b02df
-      internalID: 122997097
+      spriteID: 28ff49b7720786849921651c83b78e37
+      internalID: -565492040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Crush_1_5_3
+      name: UI_Tutorial_Upper_Vice_2_5_3
       rect:
         serializedVersion: 2
         x: 640
@@ -181,8 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca7fe50b2c37b74439e0442bd0bb5711
-      internalID: 1251366396
+      spriteID: 248e050ae0c409245b30a448cde5cf98
+      internalID: -49007007
       vertices: []
       indices: 
       edges: []
@@ -198,10 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_Tutorial_Crush_1_5_2: 122997097
-      UI_Tutorial_Crush_1_5_0: -1343652372
-      UI_Tutorial_Crush_1_5_1: -1725821748
-      UI_Tutorial_Crush_1_5_3: 1251366396
+      UI_Tutorial_Upper_Vice_2_5_0: -1731202966
+      UI_Tutorial_Upper_Vice_2_5_2: -565492040
+      UI_Tutorial_Upper_Vice_2_5_1: 1869426549
+      UI_Tutorial_Upper_Vice_2_5_3: -49007007
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

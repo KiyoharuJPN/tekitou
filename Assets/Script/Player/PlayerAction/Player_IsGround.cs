@@ -56,10 +56,6 @@ public class Player_IsGround : MonoBehaviour
         {
             time += AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.Hero_DropAttack_End);
         }
-        if (player.isAttack)
-        {
-            player.isAttack = false;
-        }
 
         yield return new WaitForSeconds(time);
 
@@ -79,6 +75,8 @@ public class Player_IsGround : MonoBehaviour
     void Landingoff()
     {
         player.isGround = true;
+        player.isNomalAttack = false;
+        player.animator.SetBool("IsNomalAttack_1", player.isNomalAttack);
         jumpData.FarstJump = true;
         player.isLanding = false;
         player.isAttack = false;

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2cc825f7548e9644a988dffd9017d8a2
+guid: e42f01924e8a57a4f8e990f5b2e82256
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -102,91 +102,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: UI_Tutorial_Slash_1_5_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 480
-        width: 640
-        height: 480
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b55ba53a5337574c8f796c5153f0c94
-      internalID: -828982065
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Tutorial_Slash_1_5_1
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 480
-        width: 640
-        height: 480
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d725929393a492c49b45ceed23a9aef2
-      internalID: 860710583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Tutorial_Slash_1_5_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 640
-        height: 480
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4178bf7b1952f7a43b2364c3ab9cf728
-      internalID: -1028281728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Tutorial_Slash_1_5_3
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 640
-        height: 480
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d9156d82b97d004eadecc0feea26158
-      internalID: -1453115827
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -197,11 +113,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      UI_Tutorial_Slash_1_5_1: 860710583
-      UI_Tutorial_Slash_1_5_2: -1028281728
-      UI_Tutorial_Slash_1_5_3: -1453115827
-      UI_Tutorial_Slash_1_5_0: -828982065
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

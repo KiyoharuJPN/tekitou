@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2064023794ec87b4bb8b18d5a0b57678
+guid: 0a4e3d2ab07a6214b958e5c3ab04e283
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Tutorial_Slash_2_5_0
+      name: UI_Tutorial_Upper_L_2_5_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aae8b271700201746a523d66e2f35aa2
-      internalID: -1925441483
+      spriteID: 7ebdd139690a3de43986d342d4ecf420
+      internalID: 118250847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Slash_2_5_1
+      name: UI_Tutorial_Upper_L_2_5_1
       rect:
         serializedVersion: 2
         x: 640
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 882028f873eca05449c3976049ec47b6
-      internalID: 32874383
+      spriteID: 1216b28c0fddeb547867f4445d8d2af4
+      internalID: 1615969779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Slash_2_5_2
+      name: UI_Tutorial_Upper_L_2_5_2
       rect:
         serializedVersion: 2
         x: 0
@@ -160,8 +160,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a20cc76cd87c7a44c83126ff28967a19
-      internalID: 1871266081
+      spriteID: a4e292487571f4c46b6455fdc8ddc375
+      internalID: -175697033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Tutorial_Upper_L_2_5_3
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 640
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff25a42a88b5c047904d6ef6fa337ca
+      internalID: -1047552907
       vertices: []
       indices: 
       edges: []
@@ -177,9 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_Tutorial_Slash_2_5_2: 1871266081
-      UI_Tutorial_Slash_2_5_1: 32874383
-      UI_Tutorial_Slash_2_5_0: -1925441483
+      UI_Tutorial_Upper_L_2_5_3: -1047552907
+      UI_Tutorial_Upper_L_2_5_2: -175697033
+      UI_Tutorial_Upper_L_2_5_1: 1615969779
+      UI_Tutorial_Upper_L_2_5_0: 118250847
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -828,7 +828,7 @@ MonoBehaviour:
   - {fileID: -1085198753, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
   - {fileID: -135370441, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
   - {fileID: -747871897, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
-  time: 2
+  time: 1.5
 --- !u!222 &2135804937
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -963,6 +963,10 @@ PrefabInstance:
     - target: {fileID: 1170880231193618366, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170880231193618381, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}
+      propertyPath: fadeTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}

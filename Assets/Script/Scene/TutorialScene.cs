@@ -96,7 +96,7 @@ public class TutorialScene : StageCtrl
                 }
                 break;
             case 4:
-                if ((player.jump.FarstJump || player.jump.isSecondJump) && player.isNomalAttack && EnemyDeathCheck())
+                if (EnemyDeathCheck())
                 {
                     Destroy(stopTiles[3]);
                     return true;
@@ -144,6 +144,9 @@ public class TutorialScene : StageCtrl
                 if (EnemyDeathCheck())
                 {
                     Destroy(stopTiles[9]);
+                    tutorialPanels[num - 1].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = false;
+                    tutorialPanels[num].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = false;
+                    tutorialPanels[num].transform.Find("UI_Tutorial_Combo_2_5").GetComponent<SpriteRenderer>().enabled = true;
                     ComboParam.Instance.ComboResume();
                     return true;
                 }
@@ -229,13 +232,15 @@ public class TutorialScene : StageCtrl
                 break;
             case 9:
                 ComboParam.Instance.ComboStop();
-                ComboParam.Instance.SetCombo(0);
+                ComboParam.Instance.SetCombo(5);
+                tutorialPanels[num].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = true;
                 player.isTUpAttack = false;
                 player.isTSideAttack = false;
                 player.isTDownAttack = false;
                 break;
             case 10:
                 ComboParam.Instance.SetCombo(100);
+                tutorialPanels[num].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = true;
                 break;
             case 11:
                 ExAttackParam.Instance.SetGage(50);

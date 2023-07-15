@@ -12,6 +12,7 @@ public class NomalAttack
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
         player.canNomalAttack = false;
         player.isNomalAttack = true;
+        player.animator.SetBool("IsNomalAttack_1", player.isNomalAttack);
         player.animator.SetTrigger("IsNomalAttack");
         
         player.isAttack = true;

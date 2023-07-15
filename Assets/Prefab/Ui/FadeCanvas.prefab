@@ -273,3 +273,4 @@ MonoBehaviour:
   - {fileID: -135370441, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
   - {fileID: -747871897, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
   stockImg: {fileID: 9087038689703108885}
+  fadeTime: 1

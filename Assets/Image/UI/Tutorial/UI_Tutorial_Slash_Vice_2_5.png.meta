@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b601801953d40394584caa6f61d3fa08
+guid: 5fd0f518cabf58841b2dc2942ce55a9e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Tutorial_Upper_2_5_0
+      name: UI_Tutorial_Slash_Vice_2_5_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba2a0d23e9213d14b86b6f9a84646f93
-      internalID: -1286273994
+      spriteID: 460709f9876761746a8059545cc3b3fa
+      internalID: -280901929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Upper_2_5_1
+      name: UI_Tutorial_Slash_Vice_2_5_1
       rect:
         serializedVersion: 2
         x: 640
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f65b268d6f05d1478e97e867f375329
-      internalID: 723543355
+      spriteID: a7a3cf62fcf9a8f41b06f67f448db360
+      internalID: 571393932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Tutorial_Upper_2_5_2
+      name: UI_Tutorial_Slash_Vice_2_5_2
       rect:
         serializedVersion: 2
         x: 0
@@ -160,29 +160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04d86c27ad60c3d47983470d2b5a4b62
-      internalID: 632665779
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Tutorial_Upper_2_5_3
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 640
-        height: 480
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 146d00df125d7dd46b4ea6a12313c6b9
-      internalID: -1693675536
+      spriteID: 253f9c7cf907d9248b6217c92376e90f
+      internalID: 787860167
       vertices: []
       indices: 
       edges: []
@@ -198,10 +177,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_Tutorial_Upper_2_5_3: -1693675536
-      UI_Tutorial_Upper_2_5_0: -1286273994
-      UI_Tutorial_Upper_2_5_1: 723543355
-      UI_Tutorial_Upper_2_5_2: 632665779
+      UI_Tutorial_Slash_Vice_2_5_0: -280901929
+      UI_Tutorial_Slash_Vice_2_5_1: 571393932
+      UI_Tutorial_Slash_Vice_2_5_2: 787860167
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
