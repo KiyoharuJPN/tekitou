@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     protected Animator animator;
 
     [SerializeField]
+    protected GameObject EnemyColliderArea;
+    [SerializeField]
     protected string id;
     protected EnemyData enemyData;
     protected Rigidbody2D enemyRb;
@@ -90,7 +92,7 @@ public class Enemy : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    virtual protected void OnCollisionEnter2D(Collision2D col)
+    virtual protected void OnColEnter2D(Collider2D col)
     {
 
         if (col.gameObject.CompareTag("Player"))
@@ -109,7 +111,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    virtual protected void OnCollisionStay2D(Collision2D col)
+    virtual protected void OnColStay2D(Collider2D col)
     {
         if (!isDestroy)
         {
@@ -155,13 +157,15 @@ public class Enemy : MonoBehaviour
     }
 
     //攻撃
-    protected void Attack(Collision2D col)
+    protected void Attack(Collider2D col)
     {
         if (!HadAttack)
         {
+            //一時使用停止
             //攻撃クールダウンタイム
-            HadAttack = true;
-            StartCoroutine(HadAttackReset());
+            //HadAttack = true;
+            //StartCoroutine(HadAttackReset());
+
             //ダメージとノックバック
             col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
             col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.power);
@@ -466,6 +470,14 @@ public class Enemy : MonoBehaviour
         return enemyData.hp;
     }
 
+    public void OnColEnter(Collider2D col)
+    {
+        OnColEnter2D(col);
+    }
 
+    public void OnColStay(Collider2D col)
+    {
+        OnColStay2D(col);
+    }
 
 }

@@ -73,7 +73,7 @@ public class Dragon : Enemy
     {
         base.Start();
         moveSpeed = MoveSpeed * -1;
-        EnemyCollider = GetComponent<BoxCollider2D>();
+        EnemyCollider = EnemyColliderArea.GetComponent<BoxCollider2D>();
 
         //もし石の存在場所が書かれていなかったらドラゴンの動ける場所が目標になる
         if (_dragonJumpingAttackData.StoneMaxLeftPos == 0) _dragonJumpingAttackData.StoneMaxLeftPos = _dragonJumpingAttackData.DragonJALeftPos.x;
@@ -86,9 +86,9 @@ public class Dragon : Enemy
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
     }
-    protected override void OnCollisionEnter2D(Collision2D col)
+    protected override void OnColEnter2D(Collider2D col)
     {
-        base.OnCollisionEnter2D(col);
+        base.OnColEnter2D(col);
         if(col.gameObject.CompareTag("Stage")&&JumpAttackAnimCtrl == 0)
         {
             StartCoroutine(JumpAttackAnimPlus());

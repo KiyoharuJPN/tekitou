@@ -138,6 +138,11 @@ public class PlayerController : MonoBehaviour
     internal int attckType;
     internal bool isGround = false;
 
+    //–³“GŽžŠÔ
+    bool inInvincibleTimeKnockBack = false, inInvincibleTimeLife = false;
+    public float InvincibleTime = 20;
+    SpriteRenderer sprite;
+
     //boss”»’è—p
     internal bool canMove = true;
 
@@ -147,6 +152,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         jump = GetComponent<Player_Jump>();
         hpparam = GameObject.Find("UI").GetComponentInChildren<HPparam>();
+
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -208,17 +215,24 @@ public class PlayerController : MonoBehaviour
 
     public void _Damage(int power)
     {
-
-        hpparam.DamageHP(hpparam.GetHP() - power);
-        shake.Shake(0.2f, 0.8f, true, true);
-        if (hpparam.GetHP() <= 0)
+        if (!inInvincibleTimeLife)
         {
-            gameObject.layer = LayerMask.NameToLayer("PlayerAction");
-            isKnockingBack = false;
-            SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
-            animator.Play("Death");
-            shake.Shake(0.2f, 1f, true, true);
-            GameManager.Instance.PlayerDeath();
+            //–³“GŽžŠÔ‚ÌŒvŽZ
+            inInvincibleTimeLife = true;
+            StartCoroutine(InvincibleLife());
+
+            //ƒ‰ƒCƒtŒvŽZ
+            hpparam.DamageHP(hpparam.GetHP() - power);
+            shake.Shake(0.2f, 0.8f, true, true);
+            if (hpparam.GetHP() <= 0)
+            {
+                gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+                isKnockingBack = false;
+                SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
+                animator.Play("Death");
+                shake.Shake(0.2f, 1f, true, true);
+                GameManager.Instance.PlayerDeath();
+            }
         }
     }
 
@@ -343,13 +357,21 @@ public class PlayerController : MonoBehaviour
     //KnockBack‚³‚ê‚½‚çŒÄ‚ÔŠÖ”
     public void KnockBack(Vector3 position, float force)
     {
-        canMovingCounter = knockBack.cantMovingTime;
-        knockBackCounter = knockBack.knockBackTime;
-        isKnockingBack = true;
+        if (!inInvincibleTimeKnockBack)
+        {
+            // –³“GŽžŠÔ‚ÌŒvŽZ
+            inInvincibleTimeKnockBack = true;
+            StartCoroutine(InvincibleKnockBack());
 
-        knockBackDir = transform.position - position;
-        knockBackDir.Normalize();
-        knockBackForce = force;
+            //ƒmƒbƒNƒoƒbƒN
+            canMovingCounter = knockBack.cantMovingTime;
+            knockBackCounter = knockBack.knockBackTime;
+            isKnockingBack = true;
+
+            knockBackDir = transform.position - position;
+            knockBackDir.Normalize();
+            knockBackForce = force;
+        }
     }
 
     //•KŽE‹Z
@@ -517,5 +539,35 @@ public class PlayerController : MonoBehaviour
         {
             parallaxBackground.StartScroll(this.transform.position);
         }
+    }
+
+    protected IEnumerator InvincibleKnockBack()
+    {
+        var n = InvincibleTime;
+        while (n > 0)
+        {
+            n--;
+            if(n%2 == 0)
+            {
+                sprite.color = new Color(1, 1, 1);
+            }
+            else
+            {
+                sprite.color = new Color(1, .3f, .3f);
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+        inInvincibleTimeKnockBack = false;
+    }
+
+    protected IEnumerator InvincibleLife()
+    {
+        var n = InvincibleTime;
+        while (n > 0)
+        {
+            n--;
+            yield return new WaitForSeconds(0.1f);
+        }
+        inInvincibleTimeLife = false;
     }
 }
