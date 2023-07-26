@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 947777716468553425}
   - component: {fileID: 1857387125819971154}
   m_Layer: 0
-  m_Name: Gimmick
+  m_Name: GimmickTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

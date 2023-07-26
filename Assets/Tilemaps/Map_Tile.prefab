@@ -951,7 +951,7 @@ GameObject:
   - component: {fileID: 8237815600538727747}
   - component: {fileID: 6972615489093336865}
   m_Layer: 0
-  m_Name: Test_Tile
+  m_Name: Map_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -60,18 +60,10 @@ public class LoadScene : MonoBehaviour
         }
         else if (SceneData.Instance.referer == "Stage1")
         {
-            if(SceneData.Instance.stock == 0)
-            {
-                loadSceneTextBox.sprite = loadSceneText[0];
-                loadScene = "TitleScene";
-            }
-            else
-            {
-                obj = (GameObject)Instantiate(loadSceneImage[2], BackGround.transform.position, Quaternion.identity);
-                obj.transform.parent = BackGround.transform;
-                loadSceneTextBox.sprite = loadSceneText[2];
-                loadScene = "Level_Stage2";
-            }
+            obj = (GameObject)Instantiate(loadSceneImage[2], BackGround.transform.position, Quaternion.identity);
+            obj.transform.parent = BackGround.transform;
+            loadSceneTextBox.sprite = loadSceneText[2];
+            loadScene = "Level_Stage2";
         }
 
         stockImg.sprite = stockImgs[SceneData.Instance.stock];
