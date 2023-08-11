@@ -122,6 +122,17 @@ public class DebugPlayer : DebugBase
             SceneManager.LoadScene("Load");
         }
 
+        //速度バフ付与
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            PlayerBuff.Instance.SpeedUp();
+        }
+        //バフリセット
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            PlayerBuff.Instance.BuffRest();
+        }
+
 
         //タイトルへ
         if (SceneManager.GetActiveScene().name != "Level_Testing" && Input.GetKeyDown(KeyCode.Escape))

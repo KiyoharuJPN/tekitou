@@ -268,4 +268,12 @@ public class GameManager : MonoBehaviour
     {
         player.canMove = true;
     }
+
+    /// <summary>
+    /// バフ付与
+    /// </summary>
+    public void SetBuff(int id)
+    {
+        //バフセット処理はここに記述する
+    }
 }
