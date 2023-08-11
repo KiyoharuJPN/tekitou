@@ -324,7 +324,7 @@ public class KingSlime : Enemy
     }
 
     //コライダーやトリガーなどのチェック関数
-    protected override void OnCollisionEnter2D(Collision2D col)
+    protected override void OnColEnter2D(Collider2D col)
     {
         if (GetComponent<KingSlime>().enabled)
         {
@@ -333,10 +333,10 @@ public class KingSlime : Enemy
                 KSNormalAttackLanding = false;
                 StartCoroutine(KSBossAtack2());
             }
-            base.OnCollisionEnter2D(col);
+            base.OnColEnter2D(col);
         }
     }
-    protected override void OnCollisionStay2D(Collision2D col)
+    protected override void OnColStay2D(Collider2D col)
     {
         if (GetComponent<KingSlime>().enabled)
         {

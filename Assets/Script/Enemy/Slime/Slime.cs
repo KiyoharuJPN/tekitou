@@ -82,14 +82,14 @@ public class Slime : Enemy
         MovingAnim = 0;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D col)
+    protected override void OnColEnter2D(Collider2D col)
     {
         if (!IsMoving && col.gameObject.CompareTag("Stage") && BossSummon)
         {
             BossSummon = false;
             if (BossTurn) movingWidth *= -1;
         }
-        base.OnCollisionEnter2D(col);
+        base.OnColEnter2D(col);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
