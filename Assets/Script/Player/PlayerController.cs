@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
         float rsv = Input.GetAxis("R_Stick_V");
         float tri = Input.GetAxis("L_R_Trigger");
 
-        if (tri > 0)
+        if (Input.GetKey(KeyCode.JoystickButton1))
         {
             isAttackKay = true;
         }
