@@ -275,5 +275,6 @@ public class GameManager : MonoBehaviour
     public void SetBuff(int id)
     {
         //バフセット処理はここに記述する
+        //GameManager.Instance.SetBuff(0);
     }
 }

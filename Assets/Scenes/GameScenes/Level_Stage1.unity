@@ -59334,30 +59334,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 574533338, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: _span
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 574533338, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 574533338, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: _duraction
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 574533338, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: _colorList.Array.data[0].b
-      value: 0.972549
-      objectReference: {fileID: 0}
-    - target: {fileID: 574533338, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: _colorList.Array.data[0].g
-      value: 0.688204
-      objectReference: {fileID: 0}
-    - target: {fileID: 574533338, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: _colorList.Array.data[0].r
-      value: 0.0509804
-      objectReference: {fileID: 0}
     - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: shake
       value: 
@@ -59414,14 +59390,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4075973575706176913, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4075973575706176913, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a908bb9c1f6745da96addb351faf816, type: 2}
     - target: {fileID: 4075973575706176915, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -67989,6 +67957,10 @@ PrefabInstance:
       propertyPath: p_obj
       value: 
       objectReference: {fileID: 2134018523}
+    - target: {fileID: 854406889783310852, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 854406889783310853, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -68076,6 +68048,10 @@ PrefabInstance:
     - target: {fileID: 854406889783310905, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
       propertyPath: m_Name
       value: DebugCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 854406889783310905, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9f46fb990dec214f9b44badd7972e09, type: 3}
