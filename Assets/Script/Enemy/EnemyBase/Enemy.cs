@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
     protected moveType type;
 
     internal bool isDestroy = false;
-    protected bool OnCamera = false;
+    internal bool OnCamera = false;
 
     protected Transform _transform;
 
@@ -325,8 +325,6 @@ public class Enemy : MonoBehaviour
     {
         OnCamera = false;
     }
-
-
 
     //ˆÚ“®•ûŒü‚Ì‰ñ“]
     public virtual void TurnAround()

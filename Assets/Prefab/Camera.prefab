@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6100039277293448474}
   - component: {fileID: 1605353977891719821}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: BoxCollider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 420352072944223566}
   - component: {fileID: 1353346689574272396}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: BoxCollider (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7133389109148824417}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7700005, y: 0.7000003, z: 0}
+  m_LocalPosition: {x: -1.77, y: 0.7000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -487,7 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3362195985036683397}
   - component: {fileID: 880043243738117431}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: BoxCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377588680370892955}
   - component: {fileID: 9142780268018749710}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: BoxCollider (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

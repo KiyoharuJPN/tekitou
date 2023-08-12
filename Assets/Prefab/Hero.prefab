@@ -351,7 +351,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1a908bb9c1f6745da96addb351faf816, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -465,6 +465,7 @@ MonoBehaviour:
     cantMovingTime: 0.001
     canKnockBack: 1
   parallaxBackground: {fileID: 0}
+  exAttacArea: {fileID: 1261378116}
   shake: {fileID: 0}
   InvincibleTime: 20
 --- !u!114 &6578985677749316734
@@ -545,12 +546,12 @@ MonoBehaviour:
   _afterImageNum: 2
   _ignoreTimeScale: 0
   _colorList:
-  - {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  - {r: 0.0509804, g: 0.688204, b: 0.972549, a: 0.5}
   _isSameColor: 1
   _materialType: 0
   _materialList: []
-  _span: 0.2
-  _duraction: 1
+  _span: 0.1
+  _duraction: 0.02
   _fadeTime: 0.2
   _colorNum: 1
   _materialNum: 1

@@ -120,7 +120,9 @@ public class PlayerController : MonoBehaviour
     internal bool isAttack = false;
     internal bool isAttackKay = false;
 
-    //必殺技時に取得する・保存する為のEnemyList[
+    //必殺技時に取得する・保存する為のEnemyList
+    [SerializeField, Header("exAttackArea")]
+    private ExAttackArea exAttacArea;
     internal List<GameObject> enemylist = new List<GameObject>();
 
     //ダメージカメラ処理
@@ -323,6 +325,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("IsExAttack", isExAttack);
                 ExAttackParam.Instance._EXAttack();
                 GameManager.Instance.PlayerExAttack_Start();
+                exAttacArea.ExAttackEnemySet();
                 ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
                 break;
             case "NomalAttack":
@@ -391,10 +394,12 @@ public class PlayerController : MonoBehaviour
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         }
     }
+
     public void _ExAttackHitEnemyDamage()
     {
         //ダメージ処理
-        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.ExAttack); ;
+        Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.ExAttack);
+        
         GameManager.Instance.PlayerExAttack_HitEnemyEnd(enemylist ,skill.damage);
         foreach (var enemy in enemylist)
         {

@@ -5,17 +5,23 @@ using UnityEngine;
 public class ExAttackArea : MonoBehaviour
 {
     PlayerController player;
+    GameObject[] enemys;
 
     private void Start()
     {
         player = transform.parent.gameObject.GetComponent<PlayerController>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void ExAttackEnemySet()
     {
-        if(other.gameObject.CompareTag("Enemy") && !player.enemylist.Contains(other.gameObject))
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject gameObj in enemys)
         {
-            player.enemylist.Add(other.gameObject);
+            if (gameObj.GetComponent<Enemy>().OnCamera)
+            {
+                player.enemylist.Add(gameObj);
+            }
         }
     }
 }
