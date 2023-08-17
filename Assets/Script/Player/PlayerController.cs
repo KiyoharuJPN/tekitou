@@ -217,6 +217,8 @@ public class PlayerController : MonoBehaviour
 
     public void _Damage(int power)
     {
+
+        if (gameObject.GetComponent<InvinciblBuff>()) { return; }
         if (!inInvincibleTimeLife)
         {
             //無敵時間の計算
@@ -293,6 +295,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //アクション実行
     internal void AttackAction(string actionName)
     {
         if (isExAttack) return;
@@ -434,6 +437,7 @@ public class PlayerController : MonoBehaviour
     public void NomalPlayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Player");
+
     }
 
     //スキルアクション終了メソッド
@@ -574,5 +578,11 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         inInvincibleTimeLife = false;
+    }
+
+    public void AddAttack(SlashingBuff.SlashingType type)
+    {
+        if (gameObject.GetComponent<SlashingBuff>())
+            gameObject.GetComponent<SlashingBuff>().Slashing(type, gameObject);
     }
 }

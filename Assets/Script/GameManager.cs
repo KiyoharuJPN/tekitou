@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -274,7 +275,20 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void SetBuff(int id)
     {
-        //バフセット処理はここに記述する
-        //GameManager.Instance.SetBuff(0);
+        switch (id)
+        {
+            case 0:
+                PlayerBuff.Instance.ExAttackGageUp();
+                break;
+            case 1:
+                PlayerBuff.Instance.SpeedUp();
+                break;
+            case 2:
+                PlayerBuff.Instance.SlashingBuff();
+                break;
+            case 3:
+                PlayerBuff.Instance.InvincibleBuff();
+                break;
+        }
     }
 }
