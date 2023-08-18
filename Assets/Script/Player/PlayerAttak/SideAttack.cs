@@ -1,5 +1,7 @@
 using System.Collections;
-using System.Threading.Tasks;using UnityEngine;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class SideAttack:MonoBehaviour
 {
@@ -45,6 +47,7 @@ public class SideAttack:MonoBehaviour
             if (sideJudge)
             {
                 player.rb.velocity = new Vector2(player.transform.localScale.x * skill.distance, 0f);
+                
             }
             else if (!sideJudge)
             {
@@ -66,5 +69,21 @@ public class SideAttack:MonoBehaviour
                 player.rb.velocity = new Vector2(player.transform.localScale.x * skill.distance, 0f);
             }
         }
+        Slashing(player, sideJudge);
     }
+
+    //’Ç‰ÁŽaŒ‚
+    private static void Slashing(PlayerController player, bool sideJudge)
+    {
+        if (sideJudge)
+        {
+            if (player.gameObject.GetComponent<SlashingBuff>())
+                player.gameObject.GetComponent<SlashingBuff>().Slashing(SlashingBuff.SlashingType.sideAttack_Right, player.gameObject);
+        }
+        else if(!sideJudge) 
+        {
+            if (player.gameObject.GetComponent<SlashingBuff>())
+                player.gameObject.GetComponent<SlashingBuff>().Slashing(SlashingBuff.SlashingType.sideAttack_Left, player.gameObject);
+        }
+    } 
 }
