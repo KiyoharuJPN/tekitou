@@ -55,7 +55,7 @@ public class EnemyBuffSystem : MonoBehaviour
     {
         if (BuffAttackCheckText.gameObject.activeSelf)
         {
-            BuffCanvas.gameObject.transform.position = transform.position + intervalPos;
+            BuffAttackCheckText.gameObject.transform.position = transform.position + intervalPos;
         }
     }
 
