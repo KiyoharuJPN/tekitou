@@ -8,6 +8,10 @@ public class SlashingBuff : MonoBehaviour
     slashingBuff slashing;
     float buffTime;
 
+    SpriteGlow.SpriteGlowEffect spriteGlow;
+    //ÉoÉtíÜÇ…åıÇÈêF
+    Color32 color = Color.green;//óŒ
+
     public enum SlashingType
     {
         sideAttack_Right,
@@ -20,6 +24,13 @@ public class SlashingBuff : MonoBehaviour
     {
         slashing = PlayerBuff.Instance.GetSlashing();
         buffTime = slashing.firstSetTime;
+        spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
+
+        if (!gameObject.GetComponent<InvinciblBuff>())
+        {
+            spriteGlow.GlowColor = color;
+        }
+
         StartCoroutine(SlashingMode());
     }
 
@@ -64,7 +75,14 @@ public class SlashingBuff : MonoBehaviour
         {
             buffTime -= Time.deltaTime;
             yield return null;
+        };
+
+        if (gameObject.GetComponent<SpeedUp>())
+        {
+            spriteGlow.GlowColor = Color.cyan;
         }
+
+        spriteGlow.enabled = false;
         Destroy(this.GetComponent<SlashingBuff>());
     }
 }
