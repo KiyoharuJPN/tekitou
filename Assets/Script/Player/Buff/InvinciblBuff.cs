@@ -9,6 +9,10 @@ public class InvinciblBuff : MonoBehaviour
 
     GameObject invinvibleObj;
 
+    SpriteGlow.SpriteGlowEffect spriteGlow;
+    //バフ中に光る色
+    Color32 color = Color.yellow;//水色
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +20,10 @@ public class InvinciblBuff : MonoBehaviour
         buffTime = invincible.firstSetTime;
         invinvibleObj = transform.Find("Invincibility").gameObject;
         invinvibleObj.SetActive(true);
+        spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
+
+        spriteGlow.GlowColor = color;
+
         StartCoroutine(InvincibleMode());
     }
 
@@ -33,6 +41,16 @@ public class InvinciblBuff : MonoBehaviour
         }
         invinvibleObj.SetActive(false);
         gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+
+        if (gameObject.GetComponent<SlashingBuff>())
+        {
+            spriteGlow.GlowColor = Color.green;
+        }
+        else if (gameObject.GetComponent<SpeedUp>())
+        {
+            spriteGlow.GlowColor = Color.cyan;
+        }
+        spriteGlow.enabled = false;
         Destroy(this.GetComponent<InvinciblBuff>());
     }
 }
