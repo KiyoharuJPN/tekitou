@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47869f500e4c7a54093e2cf94b132c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyCollider: {fileID: 8820089978481055644}
+  EnemyColliderArea: {fileID: 8820089978481055644}
   id: 9
   speed: 15
   MoveDistance: -5
