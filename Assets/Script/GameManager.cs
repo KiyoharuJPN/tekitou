@@ -275,7 +275,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void SetBuff(int id)
     {
-        //UnityEngine.Debug.Log("Buff‚ªŽg—p‚³‚ê‚½");
         switch (id)
         {
             case 0:
