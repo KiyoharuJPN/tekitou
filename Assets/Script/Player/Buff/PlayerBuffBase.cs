@@ -5,12 +5,21 @@ namespace PBF
 {
     public static class PlayerBuffBase
     {
+        //バフの種類
+        public enum BuffType
+        {
+            ExGage,//ゲージ追加
+            SpeedUp,//スピードアップ
+            Slashing,//斬撃波追加
+            Invincible//無敵化
+        }
+
         //-------------------------------------------
         //各バフに関する変数
         //-------------------------------------------
         //必殺技ゲージ増加バフパラメータ
         [System.Serializable]
-        public struct exAttackBuff
+        public struct ExAttackBuff
         {
             [SerializeField, Header("初期上昇値")]
             internal int setBuffNum;
@@ -22,7 +31,7 @@ namespace PBF
 
         //移動速度増加バフパラメータ
         [System.Serializable]
-        public struct speedBuff
+        public struct SpeedBuff
         {
             [SerializeField, Header("初期上昇値")]
             internal float setBuffNum;
@@ -34,7 +43,7 @@ namespace PBF
 
         //斬撃追加バフパラメータ
         [System.Serializable]
-        public struct slashingBuff
+        public struct SlashingBuff
         {
             [SerializeField, Header("初期獲得効果時間")]
             internal float firstSetTime;
@@ -52,7 +61,7 @@ namespace PBF
 
         //無敵化バフパラメータ
         [System.Serializable]
-        public struct invincibleBuff
+        public struct InvincibleBuff
         {
             [SerializeField, Header("初期獲得効果時間")]
             internal float firstSetTime;
@@ -66,5 +75,7 @@ namespace PBF
             internal int getBuffCount;
         };
         //----------------------------------------------
+
+        
     }
 }

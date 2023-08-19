@@ -275,6 +275,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void SetBuff(int id)
     {
+        
         switch (id)
         {
             case 0:

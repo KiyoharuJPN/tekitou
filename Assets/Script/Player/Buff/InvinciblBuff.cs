@@ -4,7 +4,7 @@ using static PBF.PlayerBuffBase;
 
 public class InvinciblBuff : MonoBehaviour
 {
-    invincibleBuff invincible;
+    InvincibleBuff invincible;
     float buffTime;
 
     GameObject invinvibleObj;
@@ -50,7 +50,11 @@ public class InvinciblBuff : MonoBehaviour
         {
             spriteGlow.GlowColor = Color.cyan;
         }
-        spriteGlow.enabled = false;
+        else if(!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<SlashingBuff>())
+        {
+            spriteGlow.EnableInstancing = true;
+        }
+
         Destroy(this.GetComponent<InvinciblBuff>());
     }
 }

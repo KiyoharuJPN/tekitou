@@ -2,15 +2,25 @@ using UnityEngine;
 using System.Collections;
 using static PBF.PlayerBuffBase;
 using System;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class SlashingBuff : MonoBehaviour
 {
-    slashingBuff slashing;
+    PBF.PlayerBuffBase.SlashingBuff slashing;
     float buffTime;
 
     SpriteGlow.SpriteGlowEffect spriteGlow;
     //バフ中に光る色
     Color32 color = Color.green;//緑
+
+    //斬撃のスピード
+    float waveSpeed;
+
+    //残り時間のバー
+    GameObject timeBar;
+    Image timeBarImg;
+    float time;
 
     public enum SlashingType
     {
@@ -25,6 +35,14 @@ public class SlashingBuff : MonoBehaviour
         slashing = PlayerBuff.Instance.GetSlashing();
         buffTime = slashing.firstSetTime;
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
+
+        //残り時間のバー表示・設定
+        timeBar = GameObject.Find("PlayerBuffTime").gameObject;
+        timeBar.GetComponent<UIPosController>().enabled = true;
+        timeBar.GetComponent<Canvas>().enabled = true;
+        timeBarImg = timeBar.transform.Find("Bar").gameObject.GetComponent<Image>();
+
+        waveSpeed = PlayerBuff.Instance.GetPlayerMoveData() * 2;
 
         if (!gameObject.GetComponent<InvinciblBuff>())
         {
@@ -41,48 +59,69 @@ public class SlashingBuff : MonoBehaviour
         switch (type)
         {
             case SlashingType.sideAttack_Right:
-                obj = Instantiate(slashing.slashingObj, player.transform.position + new Vector3(1f,0,0), Quaternion.identity);
-                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(PlayerBuff.Instance.GetPlayerMoveData(),0);
+                SlashingWaveGenerate(player.transform.position + new Vector3(1f, 0, 0),
+                    Quaternion.Euler(0f, 0f, 0f), false, new Vector2(waveSpeed, 0));
                 break;
             case SlashingType.sideAttack_Left:
-                obj = Instantiate(slashing.slashingObj, player.transform.position + new Vector3(-1f, 0, 0), Quaternion.identity);
-                obj.GetComponent<SpriteRenderer>().flipX = true;
-                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(-PlayerBuff.Instance.GetPlayerMoveData(), 0);
+                SlashingWaveGenerate(player.transform.position + new Vector3(-1f, 0, 0),
+                    Quaternion.Euler(0f, 0f, 0f), true, new Vector2(-waveSpeed, 0));
                 break;
             case SlashingType.UpAttack:
-                obj = Instantiate(slashing.slashingObj, player.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
-                obj.transform.rotation = Quaternion.Euler(0f, 0f, 90f); ;
-                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(0, PlayerBuff.Instance.GetPlayerMoveData());
+                SlashingWaveGenerate(player.transform.position + new Vector3(0, 1f, 0),
+                    Quaternion.Euler(0f, 0f, 90f), false, new Vector2(0, waveSpeed));
                 break;
             case SlashingType.DropAttack:
-                obj = Instantiate(slashing.slashingObj, player.transform.position + new Vector3(1f, 0, 0), Quaternion.identity);
-                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(PlayerBuff.Instance.GetPlayerMoveData(), 0);
-                obj = Instantiate(slashing.slashingObj, player.transform.position + new Vector3(-1f, 0, 0), Quaternion.identity);
-                obj.GetComponent<SpriteRenderer>().flipX = true;
-                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(-PlayerBuff.Instance.GetPlayerMoveData(), 0);
+                SlashingWaveGenerate(player.transform.position + new Vector3(1f, 0, 0),
+                    Quaternion.Euler(0f, 0f, 0f), false, new Vector2(waveSpeed, 0));
+                SlashingWaveGenerate(player.transform.position + new Vector3(-1f, 0, 0),
+                    Quaternion.Euler(0f, 0f, 0f), true, new Vector2(-waveSpeed, 0));
                 break;
         }
+
+    }
+
+    //斬撃波生成(第一引数:生成場所、第二引数:角度、第三引数:X反転の有無、第四引数:力)
+    private void SlashingWaveGenerate(Vector3 position, Quaternion rotation, bool flipX, Vector2 velocity)
+    {
+        GameObject obj = Instantiate(slashing.slashingObj, position, Quaternion.identity);
+        obj.transform.rotation = rotation;
+        obj.GetComponent<SlashingWave>().player = this.gameObject.GetComponent<PlayerController>();
+
+        obj.GetComponent<SpriteRenderer>().flipX = flipX;
+
+        obj.GetComponent <Rigidbody2D>().velocity = velocity;
     }
 
     internal void AddBuff(int count)
     {
-        buffTime += slashing.buffSetTime - slashing.buffTimeDown * count;
+        float addTime = slashing.buffSetTime - slashing.buffTimeDown * count;
+        buffTime += addTime;
+        time += addTime;
     }
 
     IEnumerator SlashingMode()
     {
-        while(buffTime > 0)
+        timeBarImg.fillAmount = 1;
+        time = buffTime;
+
+        while(time > 0)
         {
-            buffTime -= Time.deltaTime;
+            time -= Time.deltaTime;
+            timeBarImg.fillAmount -= Time.deltaTime / buffTime;
             yield return null;
         };
 
-        if (gameObject.GetComponent<SpeedUp>())
+        if (gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
         {
             spriteGlow.GlowColor = Color.cyan;
         }
+        else if(!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
+        {
+            spriteGlow.EnableInstancing = false;
+        }
 
-        spriteGlow.enabled = false;
+        timeBar.GetComponent<UIPosController>().enabled = false;
+        timeBar.GetComponent<Canvas>().enabled = false;
         Destroy(this.GetComponent<SlashingBuff>());
     }
 }

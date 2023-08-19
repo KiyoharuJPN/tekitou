@@ -5,7 +5,7 @@ using AIE2D;
 
 public class SpeedUp : MonoBehaviour
 {
-    speedBuff speed;
+    SpeedBuff speed;
     SpriteGlow.SpriteGlowEffect spriteGlow;
     PlayerController player;
 
