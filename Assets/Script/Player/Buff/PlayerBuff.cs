@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using static PBF.PlayerBuffBase;
@@ -66,6 +67,29 @@ public class PlayerBuff : MonoBehaviour
             ExAttackParam.Instance.AddGauge();
         }
         exGage.getBuffCount++;
+
+        if(!player.gameObject.GetComponent<SpeedUp>() || 
+            !player.gameObject.GetComponent<SlashingBuff>() || 
+            !player.gameObject.GetComponent<InvinciblBuff>())
+        {
+            player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
+            player.GetComponent<SpriteGlow.SpriteGlowEffect>().GlowColor = new Color(255, 165, 0);
+        }
+    }
+    IEnumerator ColorChenge()
+    {
+        float time = 0.2f;
+        while (time > 0) { 
+            time -= Time.deltaTime; 
+            yield return null;
+        }
+
+        if (!player.gameObject.GetComponent<SpeedUp>() ||
+            !player.gameObject.GetComponent<SlashingBuff>() ||
+            !player.gameObject.GetComponent<InvinciblBuff>())
+        {
+            player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = true;
+        }
     }
 
     /// <summary>
@@ -83,6 +107,7 @@ public class PlayerBuff : MonoBehaviour
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
             player.gameObject.AddComponent<SpeedUp>();
         }
+        speed.getBuffCount++;
     }
     public SpeedBuff GetSpeed()
     {
@@ -110,6 +135,10 @@ public class PlayerBuff : MonoBehaviour
     {
         return slashing;
     }
+    public void CountReset_Slashing()
+    {
+        slashing.getBuffCount = 0;
+    }
 
     /// <summary>
     /// –³“G‰»ƒoƒt
@@ -132,6 +161,10 @@ public class PlayerBuff : MonoBehaviour
     public InvincibleBuff GetInvincible()
     {
         return invincible;
+    }
+    public void CountReset_Invincible()
+    {
+        invincible.getBuffCount = 0;
     }
 
     /// <summary>

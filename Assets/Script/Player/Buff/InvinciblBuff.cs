@@ -55,6 +55,7 @@ public class InvinciblBuff : MonoBehaviour
             spriteGlow.EnableInstancing = true;
         }
 
+        PlayerBuff.Instance.CountReset_Invincible();
         Destroy(this.GetComponent<InvinciblBuff>());
     }
 }

@@ -122,6 +122,8 @@ public class SlashingBuff : MonoBehaviour
 
         timeBar.GetComponent<UIPosController>().enabled = false;
         timeBar.GetComponent<Canvas>().enabled = false;
+
+        PlayerBuff.Instance.CountReset_Slashing();
         Destroy(this.GetComponent<SlashingBuff>());
     }
 }

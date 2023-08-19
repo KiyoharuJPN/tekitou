@@ -29,7 +29,6 @@ public class SpeedUp : MonoBehaviour
 
     public void AddBuff()
     {
-        speed.getBuffCount++;
         if (speed.getBuffCount % 2 == 0 && speed.setBuffNum > 1)
         {
             speed.setBuffNum -= speed.setBuffDown;
