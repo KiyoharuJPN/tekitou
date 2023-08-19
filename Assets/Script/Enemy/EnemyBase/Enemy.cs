@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     //吹っ飛び角度
     protected float forceAngle;
     protected Vector2 forceDirection = new Vector3(1.0f, 1.0f);
-    [SerializeField, Header("吹っ飛び速度")]
+    //[SerializeField, Header("吹っ飛び速度")]
     protected float speed = 15f;     //吹っ飛び速度
     //吹っ飛び中の煙エフェクト
     private GameObject smokeEffect;
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
         //吹っ飛び中に使用
         _transform = transform;
         _prevPosition = _transform.position;
-        speed = EnemyGeneratar.instance.speed;
+        speed = enemyData.speed;
         smokeEffect = EnemyGeneratar.instance.smokeEffect;
         effectInterval = EnemyGeneratar.instance.effectInterval;
 
