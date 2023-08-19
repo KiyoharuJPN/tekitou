@@ -205,11 +205,11 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    _EnemyBuff.ShowAttackChecking();
                     SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
                     GameObject obj = Instantiate(_EnemyBuff.GetBuffEffect(), new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
                     obj.GetComponent<SpriteRenderer>().color = _EnemyBuff.GetColorByType();
                     GameManager.Instance.SetBuff((int)_EnemyBuff.GetBuffType());
+                    _EnemyBuff.ShowAttackChecking();
 
                     Destroy(gameObject);
                 }
@@ -286,7 +286,7 @@ public class Enemy : MonoBehaviour
         {
             // 向きと力の計算
             Vector2 force = (speed + _EnemyBuff.GetBuffBlowingSpeed()) * forceDirection;
-
+            Debug.Log(_EnemyBuff.GetBuffBlowingSpeed());
             // 力を加えるメソッド
             enemyRb.velocity = force;
         }

@@ -179,8 +179,6 @@ public class EnemyBuffSystem : MonoBehaviour
                 count = 0;
                 break;
         }
-        Debug.Log(count);
-        Debug.Log(buffType);
         return count * 2;
     }
 
