@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3530464263404757009}
   - component: {fileID: 3530464263404757014}
   - component: {fileID: 3530464263404757015}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: SlashingWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,3 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4345db39f3aab43a9d28f982713fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  time: 2

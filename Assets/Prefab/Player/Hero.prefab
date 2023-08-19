@@ -592,7 +592,7 @@ MonoBehaviour:
   outlineWidth: 2
   alphaThreshold: 0.05
   drawOutside: 0
-  enableInstancing: 0
+  enableInstancing: 1
 --- !u!1001 &5312690598418310978
 PrefabInstance:
   m_ObjectHideFlags: 0

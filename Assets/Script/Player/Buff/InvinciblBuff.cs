@@ -56,6 +56,7 @@ public class InvinciblBuff : MonoBehaviour
         }
 
         PlayerBuff.Instance.CountReset_Invincible();
+        GameManager.Instance.BGMBack();
         Destroy(this.GetComponent<InvinciblBuff>());
     }
 }

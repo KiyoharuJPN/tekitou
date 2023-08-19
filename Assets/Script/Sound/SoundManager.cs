@@ -126,7 +126,9 @@ public class BGMSoundData
         KingSlimeBoss_roop,
         none, //Resultの様なイントロ・ループがないBGMを呼び出す際の引数２
         Stage2_intro,
-        Stage2_roop
+        Stage2_roop,
+        //無敵中BGM
+        Invincibility
     }
 
     public BGM bgm;
@@ -188,8 +190,12 @@ public class SESoundData
         HalfPoint,              //中間地点起動
 
         //チュートリアル正解音
-        tutorialCorrect
+        tutorialCorrect,
 
+        //強化時
+        BuffGet,
+        SlashingWave,
+        
 
     }
 

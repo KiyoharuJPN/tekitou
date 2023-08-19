@@ -73,7 +73,8 @@ public class PlayerBuff : MonoBehaviour
             !player.gameObject.GetComponent<InvinciblBuff>())
         {
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().GlowColor = new Color(255, 165, 0);
+            player.GetComponent<SpriteGlow.SpriteGlowEffect>().GlowColor = new Color(0.95f, 0.53f, 0, 1);
+            StartCoroutine(ColorChenge());
         }
     }
     IEnumerator ColorChenge()
@@ -145,7 +146,7 @@ public class PlayerBuff : MonoBehaviour
     /// </summary>
     public void InvincibleBuff()
     {
-        if (player.gameObject.GetComponent<SlashingBuff>())
+        if (player.gameObject.GetComponent<InvinciblBuff>())
         {
             //プレイヤー（gameObject)に無敵化スクリプトを追加
             player.gameObject.AddComponent<InvinciblBuff>().AddBuff(invincible.getBuffCount);
@@ -153,6 +154,7 @@ public class PlayerBuff : MonoBehaviour
         else
         {
             //プレイヤー（gameObject)に無敵化スクリプトを追加
+            SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Invincibility, BGMSoundData.BGM.none);
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
             player.gameObject.AddComponent<InvinciblBuff>();
         }

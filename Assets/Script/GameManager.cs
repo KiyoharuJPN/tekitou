@@ -231,6 +231,20 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver_intro, BGMSoundData.BGM.GameOver_roop);
     }
 
+    //ñ≥ìGâªÇ©ÇÁñﬂÇ¡ÇΩç€ÇÃBGMçƒê∂
+    public void BGMBack()
+    {
+        switch (SceneData.Instance.referer)
+        {
+            case "Tutorial":
+                BGMStart_Tutorial(); break;
+            case "Stage1":
+                BGMStart_Stage1(); break;
+            case "Stage2":
+                BGMStart_Stage2(); break;
+        }
+    }
+
     IEnumerator Result_True()
     {
         yield return new WaitForSeconds(1f);
@@ -275,6 +289,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void SetBuff(int id)
     {
+        SoundManager.Instance.PlaySE(SESoundData.SE.BuffGet);
         switch (id)
         {
             case 0:
