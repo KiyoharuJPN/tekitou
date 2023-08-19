@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     //吹っ飛び角度
     protected float forceAngle;
     protected Vector2 forceDirection = new Vector3(1.0f, 1.0f);
-    //[SerializeField, Header("吹っ飛び速度")]
+    [SerializeField, Header("吹っ飛び速度")]
     protected float speed = 15f;     //吹っ飛び速度
     //吹っ飛び中の煙エフェクト
     private GameObject smokeEffect;
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
         //吹っ飛び中に使用
         _transform = transform;
         _prevPosition = _transform.position;
-        speed = enemyData.speed;
+        speed = EnemyGeneratar.instance.speed;
         smokeEffect = EnemyGeneratar.instance.smokeEffect;
         effectInterval = EnemyGeneratar.instance.effectInterval;
 
@@ -201,7 +201,7 @@ public class Enemy : MonoBehaviour
                     ComboParam.Instance.ResetTime();
                     reflexNum = maxReflexNum;
                     CalcForceDirection();
-                    BoostSphere();
+                    BuffBoostSphere();
                 }
                 else
                 {
@@ -279,6 +279,17 @@ public class Enemy : MonoBehaviour
 
         // 力を加えるメソッド
         enemyRb.velocity = force;
+    }
+    public void BuffBoostSphere()
+    {
+        if(_EnemyBuff != null)
+        {
+            // 向きと力の計算
+            Vector2 force = (speed + _EnemyBuff.GetBuffBlowingSpeed()) * forceDirection;
+
+            // 力を加えるメソッド
+            enemyRb.velocity = force;
+        }
     }
 
     //吹っ飛び中回転

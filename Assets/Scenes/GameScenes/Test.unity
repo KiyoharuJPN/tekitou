@@ -59398,6 +59398,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4075973575706176913, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176915, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -65918,7 +65922,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1174232166672535299, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: buffType
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder

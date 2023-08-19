@@ -12,6 +12,8 @@ public class EnemyBuffSystem : MonoBehaviour
     TextMeshProUGUI BuffAttackCheckText;
     GameObject BuffCanvas;
 
+    bool checkBlowingUp = false;
+
     //表示時(暫定)
     public enum DisplayType
     {
@@ -36,7 +38,7 @@ public class EnemyBuffSystem : MonoBehaviour
     public Vector3 intervalPos;
     public SetBuffType buffType = SetBuffType.NoBuff;
     public GameObject[] DeadEffect;
-    public GameObject TextObject;
+    public GameObject TextObject,CanvasObject;
 
     private void Start()
     {
@@ -45,7 +47,15 @@ public class EnemyBuffSystem : MonoBehaviour
             var newbuffType = (int)Random.Range(0, (float)SetBuffType.NoBuff);
             buffType = (SetBuffType)newbuffType;
         }
-        BuffCanvas = GameObject.Find("BuffCanvas");
+        if (GameObject.Find("BuffCanvas"))
+        {
+            BuffCanvas = GameObject.Find("BuffCanvas");
+        }
+        else
+        {
+            BuffCanvas = Instantiate(CanvasObject);
+            BuffCanvas.name = "BuffCanvas";
+        }
         BuffAttackCheckText = Instantiate(TextObject,BuffCanvas.transform).GetComponent<TextMeshProUGUI>();
         BuffAttackCheckText.gameObject.SetActive(false);
         BuffAttackCheck = initialBuffAttackCheck;
@@ -77,6 +87,7 @@ public class EnemyBuffSystem : MonoBehaviour
         //倒された時は表示だけをする
         if (!BuffAttackCheckText.gameObject.activeSelf)
         {
+            BuffAttackCheck = GetBuffAcquisitionCount();
             BuffAttackCheckText.color = GetColorByType();
             BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
             BuffAttackCheckText.gameObject.SetActive(true);
@@ -87,7 +98,21 @@ public class EnemyBuffSystem : MonoBehaviour
         BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
         if(BuffAttackCheck < 0)
         {
+            if (!checkBlowingUp)
+            {
+                checkBlowingUp = true;
+                var enemys = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (var emy in enemys)
+                {
+                    if (emy.GetComponent<Enemy>().isDestroy)
+                    {
+                        emy.GetComponent<Enemy>().BuffBoostSphere();
+                    }
+                }
+                checkBlowingUp = false;
+            }
 
+            Debug.Log("Enemy Dead");
             _Destroy();
         }
 
@@ -105,6 +130,58 @@ public class EnemyBuffSystem : MonoBehaviour
     public GameObject GetBuffEffect()
     {
         return DeadEffect[(int)buffType];
+    }
+
+    //取得回数を外で取得する
+    public int GetBuffAcquisitionCount()
+    {
+        int count = 0;
+        switch (buffType)
+        {
+            case SetBuffType.HeroExSkillGaugeUp:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.ExGage);
+                break;
+            case SetBuffType.HeroSpeedUp:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp);
+                break;
+            case SetBuffType.HeroSlashingBuff:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Slashing);
+                break;
+            case SetBuffType.HeroinvincibleBuff:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible);
+                break;
+            default:
+                count = 0;
+                break;
+        }
+        return initialBuffAttackCheck + count/*(count / 2)*/;
+    }
+
+    //吹っ飛び速度を外で取得する
+    public int GetBuffBlowingSpeed()
+    {
+        int count = 0;
+        switch (buffType)
+        {
+            case SetBuffType.HeroExSkillGaugeUp:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.ExGage);
+                break;
+            case SetBuffType.HeroSpeedUp:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp);
+                break;
+            case SetBuffType.HeroSlashingBuff:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Slashing);
+                break;
+            case SetBuffType.HeroinvincibleBuff:
+                count = PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible);
+                break;
+            default:
+                count = 0;
+                break;
+        }
+        Debug.Log(count);
+        Debug.Log(buffType);
+        return count * 2;
     }
 
     //Buff対応の色を外から取得
