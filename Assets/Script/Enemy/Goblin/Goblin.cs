@@ -122,7 +122,7 @@ public class Goblin : Enemy
         PlayerNotAttacked = true;
     }
 
-    //プレイヤーが攻撃エリアに要る時の動き（AttackCheckAreaから呼ばれる）
+    //プレイヤーが攻撃エリアにいる時の動き（AttackCheckAreaから呼ばれる）
     public override bool PlayerInAttackArea()
     {
         var InAttack = false;

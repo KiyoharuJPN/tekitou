@@ -66,6 +66,10 @@ public class Enemy : MonoBehaviour
     // 前フレームのワールド位置
     protected Vector2 _prevPosition;
 
+
+    //Buff関連
+    EnemyBuffSystem _EnemyBuff;
+
     protected virtual void Start()
     {
         //idで指定した敵データ読込
@@ -90,14 +94,23 @@ public class Enemy : MonoBehaviour
 
         //敵の点滅
         sprite = GetComponent<SpriteRenderer>();
+
+        //Buff関連
+        if (GetComponentInChildren<EnemyBuffSystem>())
+        {
+            _EnemyBuff = GetComponentInChildren<EnemyBuffSystem>();
+        }
     }
 
     virtual protected void OnColEnter2D(Collider2D col)
     {
 
-        if (col.gameObject.CompareTag("Player"))
+        if (!isDestroy)
         {
-            Attack(col);
+            if (col.gameObject.CompareTag("Player"))
+            {
+                Attack(col);
+            }
         }
         if (col.gameObject.CompareTag("Stage") && isDestroy)
         {
@@ -106,6 +119,8 @@ public class Enemy : MonoBehaviour
             {
                 SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
                 GameObject obj = Instantiate(deathEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+
+                if (_EnemyBuff) _EnemyBuff._Destroy();
                 Destroy(gameObject);
             }
         }
@@ -119,10 +134,10 @@ public class Enemy : MonoBehaviour
             {
                 Attack(col);
             }
-            if (col.gameObject.CompareTag("Player"))
-            {
-                enemyRb.velocity = new Vector2(0, enemyRb.velocity.y);
-            }
+            //if (col.gameObject.CompareTag("Player"))
+            //{
+            //    enemyRb.velocity = new Vector2(0, enemyRb.velocity.y);
+            //}
         }
     }
 
@@ -177,11 +192,37 @@ public class Enemy : MonoBehaviour
         //既に死亡状態の場合
         if (isDestroy)
         {
-            SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
-            ComboParam.Instance.ResetTime();
-            reflexNum = maxReflexNum;
-            CalcForceDirection();
-            BoostSphere();
+            if (_EnemyBuff != null)
+            {
+                if(_EnemyBuff.GetBuffAttackCheckCount() > 0)
+                {
+                    _EnemyBuff.ShowAttackChecking();
+                    SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
+                    ComboParam.Instance.ResetTime();
+                    reflexNum = maxReflexNum;
+                    CalcForceDirection();
+                    BoostSphere();
+                }
+                else
+                {
+                    _EnemyBuff.ShowAttackChecking();
+                    SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
+                    GameObject obj = Instantiate(_EnemyBuff.GetBuffEffect(), new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+                    obj.GetComponent<SpriteRenderer>().color = _EnemyBuff.GetColorByType();
+                    GameManager.Instance.SetBuff((int)_EnemyBuff.GetBuffType());
+
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
+                ComboParam.Instance.ResetTime();
+                //reflexNum = maxReflexNum;
+                CalcForceDirection();
+                BoostSphere();
+
+            }
             return;
         }
 
@@ -222,10 +263,12 @@ public class Enemy : MonoBehaviour
         isDestroy = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
+        
+        if(_EnemyBuff != null)
+            _EnemyBuff.ShowAttackChecking();
+
         if(smokeEffect != null)
-        {
             StartCoroutine(BlowAwayEffect());
-        }
     }
 
     //吹っ飛び発生
