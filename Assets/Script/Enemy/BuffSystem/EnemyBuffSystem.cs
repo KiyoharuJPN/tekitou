@@ -154,7 +154,7 @@ public class EnemyBuffSystem : MonoBehaviour
                 count = 0;
                 break;
         }
-        return initialBuffAttackCheck + count/*(count / 2)*/;
+        return initialBuffAttackCheck + (count / 2);
     }
 
     //‚Á”ò‚Ñ‘¬“x‚ğŠO‚Åæ“¾‚·‚é
