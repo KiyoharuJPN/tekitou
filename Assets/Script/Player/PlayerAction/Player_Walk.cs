@@ -33,15 +33,6 @@ public class Player_Walk : MonoBehaviour
         }
 
         MoveKay();
-        Dash();
-
-        if (!player.isMoving)
-        {
-            isDash = false;
-            dashTime = 0;
-            dashSpeed = 0.0f;
-            player.isRun = false;
-        }
     }
 
     private void FixedUpdate()
@@ -54,7 +45,7 @@ public class Player_Walk : MonoBehaviour
         if (player.canMovingCounter <= 0) 
         {
             //プレイヤーの左右の移動
-            player.rb.velocity = new Vector2(xSpeed + dashSpeed, player.rb.velocity.y);
+            player.rb.velocity = new Vector2(xSpeed, player.rb.velocity.y);
             if(player.parallaxBackground != null)
             {
                 player.parallaxBackground.StartScroll(player.transform.position);
@@ -73,83 +64,21 @@ public class Player_Walk : MonoBehaviour
             player.rb.velocity = (new Vector2(0, player.rb.velocity.y));
         }
 
-
-        if (moveInput > 0)
+        if(moveInput == 0)
+        {
+            xSpeed = 0;
+        }
+        else if(moveInput > 0) 
         {
             transform.localScale = new Vector3(1, 1, 1);
-            xSpeed = JumpCheck();
-
+            xSpeed = player.moveData.maxSpeed;
         }
-        else if (moveInput < 0)
+        else if(moveInput < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
-            xSpeed = -JumpCheck();
-        }
-        else
-        {
-            xSpeed = 0.0f;
+            xSpeed = -player.moveData.maxSpeed;
         }
 
         player.isMoving = moveInput != 0;
-    }
-
-    //ジャンプ中かどうか
-    float JumpCheck()
-    {
-        if(player.isJumping || player.isFalling)
-        {
-            return player.moveData.jumpFirstSpeed;
-        }
-        else { return player.moveData.firstSpeed; }
-    }
-
-    //移動中の加速等
-    void Dash()
-    {
-        //ダッシュ加速
-        if (player.isMoving 
-            && ((player.moveData.maxSpeed >= (xSpeed + dashSpeed)) 
-            && (-player.moveData.maxSpeed <= (xSpeed + dashSpeed))))
-        {
-            dashTime += Time.deltaTime;
-            
-            if (dashTime > player.moveData.acceleTime)
-            {
-                
-                dashSpeed += DirectionChack();
-                dashTime = 0;
-                if ((xSpeed + dashSpeed) >= player.moveData.dashSpeed)
-                {
-                    player.isRun = true;
-                    if (!isDash)
-                    {
-                        //player.playerSE._DashSE();
-                        isDash = true;
-                    }
-                }
-            }
-        }
-        
-    }
-
-    float DirectionChack()
-    {
-        if (moveInput > 0)
-        {
-            if ((xSpeed + dashSpeed) >= player.moveData.dashSpeed)
-            {
-                player.isRun = true;
-            }
-            return player.moveData.accele;
-        }
-        else if (moveInput < 0)
-        {
-            if ((xSpeed + dashSpeed) <= -player.moveData.dashSpeed)
-            {
-                player.isRun = true;
-            }
-            return -player.moveData.accele;
-        }
-        else return 0.0f;
     }
 }
