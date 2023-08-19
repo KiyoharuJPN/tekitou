@@ -83,6 +83,7 @@ public class SlashingBuff : MonoBehaviour
     //斬撃波生成(第一引数:生成場所、第二引数:角度、第三引数:X反転の有無、第四引数:力)
     private void SlashingWaveGenerate(Vector3 position, Quaternion rotation, bool flipX, Vector2 velocity)
     {
+        SoundManager.Instance.PlaySE(SESoundData.SE.SlashingWave);
         GameObject obj = Instantiate(slashing.slashingObj, position, Quaternion.identity);
         obj.transform.rotation = rotation;
         obj.GetComponent<SlashingWave>().player = this.gameObject.GetComponent<PlayerController>();

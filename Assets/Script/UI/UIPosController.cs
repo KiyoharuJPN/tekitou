@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UIPosController : MonoBehaviour
 {
-    [SerializeField]
     private Transform targetTfm;
 
     private RectTransform myRectTfm;
@@ -13,6 +12,7 @@ public class UIPosController : MonoBehaviour
     void Start()
     {
         myRectTfm = GetComponent<RectTransform>();
+        targetTfm = GameObject.Find("Hero").transform;
     }
 
     void Update()
