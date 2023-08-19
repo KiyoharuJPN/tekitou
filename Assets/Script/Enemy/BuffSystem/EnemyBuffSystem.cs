@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnemyBuffSystem : MonoBehaviour
 {
-    [SerializeField, Tooltip("Buffを獲得するまでの必要攻撃数")]
-    int BuffAttackCheck = 3;
-    
+    [SerializeField, Tooltip("基本追撃回数")]
+    int initialBuffAttackCheck = 3;
+    int BuffAttackCheck;
 
     TextMeshProUGUI BuffAttackCheckText;
     GameObject BuffCanvas;
@@ -48,6 +48,7 @@ public class EnemyBuffSystem : MonoBehaviour
         BuffCanvas = GameObject.Find("BuffCanvas");
         BuffAttackCheckText = Instantiate(TextObject,BuffCanvas.transform).GetComponent<TextMeshProUGUI>();
         BuffAttackCheckText.gameObject.SetActive(false);
+        BuffAttackCheck = initialBuffAttackCheck;
         //enemy = GetComponentInParent<Enemy>();
     }
 
@@ -84,7 +85,11 @@ public class EnemyBuffSystem : MonoBehaviour
 
         //カウントを減らして表示する
         BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
-        if(BuffAttackCheck < 0) _Destroy();
+        if(BuffAttackCheck < 0)
+        {
+
+            _Destroy();
+        }
 
     }
 
