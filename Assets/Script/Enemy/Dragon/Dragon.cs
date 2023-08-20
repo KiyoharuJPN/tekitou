@@ -86,9 +86,9 @@ public class Dragon : Enemy
         //Žg—p•û–@
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
     }
-    protected override void OnColEnter2D(Collider2D col)
+
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        base.OnColEnter2D(col);
         if(col.gameObject.CompareTag("Stage")&&JumpAttackAnimCtrl == 0)
         {
             StartCoroutine(JumpAttackAnimPlus());
