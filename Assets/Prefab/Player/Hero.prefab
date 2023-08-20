@@ -458,10 +458,10 @@ MonoBehaviour:
     accele: 0.3
     acceleTime: 0.1
   jumpData:
-    speed: 10
-    gravity: 12
-    jumpHeight: 3
-    secondJumpHeight: 2.5
+    speed: 12
+    gravity: 14
+    jumpHeight: 4
+    secondJumpHeight: 3.5
     maxJumpTime: 0.3
   knockBack:
     knockBackTime: 0.4

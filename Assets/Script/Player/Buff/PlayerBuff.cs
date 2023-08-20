@@ -149,7 +149,7 @@ public class PlayerBuff : MonoBehaviour
         if (player.gameObject.GetComponent<InvinciblBuff>())
         {
             //プレイヤー（gameObject)に無敵化スクリプトを追加
-            player.gameObject.AddComponent<InvinciblBuff>().AddBuff(invincible.getBuffCount);
+            player.gameObject.GetComponent<InvinciblBuff>().AddBuff(invincible.getBuffCount);
         }
         else
         {
