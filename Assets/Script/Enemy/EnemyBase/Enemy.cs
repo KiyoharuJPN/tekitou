@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -187,7 +188,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void Damage(float power)
+    public virtual void Damage(float power, Skill skill)
     {
         //既に死亡状態の場合
         if (isDestroy)
@@ -226,8 +227,37 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        //ヒットストップにダメージ処理を行ってもらう
+        StartCoroutine(HitStop(power, skill));
+    }
+
+    IEnumerator HitStop(float power, Skill skill)
+    {
+        
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         ComboParam.Instance.ResetTime();
+
+        if(skill != null)
+        {
+            HitEfect(this.transform, skill.hitEffectAngle);
+        }
+        else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
+
+        //ヒットストップ処理
+        Vector3 initialPos = this.transform.position;//初期位置保存
+        Time.timeScale = 0;
+
+        yield return transform.DOShakePosition(power * 0.1f, 0.8f, 30, 90)
+            .SetUpdate(true)
+            .OnComplete(() => 
+            {
+                //アニメーションが終了したら時間を戻す
+                Time.timeScale = 1;
+                //初期位置に戻す
+                this.transform.position = initialPos;
+            });
+
+
         hp -= power;
         
         if (!hadDamaged)
@@ -498,7 +528,7 @@ public class Enemy : MonoBehaviour
             animator.speed = 1;
         }
         isPlayerExAttack = false;
-        Damage(powar);
+        Damage(powar, null);
     }
 
     //停止処理解除
@@ -530,6 +560,21 @@ public class Enemy : MonoBehaviour
     public void OnColStay(Collider2D col)
     {
         OnColStay2D(col);
+    }
+
+    //ヒットエフェクト生成
+    internal void HitEfect(Transform enemy, int angle)
+    {
+        GameObject prefab =
+        Instantiate(GameManager.Instance.hitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
+        prefab.transform.Rotate(new Vector3(0, 0, angle));
+        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Hit);
+        _EfectDestroy(prefab, 0.2f);
+    }
+    //エフェクト削除
+    void _EfectDestroy(GameObject prefab, float time)
+    {
+        Destroy(prefab, time);
     }
 
 }

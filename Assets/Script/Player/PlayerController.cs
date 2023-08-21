@@ -202,12 +202,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsGround", isGround);
     }
 
-    public void _Attack(Collider2D enemy, float powar)
+    public void _Attack(Collider2D enemy, float powar, Skill skill)
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
         if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
-        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp());   
+        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill);   
     }
 
     public void _Heel(int resilience)
@@ -245,9 +245,9 @@ public class PlayerController : MonoBehaviour
     {
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
-        float rsh = Input.GetAxis("R_Stick_H");
-        float rsv = Input.GetAxis("R_Stick_V");
-        float tri = Input.GetAxis("L_R_Trigger");
+        //ä»à’ì¸óÕÇ≈égóp
+        //float rsh = Input.GetAxis("R_Stick_H");
+        //float rsv = Input.GetAxis("R_Stick_V");
 
         if (Input.GetKey(KeyCode.JoystickButton1))
         {
@@ -256,21 +256,23 @@ public class PlayerController : MonoBehaviour
         else { isAttackKay = false; }
 
         //è„è∏çUåÇ
-        if (((lsv >= 0.9 && isAttackKay) || rsv >= 0.8))
+        if (lsv >= 0.9 && isAttackKay)
+            //rsv >= 0.8
         {
             AttackAction("UpAttack");
         }
         //óéâ∫çUåÇçUåÇ
-        if (((lsv <= -0.9 && isAttackKay) || rsv <= -0.8))
+        if (lsv <= -0.9 && isAttackKay)
+            //rsv <= -0.8
         {
             AttackAction("DawnAttack");
         }
         //â°à⁄ìÆçUåÇ
-        if (((lsh >= 0.9 && isAttackKay) || rsh >= 0.8))
+        if (lsh >= 0.9 && isAttackKay)
         {
             AttackAction("SideAttack_right");
         }
-        else if(((lsh <= -0.9 && isAttackKay) || rsh <= -0.8))
+        else if(lsh <= -0.9 && isAttackKay)
         {
             AttackAction("SideAttack_left");
         }
@@ -393,7 +395,7 @@ public class PlayerController : MonoBehaviour
         //ÉGÉtÉFÉNÉgê∂ê¨
         foreach (var enemy in enemylist)
         {
-            _HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
+            HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         }
     }
@@ -404,11 +406,6 @@ public class PlayerController : MonoBehaviour
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.ExAttack);
         
         GameManager.Instance.PlayerExAttack_HitEnemyEnd(enemylist ,skill.damage);
-        foreach (var enemy in enemylist)
-        {
-            _HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
-            ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
-        }
     }
     public void ExAttackHitCheck()
     {
@@ -475,7 +472,7 @@ public class PlayerController : MonoBehaviour
         _EfectDestroy(prefab, 0.2f);
     }
 
-    internal void _HitEfect(Transform enemy, int angle)
+    internal void HitEfect(Transform enemy, int angle)
     {
         GameObject prefab =
         Instantiate(ExAttackHitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);

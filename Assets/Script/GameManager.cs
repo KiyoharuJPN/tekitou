@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     private int killEnemy;
     private bool canPause = false;
 
+    public GameObject hitEffect;
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()
