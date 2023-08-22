@@ -14,11 +14,13 @@ public class SceneData
     public bool revival = false;
 
     //’†ŠÔ’n“_‹N“®ó‘Ô
-    public bool wayPoint = false;
+    public bool wayPoint_1 = false;
+    public bool wayPoint_2 = false;
 
     public void DataReset()
     {
         stock = MAX_STOCK;
-        wayPoint = false;
+        wayPoint_1 = false;
+        wayPoint_2 = false;
     }
 }

@@ -9,20 +9,16 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField]//クリア判定に使用する敵
     GameObject[] enemys;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //プレイヤーが範囲内にいるか？
+    public bool isPlayer = false;
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            manager.TutorialStep();
-            this.enabled = false;
-            if(enemys.Length > 0)
-            {
-                foreach (GameObject enemy in enemys) 
-                {
-                    manager.enemylist.Add(enemy);
-                }
-            }
-        }
+        isPlayer = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isPlayer = false;
     }
 }
