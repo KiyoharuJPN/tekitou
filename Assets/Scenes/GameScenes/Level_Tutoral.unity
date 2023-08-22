@@ -5843,7 +5843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6c5c3d4de83b04ba309d523ec5bcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 7
+  num: 9
   tutorialText: {fileID: 0}
 --- !u!61 &619232086
 BoxCollider2D:
@@ -6166,8 +6166,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 21ff02e3bc82b614a8d877261b419041, type: 2}
+  m_sharedMaterial: {fileID: 6171890846168689287, guid: 21ff02e3bc82b614a8d877261b419041, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9069,42 +9069,24 @@ MonoBehaviour:
   textBox_2: {fileID: 658281396}
   backGround: {fileID: 822034967}
   tutorialContent:
-  - text_1: 1111111111111
+  - text_1: "\u5DE6\u30B9\u30C6\u30A3\u30C3\u30AF\u3067\u79FB\u52D5"
     text_2: 
-    series_1: 0
-    series_2: 0
-  - text_1: 2222222222222222
-    text_2: 22222222222222222
-    series_1: 0
-    series_2: 0
-  - text_1: 333333333
-    text_2: 3333333
-    series_1: 0
-    series_2: 0
-  - text_1: 44444444
-    text_2: 444444444
-    series_1: 0
-    series_2: 0
-  - text_1: 555555
-    text_2: 5555555
-    series_1: 0
-    series_2: 0
-  - text_1: 666666666666
-    text_2: 66666666666
-    series_1: 0
-    series_2: 0
-  - text_1: 7777777777
-    text_2: 7777777
-    series_1: 0
-    series_2: 0
-  - text_1: 8888888888
-    text_2: 88888888888
-    series_1: 0
-    series_2: 0
-  - text_1: 9999999999999
-    text_2: 9999999999999
-    series_1: 0
-    series_2: 0
+  - text_1: "A\u30DC\u30BF\u30F3\u3067\u30B8\u30E3\u30F3\u30D7"
+    text_2: "\u7A7A\u4E2D\u3067A\u30DC\u30BF\u30F3\u3067\u7A7A\u4E2D\u30B8\u30E3\u30F3\u30D7"
+  - text_1: "X\u3067\u653B\u6483"
+    text_2: 
+  - text_1: "\u30B8\u30E3\u30F3\u30D7\uFF08A\uFF09\u4E2D\u306B\u653B\u6483\uFF08X\uFF09\u3067\u7A7A\u4E2D\u653B\u6483"
+    text_2: 
+  - text_1: "\u6575\u306E\u4F53\u529B\u30920\u306B\u3059\u308B\u3068\u6575\u304C\u5439\u3063\u98DB\u3076"
+    text_2: "\u5439\u3063\u98DB\u3093\u3067\u3044\u308B\u6642\u306B\u6570\u5B57\u306E\u56DE\u6570\u653B\u6483\u3092\u5F53\u3066\u308B\u3068\u30D1\u30EF\u30FC\u30A2\u30C3\u30D7"
+  - text_1: "\u5DE6\u30B9\u30C6\u30A3\u30C3\u30AF\u3092\u5012\u3057\u3066B\u30DC\u30BF\u30F3\u3092\u62BC\u3059\u3068\u6280\u3092\u653E\u3064"
+    text_2: "\u5DE6\u30B9\u30C6\u30A3\u30C3\u30AF\u3092\u5DE6\u53F3\u306B\u5012\u3057B\u30DC\u30BF\u30F3\u3067\u300C\u30B9\u30E9\u30C3\u30B7\u30E5\u300D"
+  - text_1: "\u5DE6\u30B9\u30C6\u30A3\u30C3\u30AF\u3092\u4E0A\u306B\u5012\u3057\u3066B\u30DC\u30BF\u30F3\u3067\u300C\u30A2\u30C3\u30D1\u30FC\u300D"
+    text_2: 
+  - text_1: "\u5DE6\u30B9\u30C6\u30A3\u30C3\u30AF\u3092\u4E0B\u306B\u5012\u3057\u3066B\u30DC\u30BF\u30F3\u3067\u300C\u30AF\u30E9\u30C3\u30B7\u30E5\u300D"
+    text_2: 
+  - text_1: "\u5DE6\u4E0A\u306E\u9EC4\u8272\u306E\u30B2\u30FC\u30B8\u304C\u305F\u307E\u308B\u3068\u5FC5\u6BBA\u6280\u304C\u767A\u52D5\u53EF\u80FD"
+    text_2: "LB\u3068RB\u30DC\u30BF\u30F3\u3092\u62BC\u3057\u3066\u5FC5\u6BBA\u6280\u3092\u767A\u52D5"
   textNum: 0
 --- !u!1 &1081312778
 GameObject:
@@ -48845,7 +48827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6c5c3d4de83b04ba309d523ec5bcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num: 7
+  num: 8
   tutorialText: {fileID: 0}
 --- !u!61 &1628434967
 BoxCollider2D:
@@ -51595,8 +51577,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 21ff02e3bc82b614a8d877261b419041, type: 2}
+  m_sharedMaterial: {fileID: 6171890846168689287, guid: 21ff02e3bc82b614a8d877261b419041, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

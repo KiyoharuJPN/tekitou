@@ -21,10 +21,6 @@ public class TutorialText : MonoBehaviour
         public string text_1;
         [SerializeField, Header("説明文2")]
         public string text_2;
-        [SerializeField, Header("連続で表示させるパネル番号前")]
-        public int series_1;
-        [SerializeField, Header("連続で表示させるパネル番号後")]
-        public int series_2;
     }
 
     [SerializeField, Header("テキストコンテンツ")]
