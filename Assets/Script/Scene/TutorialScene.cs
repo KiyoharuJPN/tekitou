@@ -163,6 +163,8 @@ public class TutorialScene : StageCtrl
         //現在のチュートリアルにワープドアがあるなら
         if (tutorialPanels[num].warpDoor != null)
         {
+            tutorialPanels[num].tutorialPanel.transform.Find("TextBox_7").gameObject.SetActive(false);
+            tutorialPanels[num].tutorialPanel.transform.Find("TextBox_8").gameObject.SetActive(true);
             StartCoroutine(SetWarpDoor(tutorialPanels[num].warpDoor));
         }
         ////現在のチュートリアルに専用カメラエリアがあるなら
