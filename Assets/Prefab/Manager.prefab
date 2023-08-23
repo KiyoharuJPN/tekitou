@@ -58,7 +58,7 @@ MonoBehaviour:
     maxBuffTime: 0
     slashingObj: {fileID: 3530464263404757012, guid: 765956a0ebd94f44088ad40beb2a73aa, type: 3}
   invincible:
-    firstSetTime: 8
+    firstSetTime: 10
     buffSetTime: 5
     buffTimeDown: 1
     maxBuffTime: 30
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 0}
   player: {fileID: 0}
+  hitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
 --- !u!1001 &6498813625326001450
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class InvinciblBuff : MonoBehaviour
         buffTime = invincible.firstSetTime;
         invinvibleObj = transform.Find("Invincibility").gameObject;
         invinvibleObj.SetActive(true);
+        gameObject.layer = LayerMask.NameToLayer("PlayerAction");
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         spriteGlow.GlowColor = color;
@@ -40,7 +41,7 @@ public class InvinciblBuff : MonoBehaviour
             yield return null;
         }
         invinvibleObj.SetActive(false);
-        gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+        
 
         if (gameObject.GetComponent<SlashingBuff>())
         {
@@ -55,6 +56,7 @@ public class InvinciblBuff : MonoBehaviour
             spriteGlow.EnableInstancing = true;
         }
 
+        gameObject.layer = LayerMask.NameToLayer("Player");
         PlayerBuff.Instance.CountReset_Invincible();
         GameManager.Instance.BGMBack();
         Destroy(this.GetComponent<InvinciblBuff>());
