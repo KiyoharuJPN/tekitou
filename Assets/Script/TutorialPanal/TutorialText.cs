@@ -55,16 +55,8 @@ public class TutorialText : MonoBehaviour
 
     void TextChenge(int num)
     {
-        if (tutorialContent[num].text_1 != "")
-        {
-            textBox_1.text = tutorialContent[num].text_1;
-        }
-        else textBox_1.text = "";
-        if (tutorialContent[num].text_2 != "")
-        {
-            textBox_2.text = tutorialContent[num].text_2;
-        }
-        else textBox_2.text = "";
+        textBox_1.text = tutorialContent[num].text_1;
+        textBox_2.text = tutorialContent[num].text_2;
     }
 
     void TextPopCheck(int num)
