@@ -7691,7 +7691,7 @@ GameObject:
   - component: {fileID: 830438529}
   - component: {fileID: 830438528}
   m_Layer: 0
-  m_Name: TutoriaStageManager
+  m_Name: TutorialStageManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
