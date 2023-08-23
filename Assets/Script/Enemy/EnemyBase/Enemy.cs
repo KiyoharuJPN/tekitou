@@ -106,16 +106,31 @@ public class Enemy : MonoBehaviour
 
     virtual protected void OnColEnter2D(Collider2D col)
     {
-        Debug.Log(col.tag);
         if (!isDestroy && HadContactDamage)
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                Debug.Log(233333333333);
                 Attack(col);
             }
         }
         if (col.gameObject.CompareTag("Stage") && isDestroy)
+        {
+            reflexNum--;
+            Debug.Log(reflexNum);
+            if (reflexNum == 0)
+            {
+                SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
+                GameObject obj = Instantiate(deathEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+
+                if (_EnemyBuff) _EnemyBuff._Destroy();
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Stage") && isDestroy)
         {
             reflexNum--;
             Debug.Log(reflexNum);
