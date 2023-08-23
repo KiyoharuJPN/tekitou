@@ -179,7 +179,7 @@ public class EnemyBuffSystem : MonoBehaviour
                 count = 0;
                 break;
         }
-        return count * 2;
+        return count;
     }
 
     //Buff‘Î‰‚ÌF‚ğŠO‚©‚çæ“¾
