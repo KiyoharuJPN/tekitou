@@ -561,7 +561,7 @@ public class PlayerController : MonoBehaviour
             {
                 sprite.color = new Color(1, .3f, .3f);
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.05f);
         }
         inInvincibleTimeKnockBack = false;
     }
@@ -572,7 +572,7 @@ public class PlayerController : MonoBehaviour
         while (n > 0)
         {
             n--;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
         inInvincibleTimeLife = false;
     }

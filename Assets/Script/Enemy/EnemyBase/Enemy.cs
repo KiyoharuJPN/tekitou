@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Stage") && isDestroy)
         {
             reflexNum--;
-            Debug.Log(reflexNum);
+            //Debug.Log(reflexNum);
             if (reflexNum == 0)
             {
                 SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);

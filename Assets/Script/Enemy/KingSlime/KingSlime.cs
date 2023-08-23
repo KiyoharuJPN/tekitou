@@ -328,19 +328,43 @@ public class KingSlime : Enemy
     {
         if (GetComponent<KingSlime>().enabled)
         {
-            if (col.gameObject.CompareTag("Stage") && KSNormalAttackLanding)
+            //if (col.gameObject.CompareTag("Stage") && KSNormalAttackLanding)
+            //{
+            //    KSNormalAttackLanding = false;
+            //    StartCoroutine(KSBossAtack2());
+            //}
+            base.OnColEnter2D(col);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (GetComponent<KingSlime>().enabled)
+        {
+            if (collision.gameObject.CompareTag("Stage") && KSNormalAttackLanding)
             {
                 KSNormalAttackLanding = false;
                 StartCoroutine(KSBossAtack2());
             }
-            base.OnColEnter2D(col);
         }
     }
+
     protected override void OnColStay2D(Collider2D col)
     {
         if (GetComponent<KingSlime>().enabled)
         {
-            if (col.gameObject.CompareTag("Stage") && KSNormalAttackLanding && enemyRb.velocity == Vector2.zero)
+            //if (col.gameObject.CompareTag("Stage") && KSNormalAttackLanding && enemyRb.velocity == Vector2.zero)
+            //{
+            //    KSNormalAttackLanding = false;
+            //    StartCoroutine(KSBossAtack2());
+            //}
+            base.OnColStay2D(col);
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (GetComponent<KingSlime>().enabled)
+        {
+            if (collision.gameObject.CompareTag("Stage") && KSNormalAttackLanding && enemyRb.velocity == Vector2.zero)
             {
                 KSNormalAttackLanding = false;
                 StartCoroutine(KSBossAtack2());
