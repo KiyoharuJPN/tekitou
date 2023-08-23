@@ -150,6 +150,10 @@ public class KingSlime : Enemy
         if (playerObj.transform.position.x > gameObject.transform.position.x && movingWidth < 0) TurnAround();
         if (playerObj.transform.position.x < gameObject.transform.position.x && movingWidth > 0) TurnAround();
         yield return new WaitForSeconds(0.25f);
+        attackCheckArea.offset = new Vector2(0, 0f);
+        attackCheckArea.size = new Vector2(5.36f, 4.1f);
+        attackCheckArea.enabled = true;
+
         NoGravity = true;
         var i = 0;
         while(i < 25)
@@ -175,6 +179,7 @@ public class KingSlime : Enemy
         knockbackAttackCircle.enabled = false;
         NormalAttackAnimation++;
         gameObject.layer = LayerMask.NameToLayer("Enemy");
+
         int i = 0;
         while(i < 5)
         {
@@ -183,7 +188,6 @@ public class KingSlime : Enemy
         }
         attackCheckArea.offset = new Vector2(0, -0.2f);
         attackCheckArea.size = new Vector2(6.86f, 3.8f);
-        attackCheckArea.enabled = true;
         while (i < 10)
         {
             i++;
