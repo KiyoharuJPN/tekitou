@@ -572,7 +572,7 @@ public class PlayerController : MonoBehaviour
         while (n > 0)
         {
             n--;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
         inInvincibleTimeLife = false;
     }

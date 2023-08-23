@@ -14,7 +14,7 @@ public class KingSlimeAttackCheckArea : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             transform.GetComponentInParent<KingSlime>().PlayerInAttackArea(collision);
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 
