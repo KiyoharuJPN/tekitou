@@ -106,11 +106,12 @@ public class Enemy : MonoBehaviour
 
     virtual protected void OnColEnter2D(Collider2D col)
     {
-
+        Debug.Log(col.tag);
         if (!isDestroy && HadContactDamage)
         {
             if (col.gameObject.CompareTag("Player"))
             {
+                Debug.Log(233333333333);
                 Attack(col);
             }
         }
@@ -131,7 +132,7 @@ public class Enemy : MonoBehaviour
 
     virtual protected void OnColStay2D(Collider2D col)
     {
-        if (!isDestroy)
+        if (!isDestroy && HadContactDamage)
         {
             if (col.gameObject.CompareTag("Player")&&!HadAttack)
             {
@@ -558,7 +559,7 @@ public class Enemy : MonoBehaviour
     {
         OnColEnter2D(col);
     }
-
+    
     public void OnColStay(Collider2D col)
     {
         OnColStay2D(col);

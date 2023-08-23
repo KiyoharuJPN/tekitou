@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyColliderArea: {fileID: 3724647899762070694}
   id: 0
+  HadContactDamage: 0
   speed: 15
 --- !u!61 &6054787801465259573
 BoxCollider2D:
