@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
     virtual protected void OnColEnter2D(Collider2D col)
     {
 
-        if (!isDestroy)
+        if (!isDestroy && HadContactDamage)
         {
             if (col.gameObject.CompareTag("Player"))
             {
@@ -555,18 +555,12 @@ public class Enemy : MonoBehaviour
 
     public void OnColEnter(Collider2D col)
     {
-        if (HadContactDamage)
-        {
-            OnColEnter2D(col);
-        }
+        OnColEnter2D(col);
     }
 
     public void OnColStay(Collider2D col)
     {
-        if (HadContactDamage)
-        {
-            OnColStay2D(col);
-        }
+        OnColStay2D(col);
     }
 
     //ヒットエフェクト生成
