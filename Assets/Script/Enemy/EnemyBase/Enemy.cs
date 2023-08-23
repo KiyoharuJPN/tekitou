@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     //プレイヤー必殺技中かどうか
     [System.NonSerialized]
     public bool isPlayerExAttack;
+    public bool HadContactDamage = true;
 
     protected float hp;
 
@@ -219,7 +220,7 @@ public class Enemy : MonoBehaviour
             {
                 SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
                 ComboParam.Instance.ResetTime();
-                //reflexNum = maxReflexNum;
+                reflexNum = maxReflexNum;
                 CalcForceDirection();
                 BoostSphere();
 
@@ -554,12 +555,18 @@ public class Enemy : MonoBehaviour
 
     public void OnColEnter(Collider2D col)
     {
-        OnColEnter2D(col);
+        if (HadContactDamage)
+        {
+            OnColEnter2D(col);
+        }
     }
 
     public void OnColStay(Collider2D col)
     {
-        OnColStay2D(col);
+        if (HadContactDamage)
+        {
+            OnColStay2D(col);
+        }
     }
 
     //ヒットエフェクト生成

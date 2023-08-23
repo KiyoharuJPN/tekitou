@@ -191,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyColliderArea: {fileID: 8936830619934675688}
   id: 6
+  HadContactDamage: 1
   speed: 15
   movingSpeed: 0.8
   idleTime: 2.4

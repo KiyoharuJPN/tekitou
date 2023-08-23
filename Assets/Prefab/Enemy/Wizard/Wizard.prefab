@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyColliderArea: {fileID: 1981466018770677231}
   id: 10
+  HadContactDamage: 1
   speed: 15
   Wizard_MagicBall: {fileID: 3335520675696244365, guid: d0e03f6349c97d949b338ff1a9612cab, type: 3}
   WMBAttackPos: {fileID: 407148582751952771}

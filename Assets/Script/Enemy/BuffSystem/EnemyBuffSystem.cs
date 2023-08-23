@@ -64,10 +64,10 @@ public class EnemyBuffSystem : MonoBehaviour
 
     private void Update()
     {
-        if (BuffAttackCheckText.gameObject.activeSelf)
+        /*if (BuffAttackCheckText.gameObject.activeSelf)
         {
             BuffAttackCheckText.gameObject.transform.position = transform.position + intervalPos;
-        }
+        }*/
     }
 
     //最初に表示されるアタック必要数のセット

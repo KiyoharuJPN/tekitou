@@ -58801,6 +58801,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA (4)
@@ -58858,6 +58862,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA (1)
@@ -59243,6 +59251,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -60468,6 +60480,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -60650,6 +60666,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -61098,6 +61118,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -61587,6 +61611,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -61644,6 +61672,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 3086247454851273935, guid: 076d4a137267cd845bf18b4228f5410e, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3086247454851273972, guid: 076d4a137267cd845bf18b4228f5410e, type: 3}
       propertyPath: m_Name
       value: Enemy_Bird
@@ -61904,6 +61936,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -62247,6 +62283,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 6548554273560688657, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin
@@ -62438,6 +62478,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA (6)
@@ -62824,6 +62868,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA (5)
@@ -63319,6 +63367,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -63381,6 +63433,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -64850,6 +64906,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 6548554273560688657, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin (2)
@@ -66306,6 +66366,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -66612,6 +66676,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA (3)
@@ -66936,6 +67004,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -67179,6 +67251,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 3086247454851273935, guid: 076d4a137267cd845bf18b4228f5410e, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3086247454851273972, guid: 076d4a137267cd845bf18b4228f5410e, type: 3}
       propertyPath: m_Name
       value: Enemy_Bird (1)
@@ -68289,6 +68365,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA
@@ -68416,6 +68496,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA (2)
@@ -68726,6 +68810,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -69043,6 +69131,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 4186489159880560721, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4186489159880560725, guid: 50a7f647823ef734ab25aa4c2c5f88f0, type: 3}
       propertyPath: m_Name
       value: EnemyA (7)
@@ -69157,6 +69249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -71242,6 +71338,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 6548554273560688657, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin (1)
@@ -71382,6 +71482,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 856127400}
     m_Modifications:
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: HadContactDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -455,6 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyColliderArea: {fileID: 41147816281817053}
   id: 11
+  HadContactDamage: 1
   speed: 15
   MoveSpeed: 1
   SpiderAttackCheckArea: {fileID: 6308638242716181035}
