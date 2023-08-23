@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
         //吹っ飛び中に使用
         _transform = transform;
         _prevPosition = _transform.position;
-        speed = EnemyGeneratar.instance.speed;
+        speed = enemyData.speed;
         smokeEffect = EnemyGeneratar.instance.smokeEffect;
         effectInterval = EnemyGeneratar.instance.effectInterval;
 
@@ -333,8 +333,8 @@ public class Enemy : MonoBehaviour
         if(_EnemyBuff != null)
         {
             // 向きと力の計算
-            Vector2 force = (speed + _EnemyBuff.GetBuffBlowingSpeed()) * forceDirection;
-            Debug.Log(_EnemyBuff.GetBuffBlowingSpeed());
+            Vector2 force = (speed + BuffBlowingSpeed()) * forceDirection;
+            
             // 力を加えるメソッド
             enemyRb.velocity = force;
         }
@@ -595,4 +595,34 @@ public class Enemy : MonoBehaviour
         Destroy(prefab, time);
     }
 
+
+
+    float BuffBlowingSpeed()
+    {
+        switch (_EnemyBuff.GetBuffBlowingSpeed())
+        {
+            case 0:
+                return 0f;
+            case 1:
+                return 0.2f;
+            case 2:
+                return 0.4f;
+            case 3:
+                return 0.7f;
+            case 4:
+                return 1f;
+            case 5:
+                return 1.6f;
+            case 6:
+                return 2.4f;
+            case 7:
+                return 3.4f;
+            case 8:
+                return 4.6f;
+            case 9:
+                return 6.2f;
+            default:
+                return 8f;
+        }
+    }
 }

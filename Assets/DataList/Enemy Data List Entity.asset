@@ -23,7 +23,7 @@ MonoBehaviour:
     angle: 60
     num: 0
     type: 0
-    speed: 0
+    speed: 15
   - id: 1
     charName: "\u93A7\u4ED8\u304D\u6848\u5C71\u5B50"
     hp: 5
@@ -34,7 +34,7 @@ MonoBehaviour:
     angle: 0
     num: 0
     type: 0
-    speed: 0
+    speed: 15
   - id: 2
     charName: "\u7684"
     hp: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
     angle: 50
     num: 0
     type: 1
-    speed: 0
+    speed: 15
   - id: 3
     charName: "\u58CA\u308C\u305F\u6848\u5C71\u5B50"
     hp: 1
@@ -56,7 +56,7 @@ MonoBehaviour:
     angle: 10
     num: 0
     type: 0
-    speed: 0
+    speed: 15
   - id: 4
     charName: "\u6575A"
     hp: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
     angle: 45
     num: 5
     type: 0
-    speed: 0
+    speed: 15
   - id: 5
     charName: "\u30B9\u30E9\u30A4\u30E0"
     hp: 1
@@ -78,7 +78,7 @@ MonoBehaviour:
     angle: 60
     num: 8
     type: 0
-    speed: 0
+    speed: 15
   - id: 6
     charName: "\u30B4\u30D6\u30EA\u30F3"
     hp: 1
@@ -89,7 +89,7 @@ MonoBehaviour:
     angle: 30
     num: 6
     type: 0
-    speed: 0
+    speed: 15
   - id: 7
     charName: "\u9CE5"
     hp: 1
@@ -100,7 +100,7 @@ MonoBehaviour:
     angle: 50
     num: 5
     type: 1
-    speed: 0
+    speed: 15
   - id: 8
     charName: "\u30AD\u30F3\u30B0\u30B9\u30E9\u30A4\u30E0"
     hp: 40
@@ -122,7 +122,7 @@ MonoBehaviour:
     angle: 45
     num: 5
     type: 1
-    speed: 0
+    speed: 15
   - id: 10
     charName: "\u9B54\u6CD5\u4F7F\u3044"
     hp: 1
@@ -133,7 +133,7 @@ MonoBehaviour:
     angle: 80
     num: 6
     type: 0
-    speed: 0
+    speed: 15
   - id: 11
     charName: "\u30AF\u30E2"
     hp: 1
@@ -144,7 +144,7 @@ MonoBehaviour:
     angle: 30
     num: 8
     type: 0
-    speed: 0
+    speed: 15
   - id: 12
     charName: "\u30C9\u30E9\u30B4\u30F3"
     hp: 50
