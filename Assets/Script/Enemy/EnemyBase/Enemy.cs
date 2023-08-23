@@ -101,6 +101,10 @@ public class Enemy : MonoBehaviour
         if (GetComponentInChildren<EnemyBuffSystem>())
         {
             _EnemyBuff = GetComponentInChildren<EnemyBuffSystem>();
+            //if(_EnemyBuff.GetBuffType() == EnemyBuffSystem.SetBuffType.NoBuff)
+            //{
+            //    _EnemyBuff = null;
+            //}
         }
     }
 
