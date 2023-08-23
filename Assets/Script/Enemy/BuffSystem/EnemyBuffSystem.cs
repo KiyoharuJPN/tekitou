@@ -40,12 +40,17 @@ public class EnemyBuffSystem : MonoBehaviour
     public GameObject[] DeadEffect;
     public GameObject TextObject,CanvasObject;
 
-    private void Start()
+    private void Awake()
     {
         if(buffType == SetBuffType.RandomSet)
         {
             var newbuffType = (int)Random.Range(0, (float)SetBuffType.NoBuff);
             buffType = (SetBuffType)newbuffType;
+        }
+        if(buffType == SetBuffType.NoBuff)
+        {
+            Destroy(GetComponent<EnemyBuffSystem>());
+            return;
         }
         if (GameObject.Find("BuffCanvas"))
         {
@@ -233,5 +238,14 @@ public class EnemyBuffSystem : MonoBehaviour
     public void _Destroy()
     {
         Destroy(BuffAttackCheckText.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        BuffAttackCheckText.gameObject.SetActive(false);
+    }
+    private void OnDestroy()
+    {
+        Destroy(BuffAttackCheckText);
     }
 }
