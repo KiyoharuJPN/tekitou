@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Item;
 
 //中間地点
 public class WayPoint : MonoBehaviour
@@ -7,11 +8,21 @@ public class WayPoint : MonoBehaviour
 
     bool isWayPoint = false;
 
+    //中間地点何個目
+    public int pointNum; 
+
     private void Awake()
     {
         animator = this.GetComponent<Animator>();
 
-        isWayPoint = SceneData.Instance.wayPoint;
+        if(pointNum == 1)
+        {
+            isWayPoint = SceneData.Instance.wayPoint_1;
+        }
+        else if(pointNum == 2)
+        {
+            isWayPoint = SceneData.Instance.wayPoint_2;
+        }
 
         //開始時に中間起動済み状態の場合
         if (isWayPoint)
@@ -27,8 +38,17 @@ public class WayPoint : MonoBehaviour
         {
             isWayPoint = true;
             animator.SetTrigger("IsWayPoint");
-            SceneData.Instance.wayPoint = true;
+            if (pointNum == 1)
+            {
+                SceneData.Instance.wayPoint_1 = true;
+            }
+            else if (pointNum == 2)
+            {
+                SceneData.Instance.wayPoint_2 = true;
+            }
             SoundManager.Instance.PlaySE(SESoundData.SE.HalfPoint);
+            SoundManager.Instance.PlaySE(SESoundData.SE.GetHeart);
+            collision.GetComponent<PlayerController>()._Heel(2);
             this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             this.enabled = false;
         }

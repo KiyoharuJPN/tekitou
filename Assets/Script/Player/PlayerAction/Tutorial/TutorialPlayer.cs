@@ -81,30 +81,33 @@ public class TutorialPlayer : PlayerController
         float lsv = Input.GetAxis("L_Stick_V");
         float rsh = Input.GetAxis("R_Stick_H");
         float rsv = Input.GetAxis("R_Stick_V");
-        float tri = Input.GetAxis("L_R_Trigger");
 
-        if (tri > 0)
+        if (Input.GetKey(KeyCode.JoystickButton1))
         {
             isAttackKay = true;
         }
         else { isAttackKay = false; }
 
         //ã¸UŒ‚
-        if (((lsv >= 0.9 && isAttackKay) || rsv >= 0.8) && isTUpAttack)
+        if (lsv >= 0.9 && isAttackKay && isTUpAttack)
+            // || rsv >= 0.8)
         {
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
-        if (((lsv <= -0.9 && isAttackKay) || rsv <= -0.8) && isTDownAttack)
+        if (lsv <= -0.9 && isAttackKay && isTDownAttack)
+            // || rsv <= -0.8)
         {
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
-        if (((lsh >= 0.9 && isAttackKay) || rsh >= 0.8) && isTSideAttack)
+        if (lsh >= 0.9 && isAttackKay && isTSideAttack)
+            // || rsh >= 0.8)
         {
             AttackAction("SideAttack_right");
         }
-        else if(((lsh <= -0.9 && isAttackKay) || rsh <= -0.8) && isTSideAttack)
+        else if(lsh <= -0.9 && isAttackKay && isTSideAttack)
+            // || rsh <= -0.8)
         {
             AttackAction("SideAttack_left");
         }

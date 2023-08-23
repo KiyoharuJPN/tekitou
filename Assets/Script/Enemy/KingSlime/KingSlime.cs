@@ -426,7 +426,7 @@ public class KingSlime : Enemy
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
     }
 
-    public override void Damage(float power)
+    public override void Damage(float power, Skill skill)
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         hp -= power;

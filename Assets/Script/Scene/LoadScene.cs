@@ -95,7 +95,7 @@ public class LoadScene : MonoBehaviour
             yield return null;
         }
         SceneData.Instance.revival = false;
-        SceneData.Instance.wayPoint = false;
+        SceneData.Instance.wayPoint_2 = false;
         SceneManager.LoadScene(loadScene);
     }
 }

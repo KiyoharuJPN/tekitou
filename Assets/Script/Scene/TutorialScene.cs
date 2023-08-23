@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ public class TutorialScene : StageCtrl
 {
     [SerializeField]
     TutorialPlayer player;
+
+    [SerializeField]
+    CameraManager mainCamera;
 
     const string stageName = "Tutorial";
 
@@ -15,27 +19,30 @@ public class TutorialScene : StageCtrl
     bool stepStart;
     bool goal = false;
 
-    [SerializeField, Header("進行不能壁")]
-    GameObject[] stopTiles;
-    [SerializeField, Header("チュートリアルパネル")]
-    GameObject[] tutorialPanels;
+    [System.Serializable]
+    struct TutorialPanelObj
+    {
+        [SerializeField, Header("チュートリアルパネル")]
+        internal GameObject tutorialPanel;
+        [SerializeField, Header("進行不能壁")]
+        internal GameObject stopTiles;
+        [SerializeField, Header("ワープドア")]
+        internal GameObject warpDoor;
+        [SerializeField, Header("専用カメラエリア")]
+        internal GameObject cameraArea;
+        public TutorialPanel tutorialArea;
+    }
 
     //クリアが敵を倒す条件の際に使用
     internal List<GameObject> enemylist = new List<GameObject>();
 
+    [SerializeField, Header("チュートリアルパネル")]
+    TutorialPanelObj[] tutorialPanels;
+
 
     private void Awake()
     {
-        SceneData.Instance.referer = stageName;
-
-        //各パネルを消す
-        foreach(GameObject panel in tutorialPanels) 
-        {
-            panel.transform.Find("UI_Correct").GetComponent<SpriteRenderer>().enabled = false;
-            panel.GetComponent<SpriteRenderer>().enabled = false;
-        }
-
-        tutorialPanels[0].GetComponent<SpriteRenderer>().enabled = true;
+        SceneData.Instance.referer = stageName; 
     }
 
     protected override void Start()
@@ -44,9 +51,13 @@ public class TutorialScene : StageCtrl
         GameManager.Instance.PlayStart(1);
         Cursor.visible = false;
 
+        for (int i = 0; i < tutorialPanels.Length; i++)
+        {
+            tutorialPanels[i].tutorialArea = tutorialPanels[i].tutorialPanel.GetComponent<TutorialPanel>();
+        }
+
         base.Start();
         TutorialStep();
-
     }
 
     private void FixedUpdate()
@@ -54,135 +65,181 @@ public class TutorialScene : StageCtrl
         if (TutorialClearCheck())
         {
             stepStart = false;
-            tutorialPanels[num].transform.Find("UI_Correct").GetComponent<SpriteRenderer>().enabled = true;
-            if (!goal)
-            {
-                tutorialPanels[num + 1].GetComponent<SpriteRenderer>().enabled = true;
-            }
+            tutorialPanels[num].tutorialPanel.transform.Find("UI_Correct").GetComponent<SpriteRenderer>().enabled = true;
             SoundManager.Instance.PlaySE(SESoundData.SE.tutorialCorrect);
             num++;
+            TutorialStep();
         }
     }
 
     private bool TutorialClearCheck()
     {
-        if(!stepStart) return false;
+        if (!stepStart || goal) return false;
+        if (!tutorialPanels[num].tutorialArea.isPlayer)
+        {
+            return false;
+        }
+        
         switch (num)
         {
             case 0:
                 if (player.isMoving)
                 {
-                    Destroy(stopTiles[0]);
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 1:
                 if (player.isJumping)
                 {
-                    Destroy(stopTiles[1]);
-                    return true;
+                    return TutorialClear();
                 };
                 break;
             case 2:
-                if (player.jump.isSecondJump) return true;
+                if (player.jump.isSecondJump) 
+                    return TutorialClear();
                 break;
             case 3:
-                if (EnemyDeathCheck())
+                if (player.isNomalAttack && player.isGround)
                 {
-                    Destroy(stopTiles[2]);
-                    player.isTJump = true;
-                    player.isTAirJump = true;
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 4:
-                if (EnemyDeathCheck())
+                if (player.isNomalAttack && player.isJumping)
                 {
-                    Destroy(stopTiles[3]);
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 5:
-                if (EnemyDeathCheck())
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 0)
                 {
-                    Destroy(stopTiles[4]);
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 6:
-                if (EnemyDeathCheck())
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 1 &&
+                    PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.ExGage) > 0 &&
+                        PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Slashing) > 0 &&
+                        PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible) > 0)
                 {
-                    Destroy(stopTiles[5]);
-                    player.isTJump = true;
-                    player.isTAirJump = true;
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 7:
-                if (EnemyDeathCheck())
+                if (player.isSideAttack)
                 {
-                    Destroy(stopTiles[6]);
-                    ComboParam.Instance.SetCombo(0);
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 8:
-                if (ComboParam.Instance.GetCombo() >= 5)
+                if (player.isUpAttack)
                 {
-                    Destroy(stopTiles[7]);
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 9:
-                if (EnemyDeathCheck())
+                if (player.isDropAttack)
                 {
-                    Destroy(stopTiles[8]);
-                    return true;
+                    return TutorialClear();
                 }
                 break;
             case 10:
-                if (EnemyDeathCheck())
+                if (player.isExAttack)
                 {
-                    Destroy(stopTiles[9]);
-                    tutorialPanels[num - 1].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = false;
-                    tutorialPanels[num].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = false;
-                    tutorialPanels[num].transform.Find("UI_Tutorial_Combo_2_5").GetComponent<SpriteRenderer>().enabled = true;
-                    ComboParam.Instance.ComboResume();
-                    return true;
-                }
-                break;
-            case 11:
-                if (EnemyDeathCheck())
-                {
-                    Destroy(stopTiles[10]);
-                    goal = true;
-                    return true;
-                }
-                else if (!player.canExAttack) {
-                    ExAttackParam.Instance.SetGage(50);
-                    player.canExAttack = true;
+                    return TutorialClear();
                 }
                 break;
         }
         return false;
     }
 
-    private bool EnemyDeathCheck()
+    bool TutorialClear()
     {
-        var enemyCount = enemylist.Count;
-        var deathCount = 0;
-        foreach(GameObject enemy in enemylist)
+        //現在のチュートリアルに進行不能壁があるなら
+        if (tutorialPanels[num].stopTiles != null)
         {
-            if(enemy.GetComponent<Enemy>().isDestroy) deathCount++;
+            tutorialPanels[num].stopTiles.SetActive(false);
+        }
+        //現在のチュートリアルにワープドアがあるなら
+        if (tutorialPanels[num].warpDoor != null)
+        {
+            tutorialPanels[num].tutorialPanel.transform.Find("TextBox_7").gameObject.SetActive(false);
+            tutorialPanels[num].tutorialPanel.transform.Find("TextBox_8").gameObject.SetActive(true);
+            StartCoroutine(SetWarpDoor(tutorialPanels[num].warpDoor));
+        }
+        ////現在のチュートリアルに専用カメラエリアがあるなら
+        //if (tutorialPanels[num].cameraArea != null)
+        //{
+        //    mainCamera.NomalCameraAreaSet();
+        //}
+
+        if (tutorialPanels.Length == num + 1) {
+            Debug.Log("チュートリアル終了");
+            goal = true;
+            return true; 
         }
 
-        if (deathCount == enemyCount)
+        ////次のパネルに専用カメラエリアがあるなら
+        //if (tutorialPanels[num + 1].cameraArea != null) 
+        //{
+        //    mainCamera.SetOriCameraArea(tutorialPanels[num + 1].cameraArea);
+        //}
+
+        //次のパネルがFalseなら
+        if (!tutorialPanels[num + 1].tutorialPanel.activeSelf)
         {
-            enemylist.Clear();
-            return true;
+            StartCoroutine(ObjSetActive(1f, tutorialPanels[num].tutorialPanel, tutorialPanels[num + 1].tutorialPanel));
         }
-        return false;
+
+        tutorialPanels[num].tutorialPanel.GetComponent<BoxCollider2D>().enabled = false;
+        tutorialPanels[num].tutorialPanel.GetComponent<TutorialPanel>().enabled = false;
+
+        return true;
     }
+
+    IEnumerator ObjSetActive(float time,GameObject obj, GameObject nextObj)
+    {
+        yield return new WaitForSeconds(time);
+
+        obj.SetActive(false);
+        nextObj.SetActive(true);
+    }
+
+    IEnumerator SetWarpDoor(GameObject warpDoor)
+    {
+        //出現時間
+        float time = 1f;
+        SpriteRenderer warpDoor_Sprite = warpDoor.GetComponent<SpriteRenderer>();
+        float color_A = 0f;
+
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            color_A += 1f * Time.deltaTime;
+            warpDoor_Sprite.color = new Color(warpDoor_Sprite.color.r, warpDoor_Sprite.color.g, warpDoor_Sprite.color.b, color_A);
+            yield return null;
+        }
+
+        warpDoor.GetComponent<BoxCollider2D>().enabled = true;
+        warpDoor.GetComponent<WarpDoor>().enabled = true;
+    }
+
+    //private bool EnemyDeathCheck()
+    //{
+    //    var enemyCount = enemylist.Count;
+    //    var deathCount = 0;
+    //    foreach(GameObject enemy in enemylist)
+    //    {
+    //        if(enemy.GetComponent<Enemy>().isDestroy) deathCount++;
+    //    }
+
+    //    if (deathCount == enemyCount)
+    //    {
+    //        enemylist.Clear();
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
     internal void TutorialStep()
     {
@@ -199,57 +256,21 @@ public class TutorialScene : StageCtrl
                 break;
             case 3:
                 player.isTAttack = true;
-                player.isTJump = false;
-                player.isTAirJump = false;
                 break;
             case 4:
-                player.isTAttack = true;
                 player.isTAirAttack = true;
-                break;
-            case 5:
-                player.isTSideAttack = true;
-                player.isTJump = false;
-                player.isTAirJump = false;
-                player.isTAttack = false;
-                player.isTAirAttack = false;
-                break;
-            case 6:
-                player.isTUpAttack = true;
-                player.isTSideAttack = false;
                 break;
             case 7:
-                player.isTUpAttack = false;
-                player.isTDownAttack = true;
-                player.isTJump = true;
-                player.isTAirJump = true;
-                break;
-            case 8:
-                ComboParam.Instance.ComboStop();
-                player.isTAttack = true;
-                player.isTAirAttack = true;
-                player.isTUpAttack = true;
                 player.isTSideAttack = true;
                 break;
+            case 8:
+                player.isTUpAttack = true;
+                break;
             case 9:
-                ComboParam.Instance.ComboStop();
-                ComboParam.Instance.SetCombo(5);
-                tutorialPanels[num].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = true;
-                player.isTUpAttack = false;
-                player.isTSideAttack = false;
-                player.isTDownAttack = false;
+                player.isTDownAttack = true;
                 break;
             case 10:
-                ComboParam.Instance.SetCombo(100);
-                tutorialPanels[num].transform.Find("UI_Attack_Only").GetComponent<SpriteRenderer>().enabled = true;
-                break;
-            case 11:
-                ExAttackParam.Instance.SetGage(50);
                 player.isTExAttack = true;
-                player.canExAttack = true;
-                player.isTJump = false;
-                player.isTAirJump = false;
-                player.isTAttack = false;
-                player.isTAirAttack = false;
                 break;
         }
         stepStart = true;

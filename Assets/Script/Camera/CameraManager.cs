@@ -9,7 +9,6 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     GameObject CMvcam;
 
-
     [SerializeField]
     private GameObject cameraArea_Tutorial;
     [SerializeField]
@@ -23,18 +22,7 @@ public class CameraManager : MonoBehaviour
 
     void Start()
     {
-        if(SceneData.Instance.referer == "Tutorial")
-        {
-            ChengeCameraArea_Tutorial();
-        }
-        else if(SceneData.Instance.referer == "Stage1")
-        {
-            ChengeCameraArea_Stage1Nomal();
-        }
-        else if (SceneData.Instance.referer == "Stage2")
-        {
-            ChengeCameraArea_Stage2Nomal();
-        }
+        NomalCameraAreaSet();
     }
     internal void ChengeCameraArea_Tutorial()
     {
@@ -64,5 +52,26 @@ public class CameraManager : MonoBehaviour
             CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage2Boss.GetComponent<PolygonCollider2D>();
             CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 5.8f;
         }
+    }
+
+    public void NomalCameraAreaSet()
+    {
+        if (SceneData.Instance.referer == "Tutorial")
+        {
+            ChengeCameraArea_Tutorial();
+        }
+        else if (SceneData.Instance.referer == "Stage1")
+        {
+            ChengeCameraArea_Stage1Nomal();
+        }
+        else if (SceneData.Instance.referer == "Stage2")
+        {
+            ChengeCameraArea_Stage2Nomal();
+        }
+    }
+
+    public void SetOriCameraArea(GameObject oriCameraArea)
+    {
+        CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = oriCameraArea.GetComponent<PolygonCollider2D>();
     }
 }

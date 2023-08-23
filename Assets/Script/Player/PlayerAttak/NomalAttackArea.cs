@@ -25,7 +25,6 @@ public class NomalAttackArea : MonoBehaviour
 
     void HitDamage(Collider2D Enemy)
     {
-        player._Attack(Enemy, skill.damage);
-        player._HitEfect(Enemy.transform, skill.hitEffectAngle);
+        player._Attack(Enemy, skill.damage, skill);
     }
 }

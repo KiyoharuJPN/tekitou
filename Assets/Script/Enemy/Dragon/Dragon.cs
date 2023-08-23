@@ -555,7 +555,7 @@ public class Dragon : Enemy
     }
 
     //ŠO•”ŠÖ”
-    public override void Damage(float power)
+    public override void Damage(float power, Skill skill)
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         hp -= power;

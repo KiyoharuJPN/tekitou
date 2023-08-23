@@ -178,11 +178,6 @@ public class PlayerBuff : MonoBehaviour
         firstSpeedBuuf = speed;
         firstSlashingBuff = slashing;
         firstInvincibleBuff = invincible;
-
-        moveFirstSpeed = player.moveData.firstSpeed;
-        moveDashSpeed = player.moveData.dashSpeed;
-        moveMaxSpeed = player.moveData.maxSpeed;
-        jumpSpeed = player.jumpData.speed;
     }
 
     /// <summary>

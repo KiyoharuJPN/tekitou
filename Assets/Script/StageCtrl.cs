@@ -10,13 +10,17 @@ public class StageCtrl : MonoBehaviour
 
     virtual protected void Start()
     {
-        if (playerObj != null && continuePoint != null && continuePoint.Length > 0 && !SceneData.Instance.wayPoint)
+        if (playerObj != null && continuePoint != null && continuePoint.Length > 0 && !SceneData.Instance.wayPoint_1 && !SceneData.Instance.wayPoint_2)
         {
             playerObj.transform.position = continuePoint[0].transform.position;
         }
-        else if(playerObj != null && continuePoint != null && continuePoint.Length > 0 && SceneData.Instance.wayPoint)
+        else if(playerObj != null && continuePoint != null && continuePoint.Length > 0 && SceneData.Instance.wayPoint_1)
         {
             playerObj.transform.position = continuePoint[1].transform.position;
+        }
+        else if (playerObj != null && continuePoint != null && continuePoint.Length > 0 && SceneData.Instance.wayPoint_2)
+        {
+            playerObj.transform.position = continuePoint[2].transform.position;
         }
         else
         {

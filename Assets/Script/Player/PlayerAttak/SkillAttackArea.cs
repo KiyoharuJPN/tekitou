@@ -21,27 +21,17 @@ public class SkillAttackArea : MonoBehaviour
         if (player.isUpAttack)//è„è∏çUåÇ
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
-            player._Attack(Enemy, skill.damage);
-            player._HitEfect(Enemy.transform, skill.hitEffectAngle);
+            player._Attack(Enemy, skill.damage, skill);
         }
         if (player.isSideAttack)//â°çUåÇ
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
-            player._Attack(Enemy, skill.damage);
-            player._HitEfect(Enemy.transform, skill.hitEffectAngle);
+            player._Attack(Enemy, skill.damage, skill);
         }
         if (player.isDropAttack)//â∫çUåÇ
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
-            player._Attack(Enemy, skill.damage);
-            if (player.transform.localScale.x == 1)
-            {
-                player._HitEfect(Enemy.transform, -skill.hitEffectAngle);
-            }
-            else
-            {
-                player._HitEfect(Enemy.transform, skill.hitEffectAngle);
-            }
+            player._Attack(Enemy, skill.damage, skill);
         }
         ExAttackParam.Instance.AddGauge();
     }

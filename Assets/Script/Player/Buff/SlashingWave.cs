@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SlashingWave : MonoBehaviour
@@ -17,7 +18,8 @@ public class SlashingWave : MonoBehaviour
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            player._Attack(collision, 1);
+            Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
+            player._Attack(collision, 1, skill);
             Destroy(this.gameObject);
         }
     }
