@@ -242,10 +242,16 @@ public class EnemyBuffSystem : MonoBehaviour
 
     private void OnDisable()
     {
-        BuffAttackCheckText.gameObject.SetActive(false);
+        if (BuffAttackCheckText!=null)
+        {
+            BuffAttackCheckText.gameObject.SetActive(false);
+        }
     }
     private void OnDestroy()
     {
-        Destroy(BuffAttackCheckText);
+        if (BuffAttackCheckText != null)
+        {
+            Destroy(BuffAttackCheckText);
+        }
     }
 }
