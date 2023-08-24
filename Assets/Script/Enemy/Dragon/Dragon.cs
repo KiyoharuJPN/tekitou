@@ -662,9 +662,9 @@ public class Dragon : Enemy
     protected override void Destroy()
     {
         GameManager.Instance.AddKillEnemy();
-        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss"); 
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         isDestroy = true;
-        //”à‚ÌoŒ»‚ğ“à•”‚ÅÀ‘•‚·‚é‚Æ‚«‚É‚±‚±‚É‘‚¯‚ÎÀ‘•‚Å‚«‚é
     }
 
     protected override void Gravity()
