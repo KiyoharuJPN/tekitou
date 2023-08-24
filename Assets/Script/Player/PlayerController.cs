@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     internal GameObject JumpEffect;
 
     [SerializeField]
+    internal GameObject heelEffect;
+
+    [SerializeField]
     internal GameObject ExAttackHitEffect;
 
     [SerializeField]
@@ -139,6 +142,7 @@ public class PlayerController : MonoBehaviour
     internal bool isWarpDoor = false;
     internal int attckType;
     internal bool isGround = false;
+    internal float animSpeed = 1f;
 
     //無敵時間
     bool inInvincibleTimeKnockBack = false, inInvincibleTimeLife = false;
@@ -154,6 +158,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         jump = GetComponent<Player_Jump>();
         hpparam = GameObject.Find("UI").GetComponentInChildren<HPparam>();
+        animator.SetFloat("Speed", animSpeed);
 
         sprite = GetComponent<SpriteRenderer>();
     }
@@ -213,6 +218,7 @@ public class PlayerController : MonoBehaviour
     public void _Heel(int resilience)
     {
         hpparam.SetHP(hpparam.GetHP() + resilience);
+        HeelEffect();
     }
 
     public void _Damage(int power)
@@ -479,6 +485,15 @@ public class PlayerController : MonoBehaviour
         prefab.transform.Rotate(new Vector3(0,0,angle));
         SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Hit);
         _EfectDestroy(prefab, 0.2f);
+    }
+
+    //ヒールエフェクト生成
+    void HeelEffect()
+    {
+        GameObject prefab =
+        Instantiate(heelEffect, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
+        prefab.transform.parent = this.transform.transform;
+        _EfectDestroy(prefab, 1f);
     }
 
     public void _ExAttackLastEffect()

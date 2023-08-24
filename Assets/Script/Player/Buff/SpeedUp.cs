@@ -29,15 +29,24 @@ public class SpeedUp : MonoBehaviour
 
     public void AddBuff()
     {
-        if (speed.getBuffCount % 2 == 0 && speed.setBuffNum > 1)
+        if (PlayerBuff.Instance.GetBuffCount(BuffType.SpeedUp) > 10) return;
+
+        if (PlayerBuff.Instance.GetBuffCount(BuffType.SpeedUp) == 3 ||
+            PlayerBuff.Instance.GetBuffCount(BuffType.SpeedUp) == 5 ||
+            PlayerBuff.Instance.GetBuffCount(BuffType.SpeedUp) == 7 ||
+            PlayerBuff.Instance.GetBuffCount(BuffType.SpeedUp) == 9)
         {
             speed.setBuffNum -= speed.setBuffDown;
         }
 
+        //ˆÚ“®UŒ‚‘‰Á
         player.moveData.firstSpeed += speed.setBuffNum;
         player.moveData.dashSpeed += speed.setBuffNum;
         player.moveData.maxSpeed += speed.setBuffNum;
         player.moveData.jumpFirstSpeed += speed.setBuffNum;
-    }
 
+        //UŒ‚‘¬“x‘‰Á
+        player.animSpeed += speed.attackSpeedNum;
+        player.animator.SetFloat("Speed", player.animSpeed);
+    }
 }

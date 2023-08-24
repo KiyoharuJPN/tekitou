@@ -98,6 +98,7 @@ public class PlayerBuff : MonoBehaviour
     /// </summary>
     public void SpeedUp()
     {
+        speed.getBuffCount++;
         if (player.gameObject.GetComponent<SpeedUp>())
         {
             player.gameObject.GetComponent<SpeedUp>().AddBuff();
@@ -108,7 +109,6 @@ public class PlayerBuff : MonoBehaviour
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
             player.gameObject.AddComponent<SpeedUp>();
         }
-        speed.getBuffCount++;
     }
     public SpeedBuff GetSpeed()
     {

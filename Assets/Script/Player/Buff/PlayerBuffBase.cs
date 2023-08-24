@@ -37,6 +37,10 @@ namespace PBF
             internal float setBuffNum;
             [SerializeField, Header("獲得回数による減少量")]
             internal float setBuffDown;
+            [SerializeField, Header("上昇値上限")]
+            internal float maxBuffNum;
+            [SerializeField, Header("攻撃速度上昇量")]
+            internal float attackSpeedNum;
             //スピードアップバフ獲得回数
             internal int getBuffCount;
         };
