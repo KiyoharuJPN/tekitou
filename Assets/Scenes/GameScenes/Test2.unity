@@ -7125,7 +7125,7 @@ GameObject:
   - component: {fileID: 798594297}
   - component: {fileID: 798594299}
   - component: {fileID: 798594298}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: floorCollider (2)
   m_TagString: Stage
   m_Icon: {fileID: 0}
@@ -7747,110 +7747,6 @@ PrefabInstance:
     - target: {fileID: 8236160012760509620, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_Name
       value: Dragon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern2.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[3]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[4]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[5]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[6]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[7]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern1.Array.data[8]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern2.Array.data[3]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern2.Array.data[4]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern2.Array.data[6]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern2.Array.data[7]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern2.Array.data[8]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[3]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[4]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[5]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[6]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[7]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern3.Array.data[9]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Pattern2.Array.data[10]
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509623, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_RootOrder
@@ -8587,7 +8483,7 @@ GameObject:
   - component: {fileID: 940352927}
   - component: {fileID: 940352926}
   - component: {fileID: 940352925}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: floorCollider (3)
   m_TagString: Stage
   m_Icon: {fileID: 0}
@@ -9198,7 +9094,7 @@ GameObject:
   - component: {fileID: 1014115645}
   - component: {fileID: 1014115644}
   - component: {fileID: 1014115643}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: floorCollider (1)
   m_TagString: Stage
   m_Icon: {fileID: 0}
@@ -16222,7 +16118,7 @@ GameObject:
   - component: {fileID: 1877586095}
   - component: {fileID: 1877586090}
   - component: {fileID: 1877586094}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: floorCollider
   m_TagString: Stage
   m_Icon: {fileID: 0}
@@ -16446,7 +16342,7 @@ GameObject:
   - component: {fileID: 1885107043}
   - component: {fileID: 1885107042}
   - component: {fileID: 1885107041}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: floorCollider (1)
   m_TagString: Stage
   m_Icon: {fileID: 0}

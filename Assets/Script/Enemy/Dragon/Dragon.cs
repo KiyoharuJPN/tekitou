@@ -19,6 +19,11 @@ public class Dragon : Enemy
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
+    //Platformを擦りぬく
+    [SerializeField, Tooltip("Platformのオブジェクト名")]
+    string Platformname;
+    BoxCollider2D BoxColthis;
+
     //ジャンプ関連
     [System.Serializable]
     public struct DragonJumpingAttackData
@@ -85,15 +90,19 @@ public class Dragon : Enemy
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
+        BoxColthis = GetComponent<BoxCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.CompareTag("Stage")&&JumpAttackAnimCtrl == 0)
+        if (col.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 0 && col.gameObject.name != Platformname)
         {
+            BoxColthis.isTrigger = false;
             StartCoroutine(JumpAttackAnimPlus());
         }
     }
+
+
     //ドラゴンの動き
     protected override void Update()
     {
@@ -520,7 +529,7 @@ public class Dragon : Enemy
         animator.SetInteger("JumpAttackAnimCtrl", JumpAttackAnimCtrl);
         //コライダーと攻撃範囲の調整
         dragonAttackCheckArea.gameObject.SetActive(false);
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        gameObject.layer = LayerMask.NameToLayer("BossEnemy");
         ResetAttackCheckArea();
         //落下後の画面揺れ
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
@@ -616,7 +625,7 @@ public class Dragon : Enemy
         {
             jumpWidth = _dragonJumpingAttackData.DragonJARightPos.x - transform.position.x;
         }
-
+        BoxColthis.isTrigger = true;
         enemyRb.AddForce(new Vector2(jumpWidth * 0.5f, _dragonJumpingAttackData.DragonJAHeight),ForceMode2D.Impulse);
         //接地する時に次のアニメーションを流せるようにif文の判断要素にする
         JumpAttackAnimCtrl = 2;
