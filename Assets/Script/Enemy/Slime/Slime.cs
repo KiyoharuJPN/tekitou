@@ -85,12 +85,17 @@ public class Slime : Enemy
 
     protected override void OnColEnter2D(Collider2D col)
     {
-        if (!IsMoving && col.gameObject.CompareTag("Stage") && BossSummon)
+        
+        base.OnColEnter2D(col);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!IsMoving && collision.gameObject.CompareTag("Stage") && BossSummon)
         {
             BossSummon = false;
             if (BossTurn) movingWidth *= -1;
         }
-        base.OnColEnter2D(col);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
