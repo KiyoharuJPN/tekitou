@@ -72,6 +72,9 @@ public class Enemy : MonoBehaviour
     //Buff関連
     EnemyBuffSystem _EnemyBuff;
 
+    //ヒットストップバフ
+    bool _isDestroyed = false,_isHitStoped = false;
+
     protected virtual void Start()
     {
         //idで指定した敵データ読込
@@ -233,7 +236,15 @@ public class Enemy : MonoBehaviour
                     GameManager.Instance.SetBuff((int)_EnemyBuff.GetBuffType());
                     _EnemyBuff.ShowAttackChecking();
 
-                    Destroy(gameObject);
+                    if (_isHitStoped)
+                    {
+                        _isDestroyed = true;
+                        gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
             else
@@ -265,7 +276,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator HitStop(float power, Skill skill)
     {
-        
+        _isHitStoped = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         ComboParam.Instance.ResetTime();
 
@@ -289,8 +300,14 @@ public class Enemy : MonoBehaviour
                 this.transform.position = initialPos;
             });
 
+        _isHitStoped = false;
 
-        
+        if (_isDestroyed)
+        {
+            Destroy(gameObject);
+        }
+
+
     }
 
     protected void EnemyMove()
