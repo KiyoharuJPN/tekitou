@@ -208,6 +208,9 @@ public class Enemy : MonoBehaviour
 
     public virtual void Damage(float power, Skill skill)
     {
+        //ヒットストップ
+        StartCoroutine(HitStop(power, skill));
+
         //既に死亡状態の場合
         if (isDestroy)
         {
@@ -245,8 +248,19 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        //ヒットストップにダメージ処理を行ってもらう
-        StartCoroutine(HitStop(power, skill));
+        hp -= power;
+
+        if (!hadDamaged)
+        {
+            StartCoroutine(HadDamaged());
+            hadDamaged = true;
+        }
+        if (hp <= 0)
+        {
+            PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
+
+            Destroy();
+        }
     }
 
     IEnumerator HitStop(float power, Skill skill)
@@ -276,19 +290,7 @@ public class Enemy : MonoBehaviour
             });
 
 
-        hp -= power;
         
-        if (!hadDamaged)
-        {
-            StartCoroutine(HadDamaged());
-            hadDamaged = true;
-        }
-        if (hp <= 0)
-        {
-            PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
-            
-            Destroy();
-        }
     }
 
     protected void EnemyMove()

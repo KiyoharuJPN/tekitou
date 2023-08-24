@@ -24,7 +24,7 @@ public class UpAttack
     private static void UpAttackMove(PlayerController player, Player_Jump p_Jump)
     {
         player.rb.velocity = new Vector2(0, p_Jump.HeigetLimt(p_Jump.jumpPos, p_Jump.jumpHight, upAttackStatus.distance) + p_Jump.jumpTime * Time.deltaTime);
-        
+
     }
 
     private static IEnumerator UpAttackTime(PlayerController player, Player_Jump p_Jump, MonoBehaviour mono)
@@ -33,6 +33,7 @@ public class UpAttack
 
         while (time > 0)
         {
+            if (player.isWarpDoor) break;
             UpAttackMove(player, p_Jump);
             time -= Time.deltaTime;
             yield return null;
