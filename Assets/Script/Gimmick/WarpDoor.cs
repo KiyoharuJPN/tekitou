@@ -46,7 +46,7 @@ public class WarpDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6 && !isBottonUi)
+        if (collision.gameObject.CompareTag("Player"))
         {
             player = collision;
             isBottonUi = true;

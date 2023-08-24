@@ -516,6 +516,7 @@ public class PlayerController : MonoBehaviour
         var doorPosX = door.position.x;
         var doorPosY = door.position.y;
         this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);
+        this.rb.velocity = new Vector2 (0, 0);
         animator.SetBool("IsWarpDoor", isWarpDoor);
         animator.SetTrigger("WarpDoor");
     }
