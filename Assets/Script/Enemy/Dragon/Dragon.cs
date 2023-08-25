@@ -19,6 +19,11 @@ public class Dragon : Enemy
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
+    //Platformを擦りぬく
+    [SerializeField, Tooltip("Platformのオブジェクト名")]
+    string Platformname;
+    BoxCollider2D BoxColthis;
+
     //ジャンプ関連
     [System.Serializable]
     public struct DragonJumpingAttackData
@@ -66,7 +71,7 @@ public class Dragon : Enemy
     int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1, JumpAttackAnimCtrl = -1;
 
     //アニメチェック、パターンチェック
-    bool NotInAnim = true, PatternOver = true, patternover = false, isFlameBracing = false, isSlewAttacking = false;
+    bool NotInAnim = true, PatternOver = true, patternover = false, isFlameBracing = false, isSlewAttacking = false, isJumpingAttacking = false;
 
     BoxCollider2D EnemyCollider;
     protected override void Start()
@@ -85,15 +90,19 @@ public class Dragon : Enemy
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
+        BoxColthis = GetComponent<BoxCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.CompareTag("Stage")&&JumpAttackAnimCtrl == 0)
+        if (col.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 0 && col.gameObject.name != Platformname)
         {
+            BoxColthis.isTrigger = false;
             StartCoroutine(JumpAttackAnimPlus());
         }
     }
+
+
     //ドラゴンの動き
     protected override void Update()
     {
@@ -441,8 +450,10 @@ public class Dragon : Enemy
         EnemyCollider.offset = new Vector2(0.67f, -1.6f);
         EnemyCollider.size = new Vector2(7.3f, 3.18f);
         //攻撃チェックArea
-        dragonAttackCheckArea.offset = new Vector2(1.34f, -1.2f);
-        dragonAttackCheckArea.size = new Vector2(9.3f, 4f);
+        //dragonAttackCheckArea.offset = new Vector2(1.34f, -1.2f);
+        //dragonAttackCheckArea.size = new Vector2(9.3f, 4f);
+        dragonAttackCheckArea.offset = new Vector2(0.9f, -1f);
+        dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
         dragonAttackCheckArea.gameObject.SetActive(true);
         while(animcheck < 96)
         {
@@ -452,8 +463,10 @@ public class Dragon : Enemy
         EnemyCollider.offset = new Vector2(-3.3f, -1.6f);
         EnemyCollider.size = new Vector2(7, 3.18f);
         //攻撃チェックArea
-        dragonAttackCheckArea.offset = new Vector2(-3.9f, -1.2f);
-        dragonAttackCheckArea.size = new Vector2(10, 4f);
+        //dragonAttackCheckArea.offset = new Vector2(-3.9f, -1.2f);
+        //dragonAttackCheckArea.size = new Vector2(10, 4f);
+        dragonAttackCheckArea.offset = new Vector2(-4.2f, -1f);
+        dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
         while (animcheck < 104)
         {
             animcheck++;
@@ -462,8 +475,10 @@ public class Dragon : Enemy
         EnemyCollider.offset = new Vector2(-1.7f, -1.6f);
         EnemyCollider.size = new Vector2(6.65f, 3.18f);
         //攻撃チェックArea
-        dragonAttackCheckArea.offset = new Vector2(-4.9f, -1.2f);
-        dragonAttackCheckArea.size = new Vector2(8.2f, 4f);
+        //dragonAttackCheckArea.offset = new Vector2(-4.9f, -1.2f);
+        //dragonAttackCheckArea.size = new Vector2(8.2f, 4f);
+        dragonAttackCheckArea.offset = new Vector2(-3.5f, -1f);
+        dragonAttackCheckArea.size = new Vector2(12.35f, 4.45f);
         while (animcheck < 112)
         {
             animcheck++;
@@ -498,7 +513,8 @@ public class Dragon : Enemy
     {
         AnimationController = 5;        //animator調整（必須）
         animator.SetInteger("AnimationController", AnimationController);
-        
+        isJumpingAttacking = true;
+
         yield return new WaitForEndOfFrame();
         //アニメーションの時間を図って、アニメーションの関数でジャンプした次第、
         //接地するとアニメーションが流される関数に変える
@@ -519,13 +535,44 @@ public class Dragon : Enemy
         JumpAttackAnimCtrl = 1;
         animator.SetInteger("JumpAttackAnimCtrl", JumpAttackAnimCtrl);
         //コライダーと攻撃範囲の調整
-        dragonAttackCheckArea.gameObject.SetActive(false);
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        //dragonAttackCheckArea.gameObject.SetActive(false);
+        dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
+        dragonAttackCheckArea.size = new Vector2(10f, 3.5f);
+        gameObject.layer = LayerMask.NameToLayer("BossEnemy");
         ResetAttackCheckArea();
         //落下後の画面揺れ
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
 
         var animcheck = 0;
+        while (animcheck < 5)
+        {
+            animcheck++;
+            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
+            yield return new WaitForSeconds(0.01f);
+        }
+        dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
+        dragonAttackCheckArea.size = new Vector2(11.5f, 3.5f);
+        while (animcheck < 10)
+        {
+            animcheck++;
+            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
+            yield return new WaitForSeconds(0.01f);
+        }
+        dragonAttackCheckArea.offset = new Vector2(0f, -1f);
+        dragonAttackCheckArea.size = new Vector2(13f, 4.6f);
+        while (animcheck < 15)
+        {
+            animcheck++;
+            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
+            yield return new WaitForSeconds(0.01f);
+        }
+        while (animcheck < 20)
+        {
+            animcheck++;
+            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
+            yield return new WaitForSeconds(0.01f);
+        }
+        dragonAttackCheckArea.gameObject.SetActive(false);
         while (animcheck < 50)
         {
             animcheck++;
@@ -541,6 +588,7 @@ public class Dragon : Enemy
             yield return new WaitForSeconds(0.01f);
         }
 
+        isJumpingAttacking = false;
         //アニメの終わり（必須）
         animator.SetInteger("AnimationController", -1);
         JumpAttackAnimCtrl = -1;
@@ -602,8 +650,10 @@ public class Dragon : Enemy
     public void BossJAJump()
     {
         //コライダー設定
-        dragonAttackCheckArea.offset = new Vector2(0, -1.6f);
-        dragonAttackCheckArea.size = new Vector2(9.6f, 3.18f);
+        //dragonAttackCheckArea.offset = new Vector2(0, -1.6f);
+        //dragonAttackCheckArea.size = new Vector2(9.6f, 3.18f);
+        dragonAttackCheckArea.offset = new Vector2(0.5f, -1.2f);
+        dragonAttackCheckArea.size = new Vector2(12f, 3.9f);
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         dragonAttackCheckArea.gameObject.SetActive(true);
 
@@ -616,7 +666,7 @@ public class Dragon : Enemy
         {
             jumpWidth = _dragonJumpingAttackData.DragonJARightPos.x - transform.position.x;
         }
-
+        BoxColthis.isTrigger = true;
         enemyRb.AddForce(new Vector2(jumpWidth * 0.5f, _dragonJumpingAttackData.DragonJAHeight),ForceMode2D.Impulse);
         //接地する時に次のアニメーションを流せるようにif文の判断要素にする
         JumpAttackAnimCtrl = 2;
@@ -641,7 +691,17 @@ public class Dragon : Enemy
                 //攻撃クールダウンタイム
                 HadAttack = true;
                 StartCoroutine(HadAttackReset());
-                //FlameBracingのダメージとノックバック
+                //SlewAttackingのダメージとノックバック
+                col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 30);
+                col.gameObject.GetComponent<PlayerController>()._Damage(2);
+            }
+
+            if (isJumpingAttacking)
+            {
+                //攻撃クールダウンタイム
+                HadAttack = true;
+                StartCoroutine(HadAttackReset());
+                //SlewAttackingのダメージとノックバック
                 col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 30);
                 col.gameObject.GetComponent<PlayerController>()._Damage(2);
             }
@@ -662,9 +722,9 @@ public class Dragon : Enemy
     protected override void Destroy()
     {
         GameManager.Instance.AddKillEnemy();
-        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss"); 
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         isDestroy = true;
-        //扉の出現を内部で実装するときにここに書けば実装できる
     }
 
     protected override void Gravity()

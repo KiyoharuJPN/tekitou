@@ -65,7 +65,7 @@ MonoBehaviour:
     power: 1
     knockBackValue: 1
     angle: 45
-    num: 5
+    num: 10
     type: 0
     speed: 15
   - id: 5
@@ -76,7 +76,7 @@ MonoBehaviour:
     power: 1
     knockBackValue: 1
     angle: 60
-    num: 8
+    num: 13
     type: 0
     speed: 15
   - id: 6
@@ -87,7 +87,7 @@ MonoBehaviour:
     power: 1
     knockBackValue: 3
     angle: 30
-    num: 6
+    num: 11
     type: 0
     speed: 15
   - id: 7
@@ -98,7 +98,7 @@ MonoBehaviour:
     power: 1
     knockBackValue: 2
     angle: 50
-    num: 5
+    num: 10
     type: 1
     speed: 15
   - id: 8
@@ -120,7 +120,7 @@ MonoBehaviour:
     power: 1
     knockBackValue: 1
     angle: 45
-    num: 5
+    num: 10
     type: 1
     speed: 15
   - id: 10
@@ -131,7 +131,7 @@ MonoBehaviour:
     power: 1
     knockBackValue: 1
     angle: 80
-    num: 6
+    num: 11
     type: 0
     speed: 15
   - id: 11
@@ -142,7 +142,7 @@ MonoBehaviour:
     power: 1
     knockBackValue: 3
     angle: 30
-    num: 8
+    num: 13
     type: 0
     speed: 15
   - id: 12
