@@ -57,7 +57,9 @@ namespace PBF
             internal float buffTimeDown;
             [SerializeField, Header("バフ最大時間")]
             internal float maxBuffTime;
-            [SerializeField, Header("バフ最大時間")]
+            [SerializeField, Header("スピード")]
+            internal float slashingSpeed;
+            [SerializeField, Header("斬撃Prefab")]
             internal GameObject slashingObj;
             //スピードアップバフ獲得回数
             internal int getBuffCount;

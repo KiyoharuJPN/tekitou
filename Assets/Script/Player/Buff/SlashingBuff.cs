@@ -42,7 +42,7 @@ public class SlashingBuff : MonoBehaviour
         timeBar.GetComponent<Canvas>().enabled = true;
         timeBarImg = timeBar.transform.Find("Bar").gameObject.GetComponent<Image>();
 
-        waveSpeed = PlayerBuff.Instance.GetPlayerMoveData() * 2;
+        waveSpeed = slashing.slashingSpeed;
 
         if (!gameObject.GetComponent<InvinciblBuff>())
         {
@@ -55,7 +55,6 @@ public class SlashingBuff : MonoBehaviour
     //斬撃生成メソッド
     public void Slashing(SlashingType type, GameObject player)
     {
-        GameObject obj;
         switch (type)
         {
             case SlashingType.sideAttack_Right:
@@ -98,6 +97,10 @@ public class SlashingBuff : MonoBehaviour
         float addTime = slashing.buffSetTime - slashing.buffTimeDown * count;
         buffTime += addTime;
         time += addTime;
+
+        //バー再セット
+        timeBarImg.fillAmount = 1;
+        timeBarImg.fillAmount -= 1 - (time / buffTime);
     }
 
     IEnumerator SlashingMode()
