@@ -284,7 +284,11 @@ MonoBehaviour:
   moveHeightForce: 3
   moveWidthForce: 3
   AttackHeight: 8
-  summonSlime: {fileID: 1370193731701165691, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+  summonSlime:
+  - {fileID: 891865252728703091, guid: 687f6cef0869ab742946f171350ba6d1, type: 3}
+  - {fileID: 1370193731701165691, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+  - {fileID: 6186496179467629056, guid: 5450d1aa9cee04a478c656cb07844143, type: 3}
+  - {fileID: 1732391209181611224, guid: f86af757b9b1adf49afd5e4d372fb489, type: 3}
   wallCheck: {fileID: 7294653932298096155}
   attackCheckArea: {fileID: 85724219}
   knockbackAttackCircle: {fileID: 3563092138790404470}

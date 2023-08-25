@@ -6,7 +6,8 @@ public class KingSlime : Enemy
 {
     [Header("à⁄ìÆÇ∑ÇÈéûÇÃçÇÇ≥Ç∆ãóó£")]
     public float moveHeightForce, moveWidthForce, AttackHeight = 8;
-    public GameObject summonSlime, wallCheck;
+    public GameObject[] summonSlime;
+    public GameObject wallCheck;
     
     public BoxCollider2D attackCheckArea;
     public CircleCollider2D knockbackAttackCircle;
@@ -268,17 +269,23 @@ public class KingSlime : Enemy
         if (playerObj.transform.position.x < gameObject.transform.position.x && movingWidth > 0) TurnAround();
         var summonPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 2.5f, gameObject.transform.position.z);
         yield return new WaitForSeconds(0.333f);
-        var newSlime1 = Instantiate(summonSlime, summonPos, Quaternion.identity);
+
+        var Summonslm = GetSummonProbability();
+        var newSlime1 = Instantiate(summonSlime[Summonslm], summonPos, Quaternion.identity);
         if (transform.localScale.x < 0) newSlime1.GetComponent<Slime>().SummonSlimeTurn();
         newSlime1.GetComponent<Slime>().SetIsMoving(false);
         newSlime1.GetComponent<Rigidbody2D>().AddForce(new Vector2(summonPosX, summonPosY),ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.335f);
-        var newSlime2 = Instantiate(summonSlime, summonPos, Quaternion.identity);
+
+        Summonslm = GetSummonProbability();
+        var newSlime2 = Instantiate(summonSlime[Summonslm], summonPos, Quaternion.identity);
         if (transform.localScale.x < 0) newSlime2.GetComponent<Slime>().SummonSlimeTurn();
         newSlime2.GetComponent<Slime>().SetIsMoving(false);
         newSlime2.GetComponent<Rigidbody2D>().AddForce(new Vector2(summonPosX + 1, summonPosY), ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.335f);
-        var newSlime3 = Instantiate(summonSlime, summonPos, Quaternion.identity);
+
+        Summonslm = GetSummonProbability();
+        var newSlime3 = Instantiate(summonSlime[Summonslm], summonPos, Quaternion.identity);
         if (transform.localScale.x < 0) newSlime3.GetComponent<Slime>().SummonSlimeTurn();
         newSlime3.GetComponent<Slime>().SetIsMoving(false);
         newSlime3.GetComponent<Rigidbody2D>().AddForce(new Vector2(summonPosX + 2, summonPosY), ForceMode2D.Impulse);
@@ -533,6 +540,30 @@ public class KingSlime : Enemy
         {
             movingCheck = 0;
             KSmovingCheck = true;
+        }
+    }
+
+    int GetSummonProbability()
+    {
+        var probability = (int)UnityEngine.Random.Range(0, 99) % 9;
+
+        switch (probability)
+        {
+            case 0:
+            case 1:
+            case 2:
+            default:
+                return 0;
+            case 3:
+            case 4:
+            case 5:
+                return 1;
+            case 6:
+            case 7:
+            case 8:
+                return 2;
+            case 9:
+                return 3;
         }
     }
 }
