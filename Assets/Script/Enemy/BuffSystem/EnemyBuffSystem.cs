@@ -99,8 +99,15 @@ public class EnemyBuffSystem : MonoBehaviour
             return;
         }
 
+        //if (EXAttack)
+        //{
+        //    BuffAttackCheck = BuffAttackCheck - 7;
+        //    EXAttack = false;
+        //}
+
         //カウントを減らして表示する
         BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
+
         if(BuffAttackCheck < 0)
         {
             if (!checkBlowingUp)
@@ -117,12 +124,22 @@ public class EnemyBuffSystem : MonoBehaviour
                 checkBlowingUp = false;
             }
 
-            Debug.Log("Enemy Dead");
+            //Debug.Log("Enemy Dead");
             _Destroy();
         }
 
     }
 
+    //エクストラスキル当たられたときに追撃回数を指定回数減らす
+    public void SetEXAttackDecrease(int exa)
+    {
+        //EXAttack = exa;
+        BuffAttackCheck = BuffAttackCheck - exa;
+    }
+    //public bool GetEXAttack()
+    //{
+    //    return EXAttack;
+    //}
 
     //BuffTypeを外から取得
     public SetBuffType GetBuffType()
@@ -251,7 +268,7 @@ public class EnemyBuffSystem : MonoBehaviour
     {
         if (BuffAttackCheckText != null)
         {
-            Destroy(BuffAttackCheckText);
+            _Destroy();
         }
     }
 }

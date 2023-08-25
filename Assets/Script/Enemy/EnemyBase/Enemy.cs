@@ -213,7 +213,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void Damage(float power, Skill skill)
+    public virtual void Damage(float power, Skill skill, bool ExSkill = false)
     {
         //ヒットストップ
         StartCoroutine(HitStop(power, skill));
@@ -223,7 +223,8 @@ public class Enemy : MonoBehaviour
         {
             if (_EnemyBuff != null)
             {
-                if(_EnemyBuff.GetBuffAttackCheckCount() > 0)
+                if (ExSkill) _EnemyBuff.SetEXAttackDecrease(7);
+                if (_EnemyBuff.GetBuffAttackCheckCount() > 0)
                 {
                     _EnemyBuff.ShowAttackChecking();
                     SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
@@ -234,11 +235,11 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
+                    _EnemyBuff.ShowAttackChecking();
                     SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
                     GameObject obj = Instantiate(_EnemyBuff.GetBuffEffect(), new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
                     obj.GetComponent<SpriteRenderer>().color = _EnemyBuff.GetColorByType();
                     GameManager.Instance.SetBuff((int)_EnemyBuff.GetBuffType());
-                    _EnemyBuff.ShowAttackChecking();
 
                     if (_isHitStoped)
                     {
@@ -569,7 +570,7 @@ public class Enemy : MonoBehaviour
             animator.speed = 1;
         }
         isPlayerExAttack = false;
-        Damage(powar, null);
+        Damage(powar, null, true);
     }
 
     //停止処理解除
