@@ -36,7 +36,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1560115675992989682}
-  - {fileID: 8236160013820884808}
   - {fileID: 8236160014182726316}
   - {fileID: 1820371032683682636}
   m_Father: {fileID: 0}
@@ -173,7 +172,7 @@ MonoBehaviour:
     Duration: 2
     Strength: 0.5
   waitSecond: 1
-  WallCheck: {fileID: 8236160013820884809}
+  WallCheck: {fileID: 0}
   HPBar: {fileID: 78672566138135562}
 --- !u!114 &8236160012760509622
 MonoBehaviour:
@@ -200,8 +199,8 @@ MonoBehaviour:
     DragonJALeftPos: {x: 297, y: 29.7}
     DragonJARightPos: {x: 311, y: 29.7}
     StoneHeight: 13
-    StoneMaxLeftPos: 297
-    StoneMaxRightPos: 311
+    StoneMaxLeftPos: 296
+    StoneMaxRightPos: 316
     StoneQuantity: 3
     FallSpeed: 5
   JumpAttackStone: {fileID: 6242594049170678304, guid: fd84ca715b3cefb4cb7fe5875b853a04, type: 3}
@@ -231,64 +230,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &8236160013820884809
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8236160013820884808}
-  - component: {fileID: 8236160013820884811}
-  m_Layer: 0
-  m_Name: WallCheckArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &8236160013820884808
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8236160013820884809}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.814, y: -1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8236160012760509623}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8236160013820884811
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8236160013820884809}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 3.2}
-  m_EdgeRadius: 0
 --- !u!1 &8236160014182726317
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +261,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8236160012760509623}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8236160014182726318
 BoxCollider2D:
@@ -335,7 +276,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -9, y: -1}
+  m_Offset: {x: -6.64, y: -2.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -346,7 +287,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.75, y: 4.45}
+  m_Size: {x: 4.3, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &8236160014182726319
 MonoBehaviour:
@@ -381,7 +322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2489340896893339500, guid: 5fe267218d22a8d499ed8cc13cf8cd4e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2489340896893339500, guid: 5fe267218d22a8d499ed8cc13cf8cd4e, type: 3}
       propertyPath: m_LocalPosition.x

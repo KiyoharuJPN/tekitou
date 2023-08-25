@@ -49,6 +49,8 @@ public class Dragon : Enemy
     public DragonJumpingAttackData _dragonJumpingAttackData;
     public GameObject JumpAttackStone;
     GameObject[] DragonFallStone;
+    float[] subDistanceRdm;
+
 
     // パタンシステム関連
     enum EnemyPatternSettings
@@ -85,6 +87,7 @@ public class Dragon : Enemy
         if (_dragonJumpingAttackData.StoneMaxRightPos == 0) _dragonJumpingAttackData.StoneMaxRightPos = _dragonJumpingAttackData.DragonJARightPos.x;
         //必要だけの場所をとる
         DragonFallStone = new GameObject[(int)_dragonJumpingAttackData.StoneQuantity];
+        subDistanceRdm = new float[(int)_dragonJumpingAttackData.StoneQuantity];
 
         //カメラ揺れ
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
@@ -219,7 +222,7 @@ public class Dragon : Enemy
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        //Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
         //アニメの終わり（必須）
         animator.SetInteger("AnimationController", -1);
@@ -244,7 +247,7 @@ public class Dragon : Enemy
             transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
             yield return new WaitForSeconds(0.01f);
         }
-        Debug.Log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        //Debug.Log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 
         animator.SetInteger("AnimationController", -1);
         NotInAnim = true;
@@ -275,7 +278,7 @@ public class Dragon : Enemy
             animator.SetInteger("AnimationController", AnimationController);
 
             yield return new WaitForSeconds(0.3f);
-            Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+            //Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         }
 
         animator.SetInteger("AnimationController", -1);
@@ -579,7 +582,6 @@ public class Dragon : Enemy
             transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
             yield return new WaitForSeconds(0.01f);
         }
-
         CreateStoneAttack();
 
         while (animcheck < 60)
@@ -603,7 +605,7 @@ public class Dragon : Enemy
     }
 
     //外部関数
-    public override void Damage(float power, Skill skill)
+    public override void Damage(float power, Skill skill, bool ExSkill = false)
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         hp -= power;
@@ -658,7 +660,7 @@ public class Dragon : Enemy
         dragonAttackCheckArea.gameObject.SetActive(true);
 
         //ドラゴンジャンプ
-        float jumpWidth = 1;
+        var jumpWidth = 1.0f;
         if (transform.localScale.x > 0f)
         {
             jumpWidth = _dragonJumpingAttackData.DragonJALeftPos.x - transform.position.x;
@@ -779,11 +781,26 @@ public class Dragon : Enemy
     void CreateStoneAttack()
     {
         var Distance = _dragonJumpingAttackData.StoneMaxRightPos - _dragonJumpingAttackData.StoneMaxLeftPos;
-        var subDistance = Distance / (_dragonJumpingAttackData.StoneQuantity + 1);
+        var subDistance = Distance / (_dragonJumpingAttackData.StoneQuantity + 1) + 4f;
+        //Debug.Log(subDistance+"\n"+Distance);
+        for(int i =0; i <= _dragonJumpingAttackData.StoneQuantity - 1; i++)
+        {
+            if(i == 0)
+            {
+                subDistanceRdm[i] = Random.Range(0f, subDistance);
+            }
+            else
+            {
+                subDistanceRdm[i] = Random.Range(2.5f, subDistance);
+            }
+        }
+        subDistance = 0;
         for (int i = 1; i <= _dragonJumpingAttackData.StoneQuantity; i++)
         {
+            subDistance += subDistanceRdm[i-1];
+            if(subDistance > Distance) { subDistance = Distance; }
             DragonFallStone[i - 1] = ObjectPool.Instance.GetObject(JumpAttackStone);
-            DragonFallStone[i - 1].transform.position = new Vector2(_dragonJumpingAttackData.StoneMaxLeftPos + (i * subDistance), gameObject.transform.position.y + _dragonJumpingAttackData.StoneHeight);
+            DragonFallStone[i - 1].transform.position = new Vector2(_dragonJumpingAttackData.StoneMaxLeftPos + subDistance, gameObject.transform.position.y + _dragonJumpingAttackData.StoneHeight);
             DragonFallStone[i - 1].GetComponent<DragonFallStone>().SetSpeed(_dragonJumpingAttackData.FallSpeed);
         }
     }
