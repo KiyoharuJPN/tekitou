@@ -73,7 +73,7 @@ public class PlayerBuff : MonoBehaviour
             !player.gameObject.GetComponent<InvinciblBuff>())
         {
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().GlowColor = new Color(0.95f, 0.53f, 0, 1);
+            player.GetComponent<SpriteGlow.SpriteGlowEffect>().GlowColor = new Color(1f, 0.05f, 0, 1);
             StartCoroutine(ColorChenge());
         }
     }
