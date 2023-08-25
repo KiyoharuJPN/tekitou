@@ -68,8 +68,8 @@ public class PlayerBuff : MonoBehaviour
         }
         exGage.getBuffCount++;
 
-        if(!player.gameObject.GetComponent<SpeedUp>() || 
-            !player.gameObject.GetComponent<SlashingBuff>() || 
+        if(!player.gameObject.GetComponent<SpeedUp>() && 
+            !player.gameObject.GetComponent<SlashingBuff>() && 
             !player.gameObject.GetComponent<InvinciblBuff>())
         {
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;

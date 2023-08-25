@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5087747834652861654}
   m_Layer: 3
   m_Name: BoxColl
-  m_TagString: PassStage
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7847591705455277042}
   m_Layer: 3
   m_Name: Gimmick_STF 1
-  m_TagString: PassStage
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
