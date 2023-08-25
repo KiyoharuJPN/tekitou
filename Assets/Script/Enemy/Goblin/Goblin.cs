@@ -74,7 +74,7 @@ public class Goblin : Enemy
 
         //UŒ‚‚·‚é‚Æ‚«‚Ì“®‚«
         int i = 0;
-        while (i < 10)
+        while (i < 25)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -83,27 +83,27 @@ public class Goblin : Enemy
         GoblinAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-.55f, 1.05f);
         GoblinAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.4f, 1f);
         GoblinAttack.SetActive(true);
-        while (i < 15)
+        while (i < 32)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         GoblinAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-.8f, .3f);
         GoblinAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.7f, 2.3f);
-        while (i < 20)
+        while (i < 37)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         GoblinAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-1.05f, -0.1f);
         GoblinAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.1f, 1.6f);
-        while (i < 21)
+        while (i < 38)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         GoblinAttack.SetActive(false);
-        while (i < 30)
+        while (i < 57)
         {
             i++;
             yield return new WaitForSeconds(0.01f);

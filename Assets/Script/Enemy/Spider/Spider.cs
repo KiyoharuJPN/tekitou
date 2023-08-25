@@ -53,20 +53,20 @@ public class Spider : Enemy
     IEnumerator SpiderAttacking()
     {
         var i = 0;
-        while (i < 15)
+        while (i < 25)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         SpiderAttack.SetActive(true);
         SoundManager.Instance.PlaySE(SESoundData.SE.ForefootHeavyAttack);
-        while(i < 22)
+        while(i < 32)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         SpiderAttack.SetActive(false);
-        while (i < 60)
+        while (i < 70)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
