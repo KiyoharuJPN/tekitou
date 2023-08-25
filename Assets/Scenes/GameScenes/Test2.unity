@@ -7748,21 +7748,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1214563233}
     m_Modifications:
-    - target: {fileID: 8236160012760509608, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 12.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160012760509609, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: WallCheck
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509620, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_Name
       value: Dragon
       objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509622, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: Platformname
-      value: floorCollider (3)
+      propertyPath: _dragonJumpingAttackData.FallSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509623, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_RootOrder
@@ -7807,26 +7799,6 @@ PrefabInstance:
     - target: {fileID: 8236160012760509623, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160014182726317, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160014182726318, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: m_Size.x
-      value: 4.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160014182726318, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160014182726318, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: m_Offset.x
-      value: -6.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 8236160014182726318, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
-      propertyPath: m_Offset.y
-      value: -2.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
@@ -16881,7 +16853,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 1, y: 1, z: 0}
   m_MaxChunkCount: 16
@@ -19535,7 +19507,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.050000012, y: 0, z: 0}
   m_MaxChunkCount: 16
