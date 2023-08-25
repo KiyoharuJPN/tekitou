@@ -8712,18 +8712,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3261967107540972044, guid: eda301c8281947d4eaeeceac652897c1, type: 3}
-      propertyPath: stopState.shakNum
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261967107540972044, guid: eda301c8281947d4eaeeceac652897c1, type: 3}
-      propertyPath: stopState.shakTime
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261967107540972044, guid: eda301c8281947d4eaeeceac652897c1, type: 3}
-      propertyPath: stopState.shakPowar
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3261967107540972045, guid: eda301c8281947d4eaeeceac652897c1, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -108027,11 +108015,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1342283853880011412, guid: c5ba7940703d16a4a98e251f8cbf61dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 263.6
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: 1342283853880011412, guid: c5ba7940703d16a4a98e251f8cbf61dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -27.1
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1342283853880011412, guid: c5ba7940703d16a4a98e251f8cbf61dc, type: 3}
       propertyPath: m_LocalPosition.z

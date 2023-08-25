@@ -49,13 +49,16 @@ MonoBehaviour:
     setBuffNum: 20
     setBuffDown: 5
   speed:
-    setBuffNum: 5
-    setBuffDown: 1
+    setBuffNum: 2
+    setBuffDown: 0.5
+    maxBuffNum: 10
+    attackSpeedNum: 0.1
   slashing:
     firstSetTime: 30
     buffSetTime: 20
-    buffTimeDown: 0
+    buffTimeDown: 2
     maxBuffTime: 0
+    slashingSpeed: 20
     slashingObj: {fileID: 3530464263404757012, guid: 765956a0ebd94f44088ad40beb2a73aa, type: 3}
   invincible:
     firstSetTime: 10

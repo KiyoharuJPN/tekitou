@@ -50,7 +50,7 @@ MonoBehaviour:
   effectInterval: 0.5
   deathEffect: {fileID: 9154329713119241770, guid: 8a94318f973429f439255977a869362d, type: 3}
   stopState:
-    shakTime: 0.1
-    shakPowar: 0.8
-    shakNum: 30
+    shakTime: 0.03
+    shakPowar: 2
+    shakNum: 40
     shakRand: 90
