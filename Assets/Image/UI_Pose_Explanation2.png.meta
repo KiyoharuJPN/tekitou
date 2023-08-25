@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb21f8afb34a18f42b22ba907387b83e
+guid: 306c45e9844473d43a42e592537d10ef
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,28 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Pose_Explanation_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 120
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41dedc9658f57a74c99637a8c6a3bf94
-      internalID: 936732849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Pose_Explanation_1
+      name: UI_Pose_Explanation2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a9beab7562f15d4ab39ff1e4080d1f6
-      internalID: 455468319
+      spriteID: a0c178facdb9efc4a9d74fb7bb492e35
+      internalID: 165035543
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Pose_Explanation_2
+      name: UI_Pose_Explanation2_1
       rect:
         serializedVersion: 2
         x: 0
@@ -160,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5874da7c4fd597b429801cbf727b0958
-      internalID: -1874629280
+      spriteID: c876f8d9a9157b94583f2c20f6317454
+      internalID: 2145789984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Pose_Explanation_3
+      name: UI_Pose_Explanation2_2
       rect:
         serializedVersion: 2
         x: 0
@@ -181,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9066752cd6dc35f49a65f48ec41a695a
-      internalID: -2103284719
+      spriteID: 059773d0afcb29a47bc45337c801d3b2
+      internalID: -2042431907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Pose_Explanation_4
+      name: UI_Pose_Explanation2_3
       rect:
         serializedVersion: 2
         x: 0
@@ -202,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4f1c772e0d050f47a960f833f9f4009
-      internalID: 485038028
+      spriteID: 8c0ddae6bdc938448b06cb6ead57967d
+      internalID: 457735161
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Pose_Explanation_5
+      name: UI_Pose_Explanation2_4
       rect:
         serializedVersion: 2
         x: 0
@@ -223,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 486c4f1f7a753624caa48ea7ebd5be7b
-      internalID: 5452321
+      spriteID: 0c257931c8a986c4b9833db527bff98a
+      internalID: -1805147287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Pose_Explanation_6
+      name: UI_Pose_Explanation2_5
       rect:
         serializedVersion: 2
         x: 0
@@ -244,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80e436c39224a2b4d80575e77dde062f
-      internalID: -1723585897
+      spriteID: 8b4357308b164854380eda07ace77a30
+      internalID: -1615543859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Pose_Explanation_7
+      name: UI_Pose_Explanation2_6
       rect:
         serializedVersion: 2
         x: 0
@@ -265,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2eb04f1fa3ffcf47bfe8217e01f04d0
-      internalID: -1892511922
+      spriteID: acf3ec8e89bd6234b80486e05a327065
+      internalID: -442726944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Pose_Explanation_8
+      name: UI_Pose_Explanation2_7
       rect:
         serializedVersion: 2
         x: 0
@@ -286,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2ba8f5db16a67d4489f289ea5985f54
-      internalID: -2117386630
+      spriteID: 5c2d5823e4baf664d99c029e0c881904
+      internalID: -1356577338
       vertices: []
       indices: 
       edges: []
@@ -303,15 +282,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_Pose_Explanation_6: -1723585897
-      UI_Pose_Explanation_2: -1874629280
-      UI_Pose_Explanation_3: -2103284719
-      UI_Pose_Explanation_7: -1892511922
-      UI_Pose_Explanation_4: 485038028
-      UI_Pose_Explanation_5: 5452321
-      UI_Pose_Explanation_0: 936732849
-      UI_Pose_Explanation_8: -2117386630
-      UI_Pose_Explanation_1: 455468319
+      UI_Pose_Explanation2_4: -1805147287
+      UI_Pose_Explanation2_5: -1615543859
+      UI_Pose_Explanation2_1: 2145789984
+      UI_Pose_Explanation2_0: 165035543
+      UI_Pose_Explanation2_2: -2042431907
+      UI_Pose_Explanation2_7: -1356577338
+      UI_Pose_Explanation2_3: 457735161
+      UI_Pose_Explanation2_6: -442726944
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

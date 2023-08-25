@@ -122,12 +122,12 @@ public class Player_Jump : MonoBehaviour
             jumpPos = this.transform.position.y;
             isjump = true;
             player.playerSE._JumpSE();
+
+            player.animator.Play("Hero_anim_Jump_1");
         }
         //ジャンプ2段目
         else if(canSecondJump)
         {
-
-            Debug.Log("ダブルジャンプボタン入力");
             player.animator.SetTrigger("IsSecondJump");
             canSecondJump = false;
             isSecondJump = true;
@@ -137,6 +137,7 @@ public class Player_Jump : MonoBehaviour
             player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
             jumpTime = 0;
             isjump = true;
+            player._JumpEffect();
         }
     }
 

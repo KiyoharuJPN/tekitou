@@ -3824,6 +3824,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1855558371, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: groundCheckObj
+      value: 
+      objectReference: {fileID: 1964078493}
     - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: shake
       value: 
@@ -106084,6 +106088,11 @@ MonoBehaviour:
   - {fileID: 1072876772}
   - {fileID: 1264508475}
   - {fileID: 1835817038}
+--- !u!1 &1964078493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1855558368, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+  m_PrefabInstance: {fileID: 574533324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1984412178
 PrefabInstance:
   m_ObjectHideFlags: 0
