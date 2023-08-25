@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - FadeImage
   - PauseMenu
+  - PassStage
   layers:
   - Default
   - TransparentFX

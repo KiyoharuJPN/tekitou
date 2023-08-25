@@ -13,6 +13,9 @@ public class Player_IsGround : MonoBehaviour
     PlayerController player;
     Player_Jump jumpData;
 
+    [SerializeField]
+    GameObject groundCheckObj;
+
     void Start()
     {
         player = HERO.GetComponent<PlayerController>();
@@ -22,7 +25,23 @@ public class Player_IsGround : MonoBehaviour
     //’…’n‚Ì”»’è
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Stage") && !player.isUpAttack)
+        
+        if (collision.CompareTag("PassStage"))
+        {
+            StageLanding(collision);
+        }
+        else if(collision.CompareTag("Stage"))
+        {
+            Debug.Log("Stage");
+            StageLanding(collision);
+        }
+        
+    }
+
+    //stage’…’nˆ—
+    void StageLanding(Collider2D collision)
+    {
+        if ((collision.CompareTag("Stage") || collision.CompareTag("PassStage")) && !player.isUpAttack)
         {
             if (player.isFalling == true)
             {

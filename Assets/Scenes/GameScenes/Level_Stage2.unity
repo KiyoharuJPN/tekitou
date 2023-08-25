@@ -574,6 +574,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
 --- !u!4 &40777891 stripped
@@ -760,6 +768,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!4 &61656815 stripped
@@ -836,6 +856,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -1361,6 +1393,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!1001 &244847892
@@ -1418,6 +1458,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!4 &244847893 stripped
@@ -1432,6 +1484,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -2162,6 +2226,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin
@@ -2266,6 +2342,18 @@ PrefabInstance:
     - target: {fileID: 781626350735882293, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
@@ -2457,6 +2545,18 @@ PrefabInstance:
     - target: {fileID: 781626350735882293, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
@@ -2937,6 +3037,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -3061,6 +3173,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin (2)
@@ -3502,6 +3626,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin
@@ -3688,6 +3824,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1855558371, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: groundCheckObj
+      value: 
+      objectReference: {fileID: 1964078493}
     - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: shake
       value: 
@@ -6291,6 +6431,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!4 &580071100 stripped
@@ -6795,6 +6947,14 @@ PrefabInstance:
     - target: {fileID: 407148583342513145, guid: e38628aba5447854e926292fd1056f4a, type: 3}
       propertyPath: m_Name
       value: Wizard (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
@@ -7309,6 +7469,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
 --- !u!4 &815111795 stripped
@@ -7686,6 +7854,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -8086,6 +8266,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!4 &902104203 stripped
@@ -8453,6 +8645,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!1001 &935018338
@@ -8509,6 +8713,18 @@ PrefabInstance:
     - target: {fileID: 781626350735882293, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
@@ -9001,6 +9217,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -9115,6 +9343,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
 --- !u!4 &977910400 stripped
@@ -9176,6 +9412,18 @@ PrefabInstance:
     - target: {fileID: 781626350735882293, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
@@ -9375,6 +9623,14 @@ PrefabInstance:
     - target: {fileID: 407148583342513145, guid: e38628aba5447854e926292fd1056f4a, type: 3}
       propertyPath: m_Name
       value: Wizard (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
@@ -10026,6 +10282,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -10481,6 +10749,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!1001 &1122681880
@@ -10614,6 +10894,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -11813,6 +12105,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!1001 &1302224388
@@ -12521,6 +12825,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
 --- !u!4 &1333793244 stripped
@@ -12645,6 +12957,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!1001 &1363090714
@@ -12701,6 +13025,18 @@ PrefabInstance:
     - target: {fileID: 781626350735882293, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
@@ -13413,6 +13749,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -14840,6 +15188,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard
       objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
 --- !u!4 &1724756417 stripped
@@ -14901,6 +15257,14 @@ PrefabInstance:
     - target: {fileID: 407148583342513145, guid: e38628aba5447854e926292fd1056f4a, type: 3}
       propertyPath: m_Name
       value: Wizard (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}
@@ -15074,6 +15438,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin (1)
@@ -15374,6 +15750,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!4 &1769561151 stripped
@@ -15635,6 +16023,18 @@ PrefabInstance:
     - target: {fileID: 781626350735882293, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
@@ -16029,6 +16429,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4329261956850845547, guid: 17e891d5e90110f41bda6428fc559427, type: 3}
   m_PrefabInstance: {fileID: 1835817036}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1835817038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 647448736826333003, guid: 17e891d5e90110f41bda6428fc559427, type: 3}
+  m_PrefabInstance: {fileID: 1835817036}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1844193877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16083,6 +16488,18 @@ PrefabInstance:
     - target: {fileID: 781626350735882293, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
@@ -105550,6 +105967,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: buffType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052031675093040574, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b98642f124868e4585629ce7a1c00a8, type: 3}
 --- !u!1001 &1957283807
@@ -105662,6 +106091,12 @@ MonoBehaviour:
   continuePoint:
   - {fileID: 1072876772}
   - {fileID: 1264508475}
+  - {fileID: 1835817038}
+--- !u!1 &1964078493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1855558368, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+  m_PrefabInstance: {fileID: 574533324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1984412178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106170,6 +106605,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771250227092601614, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6548554273560688661, guid: a8a9515ddb3ac3e4d9c89758c0683f82, type: 3}
       propertyPath: m_Name
       value: Goblin (3)
@@ -106531,6 +106978,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -106717,6 +107176,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1694314064}
     m_Modifications:
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: buffType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: intervalPos.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619508036307039069, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
+      propertyPath: initialBuffAttackCheck
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6308638243396857252, guid: e155662fbc3a3b8429e55bcdf11a6146, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -106826,6 +107297,14 @@ PrefabInstance:
     - target: {fileID: 407148583342513145, guid: e38628aba5447854e926292fd1056f4a, type: 3}
       propertyPath: m_Name
       value: Wizard (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: buffType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5638212681772807801, guid: e38628aba5447854e926292fd1056f4a, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38628aba5447854e926292fd1056f4a, type: 3}

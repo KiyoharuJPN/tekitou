@@ -72,6 +72,8 @@ public class Enemy : MonoBehaviour
     //Buff関連
     EnemyBuffSystem _EnemyBuff;
 
+    //ヒットストップステータス
+    EnemyGeneratar.HitStopState stopState;
     //ヒットストップバフ
     bool _isDestroyed = false,_isHitStoped = false;
 
@@ -105,6 +107,8 @@ public class Enemy : MonoBehaviour
         {
             _EnemyBuff = GetComponentInChildren<EnemyBuffSystem>();
         }
+
+        stopState = EnemyGeneratar.instance.stopState;
     }
 
     virtual protected void OnColEnter2D(Collider2D col)
@@ -291,7 +295,7 @@ public class Enemy : MonoBehaviour
         Vector3 initialPos = this.transform.position;//初期位置保存
         Time.timeScale = 0;
 
-        yield return transform.DOShakePosition(power * 0.1f, 0.8f, 30, 90)
+        yield return transform.DOShakePosition( power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
             .SetUpdate(true)
             .OnComplete(() => 
             {

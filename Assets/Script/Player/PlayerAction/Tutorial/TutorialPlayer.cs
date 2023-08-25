@@ -28,6 +28,8 @@ public class TutorialPlayer : PlayerController
         rb = GetComponent<Rigidbody2D>();
         jump = GetComponent<Player_Jump>();
         hpparam = GameObject.Find("UI").GetComponentInChildren<HPparam>();
+
+        animator.SetFloat("Speed", animSpeed);
     }
 
     void Update()

@@ -16,6 +16,22 @@ public class EnemyGeneratar : MonoBehaviour
     public GameObject deathEffect;
     public static EnemyGeneratar instance;
 
+    [System.Serializable]
+    public struct HitStopState
+    {
+        [SerializeField, Header("—h‚ê‚ÌŠÔ")]
+        public float shakTime;
+        [SerializeField, Header("—h‚ê‚Ì‹­‚³")]
+        public float shakPowar;
+        [SerializeField, Header("U“®”")]
+        public int shakNum;
+        [SerializeField, Header("—h‚ê‚Ìƒ‰ƒ“ƒ_ƒ€«")]
+        public int shakRand;
+    }
+
+    [SerializeField, Header("ƒqƒbƒgƒXƒgƒbƒv")]
+    public HitStopState stopState;
+
     private void Awake()
     {
         if (instance == null)

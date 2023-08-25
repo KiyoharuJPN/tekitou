@@ -47,7 +47,6 @@ public class WayPoint : MonoBehaviour
                 SceneData.Instance.wayPoint_2 = true;
             }
             SoundManager.Instance.PlaySE(SESoundData.SE.HalfPoint);
-            SoundManager.Instance.PlaySE(SESoundData.SE.GetHeart);
             collision.GetComponent<PlayerController>()._Heel(4);
             this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             this.enabled = false;
