@@ -464,6 +464,8 @@ public class KingSlime : Enemy
 
     public override void Damage(float power, Skill skill, bool ExSkill = false)
     {
+        //ヒットストップ
+        StartCoroutine(HitStop(power, skill));
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         hp -= power;
         //HPゲージを使用しているかどうか

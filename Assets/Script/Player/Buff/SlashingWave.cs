@@ -16,7 +16,9 @@ public class SlashingWave : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || 
+            collision.gameObject.layer == LayerMask.NameToLayer("PinBallEnemy") ||
+            collision.gameObject.layer == LayerMask.NameToLayer("BossEnemy"))
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
             player._Attack(collision, 1, skill);

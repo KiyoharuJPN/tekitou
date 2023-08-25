@@ -15,7 +15,7 @@ public class SpeedUp : MonoBehaviour
     void Start()
     {
         speed = PlayerBuff.Instance.GetSpeed();
-        player = gameObject.GetComponent<PlayerController>();
+        player = this.gameObject.GetComponent<PlayerController>();
         gameObject.GetComponent<StaticAfterImageEffect2DPlayer>().enabled = true;
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
@@ -39,7 +39,7 @@ public class SpeedUp : MonoBehaviour
             speed.setBuffNum -= speed.setBuffDown;
         }
 
-        //ˆÚ“®UŒ‚‘‰Á
+        //ˆÚ“®‘‰Á
         player.moveData.firstSpeed += speed.setBuffNum;
         player.moveData.dashSpeed += speed.setBuffNum;
         player.moveData.maxSpeed += speed.setBuffNum;

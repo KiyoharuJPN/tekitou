@@ -730,8 +730,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys:
-  - {fileID: 0}
   isPlayer: 0
 --- !u!61 &62941443
 BoxCollider2D:
@@ -1724,8 +1722,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys:
-  - {fileID: 0}
   isPlayer: 0
 --- !u!61 &194167353
 BoxCollider2D:
@@ -2614,8 +2610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys:
-  - {fileID: 0}
   isPlayer: 0
 --- !u!61 &303818753
 BoxCollider2D:
@@ -3753,7 +3747,7 @@ GameObject:
   - component: {fileID: 486168381}
   - component: {fileID: 486168383}
   - component: {fileID: 486168382}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4852,12 +4846,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isPlayer: 0
 --- !u!61 &531769754
 BoxCollider2D:
@@ -5655,7 +5643,7 @@ GameObject:
   - component: {fileID: 619232084}
   - component: {fileID: 619232086}
   - component: {fileID: 619232085}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6822,7 +6810,7 @@ GameObject:
   - component: {fileID: 784100887}
   - component: {fileID: 784100888}
   - component: {fileID: 784100889}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6976,7 +6964,7 @@ GameObject:
   - component: {fileID: 788667071}
   - component: {fileID: 788667073}
   - component: {fileID: 788667072}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7486,8 +7474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2317c8b25b654864d96e2ca96cfbf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  enemys: []
+  manager: {fileID: 830438528}
   isPlayer: 0
 --- !u!61 &849228611
 BoxCollider2D:
@@ -7598,7 +7585,7 @@ GameObject:
   - component: {fileID: 853321651}
   - component: {fileID: 853321653}
   - component: {fileID: 853321652}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7832,33 +7819,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1519914036}
     m_Modifications:
-    - target: {fileID: 5312690598755832619, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5312690598838585059, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5312690599609741164, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5312690599634329172, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5312690600111030628, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5312690600111030628, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 289.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5312690600111030628, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8000002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5312690600111030628, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7892,17 +7863,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5312690600111030629, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5312690600111030635, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
       propertyPath: m_Name
       value: Invincibility
-      objectReference: {fileID: 0}
-    - target: {fileID: 5312690600111030635, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683973ef6d72a214991a8d74979bc0f4, type: 3}
@@ -10132,8 +10095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2317c8b25b654864d96e2ca96cfbf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  enemys: []
+  manager: {fileID: 830438528}
   isPlayer: 0
 --- !u!61 &1208552116
 BoxCollider2D:
@@ -10368,7 +10330,7 @@ GameObject:
   - component: {fileID: 1261271337}
   - component: {fileID: 1261271339}
   - component: {fileID: 1261271338}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10625,8 +10587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys:
-  - {fileID: 0}
   isPlayer: 0
 --- !u!61 &1279107628
 BoxCollider2D:
@@ -10802,7 +10762,7 @@ GameObject:
   - component: {fileID: 1322327599}
   - component: {fileID: 1322327601}
   - component: {fileID: 1322327600}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11300,7 +11260,7 @@ GameObject:
   - component: {fileID: 1400914524}
   - component: {fileID: 1400914525}
   - component: {fileID: 1400914526}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11968,8 +11928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2317c8b25b654864d96e2ca96cfbf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  enemys: []
+  manager: {fileID: 830438528}
   isPlayer: 0
 --- !u!1001 &1503263517
 PrefabInstance:
@@ -13334,7 +13293,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys: []
   isPlayer: 0
 --- !u!61 &1558551971
 BoxCollider2D:
@@ -63019,7 +62977,7 @@ GameObject:
   - component: {fileID: 1628434965}
   - component: {fileID: 1628434967}
   - component: {fileID: 1628434966}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63663,7 +63621,7 @@ GameObject:
   - component: {fileID: 1733177430}
   - component: {fileID: 1733177432}
   - component: {fileID: 1733177431}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63874,7 +63832,7 @@ GameObject:
   - component: {fileID: 1794885391}
   - component: {fileID: 1794885393}
   - component: {fileID: 1794885392}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: box_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64143,7 +64101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys: []
   isPlayer: 0
 --- !u!61 &1805718053
 BoxCollider2D:
@@ -65186,8 +65143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 830438528}
-  enemys:
-  - {fileID: 0}
   isPlayer: 0
 --- !u!61 &1961148943
 BoxCollider2D:

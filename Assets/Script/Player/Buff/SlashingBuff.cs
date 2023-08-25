@@ -110,8 +110,11 @@ public class SlashingBuff : MonoBehaviour
 
         while(time > 0)
         {
-            time -= Time.deltaTime;
-            timeBarImg.fillAmount -= Time.deltaTime / buffTime;
+            if (this.gameObject.GetComponent<PlayerController>().canMove)
+            {
+                time -= Time.deltaTime;
+                timeBarImg.fillAmount -= Time.deltaTime / buffTime;
+            }
             yield return null;
         };
 

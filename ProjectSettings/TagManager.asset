@@ -9,6 +9,8 @@ TagManager:
   - FadeImage
   - PauseMenu
   - PassStage
+  - DeadPlayer
+  - InvinciblePlayer
   layers:
   - Default
   - TransparentFX
@@ -35,7 +37,7 @@ TagManager:
   - TutorialArea
   - BossEnemy
   - GimmeckPlatform
-  - 
+  - DeadPlayer
   - 
   - 
   - 

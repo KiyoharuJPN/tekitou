@@ -69683,6 +69683,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5632973206769061244, guid: 50cecbd389797154ebf778d2cdb93d2d, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8727203579926841528, guid: 50cecbd389797154ebf778d2cdb93d2d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -72029,6 +72033,10 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 621046461}
+    - target: {fileID: 3120454149288359097, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
+      propertyPath: bossDoor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3120454149288359099, guid: 9c926f0ba2e6bcb4aad001d7daba260d, type: 3}
       propertyPath: m_SortingOrder
       value: -1
@@ -72935,6 +72943,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 787591354}
     m_Modifications:
+    - target: {fileID: 6732858354407642832, guid: 871878678cced4e448eb380f452f04e8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6732858354407642835, guid: 871878678cced4e448eb380f452f04e8, type: 3}
       propertyPath: m_Name
       value: PlayerBuffTime

@@ -73,14 +73,14 @@ public class TutorialText : MonoBehaviour
     {
         backGround.transform.DOMoveY(
             0f,
-            1f
+            0.5f
             );
     }
     void TextDown()
     {
         backGround.transform.DOMoveY(
             -200f,
-            1f
+            0.5f
             );
     }
 

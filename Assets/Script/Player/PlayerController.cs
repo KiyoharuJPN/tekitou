@@ -236,7 +236,8 @@ public class PlayerController : MonoBehaviour
             shake.Shake(0.2f, 0.8f, true, true);
             if (hpparam.GetHP() <= 0)
             {
-                gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+                this.tag = "DeadPlayer";
+                gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
                 isKnockingBack = false;
                 SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
                 animator.Play("Death");
@@ -520,6 +521,11 @@ public class PlayerController : MonoBehaviour
     public void SetCanMove(bool cM)
     {
         canMove = cM;
+        isDropAttack = false;
+        isUpAttack = false;
+        isSideAttack = false;
+        isNomalAttack = false;
+        isJumping = false;
     }
 
     internal void WarpDoor(Transform door)

@@ -6,11 +6,19 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField]
     TutorialScene manager;
 
-    [SerializeField]//クリア判定に使用する敵
-    GameObject[] enemys;
+    bool farstAreaIn = true;
 
     //プレイヤーが範囲内にいるか？
     public bool isPlayer = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (farstAreaIn)
+        {
+            farstAreaIn = false;
+            manager.TutorialStep();
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
