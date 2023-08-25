@@ -150,7 +150,7 @@ public class KingSlime : Enemy
         AttackMoveSpeed /= 25;
         if (playerObj.transform.position.x > gameObject.transform.position.x && movingWidth < 0) TurnAround();
         if (playerObj.transform.position.x < gameObject.transform.position.x && movingWidth > 0) TurnAround();
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1f);
         attackCheckArea.offset = new Vector2(0, 0f);
         attackCheckArea.size = new Vector2(5.36f, 4.1f);
         attackCheckArea.enabled = true;
@@ -167,6 +167,7 @@ public class KingSlime : Enemy
         yield return new WaitForSeconds(0.8f);
         NoGravity = false;
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        NormalAttackAnimation++;
         enemyRb.AddForce(new Vector2(0, -40),ForceMode2D.Impulse);
         knockbackAttackCircle.enabled = true;
         KSNormalAttackLanding = true;
@@ -182,60 +183,60 @@ public class KingSlime : Enemy
         gameObject.layer = LayerMask.NameToLayer("Enemy");
 
         int i = 0;
-        while(i < 5)
+        while(i < 1)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         attackCheckArea.offset = new Vector2(0, -0.2f);
         attackCheckArea.size = new Vector2(6.86f, 3.8f);
-        while (i < 10)
+        while (i < 6)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         attackCheckArea.offset = new Vector2(0, 0.05f);
         attackCheckArea.size = new Vector2(8f, 4.3f);
-        while (i < 15)
+        while (i < 11)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         attackCheckArea.offset = new Vector2(0, 1.55f);
         attackCheckArea.size = new Vector2(8f, 7.3f);
-        while (i < 25)
+        while (i < 21)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         attackCheckArea.offset = new Vector2(0, -0.1f);
         attackCheckArea.size = new Vector2(7f, 4f);
-        while (i < 29)
+        while (i < 25)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         attackCheckArea.offset = new Vector2(0, -0.1f);
         attackCheckArea.size = new Vector2(9f, 4f);
-        while (i < 33)
+        while (i < 29)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
-        while (i < 37)
+        while (i < 33)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         attackCheckArea.offset = new Vector2(0, -0.1f);
         attackCheckArea.size = new Vector2(10f, 4f);
-        while (i < 41)
+        while (i < 37)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
         attackCheckArea.enabled = false;
-        while (i < 55)
+        while (i < 51)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -491,6 +492,19 @@ public class KingSlime : Enemy
     void ClearCoroutines()
     {
         if (inKSBossAtack1)
+        {
+            inKSBossAtack1 = false;
+            NoGravity = false;
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
+            knockbackAttackCircle.enabled = false;
+            KSNormalAttackLanding = false;
+            IsAttacking = false;
+            IsMoving = true;
+            KSattackingCheck = true;
+            AttackMode = 0;
+            wallCheck.SetActive(true);
+        }
+        if(NormalAttackAnimation == 1)
         {
             inKSBossAtack1 = false;
             NoGravity = false;
