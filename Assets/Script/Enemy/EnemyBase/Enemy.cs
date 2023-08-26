@@ -126,11 +126,7 @@ public class Enemy : MonoBehaviour
             Debug.Log(reflexNum);
             if (reflexNum == 0)
             {
-                SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
-                GameObject obj = Instantiate(deathEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
-
-                if (_EnemyBuff) _EnemyBuff._Destroy();
-                Destroy(gameObject);
+                EnemyNomalDestroy();
             }
         }
     }
@@ -244,6 +240,7 @@ public class Enemy : MonoBehaviour
                     if (_isHitStoped)
                     {
                         _isDestroyed = true;
+                        OnCamera = false;
                         gameObject.SetActive(false);
                     }
                     else
@@ -279,7 +276,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator HitStop(float power, Skill skill)
+    public IEnumerator HitStop(float power, Skill skill)
     {
         _isHitStoped = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
@@ -311,8 +308,6 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
     }
 
     protected void EnemyMove()
@@ -396,6 +391,10 @@ public class Enemy : MonoBehaviour
 
         //オブジェクトを取得
         player = serchTag(gameObject, "Player");
+        if(player == null)
+        {
+            player = serchTag(gameObject, "InvinciblePlayer");
+        }
 
         // それぞれの軸の成分を計算
         float x = Mathf.Cos(rad);
@@ -604,6 +603,16 @@ public class Enemy : MonoBehaviour
     public void OnColStay(Collider2D col)
     {
         OnColStay2D(col);
+    }
+
+    //通常削除
+    public void EnemyNomalDestroy()
+    {
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
+        GameObject obj = Instantiate(deathEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+
+        if (_EnemyBuff) _EnemyBuff._Destroy();
+        Destroy(gameObject);
     }
 
     //ヒットエフェクト生成

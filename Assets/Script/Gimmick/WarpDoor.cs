@@ -15,7 +15,8 @@ public class WarpDoor : MonoBehaviour
     GameObject inPoint;
     GameObject bottonUiPrefab;
     bool isBottonUi;
-
+    [SerializeField, Header("ボス部屋前かどうか")]
+    bool bossDoor;
     GameObject warpPoint;
 
     Collider2D player;
@@ -46,7 +47,8 @@ public class WarpDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") ||
+            collision.gameObject.CompareTag("InvinciblePlayer"))
         {
             player = collision;
             isBottonUi = true;
@@ -72,6 +74,8 @@ public class WarpDoor : MonoBehaviour
 
     IEnumerator PlayerWarp(float delay,Collider2D player)
     {
+        DaedEnemyDestroy();
+        player.GetComponent<PlayerController>().SetCanMove(false);
         yield return new WaitForSeconds(delay);//渡された時間待機
 
         //フェードアウト開始
@@ -81,10 +85,12 @@ public class WarpDoor : MonoBehaviour
         {
             yield return null;
         }
+
         //フェードアウト終了
         ComboParam.Instance.ResetTime();
         player.transform.position = warpPoint.transform.position;
-        camera.ChengeCameraArea_Boss();
+        if (SceneData.Instance.referer != "Tutorial") camera.ChengeCameraArea_Boss();
+
         yield return new WaitForSeconds(1f);//渡された時間待機
         //フェードイン開始
         fade.StartFadeIn();
@@ -98,5 +104,25 @@ public class WarpDoor : MonoBehaviour
         }
 
         player.GetComponent<PlayerController>().WarpDoorEnd();
+
+        yield return new WaitForSeconds(1f);
+        if (!bossDoor)
+        {
+            player.GetComponent<PlayerController>().SetCanMove(true);
+        }
+    }
+
+    //死んでいるEnemy強制削除
+    void DaedEnemyDestroy()
+    {
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject gameObj in enemys)
+        {
+            if (gameObj.GetComponent<Enemy>().isDestroy)
+            {
+                gameObj.GetComponent<Enemy>().EnemyNomalDestroy();
+            }
+        }
     }
 }

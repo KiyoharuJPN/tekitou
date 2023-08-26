@@ -76,9 +76,15 @@ public class Dragon : Enemy
     bool NotInAnim = true, PatternOver = true, patternover = false, isFlameBracing = false, isSlewAttacking = false, isJumpingAttacking = false;
 
     BoxCollider2D EnemyCollider;
+    private void Awake()
+    {
+        enemyRb = GetComponent<Rigidbody2D>();
+    }
+
     protected override void Start()
     {
         base.Start();
+        Debug.Log(enemyRb);
         moveSpeed = MoveSpeed * -1;
         EnemyCollider = EnemyColliderArea.GetComponent<BoxCollider2D>();
 
@@ -607,6 +613,8 @@ public class Dragon : Enemy
     //外部関数
     public override void Damage(float power, Skill skill, bool ExSkill = false)
     {
+        //ヒットストップ
+        StartCoroutine(HitStop(power, skill));
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         hp -= power;
         //HPゲージを使用しているかどうか

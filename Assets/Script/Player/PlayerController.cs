@@ -166,6 +166,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        Debug.Log(canMove);
+        Debug.Log(isWarpDoor);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -212,7 +214,7 @@ public class PlayerController : MonoBehaviour
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
         if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
-        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill);   
+        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill);
     }
 
     public void _Heel(int resilience)
@@ -236,7 +238,8 @@ public class PlayerController : MonoBehaviour
             shake.Shake(0.2f, 0.8f, true, true);
             if (hpparam.GetHP() <= 0)
             {
-                gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+                this.tag = "DeadPlayer";
+                gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
                 isKnockingBack = false;
                 SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
                 animator.Play("Death");
@@ -520,6 +523,12 @@ public class PlayerController : MonoBehaviour
     public void SetCanMove(bool cM)
     {
         canMove = cM;
+        isDropAttack = false;
+        isUpAttack = false;
+        isSideAttack = false;
+        isNomalAttack = false;
+        canDropAttack = true;
+        animator.SetBool("IsDropAttack", isDropAttack);
     }
 
     internal void WarpDoor(Transform door)

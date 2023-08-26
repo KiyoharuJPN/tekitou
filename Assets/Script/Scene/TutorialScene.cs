@@ -57,7 +57,6 @@ public class TutorialScene : StageCtrl
         }
 
         base.Start();
-        TutorialStep();
     }
 
     private void FixedUpdate()
@@ -68,7 +67,6 @@ public class TutorialScene : StageCtrl
             tutorialPanels[num].tutorialPanel.transform.Find("UI_Correct").GetComponent<SpriteRenderer>().enabled = true;
             SoundManager.Instance.PlaySE(SESoundData.SE.tutorialCorrect);
             num++;
-            TutorialStep();
         }
     }
 
@@ -270,6 +268,8 @@ public class TutorialScene : StageCtrl
                 player.isTDownAttack = true;
                 break;
             case 10:
+                ExAttackParam.Instance.SetGage(50);
+                player.canExAttack = true;
                 player.isTExAttack = true;
                 break;
         }

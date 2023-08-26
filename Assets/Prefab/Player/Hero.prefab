@@ -200,7 +200,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.05}
+  m_Size: {x: 0.78, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &1855558371
 MonoBehaviour:
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HERO: {fileID: 4075973575706176915}
+  groundCheckObj: {fileID: 0}
 --- !u!1 &3781554596584978093
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,13 +466,13 @@ MonoBehaviour:
     secondJumpHeight: 3.5
     maxJumpTime: 0.3
   knockBack:
-    knockBackTime: 0.4
+    knockBackTime: 0.2
     cantMovingTime: 0.001
     canKnockBack: 1
   parallaxBackground: {fileID: 0}
   exAttacArea: {fileID: 1261378116}
   shake: {fileID: 0}
-  InvincibleTime: 20
+  InvincibleTime: 100
 --- !u!114 &6578985677749316734
 MonoBehaviour:
   m_ObjectHideFlags: 0

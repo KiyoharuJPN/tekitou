@@ -35,6 +35,8 @@ public class TutorialPlayer : PlayerController
     void Update()
     {
         //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        Debug.Log(canMove);
+        Debug.Log(isWarpDoor);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -81,8 +83,8 @@ public class TutorialPlayer : PlayerController
     {
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
-        float rsh = Input.GetAxis("R_Stick_H");
-        float rsv = Input.GetAxis("R_Stick_V");
+        //float rsh = Input.GetAxis("R_Stick_H");
+        //float rsv = Input.GetAxis("R_Stick_V");
 
         if (Input.GetKey(KeyCode.JoystickButton1))
         {
