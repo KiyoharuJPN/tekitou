@@ -8306,7 +8306,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8236160012760509608, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509610, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_BodyType
@@ -9333,7 +9333,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 25100287
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
