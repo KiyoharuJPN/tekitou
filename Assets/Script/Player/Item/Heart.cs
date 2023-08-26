@@ -12,7 +12,7 @@ public class Heart : Item
     //}
     override protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) 
+        if (collision.CompareTag("Player") || collision.CompareTag("InvinciblePlayer")) 
         { 
             SoundManager.Instance.PlaySE(SESoundData.SE.GetHeart);
             collision.GetComponent<PlayerController>()._Heel(itemData.resilience);
