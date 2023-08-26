@@ -22,9 +22,5 @@ public class StageCtrl : MonoBehaviour
         {
             playerObj.transform.position = continuePoint[2].transform.position;
         }
-        else
-        {
-            Debug.Log("İ’è‚ª‘«‚è‚Ä‚È‚¢‚æI");
-        }
     }
 }
