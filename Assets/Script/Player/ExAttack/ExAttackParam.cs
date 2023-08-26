@@ -70,6 +70,7 @@ public class ExAttackParam : MonoBehaviour
             exAttackText.GetComponent<Image>().enabled = true;
             canExAttack = true;
         }
+        PlayerCanExAttackCheck();
     }
 
     internal int GetGage()
@@ -88,6 +89,7 @@ public class ExAttackParam : MonoBehaviour
             exAttackText.GetComponent<Image>().enabled = true;
             canExAttack = true;
         }
+        PlayerCanExAttackCheck();
     }
 
     IEnumerator _SetGage(int i) 
@@ -104,6 +106,14 @@ public class ExAttackParam : MonoBehaviour
                 canExAttack = true;
             }
             yield return null;
+        }
+    }
+
+    void PlayerCanExAttackCheck()
+    {
+        if(canExAttack)
+        {
+            player.canExAttack = true;
         }
     }
 }
