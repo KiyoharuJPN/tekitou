@@ -166,8 +166,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        Debug.Log(canMove);
-        Debug.Log(isWarpDoor);
+        //Debug.Log(canMove);
+        //Debug.Log(isWarpDoor);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {

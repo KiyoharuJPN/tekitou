@@ -553,10 +553,12 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyStop() 
     {
-        isPlayerExAttack = true;
-        Debug.Log(enemyRb);
-        Debug.Log(enemyData.charName);
-        enemyRb.velocity = Vector2.zero;
+        if (enemyRb != null)
+        {
+            isPlayerExAttack = true;
+            Debug.Log(enemyRb);
+            enemyRb.velocity = Vector2.zero;
+        }
         if(animator != null)
         {
             animator.speed = 0;
