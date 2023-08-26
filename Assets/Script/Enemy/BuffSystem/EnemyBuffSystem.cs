@@ -69,7 +69,7 @@ public class EnemyBuffSystem : MonoBehaviour
 
     private void Update()
     {
-        if (BuffAttackCheckText.gameObject.activeSelf)
+        if (BuffAttackCheckText != null && BuffAttackCheckText.gameObject.activeSelf)
         {
             BuffAttackCheckText.gameObject.transform.position = transform.position + intervalPos;
         }
