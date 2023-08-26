@@ -166,6 +166,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+        Debug.Log(canMove);
+        Debug.Log(isWarpDoor);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -525,8 +527,7 @@ public class PlayerController : MonoBehaviour
         isUpAttack = false;
         isSideAttack = false;
         isNomalAttack = false;
-        isJumping = false;
-        isMoving = false;
+        canDropAttack = true;
         animator.SetBool("IsDropAttack", isDropAttack);
     }
 
