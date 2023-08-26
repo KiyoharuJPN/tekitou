@@ -209,10 +209,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void Damage(float power, Skill skill, bool ExSkill = false)
+    public virtual void Damage(float power, Skill skill, bool isHitStop, bool ExSkill = false)
     {
         //ヒットストップ
-        StartCoroutine(HitStop(power, skill));
+        StartCoroutine(HitStop(power, skill, isHitStop));
 
         //既に死亡状態の場合
         if (isDestroy)
@@ -276,7 +276,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public IEnumerator HitStop(float power, Skill skill)
+    public IEnumerator HitStop(float power, Skill skill, bool isHitStop)
     {
         _isHitStoped = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
@@ -288,19 +288,23 @@ public class Enemy : MonoBehaviour
         }
         else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
 
-        //ヒットストップ処理
-        Vector3 initialPos = this.transform.position;//初期位置保存
-        Time.timeScale = 0;
+        if(isHitStop)
+        {
+            Debug.Log("ヒットストップ実行");
+            //ヒットストップ処理
+            Vector3 initialPos = this.transform.position;//初期位置保存
+            Time.timeScale = 0;
 
-        yield return transform.DOShakePosition( power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
-            .SetUpdate(true)
-            .OnComplete(() => 
-            {
-                //アニメーションが終了したら時間を戻す
-                Time.timeScale = 1;
-                //初期位置に戻す
-                this.transform.position = initialPos;
-            });
+            yield return transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    //アニメーションが終了したら時間を戻す
+                    Time.timeScale = 1;
+                    //初期位置に戻す
+                    this.transform.position = initialPos;
+                });
+        }
 
         _isHitStoped = false;
 
@@ -556,7 +560,6 @@ public class Enemy : MonoBehaviour
         if (enemyRb != null)
         {
             isPlayerExAttack = true;
-            Debug.Log(enemyRb);
             enemyRb.velocity = Vector2.zero;
         }
         if(animator != null)
@@ -573,7 +576,7 @@ public class Enemy : MonoBehaviour
             animator.speed = 1;
         }
         isPlayerExAttack = false;
-        Damage(powar, null, true);
+        Damage(powar, null,true, true);
     }
 
     //停止処理解除

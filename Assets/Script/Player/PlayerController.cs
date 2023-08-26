@@ -209,12 +209,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsGround", isGround);
     }
 
-    public void _Attack(Collider2D enemy, float powar, Skill skill)
+    public void _Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
         if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
-        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill);
+        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill, isHitStop);
     }
 
     public void _Heel(int resilience)

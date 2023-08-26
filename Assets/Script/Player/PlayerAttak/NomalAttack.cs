@@ -5,7 +5,7 @@ public class NomalAttack
 {
     static Skill skill;
     //空中時のクールタイム
-    const float airCoolTime = 0.5f;
+    const float airCoolTime = 0.1f;
 
     public static void NomalAttackStart(PlayerController player)
     {
@@ -34,7 +34,7 @@ public class NomalAttack
     static IEnumerator _NomalAttackInterval(float coolTime, PlayerController player)
     {
         player.enemylist.Clear();
-        player.isAttack = false;
+        
         float time = coolTime;
 
         while (time > 0)
@@ -42,6 +42,8 @@ public class NomalAttack
             time -= Time.deltaTime;
             yield return null;
         }
+
+        player.isAttack = false;
         player.isNomalAttack = false; 
         player.canNomalAttack = true;
     }

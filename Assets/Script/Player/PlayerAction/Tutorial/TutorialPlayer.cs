@@ -34,9 +34,6 @@ public class TutorialPlayer : PlayerController
 
     void Update()
     {
-        //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        Debug.Log(canMove);
-        Debug.Log(isWarpDoor);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -102,6 +99,7 @@ public class TutorialPlayer : PlayerController
         if (lsv <= -0.9 && isAttackKay && isTDownAttack)
             // || rsv <= -0.8)
         {
+            Debug.Log("—Ž‰ºUŒ‚");
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚

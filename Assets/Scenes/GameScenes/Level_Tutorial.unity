@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 62941444}
   - component: {fileID: 62941443}
   - component: {fileID: 62941442}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_UpAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1683,7 +1683,7 @@ GameObject:
   - component: {fileID: 194167354}
   - component: {fileID: 194167353}
   - component: {fileID: 194167352}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_AirAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2572,7 +2572,7 @@ GameObject:
   - component: {fileID: 303818754}
   - component: {fileID: 303818753}
   - component: {fileID: 303818752}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_SideAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4809,7 +4809,7 @@ GameObject:
   - component: {fileID: 531769755}
   - component: {fileID: 531769754}
   - component: {fileID: 531769753}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_Special
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7439,7 +7439,7 @@ GameObject:
   - component: {fileID: 849228612}
   - component: {fileID: 849228611}
   - component: {fileID: 849228610}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10060,7 +10060,7 @@ GameObject:
   - component: {fileID: 1208552117}
   - component: {fileID: 1208552116}
   - component: {fileID: 1208552115}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_DoubleJump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10548,7 +10548,7 @@ GameObject:
   - component: {fileID: 1279107629}
   - component: {fileID: 1279107628}
   - component: {fileID: 1279107627}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_NomalAttack_Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11795,7 +11795,7 @@ GameObject:
   - component: {fileID: 1488299189}
   - component: {fileID: 1488299191}
   - component: {fileID: 1488299192}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13255,7 +13255,7 @@ GameObject:
   - component: {fileID: 1558551972}
   - component: {fileID: 1558551971}
   - component: {fileID: 1558551970}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_Buff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64058,7 +64058,7 @@ GameObject:
   - component: {fileID: 1805718054}
   - component: {fileID: 1805718053}
   - component: {fileID: 1805718052}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_TurorialCombo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65034,6 +65034,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 303818751}
     m_Modifications:
+    - target: {fileID: 2397349381615487361, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6054787801465259575, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -65106,7 +65110,7 @@ GameObject:
   - component: {fileID: 1961148944}
   - component: {fileID: 1961148943}
   - component: {fileID: 1961148942}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: UI_DownAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -462,10 +462,10 @@ public class KingSlime : Enemy
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
     }
 
-    public override void Damage(float power, Skill skill, bool ExSkill = false)
+    public override void Damage(float power, Skill skill, bool isHitStop, bool ExSkill = false)
     {
         //ヒットストップ
-        StartCoroutine(HitStop(power, skill));
+        StartCoroutine(HitStop(power, skill, isHitStop));
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         hp -= power;
         //HPゲージを使用しているかどうか
