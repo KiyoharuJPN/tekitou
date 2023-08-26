@@ -125,9 +125,7 @@ public class EnemyBuffSystem : MonoBehaviour
                 checkBlowingUp = false;
             }
 
-            //Debug.Log("Enemy Dead");
             _Destroy();
-            Debug.Log(BuffAttackCheck);
         }
 
     }

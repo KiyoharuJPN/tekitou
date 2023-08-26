@@ -32,7 +32,6 @@ public class Player_IsGround : MonoBehaviour
         }
         else if(collision.CompareTag("Stage"))
         {
-            Debug.Log("Stage");
             StageLanding(collision);
         }
         

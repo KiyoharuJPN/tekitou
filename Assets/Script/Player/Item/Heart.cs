@@ -14,7 +14,6 @@ public class Heart : Item
     {
         if (collision.CompareTag("Player")) 
         { 
-            Debug.Log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             SoundManager.Instance.PlaySE(SESoundData.SE.GetHeart);
             collision.GetComponent<PlayerController>()._Heel(itemData.resilience);
             base.OnTriggerEnter2D(collision);

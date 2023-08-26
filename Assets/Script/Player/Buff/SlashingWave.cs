@@ -18,7 +18,7 @@ public class SlashingWave : MonoBehaviour
         if(collision.tag == "Enemy")
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-            player._Attack(collision,skill.damage, skill);
+            player._Attack(collision,skill.damage, skill, false);
             Destroy(this.gameObject);
         }
     }

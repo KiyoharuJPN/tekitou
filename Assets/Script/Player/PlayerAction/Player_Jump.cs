@@ -90,7 +90,6 @@ public class Player_Jump : MonoBehaviour
         {
             if (!Input.GetButton("Jump") || jumpTime >= player.jumpData.maxJumpTime)
             {
-                Debug.Log("ƒWƒƒƒ“ƒvI—¹");
                 isjump = false;
                 jumpTime = 0;
             }
