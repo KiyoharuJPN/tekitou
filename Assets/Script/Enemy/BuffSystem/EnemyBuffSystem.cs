@@ -98,6 +98,7 @@ public class EnemyBuffSystem : MonoBehaviour
             BuffAttackCheckText.gameObject.SetActive(true);
             return;
         }
+        Debug.Log(BuffAttackCheck);
 
         //if (EXAttack)
         //{
@@ -116,7 +117,7 @@ public class EnemyBuffSystem : MonoBehaviour
                 var enemys = GameObject.FindGameObjectsWithTag("Enemy");
                 foreach (var emy in enemys)
                 {
-                    if (emy.GetComponent<Enemy>().isDestroy)
+                    if (emy.GetComponent<Enemy>() != null && emy.GetComponent<Enemy>().isDestroy)
                     {
                         emy.GetComponent<Enemy>().BuffBoostSphere();
                     }
@@ -126,6 +127,7 @@ public class EnemyBuffSystem : MonoBehaviour
 
             //Debug.Log("Enemy Dead");
             _Destroy();
+            Debug.Log(BuffAttackCheck);
         }
 
     }
