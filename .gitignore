@@ -62,3 +62,4 @@ crashlytics-build.properties
 /.gitignore
 /UserSettings/EditorUserSettings.asset
 /.gitignore
+/Assets/Scenes/GameScenes/Level_Stage2.unity
