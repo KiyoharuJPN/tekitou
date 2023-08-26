@@ -592,7 +592,7 @@ public class Dragon : Enemy
         }
         CreateStoneAttack();
 
-        while (animcheck < 60)
+        while (animcheck < 75)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
@@ -644,6 +644,7 @@ public class Dragon : Enemy
 
     public override void TurnAround()
     {
+        Debug.Log("•ûŒü‚ð•Ï‚¦‚é");
         bool InCheck = true;
         if (transform.localScale.x == 1f && InCheck)
         {
