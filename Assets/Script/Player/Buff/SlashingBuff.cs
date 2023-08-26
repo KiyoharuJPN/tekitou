@@ -37,10 +37,10 @@ public class SlashingBuff : MonoBehaviour
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         //残り時間のバー表示・設定
-        timeBar = GameObject.Find("PlayerBuffTime").gameObject;
+        timeBar = GameObject.Find("PlayerBuffTime");
         timeBar.GetComponent<UIPosController>().enabled = true;
         timeBar.GetComponent<Canvas>().enabled = true;
-        timeBarImg = timeBar.transform.Find("Bar").gameObject.GetComponent<Image>();
+        timeBarImg = timeBar.transform.Find("Bar").GetComponent<Image>();
 
         waveSpeed = slashing.slashingSpeed;
 
@@ -122,7 +122,7 @@ public class SlashingBuff : MonoBehaviour
         {
             spriteGlow.GlowColor = Color.cyan;
         }
-        else if(!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
+        if(!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
         {
             spriteGlow.EnableInstancing = false;
         }
