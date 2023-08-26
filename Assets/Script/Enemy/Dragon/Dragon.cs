@@ -84,7 +84,6 @@ public class Dragon : Enemy
     protected override void Start()
     {
         base.Start();
-        Debug.Log(enemyRb);
         moveSpeed = MoveSpeed * -1;
         EnemyCollider = EnemyColliderArea.GetComponent<BoxCollider2D>();
 
@@ -678,6 +677,7 @@ public class Dragon : Enemy
         }
         BoxColthis.isTrigger = true;
         enemyRb.AddForce(new Vector2(jumpWidth * 0.5f, _dragonJumpingAttackData.DragonJAHeight),ForceMode2D.Impulse);
+
         //接地する時に次のアニメーションを流せるようにif文の判断要素にする
         JumpAttackAnimCtrl = 2;
     }

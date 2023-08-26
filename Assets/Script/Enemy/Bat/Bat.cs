@@ -62,6 +62,7 @@ public class Bat : Enemy
     //“G‚Ì“®‚«‚âŠÖ”
     void Movement()
     {
+        if (isPlayerExAttack) return;
         //ˆÚ“®•ûŒü‚ğ‰Šú‰»‚µ‚Ä“®‚©‚·
         if (Direction == 0)
         {
