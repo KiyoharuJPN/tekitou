@@ -81,8 +81,8 @@ public class TutorialPlayer : PlayerController
     {
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
-        float rsh = Input.GetAxis("R_Stick_H");
-        float rsv = Input.GetAxis("R_Stick_V");
+        //float rsh = Input.GetAxis("R_Stick_H");
+        //float rsv = Input.GetAxis("R_Stick_V");
 
         if (Input.GetKey(KeyCode.JoystickButton1))
         {

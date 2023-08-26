@@ -73286,6 +73286,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2134018524}
+    - target: {fileID: 8801034262499123334, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8801034262499123337, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -73373,6 +73377,10 @@ PrefabInstance:
     - target: {fileID: 8801034262499123338, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801034263884436769, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1e508b190f21af45add24d4f18b5250, type: 3}

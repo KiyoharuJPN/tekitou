@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class SlashingWave : MonoBehaviour
@@ -16,12 +15,10 @@ public class SlashingWave : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || 
-            collision.gameObject.layer == LayerMask.NameToLayer("PinBallEnemy") ||
-            collision.gameObject.layer == LayerMask.NameToLayer("BossEnemy"))
+        if(collision.tag == "Enemy")
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-            player._Attack(collision, 1, skill);
+            player._Attack(collision,skill.damage, skill);
             Destroy(this.gameObject);
         }
     }

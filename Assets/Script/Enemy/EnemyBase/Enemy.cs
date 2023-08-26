@@ -391,6 +391,10 @@ public class Enemy : MonoBehaviour
 
         //オブジェクトを取得
         player = serchTag(gameObject, "Player");
+        if(player == null)
+        {
+            player = serchTag(gameObject, "InvinciblePlayer");
+        }
 
         // それぞれの軸の成分を計算
         float x = Mathf.Cos(rad);

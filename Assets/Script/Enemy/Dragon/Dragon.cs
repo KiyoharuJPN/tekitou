@@ -76,9 +76,15 @@ public class Dragon : Enemy
     bool NotInAnim = true, PatternOver = true, patternover = false, isFlameBracing = false, isSlewAttacking = false, isJumpingAttacking = false;
 
     BoxCollider2D EnemyCollider;
+    private void Awake()
+    {
+        enemyRb = GetComponent<Rigidbody2D>();
+    }
+
     protected override void Start()
     {
         base.Start();
+        Debug.Log(enemyRb);
         moveSpeed = MoveSpeed * -1;
         EnemyCollider = EnemyColliderArea.GetComponent<BoxCollider2D>();
 

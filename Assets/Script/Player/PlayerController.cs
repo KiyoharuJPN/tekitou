@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
         if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
-        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill);   
+        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill);
     }
 
     public void _Heel(int resilience)
@@ -527,6 +527,7 @@ public class PlayerController : MonoBehaviour
         isNomalAttack = false;
         isJumping = false;
         isMoving = false;
+        animator.SetBool("IsDropAttack", isDropAttack);
     }
 
     internal void WarpDoor(Transform door)
