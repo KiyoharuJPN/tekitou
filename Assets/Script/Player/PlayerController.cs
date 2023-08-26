@@ -526,6 +526,7 @@ public class PlayerController : MonoBehaviour
         isSideAttack = false;
         isNomalAttack = false;
         isJumping = false;
+        isMoving = false;
     }
 
     internal void WarpDoor(Transform door)

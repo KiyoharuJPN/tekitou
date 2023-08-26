@@ -51,6 +51,8 @@ public class DragonSummonAnimation : MonoBehaviour
     //“®‰æ‚ªI‚í‚Á‚½‚ç•’Ê‚Ì“GScript‚ÉˆÚ‚·B
     void AnimationPlayed()
     {
+        enemyRb.bodyType = RigidbodyType2D.Dynamic;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
         gameObject.GetComponent<Dragon>().enabled = true;
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         IsAnimation = false;
