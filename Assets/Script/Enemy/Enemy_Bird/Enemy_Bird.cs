@@ -71,6 +71,7 @@ public class Enemy_Bird : Enemy
     {
         //アニメ調整
         IsAttacking = true;
+        PlayerNotAttacked = true;
         IsMoving = false;
         //コライダー調整
         AttackAnim();
