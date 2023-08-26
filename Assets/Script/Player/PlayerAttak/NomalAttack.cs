@@ -33,6 +33,7 @@ public class NomalAttack
     //クールタイム用コルーチン
     static IEnumerator _NomalAttackInterval(float coolTime, PlayerController player)
     {
+        player.enemylist.Clear();
         player.isAttack = false;
         float time = coolTime;
 
@@ -41,9 +42,7 @@ public class NomalAttack
             time -= Time.deltaTime;
             yield return null;
         }
-        player.isNomalAttack = false;
-        
-        player.enemylist.Clear();
+        player.isNomalAttack = false; 
         player.canNomalAttack = true;
     }
 }
