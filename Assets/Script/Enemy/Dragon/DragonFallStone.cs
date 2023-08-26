@@ -54,7 +54,8 @@ public class DragonFallStone : MonoBehaviour
     //ì‡ïîä÷êî
     void DestroyThis()
     {
-        ObjectPool.Instance.PushObject(gameObject);
+        //ObjectPool.Instance.PushObject(gameObject);
+        Destroy(gameObject);
     }
 
     void OnCollide()

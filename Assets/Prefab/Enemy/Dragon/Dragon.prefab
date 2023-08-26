@@ -197,7 +197,7 @@ MonoBehaviour:
   _dragonJumpingAttackData:
     DragonJAHeight: 15
     DragonJALeftPos: {x: 297, y: 29.7}
-    DragonJARightPos: {x: 311, y: 29.7}
+    DragonJARightPos: {x: 316, y: 29.7}
     StoneHeight: 13
     StoneMaxLeftPos: 296
     StoneMaxRightPos: 316

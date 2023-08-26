@@ -19,10 +19,10 @@ public class Dragon : Enemy
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
-    //Platformを擦りぬく
+/*    //Platformを擦りぬく
     [SerializeField, Tooltip("Platformのオブジェクト名")]
     string Platformname;
-    BoxCollider2D BoxColthis;
+    BoxCollider2D BoxColthis;*/
 
     //ジャンプ関連
     [System.Serializable]
@@ -98,17 +98,20 @@ public class Dragon : Enemy
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-        BoxColthis = GetComponent<BoxCollider2D>();
+        
+        //すり抜く関係
+        //BoxColthis = GetComponent<BoxCollider2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (col.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 0 && col.gameObject.name != Platformname)
+        if (collision.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 0 && enemyRb.velocity.y > -0.1)
         {
-            BoxColthis.isTrigger = false;
+            JumpAttackAnimCtrl = 1;
             StartCoroutine(JumpAttackAnimPlus());
         }
     }
+
 
 
     //ドラゴンの動き
@@ -449,7 +452,7 @@ public class Dragon : Enemy
         //enemyData.knockBackValue = 100;
 
         float animcheck = 0;
-        while(animcheck < 88)
+        while(animcheck < 90)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
@@ -675,7 +678,8 @@ public class Dragon : Enemy
         {
             jumpWidth = _dragonJumpingAttackData.DragonJARightPos.x - transform.position.x;
         }
-        BoxColthis.isTrigger = true;
+        //すり抜く関係
+        //BoxColthis.isTrigger = true;
         enemyRb.AddForce(new Vector2(jumpWidth * 0.5f, _dragonJumpingAttackData.DragonJAHeight),ForceMode2D.Impulse);
 
         //接地する時に次のアニメーションを流せるようにif文の判断要素にする
@@ -789,7 +793,7 @@ public class Dragon : Enemy
     void CreateStoneAttack()
     {
         var Distance = _dragonJumpingAttackData.StoneMaxRightPos - _dragonJumpingAttackData.StoneMaxLeftPos;
-        var subDistance = Distance / (_dragonJumpingAttackData.StoneQuantity + 1) + 4f;
+        var subDistance = Distance / (_dragonJumpingAttackData.StoneQuantity);
         //Debug.Log(subDistance+"\n"+Distance);
         for(int i =0; i <= _dragonJumpingAttackData.StoneQuantity - 1; i++)
         {
@@ -807,7 +811,8 @@ public class Dragon : Enemy
         {
             subDistance += subDistanceRdm[i-1];
             if(subDistance > Distance) { subDistance = Distance; }
-            DragonFallStone[i - 1] = ObjectPool.Instance.GetObject(JumpAttackStone);
+            //DragonFallStone[i - 1] = ObjectPool.Instance.GetObject(JumpAttackStone);
+            DragonFallStone[i - 1] = Instantiate(JumpAttackStone);
             DragonFallStone[i - 1].transform.position = new Vector2(_dragonJumpingAttackData.StoneMaxLeftPos + subDistance, gameObject.transform.position.y + _dragonJumpingAttackData.StoneHeight);
             DragonFallStone[i - 1].GetComponent<DragonFallStone>().SetSpeed(_dragonJumpingAttackData.FallSpeed);
         }
