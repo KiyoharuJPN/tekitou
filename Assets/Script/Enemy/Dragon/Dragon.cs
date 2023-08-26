@@ -116,7 +116,6 @@ public class Dragon : Enemy
     {
         base.Update();
 
-        enemyRb.AddForce(new Vector2(2 * 0.5f, _dragonJumpingAttackData.DragonJAHeight), ForceMode2D.Impulse);
         //animatorÇÃê›íË
         animator.SetBool("IsBlowing", isDestroy);
         if (isDestroy) return;

@@ -41,6 +41,7 @@ public class Spider : Enemy
     }
     void Moving()
     {
+        if (isPlayerExAttack) return;
         if(enemyRb.velocity == Vector2.zero)
         {
             enemyRb.velocity = new Vector2(moveSpeed, 0);

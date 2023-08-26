@@ -8310,11 +8310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509610, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_BodyType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509610, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_Constraints
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8236160012760509620, guid: 1635352481d1b294e99f42a594b80f47, type: 3}
       propertyPath: m_Name
