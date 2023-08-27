@@ -47,6 +47,7 @@ public class TitleMenu : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         Cursor.visible = false;
         SceneData.Instance.referer = "Title";
         pointer = 0;            //ポインターの初期化

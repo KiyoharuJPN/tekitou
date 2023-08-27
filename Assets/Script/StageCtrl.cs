@@ -10,6 +10,7 @@ public class StageCtrl : MonoBehaviour
 
     virtual protected void Start()
     {
+        Time.timeScale = 1f;
         if (playerObj != null && continuePoint != null && continuePoint.Length > 0 && !SceneData.Instance.wayPoint_1 && !SceneData.Instance.wayPoint_2)
         {
             playerObj.transform.position = continuePoint[0].transform.position;
