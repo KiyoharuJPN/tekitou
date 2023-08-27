@@ -212,7 +212,12 @@ public class Enemy : MonoBehaviour
     public virtual void Damage(float power, Skill skill, bool isHitStop, bool ExSkill = false)
     {
         //ヒットストップ
-        StartCoroutine(HitStop(power, skill, isHitStop));
+        if (!_isHitStoped)
+        {
+            _isHitStoped = true;
+            StartCoroutine(HitStop(power, skill, isHitStop));
+        }
+            
 
         //既に死亡状態の場合
         if (isDestroy)
@@ -278,7 +283,6 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator HitStop(float power, Skill skill, bool isHitStop)
     {
-        _isHitStoped = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         ComboParam.Instance.ResetTime();
 
