@@ -31,14 +31,28 @@ public class TutorialScene : StageCtrl
         [SerializeField, Header("専用カメラエリア")]
         internal GameObject cameraArea;
         public TutorialPanel tutorialArea;
+        [SerializeField, Header("クリア条件に敵を倒す場合")]
+        //クリアが敵を倒す条件の際に使用
+        internal List<Enemy> enemylist;
     }
 
-    //クリアが敵を倒す条件の際に使用
-    internal List<GameObject> enemylist = new List<GameObject>();
+    bool isAttackPlay = false;
+    bool panelEnemyDaeth = false;
 
     [SerializeField, Header("チュートリアルパネル")]
     TutorialPanelObj[] tutorialPanels;
 
+
+    //チュートリアルバフ獲得したか
+    internal struct farstGetBaff
+    {
+        internal bool speedUp;
+        internal bool exGage;
+        internal bool slashing;
+        internal bool invincible;
+    }
+
+    farstGetBaff getCheckBuff = new() { speedUp = false, exGage = false, slashing = false, invincible = false };
 
     private void Awake()
     {
@@ -97,16 +111,36 @@ public class TutorialScene : StageCtrl
                     return TutorialClear();
                 break;
             case 3:
-                if (player.isNomalAttack && player.isGround)
+                if (player.isNomalAttack && player.isGround )
                 {
-                    return TutorialClear();
+                    isAttackPlay = true;
                 }
+                if (!panelEnemyDaeth)
+                {
+                    int count = 0;
+                    foreach (Enemy d in tutorialPanels[num].enemylist)
+                    {
+                        if(d.isDestroy) count++;
+                    }
+                    if (tutorialPanels[num].enemylist.Count == count) panelEnemyDaeth = true;
+                }
+                if(isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 4:
                 if (player.isNomalAttack && player.isJumping)
                 {
-                    return TutorialClear();
+                    isAttackPlay = true;
                 }
+                if (!panelEnemyDaeth)
+                {
+                    int count = 0;
+                    foreach (Enemy d in tutorialPanels[num].enemylist)
+                    {
+                        if (d.isDestroy) count++;
+                    }
+                    if (tutorialPanels[num].enemylist.Count == count) panelEnemyDaeth = true;
+                }
+                if (isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 5:
                 if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 0)
@@ -115,10 +149,23 @@ public class TutorialScene : StageCtrl
                 }
                 break;
             case 6:
-                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 1 &&
-                    PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.ExGage) > 0 &&
-                        PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Slashing) > 0 &&
-                        PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible) > 0)
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 1 && !getCheckBuff.speedUp)
+                {
+                    getCheckBuff.speedUp = true;
+                }
+                if(PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.ExGage) > 0 && !getCheckBuff.exGage)
+                {
+                    getCheckBuff.exGage = true;
+                }
+                if(PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Slashing) > 0 && !getCheckBuff.slashing)
+                {
+                    getCheckBuff.slashing = true;
+                }
+                if(PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible) > 0 && !getCheckBuff.invincible)
+                {
+                    getCheckBuff.invincible = true;
+                }
+                if(getCheckBuff.speedUp && getCheckBuff.exGage && getCheckBuff.slashing && getCheckBuff.invincible)
                 {
                     return TutorialClear();
                 }
@@ -153,6 +200,8 @@ public class TutorialScene : StageCtrl
 
     bool TutorialClear()
     {
+        isAttackPlay = false;
+        panelEnemyDaeth = false;
         //現在のチュートリアルに進行不能壁があるなら
         if (tutorialPanels[num].stopTiles != null)
         {

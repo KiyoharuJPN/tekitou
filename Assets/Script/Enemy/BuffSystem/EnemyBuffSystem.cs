@@ -98,7 +98,6 @@ public class EnemyBuffSystem : MonoBehaviour
             BuffAttackCheckText.gameObject.SetActive(true);
             return;
         }
-        Debug.Log(BuffAttackCheck);
 
         //if (EXAttack)
         //{
@@ -124,7 +123,6 @@ public class EnemyBuffSystem : MonoBehaviour
                 }
                 checkBlowingUp = false;
             }
-
             _Destroy();
         }
 
@@ -134,7 +132,7 @@ public class EnemyBuffSystem : MonoBehaviour
     public void SetEXAttackDecrease(int exa)
     {
         //EXAttack = exa;
-        BuffAttackCheck = BuffAttackCheck - exa;
+        BuffAttackCheck -= exa;
     }
     //public bool GetEXAttack()
     //{

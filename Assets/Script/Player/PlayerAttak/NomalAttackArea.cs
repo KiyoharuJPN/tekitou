@@ -25,6 +25,6 @@ public class NomalAttackArea : MonoBehaviour
 
     void HitDamage(Collider2D Enemy)
     {
-        player._Attack(Enemy, skill.damage, skill, true);
+        player.Attack(Enemy, skill.damage, skill, true);
     }
 }

@@ -19,4 +19,8 @@ public class Stage1 : StageCtrl
 
         base.Start();
     }
+    protected override void Update()
+    {
+        base.Update();
+    }
 }

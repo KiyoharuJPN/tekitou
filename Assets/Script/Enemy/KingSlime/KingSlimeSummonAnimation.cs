@@ -34,6 +34,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.canPause = false;
         animationControler = 0;
         animator = GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody2D>();
@@ -54,7 +55,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
             if (collision.gameObject.CompareTag("Stage") && !StageCheck)
             {
                 StageCheck = true;
-                Debug.Log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                
                 animationControler++;
                 SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
                 shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength,true,true);
@@ -102,11 +103,16 @@ public class KingSlimeSummonAnimation : MonoBehaviour
         HPBar.SetActive(true);
         gameObject.GetComponent<KingSlime>().enabled = true;
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
+        GameManager.Instance.canPause = true;
         IsAnimation = false;
         animator.SetBool("IsAnimation", IsAnimation);
         //Debug.Log("++++++++++++++++++++++++++++++++++++++++++");
         WallCheck.SetActive(true);
         gameObject.GetComponent<KingSlimeSummonAnimation>().enabled = false;
+        if (GameObject.Find("Hero").CompareTag("InvinciblePlayer"))
+        {
+            SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Invincibility, BGMSoundData.BGM.none);
+        }
     }
 
     private void FixedUpdate()

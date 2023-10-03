@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("exAttackArea")]
     private ExAttackArea exAttacArea;
     internal List<GameObject> enemylist = new List<GameObject>();
+    internal List<GameObject> exAttackEnemylist = new List<GameObject>();
 
     //ダメージカメラ処理
     [SerializeField]
@@ -209,7 +210,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsGround", isGround);
     }
 
-    public void _Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
+    public void Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
@@ -217,7 +218,7 @@ public class PlayerController : MonoBehaviour
         enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill, isHitStop);
     }
 
-    public void _Heel(int resilience)
+    public void Heel(int resilience)
     {
         hpparam.SetHP(hpparam.GetHP() + resilience);
         HeelEffect();
@@ -414,7 +415,7 @@ public class PlayerController : MonoBehaviour
         //ダメージ処理
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.ExAttack);
         
-        GameManager.Instance.PlayerExAttack_HitEnemyEnd(enemylist ,skill.damage);
+        GameManager.Instance.PlayerExAttack_HitEnemyEnd(enemylist ,skill.damage + ComboParam.Instance.GetPowerUp());
     }
     public void ExAttackHitCheck()
     {

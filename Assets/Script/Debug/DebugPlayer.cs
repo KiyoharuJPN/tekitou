@@ -74,7 +74,7 @@ public class DebugPlayer : DebugBase
         //体力満タン
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            p_Controller._Heel(6);
+            p_Controller.Heel(6);
         }
 
         //シーンリロード

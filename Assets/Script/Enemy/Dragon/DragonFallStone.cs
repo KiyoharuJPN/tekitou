@@ -37,7 +37,7 @@ public class DragonFallStone : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>()._Damage(2);
         }
 
-        if(isActiveAndEnabled && collision.CompareTag("Stage"))
+        if(isActiveAndEnabled && (collision.CompareTag("Stage") || collision.CompareTag("PlatFormStage")))
         {
             //‚Ô‚Â‚©‚Á‚½‚ç
             OnCollide();

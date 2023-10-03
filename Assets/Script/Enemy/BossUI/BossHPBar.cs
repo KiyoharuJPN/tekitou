@@ -6,8 +6,6 @@ public class BossHPBar : MonoBehaviour
 {
     public float FillSpeed = 1, DecreaseSpeed = 1;
 
-    
-
     [Header("ƒQ[ƒW‚Ì‰æ‘œ")]
     [SerializeField]
     Image BossHPGauge;

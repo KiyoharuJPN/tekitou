@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -111,8 +112,6 @@ public class Dragon : Enemy
             StartCoroutine(JumpAttackAnimPlus());
         }
     }
-
-
 
     //ドラゴンの動き
     protected override void Update()
@@ -321,109 +320,109 @@ public class Dragon : Enemy
             yield return new WaitForSeconds(0.01f);
         }
         ResetAttackCheckArea();
-        dragonAttackCheckArea.gameObject.SetActive(true);
+        //dragonAttackCheckArea.gameObject.SetActive(true);
         while (animcheck < 86)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea1();
+        //AttackCheckArea1();
         while (animcheck < 93)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea2();
+        //AttackCheckArea2();
         while (animcheck < 100)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea3();
+        //AttackCheckArea3();
         while (animcheck < 107)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea4();
+        //AttackCheckArea4();
         while (animcheck < 114)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea5();
+        //AttackCheckArea5();
         while (animcheck < 121)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea1();
+        //AttackCheckArea1();
         while (animcheck < 128)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea2();
+        //AttackCheckArea2();
         while (animcheck < 135)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea3();
+        //AttackCheckArea3();
         while (animcheck < 142)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea4();
+        //AttackCheckArea4();
         while (animcheck < 149)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea5();
+        //AttackCheckArea5();
         while (animcheck < 156)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea1();
+        //AttackCheckArea1();
         while (animcheck < 163)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea2();
+        //AttackCheckArea2();
         while (animcheck < 170)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea3();
+        //AttackCheckArea3();
         while (animcheck < 177)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea4();
+        //AttackCheckArea4();
         while (animcheck < 177)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckArea5();
+        //AttackCheckArea5();
         while (animcheck < 184)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        AttackCheckAreaOver();
+        //AttackCheckAreaOver();
         while (animcheck < 210)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        dragonAttackCheckArea.gameObject.SetActive(false);
+        //dragonAttackCheckArea.gameObject.SetActive(false);
 
         isFlameBracing = false;
 
@@ -458,44 +457,44 @@ public class Dragon : Enemy
             yield return new WaitForSeconds(0.01f);
         }
         //ドラゴンコライダー
-        EnemyCollider.offset = new Vector2(0.67f, -1.6f);
-        EnemyCollider.size = new Vector2(7.3f, 3.18f);
+        //EnemyCollider.offset = new Vector2(0.67f, -1.6f);
+        //EnemyCollider.size = new Vector2(7.3f, 3.18f);
         //攻撃チェックArea
         //dragonAttackCheckArea.offset = new Vector2(1.34f, -1.2f);
         //dragonAttackCheckArea.size = new Vector2(9.3f, 4f);
-        dragonAttackCheckArea.offset = new Vector2(0.9f, -1f);
-        dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
-        dragonAttackCheckArea.gameObject.SetActive(true);
+        //dragonAttackCheckArea.offset = new Vector2(0.9f, -1f);
+        //dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
+        //dragonAttackCheckArea.gameObject.SetActive(true);
         while(animcheck < 96)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        EnemyCollider.offset = new Vector2(-3.3f, -1.6f);
-        EnemyCollider.size = new Vector2(7, 3.18f);
+        //EnemyCollider.offset = new Vector2(-3.3f, -1.6f);
+        //EnemyCollider.size = new Vector2(7, 3.18f);
         //攻撃チェックArea
         //dragonAttackCheckArea.offset = new Vector2(-3.9f, -1.2f);
         //dragonAttackCheckArea.size = new Vector2(10, 4f);
-        dragonAttackCheckArea.offset = new Vector2(-4.2f, -1f);
-        dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
+        //dragonAttackCheckArea.offset = new Vector2(-4.2f, -1f);
+        //dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
         while (animcheck < 104)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        EnemyCollider.offset = new Vector2(-1.7f, -1.6f);
-        EnemyCollider.size = new Vector2(6.65f, 3.18f);
+        //EnemyCollider.offset = new Vector2(-1.7f, -1.6f);
+        //EnemyCollider.size = new Vector2(6.65f, 3.18f);
         //攻撃チェックArea
         //dragonAttackCheckArea.offset = new Vector2(-4.9f, -1.2f);
         //dragonAttackCheckArea.size = new Vector2(8.2f, 4f);
-        dragonAttackCheckArea.offset = new Vector2(-3.5f, -1f);
-        dragonAttackCheckArea.size = new Vector2(12.35f, 4.45f);
+        //dragonAttackCheckArea.offset = new Vector2(-3.5f, -1f);
+        //dragonAttackCheckArea.size = new Vector2(12.35f, 4.45f);
         while (animcheck < 112)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        dragonAttackCheckArea.gameObject.SetActive(false);
+        //dragonAttackCheckArea.gameObject.SetActive(false);
         ResetAttackCheckArea();
         ResetBoxCollider2D();
         while (animcheck < 150)
@@ -507,7 +506,6 @@ public class Dragon : Enemy
         //enemyData.power = attackdam;
         //enemyData.knockBackValue = knockbackval;
         isSlewAttacking = false;
-
 
         //アニメの終わり（必須）
         animator.SetInteger("AnimationController", -1);
@@ -535,10 +533,6 @@ public class Dragon : Enemy
         //    animcheck++;
         //    yield return new WaitForSeconds(0.01f);
         //}
-
-
-        
-
     }
     IEnumerator JumpAttackAnimPlus()
     {
@@ -546,9 +540,9 @@ public class Dragon : Enemy
         JumpAttackAnimCtrl = 1;
         animator.SetInteger("JumpAttackAnimCtrl", JumpAttackAnimCtrl);
         //コライダーと攻撃範囲の調整
-        //dragonAttackCheckArea.gameObject.SetActive(false);
-        dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
-        dragonAttackCheckArea.size = new Vector2(10f, 3.5f);
+        ////dragonAttackCheckArea.gameObject.SetActive(false);
+        //dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
+        //dragonAttackCheckArea.size = new Vector2(10f, 3.5f);
         gameObject.layer = LayerMask.NameToLayer("BossEnemy");
         ResetAttackCheckArea();
         //落下後の画面揺れ
@@ -561,16 +555,16 @@ public class Dragon : Enemy
             transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
             yield return new WaitForSeconds(0.01f);
         }
-        dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
-        dragonAttackCheckArea.size = new Vector2(11.5f, 3.5f);
+        //dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
+        //dragonAttackCheckArea.size = new Vector2(11.5f, 3.5f);
         while (animcheck < 10)
         {
             animcheck++;
             transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
             yield return new WaitForSeconds(0.01f);
         }
-        dragonAttackCheckArea.offset = new Vector2(0f, -1f);
-        dragonAttackCheckArea.size = new Vector2(13f, 4.6f);
+        //dragonAttackCheckArea.offset = new Vector2(0f, -1f);
+        //dragonAttackCheckArea.size = new Vector2(13f, 4.6f);
         while (animcheck < 15)
         {
             animcheck++;
@@ -583,7 +577,7 @@ public class Dragon : Enemy
             transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
             yield return new WaitForSeconds(0.01f);
         }
-        dragonAttackCheckArea.gameObject.SetActive(false);
+        //dragonAttackCheckArea.gameObject.SetActive(false);
         while (animcheck < 50)
         {
             animcheck++;
@@ -613,38 +607,69 @@ public class Dragon : Enemy
     }
 
     //外部関数
-    public override void Damage(float power, Skill skill, bool isHitStop, bool ExSkill = false)
+    public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
         //ヒットストップ
-        StartCoroutine(HitStop(power, skill, isHitStop));
+        StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
+    }
+
+    protected override IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
+    {
+        //ヒット時SE・コンボ時間リセット
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
-        hp -= power;
-        //HPゲージを使用しているかどうか
-        if (HPBar != null)
+        ComboParam.Instance.ResetTime();
+
+        //ヒットエフェクト生成
+        if (skill != null)
         {
-            HPBar.ReductionHP();
+            HitEfect(this.transform, skill.hitEffectAngle);
         }
-        else
+        else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
+
+        //ヒットストップ処理
+        if (isHitStop)
         {
-            Debug.Log("HPBarはまだ入れてないです。もしHPBar付きで試したい場合はHPBarを付けてから試してください。");
+            Vector3 initialPos = this.transform.position;//初期位置保存
+            Time.timeScale = 0;
+
+            //ヒットストップ処理開始
+            tween = transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    //アニメーションが終了したら時間を戻す
+                    Time.timeScale = 1;
+                    //初期位置に戻す
+                    this.transform.position = initialPos;
+
+                });
+            yield return new WaitForSeconds(power * stopState.shakTime + 0.01f);
         }
 
-        ComboParam.Instance.ResetTime();
+        //ヒット時演出（敵点滅）
         if (!hadDamaged)
         {
             StartCoroutine(HadDamaged());
             hadDamaged = true;
         }
+
+        hp -= power;
+
+        //HPゲージを使用しているかどうか
+        if (HPBar != null)
+        {
+            HPBar.ReductionHP();
+        }
+
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
-            Destroy();
+            OnDestroyMode();
         }
     }
 
     public override void TurnAround()
     {
-        Debug.Log("方向を変える");
         bool InCheck = true;
         if (transform.localScale.x == 1f && InCheck)
         {
@@ -734,7 +759,7 @@ public class Dragon : Enemy
 
 
     //内部関数
-    protected override void Destroy()
+    protected override void OnDestroyMode()
     {
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss"); 

@@ -21,17 +21,17 @@ public class SkillAttackArea : MonoBehaviour
         if (player.isUpAttack)//ã¸UŒ‚
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
-            player._Attack(Enemy, skill.damage, skill, true);
+            player.Attack(Enemy, skill.damage, skill, true);
         }
         if (player.isSideAttack)//‰¡UŒ‚
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
-            player._Attack(Enemy, skill.damage, skill, true);
+            player.Attack(Enemy, skill.damage, skill, true);
         }
         if (player.isDropAttack)//‰ºUŒ‚
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
-            player._Attack(Enemy, skill.damage, skill, true);
+            player.Attack(Enemy, skill.damage, skill, true);
         }
         ExAttackParam.Instance.AddGauge();
     }

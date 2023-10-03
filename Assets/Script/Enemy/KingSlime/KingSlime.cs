@@ -1,6 +1,8 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using DG.Tweening;
+using System.Net.NetworkInformation;
 
 public class KingSlime : Enemy
 {
@@ -12,8 +14,6 @@ public class KingSlime : Enemy
     public BoxCollider2D attackCheckArea;
     public CircleCollider2D knockbackAttackCircle;
     public BossHPBar HPBar;
-
-
 
     //揺れ関連
     [System.Serializable]
@@ -454,7 +454,7 @@ public class KingSlime : Enemy
         enemyRb.AddForce(new Vector2(0, -10f));
     }
 
-    protected override void Destroy()
+    protected override void OnDestroyMode()
     {
         isDestroy = true;
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
@@ -462,32 +462,66 @@ public class KingSlime : Enemy
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
     }
 
-    public override void Damage(float power, Skill skill, bool isHitStop, bool ExSkill = false)
+    public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
-        //ヒットストップ
-        StartCoroutine(HitStop(power, skill, isHitStop));
+        //ダメージ処理
+        StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
+    }
+
+    protected override IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
+    {
+        //ヒット時SE・コンボ時間リセット
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
-        hp -= power;
-        //HPゲージを使用しているかどうか
-        if (HPBar != null)
+        ComboParam.Instance.ResetTime();
+
+        //ヒットエフェクト生成
+        if (skill != null)
         {
-            HPBar.ReductionHP();
+            HitEfect(this.transform, skill.hitEffectAngle);
         }
-        else
+        else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
+
+        //ヒットストップ処理
+        if (isHitStop)
         {
-            Debug.Log("HPBarはまだ入れてないです。もしHPBar付きで試したい場合はHPBarを付けてから試してください。");
+            Vector3 initialPos = this.transform.position;//初期位置保存
+            Time.timeScale = 0;
+
+            //ヒットストップ処理開始
+            Debug.Log("ヒットストップ開始");
+            tween = transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    //アニメーションが終了したら時間を戻す
+                    Time.timeScale = 1;
+                    //初期位置に戻す
+                    this.transform.position = initialPos;
+
+                    Debug.Log("ヒットストップ終了");
+                });
+            yield return new WaitForSeconds(power * stopState.shakTime + 0.01f);
         }
 
-        ComboParam.Instance.ResetTime();
+        //ヒット時演出（敵点滅）
         if (!hadDamaged)
         {
             StartCoroutine(HadDamaged());
             hadDamaged = true;
         }
+
+        hp -= power;
+
+        //HPゲージを使用しているかどうか
+        if (HPBar != null)
+        {
+            HPBar.ReductionHP();
+        }
+
         if (hp <= 0)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
-            Destroy();
+            OnDestroyMode();
         }
     }
 
@@ -499,6 +533,7 @@ public class KingSlime : Enemy
             NoGravity = false;
             gameObject.layer = LayerMask.NameToLayer("Enemy");
             knockbackAttackCircle.enabled = false;
+            attackCheckArea.enabled = false;
             KSNormalAttackLanding = false;
             IsAttacking = false;
             IsMoving = true;
@@ -512,6 +547,7 @@ public class KingSlime : Enemy
             NoGravity = false;
             gameObject.layer = LayerMask.NameToLayer("Enemy");
             knockbackAttackCircle.enabled = false;
+            attackCheckArea.enabled = false;
             KSNormalAttackLanding = false;
             IsAttacking = false;
             IsMoving = true;
@@ -540,6 +576,8 @@ public class KingSlime : Enemy
             IsAttacking = false;
             IsMoving = true;
             KSattackingCheck = true;
+            knockbackAttackCircle.enabled = false;
+            attackCheckArea.enabled = false;
             AttackMode = 0;
             wallCheck.SetActive(true);
             SkillTurnAround = false;

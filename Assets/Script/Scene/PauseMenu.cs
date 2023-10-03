@@ -53,6 +53,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseStart()
     {
+        
         Time.timeScale = 0;
         isPauseMenu = true;
         stockImage.sprite = stockImages[SceneData.Instance.stock];

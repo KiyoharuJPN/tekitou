@@ -46,7 +46,6 @@ public class PlayerBuff : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -63,7 +62,12 @@ public class PlayerBuff : MonoBehaviour
     {
         player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
         //ゲージ追加（獲得量 - (獲得毎減少 × 獲得回数)
-        for (int i = 0; i < exGage.setBuffNum - (exGage.setBuffDown * exGage.getBuffCount); i++) {
+        int getExGage = exGage.setBuffNum - (exGage.setBuffDown * exGage.getBuffCount);
+        if(getExGage < 5)
+        {
+            getExGage = 5;//最低値
+        }
+        for (int i = 0; i < getExGage; i++) {
             ExAttackParam.Instance.AddGauge();
         }
         exGage.getBuffCount++;
@@ -77,6 +81,7 @@ public class PlayerBuff : MonoBehaviour
             StartCoroutine(ColorChenge());
         }
     }
+
     IEnumerator ColorChenge()
     {
         float time = 0.2f;
@@ -105,7 +110,7 @@ public class PlayerBuff : MonoBehaviour
         }
         else
         {
-            //プレイヤー（gameObject)に斬撃追加スクリプトを追加
+            //プレイヤー（gameObject)にスピードアップスクリプトを追加
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
             player.gameObject.AddComponent<SpeedUp>();
         }
@@ -160,6 +165,7 @@ public class PlayerBuff : MonoBehaviour
         }
         invincible.getBuffCount++;
     }
+
     public InvincibleBuff GetInvincible()
     {
         return invincible;

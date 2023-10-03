@@ -38,7 +38,7 @@ MonoBehaviour:
     hitEffectAngle: 0
     coolTime: 0
   - type: 4
-    damage: 10
+    damage: 25
     distance: 0
     skillText: "\u5FC5\u6BBA\u6280"
     hitEffectAngle: 0

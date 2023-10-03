@@ -94,6 +94,7 @@ public class SlashingBuff : MonoBehaviour
 
     internal void AddBuff(int count)
     {
+        timeBar = GameObject.Find("PlayerBuffTime");
         float addTime = slashing.buffSetTime - slashing.buffTimeDown * count;
         buffTime += addTime;
         time += addTime;

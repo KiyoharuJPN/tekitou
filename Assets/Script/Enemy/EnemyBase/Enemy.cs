@@ -50,6 +50,9 @@ public class Enemy : MonoBehaviour
 
     protected GameObject player;
 
+    //ダメージ処理中か
+    bool isDamege = false;
+
     //敵の点滅
     SpriteRenderer sprite;
     protected enum moveType
@@ -73,9 +76,11 @@ public class Enemy : MonoBehaviour
     EnemyBuffSystem _EnemyBuff;
 
     //ヒットストップステータス
-    EnemyGeneratar.HitStopState stopState;
+    internal EnemyGeneratar.HitStopState stopState;
     //ヒットストップバフ
-    bool _isDestroyed = false,_isHitStoped = false;
+    bool _isDestroyed = false, _isHitStoped = false;
+
+    protected Tween tween;
 
     protected virtual void Start()
     {
@@ -178,12 +183,10 @@ public class Enemy : MonoBehaviour
         //吹っ飛び中以外は行わない
         if (!isDestroy)
             return;
-
         //吹っ飛び中の処理
         if (isDestroy)
         {
-            
-            EnemyRotate();
+            EnemyRotate();//回転
         }
     }
 
@@ -209,97 +212,40 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void Damage(float power, Skill skill, bool isHitStop, bool ExSkill = false)
+    //ダメージ処理呼出し
+    public virtual void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
-        //ヒットストップ
         if (!_isHitStoped)
         {
             _isHitStoped = true;
-            StartCoroutine(HitStop(power, skill, isHitStop));
-        }
-            
-
-        //既に死亡状態の場合
-        if (isDestroy)
-        {
-            if (_EnemyBuff != null)
-            {
-                if (ExSkill) _EnemyBuff.SetEXAttackDecrease(7);
-                if (_EnemyBuff.GetBuffAttackCheckCount() > 0)
-                {
-                    _EnemyBuff.ShowAttackChecking();
-                    SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
-                    ComboParam.Instance.ResetTime();
-                    reflexNum = maxReflexNum;
-                    CalcForceDirection();
-                    BuffBoostSphere();
-                }
-                else
-                {
-                    _EnemyBuff.ShowAttackChecking();
-                    SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
-                    GameObject obj = Instantiate(_EnemyBuff.GetBuffEffect(), new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
-                    obj.GetComponent<SpriteRenderer>().color = _EnemyBuff.GetColorByType();
-                    GameManager.Instance.SetBuff((int)_EnemyBuff.GetBuffType());
-
-                    if (_isHitStoped)
-                    {
-                        _isDestroyed = true;
-                        OnCamera = false;
-                        gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        Destroy(gameObject);
-                    }
-                }
-            }
-            else
-            {
-                SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
-                ComboParam.Instance.ResetTime();
-                reflexNum = maxReflexNum;
-                CalcForceDirection();
-                BoostSphere();
-
-            }
-            return;
-        }
-
-        hp -= power;
-
-        if (!hadDamaged)
-        {
-            StartCoroutine(HadDamaged());
-            hadDamaged = true;
-        }
-        if (hp <= 0)
-        {
-            PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
-
-            Destroy();
+            //ダメージ処理開始
+            StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
         }
     }
-
-    public IEnumerator HitStop(float power, Skill skill, bool isHitStop)
+    
+    //ダメージ処理（ヒットストップの関係でコルーチンに変更）
+    protected virtual IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
     {
+        //ヒット時SE・コンボ時間リセット
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         ComboParam.Instance.ResetTime();
 
-        if(skill != null)
+        //ヒットエフェクト生成
+        if (skill != null)
         {
             HitEfect(this.transform, skill.hitEffectAngle);
         }
         else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
 
-        if(isHitStop)
+        //ヒットストップ処理
+        if (isHitStop)
         {
-            Debug.Log("ヒットストップ実行");
-            //ヒットストップ処理
+            isHitStop = true;
             Vector3 initialPos = this.transform.position;//初期位置保存
             Time.timeScale = 0;
 
-            yield return transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+            //ヒットストップ処理開始
+            tween = transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
                 .SetUpdate(true)
                 .OnComplete(() =>
                 {
@@ -308,13 +254,100 @@ public class Enemy : MonoBehaviour
                     //初期位置に戻す
                     this.transform.position = initialPos;
                 });
+            yield return new WaitForSeconds(power * stopState.shakTime);
         }
 
-        _isHitStoped = false;
-
-        if (_isDestroyed)
+        //ヒット時演出（敵点滅）
+        if (!hadDamaged)
         {
-            Destroy(gameObject);
+            StartCoroutine(HadDamaged());
+            hadDamaged = true;
+        }
+
+        //既に死亡状態の場合
+        if (isDestroy)
+        {
+            if (_EnemyBuff != null)
+            {
+                if (exSkill) _EnemyBuff.SetEXAttackDecrease(7);　//必殺技ヒット時処理
+
+                if (_EnemyBuff.GetBuffAttackCheckCount() > 0)　//追撃回数が０以上の場合
+                {
+                    //SE・コンボ時間リセット
+                    SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
+                    ComboParam.Instance.ResetTime();
+
+                    //追撃回数UIに対しての処理
+                    _EnemyBuff.ShowAttackChecking();
+
+                    _isHitStoped = false;
+                }
+                else if ((_EnemyBuff.GetBuffAttackCheckCount() == 0) || (_EnemyBuff.GetBuffAttackCheckCount() <= 0 && exSkill))
+                {
+                    //追撃回数UIに対しての処理
+                    _EnemyBuff.ShowAttackChecking();
+                    //消滅時SE再生
+                    SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
+
+                    //バフゲット時消滅エフェクト
+                    GameObject obj = Instantiate(_EnemyBuff.GetBuffEffect(), new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+                    obj.GetComponent<SpriteRenderer>().color = _EnemyBuff.GetColorByType();
+                    //プレイヤーにバフセット
+                    GameManager.Instance.SetBuff((int)_EnemyBuff.GetBuffType());
+
+                    if (tween != null)
+                    {
+                        tween.Kill();
+                        //アニメーションが終了したら時間を戻す
+                        Time.timeScale = 1;
+                    }
+
+                    Destroy(gameObject);
+
+                    yield break;
+                    //if (_isHitStoped)
+                    //{
+                    //    _isDestroyed = true;
+                    //    OnCamera = false;
+                    //    gameObject.SetActive(false);
+                    //}
+                    //else
+                    //{
+                    //    if (tween != null)
+                    //    {
+                    //        tween.Kill();
+                    //        //アニメーションが終了したら時間を戻す
+                    //        Time.timeScale = 1;
+                    //    }
+                    //    Destroy(gameObject);
+                    //}
+                }
+            }
+
+            //反射回数リセット
+            reflexNum = maxReflexNum;
+
+            //吹き飛び処理
+            BlownAway();
+            yield break;
+        }
+        //死亡時ではない場合
+        else if (!isDestroy)
+        {
+            //体力減少
+            hp -= power;
+
+            //体力がなくなった場合死亡
+            if (hp <= 0)
+            {
+                //スコア追加
+                PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
+
+                //死亡時処理
+                OnDestroyMode();
+            }
+
+            _isHitStoped = false;
         }
     }
 
@@ -323,27 +356,39 @@ public class Enemy : MonoBehaviour
         
     }
 
-    protected virtual void Destroy()
+    //死亡時処理
+    protected virtual void OnDestroyMode()
     {
+        //死亡状態に変更
+        isDestroy = true;
+        //死亡SE再生
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
+        //敵討伐数追加
         GameManager.Instance.AddKillEnemy();
-        //反射用のコライダーに変更
+        //反射用の設定に変更
         this.GetComponent<BoxCollider2D>().enabled = false;
         this.GetComponent<CircleCollider2D>().enabled = true;
         enemyRb.bodyType = RigidbodyType2D.Dynamic;
         enemyRb.gravityScale = 0;
         enemyRb.constraints = RigidbodyConstraints2D.None;
-        CalcForceDirection();
-        //吹っ飛び開始
-        BoostSphere();
-        isDestroy = true;
-        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
         gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
-        
-        if(_EnemyBuff != null)
+
+        //吹っ飛び開始
+        BlownAway();
+
+        if (_EnemyBuff != null)
             _EnemyBuff.ShowAttackChecking();
 
         if(smokeEffect != null)
             StartCoroutine(BlowAwayEffect());
+    }
+
+    //吹き飛び処理
+    protected void BlownAway()
+    {
+        //吹っ飛び開始
+        CalcForceDirection(); //吹き飛び方向計算
+        BoostSphere();        //velocity付与
     }
 
     //吹っ飛び発生
@@ -387,9 +432,9 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(effectInterval);
         GameObject obj =  Instantiate(smokeEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
-        StartCoroutine(BlowAwayEffect());
         yield return new WaitForSeconds(0.25f);
         Destroy(obj);
+        StartCoroutine(BlowAwayEffect());
     }
 
     protected void CalcForceDirection()
@@ -449,6 +494,7 @@ public class Enemy : MonoBehaviour
         //return GameObject.Find(nearObjName);
         return targetObj;
     }
+
     //画面に入ったどうかをチェック
     protected void OnBecameVisible()
     {
@@ -552,13 +598,13 @@ public class Enemy : MonoBehaviour
         hadDamaged = false;
     }
 
-
     //重力
     protected virtual void Gravity()
     {
         enemyRb.AddForce(new Vector2(0, -5));
     }
 
+    //敵停止処理
     public virtual void EnemyStop() 
     {
         if (enemyRb != null)
@@ -572,7 +618,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //必殺技が当たっていた場合
+    //必殺技が当たっていた場合のダメージ処理呼出し
     public virtual void PlaeyrExAttack_HitEnemyEnd(float powar)
     {
         if (animator != null)
@@ -621,6 +667,13 @@ public class Enemy : MonoBehaviour
         GameObject obj = Instantiate(deathEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
 
         if (_EnemyBuff) _EnemyBuff._Destroy();
+
+        if (tween != null)
+        {
+            tween.Kill();
+            //アニメーションが終了したら時間を戻す
+            Time.timeScale = 1;
+        }
         Destroy(gameObject);
     }
 
@@ -639,8 +692,7 @@ public class Enemy : MonoBehaviour
         Destroy(prefab, time);
     }
 
-
-
+    //バフによる吹き飛び速度変更
     float BuffBlowingSpeed()
     {
         switch (_EnemyBuff.GetBuffBlowingSpeed())

@@ -15,7 +15,7 @@ public class Heart : Item
         if (collision.CompareTag("Player") || collision.CompareTag("InvinciblePlayer")) 
         { 
             SoundManager.Instance.PlaySE(SESoundData.SE.GetHeart);
-            collision.GetComponent<PlayerController>()._Heel(itemData.resilience);
+            collision.GetComponent<PlayerController>().Heel(itemData.resilience);
             base.OnTriggerEnter2D(collision);
         }
     }

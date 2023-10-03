@@ -12,16 +12,17 @@ public class InvinciblBuff : MonoBehaviour
 
     SpriteGlow.SpriteGlowEffect spriteGlow;
     //バフ中に光る色
-    Color32 color = Color.yellow;//水色
+    Color32 color = Color.yellow;//黄色
 
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.tag = "InvinciblePlayer";
         invincible = PlayerBuff.Instance.GetInvincible();
         buffTime = invincible.firstSetTime;
         invincibleObj = this.transform.Find("Invincibility").gameObject;
         invincibleObj.SetActive(true);
-        gameObject.tag = "InvinciblePlayer";
+        
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         spriteGlow.GlowColor = color;
@@ -38,7 +39,10 @@ public class InvinciblBuff : MonoBehaviour
     {
         while (buffTime > 0)
         {
-            buffTime -= Time.deltaTime;
+            if (this.gameObject.GetComponent<PlayerController>().canMove)
+            {
+                buffTime -= Time.deltaTime;
+            }
             yield return null;
         }
         invincibleObj.SetActive(false);
@@ -48,7 +52,7 @@ public class InvinciblBuff : MonoBehaviour
         {
             spriteGlow.GlowColor = Color.green;
         }
-        else if (gameObject.GetComponent<SpeedUp>())
+        else if (gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<SlashingBuff>())
         {
             spriteGlow.GlowColor = Color.cyan;
         }
@@ -57,8 +61,8 @@ public class InvinciblBuff : MonoBehaviour
             spriteGlow.EnableInstancing = true;
         }
 
-        gameObject.tag = "Player";
         PlayerBuff.Instance.CountReset_Invincible();
+        gameObject.tag = "Player";
         GameManager.Instance.BGMBack();
         Destroy(this.GetComponent<InvinciblBuff>());
     }

@@ -145,7 +145,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 0}
   player: {fileID: 0}
+  canPause: 0
   hitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
+  isBossRoom: 0
 --- !u!1001 &6498813625326001450
 PrefabInstance:
   m_ObjectHideFlags: 0

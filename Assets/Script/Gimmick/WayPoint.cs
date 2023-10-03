@@ -32,11 +32,10 @@ public class WayPoint : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (!isWayPoint) 
+        if (!isWayPoint && (col.CompareTag("Player") || col.CompareTag("InvinciblePlayer"))) 
         {
-            isWayPoint = true;
             animator.SetTrigger("IsWayPoint");
             if (pointNum == 1)
             {
@@ -47,8 +46,11 @@ public class WayPoint : MonoBehaviour
                 SceneData.Instance.wayPoint_2 = true;
             }
             SoundManager.Instance.PlaySE(SESoundData.SE.HalfPoint);
-            collision.GetComponent<PlayerController>()._Heel(4);
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            if(col != null)
+            {
+                col.GetComponent<PlayerController>().Heel(4);
+            }
+            isWayPoint = true;
             this.enabled = false;
         }
     }

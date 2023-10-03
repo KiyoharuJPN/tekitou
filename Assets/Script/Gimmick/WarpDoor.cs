@@ -98,9 +98,10 @@ public class WarpDoor : MonoBehaviour
         {
             yield return null;
         }
-        if(SceneData.Instance.referer != "Tutorial")
+        if(bossDoor)
         {
-            SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
+            GameManager.Instance.isBossRoom = true;
+            GameManager.Instance.BGMStart_BossRoom();
         }
 
         player.GetComponent<PlayerController>().WarpDoorEnd();

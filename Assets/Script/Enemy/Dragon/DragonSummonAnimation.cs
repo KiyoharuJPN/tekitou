@@ -54,6 +54,7 @@ public class DragonSummonAnimation : MonoBehaviour
         enemyRb.bodyType = RigidbodyType2D.Dynamic;
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
         gameObject.GetComponent<Dragon>().enabled = true;
+        GameManager.Instance.canPause = true;
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         IsAnimation = false;
         animator.SetBool("IsAnimation", IsAnimation);
@@ -61,11 +62,16 @@ public class DragonSummonAnimation : MonoBehaviour
         //壁のチェック
         if(WallCheck!=null)WallCheck.SetActive(true);
         gameObject.GetComponent<DragonSummonAnimation>().enabled = false;
+        if (GameObject.Find("Hero").CompareTag("InvinciblePlayer"))
+        {
+            SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Invincibility, BGMSoundData.BGM.none);
+        }
     }
 
     //ボス登場アニメーション
     IEnumerator BossSummonAnim1()
     {
+
         AnimController = 1;
         yield return new WaitForSeconds(1);
         SoundManager.Instance.PlaySE(SESoundData.SE.DragonRoar);
@@ -93,6 +99,7 @@ public class DragonSummonAnimation : MonoBehaviour
             if (summon)
             {
                 summon = false;
+                GameManager.Instance.canPause = false;
                 StartCoroutine(BossSummon());
                 GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(false);
             }

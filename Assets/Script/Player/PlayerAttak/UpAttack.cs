@@ -15,7 +15,7 @@ public class UpAttack
         player.animator.SetBool("IsUpAttack", player.isUpAttack);
         p_Jump.jumpPos = player.transform.position.y;
         p_Jump.jumpHight = 3f;
-        await Task.Delay(170); ;
+        await Task.Delay(170);
         p_Jump.isUpAttack = true;
         player.rb.velocity = new Vector2(0, 0);
         mono.StartCoroutine(UpAttackTime(player,p_Jump,mono));
@@ -29,7 +29,7 @@ public class UpAttack
 
     private static IEnumerator UpAttackTime(PlayerController player, Player_Jump p_Jump, MonoBehaviour mono)
     {
-        var time = 0.4f;
+        var time = 0.3f;
 
         while (time > 0)
         {
@@ -39,8 +39,8 @@ public class UpAttack
             yield return null;
         }
 
+
         mono.StartCoroutine(_UpAttackInterval(AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.Hero_UpAttack_End), player, p_Jump));
-        UpAttackEnd(player, p_Jump);
     }
 
     //クールタイム用コルーチン
@@ -60,6 +60,7 @@ public class UpAttack
     {
         if (p_Jump.isUpAttack)
         {
+            player.rb.velocity = new Vector2(0, 0);
             player.isAttack = false;
             player.enemylist.Clear();
             p_Jump.isUpAttack = false;

@@ -18,9 +18,11 @@ public class GameManager : MonoBehaviour
 
     private int maxCombo;
     private int killEnemy;
-    private bool canPause = false;
+    public bool canPause = false;
 
     public GameObject hitEffect;
+
+    public bool isBossRoom = false;
 
     public static GameManager Instance { get; private set; }
 
@@ -29,7 +31,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //ポーズ画面
-        if (Input.GetKeyDown("joystick button 7") && canPause) 
+        if (Input.GetKeyUp("joystick button 7") && canPause) 
         {
             if (!pauseMenu.PauseCheck())
             {
@@ -180,6 +181,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject gameObj in hitEnemyList)
         {
+            ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
             gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
             enemyList.Remove(gameObj);
         }
@@ -224,6 +226,10 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
     }
+    public void BGMStart_BossRoom()
+    {
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
+    }
     private void BGMStart_Result()
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Result, BGMSoundData.BGM.none);
@@ -236,14 +242,21 @@ public class GameManager : MonoBehaviour
     //無敵化から戻った際のBGM再生
     public void BGMBack()
     {
-        switch (SceneData.Instance.referer)
+        if (isBossRoom)//ボス戦中だった場合
         {
-            case "Tutorial":
-                BGMStart_Tutorial(); break;
-            case "Stage1":
-                BGMStart_Stage1(); break;
-            case "Stage2":
-                BGMStart_Stage2(); break;
+            BGMStart_BossRoom();
+        }
+        else if(!isBossRoom)
+        {
+            switch (SceneData.Instance.referer)
+            {
+                case "Tutorial":
+                    BGMStart_Tutorial(); break;
+                case "Stage1":
+                    BGMStart_Stage1(); break;
+                case "Stage2":
+                    BGMStart_Stage2(); break;
+            }
         }
     }
 

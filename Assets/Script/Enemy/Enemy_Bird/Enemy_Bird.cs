@@ -91,9 +91,9 @@ public class Enemy_Bird : Enemy
         //monster_upper.size = new Vector2(3.1f, 1.3f);
         //monster_lower.offset = new Vector2(-0.3f, -0.5f);
         //monster_lower.size = new Vector2(1.42f, 1.64f);
-        BirdAttack.SetActive(true);
-        BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.85f, -0.65f);
-        BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.5f, 1.4f);
+        //BirdAttack.SetActive(true);
+        //BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.85f, -0.65f);
+        //BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.5f, 1.4f);
         while (i < 3)
         {
             i++;
@@ -102,8 +102,8 @@ public class Enemy_Bird : Enemy
         //monster_upper.offset = new Vector2(-0.05f, 0.3f);
         //monster_upper.size = new Vector2(3f, 1.95f);
         //monster_lower.enabled = false;
-        BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.75f, -0.9f);
-        BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.6f);
+        //BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.75f, -0.9f);
+        //BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(2f, 1.6f);
         while (i < 8)
         {
             i++;
@@ -111,14 +111,14 @@ public class Enemy_Bird : Enemy
         }
         //monster_upper.offset = new Vector2(-0.05f, -0.3f);
         //monster_upper.size = new Vector2(3f, 1.95f);
-        BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.7f, -1.15f);
-        BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.9f, 1.11f);
+        //BirdAttack.GetComponent<BoxCollider2D>().offset = new Vector2(-0.7f, -1.15f);
+        //BirdAttack.GetComponent<BoxCollider2D>().size = new Vector2(1.9f, 1.11f);
         while (i < 11)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
         }
-        BirdAttack.SetActive(false);
+        //BirdAttack.SetActive(false);
         //monster_upper.offset = new Vector2(0f, -0.32f);
         //monster_upper.size = new Vector2(3.3f, 1.26f);
         //monster_lower.enabled = true;
@@ -164,7 +164,7 @@ public class Enemy_Bird : Enemy
         //monster_upper.size = new Vector2(3f, 1.82f);
         //monster_lower.offset = new Vector2(-0.33f, -0.83f);
         //monster_lower.size = new Vector2(0.90f, 1.58f);
-        while (i < 35)
+        while (i < 55)
         {
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -175,7 +175,7 @@ public class Enemy_Bird : Enemy
         //monster_lower.size = new Vector2(1f, 1.35f);
         AttackChecking = true;
         BirdAttackArea.SetActive(true);
-        while (i < 41)
+        while (i < 60)
         {
             i++;
             yield return new WaitForSeconds(0.01f);

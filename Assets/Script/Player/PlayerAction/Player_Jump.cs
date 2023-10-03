@@ -8,11 +8,11 @@ using static PlayerController;
 public class Player_Jump : MonoBehaviour
 {
     PlayerController player;
-    bool isGrounded = false;            //接地フラグ
+    public Player_IsGround ground;
+    public Player_IsGround head;
+    bool isGround = false;            //接地フラグ
+    bool isHead = false;            //頭をぶつけた判定
     const float FALL_VELOCITY = 0.4f;   //落下中判定用定数（characterのVilocityがこれより大きい場合true）
-
-    [Header("すり抜床か判定するか")]
-    public bool checkPlatformGroud = true;
 
     internal float jumpTime = 0;
     internal bool isjump = false;
@@ -52,6 +52,9 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //接地状態を得る
+        isGround = ground.IsGround();
+        isHead = head.IsGround();
 
         //停止
         if (player.isExAttack || player.isWarpDoor) return;
@@ -67,7 +70,6 @@ public class Player_Jump : MonoBehaviour
             isjump = false;
             jumpTime = 0;
         };
-
     }
 
     private void FixedUpdate()
@@ -86,7 +88,7 @@ public class Player_Jump : MonoBehaviour
     {
 
         //ジャンプ中の処理
-        if (isjump)
+        if (isjump && !isHead)
         {
             if (!Input.GetButton("Jump") || jumpTime >= player.jumpData.maxJumpTime)
             {
@@ -97,6 +99,11 @@ public class Player_Jump : MonoBehaviour
             {
                 jumpTime += Time.deltaTime;
             }
+        }
+        else if (isHead)
+        {
+            isjump = false;
+            jumpTime = 0;
         }
 
         //ジャンプキー入力
@@ -110,7 +117,7 @@ public class Player_Jump : MonoBehaviour
     internal void JumpSet()
     {
         //ジャンプ1段目
-        if (FarstJump && !canSecondJump)
+        if (FarstJump && !canSecondJump && isGround)
         {
             
             player.isSquatting = true;
@@ -125,7 +132,7 @@ public class Player_Jump : MonoBehaviour
             player.animator.Play("Hero_anim_Jump_1");
         }
         //ジャンプ2段目
-        else if(canSecondJump)
+        else if(!FarstJump && canSecondJump)
         {
             player.animator.SetTrigger("IsSecondJump");
             canSecondJump = false;

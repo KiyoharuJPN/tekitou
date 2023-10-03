@@ -390,6 +390,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8236160012760509623}
     m_Modifications:
+    - target: {fileID: 425947600410578562, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109252181806215228, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6267112408542514857, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381885107164672619, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7487818308816874675, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -477,6 +493,10 @@ PrefabInstance:
     - target: {fileID: 8312298754847659851, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
       propertyPath: m_Name
       value: BossHPBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312298754847659851, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9056471604131598449, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
       propertyPath: FillSpeed

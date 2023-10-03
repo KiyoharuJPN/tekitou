@@ -25,7 +25,6 @@ public class SoundManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
 
             introAudioSource = bgmAudioSource;
             loopAudioSource = bgmAudioSource;

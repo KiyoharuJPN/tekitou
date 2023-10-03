@@ -99,7 +99,6 @@ public class TutorialPlayer : PlayerController
         if (lsv <= -0.9 && isAttackKay && isTDownAttack)
             // || rsv <= -0.8)
         {
-            Debug.Log("—Ž‰ºUŒ‚");
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GoolDoor : MonoBehaviour
 {
     [SerializeField] FadeImage fade;
-    [SerializeField] CameraManager camera;
+    [SerializeField] new CameraManager camera;
 
     Collider2D player;
 
