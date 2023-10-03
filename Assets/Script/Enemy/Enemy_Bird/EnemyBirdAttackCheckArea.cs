@@ -17,4 +17,15 @@ public class EnemyBirdAttackCheckArea : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Player") && gameObject.activeSelf)
+        {
+            if (transform.GetComponentInParent<Enemy_Bird>().PlayerInAttackArea())
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
 }

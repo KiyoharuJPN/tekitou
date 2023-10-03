@@ -15,7 +15,7 @@ public class Stage2 : StageCtrl
     {
         GameManager.Instance.ClearEnemyList();
         GameManager.Instance.PlayStart(4);
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         base.Start();
     }
