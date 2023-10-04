@@ -595,6 +595,7 @@ public class KingSlime : Enemy
             movingCheck = 0;
             KSmovingCheck = true;
         }
+        DefaultColor();
     }
 
     int GetSummonProbability()

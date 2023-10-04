@@ -598,6 +598,11 @@ public class Enemy : MonoBehaviour
         hadDamaged = false;
     }
 
+    protected void DefaultColor()
+    {
+        sprite.color = new Color(1, 1, 1);
+    }
+
     //èdóÕ
     protected virtual void Gravity()
     {
