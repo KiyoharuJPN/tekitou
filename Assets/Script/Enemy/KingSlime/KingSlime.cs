@@ -328,7 +328,7 @@ public class KingSlime : Enemy
     }
 
     //キングスライム死亡時に呼ぶ関数
-    public void Boss_Down()
+    virtual public void Boss_Down()
     {
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();
@@ -348,7 +348,7 @@ public class KingSlime : Enemy
             base.OnColEnter2D(col);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    new private void OnCollisionEnter2D(Collision2D collision)
     {
         if (GetComponent<KingSlime>().enabled)
         {

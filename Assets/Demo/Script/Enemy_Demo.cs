@@ -7,6 +7,8 @@ public class Enemy_Demo : Enemy
     [SerializeField]
     private GameObject damageUI;
 
+    private int cmeraReflexNum = 2;
+
     override protected void Start()
     {
         ///“G‚Ìscript‚ÉŠî‚Ã‚­
@@ -17,6 +19,34 @@ public class Enemy_Demo : Enemy
     {
         base.FixedUpdate();
         Gravity();
+    }
+
+    protected override void OnColEnter2D(Collider2D col)
+    {
+        if (!isDestroy && HadContactDamage)
+        {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                Attack(col);
+            }
+        }
+        if (col.gameObject.CompareTag("Stage") && isDestroy)
+        {
+            if(col.gameObject.layer == 20)
+            {
+                cmeraReflexNum--;
+                if (cmeraReflexNum <= 0)
+                {
+                    this.gameObject.layer = 27;
+                }
+            }
+            reflexNum--;
+            Debug.Log(reflexNum);
+            if (reflexNum == 0)
+            {
+                EnemyNomalDestroy();
+            }
+        }
     }
 
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
