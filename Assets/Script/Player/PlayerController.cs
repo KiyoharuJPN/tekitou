@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
         {
             canMovingCounter -= Time.deltaTime;
         }
-        if (!isLanding) { _Skill(); }
+        if (!isLanding) { InputKay(); }
         
 
         BackgroundScroll();
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //‹Z“ü—ÍŒŸ’m
-    void _Skill()
+    protected virtual void InputKay()
     {
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
