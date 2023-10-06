@@ -9,7 +9,6 @@ public class Spider : Enemy
 
     public GameObject SpiderAttackCheckArea, SpiderAttack;
 
-    Coroutine attack;
 
     protected override void Start()
     {
@@ -51,34 +50,41 @@ public class Spider : Enemy
 
 
     //コルーチン用関数
-    IEnumerator SpiderAttacking()
+    //IEnumerator SpiderAttacking()
+    //{
+    //    var i = 0;
+    //    while (i < 25)
+    //    {
+    //        i++;
+    //        yield return new WaitForSeconds(0.01f);
+    //    }
+    //    SpiderAttack.SetActive(true);
+    //    SoundManager.Instance.PlaySE(SESoundData.SE.ForefootHeavyAttack);
+    //    while(i < 32)
+    //    {
+    //        i++;
+    //        yield return new WaitForSeconds(0.01f);
+    //    }
+    //    SpiderAttack.SetActive(false);
+    //    while (i < 70)
+    //    {
+    //        i++;
+    //        yield return new WaitForSeconds(0.01f);
+    //    }
+    //}
+
+
+    //外部関数
+    public void AttackSE()
     {
-        var i = 0;
-        while (i < 25)
-        {
-            i++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        SpiderAttack.SetActive(true);
         SoundManager.Instance.PlaySE(SESoundData.SE.ForefootHeavyAttack);
-        while(i < 32)
-        {
-            i++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        SpiderAttack.SetActive(false);
-        while (i < 70)
-        {
-            i++;
-            yield return new WaitForSeconds(0.01f);
-        }
+    }
+    public void EndAttack()
+    {
         SpiderAttackCheckArea.SetActive(true);
         IsMoving = true;
         AttackChecking = true;
     }
-
-
-    //外部関数
     public override void TurnAround()
     {
         base.TurnAround();
@@ -94,7 +100,6 @@ public class Spider : Enemy
             //Spider
             PlayerNotAttacked = true;
             IsMoving = false;
-            attack = StartCoroutine(SpiderAttacking());
             enemyRb.velocity = Vector2.zero;
             SpiderAttackCheckArea.SetActive(false);
             //Spider
