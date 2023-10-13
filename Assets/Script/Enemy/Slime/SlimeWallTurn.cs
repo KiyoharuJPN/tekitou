@@ -11,7 +11,7 @@ public class SlimeWallTurn : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Stage"))
-            GetComponentInParent<Slime>().TurnAround();
+            GetComponentInParent<Enemy>().TurnAround();
     }
 
     //private void OnTriggerStay2D(Collider2D collision)
