@@ -12,6 +12,8 @@ public class Slime : Enemy
 {
     [Header("移動する時の高さと距離")]
     public float moveHeight, moveWidth;
+    [Header("構え時間")]
+    public float StanceTime = 1;
 
     float movingHeight, movingWidth, movingCheck;    //移動に関する内部関数
     //チェック用内部関数
@@ -33,7 +35,7 @@ public class Slime : Enemy
         //敵のscriptに基づく
         base.Update();
 
-        if (enemyRb.velocity.y <-1)MovingAnim = 1;
+        if (enemyRb.velocity.y < -1) MovingAnim = 1;
         IsMoving = enemyRb.velocity != Vector2.zero;
         //画面内にある
         if (OnCamera)
@@ -65,7 +67,7 @@ public class Slime : Enemy
         if (!IsMoving)
         {
             movingCheck += Time.deltaTime;
-            if(movingCheck > 1)
+            if(movingCheck > StanceTime)
             {
                 movingCheck = 0;
                 enemyRb.AddForce(new Vector2(movingWidth, movingHeight), ForceMode2D.Impulse);
@@ -78,7 +80,7 @@ public class Slime : Enemy
     //0.1秒待って移動不可にする
     IEnumerator SetMoveFalse ()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.05f);
         //IsMoving = false;
         MovingAnim = 0;
     }
@@ -89,13 +91,14 @@ public class Slime : Enemy
         base.OnColEnter2D(col);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
         if (!IsMoving && collision.gameObject.CompareTag("Stage") && BossSummon)
         {
             BossSummon = false;
             if (BossTurn) movingWidth *= -1;
         }
+        base.OnCollisionEnter2D(collision);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -105,7 +108,7 @@ public class Slime : Enemy
             if (col.CompareTag("Stage") && MovingAnim == 1)
             {
                 MovingAnim = 2;
-                if(enemyRb.velocity.y !< 0) enemyRb.velocity = Vector2.zero;
+                //if(enemyRb.velocity.y !< 0) enemyRb.velocity = Vector2.zero;
                 StartCoroutine(SetMoveFalse());
             }
         }
@@ -136,6 +139,8 @@ public class Slime : Enemy
     public override void TurnAround()
     {
         movingWidth *= -1;
+        var eveloX = enemyRb.velocity.x * -1;
+        enemyRb.velocity = new Vector2 (eveloX, enemyRb.velocity.y);
         base.TurnAround();
     }
 
