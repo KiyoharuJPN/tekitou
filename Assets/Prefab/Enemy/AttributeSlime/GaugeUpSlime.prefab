@@ -200,6 +200,7 @@ MonoBehaviour:
   speed: 15
   moveHeight: 4
   moveWidth: 3
+  StanceTime: 1
 --- !u!95 &891865252728703089
 Animator:
   serializedVersion: 4

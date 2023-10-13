@@ -108,7 +108,7 @@ public class Slime : Enemy
             if (col.CompareTag("Stage") && MovingAnim == 1)
             {
                 MovingAnim = 2;
-                //if(enemyRb.velocity.y !< 0) enemyRb.velocity = Vector2.zero;
+                if(enemyRb.velocity.y !< 0) enemyRb.velocity = Vector2.zero;
                 StartCoroutine(SetMoveFalse());
             }
         }

@@ -62280,6 +62280,10 @@ PrefabInstance:
       value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
+      propertyPath: StanceTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370193731701165670, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
       propertyPath: HadContactDamage
       value: 1
       objectReference: {fileID: 0}
