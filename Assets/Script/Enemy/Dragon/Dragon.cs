@@ -749,7 +749,7 @@ public class Dragon : Enemy
     }
 
     //ƒhƒ‰ƒSƒ“€–S‚ÉŒÄ‚ÔŠÖ”
-    public void Boss_Down()
+    virtual public void Boss_Down()
     {
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();

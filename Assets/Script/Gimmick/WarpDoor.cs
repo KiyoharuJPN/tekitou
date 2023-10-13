@@ -74,6 +74,7 @@ public class WarpDoor : MonoBehaviour
 
     IEnumerator PlayerWarp(float delay,Collider2D player)
     {
+        //死んでいるEnemy強制削除
         DaedEnemyDestroy();
         player.GetComponent<PlayerController>().SetCanMove(false);
         yield return new WaitForSeconds(delay);//渡された時間待機

@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
     }
-    private void BGMStart_Tutorial()
+    public void BGMStart_Tutorial()
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Tutorial_intro, BGMSoundData.BGM.Tutorial_roop);
     }
@@ -284,6 +284,8 @@ public class GameManager : MonoBehaviour
         if (SceneData.Instance.stock >= 1)
         {
             SceneData.Instance.stock--;
+            //デモステージのみの処理
+            if (SceneData.Instance.referer == "Demo") SceneData.Instance.stock++;
             SceneData.Instance.revival = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -319,6 +321,32 @@ public class GameManager : MonoBehaviour
             case 3:
                 PlayerBuff.Instance.InvincibleBuff();
                 break;
+        }
+    }
+
+    //デモ限定機能
+    [SerializeField, Header("ボス終了後のワープポイント")]
+    GameObject[] warpPoint;
+    CameraManager camera;
+
+    public void DemoStage_BossDown()
+    {
+        camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraManager>();
+        StartCoroutine(bossDownMove());
+        IEnumerator bossDownMove()
+        {
+            player.SetCanMove(false);
+
+            //フェードアウト開始
+            fade.StartFadeOut();
+
+            while (!fade.IsFadeOutComplete())
+            {
+                yield return null;
+            }
+
+            //フェードアウト終了
+            ComboParam.Instance.ResetTime(); SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

@@ -7,7 +7,6 @@ public class NomalAttackArea : MonoBehaviour
     PlayerController player;
     Skill skill;
 
-
     private void Start()
     {
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);

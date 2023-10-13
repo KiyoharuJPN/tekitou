@@ -68,6 +68,10 @@ public class CameraManager : MonoBehaviour
         {
             ChengeCameraArea_Stage2Nomal();
         }
+        else if(SceneData.Instance.referer == "Demo")
+        {
+            ChengeCameraArea_Stage1Nomal();
+        }
     }
 
     public void SetOriCameraArea(GameObject oriCameraArea)
