@@ -15,7 +15,7 @@ public class Slime : Enemy
 
     float movingHeight, movingWidth, movingCheck;    //移動に関する内部関数
     //チェック用内部関数
-    bool /*IsBlowing = false, IsMoving = false, */BossSummon = false, BossTurn = false;
+    bool BossSummon = false, BossTurn = false;
     int MovingAnim = 0;
 
     //float TestTime = 0f;
