@@ -17,6 +17,7 @@ public class ResultAnyKay : MonoBehaviour
     private void Start()
     {
         loadScene = SceneData.Instance.referer;
+        Debug.Log(loadScene);
         result = this.GetComponent<Result>();
     }
 
@@ -32,6 +33,11 @@ public class ResultAnyKay : MonoBehaviour
             if (loadScene == "Stage2")
             {
                 SceneManager.LoadScene("Ending");
+                return;
+            }
+            if (loadScene == "Demo")
+            {
+                SceneManager.LoadScene("EndingDemo");
                 return;
             }
             SceneManager.LoadScene("Load");

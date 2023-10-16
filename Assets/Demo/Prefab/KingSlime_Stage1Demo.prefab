@@ -173,12 +173,12 @@ GameObject:
   - component: {fileID: 8478506428223087271}
   - component: {fileID: 8478506428223087268}
   - component: {fileID: 8478506428223087264}
-  - component: {fileID: 8251469872280446381}
+  - component: {fileID: -4449533118657942862}
   - component: {fileID: 8478506428223087267}
   - component: {fileID: 4545585258559804487}
   - component: {fileID: 2206064509429968840}
   m_Layer: 23
-  m_Name: KingSlime_Demo
+  m_Name: KingSlime_Stage1Demo
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +338,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8251469872280446381
+--- !u!114 &-4449533118657942862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8478506428223087275}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24884e4644364ab4593b67051f906d3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d1fb2e4996b1dc4d96a0d3ce3b07de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyColliderArea: {fileID: 3015433365696554087}

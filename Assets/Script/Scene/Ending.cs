@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Ending : MonoBehaviour
 {
     [SerializeField]
-    FadeImage fade;
+    private FadeImage fade;
     private void Start()
     {
         Cursor.visible = false;

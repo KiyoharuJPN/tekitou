@@ -113,6 +113,10 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(_PlyerDeath());
     }
+    public void DemoPlayerDeath()
+    {
+        StartCoroutine(_DemoPlyerDeath());
+    }
 
     public void AddMaxComobo(int combo)
     {
@@ -296,6 +300,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator _DemoPlyerDeath()
+    {
+        player.canMove = false;
+        Time.timeScale = 0.3f;
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1f;
+
+        fade.StartFadeOut();
+
+        while (!fade.IsFadeOutComplete())
+        {
+            yield return null;
+        }
+
+        if (SceneData.Instance.stock >= 1)
+        {
+            SceneData.Instance.stock--;
+            //デモステージのみの処理
+            if (SceneData.Instance.referer == "Demo") SceneData.Instance.stock++;
+            SceneData.Instance.revival = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            SceneData.Instance.revival = false;
+            SceneManager.LoadScene("FinishScene_Demo");
+        }
+    }
+
     internal void PauseBack()
     {
         player.canMove = true;
@@ -348,5 +381,13 @@ public class GameManager : MonoBehaviour
             //フェードアウト終了
             ComboParam.Instance.ResetTime(); SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+
+    public void DemoStage1_BossDown()
+    {
+        ComboParam.Instance.ComboStop();
+        PlayerExAttack_Start();
+        SceneData.Instance.referer = "Demo";
+        Result_Start(1);
     }
 }

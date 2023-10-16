@@ -59,4 +59,29 @@ public class Player_Demo : PlayerController
             AttackAction("NomalAttack");
         }
     }
+
+    public override void _Damage(int power)
+    {
+        if (gameObject.GetComponent<InvinciblBuff>()) { return; }
+        if (!inInvincibleTimeLife)
+        {
+            //–³“GŽžŠÔ‚ÌŒvŽZ
+            inInvincibleTimeLife = true;
+            StartCoroutine(InvincibleLife());
+
+            //ƒ‰ƒCƒtŒvŽZ
+            hpparam.DamageHP(hpparam.GetHP() - power);
+            shake.Shake(0.2f, 0.8f, true, true);
+            if (hpparam.GetHP() <= 0)
+            {
+                this.tag = "DeadPlayer";
+                gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
+                isKnockingBack = false;
+                SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
+                animator.Play("Death");
+                shake.Shake(0.2f, 1f, true, true);
+                GameManager.Instance.DemoPlayerDeath();
+            }
+        }
+    }
 }
