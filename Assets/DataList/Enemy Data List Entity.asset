@@ -156,3 +156,14 @@ MonoBehaviour:
     num: 0
     type: 0
     speed: 0
+  - id: 13
+    charName: "\u30B9\u30E9\u30A4\u30E0\u30A2\u30FC\u30DE\u30FC"
+    hp: 2
+    score: 200
+    attackPower: 1
+    power: 1
+    knockBackValue: 30
+    angle: 60
+    num: 13
+    type: 0
+    speed: 15
