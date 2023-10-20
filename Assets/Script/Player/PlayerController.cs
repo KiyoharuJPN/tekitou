@@ -279,16 +279,16 @@ public class PlayerController : MonoBehaviour
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
-        if (lsh >= 0.9 && isAttackKay || Input.GetKeyDown(KeyCode.I))
+        if (lsh >= 0.9 && isAttackKay)
         {
             AttackAction("SideAttack_right");
         }
-        else if(lsh <= -0.9 && isAttackKay || Input.GetKeyDown(KeyCode.O))
+        else if(lsh <= -0.9 && isAttackKay)
         {
             AttackAction("SideAttack_left");
         }
         //•KŽE‹Z
-        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5) || Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5))
         {
             if (!isAttack && canExAttack) 
             {
@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         //Žè“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
-        if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack || Input.GetKeyDown(KeyCode.U) && canNomalAttack)
+        if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack)
         {
             //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack");
