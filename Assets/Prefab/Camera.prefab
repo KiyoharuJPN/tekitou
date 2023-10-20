@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7133389109148824417}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51, y: -0.3299998, z: 0}
+  m_LocalPosition: {x: 118.33, y: -0.3299998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -276,6 +276,8 @@ MonoBehaviour:
   cameraArea_Stage1Boss: {fileID: 8238288887400494910, guid: 9de8c391060cbbf40b9f11900cefe772, type: 3}
   cameraArea_Stage2Nomal: {fileID: 2493369053805205941, guid: bd41ac23e29e63a43bafdd40c57d327b, type: 3}
   cameraArea_Stage2Boss: {fileID: 6978694344915378941, guid: 8e9019ade4707ec46afdab6b0716d72b, type: 3}
+  cameraArea_Stage3Nomal: {fileID: 7512619581611756726, guid: 9c00c5ae3ca19604ca3bc0adcc8acc58, type: 3}
+  cameraArea_Stage3Boss: {fileID: 7990016957512950817, guid: 5a4a64f9c8d6a7b4e93187d0402d4838, type: 3}
 --- !u!114 &7133389109148824427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7133389109952333842}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51, y: -0.3299998, z: 0}
+  m_LocalPosition: {x: 118.33, y: -0.3299998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -90,7 +90,7 @@ public class WarpDoor : MonoBehaviour
         //フェードアウト終了
         ComboParam.Instance.ResetTime();
         player.transform.position = warpPoint.transform.position;
-        if (SceneData.Instance.referer != "Tutorial") camera.ChengeCameraArea_Boss();
+        if (SceneData.Instance.referer != "Tutorial" && bossDoor) camera.ChengeCameraArea_Boss();
 
         yield return new WaitForSeconds(1f);//渡された時間待機
         //フェードイン開始
