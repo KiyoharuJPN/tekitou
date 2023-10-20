@@ -71,6 +71,7 @@ public class GoolDoor : MonoBehaviour
 
     IEnumerator Result(float delay,Collider2D player)
     {
+        player.GetComponent<PlayerController>().SetCanMove(false);
         yield return new WaitForSeconds(delay);//渡された時間待機
 
         //フェードアウト開始
