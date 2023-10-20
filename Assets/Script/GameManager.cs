@@ -93,6 +93,9 @@ public class GameManager : MonoBehaviour
             case 4:
                 BGMStart_Stage2();
                 break;
+            case 5:
+                BGMStart_Stage3();
+                break;
         }
 
         canPause = true;
@@ -112,6 +115,10 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         StartCoroutine(_PlyerDeath());
+    }
+    public void DemoPlayerDeath()
+    {
+        StartCoroutine(_DemoPlyerDeath());
     }
 
     public void AddMaxComobo(int combo)
@@ -226,6 +233,10 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
     }
+    private void BGMStart_Stage3()
+    {
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
+    }
     public void BGMStart_BossRoom()
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
@@ -255,6 +266,8 @@ public class GameManager : MonoBehaviour
                 case "Stage1":
                     BGMStart_Stage1(); break;
                 case "Stage2":
+                    BGMStart_Stage2(); break;
+                case "Stage3":
                     BGMStart_Stage2(); break;
             }
         }
@@ -293,6 +306,35 @@ public class GameManager : MonoBehaviour
         {
             SceneData.Instance.revival = false;
             SceneManager.LoadScene("FinishScene");
+        }
+    }
+
+    private IEnumerator _DemoPlyerDeath()
+    {
+        player.canMove = false;
+        Time.timeScale = 0.3f;
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1f;
+
+        fade.StartFadeOut();
+
+        while (!fade.IsFadeOutComplete())
+        {
+            yield return null;
+        }
+
+        if (SceneData.Instance.stock >= 1)
+        {
+            SceneData.Instance.stock--;
+            //デモステージのみの処理
+            if (SceneData.Instance.referer == "Demo") SceneData.Instance.stock++;
+            SceneData.Instance.revival = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            SceneData.Instance.revival = false;
+            SceneManager.LoadScene("FinishScene_Demo");
         }
     }
 
@@ -348,5 +390,13 @@ public class GameManager : MonoBehaviour
             //フェードアウト終了
             ComboParam.Instance.ResetTime(); SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+
+    public void DemoStage1_BossDown()
+    {
+        ComboParam.Instance.ComboStop();
+        PlayerExAttack_Start();
+        SceneData.Instance.referer = "Demo";
+        Result_Start(1);
     }
 }

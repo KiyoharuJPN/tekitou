@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 8236160012760509609}
   - component: {fileID: 8236160012760509622}
   - component: {fileID: 8236160012760509612}
+  - component: {fileID: 258177837940659017}
+  - component: {fileID: 5321382432974554244}
   m_Layer: 23
   m_Name: Dragon
   m_TagString: Enemy
@@ -229,6 +231,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &258177837940659017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236160012760509620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!114 &5321382432974554244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236160012760509620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0, b: 0, a: 1}
+  glowBrightness: 4
+  outlineWidth: 2
+  alphaThreshold: 0.05
+  drawOutside: 0
+  enableInstancing: 1
 --- !u!1 &8236160014182726317
 GameObject:
   m_ObjectHideFlags: 0

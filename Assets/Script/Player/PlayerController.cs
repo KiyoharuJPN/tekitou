@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
     internal float knockBackCounter; //時間を測るカウンター
     internal float canMovingCounter;
     internal float knockBackForce;   //ノックバックされる力
+    [SerializeField, Header("HPゲージ")]
     internal HPparam hpparam;
 
     //入力キー
@@ -146,7 +147,7 @@ public class PlayerController : MonoBehaviour
     internal float animSpeed = 1f;
 
     //無敵時間
-    bool inInvincibleTimeKnockBack = false, inInvincibleTimeLife = false;
+    internal bool inInvincibleTimeKnockBack = false, inInvincibleTimeLife = false;
     public float InvincibleTime = 20;
     SpriteRenderer sprite;
 
@@ -158,7 +159,7 @@ public class PlayerController : MonoBehaviour
         playerSE = GetComponent<PlayerSE>();
         rb = GetComponent<Rigidbody2D>();
         jump = GetComponent<Player_Jump>();
-        hpparam = GameObject.Find("UI").GetComponentInChildren<HPparam>();
+        //hpparam = GameObject.Find("UI").GetComponentInChildren<HPparam>();
         animator.SetFloat("Speed", animSpeed);
 
         sprite = GetComponent<SpriteRenderer>();
@@ -224,7 +225,7 @@ public class PlayerController : MonoBehaviour
         HeelEffect();
     }
 
-    public void _Damage(int power)
+    public virtual void _Damage(int power)
     {
 
         if (gameObject.GetComponent<InvinciblBuff>()) { return; }

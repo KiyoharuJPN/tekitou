@@ -26,6 +26,7 @@ public class StageCtrl : MonoBehaviour
         {
             playerObj.transform.position = continuePoint[2].transform.position;
         }
+        Cursor.visible = false;
     }
 
     virtual protected void Update()

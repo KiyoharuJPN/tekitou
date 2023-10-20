@@ -19,6 +19,10 @@ public class CameraManager : MonoBehaviour
     private GameObject cameraArea_Stage2Nomal;
     [SerializeField]
     private GameObject cameraArea_Stage2Boss;
+    [SerializeField]
+    private GameObject cameraArea_Stage3Nomal;
+    [SerializeField]
+    private GameObject cameraArea_Stage3Boss;
 
     void Start()
     {
@@ -39,7 +43,11 @@ public class CameraManager : MonoBehaviour
         CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage2Nomal.GetComponent<PolygonCollider2D>();
         CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 6.6f;
     }
-
+    internal void ChengeCameraArea_Stage3Nomal()
+    {
+        CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage3Nomal.GetComponent<PolygonCollider2D>();
+        CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 6.6f;
+    }
     internal void ChengeCameraArea_Boss()
     {
         if (SceneData.Instance.referer == "Stage1")
@@ -50,6 +58,11 @@ public class CameraManager : MonoBehaviour
         else if (SceneData.Instance.referer == "Stage2")
         {
             CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage2Boss.GetComponent<PolygonCollider2D>();
+            CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 5.8f;
+        }
+        else if (SceneData.Instance.referer == "Stage3")
+        {
+            CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage3Boss.GetComponent<PolygonCollider2D>();
             CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 5.8f;
         }
     }
@@ -67,6 +80,10 @@ public class CameraManager : MonoBehaviour
         else if (SceneData.Instance.referer == "Stage2")
         {
             ChengeCameraArea_Stage2Nomal();
+        }
+        else if (SceneData.Instance.referer == "Stage3")
+        {
+            ChengeCameraArea_Stage3Nomal();
         }
         else if(SceneData.Instance.referer == "Demo")
         {

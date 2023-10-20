@@ -104,6 +104,8 @@ GameObject:
   - component: {fileID: 6259610633585901154}
   - component: {fileID: 6259610633585901159}
   - component: {fileID: 6259610633585901153}
+  - component: {fileID: -1150304350455714979}
+  - component: {fileID: -4710984220568091287}
   m_Layer: 23
   m_Name: KingSlime(HPbar)
   m_TagString: Enemy
@@ -313,6 +315,41 @@ MonoBehaviour:
     Strength: 0.9
   WallCheck: {fileID: 7294653932298096155}
   HPBar: {fileID: 1679366743069125864}
+--- !u!114 &-1150304350455714979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6259610633585901161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0, b: 0, a: 1}
+  glowBrightness: 4
+  outlineWidth: 2
+  alphaThreshold: 0.05
+  drawOutside: 0
+  enableInstancing: 1
+--- !u!114 &-4710984220568091287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6259610633585901161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &7294653932298096155
 GameObject:
   m_ObjectHideFlags: 0

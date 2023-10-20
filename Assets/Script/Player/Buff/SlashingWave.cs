@@ -7,6 +7,8 @@ public class SlashingWave : MonoBehaviour
     //aŒ‚‚Í‚Ì¶‘¶ŠÔ
     [SerializeField, Header("¶‘¶ŠÔ")]
     float time = 2f;
+    [SerializeField, Header("Á–Å‚ÌƒfƒBƒŒƒC")]
+    float destroyDelay = 0.1f;
 
     private void Start()
     {
@@ -19,7 +21,10 @@ public class SlashingWave : MonoBehaviour
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
             player.Attack(collision,skill.damage, skill, false);
-            Destroy(this.gameObject);
+        }
+        if(collision.gameObject.layer == 20)
+        {
+            Invoke("Destroy", destroyDelay);
         }
     }
 
@@ -30,6 +35,11 @@ public class SlashingWave : MonoBehaviour
             time -= Time.deltaTime;
             yield return null;
         }
+        Destroy(this.gameObject);
+    }
+
+    private void Destroy()
+    {
         Destroy(this.gameObject);
     }
 }
