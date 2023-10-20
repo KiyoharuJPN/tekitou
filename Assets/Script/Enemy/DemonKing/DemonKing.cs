@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class DemonKing : Enemy
     [Header("画面揺れに関する")]
     public ShakeInfo _shakeInfo;
     CameraShake shake;
+    Animator LHanimator, RHanimator;
 
 
 
@@ -29,26 +31,43 @@ public class DemonKing : Enemy
         IdleAnim,
         MoveAnim,
         SummonAttackAnim,
-        crushAttackAnim,
-        PincerAttackttackAnim,
+        CrushAttackAnim,
+        PincerAttackAnim,
     }
     [Header("パタン調整（パタンの動きは敵の仕様書を参照してください）")]
     [SerializeField] List<EnemyPatternSettings> Pattern1, Pattern2, Pattern3;
     public BossHPBar HPBar;
+    public GameObject LeftHand, RightHand;
 
     //内部関数
+    //プレイヤーのオブジェクト
+    GameObject Player;
     //攻撃パタンを記録する関数
     int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1, JumpAttackAnimCtrl = -1;
 
     //アニメチェック、パターンチェック
-    bool NotInAnim = true, PatternOver = true, patternover = false, isFlameBracing = false, isSlewAttacking = false, isJumpingAttacking = false;
+    bool NotInAnim = true, PatternOver = true, patternover = false, isSummonAttack = false, isCrushAttack = false, isPincerAttack = false;
+
+    private void OnEnable()
+    {
+        if(animator != null)
+        {
+            animator.SetBool("InAdanim", false);
+            LHanimator.SetBool("InAdanim", false);
+            RHanimator.SetBool("InAdanim", false);
+        }
+
+    }
 
     protected override void Start()
     {
         base.Start();
 
-
-
+        //animator代入
+        LHanimator = LeftHand.GetComponent<Animator>();
+        RHanimator = RightHand.GetComponent<Animator>();
+        //プレイヤーのオブジェクト
+        Player = GameObject.Find("Hero");
         //カメラ揺れ
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
@@ -58,6 +77,10 @@ public class DemonKing : Enemy
     //ドラゴンの動き
     protected override void Update()
     {
+
+
+
+
         base.Update();
 
         //animatorの設定
@@ -167,7 +190,66 @@ public class DemonKing : Enemy
 
 
     //外部関数
+    public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
+    {
+        //ヒットストップ
+        StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
+    }
 
+    protected override IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
+    {
+        //ヒット時SE・コンボ時間リセット
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
+        ComboParam.Instance.ResetTime();
+
+        //ヒットエフェクト生成
+        if (skill != null)
+        {
+            HitEfect(this.transform, skill.hitEffectAngle);
+        }
+        else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
+
+        //ヒットストップ処理
+        if (isHitStop)
+        {
+            Vector3 initialPos = this.transform.position;//初期位置保存
+            Time.timeScale = 0;
+
+            //ヒットストップ処理開始
+            tween = transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    //アニメーションが終了したら時間を戻す
+                    Time.timeScale = 1;
+                    //初期位置に戻す
+                    this.transform.position = initialPos;
+
+                });
+            yield return new WaitForSeconds(power * stopState.shakTime + 0.01f);
+        }
+
+        //ヒット時演出（敵点滅）
+        if (!hadDamaged)
+        {
+            StartCoroutine(HadDamaged());
+            hadDamaged = true;
+        }
+
+        hp -= power;
+
+        //HPゲージを使用しているかどうか
+        if (HPBar != null)
+        {
+            HPBar.ReductionHP();
+        }
+
+        if (hp <= 0)
+        {
+            PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
+            OnDestroyMode();
+        }
+    }
 
 
 
@@ -178,5 +260,14 @@ public class DemonKing : Enemy
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();
         GameManager.Instance.Result_Start(3);
+    }
+
+    protected override void OnDestroyMode()
+    {
+        GameManager.Instance.AddKillEnemy();
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+        isDestroy = true;
+        IsBlowing = true;
     }
 }
