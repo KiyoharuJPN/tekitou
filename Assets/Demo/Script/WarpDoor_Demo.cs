@@ -117,7 +117,16 @@ public class WarpDoor_Demo : MonoBehaviour
         if (bossDoor)
         {
             GameManager.Instance.isBossRoom = true;
-            GameManager.Instance.BGMStart_BossRoom();
+
+            if (SceneData.Instance.referer == "Stage3")
+            {
+                GameManager.Instance.BGMStart_BossRoom2();
+            }
+            else
+            {
+                GameManager.Instance.BGMStart_BossRoom();
+            }
+            
         }
 
         player.GetComponent<PlayerController>().WarpDoorEnd();

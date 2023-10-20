@@ -127,7 +127,9 @@ public class BGMSoundData
         Stage2_intro,
         Stage2_roop,
         //–³“G’†BGM
-        Invincibility
+        Invincibility,
+        Stage3,
+        Stage3_Boss
     }
 
     public BGM bgm;
