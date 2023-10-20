@@ -60,6 +60,7 @@ public class MonsterHouse : MonoBehaviour
         //ìGê∂ê¨
         foreach (var enemy in enemyWaves[waveNum].popEnemys)
         {
+            Instantiate(summonAnimObj, enemy.popPostion.transform.position, Quaternion.identity);
             enemylist.Add(Instantiate(enemy.enmey, enemy.popPostion.transform.position, Quaternion.identity));
         }
 
