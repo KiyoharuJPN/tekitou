@@ -67,9 +67,9 @@ public class LoadScene : MonoBehaviour
         }
         else if (SceneData.Instance.referer == "Stage2")
         {
-            obj = (GameObject)Instantiate(loadSceneImage[2], BackGround.transform.position, Quaternion.identity);
+            obj = (GameObject)Instantiate(loadSceneImage[3], BackGround.transform.position, Quaternion.identity);
             obj.transform.parent = BackGround.transform;
-            loadSceneTextBox.sprite = loadSceneText[2];
+            loadSceneTextBox.sprite = loadSceneText[3];
             loadScene = "Stage3";
         }
 
