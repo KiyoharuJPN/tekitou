@@ -108,6 +108,7 @@ public class Result : MonoBehaviour
             StartCoroutine(Ending());
             return;
         }
+
         foreach (ClearStageList clearStage in clearStageList)
         {
             if (clearStage.CleatStage_ID == clearStageID)

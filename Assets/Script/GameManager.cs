@@ -140,6 +140,8 @@ public class GameManager : MonoBehaviour
         canPause = false;
         Result.Instance.Result_Set(StageID, 
             PointParam.Instance.GetPoint(), maxCombo, killEnemy);
+
+        if( StageID != 3 )
         StartCoroutine(Result_True());
     }
 
@@ -235,11 +237,15 @@ public class GameManager : MonoBehaviour
     }
     private void BGMStart_Stage3()
     {
-        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage3, BGMSoundData.BGM.none);
     }
     public void BGMStart_BossRoom()
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
+    }
+    public void BGMStart_BossRoom2()
+    {
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage3_Boss, BGMSoundData.BGM.none);
     }
     private void BGMStart_Result()
     {
@@ -255,7 +261,15 @@ public class GameManager : MonoBehaviour
     {
         if (isBossRoom)//É{ÉXêÌíÜÇæÇ¡ÇΩèÍçá
         {
-            BGMStart_BossRoom();
+            if(SceneData.Instance.referer == "Stage3")
+            {
+                BGMStart_BossRoom2();
+            }
+            else
+            {
+                BGMStart_BossRoom();
+            }
+
         }
         else if(!isBossRoom)
         {
@@ -268,7 +282,7 @@ public class GameManager : MonoBehaviour
                 case "Stage2":
                     BGMStart_Stage2(); break;
                 case "Stage3":
-                    BGMStart_Stage2(); break;
+                    BGMStart_Stage3(); break;
             }
         }
     }
@@ -276,8 +290,10 @@ public class GameManager : MonoBehaviour
     IEnumerator Result_True()
     {
         yield return new WaitForSeconds(1f);
-        BGMStart_Result();
+        
         Result.Instance.Result_Start();
+
+        BGMStart_Result();
     }
 
     private IEnumerator _PlyerDeath() 
