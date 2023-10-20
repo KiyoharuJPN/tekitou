@@ -44,6 +44,7 @@ public class DemonKingSummonAnimation : MonoBehaviour
     {
         GameManager.Instance.Result_Start(3);
 
+        //ぜんためコメントアウト
         ////gameObject.GetComponent<BoxCollider2D>().enabled = true;
         //gameObject.GetComponent<DemonKing>().enabled = true;
         //GameManager.Instance.canPause = true;
@@ -66,7 +67,9 @@ public class DemonKingSummonAnimation : MonoBehaviour
 
         SoundManager.Instance.PlaySE(SESoundData.SE.DragonRoar);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-        HPBar.SetActive(true);
+        
+        //ぜんためコメントアウト
+        //HPBar.SetActive(true);
 
     }
 
