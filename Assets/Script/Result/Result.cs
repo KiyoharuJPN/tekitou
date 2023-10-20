@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 
 public class Result : MonoBehaviour
 {
+
+    [SerializeField] FadeImage fade;
     //クリアステージ表示
     [SerializeField]
     UnityEngine.UI.Image ClearStage_NameBar;
@@ -79,7 +82,7 @@ public class Result : MonoBehaviour
         SpriteText = point.ToString("d7");
         numList.ScoreBar.text = "";
         foreach (var i in SpriteText)
-        {    
+        {
             numList.ScoreBar.text += "<sprite=" + i + ">";
         }
         //Maxコンボ初期化
@@ -98,11 +101,16 @@ public class Result : MonoBehaviour
         }
     }
 
-    public void Result_Set(int clearStageID,int score, int combo, int killScore)
+    public void Result_Set(int clearStageID, int score, int combo, int killScore)
     {
-        foreach(ClearStageList clearStage in clearStageList)
+        //強制エンディング用
+        if (clearStageID == 3) {
+            StartCoroutine(Ending());
+            return;
+        }
+        foreach (ClearStageList clearStage in clearStageList)
         {
-            if(clearStage.CleatStage_ID == clearStageID)
+            if (clearStage.CleatStage_ID == clearStageID)
             {
                 ClearStage_NameBar.sprite = clearStage.ClearStage_Image;
             }
@@ -139,11 +147,11 @@ public class Result : MonoBehaviour
 
         var clearScore = score + combo + killScore;
 
-        if(clearScore >= RANK_S)
+        if (clearScore >= RANK_S)
         {
             RankBox.sprite = RankImageList[0];
         }
-        else if(clearScore >= RANK_A) 
+        else if (clearScore >= RANK_A)
         {
             RankBox.sprite = RankImageList[1];
         }
@@ -165,5 +173,19 @@ public class Result : MonoBehaviour
         anyKay.enabled = true;
         PreesAnyKey.enabled = true;
         canAnyKey = true;
+    }
+
+    IEnumerator Ending()
+    {
+        yield return new WaitForSeconds(1);//渡された時間待機
+        //フェードアウト開始
+        fade.StartFadeOut();
+
+        while (!fade.IsFadeOutComplete())
+        {
+            yield return null;
+        }
+
+        SceneManager.LoadScene("Ending");
     }
 }

@@ -63,7 +63,7 @@ public class CameraManager : MonoBehaviour
         else if (SceneData.Instance.referer == "Stage3")
         {
             CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage3Boss.GetComponent<PolygonCollider2D>();
-            CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 5.8f;
+            CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 9.5f;
         }
     }
 

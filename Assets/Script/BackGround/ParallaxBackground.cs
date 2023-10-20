@@ -86,36 +86,36 @@ public class ParallaxBackground : MonoBehaviour
     public void StartScroll(Vector3 playerPosition)
     {
 
-        //1画像分進んだ時、スクロールが繋がるように良い感じに戻している。
-        for (int i = 0; i < backgroundMax; i++)
-        {
-            backgroundScrollValues[i] -= (playerPosition.x - previousPlayerPosition.x) * scrollRates[i];
+        ////1画像分進んだ時、スクロールが繋がるように良い感じに戻している。
+        //for (int i = 0; i < backgroundMax; i++)
+        //{
+        //    backgroundScrollValues[i] -= (playerPosition.x - previousPlayerPosition.x) * scrollRates[i];
 
-            if (backgroundSpriteSizes.x < backgroundsRt[i].anchoredPosition.x)
-            {
-                backgroundScrollValues[i] -= backgroundSpriteSizes.x;
-                tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
-                backgroundsRt[i].anchoredPosition -= tempBackgroundsPosition;
-            }
-            else if (backgroundsRt[i].anchoredPosition.x < -backgroundSpriteSizes.x)
-            {
-                backgroundScrollValues[i] += backgroundSpriteSizes.x;
-                tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
-                backgroundsRt[i].anchoredPosition += tempBackgroundsPosition;
-            }
-        }
-
-
-        //多重実行防止。
-        if (scroll != null)
-        {
-            StopCoroutine(scroll);
-        }
-
-        scroll = StartCoroutine(Scroll());
+        //    if (backgroundSpriteSizes.x < backgroundsRt[i].anchoredPosition.x)
+        //    {
+        //        backgroundScrollValues[i] -= backgroundSpriteSizes.x;
+        //        tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
+        //        backgroundsRt[i].anchoredPosition -= tempBackgroundsPosition;
+        //    }
+        //    else if (backgroundsRt[i].anchoredPosition.x < -backgroundSpriteSizes.x)
+        //    {
+        //        backgroundScrollValues[i] += backgroundSpriteSizes.x;
+        //        tempBackgroundsPosition.Set(backgroundSpriteSizes.x, 0);
+        //        backgroundsRt[i].anchoredPosition += tempBackgroundsPosition;
+        //    }
+        //}
 
 
-        previousPlayerPosition = playerPosition;
+        ////多重実行防止。
+        //if (scroll != null)
+        //{
+        //    StopCoroutine(scroll);
+        //}
+
+        //scroll = StartCoroutine(Scroll());
+
+
+        //previousPlayerPosition = playerPosition;
     }
 
 

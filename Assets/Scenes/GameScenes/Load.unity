@@ -874,11 +874,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b301c0a3df0c38b4bbe3fad69138350e, type: 3}
   - {fileID: 21300000, guid: 61ebac88e3923a64fb7d9fa981766244, type: 3}
   - {fileID: 21300000, guid: cecb192579a506c45b8789404b78b6ba, type: 3}
+  - {fileID: 21300000, guid: 26c9e49e259d4dd4698248e37ac3e91b, type: 3}
   BackGround: {fileID: 2130746578}
   loadSceneImage:
   - {fileID: 6642811417903670798, guid: 5827f937b9eb02e4caa99b35b63dbaa0, type: 3}
   - {fileID: 1614635713241564183, guid: 9bac71fb168db2347ae427aaffb2539d, type: 3}
   - {fileID: 3825343409629854529, guid: 7b3da9458fa0cb647b21fc653b447604, type: 3}
+  - {fileID: 285410188349482823, guid: cb6a0aaaa26706049853b87f9f7d7677, type: 3}
   fade: {fileID: 6114365387962428608}
   stockImg: {fileID: 1262263155}
   stockImgs:

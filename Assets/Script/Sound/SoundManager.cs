@@ -91,11 +91,11 @@ public class SoundManager : MonoBehaviour
     public void PlaySE(SESoundData.SE se)
     {
         SESoundData data = seSoundDatas.Find(data => data.se == se);
-        /*if(data != null)
-        {
-            seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
-            seAudioSource.PlayOneShot(data.audioClip);
-        }*/
+        //if (data != null)
+        //{
+        //    seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
+        //    seAudioSource.PlayOneShot(data.audioClip);
+        //}
         seAudioSource.volume = seMasterVolume * masterVolume;
         seAudioSource.PlayOneShot(data.audioClip);
     }
@@ -194,7 +194,9 @@ public class SESoundData
         //強化時
         BuffGet,
         SlashingWave,
-        
+
+        //ステージ３
+        DemonkingShout
 
     }
 
