@@ -327,7 +327,7 @@ public class KingSlime : Enemy
         inKSMovingAnim = false;
     }
 
-    //キングスライム死亡時に呼ぶ関数
+    //Boss死亡時に呼ぶ関数
     virtual public void Boss_Down()
     {
         ComboParam.Instance.ComboStop();

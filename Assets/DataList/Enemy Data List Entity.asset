@@ -167,3 +167,47 @@ MonoBehaviour:
     num: 13
     type: 0
     speed: 15
+  - id: 14
+    charName: "\u30B4\u30D6\u30EA\u30F3\u30A2\u30FC\u30DE\u30FC"
+    hp: 5
+    score: 500
+    attackPower: 2
+    power: 1
+    knockBackValue: 40
+    angle: 30
+    num: 11
+    type: 0
+    speed: 15
+  - id: 15
+    charName: "\u60AA\u9B54"
+    hp: 5
+    score: 1000
+    attackPower: 0
+    power: 3
+    knockBackValue: 40
+    angle: 45
+    num: 15
+    type: 0
+    speed: 15
+  - id: 16
+    charName: "\u9B54\u738B"
+    hp: 300
+    score: 8000
+    attackPower: 1
+    power: 1
+    knockBackValue: 1
+    angle: 0
+    num: 0
+    type: 0
+    speed: 15
+  - id: 17
+    charName: ???
+    hp: 2
+    score: 200
+    attackPower: 2
+    power: 1
+    knockBackValue: 11
+    angle: 45
+    num: 10
+    type: 0
+    speed: 15
