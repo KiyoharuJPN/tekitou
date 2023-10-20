@@ -162,7 +162,7 @@ MonoBehaviour:
     score: 200
     attackPower: 1
     power: 1
-    knockBackValue: 30
+    knockBackValue: 1
     angle: 60
     num: 13
     type: 0
