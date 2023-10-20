@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
     //ヒットストップステータス
     internal EnemyGeneratar.HitStopState stopState;
     //ヒットストップバフ
-    bool _isDestroyed = false, _isHitStoped = false;
+    bool _isDestroyed = false, _isHitStoped = false, hadEnemyBuff = false;
 
     protected Tween tween;
 
@@ -111,6 +111,7 @@ public class Enemy : MonoBehaviour
         if (GetComponentInChildren<EnemyBuffSystem>())
         {
             _EnemyBuff = GetComponentInChildren<EnemyBuffSystem>();
+            hadEnemyBuff = true;
         }
 
         stopState = EnemyGeneratar.instance.stopState;
@@ -321,6 +322,10 @@ public class Enemy : MonoBehaviour
                     //    Destroy(gameObject);
                     //}
                 }
+            }
+            else if(_EnemyBuff == null && hadEnemyBuff)
+            {
+                Destroy(gameObject);
             }
 
             //反射回数リセット
