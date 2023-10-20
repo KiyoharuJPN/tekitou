@@ -65,7 +65,7 @@ public class DemonKingSummonAnimation : MonoBehaviour
     protected void BossSummonAnim1()
     {
 
-        SoundManager.Instance.PlaySE(SESoundData.SE.DragonRoar);
+        SoundManager.Instance.PlaySE(SESoundData.SE.DemonkingShout);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         
         //ぜんためコメントアウト
