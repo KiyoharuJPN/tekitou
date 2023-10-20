@@ -93,6 +93,9 @@ public class GameManager : MonoBehaviour
             case 4:
                 BGMStart_Stage2();
                 break;
+            case 5:
+                BGMStart_Stage3();
+                break;
         }
 
         canPause = true;
@@ -230,6 +233,10 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
     }
+    private void BGMStart_Stage3()
+    {
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage2_intro, BGMSoundData.BGM.Stage2_roop);
+    }
     public void BGMStart_BossRoom()
     {
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
@@ -259,6 +266,8 @@ public class GameManager : MonoBehaviour
                 case "Stage1":
                     BGMStart_Stage1(); break;
                 case "Stage2":
+                    BGMStart_Stage2(); break;
+                case "Stage3":
                     BGMStart_Stage2(); break;
             }
         }
