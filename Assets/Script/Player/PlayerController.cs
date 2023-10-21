@@ -346,8 +346,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "NomalAttack":
                 if(isAttack || !canNomalAttack || isNomalAttack) break;
-                NomalAttack.NomalAttackStart(this);
-                NomalAttack.AttackCool(this, this);
+                NomalAttack.NomalAttackStart(this,this);
                 break;
         }
     }
@@ -561,6 +560,7 @@ public class PlayerController : MonoBehaviour
         var doorPosX = door.position.x;
         var doorPosY = door.position.y;
         this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);
+        this.rb.velocity = new Vector2(0, 0);
         animator.SetTrigger("GoolDoor");
         SoundManager.Instance.PlaySE(SESoundData.SE.GoalSE);
     }
