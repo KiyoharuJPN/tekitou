@@ -100,12 +100,10 @@ public class Wizard : Enemy
     {
         if (playerObj.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x > 0)
         {
-            Debug.Log("+++++++++++++++++++++++++++++++++++++");
             TurnAround();
             TurnADAround();
         }else if(playerObj.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x < 0)
         {
-            Debug.Log("-------------------------------------");
             TurnAround();
             TurnADAround();
         }

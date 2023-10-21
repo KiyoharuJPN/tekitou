@@ -295,7 +295,7 @@ public class PlayerController : MonoBehaviour
                 AttackAction("ExAttack");
             }
         }
-        //手動攻撃：攻撃ボタンが押されせたとき
+        //手動攻撃：攻撃ボタンが押されたとき
         if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack)
         {
             //通常攻撃入力

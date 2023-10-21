@@ -39,6 +39,13 @@ public class ResultAnyKay : MonoBehaviour
                 SceneManager.LoadScene("EndingDemo");
                 return;
             }
+
+            //ぜんため用コード
+            if(SceneManager.GetActiveScene().name == "Level_Stage2")
+            {
+                SceneManager.LoadScene("Ending");
+            }
+
             SceneManager.LoadScene("Load");
         }
     }
