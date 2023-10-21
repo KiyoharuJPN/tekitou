@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SlimeWallTurn : MonoBehaviour
 {
+    //bool triggerCheck;
     private void Update()
     {
         if (transform.GetComponentInParent<Enemy>().GetIsBlowing())
@@ -11,13 +12,19 @@ public class SlimeWallTurn : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Stage"))
+        {
+            //triggerCheck = true;
             GetComponentInParent<Enemy>().TurnAround();
-        Debug.Log("is wall");
+        }
     }
-    
+
     //private void OnTriggerStay2D(Collider2D collision)
     //{
     //    if (collision.CompareTag("Stage"))
+    //    {
     //        GetComponentInParent<Slime>().TurnAround();
+    //        Debug.Log("++++++++++++++");
+    //    }
+            
     //}
 }

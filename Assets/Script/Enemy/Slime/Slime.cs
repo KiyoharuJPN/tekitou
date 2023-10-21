@@ -42,7 +42,6 @@ public class Slime : Enemy
             //Debug.Log(moveWidth);
             //”ò‚Î‚³‚ê‚Ä‚È‚¢ŒÀ‚è
             if (!IsBlowing) SlimeMove();
-            Debug.Log(MovingAnim);
         }
         //TestTime += Time.deltaTime;
         //Debug.Log("moving:" + IsMoving + "\nsecond:" + TestTime);
