@@ -42,6 +42,7 @@ public class Slime : Enemy
             //Debug.Log(moveWidth);
             //”ò‚Î‚³‚ê‚Ä‚È‚¢ŒÀ‚è
             if (!IsBlowing) SlimeMove();
+            Debug.Log(MovingAnim);
         }
         //TestTime += Time.deltaTime;
         //Debug.Log("moving:" + IsMoving + "\nsecond:" + TestTime);
@@ -63,7 +64,7 @@ public class Slime : Enemy
         //Debug.Log(MovingAnim);
 
         if(IsMoving && movingCheck!=0)movingCheck = 0;
-        if (!IsMoving&&MovingAnim != 3)
+        if (!IsMoving&&MovingAnim == 0)
         {
             movingCheck += Time.deltaTime;
             if(movingCheck > StanceTime)
@@ -102,10 +103,23 @@ public class Slime : Enemy
     {
         if (!isDestroy)
         {
-            if (col.CompareTag("Stage") && MovingAnim == 1)
+            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
             {
                 MovingAnim = 2;
                 if(enemyRb.velocity.y !< 0) enemyRb.velocity = Vector2.zero;
+                StartCoroutine(SetMoveFalse());
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (!isDestroy)
+        {
+            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
+            {
+                MovingAnim = 2;
+                if (enemyRb.velocity.y! < 0) enemyRb.velocity = Vector2.zero;
                 StartCoroutine(SetMoveFalse());
             }
         }
