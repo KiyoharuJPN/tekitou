@@ -200,6 +200,7 @@ MonoBehaviour:
   speed: 15
   moveHeight: 4
   moveWidth: 3
+  StanceTime: 1
 --- !u!95 &1370193731701165689
 Animator:
   serializedVersion: 4
@@ -231,7 +232,7 @@ GameObject:
   - component: {fileID: 3312889800612805371}
   - component: {fileID: 6986762049248298952}
   - component: {fileID: 4512864185786238605}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WallCheckArea (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

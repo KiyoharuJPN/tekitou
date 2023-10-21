@@ -294,10 +294,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallCheckArea
       objectReference: {fileID: 0}
-    - target: {fileID: 3593011076949591874, guid: b10868cc91f353c4f812008bee7d2040, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8601875618541879261, guid: b10868cc91f353c4f812008bee7d2040, type: 3}
       propertyPath: m_RootOrder
       value: 0
