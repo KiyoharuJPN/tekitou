@@ -30,7 +30,11 @@ public class ObjectPool
             _object = GameObject.Instantiate(prefab);
             PushObject(_object);
             if (pool == null)
+            {
                 pool = new GameObject("ObjectPool");
+                pool.AddComponent<ObjectPoolScript>();
+            }
+                
             GameObject child = GameObject.Find(prefab.name);
             if (!child)
             {
