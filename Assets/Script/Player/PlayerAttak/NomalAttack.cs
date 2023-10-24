@@ -7,7 +7,7 @@ public class NomalAttack
     //空中時のクールタイム
     const float airCoolTime = 0.1f;
 
-    public static void NomalAttackStart(PlayerController player)
+    public static void NomalAttackStart(PlayerController player, MonoBehaviour mono)
     {
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
         player.canNomalAttack = false;
@@ -16,6 +16,7 @@ public class NomalAttack
         player.animator.SetTrigger("IsNomalAttack");
         
         player.isAttack = true;
+        AttackCool(player, mono);
     }
 
     public static void AttackCool(PlayerController player, MonoBehaviour mono)
@@ -34,6 +35,7 @@ public class NomalAttack
     static IEnumerator _NomalAttackInterval(float coolTime, PlayerController player)
     {
         player.enemylist.Clear();
+        player.isAttack = false;
         float time = coolTime;
 
         while (time > 0)
@@ -41,7 +43,8 @@ public class NomalAttack
             time -= Time.deltaTime;
             yield return null;
         }
-        player.isAttack = false;
+
+        
         player.isNomalAttack = false; 
         player.canNomalAttack = true;
     }

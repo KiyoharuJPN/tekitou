@@ -73,12 +73,12 @@ public class Tutorial_Walk : MonoBehaviour
         {
             xSpeed = 0;
         }
-        else if (moveInput > 0)
+        else if (moveInput > 0.3)
         {
             transform.localScale = new Vector3(1, 1, 1);
             xSpeed = player.moveData.maxSpeed;
         }
-        else if (moveInput < 0)
+        else if (moveInput < -0.3)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             xSpeed = -player.moveData.maxSpeed;

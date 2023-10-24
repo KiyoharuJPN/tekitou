@@ -5975,6 +5975,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 91515124}
     m_Modifications:
+    - target: {fileID: 5574219493478515317, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219493478515317, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219493552653365, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219493552653365, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219493711256902, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219493711256902, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219493775775403, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219493775775403, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219494367608558, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219494367608558, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5574219494436211641, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -6062,6 +6102,42 @@ PrefabInstance:
     - target: {fileID: 5574219494436211645, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
       propertyPath: m_Name
       value: HP+ExAttackCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219494641245135, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219494641245135, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219494641245135, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -121.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219495114765504, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219495114765504, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219495114765504, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -121.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219495114765504, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219495268268954, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574219495268268954, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.6
       objectReference: {fileID: 0}
     - target: {fileID: 5574219495473016243, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
       propertyPath: player
