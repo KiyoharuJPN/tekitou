@@ -8,6 +8,7 @@ public class Coin : Item
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.GetCoin);
         PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + itemData.score);
+        ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo()+1);
         ComboParam.Instance.ResetTime();
         base.OnTriggerEnter2D(collision);
     }
