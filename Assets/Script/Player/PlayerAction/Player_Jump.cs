@@ -26,7 +26,6 @@ public class Player_Jump : MonoBehaviour
 
     internal const float upAttackHight = 2f;
     internal bool isUpAttack = false;
-    Skill UpAttackStatus;
 
     //カメラ揺れ（突き刺し終了時に使用）
     [System.Serializable]
@@ -46,12 +45,12 @@ public class Player_Jump : MonoBehaviour
     protected virtual void Start()
     {
         player = this.gameObject.GetComponent<PlayerController>();
-        UpAttackStatus = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isjump);
         //接地状態を得る
         isGround = ground.IsGround();
         isHead = head.IsGround();
@@ -66,10 +65,7 @@ public class Player_Jump : MonoBehaviour
         //ジャンプキー取得
         if (player.canMove && !player.isAttack) JumpBottan();
 
-        if (isjump && player.isAttack) {
-            isjump = false;
-            jumpTime = 0;
-        };
+        
     }
 
     private void FixedUpdate()
@@ -82,6 +78,11 @@ public class Player_Jump : MonoBehaviour
         }
         Jump();
         Gravity();
+        if (isjump && player.isAttack)
+        {
+            isjump = false;
+            jumpTime = 0;
+        };
     }
 
     void JumpBottan()
@@ -90,12 +91,12 @@ public class Player_Jump : MonoBehaviour
         //ジャンプ中の処理
         if (isjump && !isHead)
         {
-            if (!Input.GetButton("Jump") || jumpTime >= player.jumpData.maxJumpTime)
+            if (!player.jumpKay.IsPressed() || jumpTime >= player.jumpData.maxJumpTime)
             {
                 isjump = false;
                 jumpTime = 0;
             }
-            else if(Input.GetButton("Jump") && jumpTime <= player.jumpData.maxJumpTime)
+            else if(player.jumpKay.IsPressed() && jumpTime <= player.jumpData.maxJumpTime)
             {
                 jumpTime += Time.deltaTime;
             }
@@ -107,8 +108,9 @@ public class Player_Jump : MonoBehaviour
         }
 
         //ジャンプキー入力
-        if (Input.GetButtonDown("Jump"))
+        if (player.jumpKay.WasPressedThisFrame())
         {
+            Debug.Log("ジャンプ");
             JumpSet();
         }
     }
@@ -154,12 +156,12 @@ public class Player_Jump : MonoBehaviour
 
         player.isJumping = true;
         
-        if (Input.GetButton("Jump"))
+        if (player.jumpKay.IsPressed())
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, player.jumpData.speed) + jumpTime * Time.deltaTime);
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (player.jumpKay.WasReleasedThisFrame())
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, player.jumpData.speed) + jumpTime * Time.deltaTime * 0.5f);
         }

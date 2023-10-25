@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
     //“ü—ÍƒL[
     internal bool isAttack = false;
     internal bool isAttackKay = false;
+    internal bool isSkillAttackKay = false;
 
     //•KE‹Z‚Éæ“¾‚·‚éE•Û‘¶‚·‚éˆ×‚ÌEnemyList
     [SerializeField, Header("exAttackArea")]
@@ -154,6 +155,9 @@ public class PlayerController : MonoBehaviour
     //boss”»’è—p
     internal bool canMove = true;
 
+    //InputSystem
+    internal InputAction move, jumpKay, nomalAttack, skillAttack, exAttack_L, exAttack_R;
+
     void Start()
     {
         playerSE = GetComponent<PlayerSE>();
@@ -163,6 +167,15 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", animSpeed);
 
         sprite = GetComponent<SpriteRenderer>();
+
+        //InputSystem
+        var playerInput = GetComponent<PlayerInput>();
+        move = playerInput.actions["Move"];
+        jumpKay = playerInput.actions["Jump"];
+        nomalAttack = playerInput.actions["NomalAttack"];
+        skillAttack = playerInput.actions["SkillAttack"];
+        exAttack_L = playerInput.actions["ExAttack_L"];
+        exAttack_R = playerInput.actions["ExAttack_R"];
     }
 
     void Update()
@@ -254,6 +267,7 @@ public class PlayerController : MonoBehaviour
     //‹Z“ü—ÍŒŸ’m
     protected virtual void InputKay()
     {
+        var inputMoveAxis = move.ReadValue<Vector2>();
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
         //ŠÈˆÕ“ü—Í‚Åg—p
@@ -267,13 +281,13 @@ public class PlayerController : MonoBehaviour
         else { isAttackKay = false; }
 
         //ã¸UŒ‚
-        if (lsv >= 0.9 && isAttackKay)
+        if (inputMoveAxis.y >= 0.9 && isAttackKay)
             //rsv >= 0.8
         {
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
-        if (lsv <= -0.9 && isAttackKay)
+        if (inputMoveAxis.y <= -0.9 && isAttackKay)
             //rsv <= -0.8
         {
             AttackAction("DawnAttack");

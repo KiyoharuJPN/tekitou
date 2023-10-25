@@ -35,7 +35,6 @@ public class NomalAttack
     static IEnumerator _NomalAttackInterval(float coolTime, PlayerController player)
     {
         player.enemylist.Clear();
-        player.isAttack = false;
         float time = coolTime;
 
         while (time > 0)
@@ -44,7 +43,8 @@ public class NomalAttack
             yield return null;
         }
 
-        
+
+        player.isAttack = false;
         player.isNomalAttack = false; 
         player.canNomalAttack = true;
     }
