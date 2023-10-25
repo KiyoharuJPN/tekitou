@@ -106,4 +106,12 @@ public class ExAttackParam : MonoBehaviour
             yield return null;
         }
     }
+
+    void PlayerCanExAttackCheck()
+    {
+        if(canExAttack)
+        {
+            player.canExAttack = true;
+        }
+    }
 }
