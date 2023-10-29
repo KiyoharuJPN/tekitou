@@ -7,14 +7,7 @@ public class Player_Walk : MonoBehaviour
 
     //変数
     private float xSpeed = 0.0f;
-
-    private float dashSpeed;
-    private float dashTime; //ダッシュしている時間
     internal float moveInput; //移動キー入力
-    
-    float timer;
-
-    bool isDash = false;
 
     //アニメーション用変数
     

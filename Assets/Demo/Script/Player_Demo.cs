@@ -1,46 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player_Demo : PlayerController
 {
     protected override void InputKay()
     {
+        var inputMoveAxis = move.ReadValue<Vector2>();
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
         //ä»à’ì¸óÕÇ≈égóp
         //float rsh = Input.GetAxis("R_Stick_H");
         //float rsv = Input.GetAxis("R_Stick_V");
 
-        if (Input.GetKey(KeyCode.JoystickButton2))
+        if (nomalAttack.IsPressed())
         {
             isAttackKay = true;
         }
         else { isAttackKay = false; }
+        if (skillAttack.IsPressed())
+        {
+            isSkillAttackKay = true;
+        }
+        else { isSkillAttackKay = false; }
 
         //è„è∏çUåÇ
-        if (lsv >= 0.9 && lsh <= 0.45 && isAttackKay)
+        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         //rsv >= 0.8
         {
             AttackAction("UpAttack");
         }
         //óéâ∫çUåÇçUåÇ
-        if (lsv <= -0.9 && lsh <= 0.45 && isAttackKay)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
         //rsv <= -0.8
         {
             AttackAction("DawnAttack");
         }
         //â°à⁄ìÆçUåÇ
-        if (lsh >= 0.9 && lsv <= 0.45 && isAttackKay)
+        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_right");
         }
-        else if (lsh <= -0.9 && lsv <= 0.45 && isAttackKay)
+        else if (inputMoveAxis.x  <= -0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_left");
         }
         //ïKéEãZ
-        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5))
+        if (exAttack_L.IsPressed())
         {
             if (!isAttack && canExAttack)
             {
@@ -48,12 +55,12 @@ public class Player_Demo : PlayerController
             }
         }
         //éËìÆçUåÇÅFçUåÇÉ{É^ÉìÇ™âüÇ≥ÇÍÇπÇΩÇ∆Ç´
-        if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack)
+        if (nomalAttack.WasPressedThisFrame() && canNomalAttack)
         {
             //í èÌçUåÇì¸óÕ
             AttackAction("NomalAttack");
         }
-        if (Input.GetKey(KeyCode.JoystickButton2) && canNomalAttack)
+        if (nomalAttack.IsPressed() && canNomalAttack)
         {
             //í èÌçUåÇí∑âüÇµíÜ
             AttackAction("NomalAttack");

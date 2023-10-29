@@ -107,4 +107,11 @@ public class ExAttackParam : MonoBehaviour
         }
     }
 
+    void PlayerCanExAttackCheck()
+    {
+        if(canExAttack)
+        {
+            player.canExAttack = true;
+        }
+    }
 }
