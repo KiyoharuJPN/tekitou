@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -30,6 +30,15 @@ public class TutorialPlayer : PlayerController
         hpparam = GameObject.Find("UI").GetComponentInChildren<HPparam>();
 
         animator.SetFloat("Speed", animSpeed);
+
+        //InputSystem
+        var playerInput = GetComponent<PlayerInput>();
+        move = playerInput.actions["Move"];
+        jumpKay = playerInput.actions["Jump"];
+        nomalAttack = playerInput.actions["NomalAttack"];
+        skillAttack = playerInput.actions["SkillAttack"];
+        exAttack_L = playerInput.actions["ExAttack_L"];
+        exAttack_R = playerInput.actions["ExAttack_R"];
     }
 
     void Update()
@@ -78,42 +87,41 @@ public class TutorialPlayer : PlayerController
     //ãZì¸óÕåüím
     void _Skill()
     {
-        float lsh = Input.GetAxis("L_Stick_H");
-        float lsv = Input.GetAxis("L_Stick_V");
+        var inputMoveAxis = move.ReadValue<Vector2>();
         //float rsh = Input.GetAxis("R_Stick_H");
         //float rsv = Input.GetAxis("R_Stick_V");
 
-        if (Input.GetKey(KeyCode.JoystickButton1))
+        if (skillAttack.IsPressed())
         {
             isAttackKay = true;
         }
         else { isAttackKay = false; }
 
         //è„è∏çUåÇ
-        if (lsv >= 0.9 && isAttackKay && isTUpAttack)
+        if (inputMoveAxis.y >= 0.9 && isAttackKay && isTUpAttack)
             // || rsv >= 0.8)
         {
             AttackAction("UpAttack");
         }
         //óéâ∫çUåÇçUåÇ
-        if (lsv <= -0.9 && isAttackKay && isTDownAttack)
+        if (inputMoveAxis.y <= -0.9 && isAttackKay && isTDownAttack)
             // || rsv <= -0.8)
         {
             AttackAction("DawnAttack");
         }
         //â°à⁄ìÆçUåÇ
-        if (lsh >= 0.9 && isAttackKay && isTSideAttack)
+        if (inputMoveAxis.x >= 0.9 && isAttackKay && isTSideAttack)
             // || rsh >= 0.8)
         {
             AttackAction("SideAttack_right");
         }
-        else if(lsh <= -0.9 && isAttackKay && isTSideAttack)
+        else if(inputMoveAxis.x <= -0.9 && isAttackKay && isTSideAttack)
             // || rsh <= -0.8)
         {
             AttackAction("SideAttack_left");
         }
         //ïKéEãZ
-        if (Input.GetKey(KeyCode.JoystickButton4) && Input.GetKey(KeyCode.JoystickButton5) )
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
         {
             if (!isAttack && canExAttack && isTExAttack && !isExAttack) 
             {
@@ -121,12 +129,12 @@ public class TutorialPlayer : PlayerController
             }
         }
         //éËìÆçUåÇÅFçUåÇÉ{É^ÉìÇ™âüÇ≥ÇÍÇπÇΩÇ∆Ç´
-        if (Input.GetKeyDown(KeyCode.JoystickButton2) && canNomalAttack && isTAttack)
+        if (nomalAttack.WasPressedThisFrame() && canNomalAttack && isTAttack)
         {
             //í èÌçUåÇì¸óÕ
             AttackAction("NomalAttack");
         }
-        if (Input.GetKey(KeyCode.JoystickButton2) && canNomalAttack && isTAttack)
+        if (nomalAttack.IsPressed() && canNomalAttack && isTAttack)
         {
             //í èÌçUåÇí∑âüÇµíÜ
             AttackAction("NomalAttack");

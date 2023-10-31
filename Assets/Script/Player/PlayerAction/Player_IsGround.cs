@@ -98,11 +98,6 @@ public class Player_IsGround : MonoBehaviour
     {
         if (!player.isUpAttack)
         {
-            
-            if (player.isFalling == true)
-            {
-                player.isLanding = true;
-            }
             player.isSquatting = false;
             player.isJumping = false;
 
@@ -119,19 +114,20 @@ public class Player_IsGround : MonoBehaviour
                 player.isDropAttack = false;
                 player.animator.SetBool("IsDropAttack", player.isDropAttack);
             }
-            StartCoroutine(Interval(0.1f));
+            StartCoroutine(Interval());
         }
     }
 
-    IEnumerator Interval(float time)
+    IEnumerator Interval()
     {
         if (!player.canDropAttack)
         {
-            time += AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.Hero_DropAttack_End);
+            float time = AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.Hero_DropAttack_End);
+
+            yield return new WaitForSeconds(time);
+
+            player.enemylist.Clear();
         }
-
-        yield return new WaitForSeconds(time);
-
         Landingoff();
     }
 

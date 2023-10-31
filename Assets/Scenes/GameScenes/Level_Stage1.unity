@@ -59646,14 +59646,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 705019280, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 705019280, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3.2
-      objectReference: {fileID: 0}
     - target: {fileID: 3654066179010914914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: shake
       value: 
@@ -59835,6 +59827,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP+ExAttackCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5574219495473016243, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 176392272}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
 --- !u!213 &187384894

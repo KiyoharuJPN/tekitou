@@ -45,6 +45,12 @@ public class Tutorial_Jump : Player_Jump
         }
         Jump();
         Gravity();
+
+        if (isjump && player.isAttack)
+        {
+            isjump = false;
+            jumpTime = 0;
+        };
     }
 
     void JumpBottan()

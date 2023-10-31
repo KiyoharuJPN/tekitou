@@ -7,7 +7,7 @@ using static PlayerController;
 
 public class Player_Jump : MonoBehaviour
 {
-    PlayerController player;
+    internal PlayerController player;
     public Player_IsGround ground;
     public Player_IsGround head;
     bool isGround = false;            //接地フラグ
@@ -50,7 +50,6 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isjump);
         //接地状態を得る
         isGround = ground.IsGround();
         isHead = head.IsGround();
