@@ -56,7 +56,7 @@ public class SlimeArmor : Enemy
         //Debug.Log(MovingAnim);
 
         if (IsMoving && movingCheck != 0) movingCheck = 0;
-        if (!IsMoving && MovingAnim != 3)
+        if (!IsMoving && MovingAnim == 0)
         {
             movingCheck += Time.deltaTime;
             if (movingCheck > StanceTime)
@@ -78,16 +78,31 @@ public class SlimeArmor : Enemy
         Debug.Log("in 0");
     }
 
+    protected override void OnColEnter2D(Collider2D col)
+    {
+        base.OnColEnter2D(col);
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Ontrigger");
         if (!isDestroy)
         {
-            if (col.CompareTag("Stage") && MovingAnim == 1)
+            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
             {
                 MovingAnim = 2;
+                if (enemyRb.velocity.y! < 0) enemyRb.velocity = Vector2.zero;
+                StartCoroutine(SetMoveFalse());
+            }
+        }
+    }
 
-                Debug.Log("in 2");
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (!isDestroy)
+        {
+            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
+            {
+                MovingAnim = 2;
                 if (enemyRb.velocity.y! < 0) enemyRb.velocity = Vector2.zero;
                 StartCoroutine(SetMoveFalse());
             }
@@ -107,7 +122,7 @@ public class SlimeArmor : Enemy
 
     protected override void Gravity()
     {
-        enemyRb.AddForce(new Vector2(0, -10f));
+        if(!isDestroy) enemyRb.AddForce(new Vector2(0, -10f));
     }
     public override void TurnAround()
     {
