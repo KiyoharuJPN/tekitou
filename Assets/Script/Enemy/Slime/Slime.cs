@@ -84,7 +84,6 @@ public class Slime : Enemy
 
     protected override void OnColEnter2D(Collider2D col)
     {
-        
         base.OnColEnter2D(col);
     }
 
