@@ -207,18 +207,7 @@
                 {
                     "name": "",
                     "id": "cb9e5450-412e-4551-af40-6527279410a5",
-                    "path": "<XInputController>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ExAttack_L",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "16a8ef5b-a6d6-4a6b-8a7a-d5c35dc6a35e",
-                    "path": "<DualShockGamepad>/leftShoulder",
+                    "path": "<XInputController>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -239,30 +228,8 @@
                 },
                 {
                     "name": "",
-                    "id": "f431a3a6-91d0-4298-9e9c-f82969a45161",
-                    "path": "<XInputController>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ExAttack_L",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "2662fa13-d756-4335-b191-16495f1481bb",
-                    "path": "<XInputController>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ExAttack_R",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5128543e-115f-43ff-b3e1-fd131687d6c5",
-                    "path": "<DualShockGamepad>/rightShoulder",
+                    "path": "<XInputController>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

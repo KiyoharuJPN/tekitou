@@ -56,7 +56,6 @@ public class ExAttackParam : MonoBehaviour
         exGauge.fillAmount = 0f;
         _exAttack = 0;
         canExAttack = false;
-        
     }
 
     public void AddGauge()
@@ -70,6 +69,7 @@ public class ExAttackParam : MonoBehaviour
             exAttackText.GetComponent<Image>().enabled = true;
             canExAttack = true;
         }
+        player.CanExAttackCheck();
     }
 
     internal int GetGage()
@@ -88,6 +88,7 @@ public class ExAttackParam : MonoBehaviour
             exAttackText.GetComponent<Image>().enabled = true;
             canExAttack = true;
         }
+        player.CanExAttackCheck();
     }
 
     IEnumerator _SetGage(int i) 
@@ -104,14 +105,6 @@ public class ExAttackParam : MonoBehaviour
                 canExAttack = true;
             }
             yield return null;
-        }
-    }
-
-    void PlayerCanExAttackCheck()
-    {
-        if(canExAttack)
-        {
-            player.canExAttack = true;
         }
     }
 }

@@ -8,11 +8,6 @@ public class Player_Demo : PlayerController
     protected override void InputKay()
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
-        float lsh = Input.GetAxis("L_Stick_H");
-        float lsv = Input.GetAxis("L_Stick_V");
-        //ŠÈˆÕ“ü—Í‚Åg—p
-        //float rsh = Input.GetAxis("R_Stick_H");
-        //float rsv = Input.GetAxis("R_Stick_V");
 
         if (nomalAttack.IsPressed())
         {
@@ -29,21 +24,25 @@ public class Player_Demo : PlayerController
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         //rsv >= 0.8
         {
+            Debug.Log("ã¸UŒ‚");
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
         if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
         //rsv <= -0.8
         {
+            Debug.Log("—‰ºUŒ‚");
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
         if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
+            Debug.Log("‰¡ˆÚ“®UŒ‚");
             AttackAction("SideAttack_right");
         }
         else if (inputMoveAxis.x  <= -0.9 && isSkillAttackKay)
         {
+            Debug.Log("‰¡ˆÚ“®UŒ‚");
             AttackAction("SideAttack_left");
         }
         //•KE‹Z
