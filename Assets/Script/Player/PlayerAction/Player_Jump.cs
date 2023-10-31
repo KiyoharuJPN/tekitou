@@ -109,7 +109,6 @@ public class Player_Jump : MonoBehaviour
         //ジャンプキー入力
         if (player.jumpKay.WasPressedThisFrame())
         {
-            Debug.Log("ジャンプ");
             JumpSet();
         }
     }

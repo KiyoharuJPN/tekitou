@@ -24,25 +24,21 @@ public class Player_Demo : PlayerController
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         //rsv >= 0.8
         {
-            Debug.Log("ã¸UŒ‚");
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
         if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
         //rsv <= -0.8
         {
-            Debug.Log("—‰ºUŒ‚");
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
         if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
-            Debug.Log("‰¡ˆÚ“®UŒ‚");
             AttackAction("SideAttack_right");
         }
         else if (inputMoveAxis.x  <= -0.9 && isSkillAttackKay)
         {
-            Debug.Log("‰¡ˆÚ“®UŒ‚");
             AttackAction("SideAttack_left");
         }
         //•KE‹Z

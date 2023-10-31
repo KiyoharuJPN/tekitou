@@ -10,11 +10,11 @@ public class SideAttack:MonoBehaviour
 
     public static void SideAttackStart(PlayerController player, bool sideJudge, MonoBehaviour p_behaviour)
     {
-        p_behaviour.StartCoroutine(_SideAttack(player, sideJudge));
+        p_behaviour.StartCoroutine(SideAttackMove(player, sideJudge));
     } 
 
     //横攻撃処理
-    public static IEnumerator _SideAttack(PlayerController player, bool sideJudge)
+    static IEnumerator SideAttackMove(PlayerController player, bool sideJudge)
     {
         //アニメーションセット
         player.canSideAttack = false;

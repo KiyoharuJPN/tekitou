@@ -180,9 +180,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        //Debug.Log(canMove);
-        //Debug.Log(isWarpDoor);
+        Debug.Log(rb.velocity);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -221,6 +219,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsJumping", isJumping);
         animator.SetBool("IsSquatting", isSquatting);
         animator.SetBool("IsLanding", isLanding);
+        animator.SetBool("IsDropAttack", isDropAttack);
         animator.SetBool("IsGround", isGround);
     }
 
@@ -286,7 +285,7 @@ public class PlayerController : MonoBehaviour
             AttackAction("UpAttack");
         }
         //落下攻撃攻撃
-        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack)
         //rsv <= -0.8
         {
             AttackAction("DawnAttack");
@@ -324,7 +323,7 @@ public class PlayerController : MonoBehaviour
     //アクション実行
     internal void AttackAction(string actionName)
     {
-        if (isExAttack) return;
+        if (isExAttack || isAttack) return;
         switch (actionName)
         {
             case "UpAttack":
@@ -334,7 +333,8 @@ public class PlayerController : MonoBehaviour
 
             case "DawnAttack":
                 if (isAttack || !canDropAttack) break;
-                DropAttack.DropAttackStart(this);
+                Debug.Log("落下攻撃");
+                DropAttack.DropAttackStart(this,this);
                 break;
 
             case "SideAttack_right":
@@ -462,7 +462,6 @@ public class PlayerController : MonoBehaviour
     public void NomalPlayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Player");
-
     }
 
     //スキルアクション終了メソッド
