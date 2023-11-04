@@ -27,7 +27,7 @@ public class BossHPBar : MonoBehaviour
 
     private void OnEnable()
     {
-        //—LŒø‰»‚·‚é‚½‚Ñ‚É‰Šú‰»‚ğ‚·‚é
+        //—LŒø‰»‚³‚ê‚é‚É‰Šú‰»‚ğ‚·‚é
         StartAnimation = true;
         BossHPGauge.fillAmount = 0f;
         BossHPBackGauge.fillAmount = 0f;

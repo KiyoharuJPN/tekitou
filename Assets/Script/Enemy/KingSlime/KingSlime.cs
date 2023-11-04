@@ -35,7 +35,7 @@ public class KingSlime : Enemy
         , NoGravity = false, ExSkillCheck = false, inExSkillCheck = false
         , ExSkillFalling = false, SkillTurnAround = false;                                            //判断用内部関数
     int movingCheck = 0, AttackMode = 0, NormalAttackAnimation;         //チェック用int関数
-    GameObject playerObj;                                  //プレイヤーオブジェクト宣言
+    GameObject playerObj;                                               //プレイヤーオブジェクト宣言
 
     //コールチーンよう判断関数
     bool inKSBossAtack1, inKSBossAtack2, inKSBossAtack3, inKSBossSummon, inKSMovingAnim;
