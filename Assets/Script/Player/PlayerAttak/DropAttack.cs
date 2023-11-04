@@ -16,6 +16,7 @@ public class DropAttack
 
     static IEnumerator DropAttackMove(PlayerController player)
     {
+        float time = 0;
         player.isAttack = true;
         player.isDropAttack = true;
         player.animator.SetBool("IsDropAttack", player.isDropAttack);
@@ -36,8 +37,14 @@ public class DropAttack
         player.rb.velocity = Vector2.zero;
         while (!player.isGround)
         {
+            time += Time.deltaTime;
             player.rb.velocity = new Vector2(0, -skill.distance);
             yield return null;
+
+            if(time > 3f)
+            {
+                break;
+            }
         }
         player.animator.Play("Hero_DropAttack_End");
         yield return new WaitForSeconds(0.18f);

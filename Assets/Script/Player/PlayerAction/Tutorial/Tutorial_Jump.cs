@@ -16,6 +16,8 @@ public class Tutorial_Jump : Player_Jump
     // Update is called once per frame
     void Update()
     {
+        //接地状態を得る
+        isGround = ground.IsGround();
 
         //停止
         if (tutroialPlayer.isExAttack || tutroialPlayer.isWarpDoor) return;
@@ -27,11 +29,6 @@ public class Tutorial_Jump : Player_Jump
         //ジャンプキー取得
         if (tutroialPlayer.canMove && !tutroialPlayer.isAttack && tutroialPlayer.isTJump) JumpBottan();
 
-        if (isjump && tutroialPlayer.isAttack)
-        {
-            isjump = false;
-            jumpTime = 0;
-        };
 
     }
 
@@ -59,19 +56,19 @@ public class Tutorial_Jump : Player_Jump
         //ジャンプ中の処理
         if (isjump)
         {
-            if (!Input.GetButton("Jump") || jumpTime >= tutroialPlayer.jumpData.maxJumpTime)
+            if (!tutroialPlayer.jumpKay.IsPressed() || jumpTime >= tutroialPlayer.jumpData.maxJumpTime)
             {
                 isjump = false;
                 jumpTime = 0;
             }
-            else if (Input.GetButton("Jump") && jumpTime <= tutroialPlayer.jumpData.maxJumpTime)
+            else if (tutroialPlayer.jumpKay.IsPressed() && jumpTime <= tutroialPlayer.jumpData.maxJumpTime)
             {
                 jumpTime += Time.deltaTime;
             }
         }
 
         //ジャンプキー入力
-        if (Input.GetButtonDown("Jump"))
+        if (tutroialPlayer.jumpKay.WasPressedThisFrame())
         {
             JumpSet();
         }
@@ -81,7 +78,7 @@ public class Tutorial_Jump : Player_Jump
     internal new void JumpSet()
     {
         //ジャンプ1段目
-        if (FarstJump && !canSecondJump)
+        if (FarstJump && !canSecondJump && isGround)
         {
 
             tutroialPlayer.isSquatting = true;
@@ -96,7 +93,7 @@ public class Tutorial_Jump : Player_Jump
             tutroialPlayer.animator.Play("Hero_anim_Jump_1");
         }
         //ジャンプ2段目
-        else if (canSecondJump && tutroialPlayer.isTAirJump)
+        else if (!FarstJump && canSecondJump && tutroialPlayer.isTAirJump)
         {
             tutroialPlayer.animator.SetTrigger("IsSecondJump");
             canSecondJump = false;
@@ -118,12 +115,12 @@ public class Tutorial_Jump : Player_Jump
 
         tutroialPlayer.isJumping = true;
 
-        if (Input.GetButton("Jump"))
+        if (tutroialPlayer.jumpKay.IsPressed())
         {
             tutroialPlayer.rb.velocity = new Vector2(tutroialPlayer.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, tutroialPlayer.jumpData.speed) + jumpTime * Time.deltaTime);
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (tutroialPlayer.jumpKay.WasReleasedThisFrame())
         {
             tutroialPlayer.rb.velocity = new Vector2(tutroialPlayer.rb.velocity.x, HeigetLimt(jumpPos, jumpHight, tutroialPlayer.jumpData.speed) + jumpTime * Time.deltaTime * 0.5f);
         }

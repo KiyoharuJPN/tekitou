@@ -81,6 +81,7 @@ public class TutorialPlayer : PlayerController
         animator.SetBool("IsJumping", isJumping);
         animator.SetBool("IsSquatting", isSquatting);
         animator.SetBool("IsLanding", isLanding);
+        animator.SetBool("IsDropAttack", isDropAttack);
         animator.SetBool("IsGround", isGround);
     }
 
@@ -88,34 +89,36 @@ public class TutorialPlayer : PlayerController
     void _Skill()
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
-        //float rsh = Input.GetAxis("R_Stick_H");
-        //float rsv = Input.GetAxis("R_Stick_V");
-
-        if (skillAttack.IsPressed())
+        if (nomalAttack.IsPressed())
         {
             isAttackKay = true;
         }
         else { isAttackKay = false; }
+        if (skillAttack.IsPressed())
+        {
+            isSkillAttackKay = true;
+        }
+        else { isSkillAttackKay = false; }
 
         //è„è∏çUåÇ
-        if (inputMoveAxis.y >= 0.9 && isAttackKay && isTUpAttack)
+        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && isTUpAttack)
             // || rsv >= 0.8)
         {
             AttackAction("UpAttack");
         }
         //óéâ∫çUåÇçUåÇ
-        if (inputMoveAxis.y <= -0.9 && isAttackKay && isTDownAttack)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && isTDownAttack)
             // || rsv <= -0.8)
         {
             AttackAction("DawnAttack");
         }
         //â°à⁄ìÆçUåÇ
-        if (inputMoveAxis.x >= 0.9 && isAttackKay && isTSideAttack)
+        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay && isTSideAttack)
             // || rsh >= 0.8)
         {
             AttackAction("SideAttack_right");
         }
-        else if(inputMoveAxis.x <= -0.9 && isAttackKay && isTSideAttack)
+        else if(inputMoveAxis.x <= -0.9 && isSkillAttackKay && isTSideAttack)
             // || rsh <= -0.8)
         {
             AttackAction("SideAttack_left");

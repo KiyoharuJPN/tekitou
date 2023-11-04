@@ -10,7 +10,7 @@ public class Player_Jump : MonoBehaviour
     internal PlayerController player;
     public Player_IsGround ground;
     public Player_IsGround head;
-    bool isGround = false;            //接地フラグ
+    internal bool isGround = false;            //接地フラグ
     bool isHead = false;            //頭をぶつけた判定
     const float FALL_VELOCITY = 0.4f;   //落下中判定用定数（characterのVilocityがこれより大きい場合true）
 
@@ -50,6 +50,7 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(ground.IsGround());
         //接地状態を得る
         isGround = ground.IsGround();
         isHead = head.IsGround();
@@ -63,7 +64,6 @@ public class Player_Jump : MonoBehaviour
 
         //ジャンプキー取得
         if (player.canMove && !player.isAttack) JumpBottan();
-
         
     }
 
@@ -151,7 +151,6 @@ public class Player_Jump : MonoBehaviour
     void Jump()
     {
         if (!isjump) return;
-
         player.isJumping = true;
         
         if (player.jumpKay.IsPressed())

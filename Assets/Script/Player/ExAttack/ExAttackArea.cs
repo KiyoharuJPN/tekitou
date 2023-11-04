@@ -16,13 +16,13 @@ public class ExAttackArea : MonoBehaviour
     {
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
 
-        player.enemylist.Clear();
+        player.exAttackEnemylist.Clear();
 
         foreach (GameObject gameObj in enemys)
         {
             if (gameObj.GetComponent<Enemy>().OnCamera)
             {
-                player.enemylist.Add(gameObj);
+                player.exAttackEnemylist.Add(gameObj);
             }
         }
     }

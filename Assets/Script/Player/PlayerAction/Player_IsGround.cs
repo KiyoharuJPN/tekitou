@@ -111,9 +111,13 @@ public class Player_IsGround : MonoBehaviour
             if (player.isDropAttack)
             {
                 jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
+                player.isGround = true;
+                Invoke("Landingoff", 0.18f);
             }
-
-            Landingoff();
+            else
+            {
+                Landingoff();
+            }
         }
     }
 

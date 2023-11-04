@@ -180,7 +180,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rb.velocity);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -300,7 +299,7 @@ public class PlayerController : MonoBehaviour
             AttackAction("SideAttack_left");
         }
         //必殺技
-        if (exAttack_L.IsPressed())
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
         {
             if (!isAttack && canExAttack)
             {
@@ -333,7 +332,6 @@ public class PlayerController : MonoBehaviour
 
             case "DawnAttack":
                 if (isAttack || !canDropAttack) break;
-                Debug.Log("落下攻撃");
                 DropAttack.DropAttackStart(this,this);
                 break;
 
@@ -349,6 +347,8 @@ public class PlayerController : MonoBehaviour
 
             case "ExAttack":
                 if (isAttack || !canExAttack) break;
+                exAttackEnemylist.Clear();
+                isAttack = true;
                 isExAttack = true;
                 canExAttack = false;
                 animator.SetBool("IsExAttack", isExAttack);
@@ -421,7 +421,7 @@ public class PlayerController : MonoBehaviour
     public void _ExAttackHitEffect()
     {
         //エフェクト生成
-        foreach (var enemy in enemylist)
+        foreach (var enemy in exAttackEnemylist)
         {
             HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
@@ -433,11 +433,11 @@ public class PlayerController : MonoBehaviour
         //ダメージ処理
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.ExAttack);
         
-        GameManager.Instance.PlayerExAttack_HitEnemyEnd(enemylist ,skill.damage + ComboParam.Instance.GetPowerUp());
+        GameManager.Instance.PlayerExAttack_HitEnemyEnd(exAttackEnemylist, skill.damage + ComboParam.Instance.GetPowerUp());
     }
     public void ExAttackHitCheck()
     {
-        if(enemylist.Count == 0)
+        if(exAttackEnemylist.Count == 0)
         {
             ExAttackEnd();
         }
@@ -446,7 +446,8 @@ public class PlayerController : MonoBehaviour
     public void ExAttackEnd()
     {
         isExAttack = false;
-        enemylist.Clear();
+        isAttack = false;
+        exAttackEnemylist.Clear();
         NomalPlayer();
         animator.SetBool("IsExAttack", isExAttack);
         GameManager.Instance.PlayerExAttack_End();
