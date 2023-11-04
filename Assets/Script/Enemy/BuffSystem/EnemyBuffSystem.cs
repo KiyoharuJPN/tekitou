@@ -12,7 +12,7 @@ public class EnemyBuffSystem : MonoBehaviour
     TextMeshProUGUI BuffAttackCheckText;
     GameObject BuffCanvas;
 
-    bool checkBlowingUp = false;
+    bool checkBlowingUp = false, canSetBuffType = true;
 
     //表示時(暫定)
     public enum DisplayType
@@ -92,6 +92,7 @@ public class EnemyBuffSystem : MonoBehaviour
         //倒された時は表示だけをする
         if (!BuffAttackCheckText.gameObject.activeSelf)
         {
+            canSetBuffType = false;
             BuffAttackCheck = GetBuffAcquisitionCount();
             BuffAttackCheckText.color = GetColorByType();
             BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
@@ -225,6 +226,12 @@ public class EnemyBuffSystem : MonoBehaviour
                 break;
         }
         return color;
+    }
+
+    //外部でバフ内容を決める
+    public void SetBuffTypeByScript(int bt)
+    {
+        if (canSetBuffType) buffType = (SetBuffType)bt;
     }
 
 

@@ -230,7 +230,14 @@ public class PlayerController : MonoBehaviour
     {
         ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         ExAttackParam.Instance.AddGauge();
-        enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill, isHitStop);
+        if (enemy.GetComponent<Enemy>() != null)
+        {
+            enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill, isHitStop);
+        }
+        else
+        {
+            enemy.GetComponent<PartsEnemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill, isHitStop);
+        }
     }
 
     public void Heel(int resilience)
@@ -289,6 +296,7 @@ public class PlayerController : MonoBehaviour
         else { isSkillAttackKay = false; }
 
         //ã¸UŒ‚
+        //if (inputMoveAxis.y >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.I))
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         //rsv >= 0.8
         {
@@ -301,12 +309,14 @@ public class PlayerController : MonoBehaviour
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
+        //if (inputMoveAxis.x >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.K))
         if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_right");
         }
+        //else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay || Input.GetKey(KeyCode.J))
         else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay)
-        {
+                {
             AttackAction("SideAttack_left");
         }
         //•KŽE‹Z
@@ -323,6 +333,7 @@ public class PlayerController : MonoBehaviour
             //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack");
         }
+        //if (nomalAttack.IsPressed() && canNomalAttack || Input.GetKey(KeyCode.U))
         if (nomalAttack.IsPressed() && canNomalAttack)
         {
             //’ÊíUŒ‚’·‰Ÿ‚µ’†

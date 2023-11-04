@@ -172,7 +172,6 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 2736784206775426938}
   id: 14
   HadContactDamage: 1
-  speed: 15
   movingSpeed: 1.2
   idleTime: 2.4
 --- !u!95 &8030852523938475198
@@ -270,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3173908005842791307, guid: fab7ba5b1dfeb794281dc588de6e8dbe, type: 3}
       propertyPath: buffType
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7747173658008363968, guid: fab7ba5b1dfeb794281dc588de6e8dbe, type: 3}
       propertyPath: m_RootOrder
