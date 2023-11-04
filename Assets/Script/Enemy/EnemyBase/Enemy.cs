@@ -363,6 +363,10 @@ public class Enemy : MonoBehaviour
     //€–Sˆ—
     protected virtual void OnDestroyMode()
     {
+        if (this.gameObject.GetComponent<MonsterHouse_Enemy>())
+        {
+            this.gameObject.GetComponent<MonsterHouse_Enemy>().Destroy();
+        }
         //€–Só‘Ô‚É•ÏX
         isDestroy = true;
         //€–SSEÄ¶

@@ -50,7 +50,6 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(ground.IsGround());
         //Ú’nó‘Ô‚ğ“¾‚é
         isGround = ground.IsGround();
         isHead = head.IsGround();

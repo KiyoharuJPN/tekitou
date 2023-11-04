@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.InputSystem.Processors;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -155,6 +155,10 @@ public class PlayerController : MonoBehaviour
     //boss”»’è—p
     internal bool canMove = true;
 
+    //Ž€–S”»’è
+    bool isDead = false;
+    public bool GetIsDead {  get { return isDead; } }
+
     //InputSystem
     internal InputAction move, jumpKay, nomalAttack, skillAttack, exAttack_L, exAttack_R;
 
@@ -248,17 +252,24 @@ public class PlayerController : MonoBehaviour
             //ƒ‰ƒCƒtŒvŽZ
             hpparam.DamageHP(hpparam.GetHP() - power);
             shake.Shake(0.2f, 0.8f, true, true);
-            if (hpparam.GetHP() <= 0)
+            if (hpparam.GetHP() <= 0 && !isDead)
             {
-                this.tag = "DeadPlayer";
-                gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
-                isKnockingBack = false;
-                SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
-                animator.Play("Death");
-                shake.Shake(0.2f, 1f, true, true);
-                GameManager.Instance.PlayerDeath();
+                PlayerDead();
             }
         }
+    }
+
+    public void PlayerDead()
+    {
+        if(isDead) { return; }
+        isDead = true;
+        this.tag = "DeadPlayer";
+        gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
+        isKnockingBack = false;
+        SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
+        animator.Play("Death");
+        shake.Shake(0.2f, 1f, true, true);
+        GameManager.Instance.PlayerDeath();
     }
 
     //‹Z“ü—ÍŒŸ’m
@@ -408,7 +419,11 @@ public class PlayerController : MonoBehaviour
     //•KŽE‹Z
     internal void CanExAttackCheck() //•KŽE‹Z‚ªŽg—p‚Å‚«‚é‚©ƒ`ƒFƒbƒN
     {
-        if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
+        if (ExAttackParam.Instance.GetCanExAttack)
+        {
+            SoundManager.Instance.PlaySE(SESoundData.SE.exGageMax);
+            canExAttack = true;
+        }
     }
 
     public void ExAttackStart()
