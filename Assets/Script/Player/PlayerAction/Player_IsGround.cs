@@ -111,24 +111,14 @@ public class Player_IsGround : MonoBehaviour
             if (player.isDropAttack)
             {
                 jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
-                player.isDropAttack = false;
-                player.animator.SetBool("IsDropAttack", player.isDropAttack);
+                player.isGround = true;
+                Invoke("Landingoff", 0.18f);
             }
-            StartCoroutine(Interval());
+            else
+            {
+                Landingoff();
+            }
         }
-    }
-
-    IEnumerator Interval()
-    {
-        if (!player.canDropAttack)
-        {
-            float time = AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.Hero_DropAttack_End);
-
-            yield return new WaitForSeconds(time);
-
-            player.enemylist.Clear();
-        }
-        Landingoff();
     }
 
     void Landingoff()
@@ -138,7 +128,7 @@ public class Player_IsGround : MonoBehaviour
         player.animator.SetBool("IsNomalAttack_1", player.isNomalAttack);
         jumpData.FarstJump = true;
         player.isLanding = false;
+        
         player.isAttack = false;
-        player.canDropAttack = true;
     }
 }

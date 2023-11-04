@@ -198,7 +198,11 @@ public class SESoundData
         SlashingWave,
 
         //ステージ３
-        DemonkingShout
+        DemonkingShout,
+        //動く壁起動音
+        moveWall,
+        //ExGageMax
+        exGageMax
 
     }
 

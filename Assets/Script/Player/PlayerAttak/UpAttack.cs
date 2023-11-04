@@ -58,14 +58,15 @@ public class UpAttack
 
     public static void UpAttackEnd(PlayerController player, Player_Jump p_Jump)
     {
+        player.rb.velocity = new Vector2(0, 0);
+        player.isAttack = false;
+        player.enemylist.Clear();
+        p_Jump.isUpAttack = false;
+        player.isUpAttack = false;
+        player.animator.SetBool("IsUpAttack", player.isUpAttack);
         if (p_Jump.isUpAttack)
         {
-            player.rb.velocity = new Vector2(0, 0);
-            player.isAttack = false;
-            player.enemylist.Clear();
-            p_Jump.isUpAttack = false;
-            player.isUpAttack = false;
-            player.animator.SetBool("IsUpAttack", player.isUpAttack);
+            
         }
     }
 }

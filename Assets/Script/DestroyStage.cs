@@ -6,7 +6,9 @@ public class DestroyStage : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name + "çÌèú");
-        Destroy(other.gameObject);
+        if(other.gameObject.tag == "Enemy")
+        {
+            other.GetComponent<Enemy>().EnemyNomalDestroy();
+        }
     }
 }

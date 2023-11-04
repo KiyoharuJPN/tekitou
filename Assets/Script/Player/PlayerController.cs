@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.InputSystem.Processors;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -155,6 +155,10 @@ public class PlayerController : MonoBehaviour
     //boss判定用
     internal bool canMove = true;
 
+    //死亡判定
+    bool isDead = false;
+    public bool GetIsDead {  get { return isDead; } }
+
     //InputSystem
     internal InputAction move, jumpKay, nomalAttack, skillAttack, exAttack_L, exAttack_R;
 
@@ -180,9 +184,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-        //Debug.Log(canMove);
-        //Debug.Log(isWarpDoor);
         if (!canMove) return;
         if (isExAttack || isWarpDoor)
         {
@@ -221,6 +222,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsJumping", isJumping);
         animator.SetBool("IsSquatting", isSquatting);
         animator.SetBool("IsLanding", isLanding);
+        animator.SetBool("IsDropAttack", isDropAttack);
         animator.SetBool("IsGround", isGround);
     }
 
@@ -257,17 +259,24 @@ public class PlayerController : MonoBehaviour
             //ライフ計算
             hpparam.DamageHP(hpparam.GetHP() - power);
             shake.Shake(0.2f, 0.8f, true, true);
-            if (hpparam.GetHP() <= 0)
+            if (hpparam.GetHP() <= 0 && !isDead)
             {
-                this.tag = "DeadPlayer";
-                gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
-                isKnockingBack = false;
-                SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
-                animator.Play("Death");
-                shake.Shake(0.2f, 1f, true, true);
-                GameManager.Instance.PlayerDeath();
+                PlayerDead();
             }
         }
+    }
+
+    public void PlayerDead()
+    {
+        if(isDead) { return; }
+        isDead = true;
+        this.tag = "DeadPlayer";
+        gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
+        isKnockingBack = false;
+        SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
+        animator.Play("Death");
+        shake.Shake(0.2f, 1f, true, true);
+        GameManager.Instance.PlayerDeath();
     }
 
     //技入力検知
@@ -294,7 +303,7 @@ public class PlayerController : MonoBehaviour
             AttackAction("UpAttack");
         }
         //落下攻撃攻撃
-        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack)
         //rsv <= -0.8
         {
             AttackAction("DawnAttack");
@@ -311,7 +320,7 @@ public class PlayerController : MonoBehaviour
             AttackAction("SideAttack_left");
         }
         //必殺技
-        if (exAttack_L.IsPressed())
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
         {
             if (!isAttack && canExAttack)
             {
@@ -335,7 +344,7 @@ public class PlayerController : MonoBehaviour
     //アクション実行
     internal void AttackAction(string actionName)
     {
-        if (isExAttack) return;
+        if (isExAttack || isAttack) return;
         switch (actionName)
         {
             case "UpAttack":
@@ -345,7 +354,7 @@ public class PlayerController : MonoBehaviour
 
             case "DawnAttack":
                 if (isAttack || !canDropAttack) break;
-                DropAttack.DropAttackStart(this);
+                DropAttack.DropAttackStart(this,this);
                 break;
 
             case "SideAttack_right":
@@ -360,6 +369,8 @@ public class PlayerController : MonoBehaviour
 
             case "ExAttack":
                 if (isAttack || !canExAttack) break;
+                exAttackEnemylist.Clear();
+                isAttack = true;
                 isExAttack = true;
                 canExAttack = false;
                 animator.SetBool("IsExAttack", isExAttack);
@@ -419,7 +430,11 @@ public class PlayerController : MonoBehaviour
     //必殺技
     internal void CanExAttackCheck() //必殺技が使用できるかチェック
     {
-        if (ExAttackParam.Instance.GetCanExAttack) canExAttack = true;
+        if (ExAttackParam.Instance.GetCanExAttack)
+        {
+            SoundManager.Instance.PlaySE(SESoundData.SE.exGageMax);
+            canExAttack = true;
+        }
     }
 
     public void ExAttackStart()
@@ -432,7 +447,7 @@ public class PlayerController : MonoBehaviour
     public void _ExAttackHitEffect()
     {
         //エフェクト生成
-        foreach (var enemy in enemylist)
+        foreach (var enemy in exAttackEnemylist)
         {
             HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
@@ -444,11 +459,11 @@ public class PlayerController : MonoBehaviour
         //ダメージ処理
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.ExAttack);
         
-        GameManager.Instance.PlayerExAttack_HitEnemyEnd(enemylist ,skill.damage + ComboParam.Instance.GetPowerUp());
+        GameManager.Instance.PlayerExAttack_HitEnemyEnd(exAttackEnemylist, skill.damage + ComboParam.Instance.GetPowerUp());
     }
     public void ExAttackHitCheck()
     {
-        if(enemylist.Count == 0)
+        if(exAttackEnemylist.Count == 0)
         {
             ExAttackEnd();
         }
@@ -457,7 +472,8 @@ public class PlayerController : MonoBehaviour
     public void ExAttackEnd()
     {
         isExAttack = false;
-        enemylist.Clear();
+        isAttack = false;
+        exAttackEnemylist.Clear();
         NomalPlayer();
         animator.SetBool("IsExAttack", isExAttack);
         GameManager.Instance.PlayerExAttack_End();
@@ -473,7 +489,6 @@ public class PlayerController : MonoBehaviour
     public void NomalPlayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Player");
-
     }
 
     //スキルアクション終了メソッド

@@ -61,7 +61,10 @@ public class MonsterHouse : MonoBehaviour
         foreach (var enemy in enemyWaves[waveNum].popEnemys)
         {
             Instantiate(summonAnimObj, enemy.popPostion.transform.position, Quaternion.identity);
-            enemylist.Add(Instantiate(enemy.enmey, enemy.popPostion.transform.position, Quaternion.identity));
+            var enemyObj = Instantiate(enemy.enmey, enemy.popPostion.transform.position, Quaternion.identity);
+            enemyObj.AddComponent<MonsterHouse_Enemy>();
+            enemyObj.GetComponent<MonsterHouse_Enemy>().monsterHouse = this;
+            enemylist.Add(enemyObj);
         }
 
         StartCoroutine(ClearCheck());
@@ -73,19 +76,6 @@ public class MonsterHouse : MonoBehaviour
     /// </summary>
     IEnumerator ClearCheck()
     {
-        List<GameObject> objlist = new List<GameObject>();
-        foreach (var enemy in enemylist)
-        {
-            //“G‚ª€–Só‘Ô‚©
-            if (enemy.GetComponent<Enemy>().isDestroy)
-            {
-                objlist.Add(enemy);
-            }
-        }
-        foreach (var item in objlist)
-        {
-            enemylist.Remove(item);
-        }
 
         //“G‚ª‘S‚Ä€‚ñ‚Å‚¢‚½‚ç
         if (enemylist.Count == 0)
@@ -107,6 +97,11 @@ public class MonsterHouse : MonoBehaviour
             yield return new WaitForSeconds(1);
             StartCoroutine(ClearCheck());
         }
+    }
+
+    public void EnemyListRemove(GameObject enemy)
+    {
+        enemylist.Remove(enemy);
     }
 
     void MonsterHouseEnd()
