@@ -34,7 +34,7 @@ public class Tutorial_Walk : MonoBehaviour
             return;
         }
 
-        if (player.isTWalk)
+        if (player.canTWalk)
         {
             MoveKay();
         }

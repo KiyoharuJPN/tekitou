@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject hitEffect;
 
+    [SerializeField,Header("“®‚­•Ç")]
+    List<MoveWall> moveWalls;
+
     public bool isBossRoom = false;
 
     public static GameManager Instance { get; private set; }
@@ -172,6 +175,14 @@ public class GameManager : MonoBehaviour
     {
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
 
+        if(moveWalls.Count != 0)
+        {
+            foreach (MoveWall moveWall in moveWalls)
+            {
+                moveWall.MoveStop = true;
+            }
+        }
+
         foreach (GameObject gameObj in enemys)
         {
             enemyList.Add(gameObj);
@@ -179,7 +190,7 @@ public class GameManager : MonoBehaviour
             {
                 gameObj.GetComponent<Enemy>().EnemyStop();
             }
-            else
+            else if(gameObj.GetComponent<Projectile>())
             {
                 gameObj.GetComponent<Projectile>().EnemyStop();
             }
@@ -188,6 +199,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayerExAttack_HitEnemyEnd(List<GameObject> hitEnemyList, float powar)
     {
+        foreach (MoveWall moveWall in moveWalls)
+        {
+            moveWall.MoveStop = false;
+        }
+
         foreach (GameObject gameObj in hitEnemyList)
         {
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
@@ -205,7 +221,7 @@ public class GameManager : MonoBehaviour
             {
                 gameObj.GetComponent<Enemy>().Stop_End();
             }
-            else
+            else if( gameObj.GetComponent<Projectile>())
             {
                 gameObj.GetComponent<Projectile>().Stop_End();
             }

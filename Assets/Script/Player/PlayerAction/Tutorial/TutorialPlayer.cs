@@ -12,15 +12,17 @@ public class TutorialPlayer : PlayerController
     internal TutorialScene tutorial;
 
     //É`ÉÖÅ[ÉgÉäÉAÉãäebool
-    internal bool isTWalk = false;
-    internal bool isTJump = false;
-    internal bool isTAirJump = false;
-    internal bool isTAttack = false;
-    internal bool isTAirAttack = false;
-    internal bool isTSideAttack = false;
-    internal bool isTUpAttack = false;
-    internal bool isTDownAttack = false;
-    internal bool isTExAttack = false;
+    internal bool canTWalk = false;
+    internal bool canTJump = false;
+    internal bool canTAirJump = false;
+    internal bool canTAttack = false;
+    internal bool canTAirAttack = false;
+    internal bool canTSideAttack = false;
+    internal bool canTUpAttack = false;
+    internal bool canTDownAttack = false;
+    internal bool canTExAttack = false;
+    internal bool tExAttackActivCheck = false;
+    internal bool canTExGageGet = false;
 
     void Start()
     {
@@ -44,6 +46,12 @@ public class TutorialPlayer : PlayerController
     void Update()
     {
         if (!canMove) return;
+
+        if (!canTExGageGet)
+        {
+            ExAttackParam.Instance.SetGage(0);
+        }
+
         if (isExAttack || isWarpDoor)
         {
             rb.velocity = Vector2.zero;
@@ -84,6 +92,22 @@ public class TutorialPlayer : PlayerController
         animator.SetBool("IsDropAttack", isDropAttack);
         animator.SetBool("IsGround", isGround);
     }
+    public void Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
+    {
+        ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
+        if (canTExGageGet)
+        {
+            ExAttackParam.Instance.AddGauge();
+        }
+        if (enemy.GetComponent<Enemy>() != null)
+        {
+            enemy.GetComponent<Enemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill, isHitStop);
+        }
+        else
+        {
+            enemy.GetComponent<PartsEnemy>().Damage(powar + ComboParam.Instance.GetPowerUp(), skill, isHitStop);
+        }
+    }
 
     //ãZì¸óÕåüím
     void _Skill()
@@ -101,24 +125,24 @@ public class TutorialPlayer : PlayerController
         else { isSkillAttackKay = false; }
 
         //è„è∏çUåÇ
-        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && isTUpAttack)
+        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && canTUpAttack)
             // || rsv >= 0.8)
         {
             AttackAction("UpAttack");
         }
         //óéâ∫çUåÇçUåÇ
-        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && isTDownAttack)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canTDownAttack)
             // || rsv <= -0.8)
         {
             AttackAction("DawnAttack");
         }
         //â°à⁄ìÆçUåÇ
-        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay && isTSideAttack)
+        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay && canTSideAttack)
             // || rsh >= 0.8)
         {
             AttackAction("SideAttack_right");
         }
-        else if(inputMoveAxis.x <= -0.9 && isSkillAttackKay && isTSideAttack)
+        else if(inputMoveAxis.x <= -0.9 && isSkillAttackKay && canTSideAttack)
             // || rsh <= -0.8)
         {
             AttackAction("SideAttack_left");
@@ -126,18 +150,18 @@ public class TutorialPlayer : PlayerController
         //ïKéEãZ
         if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
         {
-            if (!isAttack && canExAttack && isTExAttack && !isExAttack) 
+            if (!isAttack && canExAttack && canTExAttack && !isExAttack) 
             {
                 AttackAction("ExAttack");
             }
         }
         //éËìÆçUåÇÅFçUåÇÉ{É^ÉìÇ™âüÇ≥ÇÍÇπÇΩÇ∆Ç´
-        if (nomalAttack.WasPressedThisFrame() && canNomalAttack && isTAttack)
+        if (nomalAttack.WasPressedThisFrame() && canNomalAttack && canTAttack)
         {
             //í èÌçUåÇì¸óÕ
             AttackAction("NomalAttack");
         }
-        if (nomalAttack.IsPressed() && canNomalAttack && isTAttack)
+        if (nomalAttack.IsPressed() && canNomalAttack && canTAttack)
         {
             //í èÌçUåÇí∑âüÇµíÜ
             AttackAction("NomalAttack");
@@ -163,6 +187,18 @@ public class TutorialPlayer : PlayerController
         {
             isKnockingBack = false;
         }
+    }
+
+    //É`ÉÖÅ[ÉgÉäÉAÉãExAttackèIóπéû
+    public new void ExAttackEnd()
+    {
+        isExAttack = false;
+        isAttack = false;
+        exAttackEnemylist.Clear();
+        NomalPlayer();
+        animator.SetBool("IsExAttack", isExAttack);
+        GameManager.Instance.PlayerExAttack_End();
+        tExAttackActivCheck = true;
     }
 
     //îwåiÉXÉNÉçÅ[Éãèàóù

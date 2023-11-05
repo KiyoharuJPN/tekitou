@@ -143,53 +143,53 @@ public class TutorialScene : StageCtrl
                 if (isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 5:
-                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 0)
-                {
-                    return TutorialClear();
-                }
-                break;
-            case 6:
-                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 1 && !getCheckBuff.speedUp)
-                {
-                    getCheckBuff.speedUp = true;
-                }
-                if(PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.ExGage) > 0 && !getCheckBuff.exGage)
-                {
-                    getCheckBuff.exGage = true;
-                }
-                if(PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Slashing) > 0 && !getCheckBuff.slashing)
-                {
-                    getCheckBuff.slashing = true;
-                }
-                if(PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible) > 0 && !getCheckBuff.invincible)
-                {
-                    getCheckBuff.invincible = true;
-                }
-                if(getCheckBuff.speedUp && getCheckBuff.exGage && getCheckBuff.slashing && getCheckBuff.invincible)
-                {
-                    return TutorialClear();
-                }
-                break;
-            case 7:
                 if (player.isSideAttack)
                 {
                     return TutorialClear();
                 }
                 break;
-            case 8:
+            case 6:
                 if (player.isUpAttack)
                 {
                     return TutorialClear();
                 }
                 break;
-            case 9:
+            case 7:
                 if (player.isDropAttack)
                 {
                     return TutorialClear();
                 }
                 break;
+            case 8:
+                if (player.tExAttackActivCheck)
+                {
+                    return TutorialClear();
+                }
+                break;
+            case 9:
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 0)
+                {
+                    return TutorialClear();
+                }
+                break;
             case 10:
-                if (player.isExAttack)
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 1 && !getCheckBuff.speedUp)
+                {
+                    getCheckBuff.speedUp = true;
+                }
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.ExGage) > 0 && !getCheckBuff.exGage)
+                {
+                    getCheckBuff.exGage = true;
+                }
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Slashing) > 0 && !getCheckBuff.slashing)
+                {
+                    getCheckBuff.slashing = true;
+                }
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible) > 0 && !getCheckBuff.invincible)
+                {
+                    getCheckBuff.invincible = true;
+                }
+                if (getCheckBuff.speedUp && getCheckBuff.exGage && getCheckBuff.slashing && getCheckBuff.invincible)
                 {
                     return TutorialClear();
                 }
@@ -271,55 +271,39 @@ public class TutorialScene : StageCtrl
         warpDoor.GetComponent<WarpDoor>().enabled = true;
     }
 
-    //private bool EnemyDeathCheck()
-    //{
-    //    var enemyCount = enemylist.Count;
-    //    var deathCount = 0;
-    //    foreach(GameObject enemy in enemylist)
-    //    {
-    //        if(enemy.GetComponent<Enemy>().isDestroy) deathCount++;
-    //    }
-
-    //    if (deathCount == enemyCount)
-    //    {
-    //        enemylist.Clear();
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
     internal void TutorialStep()
     {
         switch (num)
         {
             case 0:
-                player.isTWalk = true;
+                player.canTWalk = true;
                 break;
             case 1:
-                player.isTJump = true;
+                player.canTJump = true;
                 break;
             case 2:
-                player.isTAirJump = true;
+                player.canTAirJump = true;
                 break;
             case 3:
-                player.isTAttack = true;
+                player.canTAttack = true;
                 break;
             case 4:
-                player.isTAirAttack = true;
+                player.canTAirAttack = true;
+                break;
+            case 5:
+                player.canTSideAttack = true;
+                break;
+            case 6:
+                player.canTUpAttack = true;
                 break;
             case 7:
-                player.isTSideAttack = true;
+                player.canTDownAttack = true;
                 break;
             case 8:
-                player.isTUpAttack = true;
-                break;
-            case 9:
-                player.isTDownAttack = true;
-                break;
-            case 10:
                 ExAttackParam.Instance.SetGage(50);
                 player.canExAttack = true;
-                player.isTExAttack = true;
+                player.canTExAttack = true;
+                player.canTExGageGet = true;
                 break;
         }
         stepStart = true;

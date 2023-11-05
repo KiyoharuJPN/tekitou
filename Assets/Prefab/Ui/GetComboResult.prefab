@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2299319930193599950}
   - component: {fileID: 2299319930193599949}
   - component: {fileID: 6915364489475329355}
+  - component: {fileID: 5188828899145082384}
   m_Layer: 5
   m_Name: GetComboResult
   m_TagString: Untagged
@@ -119,6 +120,18 @@ MonoBehaviour:
   comboCountText: {fileID: 2299319930254814474}
   displayTime: 2
   destoryTime: 0.1
+--- !u!114 &5188828899145082384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2299319930193599955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6fbe74174b83640aba95af7ca3e156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2299319930254814472
 GameObject:
   m_ObjectHideFlags: 0

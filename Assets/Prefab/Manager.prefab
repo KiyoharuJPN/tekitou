@@ -65,6 +65,12 @@ MonoBehaviour:
     buffSetTime: 5
     buffTimeDown: 1
     maxBuffTime: 30
+  buffImages:
+  - {fileID: 1006572492, guid: 745d6d001d23d8e4dac6a30e81c9d0f0, type: 3}
+  - {fileID: 1898415155, guid: 745d6d001d23d8e4dac6a30e81c9d0f0, type: 3}
+  - {fileID: -857223773, guid: 745d6d001d23d8e4dac6a30e81c9d0f0, type: 3}
+  - {fileID: 1311982681, guid: 745d6d001d23d8e4dac6a30e81c9d0f0, type: 3}
+  getBuffUI: {fileID: 1399072666018898089, guid: 65a1af02d7b30bb4d9b6b4e1737c28c5, type: 3}
 --- !u!1 &6498813624578379857
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +153,9 @@ MonoBehaviour:
   player: {fileID: 0}
   canPause: 0
   hitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
+  moveWalls: []
   isBossRoom: 0
+  warpPoint: []
 --- !u!1001 &6498813625326001450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,11 +177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: seSoundDatas.Array.size
-      value: 42
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: bgmSoundDatas.Array.size
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: seSoundDatas.Array.data[40].se
@@ -182,6 +190,14 @@ PrefabInstance:
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: seSoundDatas.Array.data[41].se
       value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[43].se
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[44].se
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: bgmSoundDatas.Array.data[10].bgm
@@ -198,6 +214,14 @@ PrefabInstance:
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: bgmSoundDatas.Array.data[13].bgm
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[14].bgm
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[15].bgm
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: bgmSoundDatas.Array.data[0].volume
@@ -236,6 +260,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[43].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[44].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: bgmSoundDatas.Array.data[10].volume
       value: 1
       objectReference: {fileID: 0}
@@ -252,6 +284,14 @@ PrefabInstance:
       value: 0.503
       objectReference: {fileID: 0}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[14].volume
+      value: 0.503
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[15].volume
+      value: 0.503
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: seSoundDatas.Array.data[40].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: ad7c15debcd541d4f864f0b4206b0ca8, type: 3}
@@ -259,6 +299,18 @@ PrefabInstance:
       propertyPath: seSoundDatas.Array.data[41].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 3002739224ddb4c4ba0d4e602092af45, type: 3}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[42].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3002739224ddb4c4ba0d4e602092af45, type: 3}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[43].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 865a2c0a185be8347a5a937c01b25c09, type: 3}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[44].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f5c9a3e3d7f639419d241fed1ed1b88, type: 3}
     - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: bgmSoundDatas.Array.data[10].audioClip
       value: 
@@ -275,6 +327,14 @@ PrefabInstance:
       propertyPath: bgmSoundDatas.Array.data[13].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: a9ec85f42c1136a42a263a85f7581099, type: 3}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[14].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: af81b486761b74741aa1ad3308a1b11d, type: 3}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: bgmSoundDatas.Array.data[15].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9fbdf177f58529f41a4fbfdbfdb97f52, type: 3}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_RootOrder
       value: 1

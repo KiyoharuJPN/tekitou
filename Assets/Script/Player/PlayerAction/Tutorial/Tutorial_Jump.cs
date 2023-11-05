@@ -27,7 +27,7 @@ public class Tutorial_Jump : Player_Jump
         if (tutroialPlayer.isUpAttack && !isSecondJump) canSecondJump = true;
 
         //ジャンプキー取得
-        if (tutroialPlayer.canMove && !tutroialPlayer.isAttack && tutroialPlayer.isTJump) JumpBottan();
+        if (tutroialPlayer.canMove && !tutroialPlayer.isAttack && tutroialPlayer.canTJump) JumpBottan();
 
 
     }
@@ -93,7 +93,7 @@ public class Tutorial_Jump : Player_Jump
             tutroialPlayer.animator.Play("Hero_anim_Jump_1");
         }
         //ジャンプ2段目
-        else if (!FarstJump && canSecondJump && tutroialPlayer.isTAirJump)
+        else if (!FarstJump && canSecondJump && tutroialPlayer.canTAirJump)
         {
             tutroialPlayer.animator.SetTrigger("IsSecondJump");
             canSecondJump = false;
