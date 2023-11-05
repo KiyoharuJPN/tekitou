@@ -167,7 +167,6 @@ public class DemonKing : Enemy
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //Žg—p•û–@
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-        Debug.Log("startcoroutine");
     }
 
     //–‚‰¤‚Ì“®‚«
