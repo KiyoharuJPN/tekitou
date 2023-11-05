@@ -74,8 +74,6 @@ public class SlimeArmor : Enemy
     {
         yield return new WaitForSeconds(0.05f);
         MovingAnim = 0;
-
-        Debug.Log("in 0");
     }
 
     protected override void OnColEnter2D(Collider2D col)

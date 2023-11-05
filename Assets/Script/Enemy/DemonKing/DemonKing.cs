@@ -42,7 +42,8 @@ public class DemonKing : Enemy
     {
         [Tooltip("下降速度と追跡時高さ(0でデフォルト)")]
         public float dropSpeed, attackHeight, furthermoreAttackHeight;
-
+        [Tooltip("左の上限、右の上限")]
+        public float leftCrushMaxPosX, rightCrushMaxPosX;
     }
     [SerializeField] CrushAttckStatus crushAttckStatus = new CrushAttckStatus { dropSpeed = 30, attackHeight = 8, furthermoreAttackHeight = 2 };
 
@@ -75,7 +76,7 @@ public class DemonKing : Enemy
 
 
     Rigidbody2D enemyLHRb, enemyRHRb;
-    Vector3 LHOriginalPos, RHOriginalPos;
+    Vector2 LHOriginalPos, RHOriginalPos;
 
     // パタンシステム関連
     enum EnemyPatternSettings
@@ -137,6 +138,10 @@ public class DemonKing : Enemy
         RHSpeed = LHSpeed * -1;
         HandMoveFrequency = idleStatus.handFrequency * 2;
 
+        //crushAttack関係
+        if (crushAttckStatus.leftCrushMaxPosX == 0) { crushAttckStatus.leftCrushMaxPosX = transform.position.x - 10; } else { crushAttckStatus.leftCrushMaxPosX = transform.position.x - crushAttckStatus.leftCrushMaxPosX; }
+        if (crushAttckStatus.rightCrushMaxPosX == 0) { crushAttckStatus.rightCrushMaxPosX = transform.position.x + 10; } else { crushAttckStatus.leftCrushMaxPosX = transform.position.x + crushAttckStatus.rightCrushMaxPosX; }
+
         //sommonAttack関係
         if (summonAttackStatus.summonHandSpeed == 0) { summonAttackStatus.summonHandSpeed = 0.01f; } else { summonAttackStatus.summonHandSpeed *= 0.01f; }
         if (summonAttackStatus.summonHeightLimit == 0) { summonAttackStatus.summonHeightLimit = LeftHand.transform.position.y + 5; } else { summonAttackStatus.summonHeightLimit += LeftHand.transform.position.y; }
@@ -167,7 +172,6 @@ public class DemonKing : Enemy
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-        Debug.Log("startcoroutine");
     }
 
     //魔王の動き
@@ -281,14 +285,16 @@ public class DemonKing : Enemy
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
 
+
+
         int Frequency = 0;
         while(Frequency < HandMoveFrequency)
         {
             LeftHand.transform.position = new Vector2(LeftHand.transform.position.x, LeftHand.transform.position.y + LHSpeed);
             RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + RHSpeed);
 
-            if (LeftHand.transform.position == LHOriginalPos) Frequency++;
-
+            if ((Vector2)LeftHand.transform.position == LHOriginalPos) Frequency++;
+            
             if (LHSpeed > 0 && LeftHand.transform.position.y > idleStatus.upLimit) LHSpeed *= -1;
             if (LHSpeed < 0 && LeftHand.transform.position.y < idleStatus.downLimit) LHSpeed *= -1;
             if (RHSpeed > 0 && RightHand.transform.position.y > idleStatus.upLimit) RHSpeed *= -1;
@@ -340,7 +346,19 @@ public class DemonKing : Enemy
         i = 0;
         while (i < 180)
         {
-            RightHand.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + crushAttckStatus.attackHeight);
+            if(Player.transform.position.x < crushAttckStatus.leftCrushMaxPosX )
+            {
+                RightHand.transform.position = new Vector2(crushAttckStatus.leftCrushMaxPosX, Player.transform.position.y + crushAttckStatus.attackHeight);
+            }
+            else if(Player.transform.position.x > crushAttckStatus.rightCrushMaxPosX)
+            {
+
+                RightHand.transform.position = new Vector2(crushAttckStatus.rightCrushMaxPosX, Player.transform.position.y + crushAttckStatus.attackHeight);
+            }
+            else
+            {
+                RightHand.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + crushAttckStatus.attackHeight);
+            }
             i++;
             yield return new WaitForSeconds(0.01f);
         }
@@ -361,8 +379,6 @@ public class DemonKing : Enemy
         //下降攻撃
         isCrushAttack = true;
         enemyRHRb.AddForce(new Vector2(0, -crushAttckStatus.dropSpeed),ForceMode2D.Impulse);
-
-        
     }
     IEnumerator CrushAttackAnim2()
     {
@@ -426,7 +442,6 @@ public class DemonKing : Enemy
 
 
     }
-
     IEnumerator SummonAttackAnim2()
     {
 
@@ -538,7 +553,6 @@ public class DemonKing : Enemy
 
         
     }
-
     IEnumerator PincerAttackAnim2()
     {
         yield return new WaitForSeconds(3);
