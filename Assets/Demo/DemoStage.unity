@@ -23556,6 +23556,8 @@ MonoBehaviour:
     buffSetTime: 5
     buffTimeDown: 1
     maxBuffTime: 30
+  buffImages: []
+  getBuffUI: {fileID: 0}
 --- !u!4 &1048433551
 Transform:
   m_ObjectHideFlags: 0
@@ -28111,7 +28113,6 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 1161423012}
   id: 12
   HadContactDamage: 1
-  speed: 15
   _shakeInfo:
     Duration: 0.5
     Strength: 0.3
@@ -29587,10 +29588,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP+ExAttackCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5574219494533568702, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8444808323574041524}
     - target: {fileID: 5574219495473016243, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
       propertyPath: player
       value: 
@@ -30018,6 +30015,7 @@ MonoBehaviour:
   player: {fileID: 0}
   canPause: 0
   hitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
+  moveWalls: []
   isBossRoom: 0
   warpPoint:
   - {fileID: 1171002801}

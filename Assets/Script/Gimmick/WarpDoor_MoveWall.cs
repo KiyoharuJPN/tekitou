@@ -117,7 +117,7 @@ public class WarpDoor_MoveWall : MonoBehaviour
 
         foreach (GameObject gameObj in enemys)
         {
-            if (gameObj.GetComponent<Enemy>())
+            if (gameObj != null)
             {
                 if (gameObj.GetComponent<Enemy>().isDestroy)
                 {

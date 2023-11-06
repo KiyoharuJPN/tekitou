@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -29,6 +30,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    //InputSystem
+    public PlayerInput playerInput;
+    internal InputAction option;
+
     private void Awake()
     {
         if (Instance == null)
@@ -50,12 +55,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        var playerInput = GetComponent<PlayerInput>();
+        option = playerInput.actions["Option"];
+
     }
 
     private void Update()
     {
         //É|Å[ÉYâÊñ 
-        if (Input.GetKeyUp("joystick button 7") && canPause) 
+        if (option.WasPressedThisFrame() && canPause) 
         {
             if (!pauseMenu.PauseCheck())
             {

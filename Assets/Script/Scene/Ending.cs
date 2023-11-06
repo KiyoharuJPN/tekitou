@@ -14,13 +14,8 @@ public class Ending : MonoBehaviour
 
     void Update()
     {
-
         if (!fade.IsFadeInComplete()) return;
-        if (Input.GetKeyDown("joystick button 0")
-            || Input.GetKeyDown("joystick button 1")
-            || Input.GetKeyDown("joystick button 2")
-            || Input.GetKeyDown("joystick button 3") || Input.anyKeyDown
-            || Input.GetKeyDown("joystick button 7"))
+        if (Input.anyKeyDown)
         {
             SceneManager.LoadScene("Title");
         }        

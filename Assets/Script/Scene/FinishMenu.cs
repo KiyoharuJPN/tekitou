@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class FinishMenu : MonoBehaviour
 {
@@ -38,18 +39,25 @@ public class FinishMenu : MonoBehaviour
     [Header("フェードアウト設定")]
     FadeOutOption fadeOutOption = new() { waitSecondTry = 1f, wateSecondTitle = 1f, fadeOutSpeedTry = 10f, fadeOutSpeedTitle = 10f};
 
+    //InputSystem
+    internal InputAction decision, option;
+
     private void Start()
     {
         Cursor.visible = false;
         Time.timeScale = 1f;
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver_intro, BGMSoundData.BGM.GameOver_roop);
+        var playerInput = GetComponent<PlayerInput>();
+        decision = playerInput.actions["Decision"];
+
+        option = playerInput.actions["Option"];
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("joystick button 7"))
+        if (option.WasPressedThisFrame())
         {
             SceneManager.LoadScene("Title");
         }
@@ -183,7 +191,7 @@ public class FinishMenu : MonoBehaviour
     //選択キーの指定
     void Choose()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
+        if (decision.WasPressedThisFrame())
         {
             switch (pointer)
             {

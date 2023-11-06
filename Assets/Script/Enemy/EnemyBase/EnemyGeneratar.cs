@@ -21,6 +21,8 @@ public class EnemyGeneratar : MonoBehaviour
     {
         [SerializeField, Header("—h‚ê‚ÌŠÔ")]
         public float shakTime;
+        [SerializeField, Header("ŠÔğŒ")]
+        public float shakTimeMax;
         [SerializeField, Header("—h‚ê‚Ì‹­‚³")]
         public float shakPowar;
         [SerializeField, Header("U“®”")]

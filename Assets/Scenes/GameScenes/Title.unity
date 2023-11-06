@@ -1481,6 +1481,7 @@ GameObject:
   - component: {fileID: 1507483616}
   - component: {fileID: 1507483615}
   - component: {fileID: 1507483619}
+  - component: {fileID: 1507483620}
   m_Layer: 5
   m_Name: TitleCanvas
   m_TagString: Untagged
@@ -1604,6 +1605,36 @@ MonoBehaviour:
   preeskey: {fileID: 814439037}
   demoVideoMoveTime: 40
   demoVideoTime: 30
+--- !u!114 &1507483620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507483614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 73831e72d3433b84189daa4b6ddef946, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: b0612040-26f8-4d53-b771-24f1b353b752
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1518416184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,7 +2203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1170880230396755601, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1170880230396755602, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}
       propertyPath: m_Name

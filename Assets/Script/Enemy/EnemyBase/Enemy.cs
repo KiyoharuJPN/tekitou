@@ -243,8 +243,14 @@ public class Enemy : MonoBehaviour
             Vector3 initialPos = this.transform.position;//初期位置保存
             Time.timeScale = 0;
 
+            var stopTime = power * stopState.shakTime;
+            if(stopTime > stopState.shakTimeMax)
+            {
+                stopTime = stopState.shakTimeMax;
+            }
+
             //ヒットストップ処理開始
-            tween = transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+            tween = transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
                 .SetUpdate(true)
                 .OnComplete(() =>
                 {

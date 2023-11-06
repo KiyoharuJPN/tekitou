@@ -20,7 +20,6 @@ public class ExAttackArea : MonoBehaviour
 
         foreach (GameObject gameObj in enemys)
         {
-            if (!gameObj.GetComponent<Enemy>()) return;
             if (gameObj.GetComponent<Enemy>().OnCamera)
             {
                 player.exAttackEnemylist.Add(gameObj);
