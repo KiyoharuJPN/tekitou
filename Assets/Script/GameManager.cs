@@ -334,6 +334,9 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        System.GC.Collect();
+        Resources.UnloadUnusedAssets();
+
         if (SceneData.Instance.stock >= 1)
         {
             SceneData.Instance.stock--;

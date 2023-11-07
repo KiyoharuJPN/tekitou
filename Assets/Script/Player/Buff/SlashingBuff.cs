@@ -18,8 +18,7 @@ public class SlashingBuff : MonoBehaviour
     float waveSpeed;
 
     //残り時間のバー
-    GameObject timeBar;
-    Image timeBarImg;
+    BuffTimer timeBar;
     float time;
 
     public enum SlashingType
@@ -32,15 +31,14 @@ public class SlashingBuff : MonoBehaviour
 
     void Start()
     {
+
+        Debug.Log("SlashingBuffStart");
         slashing = PlayerBuff.Instance.GetSlashing();
         buffTime = slashing.firstSetTime;
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         //残り時間のバー表示・設定
-        timeBar = GameObject.Find("PlayerBuffTime");
-        timeBar.GetComponent<UIPosController>().enabled = true;
-        timeBar.GetComponent<Canvas>().enabled = true;
-        timeBarImg = timeBar.transform.Find("Bar").GetComponent<Image>();
+        timeBar = GameObject.Find("PlayerBuffTime").GetComponent<BuffTimer>();
 
         waveSpeed = slashing.slashingSpeed;
 
@@ -94,19 +92,17 @@ public class SlashingBuff : MonoBehaviour
 
     internal void AddBuff(int count)
     {
-        timeBar = GameObject.Find("PlayerBuffTime");
+        timeBar = GameObject.Find("PlayerBuffTime").GetComponent<BuffTimer>();
         float addTime = slashing.buffSetTime - slashing.buffTimeDown * count;
         buffTime += addTime;
         time += addTime;
 
         //バー再セット
-        timeBarImg.fillAmount = 1;
-        timeBarImg.fillAmount -= 1 - (time / buffTime);
+        timeBar.BarSet(1 - (time / buffTime));
     }
 
     IEnumerator SlashingMode()
     {
-        timeBarImg.fillAmount = 1;
         time = buffTime;
 
         while(time > 0)
@@ -114,7 +110,7 @@ public class SlashingBuff : MonoBehaviour
             if (this.gameObject.GetComponent<PlayerController>().canMove)
             {
                 time -= Time.deltaTime;
-                timeBarImg.fillAmount -= Time.deltaTime / buffTime;
+                timeBar.BarSet(Time.deltaTime / buffTime);
             }
             yield return null;
         };

@@ -11,12 +11,4 @@ public class DestroyStage : MonoBehaviour
             other.GetComponent<Enemy>().EnemyNomalDestroy();
         }
     }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            other.GetComponent<Enemy>().EnemyNomalDestroy();
-        }
-    }
 }

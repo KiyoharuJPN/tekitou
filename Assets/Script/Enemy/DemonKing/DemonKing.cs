@@ -754,11 +754,6 @@ public class DemonKing : Enemy
     }
 
 
-
-
-
-
-
     //’²®‚µ‚È‚¢ŠÖ”
     //Boss€–S‚ÉŒÄ‚ÔŠÖ”
     virtual public void Boss_Down()
