@@ -460,7 +460,11 @@ public class Enemy : MonoBehaviour
         if(player == null)
         {
             player = serchTag(gameObject, "InvinciblePlayer");
+        }else if(player == null)
+        {
+            player = serchTag(gameObject, "DeadPlayer");
         }
+        else { Debug.Log(player); }
 
         // それぞれの軸の成分を計算
         float x = Mathf.Cos(rad);
@@ -469,6 +473,8 @@ public class Enemy : MonoBehaviour
         //プレイヤーと自身の位置関係を調査
         if (enemyData.type == EnemyData.EnemyType.FlyEnemy || isDestroy)
         {
+            Debug.Log(this);
+            Debug.Log(player);
             if (player.transform.position.y + 0.3f < this.transform.position.y)
             { y = -y; }
         }

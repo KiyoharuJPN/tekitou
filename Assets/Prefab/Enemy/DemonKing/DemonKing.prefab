@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1649552839}
   - component: {fileID: 1649552838}
   - component: {fileID: 1816189430}
-  - component: {fileID: 989291536977343036}
+  - component: {fileID: 7423475831113800516}
   m_Layer: 23
   m_Name: RightHand
   m_TagString: Enemy
@@ -170,18 +170,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287cdeea9629e14fac8731a8051a017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &989291536977343036
-MonoBehaviour:
+  EnemyColliderArea: {fileID: 0}
+  id: 
+  HadContactDamage: 1
+  id: 
+  HadContactDamage: 1
+--- !u!58 &7423475831113800516
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855283743400643419}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2486d5b0fe3a88241bade15f8dbc96cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &3133106018706546476
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +205,7 @@ GameObject:
   - component: {fileID: 1504455784}
   - component: {fileID: 1504455783}
   - component: {fileID: 1998245225}
-  - component: {fileID: 6217067216483664007}
+  - component: {fileID: 8021194688162350430}
   m_Layer: 23
   m_Name: LeftHand
   m_TagString: Enemy
@@ -352,18 +361,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287cdeea9629e14fac8731a8051a017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6217067216483664007
-MonoBehaviour:
+  EnemyColliderArea: {fileID: 0}
+  id: 
+  HadContactDamage: 1
+  id: 
+  HadContactDamage: 1
+--- !u!58 &8021194688162350430
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3133106018706546476}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2486d5b0fe3a88241bade15f8dbc96cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &6487923691452259439
 GameObject:
   m_ObjectHideFlags: 0

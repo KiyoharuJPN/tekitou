@@ -23,7 +23,7 @@ public class SlimeWallTurn : MonoBehaviour
         if (collision.CompareTag("Stage")&&triggerCheck)
         {
             triggerCheck = false;
-            GetComponentInParent<Slime>().TurnAround();
+            GetComponentInParent<Enemy>().TurnAround();
         }
 
     }
