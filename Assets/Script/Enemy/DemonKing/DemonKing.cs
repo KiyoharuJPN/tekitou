@@ -265,13 +265,6 @@ public class DemonKing : Enemy
             }
         }
 
-        FixedAnim();
-
-    }
-    //ÉAÉjÉÅÇÃèCê≥ÇÕÇ±Ç±Ç≈é¿çsÇ∑ÇÈÇÊÇ§Ç…ÇµÇÊÇ§
-    void FixedAnim()
-    {
-        
     }
 
 

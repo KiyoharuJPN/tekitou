@@ -457,12 +457,15 @@ public class Enemy : MonoBehaviour
 
         //オブジェクトを取得
         player = serchTag(gameObject, "Player");
-        if(player == null)
+        if (player == null)
         {
             player = serchTag(gameObject, "InvinciblePlayer");
-        }else if(player == null)
+            Debug.Log(player);
+        }
+        if(player == null)
         {
             player = serchTag(gameObject, "DeadPlayer");
+            Debug.Log(player);
         }
         else { Debug.Log(player); }
 
@@ -473,8 +476,6 @@ public class Enemy : MonoBehaviour
         //プレイヤーと自身の位置関係を調査
         if (enemyData.type == EnemyData.EnemyType.FlyEnemy || isDestroy)
         {
-            Debug.Log(this);
-            Debug.Log(player);
             if (player.transform.position.y + 0.3f < this.transform.position.y)
             { y = -y; }
         }
