@@ -93,13 +93,14 @@ public class DemonKing : Enemy
     public GameObject LeftHand, RightHand;
     public RuntimeAnimatorController animControllerL, animControllerR;
 
-
+    
 
     //内部関数
     //プレイヤーのオブジェクト
     GameObject Player;
     //攻撃パタンを記録する関数
     int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1;
+    int BossLayer;
 
     //アニメチェック、パターンチェック
     bool NotInAnim = true, PatternOver = true, patternover = false, isSummonAttack = false, isCrushAttack = false, isPincerAttack = false;
@@ -128,6 +129,8 @@ public class DemonKing : Enemy
     protected override void Start()
     {
         base.Start();
+        BossLayer = LayerMask.NameToLayer("BossEnemy");
+        Debug.Log(LayerMask.NameToLayer("BossEnemy"));
 
         //idle関係
         if (idleStatus.handSpeed == 0) idleStatus.handSpeed = 1;
@@ -322,6 +325,8 @@ public class DemonKing : Enemy
 
     IEnumerator CrushAttackAnim()
     {
+        Debug.Log(LayerMask.NameToLayer("BossEnemy"));
+        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer);
         AnimationController = 1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
@@ -340,8 +345,8 @@ public class DemonKing : Enemy
             yield return new WaitForEndOfFrame();
         }
 
-        //レイヤーを地形やプレイやの前に移動させる
-        RightHand.GetComponent<SpriteRenderer>().sortingOrder = 11;
+        ////レイヤーを地形やプレイやの前に移動させる
+        //RightHand.GetComponent<SpriteRenderer>().sortingOrder = 11;
         //手を3秒間プレイヤーの頭の上に残す
         i = 0;
         while (i < 180)
@@ -382,11 +387,11 @@ public class DemonKing : Enemy
     }
     IEnumerator CrushAttackAnim2()
     {
-
+        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer,false);
         yield return new WaitForSeconds(3);
 
-        //レイヤーの位置を戻す
-        RightHand.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        ////レイヤーの位置を戻す
+        //RightHand.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
 
         //手を戻す

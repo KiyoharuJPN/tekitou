@@ -34,7 +34,7 @@ public class KingSlime : Enemy
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
         , NoGravity = false, ExSkillCheck = false, inExSkillCheck = false
         , ExSkillFalling = false, SkillTurnAround = false;                                            //判断用内部関数
-    int movingCheck = 0, AttackMode = 0, NormalAttackAnimation;         //チェック用int関数
+    int movingCheck = 0, AttackMode = 1, NormalAttackAnimation;         //チェック用int関数
     GameObject playerObj;                                               //プレイヤーオブジェクト宣言
 
     //コールチーンよう判断関数
@@ -538,7 +538,7 @@ public class KingSlime : Enemy
             IsAttacking = false;
             IsMoving = true;
             KSattackingCheck = true;
-            AttackMode = 0;
+            AttackMode = 1;
             wallCheck.SetActive(true);
         }
         if(NormalAttackAnimation == 1)
@@ -552,7 +552,7 @@ public class KingSlime : Enemy
             IsAttacking = false;
             IsMoving = true;
             KSattackingCheck = true;
-            AttackMode = 0;
+            AttackMode = 1;
             wallCheck.SetActive(true);
         }
         if (inKSBossAtack2)
@@ -566,7 +566,7 @@ public class KingSlime : Enemy
             IsAttacking = false;
             IsMoving = true;
             KSattackingCheck = true;
-            AttackMode = 0;
+            AttackMode = 1;
             wallCheck.SetActive(true);
         }
         if (inKSBossAtack3)
@@ -578,7 +578,7 @@ public class KingSlime : Enemy
             KSattackingCheck = true;
             knockbackAttackCircle.enabled = false;
             attackCheckArea.enabled = false;
-            AttackMode = 0;
+            AttackMode = 1;
             wallCheck.SetActive(true);
             SkillTurnAround = false;
         }
@@ -588,7 +588,7 @@ public class KingSlime : Enemy
             IsAttacking = false;
             IsMoving = true;
             KSattackingCheck = true;
-            AttackMode = 0;
+            AttackMode = 1;
         }
         if (inKSMovingAnim)
         {
