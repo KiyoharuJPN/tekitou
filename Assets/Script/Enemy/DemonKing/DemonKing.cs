@@ -693,8 +693,14 @@ public class DemonKing : Enemy
             Vector3 initialPos = this.transform.position;//初期位置保存
             Time.timeScale = 0;
 
+            var stopTime = power * stopState.shakTime;
+            if (stopTime > stopState.shakTimeMax)
+            {
+                stopTime = stopState.shakTimeMax;
+            }
+
             //ヒットストップ処理開始
-            tween = transform.DOShakePosition(power * stopState.shakTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+            tween = transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
                 .SetUpdate(true)
                 .OnComplete(() =>
                 {
@@ -704,7 +710,7 @@ public class DemonKing : Enemy
                     this.transform.position = initialPos;
 
                 });
-            yield return new WaitForSeconds(power * stopState.shakTime + 0.01f);
+            yield return new WaitForSeconds(stopTime + 0.01f);
         }
 
         //ヒット時演出（敵点滅）
