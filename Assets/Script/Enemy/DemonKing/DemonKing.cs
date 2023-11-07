@@ -289,6 +289,8 @@ public class DemonKing : Enemy
         RHanimator.SetInteger("AnimationController", AnimationController);
 
 
+        LeftHand.transform.position = LHOriginalPos;
+        RightHand.transform.position = RHOriginalPos;
 
         int Frequency = 0;
         while(Frequency < HandMoveFrequency)
@@ -296,8 +298,9 @@ public class DemonKing : Enemy
             LeftHand.transform.position = new Vector2(LeftHand.transform.position.x, LeftHand.transform.position.y + LHSpeed);
             RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + RHSpeed);
 
-            if ((Vector2)LeftHand.transform.position == LHOriginalPos) Frequency++;
-            
+            if (LeftHand.transform.position.y >= LHOriginalPos.y - idleStatus.handSpeed/2&& LeftHand.transform.position.y <= LHOriginalPos.y + idleStatus.handSpeed / 2) Frequency++;
+            Debug.Log(LeftHand.transform.position.y);
+            Debug.Log(LHOriginalPos.y);
             if (LHSpeed > 0 && LeftHand.transform.position.y > idleStatus.upLimit) LHSpeed *= -1;
             if (LHSpeed < 0 && LeftHand.transform.position.y < idleStatus.downLimit) LHSpeed *= -1;
             if (RHSpeed > 0 && RightHand.transform.position.y > idleStatus.upLimit) RHSpeed *= -1;
@@ -677,12 +680,12 @@ public class DemonKing : Enemy
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         ComboParam.Instance.ResetTime();
 
-        //ヒットエフェクト生成
-        if (skill != null)
-        {
-            HitEfect(this.transform, skill.hitEffectAngle);
-        }
-        else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
+        ////ヒットエフェクト生成
+        //if (skill != null)
+        //{
+        //    HitEfect(this.transform, skill.hitEffectAngle);
+        //}
+        //else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
 
         //ヒットストップ処理
         if (isHitStop)

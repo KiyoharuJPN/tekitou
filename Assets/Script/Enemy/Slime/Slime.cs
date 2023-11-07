@@ -89,7 +89,7 @@ public class Slime : Enemy
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!IsMoving && collision.gameObject.CompareTag("Stage") && BossSummon)
+        if (/*!IsMoving && */collision.gameObject.CompareTag("Stage") && BossSummon)
         {
             BossSummon = false;
             if (BossTurn) movingWidth *= -1;
@@ -104,7 +104,7 @@ public class Slime : Enemy
             if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
             {
                 MovingAnim = 2;
-                if(enemyRb.velocity.y !< 0) enemyRb.velocity = Vector2.zero;
+                if(enemyRb.velocity.y <= 0) enemyRb.velocity = Vector2.zero;
                 StartCoroutine(SetMoveFalse());
             }
         }
@@ -117,7 +117,7 @@ public class Slime : Enemy
             if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
             {
                 MovingAnim = 2;
-                if (enemyRb.velocity.y! < 0) enemyRb.velocity = Vector2.zero;
+                if (enemyRb.velocity.y <= 0) enemyRb.velocity = Vector2.zero;
                 StartCoroutine(SetMoveFalse());
             }
         }

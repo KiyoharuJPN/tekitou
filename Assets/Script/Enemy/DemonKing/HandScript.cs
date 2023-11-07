@@ -122,11 +122,19 @@ public class HandScript : Enemy
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
         demonKing.Damage(power, skill, isHitStop, exSkill);
+        StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
     }
 
     //ダメージ処理（ヒットストップの関係でコルーチンに変更）
     protected override IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
     {
+        //ヒットエフェクト生成
+        if (skill != null)
+        {
+            HitEfect(this.transform, skill.hitEffectAngle);
+        }
+        else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
+
         yield return null;
     }
 

@@ -500,16 +500,17 @@ public class KingSlime : Enemy
 
                     Debug.Log("ヒットストップ終了");
                 });
-            yield return new WaitForSeconds(power * stopState.shakTime + 0.01f);
+            //yield return new WaitForSeconds(power * stopState.shakTime + 0.01f);
+            Debug.Log(hp);
         }
 
+        Debug.Log(hp);
         //ヒット時演出（敵点滅）
         if (!hadDamaged)
         {
             StartCoroutine(HadDamaged());
             hadDamaged = true;
         }
-
         hp -= power;
 
         //HPゲージを使用しているかどうか
@@ -523,6 +524,7 @@ public class KingSlime : Enemy
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
             OnDestroyMode();
         }
+        yield return new WaitForSeconds(1);
     }
 
     void ClearCoroutines()
