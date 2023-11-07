@@ -297,7 +297,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 35
   m_TargetDisplay: 0
 --- !u!114 &8622814929294617241
 MonoBehaviour:
@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5be9cd318379d4ba4d5016fee1dac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fade: {fileID: 0}
   ClearStage_NameBar: {fileID: 8622814929961867655}
   clearStageList:
   - CleatStage_ID: 0

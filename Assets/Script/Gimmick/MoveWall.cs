@@ -24,6 +24,9 @@ public class MoveWall : MonoBehaviour
     [SerializeField, Header("“®‚­•ÇÝ’è")]
     MoveWallStatus moveWallStatus;
 
+    bool moveStop = false;
+    public bool MoveStop {  get { return moveStop; } set {  moveStop = value; } }
+
     private void Start()
     {
         MoveStart();
@@ -40,10 +43,18 @@ public class MoveWall : MonoBehaviour
         var dis = Vector2.Distance(transform.position, targetPos);
         while (dis > 0.1f)
         {
-            if(moveWallStatus.player.GetComponent<PlayerController>().GetIsDead) { break; }
-            Move(targetPos);
-            dis = Vector2.Distance(transform.position, targetPos);
-            yield return null;
+            
+            if (moveStop)
+            {
+                yield return null;
+            }
+            else
+            {
+                if (moveWallStatus.player.GetComponent<PlayerController>().GetIsDead) { break; }
+                Move(targetPos);
+                dis = Vector2.Distance(transform.position, targetPos);
+                yield return null;
+            }
         }
 
         MoveEnd();

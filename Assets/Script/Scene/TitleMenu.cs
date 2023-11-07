@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class TitleMenu : MonoBehaviour
 {
@@ -45,6 +46,9 @@ public class TitleMenu : MonoBehaviour
     bool canDemoVideo = true;
     float demoTimer;
 
+    //InputSystem
+    internal InputAction back, decision;
+
     private void Start()
     {
         Time.timeScale = 1f;
@@ -54,6 +58,10 @@ public class TitleMenu : MonoBehaviour
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
         videoImage.enabled = false;
         videoPlayer.enabled = false;
+
+        var playerInput = GetComponent<PlayerInput>();
+        decision = playerInput.actions["Decision"];
+        back = playerInput.actions["Back"];
     }
 
     private void Update()
@@ -106,7 +114,7 @@ public class TitleMenu : MonoBehaviour
         }
 
         //選択キーの設定
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
+        if (decision.WasPressedThisFrame())
         {
             if (menuobj[0].activeSelf && !hideKeyChecking)//Menu
             {
@@ -142,7 +150,7 @@ public class TitleMenu : MonoBehaviour
         }
 
         //戻るキーの設定
-        if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown("joystick button 1"))
+        if (back.WasPressedThisFrame())
         {
             //menu
             if (menuobj[0].activeSelf)

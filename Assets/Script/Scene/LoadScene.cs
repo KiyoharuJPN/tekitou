@@ -101,6 +101,8 @@ public class LoadScene : MonoBehaviour
         {
             yield return null;
         }
+        System.GC.Collect();
+        Resources.UnloadUnusedAssets();
         SceneData.Instance.revival = false;
         SceneData.Instance.wayPoint_1 = false;
         SceneData.Instance.wayPoint_2 = false;

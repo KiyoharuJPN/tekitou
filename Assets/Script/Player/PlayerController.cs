@@ -581,7 +581,14 @@ public class PlayerController : MonoBehaviour
         isWarpDoor = true;
         isRun = false;
         isMoving = false;
+        isJumping = false;
+        isFalling = false;
+        isSquatting = false;
         animator.SetBool("IsRun", isRun);
+        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsJumping", isJumping);
+        animator.SetBool("IsFalling", isFalling);
+        animator.SetBool("IsSquatting", isSquatting);
         var doorPosX = door.position.x;
         var doorPosY = door.position.y;
         this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);

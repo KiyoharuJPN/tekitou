@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static PBF.PlayerBuffBase;
 
 public class PlayerBuff : MonoBehaviour
@@ -39,6 +40,12 @@ public class PlayerBuff : MonoBehaviour
     PBF.PlayerBuffBase.SlashingBuff firstSlashingBuff;
     InvincibleBuff firstInvincibleBuff;
 
+    [SerializeField, Header("バフ獲得時の画像")]
+    Sprite[] buffImages;
+    [SerializeField, Header("バフ獲得時UI")]
+    GameObject getBuffUI;
+
+
     public static PlayerBuff Instance { get; private set; }
 
     private void Awake()
@@ -60,6 +67,7 @@ public class PlayerBuff : MonoBehaviour
     /// </summary>
     public void ExAttackGageUp()
     {
+        GetBuffUIPop(0);
         player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
         //ゲージ追加（獲得量 - (獲得毎減少 × 獲得回数)
         int getExGage = exGage.setBuffNum - (exGage.setBuffDown * exGage.getBuffCount);
@@ -103,6 +111,7 @@ public class PlayerBuff : MonoBehaviour
     /// </summary>
     public void SpeedUp()
     {
+        GetBuffUIPop(1);
         speed.getBuffCount++;
         if (player.gameObject.GetComponent<SpeedUp>())
         {
@@ -125,6 +134,7 @@ public class PlayerBuff : MonoBehaviour
     /// </summary>
     public void SlashingBuff()
     {
+        GetBuffUIPop(2);
         if (player.gameObject.GetComponent<SlashingBuff>())
         {
             player.gameObject.GetComponent<SlashingBuff>().AddBuff(slashing.getBuffCount);
@@ -151,6 +161,7 @@ public class PlayerBuff : MonoBehaviour
     /// </summary>
     public void InvincibleBuff()
     {
+        GetBuffUIPop(3);
         if (player.gameObject.GetComponent<InvinciblBuff>())
         {
             //プレイヤー（gameObject)に無敵化スクリプトを追加
@@ -217,9 +228,22 @@ public class PlayerBuff : MonoBehaviour
         }
         return 0;
     }
+    public void BuffCountReset()
+    {
+        exGage.getBuffCount = 0;
+        speed.getBuffCount = 0;
+        slashing.getBuffCount = 0;
+        invincible.getBuffCount = 0;
+    }
 
     public float GetPlayerMoveData()
     {
         return moveFirstSpeed;
+    }
+
+    void GetBuffUIPop(int getBuffNum)
+    {
+        var resultObj = Instantiate(getBuffUI, player.gameObject.transform.position + new Vector3(0f, 1.5f), Quaternion.identity);
+        resultObj.GetComponent<GetBuffUI>().BuffImageSet(buffImages[getBuffNum]);
     }
 }

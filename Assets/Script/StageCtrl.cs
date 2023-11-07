@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class StageCtrl : MonoBehaviour
@@ -10,6 +11,9 @@ public class StageCtrl : MonoBehaviour
     //ƒNƒ‰ƒbƒVƒ…‘Îô‚Ì’·‰Ÿ‚µŠÔ
     private float startButtonTime = 5f;
     private float getKayTime = 0;
+
+    //InputSystem
+    internal InputAction option;
 
     virtual protected void Start()
     {
@@ -27,15 +31,18 @@ public class StageCtrl : MonoBehaviour
             playerObj.transform.position = continuePoint[2].transform.position;
         }
         Cursor.visible = false;
+
+        var playerInput = GameManager.Instance.playerInput;
+        option = playerInput.actions["Option"];
     }
 
     virtual protected void Update()
     {
-        if(!Input.GetKey("joystick button 7"))
+        if(!option.IsPressed())
         {
             getKayTime = 0;
         }
-        else if (Input.GetKey("joystick button 7"))
+        else if (option.IsPressed())
         {
             getKayTime += Time.unscaledDeltaTime;
 

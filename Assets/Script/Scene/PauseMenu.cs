@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -40,9 +41,16 @@ public class PauseMenu : MonoBehaviour
     //各種チェック用関数
     bool volumeChecking = false, inlineVolumeChecking = false, hideKeyChecking = false, pointerCheck = true, upDownLock = false;
 
+    //InputSystem
+    internal InputAction back, decision;
+
     private void Start()
     {
         pointer = 0;            //ポインターの初期化
+
+        var playerInput = GameManager.Instance.playerInput;
+        back = playerInput.actions["Back"];
+        decision = playerInput.actions["Decision"];
     }
 
     public bool PauseCheck()
@@ -82,13 +90,13 @@ public class PauseMenu : MonoBehaviour
         }
 
         //選択キーの設定
-        if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown("joystick button 0"))
+        if (decision.WasPressedThisFrame())
         {
             SelectMenu();
         }
 
         //戻るキーの設定
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 1"))
+        if (back.WasPressedThisFrame())
         {
             BackMenu();
         }
