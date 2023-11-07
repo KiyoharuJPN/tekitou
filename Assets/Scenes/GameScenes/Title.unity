@@ -1603,7 +1603,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 1642989327}
   videoImage: {fileID: 1642989328}
   preeskey: {fileID: 814439037}
-  demoVideoMoveTime: 40
+  demoVideoMoveTime: 1
   demoVideoTime: 30
 --- !u!114 &1507483620
 MonoBehaviour:
@@ -1632,7 +1632,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: b0612040-26f8-4d53-b771-24f1b353b752
+  m_DefaultActionMap: MenuKey
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &1518416184
@@ -1988,7 +1988,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642989323}
   m_Enabled: 0
-  m_VideoClip: {fileID: 32900000, guid: ced5fd5da5ec40c49ab8036f4ab3b7ae, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 187e9c8883da7744d8cab4c7217fc969, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 279554558}
@@ -2010,7 +2010,7 @@ VideoPlayer:
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
+  m_SkipOnDrop: 0
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0

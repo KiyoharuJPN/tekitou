@@ -591,15 +591,17 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsSquatting", isSquatting);
         var doorPosX = door.position.x;
         var doorPosY = door.position.y;
+        transform.localScale = new Vector3(1, 1, 1);
         this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);
         this.rb.velocity = new Vector2 (0, 0);
         animator.SetBool("IsWarpDoor", isWarpDoor);
+        gameObject.layer = LayerMask.NameToLayer("PlayerAction");
         animator.SetTrigger("WarpDoor");
     }
 
     internal void WarpDoorEnd()
     {
-
+        gameObject.layer = LayerMask.NameToLayer("Player");
         isWarpDoor = false;
         animator.SetBool("IsWarpDoor", isWarpDoor);
         NomalPlayer();

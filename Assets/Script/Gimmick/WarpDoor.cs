@@ -45,14 +45,24 @@ public class WarpDoor : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") ||
             collision.gameObject.CompareTag("InvinciblePlayer"))
         {
-            player = collision;
-            isBottonUi = true;
-            _BottonUi(collision);
+            if(collision.GetComponent<PlayerController>().isGround)
+            {
+                player = collision;
+                isBottonUi = true;
+                _BottonUi(collision);
+            }
+            else if (!collision.GetComponent<PlayerController>().isGround)
+            {
+                player = null;
+                Destroy(bottonUiPrefab);
+                bottonUiPrefab = null;
+                isBottonUi = false;
+            }
         };
     }
 
@@ -66,6 +76,7 @@ public class WarpDoor : MonoBehaviour
 
     void _BottonUi(Collider2D player)
     {
+        if (bottonUiPrefab != null) return;
         bottonUiPrefab =
         Instantiate(BottonUi, new Vector2(player.transform.position.x, player.transform.position.y + 2f), Quaternion.identity);
 
