@@ -96,7 +96,7 @@ public class SlashingBuff : MonoBehaviour
         float addTime = slashing.buffSetTime - slashing.buffTimeDown * count;
         buffTime += addTime;
         time += addTime;
-
+        Debug.Log(timeBarImg);
         //バー再セット
         timeBar.BarSet(1 - (time / buffTime));
     }

@@ -93,13 +93,14 @@ public class DemonKing : Enemy
     public GameObject LeftHand, RightHand;
     public RuntimeAnimatorController animControllerL, animControllerR;
 
-
+    
 
     //内部関数
     //プレイヤーのオブジェクト
     GameObject Player;
     //攻撃パタンを記録する関数
     int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1;
+    int BossLayer;
 
     //アニメチェック、パターンチェック
     bool NotInAnim = true, PatternOver = true, patternover = false, isSummonAttack = false, isCrushAttack = false, isPincerAttack = false;
@@ -128,6 +129,8 @@ public class DemonKing : Enemy
     protected override void Start()
     {
         base.Start();
+        BossLayer = LayerMask.NameToLayer("BossEnemy");
+        Debug.Log(LayerMask.NameToLayer("BossEnemy"));
 
         //idle関係
         if (idleStatus.handSpeed == 0) idleStatus.handSpeed = 1;
@@ -286,6 +289,8 @@ public class DemonKing : Enemy
         RHanimator.SetInteger("AnimationController", AnimationController);
 
 
+        LeftHand.transform.position = LHOriginalPos;
+        RightHand.transform.position = RHOriginalPos;
 
         int Frequency = 0;
         while(Frequency < HandMoveFrequency)
@@ -293,8 +298,9 @@ public class DemonKing : Enemy
             LeftHand.transform.position = new Vector2(LeftHand.transform.position.x, LeftHand.transform.position.y + LHSpeed);
             RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + RHSpeed);
 
-            if ((Vector2)LeftHand.transform.position == LHOriginalPos) Frequency++;
-            
+            if (LeftHand.transform.position.y >= LHOriginalPos.y - idleStatus.handSpeed/2&& LeftHand.transform.position.y <= LHOriginalPos.y + idleStatus.handSpeed / 2) Frequency++;
+            Debug.Log(LeftHand.transform.position.y);
+            Debug.Log(LHOriginalPos.y);
             if (LHSpeed > 0 && LeftHand.transform.position.y > idleStatus.upLimit) LHSpeed *= -1;
             if (LHSpeed < 0 && LeftHand.transform.position.y < idleStatus.downLimit) LHSpeed *= -1;
             if (RHSpeed > 0 && RightHand.transform.position.y > idleStatus.upLimit) RHSpeed *= -1;
@@ -322,6 +328,8 @@ public class DemonKing : Enemy
 
     IEnumerator CrushAttackAnim()
     {
+        Debug.Log(LayerMask.NameToLayer("BossEnemy"));
+        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer);
         AnimationController = 1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
@@ -340,8 +348,8 @@ public class DemonKing : Enemy
             yield return new WaitForEndOfFrame();
         }
 
-        //レイヤーを地形やプレイやの前に移動させる
-        RightHand.GetComponent<SpriteRenderer>().sortingOrder = 11;
+        ////レイヤーを地形やプレイやの前に移動させる
+        //RightHand.GetComponent<SpriteRenderer>().sortingOrder = 11;
         //手を3秒間プレイヤーの頭の上に残す
         i = 0;
         while (i < 180)
@@ -382,11 +390,11 @@ public class DemonKing : Enemy
     }
     IEnumerator CrushAttackAnim2()
     {
-
+        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer,false);
         yield return new WaitForSeconds(3);
 
-        //レイヤーの位置を戻す
-        RightHand.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        ////レイヤーの位置を戻す
+        //RightHand.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
 
         //手を戻す
@@ -672,12 +680,12 @@ public class DemonKing : Enemy
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         ComboParam.Instance.ResetTime();
 
-        //ヒットエフェクト生成
-        if (skill != null)
-        {
-            HitEfect(this.transform, skill.hitEffectAngle);
-        }
-        else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
+        ////ヒットエフェクト生成
+        //if (skill != null)
+        //{
+        //    HitEfect(this.transform, skill.hitEffectAngle);
+        //}
+        //else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
 
         //ヒットストップ処理
         if (isHitStop)
