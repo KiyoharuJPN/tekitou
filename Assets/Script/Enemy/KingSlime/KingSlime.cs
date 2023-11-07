@@ -2,8 +2,6 @@ using System.Collections;
 using System;
 using UnityEngine;
 using DG.Tweening;
-using System.Net.NetworkInformation;
-using UnityEngine.iOS;
 
 public class KingSlime : Enemy
 {
