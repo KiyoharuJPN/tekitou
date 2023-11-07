@@ -228,6 +228,13 @@ public class PlayerBuff : MonoBehaviour
         }
         return 0;
     }
+    public void BuffCountReset()
+    {
+        exGage.getBuffCount = 0;
+        speed.getBuffCount = 0;
+        slashing.getBuffCount = 0;
+        invincible.getBuffCount = 0;
+    }
 
     public float GetPlayerMoveData()
     {

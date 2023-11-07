@@ -91,7 +91,7 @@ public class TutorialScene : StageCtrl
         {
             return false;
         }
-        
+
         switch (num)
         {
             case 0:
@@ -107,11 +107,11 @@ public class TutorialScene : StageCtrl
                 };
                 break;
             case 2:
-                if (player.jump.isSecondJump) 
+                if (player.jump.isSecondJump)
                     return TutorialClear();
                 break;
             case 3:
-                if (player.isNomalAttack && player.isGround )
+                if (player.isNomalAttack && player.isGround)
                 {
                     isAttackPlay = true;
                 }
@@ -120,11 +120,11 @@ public class TutorialScene : StageCtrl
                     int count = 0;
                     foreach (Enemy d in tutorialPanels[num].enemylist)
                     {
-                        if(d.isDestroy) count++;
+                        if (d.isDestroy) count++;
                     }
                     if (tutorialPanels[num].enemylist.Count == count) panelEnemyDaeth = true;
                 }
-                if(isAttackPlay && panelEnemyDaeth) return TutorialClear();
+                if (isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 4:
                 if (player.isNomalAttack && player.isJumping)
@@ -167,7 +167,11 @@ public class TutorialScene : StageCtrl
                 }
                 break;
             case 9:
-                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 0)
+                if (PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.SpeedUp) > 0 && !getCheckBuff.speedUp)
+                {
+                    getCheckBuff.speedUp = true;
+                }
+                if (getCheckBuff.speedUp)
                 {
                     return TutorialClear();
                 }
@@ -305,6 +309,13 @@ public class TutorialScene : StageCtrl
                 player.canTExAttack = true;
                 player.canTExGageGet = true;
                 break;
+            case 9:
+                PlayerBuff.Instance.BuffCountReset();
+                break;
+            case 10:
+                getCheckBuff.speedUp = false;
+                break;
+
         }
         stepStart = true;
     }
