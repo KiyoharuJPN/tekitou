@@ -12,7 +12,7 @@ public class MoveWallCheck : MonoBehaviour
     [SerializeField, Header("壁チェック_右")]
     WallCheck_coll wallCheck_Right;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (wallCheck_Left.isWall && wallCheck_Right.isWall) 
         {
