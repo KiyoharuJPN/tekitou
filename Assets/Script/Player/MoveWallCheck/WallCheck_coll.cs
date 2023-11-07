@@ -14,6 +14,13 @@ public class WallCheck_coll : MonoBehaviour
             isWall = true;
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Stage")
+        {
+            isWall = true;
+        }
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
