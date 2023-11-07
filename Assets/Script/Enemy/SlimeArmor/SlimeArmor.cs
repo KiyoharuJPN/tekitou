@@ -85,7 +85,7 @@ public class SlimeArmor : Enemy
     {
         if (!isDestroy)
         {
-            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
+            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0|| col.CompareTag("PlatFormStage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
             {
                 MovingAnim = 2;
                 if (enemyRb.velocity.y! < 0) enemyRb.velocity = Vector2.zero;
@@ -98,7 +98,7 @@ public class SlimeArmor : Enemy
     {
         if (!isDestroy)
         {
-            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
+            if (col.CompareTag("Stage") && MovingAnim == 1 && enemyRb.velocity.y == 0|| col.CompareTag("PlatFormStage") && MovingAnim == 1 && enemyRb.velocity.y == 0)
             {
                 MovingAnim = 2;
                 if (enemyRb.velocity.y! < 0) enemyRb.velocity = Vector2.zero;
