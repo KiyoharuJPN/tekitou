@@ -211,13 +211,6 @@ public class TutorialScene : StageCtrl
         {
             tutorialPanels[num].stopTiles.SetActive(false);
         }
-        //現在のチュートリアルにワープドアがあるなら
-        if (tutorialPanels[num].warpDoor != null)
-        {
-            tutorialPanels[num].tutorialPanel.transform.Find("TextBox_7").gameObject.SetActive(false);
-            tutorialPanels[num].tutorialPanel.transform.Find("TextBox_8").gameObject.SetActive(true);
-            StartCoroutine(SetWarpDoor(tutorialPanels[num].warpDoor));
-        }
         ////現在のチュートリアルに専用カメラエリアがあるなら
         //if (tutorialPanels[num].cameraArea != null)
         //{
@@ -254,25 +247,6 @@ public class TutorialScene : StageCtrl
 
         obj.SetActive(false);
         nextObj.SetActive(true);
-    }
-
-    IEnumerator SetWarpDoor(GameObject warpDoor)
-    {
-        //出現時間
-        float time = 1f;
-        SpriteRenderer warpDoor_Sprite = warpDoor.GetComponent<SpriteRenderer>();
-        float color_A = 0f;
-
-        while (time > 0)
-        {
-            time -= Time.deltaTime;
-            color_A += 1f * Time.deltaTime;
-            warpDoor_Sprite.color = new Color(warpDoor_Sprite.color.r, warpDoor_Sprite.color.g, warpDoor_Sprite.color.b, color_A);
-            yield return null;
-        }
-
-        warpDoor.GetComponent<BoxCollider2D>().enabled = true;
-        warpDoor.GetComponent<WarpDoor>().enabled = true;
     }
 
     internal void TutorialStep()

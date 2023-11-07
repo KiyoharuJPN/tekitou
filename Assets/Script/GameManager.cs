@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
     }
     public void BGMStart_BossRoom2()
     {
-        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage3_Boss, BGMSoundData.BGM.none);
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Stage3_Boss_intro, BGMSoundData.BGM.Stage3_Boss_roop);
     }
     private void BGMStart_Result()
     {
