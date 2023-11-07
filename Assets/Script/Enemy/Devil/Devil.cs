@@ -48,6 +48,7 @@ public class Devil : Enemy
 
     protected override void Update()
     {
+        if (!isPlayerExAttack) return;
         base.Update();
         //Debug.Log(GetYFromX(transform.position.x));
 
