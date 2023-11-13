@@ -28,19 +28,7 @@ public class SlimeArmor : Enemy
     {
         //敵のscriptに基づく
         base.Update();
-        if (enemyRb.velocity.y < -1)
-        {
-            MovingAnim = 1;
-        }
-        IsMoving = MovingAnim == 3 ? true : enemyRb.velocity != Vector2.zero;
-        //画面内にある
-        if (OnCamera)
-        {
-            //飛ばされてない限り
-            if (!IsBlowing) SlimeMove();
-        }
-
-
+        
         //アニメーターの設定
         animator.SetInteger("MovingAnim", MovingAnim);
         animator.SetBool("IsMoving", IsMoving);
@@ -110,6 +98,21 @@ public class SlimeArmor : Enemy
     protected override void FixedUpdate()
     {
         if (isPlayerExAttack) return;
+        if (isDestroy) return;
+
+        if (enemyRb.velocity.y < -1)
+        {
+            MovingAnim = 1;
+        }
+        IsMoving = MovingAnim == 3 ? true : enemyRb.velocity != Vector2.zero;
+        //画面内にある
+        if (OnCamera)
+        {
+            //飛ばされてない限り
+            if (!IsBlowing) SlimeMove();
+        }
+
+
         Gravity();
     }
 

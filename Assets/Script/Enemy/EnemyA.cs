@@ -26,8 +26,7 @@ public class EnemyA : Enemy
         //アニメーターの設定
         animator.SetBool("IsBlowing",IsBlowing);
         //状態の変更
-        if (isDestroy) IsBlowing = true;
-        if (!isDestroy) IsBlowing = false;
+        IsBlowing = isDestroy;
         //敵のscriptに基づく
         base.Update();
     }

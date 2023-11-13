@@ -27,15 +27,8 @@ public class Wizard : Enemy
 
     protected override void Update()
     {
-        //敵のscriptに基づく
-        base.Update();
 
-        //飛ばされていない限り動きを続く
-        if (!isDestroy)
-        {
-            Movement();
-        }
-
+        
         //毎秒アニメを更新する
         animator.SetBool("IsAttacking",IsAttacking);
         animator.SetBool("IsBlowing",IsBlowing);
@@ -111,7 +104,17 @@ public class Wizard : Enemy
     //重力関連
     protected override void FixedUpdate()
     {
+        if (isPlayerExAttack) return;
+
         base.FixedUpdate();
+
+        //飛ばされていない限り動きを続く
+        if (!isDestroy)
+        {
+            Movement();
+        }
+
+
         Gravity();
         if (enemyRb.velocity.y > 0 && !isDestroy)
         {

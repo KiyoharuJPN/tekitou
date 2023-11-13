@@ -296,8 +296,8 @@ public class PlayerController : MonoBehaviour
         else { isSkillAttackKay = false; }
 
         //ã¸UŒ‚
-        //if (inputMoveAxis.y >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.I))
-        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
+        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.I))
+        //if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         //rsv >= 0.8
         {
             AttackAction("UpAttack");
@@ -333,8 +333,8 @@ public class PlayerController : MonoBehaviour
             //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack");
         }
-        //if (nomalAttack.IsPressed() && canNomalAttack || Input.GetKey(KeyCode.U))
-        if (nomalAttack.IsPressed() && canNomalAttack)
+        if (nomalAttack.IsPressed() && canNomalAttack || Input.GetKey(KeyCode.U))
+        //if (nomalAttack.IsPressed() && canNomalAttack)
         {
             //’ÊíUŒ‚’·‰Ÿ‚µ’†
             AttackAction("NomalAttack");

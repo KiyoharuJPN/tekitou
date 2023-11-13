@@ -16,6 +16,22 @@ public class GoblinArmor : Enemy
     }
     protected override void Update()
     {
+        //アニメ
+        animator.SetBool("IsAttacking", IsAttacking);
+        animator.SetBool("IsMoving", IsMoving);
+        animator.SetBool("IsBlowing", IsBlowing);
+        //状態の変更
+        IsBlowing = isDestroy;
+        //敵のscriptに基づく
+        base.Update();
+    }
+
+    protected override void FixedUpdate()
+    {
+        if (isPlayerExAttack) return;
+        if (isDestroy) return;
+
+
         //画面内にある
         if (OnCamera)
         {
@@ -25,20 +41,6 @@ public class GoblinArmor : Enemy
                 Movement();
             }
         }
-        //アニメ
-        animator.SetBool("IsAttacking", IsAttacking);
-        animator.SetBool("IsMoving", IsMoving);
-        animator.SetBool("IsBlowing", IsBlowing);
-        //状態の変更
-        if (isDestroy) IsBlowing = true;
-        if (!isDestroy) IsBlowing = false;
-        //敵のscriptに基づく
-        base.Update();
-    }
-
-    protected override void FixedUpdate()
-    {
-        if (isPlayerExAttack) return;
         Gravity();
     }
 

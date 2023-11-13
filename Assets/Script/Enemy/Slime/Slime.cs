@@ -34,17 +34,7 @@ public class Slime : Enemy
     {
         //敵のscriptに基づく
         base.Update();
-        if (enemyRb.velocity.y < -1) MovingAnim = 1;
-        IsMoving = MovingAnim == 3 ? true: enemyRb.velocity != Vector2.zero;
-        //画面内にある
-        if (OnCamera)
-        {
-            //Debug.Log(moveWidth);
-            //飛ばされてない限り
-            if (!IsBlowing) SlimeMove();
-        }
-        //TestTime += Time.deltaTime;
-        //Debug.Log("moving:" + IsMoving + "\nsecond:" + TestTime);
+        
 
 
         //アニメーターの設定
@@ -52,8 +42,7 @@ public class Slime : Enemy
         animator.SetBool("IsMoving", IsMoving);
         animator.SetBool("IsBlowing", IsBlowing);
         //状態の変更
-        if (isDestroy) IsBlowing = true;
-        if (!isDestroy) IsBlowing = false;
+        IsBlowing = isDestroy;
     }
 
     void SlimeMove()
@@ -126,6 +115,20 @@ public class Slime : Enemy
     protected override void FixedUpdate()
     {
         if (isPlayerExAttack) return;
+        if (isDestroy) return;
+
+
+        if (enemyRb.velocity.y < -1) MovingAnim = 1;
+        IsMoving = MovingAnim == 3 ? true : enemyRb.velocity != Vector2.zero;
+        //画面内にある
+        if (OnCamera)
+        {
+            //Debug.Log(moveWidth);
+            //飛ばされてない限り
+            if (!IsBlowing) SlimeMove();
+        }
+        //TestTime += Time.deltaTime;
+        //Debug.Log("moving:" + IsMoving + "\nsecond:" + TestTime);
         Gravity();
     }
 

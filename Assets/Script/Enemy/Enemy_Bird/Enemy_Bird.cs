@@ -26,19 +26,14 @@ public class Enemy_Bird : Enemy
 
     protected override void Update()
     {
-        if (OnCamera)      //画面内にいるとき
-        {
-            Movement();
-        }
-
+        
 
         //アニメーターの設定
         animator.SetBool("IsAttacking", IsAttacking);
         animator.SetBool("IsMoving", IsMoving);
         animator.SetBool("IsBlowing", IsBlowing);
         //飛ばされているかどうかの判定
-        if (isDestroy) IsBlowing = true;
-        if (!isDestroy) IsBlowing = false;
+        IsBlowing = isDestroy;
         //Enemyの継承
         base.Update();
     }
@@ -59,6 +54,18 @@ public class Enemy_Bird : Enemy
         {
             enemyRb.velocity = new Vector2(moveSpeed, enemyRb.velocity.y);
         }
+    }
+
+    override protected void FixedUpdate()
+    {
+        if (isPlayerExAttack) return;
+        if (isDestroy) return;
+
+        if (OnCamera)      //画面内にいるとき
+        {
+            Movement();
+        }
+
     }
 
     void Attacking()

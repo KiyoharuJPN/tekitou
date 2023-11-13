@@ -43,22 +43,13 @@ public class Devil : Enemy
         }
         //移動二次関数の計算
         FindQuadraticEquation();
-
+        IsMoving = true;
     }
 
     protected override void Update()
     {
-        if (!isPlayerExAttack) return;
         base.Update();
         //Debug.Log(GetYFromX(transform.position.x));
-
-        //移動しているとき
-        if (IsMoving)
-            Moving();
-        //移動していないとき
-        if (!IsMoving)
-            NotMoving();
-
 
         animator.SetBool("IsBlowing", isDestroy);
         animator.SetBool("IsMoving", IsMoving);
@@ -202,20 +193,20 @@ public class Devil : Enemy
 
         if (AnimCtrl == 0 && !inAnim)
         {
+            inAnim = true;
             IdleFlyPosPreY = transform.position.y;
             if (IdleAnimCorou != null)
                 StopCoroutine(IdleAnimCorou);
             IdleAnimCorou = StartCoroutine(FlyUp());
             AnimCtrl = 1;
-            inAnim = true;
         }
         if (AnimCtrl == 1 && !inAnim)
         {
+            inAnim = true;
             if (IdleAnimCorou != null)
                 StopCoroutine(IdleAnimCorou);
             IdleAnimCorou = StartCoroutine(FlyDown());
             AnimCtrl = 2;
-            inAnim = true;
         }
         if (AnimCtrl == 2 && !inAnim)
         {
@@ -223,12 +214,19 @@ public class Devil : Enemy
                 StopCoroutine(IdleAnimCorou);
             transform.position = new Vector2(transform.position.x, IdleFlyPosPreY);
             AnimCtrl = 0;
-            inAnim = true;
         }
     }
     protected override void FixedUpdate()
     {
+        if (isPlayerExAttack) return;
+        if (isDestroy) return;
 
+        //移動しているとき
+        if (IsMoving)
+            Moving();
+        //移動していないとき
+        if (!IsMoving)
+            NotMoving();
     }
 
     //コルーチン関数
