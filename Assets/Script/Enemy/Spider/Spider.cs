@@ -20,16 +20,24 @@ public class Spider : Enemy
     protected override void Update()
     {
         base.Update();
-        //画面内かつ死んでいない限り
-        if (OnCamera && !isDestroy)
-        {
-            Movement();
-        }
 
         //アニメーターの設定
         animator.SetBool("IsWalking", IsMoving);
         animator.SetBool("IsBlowing", isDestroy);
     }
+
+    protected override void FixedUpdate()
+    {
+        if (isPlayerExAttack) return;
+
+        //画面内かつ死んでいない限り
+        if (OnCamera && !isDestroy)
+        {
+            Movement();
+        }
+    }
+
+
     //敵の動き関数
     void Movement()
     {

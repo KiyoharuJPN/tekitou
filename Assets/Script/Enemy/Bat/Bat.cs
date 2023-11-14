@@ -38,6 +38,16 @@ public class Bat : Enemy
     protected override void Update()
     {
         base.Update();
+        
+        // アニメーターの設定
+        animator.SetBool("IsBlowing", isDestroy);
+    }
+
+
+    protected override void FixedUpdate()
+    {
+        if (isPlayerExAttack) return;
+
         //飛ばされていない限り
         if (!isDestroy)
         {
@@ -53,10 +63,8 @@ public class Bat : Enemy
                 //Debug.Log(3);
             }
         }
-        
 
-        // アニメーターの設定
-        animator.SetBool("IsBlowing", isDestroy);
+
     }
 
     //敵の動きや関数

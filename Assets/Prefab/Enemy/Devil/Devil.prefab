@@ -169,11 +169,10 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 8415487706837510907}
   id: 15
   HadContactDamage: 1
-  speed: 15
   IdleTime: 3.6
   UseLoopToResetTimer: 0
   Frequency: 3
-  AnimCtrl: 0
+  AnimCtrl: 2
   EndPosition: {x: 0, y: 0}
   MidPosition: {x: 0, y: 0}
   FlyingSpeed: 5
@@ -211,7 +210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3173908005842791307, guid: fab7ba5b1dfeb794281dc588de6e8dbe, type: 3}
       propertyPath: buffType
-      value: 4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173908005842791307, guid: fab7ba5b1dfeb794281dc588de6e8dbe, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7747173658008363968, guid: fab7ba5b1dfeb794281dc588de6e8dbe, type: 3}
       propertyPath: m_RootOrder
@@ -329,7 +332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5370634287905717558, guid: 5fe267218d22a8d499ed8cc13cf8cd4e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe267218d22a8d499ed8cc13cf8cd4e, type: 3}
