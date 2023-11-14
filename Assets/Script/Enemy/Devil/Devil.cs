@@ -218,7 +218,11 @@ public class Devil : Enemy
     }
     protected override void FixedUpdate()
     {
-        if (isPlayerExAttack) return;
+        if (isPlayerExAttack)
+        {
+            if (enemyRb.velocity != Vector2.zero) enemyRb.velocity = Vector3.zero;
+            return;
+        }
         if (isDestroy) return;
 
         //ˆÚ“®‚µ‚Ä‚¢‚é‚Æ‚«

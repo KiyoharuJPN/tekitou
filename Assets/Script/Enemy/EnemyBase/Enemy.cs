@@ -467,7 +467,7 @@ public class Enemy : MonoBehaviour
             player = serchTag(gameObject, "DeadPlayer");
             Debug.Log(player);
         }
-        else { Debug.Log(player); }
+        else { /*Debug.Log(player);*/ }
 
         // ‚»‚ê‚¼‚ê‚Ì²‚Ì¬•ª‚ğŒvZ
         float x = Mathf.Cos(rad);

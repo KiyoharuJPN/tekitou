@@ -225,13 +225,16 @@ public class GameManager : MonoBehaviour
         foreach (GameObject gameObj in enemyList)
         {
             
-            if (gameObj.GetComponent<Enemy>())
+            if(gameObj != null)
             {
-                gameObj.GetComponent<Enemy>().Stop_End();
-            }
-            else if( gameObj.GetComponent<Projectile>())
-            {
-                gameObj.GetComponent<Projectile>().Stop_End();
+                if (gameObj.GetComponent<Enemy>())
+                {
+                    gameObj.GetComponent<Enemy>().Stop_End();
+                }
+                else if (gameObj.GetComponent<Projectile>())
+                {
+                    gameObj.GetComponent<Projectile>().Stop_End();
+                }
             }
         }
         enemys = null;
