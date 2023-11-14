@@ -214,9 +214,12 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject gameObj in hitEnemyList)
         {
-            ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
-            gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
-            enemyList.Remove(gameObj);
+            if(gameObj != null)
+            {
+                ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
+                gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
+                enemyList.Remove(gameObj);
+            }
         }
     }
 

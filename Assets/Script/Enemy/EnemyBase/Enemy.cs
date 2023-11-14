@@ -373,6 +373,7 @@ public class Enemy : MonoBehaviour
             this.gameObject.GetComponent<MonsterHouse_Enemy>().Destroy();
         }
         //€–Só‘Ô‚É•ÏX
+        Debug.Log("had killed");
         isDestroy = true;
         //€–SSEÄ¶
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
@@ -460,12 +461,12 @@ public class Enemy : MonoBehaviour
         if (player == null)
         {
             player = serchTag(gameObject, "InvinciblePlayer");
-            Debug.Log(player);
+            //Debug.Log(player);
         }
         if(player == null)
         {
             player = serchTag(gameObject, "DeadPlayer");
-            Debug.Log(player);
+            //Debug.Log(player);
         }
         else { /*Debug.Log(player);*/ }
 
