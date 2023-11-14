@@ -5,7 +5,21 @@ using UnityEngine.InputSystem;
 
 public class Player_Demo : PlayerController
 {
+    public bool playerOpe = false;
+
     protected override void InputKay()
+    {
+        if (playerOpe)
+        {
+            DemoInputKey();
+        }
+        else if (!playerOpe)
+        {
+            NomalInputKay();
+        }
+    }
+
+    void NomalInputKay()
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
 
@@ -21,28 +35,84 @@ public class Player_Demo : PlayerController
         else { isSkillAttackKay = false; }
 
         //è„è∏çUåÇ
+        //if (inputMoveAxis.y >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.I))
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         //rsv >= 0.8
         {
             AttackAction("UpAttack");
         }
         //óéâ∫çUåÇçUåÇ
-        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack)
         //rsv <= -0.8
         {
             AttackAction("DawnAttack");
         }
         //â°à⁄ìÆçUåÇ
+        //if (inputMoveAxis.x >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.K))
         if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_right");
         }
-        else if (inputMoveAxis.x  <= -0.9 && isSkillAttackKay)
+        //else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay || Input.GetKey(KeyCode.J))
+        else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_left");
         }
         //ïKéEãZ
-        if (exAttack_L.IsPressed())
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
+        {
+            if (!isAttack && canExAttack)
+            {
+                AttackAction("ExAttack");
+            }
+        }
+        //éËìÆçUåÇÅFçUåÇÉ{É^ÉìÇ™âüÇ≥ÇÍÇπÇΩÇ∆Ç´
+        if (nomalAttack.WasPressedThisFrame() && canNomalAttack)
+        {
+            //í èÌçUåÇì¸óÕ
+            AttackAction("NomalAttack");
+        }
+        //if (nomalAttack.IsPressed() && canNomalAttack || Input.GetKey(KeyCode.U))
+        if (nomalAttack.IsPressed() && canNomalAttack)
+        {
+            //í èÌçUåÇí∑âüÇµíÜ
+            AttackAction("NomalAttack");
+        }
+    }
+
+    void DemoInputKey()
+    {
+        var inputMoveAxis = move.ReadValue<Vector2>();
+
+        if (nomalAttack.IsPressed())
+        {
+            isAttackKay = true;
+        }
+        else { isAttackKay = false; }
+
+        //è„è∏çUåÇ
+        if (inputMoveAxis.y >= 0.9 && !(inputMoveAxis.x >= 0.5 || inputMoveAxis.x <= -0.5) && isAttackKay)
+        //rsv >= 0.8
+        {
+            AttackAction("UpAttack");
+        }
+        //óéâ∫çUåÇçUåÇ
+        if (inputMoveAxis.y <= -0.9 && isAttackKay)
+        //rsv <= -0.8
+        {
+            AttackAction("DawnAttack");
+        }
+        //â°à⁄ìÆçUåÇ
+        if (inputMoveAxis.x >= 0.9 && isAttackKay)
+        {
+            AttackAction("SideAttack_right");
+        }
+        else if (inputMoveAxis.x <= -0.9 && isAttackKay)
+        {
+            AttackAction("SideAttack_left");
+        }
+        //ïKéEãZ
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
         {
             if (!isAttack && canExAttack)
             {

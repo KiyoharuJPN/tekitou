@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static PBF.PlayerBuffBase;
 
-public class PlayerBuff : MonoBehaviour
+public class PlayerBuff_Demo : MonoBehaviour
 {
     public PlayerController player;
 
@@ -46,7 +46,7 @@ public class PlayerBuff : MonoBehaviour
     GameObject getBuffUI;
 
 
-    public static PlayerBuff Instance { get; private set; }
+    public static PlayerBuff_Demo Instance { get; private set; }
 
     private void Awake()
     {
@@ -71,17 +71,18 @@ public class PlayerBuff : MonoBehaviour
         player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
         //ゲージ追加（獲得量 - (獲得毎減少 × 獲得回数)
         int getExGage = exGage.setBuffNum - (exGage.setBuffDown * exGage.getBuffCount);
-        if(getExGage < 5)
+        if (getExGage < 5)
         {
             getExGage = 5;//最低値
         }
-        for (int i = 0; i < getExGage; i++) {
+        for (int i = 0; i < getExGage; i++)
+        {
             ExAttackParam.Instance.AddGauge();
         }
         exGage.getBuffCount++;
 
-        if(!player.gameObject.GetComponent<SpeedUp>() && 
-            !player.gameObject.GetComponent<SlashingBuff>() && 
+        if (!player.gameObject.GetComponent<SpeedUp>() &&
+            !player.gameObject.GetComponent<SlashingBuff>() &&
             !player.gameObject.GetComponent<InvinciblBuff>())
         {
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
@@ -93,8 +94,9 @@ public class PlayerBuff : MonoBehaviour
     IEnumerator ColorChenge()
     {
         float time = 0.2f;
-        while (time > 0) { 
-            time -= Time.deltaTime; 
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
             yield return null;
         }
 
@@ -139,15 +141,14 @@ public class PlayerBuff : MonoBehaviour
         {
             player.gameObject.GetComponent<SlashingBuff>().AddBuff(slashing.getBuffCount);
         }
-        else 
+        else
         {
             //プレイヤー（gameObject)に斬撃追加スクリプトを追加
             player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
             player.gameObject.AddComponent<SlashingBuff>();
-        } 
+        }
         slashing.getBuffCount++;
     }
-
     public void SlashingBuffRemove()
     {
         if (player.gameObject.GetComponent<SlashingBuff>())
@@ -155,6 +156,7 @@ public class PlayerBuff : MonoBehaviour
             player.gameObject.GetComponent<SlashingBuff>().SlashingWaveRemove();
         }
     }
+
     public PBF.PlayerBuffBase.SlashingBuff GetSlashing()
     {
         return slashing;
@@ -223,7 +225,7 @@ public class PlayerBuff : MonoBehaviour
 
     public int GetBuffCount(BuffType buffType)
     {
-        switch(buffType)
+        switch (buffType)
         {
             case BuffType.ExGage:
                 return exGage.getBuffCount;
