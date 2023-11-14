@@ -248,7 +248,6 @@ public class Enemy : MonoBehaviour
             {
                 stopTime = stopState.shakTimeMax;
             }
-
             //ヒットストップ処理開始
             tween = transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
                 .SetUpdate(true)
@@ -259,7 +258,7 @@ public class Enemy : MonoBehaviour
                     //初期位置に戻す
                     this.transform.position = initialPos;
                 });
-            yield return new WaitForSeconds(power * stopState.shakTime);
+            yield return new WaitForSeconds(stopTime);
         }
 
         //ヒット時演出（敵点滅）
@@ -373,7 +372,7 @@ public class Enemy : MonoBehaviour
             this.gameObject.GetComponent<MonsterHouse_Enemy>().Destroy();
         }
         //死亡状態に変更
-        Debug.Log("had killed");
+        Debug.Log(gameObject + "had killed");
         isDestroy = true;
         //死亡SE再生
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
