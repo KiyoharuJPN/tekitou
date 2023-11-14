@@ -437,9 +437,24 @@ public class GameManager : MonoBehaviour
 
     public void DemoStage1_BossDown()
     {
-        ComboParam.Instance.ComboStop();
-        PlayerExAttack_Start();
-        SceneData.Instance.referer = "Demo";
-        Result_Start(1);
+        StartCoroutine(bossDownMove());
+        IEnumerator bossDownMove()
+        {
+            player.SetCanMove(false);
+
+            //フェードアウト開始
+            fade.StartFadeOut();
+
+            while (!fade.IsFadeOutComplete())
+            {
+                yield return null;
+            }
+            SceneData.Instance.revival = false;
+            SceneData.Instance.wayPoint_1 = false;
+            SceneData.Instance.wayPoint_2 = false;
+
+            //フェードアウト終了
+            ComboParam.Instance.ResetTime(); SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }

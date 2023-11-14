@@ -14,6 +14,7 @@ public class SlashingWave_Demo : SlashingWave
         {
             Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
             player.Attack(collision, skill.damage, skill, false);
+            Destroy(gameObject);
         }
     }
 }

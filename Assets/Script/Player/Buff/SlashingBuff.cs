@@ -31,8 +31,6 @@ public class SlashingBuff : MonoBehaviour
 
     void Start()
     {
-
-        Debug.Log("SlashingBuffStart");
         slashing = PlayerBuff.Instance.GetSlashing();
         buffTime = slashing.firstSetTime;
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
@@ -80,6 +78,7 @@ public class SlashingBuff : MonoBehaviour
     //斬撃波生成(第一引数:生成場所、第二引数:角度、第三引数:X反転の有無、第四引数:力)
     private void SlashingWaveGenerate(Vector3 position, Quaternion rotation, bool flipX, Vector2 velocity)
     {
+        slashing = PlayerBuff.Instance.GetSlashing();
         SoundManager.Instance.PlaySE(SESoundData.SE.SlashingWave);
         GameObject obj = Instantiate(slashing.slashingObj, position, Quaternion.identity);
         obj.transform.rotation = rotation;
@@ -88,6 +87,24 @@ public class SlashingBuff : MonoBehaviour
         obj.GetComponent<SpriteRenderer>().flipX = flipX;
 
         obj.GetComponent <Rigidbody2D>().velocity = velocity;
+    }
+
+    public void SlashingWaveRemove()
+    {
+        if (gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
+        {
+            spriteGlow.GlowColor = Color.cyan;
+        }
+        if (!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
+        {
+            spriteGlow.EnableInstancing = true;
+        }
+
+        timeBar.GetComponent<UIPosController>().enabled = false;
+        timeBar.GetComponent<Canvas>().enabled = false;
+
+        PlayerBuff.Instance.CountReset_Slashing();
+        Destroy(this.GetComponent<SlashingBuff>());
     }
 
     internal void AddBuff(int count)
