@@ -244,7 +244,7 @@ public class Enemy : MonoBehaviour
             Time.timeScale = 0;
 
             var stopTime = power * stopState.shakTime;
-            if(stopTime > stopState.shakTimeMax)
+            if (stopTime > stopState.shakTimeMax)
             {
                 stopTime = stopState.shakTimeMax;
             }

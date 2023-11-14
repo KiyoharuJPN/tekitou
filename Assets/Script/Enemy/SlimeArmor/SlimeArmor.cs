@@ -52,7 +52,6 @@ public class SlimeArmor : Enemy
                 movingCheck = 0;
                 MovingAnim = 3;
 
-                Debug.Log("in 3");
             }
         }
 
