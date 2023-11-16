@@ -130,7 +130,7 @@ public class DemonKing : Enemy
     {
         base.Start();
         BossLayer = LayerMask.NameToLayer("BossEnemy");
-        Debug.Log(LayerMask.NameToLayer("BossEnemy"));
+        //Debug.Log(LayerMask.NameToLayer("BossEnemy"));
 
         //idleä÷åW
         if (idleStatus.handSpeed == 0) idleStatus.handSpeed = 1;
@@ -321,7 +321,7 @@ public class DemonKing : Enemy
 
     IEnumerator CrushAttackAnim()
     {
-        Debug.Log(LayerMask.NameToLayer("BossEnemy"));
+        //Debug.Log(LayerMask.NameToLayer("BossEnemy"));
         Physics2D.IgnoreLayerCollision(BossLayer, BossLayer);
         AnimationController = 1;        //animatorí≤êÆÅiïKê{Åj
         LHanimator.SetInteger("AnimationController", AnimationController);

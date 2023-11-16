@@ -30,6 +30,7 @@ public class Devil : Enemy
     protected override void Start()
     {
         base.Start();
+        if(GetComponent<MonsterHouse_Enemy>() != null ) transform.position = new Vector2(transform.position.x, -5);
         IdleFlyingSpeed = IdleFlySpeed * 0.01f;
         Assignment();
         if(StartPosition.x < EndPosition.x)
@@ -234,7 +235,7 @@ public class Devil : Enemy
     {
         while (true)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y + IdleFlyingSpeed);
+            if (!isPlayerExAttack) transform.position = new Vector2(transform.position.x, transform.position.y + IdleFlyingSpeed);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -242,7 +243,7 @@ public class Devil : Enemy
     {
         while (true)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - IdleFlyingSpeed);
+            if (!isPlayerExAttack) transform.position = new Vector2(transform.position.x, transform.position.y - IdleFlyingSpeed);
             yield return new WaitForEndOfFrame();
         }
     }

@@ -17,7 +17,7 @@ public class InvinciblBuff : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("InvinciblBuffStart");
+        //Debug.Log("InvinciblBuffStart");
         gameObject.tag = "InvinciblePlayer";
         invincible = PlayerBuff.Instance.GetInvincible();
         buffTime = invincible.firstSetTime;

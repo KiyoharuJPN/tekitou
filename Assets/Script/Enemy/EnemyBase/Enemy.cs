@@ -244,11 +244,10 @@ public class Enemy : MonoBehaviour
             Time.timeScale = 0;
 
             var stopTime = power * stopState.shakTime;
-            if(stopTime > stopState.shakTimeMax)
+            if (stopTime > stopState.shakTimeMax)
             {
                 stopTime = stopState.shakTimeMax;
             }
-
             //ヒットストップ処理開始
             tween = transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
                 .SetUpdate(true)
@@ -259,7 +258,7 @@ public class Enemy : MonoBehaviour
                     //初期位置に戻す
                     this.transform.position = initialPos;
                 });
-            yield return new WaitForSeconds(power * stopState.shakTime);
+            yield return new WaitForSeconds(stopTime);
         }
 
         //ヒット時演出（敵点滅）
@@ -373,6 +372,7 @@ public class Enemy : MonoBehaviour
             this.gameObject.GetComponent<MonsterHouse_Enemy>().Destroy();
         }
         //死亡状態に変更
+        Debug.Log(gameObject + "had killed");
         isDestroy = true;
         //死亡SE再生
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
@@ -460,14 +460,14 @@ public class Enemy : MonoBehaviour
         if (player == null)
         {
             player = serchTag(gameObject, "InvinciblePlayer");
-            Debug.Log(player);
+            //Debug.Log(player);
         }
         if(player == null)
         {
             player = serchTag(gameObject, "DeadPlayer");
-            Debug.Log(player);
+            //Debug.Log(player);
         }
-        else { Debug.Log(player); }
+        else { /*Debug.Log(player);*/ }
 
         // それぞれの軸の成分を計算
         float x = Mathf.Cos(rad);

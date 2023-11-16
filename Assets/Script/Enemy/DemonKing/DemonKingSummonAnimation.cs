@@ -67,7 +67,7 @@ public class DemonKingSummonAnimation : MonoBehaviour
 
         SoundManager.Instance.PlaySE(SESoundData.SE.DemonkingShout);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-        Debug.Log(shake);
+        //Debug.Log(shake);
         HPBar.SetActive(true);
 
     }

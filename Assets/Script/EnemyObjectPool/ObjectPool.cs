@@ -22,7 +22,7 @@ public class ObjectPool
     //オブジェクトプールから１つのオブジェクトを取り上げて使う
     //オブジェクトプールにオブジェクトがないときは新しくオブジェクトを作って、
     //オブジェクトプールの中に入れる。
-    public GameObject GetObject(GameObject prefab)
+    public GameObject GetObject(GameObject prefab, bool error = false)
     {
         GameObject _object;
         if (!objectPool.ContainsKey(prefab.name) || objectPool[prefab.name].Count == 0)
@@ -44,7 +44,8 @@ public class ObjectPool
             _object.transform.SetParent(child.transform);
         }
         _object = objectPool[prefab.name].Dequeue();
-        _object.SetActive(true);
+        if (_object == null) _object = GetObject(prefab,true);
+        if (!error) _object.SetActive(true);
         return _object;
     }
 
