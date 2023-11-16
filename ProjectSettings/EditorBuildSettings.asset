@@ -5,34 +5,34 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/Title.unity
     guid: 527b1418317090e48b4341dec9bf31b9
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/Load.unity
     guid: 33f320307aa94e24c95e23292519d225
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/Level_Tutorial.unity
     guid: b7a576346cd7a7c469d711b1164dfcee
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/Level_Stage1.unity
     guid: 21ed1e8d7f270894582d0d3810c744ee
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/Level_Stage2.unity
     guid: d9f9edefbe8149e48bdc3fb34b43a10f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/Stage3.unity
     guid: f04766d8ca20b7e4f926be0540562742
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/FinishScene.unity
     guid: 799ce78f7c10a294a8a12b40f1c35b34
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScenes/Ending.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
     path: Assets/Demo/Title_Demo.unity
     guid: fcdf9fcb765f3754388f7c87f3d8fd60
-  - enabled: 1
+  - enabled: 0
     path: Assets/Demo/Stage1_Demo.unity
     guid: cd7e9600dbacd5e479695f0aee052c5b
   - enabled: 0

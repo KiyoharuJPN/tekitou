@@ -449,6 +449,7 @@ public class PlayerController : MonoBehaviour
         //エフェクト生成
         foreach (var enemy in exAttackEnemylist)
         {
+            if (enemy != null) return;
             HitEfect(enemy.transform, UnityEngine.Random.Range(0, 360));
             ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
         }
