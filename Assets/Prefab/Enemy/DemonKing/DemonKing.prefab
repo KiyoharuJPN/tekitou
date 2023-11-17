@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1090330504, guid: 789dcc7e96cdf2d41ab8e1d6d664b201, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -268,7 +268,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 1380700616, guid: 789dcc7e96cdf2d41ab8e1d6d664b201, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 8092157013531573884}
   m_Layer: 23
   m_Name: DemonKing
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -813,6 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949b7bf5ebd9b164ab51a4aceced893b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLeftHand: 0
 --- !u!1 &9164718561903163285
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,6 +885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949b7bf5ebd9b164ab51a4aceced893b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLeftHand: 1
 --- !u!1001 &2471679028122273461
 PrefabInstance:
   m_ObjectHideFlags: 0

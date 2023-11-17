@@ -644,14 +644,14 @@ public class Enemy : MonoBehaviour
     }
 
     //必殺技が当たっていた場合のダメージ処理呼出し
-    public virtual void PlaeyrExAttack_HitEnemyEnd(float powar)
+    public virtual void PlaeyrExAttack_HitEnemyEnd(float power)
     {
         if (animator != null)
         {
             animator.speed = 1;
         }
         isPlayerExAttack = false;
-        Damage(powar, null,true, true);
+        Damage(power, null,true, true);
     }
 
     //停止処理解除
