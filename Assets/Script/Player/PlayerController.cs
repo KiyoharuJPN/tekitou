@@ -303,24 +303,26 @@ public class PlayerController : MonoBehaviour
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
-        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack)
+        //if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack || Input.GetKey(KeyCode.K))
         //rsv <= -0.8
         {
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
-        //if (inputMoveAxis.x >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.K))
-        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
+        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.L))
+        //if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_right");
         }
-        //else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay || Input.GetKey(KeyCode.J))
-        else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay)
+        else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay || Input.GetKey(KeyCode.J))
+        //else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay)
                 {
             AttackAction("SideAttack_left");
         }
         //•KE‹Z
-        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
+        //if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed() || Input.GetKeyDown(KeyCode.E))
         {
             if (!isAttack && canExAttack)
             {
