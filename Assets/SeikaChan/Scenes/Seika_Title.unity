@@ -1399,7 +1399,7 @@ RectTransform:
   m_GameObject: {fileID: 1453837813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1507483618}
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -173045970, guid: f99ac796270e4d94e85ea9ef422bf644, type: 3}
+  m_Sprite: {fileID: -327626500, guid: b65ef678a8375d94fa18d77e65463ad1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1458,7 +1458,7 @@ Animator:
   m_GameObject: {fileID: 1453837813}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6a840b6dc25413841a2880fd64674bb4, type: 2}
+  m_Controller: {fileID: 9100000, guid: aa9ae563e8bb12f42a1cf828662b5557, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1592,7 +1592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1592c684e35355b4ba64c9e9f664e402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene: Load
+  gameScene: Seika_Load
   target: {fileID: 887530303}
   menuobj:
   - {fileID: 1898251298}
