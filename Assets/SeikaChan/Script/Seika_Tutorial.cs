@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialScene : StageCtrl
+public class Seika_Tutorial : StageCtrl
 {
     [SerializeField]
     TutorialPlayer player;
@@ -56,7 +55,7 @@ public class TutorialScene : StageCtrl
 
     private void Awake()
     {
-        SceneData.Instance.referer = stageName; 
+        SceneData.Instance.referer = stageName;
     }
 
     protected override void Start()
@@ -162,16 +161,7 @@ public class TutorialScene : StageCtrl
                 }
                 break;
             case 8:
-                if (!panelEnemyDaeth)
-                {
-                    int count = 0;
-                    foreach (Enemy d in tutorialPanels[num].enemylist)
-                    {
-                        if (d.isDestroy) count++;
-                    }
-                    if (tutorialPanels[num].enemylist.Count == count) panelEnemyDaeth = true;
-                }
-                if (player.tExAttackActivCheck && panelEnemyDaeth)
+                if (player.tExAttackActivCheck)
                 {
                     return TutorialClear();
                 }
@@ -227,10 +217,11 @@ public class TutorialScene : StageCtrl
         //    mainCamera.NomalCameraAreaSet();
         //}
 
-        if (tutorialPanels.Length == num + 1) {
+        if (tutorialPanels.Length == num + 1)
+        {
             Debug.Log("チュートリアル終了");
             goal = true;
-            return true; 
+            return true;
         }
 
         ////次のパネルに専用カメラエリアがあるなら
@@ -251,7 +242,7 @@ public class TutorialScene : StageCtrl
         return true;
     }
 
-    IEnumerator ObjSetActive(float time,GameObject obj, GameObject nextObj)
+    IEnumerator ObjSetActive(float time, GameObject obj, GameObject nextObj)
     {
         yield return new WaitForSeconds(time);
 

@@ -34,16 +34,20 @@ public class ResultAnyKay : MonoBehaviour
                 SceneManager.LoadScene("Ending");
                 return;
             }
+            if (loadScene == "Seika_Stage1")
+            {
+                SceneManager.LoadScene("Seika_Ending");
+                return;
+            }
+            if (loadScene == "Seika_Tutorial")
+            {
+                SceneManager.LoadScene("Seika_Stage1");
+                return;
+            }
             if (loadScene == "Demo")
             {
                 SceneManager.LoadScene("EndingDemo");
                 return;
-            }
-
-            //ぜんため用コード
-            if(SceneManager.GetActiveScene().name == "Level_Stage2")
-            {
-                SceneManager.LoadScene("Ending");
             }
 
             SceneManager.LoadScene("Load");
