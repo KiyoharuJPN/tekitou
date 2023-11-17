@@ -27,7 +27,8 @@ public class ResultAnyKay : MonoBehaviour
         if (Input.GetKeyDown("joystick button 0")
             || Input.GetKeyDown("joystick button 1")
             || Input.GetKeyDown("joystick button 2")
-            || Input.GetKeyDown("joystick button 3"))//
+            || Input.GetKeyDown("joystick button 3")
+            || Input.GetKeyDown(KeyCode.C))//
         {
             if (loadScene == "Stage3")
             {
