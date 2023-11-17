@@ -41,4 +41,22 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Demo/EndingDemo.unity
     guid: 1425642650563e147b4c59a71b9525a5
+  - enabled: 0
+    path: Assets/SeikaChan/Scenes/Seika_Title.unity
+    guid: 3d882abdfa1dc2141aae067b9469a2a8
+  - enabled: 0
+    path: Assets/SeikaChan/Scenes/Seika_Tutorial.unity
+    guid: 45d375dde98809d4da5343e5091c50dc
+  - enabled: 0
+    path: Assets/SeikaChan/Scenes/Seika_Stage1.unity
+    guid: 739d238188545cb448f18b54d2e2e5ed
+  - enabled: 0
+    path: Assets/SeikaChan/Scenes/Seika_Finish.unity
+    guid: 2c37a05f3ee435e45a3e61d5914359bf
+  - enabled: 0
+    path: Assets/SeikaChan/Scenes/Seika_Ending.unity
+    guid: 331d03dbbcfc6f4408c1943afa01cd0d
+  - enabled: 0
+    path: Assets/SeikaChan/Scenes/Load.unity
+    guid: 147d829c429134745a1e2c976e48fee0
   m_configObjects: {}

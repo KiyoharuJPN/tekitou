@@ -89,6 +89,16 @@ public class CameraManager : MonoBehaviour
         {
             ChengeCameraArea_Stage1Nomal();
         }
+
+        //seikaフェス限定コード
+        if (SceneData.Instance.referer == "Seika_Tutorial")
+        {
+            ChengeCameraArea_Tutorial();
+        }
+        else if (SceneData.Instance.referer == "Seika_Stage1")
+        {
+            ChengeCameraArea_Stage1Nomal();
+        }
     }
 
     public void SetOriCameraArea(GameObject oriCameraArea)
