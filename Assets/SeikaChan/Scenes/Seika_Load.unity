@@ -761,6 +761,7 @@ GameObject:
   - component: {fileID: 2135804933}
   - component: {fileID: 2135804932}
   - component: {fileID: 2135804936}
+  - component: {fileID: 2135804938}
   - component: {fileID: 2135804937}
   m_Layer: 5
   m_Name: LoadSceneCanvas
@@ -896,6 +897,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135804931}
   m_CullTransparentMesh: 1
+--- !u!114 &2135804938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135804931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f48b87e1ce1ce14595b1185d867569e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backGroundImage: {fileID: 2130746578}
+  loadSceneTextBox: {fileID: 2110327447}
+  loadSceneText:
+  - {fileID: 21300000, guid: b301c0a3df0c38b4bbe3fad69138350e, type: 3}
+  - {fileID: 21300000, guid: 61ebac88e3923a64fb7d9fa981766244, type: 3}
+  loadSceneImage:
+  - {fileID: 6642811417903670798, guid: 5827f937b9eb02e4caa99b35b63dbaa0, type: 3}
+  - {fileID: 1614635713241564183, guid: 9bac71fb168db2347ae427aaffb2539d, type: 3}
+  fade: {fileID: 6114365387962428608}
+  stockImg: {fileID: 1262263155}
+  stockImgs:
+  - {fileID: -1085198753, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
+  - {fileID: -135370441, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
+  - {fileID: -747871897, guid: e7c8368e9c834d043be2ce86902467a3, type: 3}
+  time: 1.5
 --- !u!1001 &4964474980258745101
 PrefabInstance:
   m_ObjectHideFlags: 0

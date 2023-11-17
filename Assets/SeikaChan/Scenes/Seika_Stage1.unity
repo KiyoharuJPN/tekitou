@@ -60902,9 +60902,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4075973575706176913, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -327626500, guid: b65ef678a8375d94fa18d77e65463ad1, type: 3}
+    - target: {fileID: 4075973575706176913, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4075973575706176914, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 878e8cfb6f722cb4ea08a82986df57aa, type: 2}
     - target: {fileID: 4075973575706176915, guid: 61dc7409f33387149be05f5b19dafc0d, type: 3}
       propertyPath: m_Name
       value: Hero
