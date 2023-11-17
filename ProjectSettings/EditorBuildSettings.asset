@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Demo/Title_Demo.unity
     guid: fcdf9fcb765f3754388f7c87f3d8fd60
-  - enabled: 1
+  - enabled: 0
     path: Assets/Demo/Stage1_Demo.unity
     guid: cd7e9600dbacd5e479695f0aee052c5b
   - enabled: 0

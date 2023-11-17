@@ -5,6 +5,7 @@ public class AnimationCipsTime
 {
     public enum ClipType
     {
+        //Heroアニメ
         Hero_anim_1,
         Hero_knockBack,
         ExAttack,
@@ -16,7 +17,15 @@ public class AnimationCipsTime
         Hero_DropAttack_Start,
         Hero_SideAttack_Start,
         Hero_UpAttack_End,
-        Hero_DropAttack_End
+        Hero_DropAttack_End,
+        //セイカアニメ
+        SeikaNomalAttack_Stage,
+        SeikaNomalAttack_Jump,
+        Seika_UpAttack_Start,
+        Seika_DropAttack_Start,
+        Seika_SideAttack_Start,
+        Seika_UpAttack_End,
+        Seika_DropAttack_End,
     }
 
     static public float GetAnimationTime(Animator animator, ClipType type)

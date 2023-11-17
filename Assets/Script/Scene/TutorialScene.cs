@@ -91,7 +91,6 @@ public class TutorialScene : StageCtrl
         {
             return false;
         }
-
         switch (num)
         {
             case 0:
@@ -123,7 +122,9 @@ public class TutorialScene : StageCtrl
                         if (d.isDestroy) count++;
                     }
                     if (tutorialPanels[num].enemylist.Count == count) panelEnemyDaeth = true;
+
                 }
+                Debug.Log(isAttackPlay);
                 if (isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 4:

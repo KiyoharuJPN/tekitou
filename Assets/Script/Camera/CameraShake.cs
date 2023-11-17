@@ -43,7 +43,6 @@ public class CameraShake : MonoBehaviour
 
             yield return null;
         }
-
         _isDoShake = false;
         transform.localPosition = pos;
         this.gameObject.GetComponent<CinemachineBrain>().enabled = true;

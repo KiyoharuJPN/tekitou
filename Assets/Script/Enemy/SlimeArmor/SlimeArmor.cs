@@ -104,6 +104,7 @@ public class SlimeArmor : Enemy
             MovingAnim = 1;
         }
         IsMoving = MovingAnim == 3 ? true : enemyRb.velocity != Vector2.zero;
+
         //‰æ–Ê“à‚É‚ ‚é
         if (OnCamera)
         {
