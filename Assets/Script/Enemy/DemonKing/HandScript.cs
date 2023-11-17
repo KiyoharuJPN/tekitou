@@ -7,13 +7,13 @@ using UnityEngine;
 public class HandScript : Enemy
 {
     DemonKing demonKing;
-    SpriteRenderer spritehand;
+    Renderer spritehand;
 
     protected override void Start()
     {
         demonKing = GetComponentInParent<DemonKing>();
         //“G‚Ì“_–Å
-        spritehand = GetComponent<SpriteRenderer>();
+        spritehand = GetComponent<Renderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -361,17 +361,17 @@ public class HandScript : Enemy
 
     protected IEnumerator HadDamagedHand()
     {
-        spritehand.color = new Color(1, .3f, .3f);
-        yield return new WaitForSeconds(10.1f);
-        spritehand.color = new Color(1, 1, 1);
-        yield return new WaitForSeconds(.05f);
-        spritehand.color = new Color(1, .3f, .3f);
+        spritehand.material.color = new Color(1, .3f, .3f);
         yield return new WaitForSeconds(.1f);
-        spritehand.color = new Color(1, 1, 1);
+        spritehand.material.color = new Color(1, 1, 1);
         yield return new WaitForSeconds(.05f);
-        spritehand.color = new Color(1, .3f, .3f);
+        spritehand.material.color = new Color(1, .3f, .3f);
         yield return new WaitForSeconds(.1f);
-        spritehand.color = new Color(1, 1, 1);
+        spritehand.material.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        spritehand.material.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        spritehand.material.color = new Color(1, 1, 1);
         hadDamaged = false;
     }
 
