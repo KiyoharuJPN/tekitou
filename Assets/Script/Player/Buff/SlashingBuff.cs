@@ -37,6 +37,8 @@ public class SlashingBuff : MonoBehaviour
 
         //残り時間のバー表示・設定
         timeBar = GameObject.Find("PlayerBuffTime").GetComponent<BuffTimer>();
+        timeBar.GetComponent<UIPosController>().enabled = true;
+        timeBar.GetComponent<Canvas>().enabled = true;
 
         waveSpeed = slashing.slashingSpeed;
 
@@ -115,7 +117,7 @@ public class SlashingBuff : MonoBehaviour
         time += addTime;
 
         //バー再セット
-        timeBar.BarSet(1 - (time / buffTime));
+        timeBar.BarSet(1);
     }
 
     IEnumerator SlashingMode()
@@ -127,7 +129,7 @@ public class SlashingBuff : MonoBehaviour
             if (this.gameObject.GetComponent<PlayerController>().canMove)
             {
                 time -= Time.deltaTime;
-                timeBar.BarSet(Time.deltaTime / buffTime);
+                timeBar.BarSet(time / buffTime);
             }
             yield return null;
         };
@@ -138,7 +140,7 @@ public class SlashingBuff : MonoBehaviour
         }
         if(!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
         {
-            spriteGlow.EnableInstancing = false;
+            spriteGlow.EnableInstancing = true;
         }
 
         timeBar.GetComponent<UIPosController>().enabled = false;

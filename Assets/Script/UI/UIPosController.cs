@@ -18,6 +18,5 @@ public class UIPosController : MonoBehaviour
     void Update()
     {
         myRectTfm.position = targetTfm.position + offset;
-        PlayerBuff.Instance.GetBuffCount(PBF.PlayerBuffBase.BuffType.Invincible);
     }
 }

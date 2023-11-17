@@ -203,7 +203,11 @@ public class SESoundData
         //動く壁起動音
         moveWall,
         //ExGageMax
-        exGageMax
+        exGageMax,
+
+        //TODO セイカフェス限定コード
+        Seika_Jump,
+        Seika_AirJump
 
     }
 

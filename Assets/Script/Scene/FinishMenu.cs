@@ -100,6 +100,15 @@ public class FinishMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Stage3");
         }
+        //TODO セイカフェス限定コード
+        else if (SceneData.Instance.referer == "Seika_Tutorial")
+        {
+            SceneManager.LoadScene("Seika_Tutorial");
+        }
+        else if (SceneData.Instance.referer == "Seika_Stage1")
+        {
+            SceneManager.LoadScene("Seika_Stage1");
+        }
         SceneData.Instance.stock = 2;
         SceneData.Instance.wayPoint_1 = false;
         SceneData.Instance.wayPoint_2 = false;

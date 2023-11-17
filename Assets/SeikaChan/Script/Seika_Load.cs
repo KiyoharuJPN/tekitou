@@ -47,7 +47,7 @@ public class Seika_Load : MonoBehaviour
             loadSceneTextBox.sprite = loadSceneText[0];
             loadScene = "Seika_Tutorial";
         }
-        else if (SceneData.Instance.referer == "Tutorial")
+        else if (SceneData.Instance.referer == "Seika_Tutorial")
         {
             obj = (GameObject)Instantiate(loadSceneImage[1], backGroundImage.transform.position, Quaternion.identity);
             obj.transform.parent = backGroundImage.transform;

@@ -11,7 +11,7 @@ public class BuffTimer : MonoBehaviour
 
     public void BarSet(float fillAmount)
     {
-        timeBarImg.fillAmount = 1;
-        timeBarImg.fillAmount -= fillAmount;
+        Debug.Log("バフタイマーセット");
+        timeBarImg.fillAmount = fillAmount;
     }
 }

@@ -236,6 +236,11 @@ public class GameManager : MonoBehaviour
         }
         enemys = null;
         enemyList.Clear();
+
+        foreach (MoveWall moveWall in moveWalls)
+        {
+            moveWall.MoveStop = false;
+        }
     }
 
     public void ClearEnemyList()
@@ -307,6 +312,11 @@ public class GameManager : MonoBehaviour
                     BGMStart_Stage2(); break;
                 case "Stage3":
                     BGMStart_Stage3(); break;
+                //TODO セイカフェス限定コード
+                case "Seika_Tutorial":
+                    BGMStart_Tutorial(); break;
+                case "Seika_Stage1":
+                    BGMStart_Stage1(); break;
             }
         }
     }

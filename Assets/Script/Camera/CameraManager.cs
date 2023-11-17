@@ -65,6 +65,12 @@ public class CameraManager : MonoBehaviour
             CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage3Boss.GetComponent<PolygonCollider2D>();
             CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 9.5f;
         }
+        //TODO セイカフェス限定コード
+        else if (SceneData.Instance.referer == "Seika_Stage1")
+        {
+            CMvcam.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = cameraArea_Stage1Boss.GetComponent<PolygonCollider2D>();
+            CMvcam.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 5.3f;
+        }
     }
 
     public void NomalCameraAreaSet()
