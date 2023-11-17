@@ -13,11 +13,14 @@ public class PlayerSE : MonoBehaviour
     public void _JumpSE()
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.Jump);
-        //Debug.Log(SoundManager.Instance);
+        ////セイカフェス限定コード
+        //SoundManager.Instance.PlaySE(SESoundData.SE.Seika_Jump);
     }
     public void _SecondJumpSE()
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.AirJump);
+        ////セイカフェス限定コード
+        //SoundManager.Instance.PlaySE(SESoundData.SE.Seika_AirJump);
     }
 
     public void _NomalAttack()

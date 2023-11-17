@@ -61078,6 +61078,7 @@ MonoBehaviour:
   - {fileID: 6406299289037832908, guid: 23edfd5d501f4204cbff084f4dfeba61, type: 3}
   - {fileID: 781300278}
   - {fileID: 357242130}
+  stageName: Stage1
 --- !u!1001 &296645185
 PrefabInstance:
   m_ObjectHideFlags: 0

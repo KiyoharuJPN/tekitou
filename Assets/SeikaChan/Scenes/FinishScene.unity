@@ -543,7 +543,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: b0612040-26f8-4d53-b771-24f1b353b752
+  m_DefaultActionMap: MenuKey
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &698171976
@@ -1137,7 +1137,7 @@ Animator:
   m_GameObject: {fileID: 1883329960}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0989e124bbcf5d439ee4d6a0daf2405, type: 2}
+  m_Controller: {fileID: 9100000, guid: bdc9c86c3c1281a4eacaff525f151cda, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -457586740, guid: c8f71f13207c68d4186e086f21f78181, type: 3}
+  m_Sprite: {fileID: 1458658228, guid: 7eab174678feb8a43b634ef90cb49498, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

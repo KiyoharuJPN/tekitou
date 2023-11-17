@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage1 : StageCtrl
 {
-    const string stageName = "Stage1";
+    public string stageName = "Stage1";
 
     private void Awake()
     {
