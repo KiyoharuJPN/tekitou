@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
             //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack");
         }
-        if (nomalAttack.IsPressed() && canNomalAttack || Input.GetKey(KeyCode.U))
+        if (nomalAttack.IsPressed() && canNomalAttack)
         //if (nomalAttack.IsPressed() && canNomalAttack)
         {
             //’ÊíUŒ‚’·‰Ÿ‚µ’†

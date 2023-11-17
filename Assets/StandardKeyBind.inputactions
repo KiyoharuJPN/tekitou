@@ -162,6 +162,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7a022095-d3aa-495c-bc86-02dd3af888bc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a47b5731-59c4-47f3-997e-4cf3411acbf0",
                     "path": "<XInputController>/buttonWest",
                     "interactions": "",
@@ -175,6 +186,17 @@
                     "name": "",
                     "id": "008f45ae-7c86-4396-80d2-6fcb00c14d04",
                     "path": "<DualShockGamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NomalAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "adf7b2a5-ec15-42bb-a737-adb1bfe3b720",
+                    "path": "<Keyboard>/u",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
