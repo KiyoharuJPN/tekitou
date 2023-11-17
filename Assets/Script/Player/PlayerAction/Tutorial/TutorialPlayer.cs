@@ -153,7 +153,6 @@ public class TutorialPlayer : PlayerController
             if (!isAttack && canExAttack && canTExAttack && !isExAttack) 
             {
                 AttackAction("ExAttack");
-                tExAttackActivCheck = true;
             }
         }
         //手動攻撃：攻撃ボタンが押されせたとき
@@ -190,6 +189,15 @@ public class TutorialPlayer : PlayerController
         }
     }
 
+    public new void ExAttackHitCheck()
+    {
+        if (exAttackEnemylist.Count == 0)
+        {
+            tExAttackActivCheck = true;
+            ExAttackEnd();
+        }
+    }
+
     //チュートリアルExAttack終了時
     public new void ExAttackEnd()
     {
@@ -199,7 +207,7 @@ public class TutorialPlayer : PlayerController
         NomalPlayer();
         animator.SetBool("IsExAttack", isExAttack);
         GameManager.Instance.PlayerExAttack_End();
-        
+        tExAttackActivCheck = true;
     }
 
     //背景スクロール処理

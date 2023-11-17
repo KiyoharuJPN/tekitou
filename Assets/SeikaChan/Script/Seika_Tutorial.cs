@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Seika_Tutorial : StageCtrl
+public class Seika_Tutorial : TutorialScene
 {
     [SerializeField]
     TutorialPlayer player;
@@ -10,7 +10,7 @@ public class Seika_Tutorial : StageCtrl
     [SerializeField]
     CameraManager mainCamera;
 
-    const string stageName = "Tutorial";
+    public string stageName = "Tutorial";
 
     //êiçsìx
     int num = 0;
@@ -161,7 +161,16 @@ public class Seika_Tutorial : StageCtrl
                 }
                 break;
             case 8:
-                if (player.tExAttackActivCheck)
+                if (!panelEnemyDaeth)
+                {
+                    int count = 0;
+                    foreach (Enemy d in tutorialPanels[num].enemylist)
+                    {
+                        if (d.isDestroy) count++;
+                    }
+                    if (tutorialPanels[num].enemylist.Count == count) panelEnemyDaeth = true;
+                }
+                if (player.tExAttackActivCheck && panelEnemyDaeth)
                 {
                     return TutorialClear();
                 }

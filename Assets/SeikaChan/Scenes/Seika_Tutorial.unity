@@ -4356,17 +4356,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6054787801465259575, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
   m_PrefabInstance: {fileID: 463474264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &463474266 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6054787801465259572, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
-  m_PrefabInstance: {fileID: 463474264}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318e9dd6578b14946ab6553ae9a80a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &468991714
 GameObject:
   m_ObjectHideFlags: 0
@@ -7200,17 +7189,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9103163236646839451, guid: c3d2bec196770cc448323a78be7353a5, type: 3}
   m_PrefabInstance: {fileID: 714620936}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &714620938 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9103163236646839446, guid: c3d2bec196770cc448323a78be7353a5, type: 3}
-  m_PrefabInstance: {fileID: 714620936}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318e9dd6578b14946ab6553ae9a80a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &758024714
 GameObject:
   m_ObjectHideFlags: 0
@@ -7965,7 +7943,6 @@ GameObject:
   m_Component:
   - component: {fileID: 830438529}
   - component: {fileID: 830438528}
-  - component: {fileID: 830438530}
   m_Layer: 0
   m_Name: TutorialStageManager
   m_TagString: Untagged
@@ -7990,109 +7967,7 @@ MonoBehaviour:
   - {fileID: 1986189828}
   player: {fileID: 1519914032}
   mainCamera: {fileID: 0}
-  tutorialPanels:
-  - tutorialPanel: {fileID: 1488299187}
-    stopTiles: {fileID: 0}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 849228608}
-    stopTiles: {fileID: 0}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 1208552113}
-    stopTiles: {fileID: 0}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 1279107625}
-    stopTiles: {fileID: 0}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist:
-    - {fileID: 1448423937}
-    - {fileID: 266987729}
-  - tutorialPanel: {fileID: 194167350}
-    stopTiles: {fileID: 1115738425}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist:
-    - {fileID: 405386497}
-    - {fileID: 239392482}
-  - tutorialPanel: {fileID: 303818750}
-    stopTiles: {fileID: 1165207114}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 62941440}
-    stopTiles: {fileID: 2129798420}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 1961148940}
-    stopTiles: {fileID: 1668095205}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 531769751}
-    stopTiles: {fileID: 0}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 1558551968}
-    stopTiles: {fileID: 0}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
-  - tutorialPanel: {fileID: 1805718050}
-    stopTiles: {fileID: 158336798}
-    warpDoor: {fileID: 0}
-    cameraArea: {fileID: 0}
-    tutorialArea: {fileID: 0}
-    enemylist: []
---- !u!4 &830438529
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830438527}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &830438530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830438527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 072487f488e7b1e46bb100b03c4f432b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerObj: {fileID: 1519914027}
-  continuePoint:
-  - {fileID: 1986189828}
-  player: {fileID: 1519914032}
-  mainCamera: {fileID: 0}
+  stageName: Seika_Tutorial
   tutorialPanels:
   - tutorialPanel: {fileID: 1488299187}
     stopTiles: {fileID: 0}
@@ -8162,18 +8037,28 @@ MonoBehaviour:
     warpDoor: {fileID: 0}
     cameraArea: {fileID: 0}
     tutorialArea: {fileID: 0}
-    enemylist:
-    - {fileID: 463474266}
+    enemylist: []
   - tutorialPanel: {fileID: 1805718050}
     stopTiles: {fileID: 158336798}
     warpDoor: {fileID: 0}
     cameraArea: {fileID: 0}
     tutorialArea: {fileID: 0}
-    enemylist:
-    - {fileID: 1934657596}
-    - {fileID: 1183177543}
-    - {fileID: 1503263519}
-    - {fileID: 714620938}
+    enemylist: []
+--- !u!4 &830438529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830438527}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849228608
 GameObject:
   m_ObjectHideFlags: 0
@@ -45686,17 +45571,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6054787801465259575, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
   m_PrefabInstance: {fileID: 1183177541}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1183177543 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6054787801465259572, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
-  m_PrefabInstance: {fileID: 1183177541}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318e9dd6578b14946ab6553ae9a80a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1190914304
 GameObject:
   m_ObjectHideFlags: 0
@@ -48263,17 +48137,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9103163236646839451, guid: c3d2bec196770cc448323a78be7353a5, type: 3}
   m_PrefabInstance: {fileID: 1503263517}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1503263519 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9103163236646839446, guid: c3d2bec196770cc448323a78be7353a5, type: 3}
-  m_PrefabInstance: {fileID: 1503263517}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318e9dd6578b14946ab6553ae9a80a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1508199775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48463,7 +48326,7 @@ MonoBehaviour:
   exAttacArea: {fileID: 53945927}
   shake: {fileID: 566279968}
   InvincibleTime: 20
-  tutorial: {fileID: 830438528}
+  tutorial: {fileID: 0}
 --- !u!61 &1519914033
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114562,17 +114425,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6054787801465259575, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
   m_PrefabInstance: {fileID: 1934657594}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1934657596 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6054787801465259572, guid: 1de23894bc65c6c47baa2e27250470c2, type: 3}
-  m_PrefabInstance: {fileID: 1934657594}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318e9dd6578b14946ab6553ae9a80a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1936122413
 PrefabInstance:
   m_ObjectHideFlags: 0

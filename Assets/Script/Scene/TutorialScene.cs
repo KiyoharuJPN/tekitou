@@ -11,7 +11,7 @@ public class TutorialScene : StageCtrl
     [SerializeField]
     CameraManager mainCamera;
 
-    const string stageName = "Tutorial";
+    public string stageName = "Tutorial";
 
     //êiçsìx
     int num = 0;
