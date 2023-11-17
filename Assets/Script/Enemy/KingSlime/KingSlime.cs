@@ -446,6 +446,7 @@ public class KingSlime : Enemy
     //d—ÍŠÖ˜A
     protected override void FixedUpdate()
     {
+        if (isPlayerExAttack) return;
         if(!NoGravity)Gravity();
     }
     protected override void Gravity()
