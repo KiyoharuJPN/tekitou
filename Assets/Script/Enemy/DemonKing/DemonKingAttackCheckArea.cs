@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class DemonKingAttackCheckArea : MonoBehaviour
 {
+
+    public bool isLeftHand;
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.transform.CompareTag("Player"))
         {
-            transform.GetComponentInParent<DemonKing>().PlayerInAttackArea(collision);
+            transform.GetComponentInParent<DemonKing>().PlayerInAttackArea(collision, isLeftHand);
         }
     }
 
@@ -18,7 +20,7 @@ public class DemonKingAttackCheckArea : MonoBehaviour
 
         if (collision.transform.CompareTag("Player"))
         {
-            transform.GetComponentInParent<DemonKing>().PlayerInAttackArea(collision);
+            transform.GetComponentInParent<DemonKing>().PlayerInAttackArea(collision, isLeftHand);
         }
     }
 }

@@ -214,14 +214,22 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject gameObj in hitEnemyList)
         {
-            ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
-            gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
-            enemyList.Remove(gameObj);
+            if(gameObj.GetComponent<Enemy>())
+            {
+                ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
+                gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
+                enemyList.Remove(gameObj);
+            }
         }
     }
 
     public void PlayerExAttack_End()
     {
+        foreach (MoveWall moveWall in moveWalls)
+        {
+            moveWall.MoveStop = false;
+        }
+
         foreach (GameObject gameObj in enemyList)
         {
 

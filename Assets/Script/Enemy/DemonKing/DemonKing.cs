@@ -105,8 +105,8 @@ public class DemonKing : Enemy
     //アニメチェック、パターンチェック
     bool NotInAnim = true, PatternOver = true, patternover = false, isSummonAttack = false, isCrushAttack = false, isPincerAttack = false;
 
-
-
+    //必殺技用コルーチン
+    Coroutine MovementCoroutine;
 
 
     private void OnEnable()
@@ -185,7 +185,7 @@ public class DemonKing : Enemy
         if (isDestroy) return;
 
         //敵のパターンをランダムで選択
-        if (PatternOver)
+        if (PatternOver || NotInAnim)
         {
             //ランダムで敵のパターンを選ぶ
             while (EnemyPattern == EnemyPatternPreb)
@@ -211,6 +211,7 @@ public class DemonKing : Enemy
         //敵のパターンを沿って動きを実行
         if (!PatternOver)
         {
+            if (isPlayerExAttack) return;
             switch (EnemyPattern)
             {
                 case 0:
@@ -219,14 +220,14 @@ public class DemonKing : Enemy
                     {
                         NotInAnim = false;
                         //アニメを流れる
-                        StartCoroutine(Pattern1[EnemyAnim].ToString());
+                        MovementCoroutine = StartCoroutine(Pattern1[EnemyAnim].ToString());
                         //次のアニメ
                         EnemyAnim++;
                     }
                     if (EnemyAnim == Pattern1.Count - 1 && NotInAnim)
                     {
                         NotInAnim = false;
-                        StartCoroutine(Pattern1[EnemyAnim].ToString());
+                        MovementCoroutine = StartCoroutine(Pattern1[EnemyAnim].ToString());
                         //パターンをリセット（コルーチンの最後で実行）
                         patternover = true;
                     }
@@ -235,13 +236,13 @@ public class DemonKing : Enemy
                     if (EnemyAnim < Pattern2.Count - 1 && NotInAnim)
                     {
                         NotInAnim = false;
-                        StartCoroutine(Pattern2[EnemyAnim].ToString());
+                        MovementCoroutine = StartCoroutine(Pattern2[EnemyAnim].ToString());
                         EnemyAnim++;
                     }
                     if (EnemyAnim == Pattern2.Count - 1 && NotInAnim)
                     {
                         NotInAnim = false;
-                        StartCoroutine(Pattern2[EnemyAnim].ToString());
+                        MovementCoroutine = StartCoroutine(Pattern2[EnemyAnim].ToString());
                         patternover = true;
                     }
                     break;
@@ -249,13 +250,13 @@ public class DemonKing : Enemy
                     if (EnemyAnim < Pattern3.Count - 1 && NotInAnim)
                     {
                         NotInAnim = false;
-                        StartCoroutine(Pattern3[EnemyAnim].ToString());
+                        MovementCoroutine = StartCoroutine(Pattern3[EnemyAnim].ToString());
                         EnemyAnim++;
                     }
                     if (EnemyAnim == Pattern3.Count - 1 && NotInAnim)
                     {
                         NotInAnim = false;
-                        StartCoroutine(Pattern3[EnemyAnim].ToString());
+                        MovementCoroutine = StartCoroutine(Pattern3[EnemyAnim].ToString());
                         patternover = true;
                     }
                     break;
@@ -292,8 +293,8 @@ public class DemonKing : Enemy
             RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + RHSpeed);
 
             if (LeftHand.transform.position.y >= LHOriginalPos.y - idleStatus.handSpeed/2&& LeftHand.transform.position.y <= LHOriginalPos.y + idleStatus.handSpeed / 2) Frequency++;
-            Debug.Log(LeftHand.transform.position.y);
-            Debug.Log(LHOriginalPos.y);
+            //Debug.Log(LeftHand.transform.position.y);
+            //Debug.Log(LHOriginalPos.y);
             if (LHSpeed > 0 && LeftHand.transform.position.y > idleStatus.upLimit) LHSpeed *= -1;
             if (LHSpeed < 0 && LeftHand.transform.position.y < idleStatus.downLimit) LHSpeed *= -1;
             if (RHSpeed > 0 && RightHand.transform.position.y > idleStatus.upLimit) RHSpeed *= -1;
@@ -598,6 +599,58 @@ public class DemonKing : Enemy
         }
     }
 
+    IEnumerator ExBackIdleAnim()
+    {
+        AnimationController = 0;        //animator調整（必須）
+        LHanimator.SetInteger("AnimationController", AnimationController);
+        RHanimator.SetInteger("AnimationController", AnimationController);
+
+
+        yield return new WaitForSeconds(1f);
+
+        //手の位置と戻るための速度を計算する
+        var backMoveSpeedLH = Vector2.Distance(LHOriginalPos, LeftHand.transform.position);
+        var backMoveSpeedRH = Vector2.Distance(RHOriginalPos, RightHand.transform.position);
+        backMoveSpeedLH /= 25;
+        backMoveSpeedRH /= 25;
+
+        //手をデフォルト位置に戻す
+        var i = 0;
+        while (i < 25)
+        {
+            LeftHand.transform.position = Vector2.MoveTowards(LeftHand.transform.position, LHOriginalPos, backMoveSpeedLH);
+            RightHand.transform.position = Vector2.MoveTowards(RightHand.transform.position, RHOriginalPos, backMoveSpeedRH);
+            i++;
+            if (i == 5)
+            {
+                AnimationController = 0;        //animator調整（必須）
+                LHanimator.SetInteger("AnimationController", AnimationController);
+                RHanimator.SetInteger("AnimationController", AnimationController);
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+
+
+        LeftHand.transform.position = LHOriginalPos;
+        RightHand.transform.position = RHOriginalPos;
+
+        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer, false);
+        yield return new WaitForSeconds(1f);
+
+        //アニメの終わり（必須）
+        //パターンアニメーション関連
+        AnimationController = -1;        //animator調整（必須）
+        LHanimator.SetInteger("AnimationController", AnimationController);
+        RHanimator.SetInteger("AnimationController", AnimationController);
+        //パターンループ関連
+        NotInAnim = true;                   //次の動きに移せるようにする
+        if (patternover)                    //パターンが終わる時に呼ばれる関数
+        {
+            PatternOver = patternover;
+            patternover = false;
+            //Debug.Log("Pattern Over");
+        }
+    }
 
     //内部関数
     protected override void FixedUpdate()
@@ -614,11 +667,11 @@ public class DemonKing : Enemy
 
 
     //攻撃関数
-    public void PlayerInAttackArea(Collider2D collider)
+    public void PlayerInAttackArea(Collider2D collider,bool isLH)
     {
         if (!HadAttack)
         {
-            if (isCrushAttack)
+            if (isCrushAttack && !isLH)
             {
                 //攻撃クールダウンタイム
                 HadAttack = true;
@@ -629,7 +682,7 @@ public class DemonKing : Enemy
                 collider.gameObject.GetComponent<PlayerController>()._Damage(2);
             }
 
-            if(isSummonAttack)
+            if(isSummonAttack && isLH)
             {
                 //攻撃クールダウンタイム
                 HadAttack = true;
@@ -706,12 +759,6 @@ public class DemonKing : Enemy
             yield return new WaitForSeconds(stopTime + 0.01f);
         }
 
-        //ヒット時演出（敵点滅）
-        if (!hadDamaged)
-        {
-            StartCoroutine(HadDamaged());
-            hadDamaged = true;
-        }
 
         hp -= power;
 
@@ -727,6 +774,55 @@ public class DemonKing : Enemy
             OnDestroyMode();
         }
     }
+
+    //必殺技関連
+    //敵停止処理
+    public override void EnemyStop()
+    {
+        if (isPlayerExAttack) return;
+        if (enemyRb != null)
+        {
+            isPlayerExAttack = true;
+            if (MovementCoroutine != null)
+            {
+                StopAllCoroutines();
+
+                //停止用調整
+                NotInAnim = false;
+                if (isCrushAttack) isCrushAttack = false;
+                if (isPincerAttack) isPincerAttack = false;
+                if (isSummonAttack) isSummonAttack = false;
+            }
+            enemyRb.velocity = enemyLHRb.velocity = enemyRHRb.velocity = Vector2.zero;
+        }
+        if (animator != null)
+        {
+            animator.speed = 0;
+        }
+    }
+    //必殺技が当たっていた場合のダメージ処理呼出し
+    public override void PlaeyrExAttack_HitEnemyEnd(float power)
+    {
+        if (!isPlayerExAttack) return;
+        isPlayerExAttack = false;
+        if (animator != null)
+        {
+            animator.speed = 1;
+        }
+        MovementCoroutine = StartCoroutine(ExBackIdleAnim());
+    }
+    //停止処理解除
+    public override void Stop_End()
+    {
+        if (!isPlayerExAttack) return;
+        isPlayerExAttack = false;
+        if (animator != null)
+        {
+            animator.speed = 1;
+        }
+        MovementCoroutine = StartCoroutine(ExBackIdleAnim());
+    }
+
 
     public void OnHandTriggerEnter2D(Collider2D collision)
     {
@@ -757,7 +853,7 @@ public class DemonKing : Enemy
     }
     public void OnHandTriggerExit2D(Collider2D collision)
     {
-
+        
     }
 
 
@@ -831,7 +927,7 @@ public class DemonKing : Enemy
     }
     protected void StopAllAnimator()
     {
-        RHanimator.speed = LHanimator.speed = animator.speed =0;
+        RHanimator.speed = LHanimator.speed = animator.speed = 0;
     }
     protected void StartAllAnimator()
     {

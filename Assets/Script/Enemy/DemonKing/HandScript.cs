@@ -7,10 +7,13 @@ using UnityEngine;
 public class HandScript : Enemy
 {
     DemonKing demonKing;
+    Renderer spritehand;
 
     protected override void Start()
     {
         demonKing = GetComponentInParent<DemonKing>();
+        //“G‚Ì“_–Å
+        spritehand = GetComponent<Renderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -135,6 +138,14 @@ public class HandScript : Enemy
         }
         else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
 
+
+        //ƒqƒbƒg‰‰oi“G“_–Åj
+        if (!hadDamaged)
+        {
+            StartCoroutine(HadDamagedHand());
+            hadDamaged = true;
+        }
+
         yield return null;
     }
 
@@ -144,7 +155,7 @@ public class HandScript : Enemy
     //}
 
     //€–Sˆ—
-    protected virtual void OnDestroyMode()
+    protected override void OnDestroyMode()
     {
 
     }
@@ -271,22 +282,22 @@ public class HandScript : Enemy
     //    OnCamera = false;
     //}
 
-    //ˆÚ“®•ûŒü‚Ì‰ñ“]
-    public override void TurnAround()
-    {
-        bool InCheck = true;
-        if (transform.localScale.x == 1f && InCheck)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-            InCheck = false;
-        }
-        if (transform.localScale.x == -1f && InCheck)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-            //InCheck = false;
-        }
-        moveSpeed *= -1;
-    }
+    ////ˆÚ“®•ûŒü‚Ì‰ñ“]
+    //public override void TurnAround()
+    //{
+    //    bool InCheck = true;
+    //    if (transform.localScale.x == 1f && InCheck)
+    //    {
+    //        transform.localScale = new Vector3(-1f, 1f, 1f);
+    //        InCheck = false;
+    //    }
+    //    if (transform.localScale.x == -1f && InCheck)
+    //    {
+    //        transform.localScale = new Vector3(1f, 1f, 1f);
+    //        //InCheck = false;
+    //    }
+    //    moveSpeed *= -1;
+    //}
 
     ////ŠO‚©‚ç¡‚ÌˆÚ“®ó‘Ô‚ğŠm”F
     //public bool GetIsMoving()
@@ -348,21 +359,21 @@ public class HandScript : Enemy
     //    HadAttack = false;
     //}
 
-    //protected IEnumerator HadDamaged()
-    //{
-    //    sprite.color = new Color(1, .3f, .3f);
-    //    yield return new WaitForSeconds(.1f);
-    //    sprite.color = new Color(1, 1, 1);
-    //    yield return new WaitForSeconds(.05f);
-    //    sprite.color = new Color(1, .3f, .3f);
-    //    yield return new WaitForSeconds(.1f);
-    //    sprite.color = new Color(1, 1, 1);
-    //    yield return new WaitForSeconds(.05f);
-    //    sprite.color = new Color(1, .3f, .3f);
-    //    yield return new WaitForSeconds(.1f);
-    //    sprite.color = new Color(1, 1, 1);
-    //    hadDamaged = false;
-    //}
+    protected IEnumerator HadDamagedHand()
+    {
+        spritehand.material.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        spritehand.material.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        spritehand.material.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        spritehand.material.color = new Color(1, 1, 1);
+        yield return new WaitForSeconds(.05f);
+        spritehand.material.color = new Color(1, .3f, .3f);
+        yield return new WaitForSeconds(.1f);
+        spritehand.material.color = new Color(1, 1, 1);
+        hadDamaged = false;
+    }
 
     //protected void DefaultColor()
     //{
@@ -372,12 +383,13 @@ public class HandScript : Enemy
     //d—Í
     protected override void Gravity()
     {
-        enemyRb.AddForce(new Vector2(0, -5));
+        
     }
 
     //“G’â~ˆ—
     public override void EnemyStop()
     {
+        demonKing.EnemyStop();
         if (enemyRb != null)
         {
             isPlayerExAttack = true;
@@ -390,20 +402,21 @@ public class HandScript : Enemy
     }
 
     //•KE‹Z‚ª“–‚½‚Á‚Ä‚¢‚½ê‡‚Ìƒ_ƒ[ƒWˆ—ŒÄo‚µ
-    public override void PlaeyrExAttack_HitEnemyEnd(float powar)
+    public override void PlaeyrExAttack_HitEnemyEnd(float power)
     {
+        demonKing.PlaeyrExAttack_HitEnemyEnd(power);
         if (animator != null)
         {
             animator.speed = 1;
         }
         isPlayerExAttack = false;
-        Damage(powar, null, true, true);
+        Damage(power, null, true, true);
     }
 
     //’â~ˆ—‰ğœ
     public override void Stop_End()
     {
-        isPlayerExAttack = false;
+        demonKing.Stop_End();
         if (animator != null)
         {
             animator.speed = 1;
