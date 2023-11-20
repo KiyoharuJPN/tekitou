@@ -79,16 +79,17 @@ public class TitleMenu : MonoBehaviour
             return;
         }
 
-        if (!InputKeyCheck.GetAnyKey())
-        {
-            demoTimer += Time.deltaTime;
-            if (demoTimer >= demoVideoMoveTime)
-                isDemoVideo = true;
-        }
-        else if(InputKeyCheck.GetAnyKey())
-        {
-            demoTimer = 0;
-        }
+        //seika
+        //if (!InputKeyCheck.GetAnyKey())
+        //{
+        //    demoTimer += Time.deltaTime;
+        //    if (demoTimer >= demoVideoMoveTime)
+        //        isDemoVideo = true;
+        //}
+        //else if(InputKeyCheck.GetAnyKey())
+        //{
+        //    demoTimer = 0;
+        //}
 
         
         BackGroundMove();
@@ -111,6 +112,11 @@ public class TitleMenu : MonoBehaviour
 
             //ポインターの修正
             pointerpreb = pointer;
+        }
+
+        if (!fade.IsFadeInComplete())
+        {
+            return;
         }
 
         //選択キーの設定
