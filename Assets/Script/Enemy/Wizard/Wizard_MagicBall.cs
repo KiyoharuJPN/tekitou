@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wizard_MagicBall : Projectile
 {
@@ -21,6 +21,8 @@ public class Wizard_MagicBall : Projectile
     Vector2 primarySpeed;
     bool clearWMB = true;
 
+    Coroutine wmbClear;
+
     private void Awake()
     {
         WMBRb = GetComponent<Rigidbody2D>();
@@ -29,7 +31,7 @@ public class Wizard_MagicBall : Projectile
     }
     private void OnEnable()
     {
-        StartCoroutine(WMBClear(WMBClearTime));
+        wmbClear = StartCoroutine(WMBClear(WMBClearTime));
         clearWMB = true;
     }
 
@@ -131,5 +133,12 @@ public class Wizard_MagicBall : Projectile
         }
         WMBRb.velocity = primarySpeed;
         isPlayerExAttack = false;
+    }
+
+    public void RestoreToPool()
+    {
+        StopAllCoroutines();
+        clearWMB = false;
+        ObjectPool.Instance.PushObject(gameObject);
     }
 }

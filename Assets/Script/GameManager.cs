@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject gameObj in hitEnemyList)
         {
-            if(gameObj.GetComponent<Enemy>())
+            if(gameObj != null)
             {
                 ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
                 gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject gameObj in enemyList)
         {
 
-            if (gameObj.GetComponent<Enemy>())
+            if (gameObj != null && gameObj.GetComponent<Enemy>())
             {
                 gameObj.GetComponent<Enemy>().Stop_End();
             }
@@ -348,7 +348,7 @@ public class GameManager : MonoBehaviour
         BGMStart_Result();
     }
 
-    private IEnumerator _PlyerDeath() 
+    private IEnumerator _PlyerDeath()
     {
         player.canMove = false;
         Time.timeScale = 0.3f;
@@ -360,6 +360,11 @@ public class GameManager : MonoBehaviour
         while (!fade.IsFadeOutComplete())
         {
             yield return null;
+        }
+
+        if (GameObject.Find("ObjectPool") != null)
+        {
+            GameObject.Find("ObjectPool").GetComponent<ObjectPoolScript>().SceneReset();
         }
 
         System.GC.Collect();

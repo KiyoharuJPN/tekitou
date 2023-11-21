@@ -408,7 +408,6 @@ public class Enemy : MonoBehaviour
     {
         // 向きと力の計算
         Vector2 force = speed * forceDirection;
-
         // 力を加えるメソッド
         enemyRb.velocity = force;
     }
@@ -416,9 +415,9 @@ public class Enemy : MonoBehaviour
     {
         if(_EnemyBuff != null)
         {
+            forceDirection = enemyRb.velocity.normalized;
             // 向きと力の計算
             Vector2 force = (speed + BuffBlowingSpeed()) * forceDirection;
-            
             // 力を加えるメソッド
             enemyRb.velocity = force;
         }
@@ -625,7 +624,7 @@ public class Enemy : MonoBehaviour
     //重力
     protected virtual void Gravity()
     {
-        enemyRb.AddForce(new Vector2(0, -5));
+        if(!isDestroy) enemyRb.AddForce(new Vector2(0, -5));
     }
 
     //敵停止処理
