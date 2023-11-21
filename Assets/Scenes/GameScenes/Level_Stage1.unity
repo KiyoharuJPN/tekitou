@@ -61608,6 +61608,9 @@ MonoBehaviour:
   - {fileID: 6406299289037832908, guid: 23edfd5d501f4204cbff084f4dfeba61, type: 3}
   - {fileID: 781300278}
   - {fileID: 357242130}
+  playTimeMeasurement: 0
+  folderName: Screenshots
+  stageName: Stage1
 --- !u!4 &293030112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1370193731701165688, guid: d8d7172f180dbbd4dae13f7914fc52fe, type: 3}
@@ -121255,6 +121258,14 @@ PrefabInstance:
     - target: {fileID: 7133389109148824428, guid: 68872c1cdfdb4f047aa6117efe0b3440, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133389109148824428, guid: 68872c1cdfdb4f047aa6117efe0b3440, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.3299998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133389109148824429, guid: 68872c1cdfdb4f047aa6117efe0b3440, type: 3}
+      propertyPath: orthographic size
+      value: 6.6
       objectReference: {fileID: 0}
     - target: {fileID: 7133389109952333840, guid: 68872c1cdfdb4f047aa6117efe0b3440, type: 3}
       propertyPath: m_Follow

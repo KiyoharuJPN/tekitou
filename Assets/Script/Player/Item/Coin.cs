@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Coin : Item
 {
+    bool OnCamera = false;
+    //画面に入ったどうかをチェック
+    protected void OnBecameVisible()
+    {
+        this.GetComponent<Animator>().enabled = true;
+    }
+    protected void OnBecameInvisible()
+    {
+        this.GetComponent<Animator>().enabled = false;
+    }
+
     override protected void OnTriggerEnter2D(Collider2D collision)
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.GetCoin);

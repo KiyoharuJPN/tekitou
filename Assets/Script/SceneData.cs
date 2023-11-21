@@ -26,4 +26,6 @@ public class SceneData
 
     //ƒvƒŒƒCŠÔ
     public float playTime;
+
+
 }

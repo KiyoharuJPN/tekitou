@@ -40,6 +40,7 @@ public class Result : MonoBehaviour
         public TextMeshProUGUI ScoreBar;
         public TextMeshProUGUI Combo_Bar;
         public TextMeshProUGUI Kill_Bar;
+        public TextMeshProUGUI crearTime_Bar;
     }
     [Header("スコア等TextMeshProリスト")]
     [SerializeField]
@@ -99,6 +100,12 @@ public class Result : MonoBehaviour
         {
             numList.Kill_Bar.text += "<sprite=" + i + ">";
         }
+
+        //クリアタイム初期化
+        if (numList.crearTime_Bar != null)
+        {
+            numList.crearTime_Bar.text = "";
+        }
     }
 
     public void Result_Set(int clearStageID, int score, int combo, int killScore)
@@ -145,6 +152,11 @@ public class Result : MonoBehaviour
         {
             numList.Kill_Bar.text += "<sprite=" + i + ">";
         }
+        //プレイ時間表示
+        if (numList.crearTime_Bar != null)
+        {
+            numList.crearTime_Bar.text = getTimeString(SceneData.Instance.playTime);
+        }
 
         var clearScore = score + combo + killScore;
 
@@ -188,5 +200,27 @@ public class Result : MonoBehaviour
         }
 
         SceneManager.LoadScene("Ending");
+    }
+
+    //プレイ時間文章化
+    string getTimeString(float time)
+    {
+        int sec = (int)time;
+        int mm = sec / 60;
+        int ss = sec % 60;
+        return timeCher(mm.ToString("D2")) + "<sprite=11>" + timeCher(ss.ToString("D2"));
+
+        string timeCher(string str)
+        {
+            string returnString = "";
+            var c = str.ToCharArray();
+
+            for (int i = 0; i < c.Length; i++)
+            {
+                returnString += "<sprite=" + c[i] + ">";
+            }
+
+            return returnString;
+        }
     }
 }
