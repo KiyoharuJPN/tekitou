@@ -12,6 +12,10 @@ public class StageCtrl : MonoBehaviour
     private float startButtonTime = 5f;
     private float getKayTime = 0;
 
+    //プレイ時間計測
+    public bool playTimeMeasurement = true;
+    private float playTime = 0;
+
     //InputSystem
     internal InputAction option;
 
@@ -38,6 +42,7 @@ public class StageCtrl : MonoBehaviour
 
     virtual protected void Update()
     {
+        //強制終了
         if(!option.IsPressed())
         {
             getKayTime = 0;
@@ -51,5 +56,19 @@ public class StageCtrl : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
+
+
+        //プレイ時間取得
+        if (playTimeMeasurement)
+        {
+            SceneData.Instance.playTime += Time.deltaTime;
+        }
+        
+        Debug.Log(SceneData.Instance.playTime);
+    }
+
+    void playTimeStop()
+    {
+
     }
 }

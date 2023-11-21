@@ -142,6 +142,7 @@ public class WarpDoor : MonoBehaviour
         {
             if(gameObj != null)
             {
+                if (gameObj.GetComponent<Enemy>() == null) return;
                 if (gameObj.GetComponent<Enemy>().isDestroy)
                 {
                     gameObj.GetComponent<Enemy>().EnemyNomalDestroy();
