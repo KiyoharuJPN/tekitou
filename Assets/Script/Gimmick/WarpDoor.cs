@@ -140,7 +140,7 @@ public class WarpDoor : MonoBehaviour
 
         foreach (GameObject gameObj in enemys)
         {
-            if(gameObj != null)
+            if(gameObj.GetComponent<Enemy>() != null)
             {
                 if (gameObj.GetComponent<Enemy>().isDestroy)
                 {

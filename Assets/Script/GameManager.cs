@@ -338,7 +338,7 @@ public class GameManager : MonoBehaviour
         BGMStart_Result();
     }
 
-    private IEnumerator _PlyerDeath() 
+    private IEnumerator _PlyerDeath()
     {
         player.canMove = false;
         Time.timeScale = 0.3f;
@@ -350,6 +350,11 @@ public class GameManager : MonoBehaviour
         while (!fade.IsFadeOutComplete())
         {
             yield return null;
+        }
+
+        if (GameObject.Find("ObjectPool") != null)
+        {
+            GameObject.Find("ObjectPool").GetComponent<ObjectPoolScript>().SceneReset();
         }
 
         System.GC.Collect();
