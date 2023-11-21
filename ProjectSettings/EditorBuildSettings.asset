@@ -59,4 +59,5 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/SeikaChan/Scenes/Seika_Ending.unity
     guid: 331d03dbbcfc6f4408c1943afa01cd0d
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 51ea94f4b8e5b674eb5594a7ac594b66, type: 2}
