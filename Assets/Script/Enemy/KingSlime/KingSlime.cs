@@ -493,7 +493,6 @@ public class KingSlime : Enemy
                 stopTime = stopState.shakTimeMax;
             }
             //ヒットストップ処理開始
-            Debug.Log("ヒットストップ開始");
             tween = transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
                 .SetUpdate(true)
                 .OnComplete(() =>
@@ -502,10 +501,7 @@ public class KingSlime : Enemy
                     Time.timeScale = 1;
                     //初期位置に戻す
                     this.transform.position = initialPos;
-
-                    Debug.Log("ヒットストップ終了");
                 });
-            Debug.Log(power * stopState.shakTime + 0.01f);
             yield return new WaitForSeconds(stopTime + 0.01f);
         }
         //ヒット時演出（敵点滅）

@@ -2307,7 +2307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1170880231193618381, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}
       propertyPath: firstFadeInComp
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}

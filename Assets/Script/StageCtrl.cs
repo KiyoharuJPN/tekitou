@@ -80,9 +80,10 @@ public class StageCtrl : MonoBehaviour
         playTimeMeasurement = true;
     }
 
-    public void playTimeStop()
+    virtual public void playTimeStop()
     {
-
+        playTimeMeasurement = false;
+        //SceneData.Instance.PlayTimeSeve(Gamepara.StageType);
     }
 
     [Header("ï€ë∂êÊÇÃê›íË")]
@@ -95,7 +96,6 @@ public class StageCtrl : MonoBehaviour
 
     public void PrintScreen()
     {
-        Debug.Log("ÉXÉNÉVÉá");
         StartCoroutine("PrintScreenInternal");
     }
 
@@ -116,7 +116,7 @@ public class StageCtrl : MonoBehaviour
         }
 
         string date = DateTime.Now.ToString("yy-MM-dd_HH-mm-ss");
-        string fileName = "Pictures/Screenshots/" + date + ".png";
+        string fileName = path + date + ".png";
         
 
         ScreenCapture.CaptureScreenshot(fileName);

@@ -30,8 +30,8 @@ public class Result : MonoBehaviour
     UnityEngine.UI.Image RankBox;
     [SerializeField]
     Sprite[] RankImageList;
-    const int RANK_S = 7000;
-    const int RANK_A = 3000;
+    public int RANK_S = 7000;
+    public int RANK_A = 3000;
 
     //各スコア
     [System.Serializable]
@@ -54,6 +54,14 @@ public class Result : MonoBehaviour
     ResultAnyKay anyKay;
 
     public bool getCanAnyKey { get { return canAnyKey; } }
+
+    [System.Serializable]
+    public struct TimeBonus
+    {
+        public float time;
+        public int bonus;
+    }
+    public List<TimeBonus> timeBonusList = new();
 
     public static Result Instance { get; private set; }
 
@@ -110,11 +118,6 @@ public class Result : MonoBehaviour
 
     public void Result_Set(int clearStageID, int score, int combo, int killScore)
     {
-        //強制エンディング用
-        if (clearStageID == 3) {
-            StartCoroutine(Ending());
-            return;
-        }
 
         foreach (ClearStageList clearStage in clearStageList)
         {
@@ -158,7 +161,7 @@ public class Result : MonoBehaviour
             numList.crearTime_Bar.text = getTimeString(SceneData.Instance.playTime);
         }
 
-        var clearScore = score + combo + killScore;
+        var clearScore = score + combo * 10 + killScore * 100 + GetTimeBonus();
 
         if (clearScore >= RANK_S)
         {
@@ -208,7 +211,7 @@ public class Result : MonoBehaviour
         int sec = (int)time;
         int mm = sec / 60;
         int ss = sec % 60;
-        return timeCher(mm.ToString("D2")) + "<sprite=11>" + timeCher(ss.ToString("D2"));
+        return timeCher(mm.ToString("D2")) + "<sprite=10>" + timeCher(ss.ToString("D2"));
 
         string timeCher(string str)
         {
@@ -219,8 +222,25 @@ public class Result : MonoBehaviour
             {
                 returnString += "<sprite=" + c[i] + ">";
             }
-
             return returnString;
         }
+    }
+
+    int GetTimeBonus()
+    {
+        var playTime = SceneData.Instance.playTime;
+        if(timeBonusList.Count == 0)
+        {
+            return 0;
+        }
+        for(int i = 0; i < timeBonusList.Count; i++)
+        {
+            if (playTime < timeBonusList[i].time)
+            {
+                return timeBonusList[i].bonus;
+            }
+        }
+
+        return 0;
     }
 }
