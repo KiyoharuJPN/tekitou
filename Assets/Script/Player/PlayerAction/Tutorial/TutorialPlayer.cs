@@ -125,30 +125,30 @@ public class TutorialPlayer : PlayerController
         else { isSkillAttackKay = false; }
 
         //ã¸UŒ‚
-        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && canTUpAttack || Input.GetKey(KeyCode.I) && canTUpAttack)
+        if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && canTUpAttack/* || Input.GetKey(KeyCode.I) && canTUpAttack*/)
         // || rsv >= 0.8)
         {
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
-        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canTDownAttack || Input.GetKey(KeyCode.K) && canTDownAttack)
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canTDownAttack/* || Input.GetKey(KeyCode.K) && canTDownAttack*/)
         // || rsv <= -0.8)
         {
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
-        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay && canTSideAttack || Input.GetKey(KeyCode.L) && canTSideAttack)
+        if (inputMoveAxis.x >= 0.9 && isSkillAttackKay && canTSideAttack/* || Input.GetKey(KeyCode.L) && canTSideAttack*/)
         // || rsh >= 0.8)
         {
             AttackAction("SideAttack_right");
         }
-        else if(inputMoveAxis.x <= -0.9 && isSkillAttackKay && canTSideAttack || Input.GetKey(KeyCode.J) && canTSideAttack)
+        else if(inputMoveAxis.x <= -0.9 && isSkillAttackKay && canTSideAttack/* || Input.GetKey(KeyCode.J) && canTSideAttack*/)
         // || rsh <= -0.8)
         {
             AttackAction("SideAttack_left");
         }
         //•KE‹Z
-        if (exAttack_L.IsPressed() && exAttack_R.IsPressed()|| Input.GetKey(KeyCode.E))
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed()/* || Input.GetKey(KeyCode.E)*/)
         {
             if (!isAttack && canExAttack && canTExAttack && !isExAttack) 
             {
