@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject gameObj in hitEnemyList)
         {
-            if(gameObj.GetComponent<Enemy>())
+            if(gameObj.GetComponent<Enemy>()!=null)
             {
                 ComboParam.Instance.SetCombo(ComboParam.Instance.GetCombo() + 1);
                 gameObj.GetComponent<Enemy>().PlaeyrExAttack_HitEnemyEnd(powar);
