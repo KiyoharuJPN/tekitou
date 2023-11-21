@@ -23,4 +23,9 @@ public class SceneData
         wayPoint_1 = false;
         wayPoint_2 = false;
     }
+
+    //ƒvƒŒƒCŠÔ
+    public float playTime;
+
+
 }
