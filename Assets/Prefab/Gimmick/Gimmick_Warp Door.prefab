@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3120454149288359098}
   - component: {fileID: 3120454149288359097}
   - component: {fileID: 3120454149288359096}
+  - component: {fileID: 3538398756088274141}
   m_Layer: 17
   m_Name: Gimmick_Warp Door
   m_TagString: Untagged
@@ -126,6 +127,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   BottonUi: {fileID: 87303157342926741, guid: bc7f0420d10f2dc4bb67de688497038f, type: 3}
   inPoint: {fileID: 8302031017164538470}
+  bossDoor: 0
 --- !u!61 &3120454149288359096
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -152,6 +154,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 4.86}
   m_EdgeRadius: 0
+--- !u!114 &3538398756088274141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120454149288358983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 73831e72d3433b84189daa4b6ddef946, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: b0612040-26f8-4d53-b771-24f1b353b752
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &3120454150786839524
 GameObject:
   m_ObjectHideFlags: 0

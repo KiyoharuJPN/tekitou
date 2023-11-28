@@ -575,7 +575,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8622814929294617238}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -650,18 +650,33 @@ MonoBehaviour:
     ClearStage_Image: {fileID: 21300000, guid: 22511da00125b284c9c40d27709f2168, type: 3}
   - CleatStage_ID: 2
     ClearStage_Image: {fileID: 21300000, guid: 8276e11c0cfd70b479ac757dc63c93cf, type: 3}
+  - CleatStage_ID: 3
+    ClearStage_Image: {fileID: 21300000, guid: 8276e11c0cfd70b479ac757dc63c93cf, type: 3}
   canvas: {fileID: 8622814929294617242}
   RankBox: {fileID: 8622814929990625963}
   RankImageList:
   - {fileID: 21300000, guid: 68a2c9bf0d0051d46acfcf55430c4b05, type: 3}
   - {fileID: 21300000, guid: b5e2d4a029037ca4fb5cb2687f5e1e41, type: 3}
   - {fileID: 21300000, guid: 812b1c0b56fb3a640a000828627d2923, type: 3}
+  RANK_S: 33000
+  RANK_A: 20000
   numList:
     ScoreBar: {fileID: 8622814930728098445}
     Combo_Bar: {fileID: 8622814930149613218}
     Kill_Bar: {fileID: 8622814929989681210}
     crearTime_Bar: {fileID: 6301466765295931284}
   PreesAnyKey: {fileID: 8622814929632985938}
+  timeBonusList:
+  - time: 110
+    bonus: 5000
+  - time: 150
+    bonus: 3500
+  - time: 210
+    bonus: 2500
+  - time: 300
+    bonus: 1500
+  - time: 100000
+    bonus: 1000
 --- !u!114 &8622814929294617244
 MonoBehaviour:
   m_ObjectHideFlags: 0

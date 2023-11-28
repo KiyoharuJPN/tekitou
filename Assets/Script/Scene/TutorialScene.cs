@@ -124,7 +124,6 @@ public class TutorialScene : StageCtrl
                     if (tutorialPanels[num].enemylist.Count == count) panelEnemyDaeth = true;
 
                 }
-                Debug.Log(isAttackPlay);
                 if (isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 4:

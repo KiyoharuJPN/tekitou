@@ -34,9 +34,9 @@ public class Ending : MonoBehaviour
         playTime_Stage[1].text = getTimeString(SceneData.Instance.stage2Time);
         playTime_Stage[2].text = getTimeString(SceneData.Instance.stage3Time);
         //トータルタイム表示
-        totalTime.text = getTimeString(SceneData.Instance.stage1Time +
-            SceneData.Instance.stage2Time +
-            SceneData.Instance.stage3Time);
+        totalTime.text = getTimeString(Mathf.Floor(SceneData.Instance.stage1Time) +
+            Mathf.Floor(SceneData.Instance.stage2Time) +
+            Mathf.Floor(SceneData.Instance.stage3Time));
     }
 
     void Update()
@@ -47,6 +47,7 @@ public class Ending : MonoBehaviour
         {
             SceneData.Instance.playTime = 0;
             playTimeResult.enabled = true;
+            SoundManager.Instance.PlaySE(SESoundData.SE.TimeResult);
             IsPlayTimeObj = true;
             toBeConTime = 2;
         }

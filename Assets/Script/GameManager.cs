@@ -350,6 +350,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator _PlyerDeath()
     {
+
+        GameManager.Instance.PlayTimeStop();
         player.canMove = false;
         Time.timeScale = 0.3f;
         yield return new WaitForSeconds(0.5f);
@@ -488,6 +490,23 @@ public class GameManager : MonoBehaviour
 
             //フェードアウト終了
             ComboParam.Instance.ResetTime(); SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    //プレイタイム計測関係の関数
+    public void PlayTimeStop()
+    {
+        if(stageCtrl != null)
+        {
+            stageCtrl.playTimeStop();
+        }
+    }
+
+    public void PlayTimeStart()
+    {
+        if (stageCtrl != null)
+        {
+            stageCtrl.playTimeStart();
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -40,6 +41,17 @@ public class LoadScene : MonoBehaviour
     //多重発生防止bool
     bool canLoadScene = true;
 
+    [SerializeField, Header("チュートリアルスキップ画像")]
+    GameObject tutorialSkipObj;
+    [SerializeField, Header("スキップゲージ")]
+    Image skipGage;
+    [SerializeField, Header("スキップに必要な入力時間")]
+    float skipTime = 1f;
+    float inputTime = 0;
+    
+    //InputSystem
+    internal InputAction decision;
+
     private void Start()
     {
         System.GC.Collect();
@@ -51,6 +63,11 @@ public class LoadScene : MonoBehaviour
             obj.transform.parent = BackGround.transform;
             loadSceneTextBox.sprite = loadSceneText[0];
             loadScene = "Level_Tutorial";
+            //チュートリアルスキップ画像を表示
+            time = 2f;
+            tutorialSkipObj.SetActive(true);
+            var playerInput = GetComponent<PlayerInput>();
+            decision = playerInput.actions["Decision"];
         }
         else if (SceneData.Instance.referer == "Tutorial")
         {
@@ -86,6 +103,14 @@ public class LoadScene : MonoBehaviour
             canLoadScene = false;
             StartCoroutine(LoadStart());
         }
+        if (SceneData.Instance.referer == "Title")
+        {
+            if (decision.IsPressed() && inputTime < skipTime)
+            {
+                inputTime += Time.deltaTime;
+                skipGage.fillAmount = inputTime / skipTime;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -110,6 +135,14 @@ public class LoadScene : MonoBehaviour
         SceneData.Instance.wayPoint_1 = false;
         SceneData.Instance.wayPoint_2 = false;
         SceneData.Instance.playTime = 0;
+
+        //スキップに必要な時間分入力されていればチュートリアルスキップ
+        if (inputTime > skipTime)
+        {
+            loadScene = "Load";
+            SceneData.Instance.referer = "Tutorial";
+        }
+
         SceneManager.LoadScene(loadScene);
     }
 }

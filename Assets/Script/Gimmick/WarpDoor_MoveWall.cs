@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WarpDoor_MoveWall : MonoBehaviour
 {
@@ -21,18 +22,23 @@ public class WarpDoor_MoveWall : MonoBehaviour
 
     Collider2D player;
     bool canDoor = true;
+
+    InputAction move;
     private void Start()
     {
         warpPoint = transform.Find("WarpPoint").gameObject;
         isBottonUi = false;
+
+        var playerInput = GetComponent<PlayerInput>();
+        move = playerInput.actions["Move"];
     }
 
     private void Update()
     {
         if (player == null) return;
 
-        float lsv = Input.GetAxis("L_Stick_V");
-        if ((lsv >= 0.8 || Input.GetKeyDown(KeyCode.H)) && canDoor)
+        float lsv = move.ReadValue<Vector2>().y;
+        if (lsv >= 0.8&& canDoor)
         {
             canDoor = false;
             Destroy(bottonUiPrefab);
@@ -85,6 +91,8 @@ public class WarpDoor_MoveWall : MonoBehaviour
 
     IEnumerator PlayerWarp(float delay, Collider2D player)
     {
+
+        GameManager.Instance.PlayTimeStop();
         //éÄÇÒÇ≈Ç¢ÇÈEnemyã≠êßçÌèú
         DaedEnemyDestroy();
         player.GetComponent<PlayerController>().SetCanMove(false);
@@ -113,6 +121,8 @@ public class WarpDoor_MoveWall : MonoBehaviour
         player.GetComponent<PlayerController>().WarpDoorEnd();
 
         player.GetComponent<PlayerController>().SetCanMove(true);
+
+        GameManager.Instance.PlayTimeStart();
 
         yield return new WaitForSeconds(0.2f);
         //ìÆÇ≠ï«ãNìÆ

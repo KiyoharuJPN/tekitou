@@ -40,7 +40,7 @@ public class FinishMenu : MonoBehaviour
     FadeOutOption fadeOutOption = new() { waitSecondTry = 1f, wateSecondTitle = 1f, fadeOutSpeedTry = 10f, fadeOutSpeedTitle = 10f};
 
     //InputSystem
-    internal InputAction decision, option;
+    internal InputAction decision, option, move;
 
     private void Start()
     {
@@ -51,6 +51,9 @@ public class FinishMenu : MonoBehaviour
         decision = playerInput.actions["Decision"];
 
         option = playerInput.actions["Option"];
+        move = playerInput.actions["Move"];
+
+        SceneData.Instance.playTime = 0f;
     }
 
 
@@ -160,21 +163,18 @@ public class FinishMenu : MonoBehaviour
     //’²®ƒL[‚ÌÝ’è
     void ChangePointer()
     {
-        /*if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Vertical") < vertical) vertical = 0;
-        if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Vertical") > vertical) vertical = 0;*/
-        if (Input.GetAxis("Vertical") > 0 && pointerCheck)
+        var input = move.ReadValue<Vector2>().y;
+        if (input > 0 && pointerCheck)
         {
-            //StartCoroutine(PointerMoveWait());
+            pointerCheck = false;
             pointer--;
-            pointerCheck = false;
         }
-        if (Input.GetAxis("Vertical") < 0 && pointerCheck)
+        if (input < 0 && pointerCheck)
         {
-            //StartCoroutine(PointerMoveWait());
-            pointer++;
             pointerCheck = false;
+            pointer++;
         }
-        if (Input.GetAxis("Vertical") == 0)
+        if (input == 0)
         {
             pointerCheck = true;
         }

@@ -49,7 +49,10 @@ public class SoundManager : MonoBehaviour
         if(bgm_loop == BGMSoundData.BGM.none)
         {
             BGMSoundData data = bgmSoundDatas.Find(data => data.bgm == bgm_intro);
-            bgmAudioSource.loop = false;
+            if(bgm_intro == BGMSoundData.BGM.Result)
+            {
+                bgmAudioSource.loop = false;
+            }
             bgmAudioSource.volume = bgmMasterVolume * masterVolume;
             bgmAudioSource.clip = data.audioClip;
             bgmAudioSource.Play();
@@ -207,8 +210,9 @@ public class SESoundData
 
         //TODO セイカフェス限定コード
         Seika_Jump,
-        Seika_AirJump
+        Seika_AirJump,
 
+        TimeResult
     }
 
     public SE se;

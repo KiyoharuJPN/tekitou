@@ -50,7 +50,7 @@ public class Player_Walk : MonoBehaviour
     private void MoveKay()
     {
         //ˆÚ“®ƒL[æ“¾
-        if (player.canMove) moveInput = Input.GetAxis("Horizontal");
+        if (player.canMove) moveInput = player.move.ReadValue<Vector2>().x;
         if (!player.canMove)
         {
             moveInput = 0;

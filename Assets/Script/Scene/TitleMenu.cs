@@ -47,7 +47,7 @@ public class TitleMenu : MonoBehaviour
     float demoTimer;
 
     //InputSystem
-    internal InputAction back, decision;
+    internal InputAction back, decision, move;
 
     private void Start()
     {
@@ -62,6 +62,7 @@ public class TitleMenu : MonoBehaviour
         var playerInput = GetComponent<PlayerInput>();
         decision = playerInput.actions["Decision"];
         back = playerInput.actions["Back"];
+        move = playerInput.actions["Move"];
     }
 
     private void Update()
@@ -212,17 +213,18 @@ public class TitleMenu : MonoBehaviour
 
     void StickerChangePointer()
     {
-        if (Input.GetAxis("Vertical") > 0 && pointerCheck)
+        var input = move.ReadValue<Vector2>().y;
+        if (input > 0 && pointerCheck)
         {
             pointerCheck = false;
             pointer--;
         }
-        if (Input.GetAxis("Vertical") < 0 && pointerCheck)
+        if (input < 0 && pointerCheck)
         {
             pointerCheck = false;
             pointer++;
         }
-        if (Input.GetAxis("Vertical") == 0)
+        if (input == 0)
         {
             pointerCheck = true;
         }
