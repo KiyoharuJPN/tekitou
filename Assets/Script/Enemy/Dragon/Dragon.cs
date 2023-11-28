@@ -667,7 +667,7 @@ public class Dragon : Enemy
             HPBar.ReductionHP();
         }
 
-        if (hp <= 0)
+        if (hp <= 0&&!isDestroy)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
             OnDestroyMode();
@@ -767,10 +767,10 @@ public class Dragon : Enemy
     //“à•”ŠÖ”
     protected override void OnDestroyMode()
     {
+        isDestroy = true;
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss"); 
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
-        isDestroy = true;
     }
 
     protected override void Gravity()

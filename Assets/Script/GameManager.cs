@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    
+
     public FadeImage fade;
     public PlayerController player;
     PauseMenu pauseMenu;
@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public PlayerInput playerInput;
     internal InputAction option;
 
+    [HideInInspector]
+    public bool isPlayerExSkill { get; private set; }
     //ステージコントローラ
     [SerializeField, Header("ステージコントローラ")]
     StageCtrl stageCtrl;
@@ -191,6 +193,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerExAttack_Start()
     {
+        isPlayerExSkill = true;
+
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
 
         if(moveWalls.Count != 0)
@@ -217,6 +221,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerExAttack_HitEnemyEnd(List<GameObject> hitEnemyList, float powar)
     {
+        isPlayerExSkill = false;
+
         foreach (MoveWall moveWall in moveWalls)
         {
             moveWall.MoveStop = false;
@@ -235,6 +241,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerExAttack_End()
     {
+        isPlayerExSkill = false;
+
         foreach (MoveWall moveWall in moveWalls)
         {
             moveWall.MoveStop = false;
@@ -247,7 +255,7 @@ public class GameManager : MonoBehaviour
             {
                 gameObj.GetComponent<Enemy>().Stop_End();
             }
-            else if (gameObj.GetComponent<Projectile>())
+            else if (gameObj != null && gameObj.GetComponent<Projectile>())
             {
                 gameObj.GetComponent<Projectile>().Stop_End();
             }

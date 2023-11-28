@@ -47,15 +47,24 @@ public class MonsterHouse : MonoBehaviour
             this.gameObject.GetComponent<PolygonCollider2D>().enabled = false;
             wallTileMap.SetActive(true);
             //ìGÇè¢ä´
-            NextWave();
+            StartCoroutine(NextWave());
         }
     }
 
     /// <summary>
     /// éüÇÃWaveÉZÉbÉg
     /// </summary>
-    void NextWave()
+    IEnumerator NextWave()
     {
+        //ïKéEãZëŒçÙ
+        bool check = false;
+        while (GameManager.Instance.isPlayerExSkill)
+        {
+            check = true;
+            yield return null;
+        }
+        if(check) yield return new WaitForSeconds(1);
+
         enemylist.Clear();
         //ìGê∂ê¨
         foreach (var enemy in enemyWaves[waveNum].popEnemys)
@@ -87,9 +96,10 @@ public class MonsterHouse : MonoBehaviour
                 MonsterHouseEnd();
             }
             else //waveÇ™èIÇÌÇËÇ≈Ç»Ç¢èÍçá
-            {
-                yield return new WaitForSeconds(1);
-                NextWave();//éüÇÃWaveÇî≠ê∂
+            {   
+                yield return new WaitForSeconds(1);  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                StartCoroutine(NextWave());//éüÇÃWaveÇî≠ê∂
             }
         }
         else //éÄÇÒÇ≈Ç¢Ç»ÇØÇÍÇŒ

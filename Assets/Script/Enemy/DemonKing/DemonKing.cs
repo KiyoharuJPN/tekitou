@@ -768,7 +768,7 @@ public class DemonKing : Enemy
             HPBar.ReductionHP();
         }
 
-        if (hp <= 0)
+        if (hp <= 0&&!isDestroy)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
             OnDestroyMode();
@@ -868,11 +868,11 @@ public class DemonKing : Enemy
 
     protected override void OnDestroyMode()
     {
+        isDestroy = true;
+        IsBlowing = true;
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
-        isDestroy = true;
-        IsBlowing = true;
         animator.SetBool("IsDestroy", isDestroy);
         LHanimator.SetBool("IsDestroy", isDestroy);
         RHanimator.SetBool("IsDestroy", isDestroy);
