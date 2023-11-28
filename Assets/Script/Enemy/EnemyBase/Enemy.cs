@@ -380,7 +380,6 @@ public class Enemy : MonoBehaviour
             this.gameObject.GetComponent<MonsterHouse_Enemy>().Destroy();
         }
         //€–Só‘Ô‚É•ÏX
-        Debug.Log(gameObject + "had killed");
         isDestroy = true;
         //€–SSEÄ¶
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);

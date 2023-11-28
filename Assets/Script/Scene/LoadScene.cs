@@ -109,6 +109,7 @@ public class LoadScene : MonoBehaviour
         SceneData.Instance.revival = false;
         SceneData.Instance.wayPoint_1 = false;
         SceneData.Instance.wayPoint_2 = false;
+        SceneData.Instance.playTime = 0;
         SceneManager.LoadScene(loadScene);
     }
 }

@@ -21631,6 +21631,8 @@ MonoBehaviour:
   playerObj: {fileID: 4075973575865787869}
   continuePoint:
   - {fileID: 6406299289037832908, guid: 23edfd5d501f4204cbff084f4dfeba61, type: 3}
+  playTimeMeasurement: 0
+  folderName: Screenshots
 --- !u!1 &297335456
 GameObject:
   m_ObjectHideFlags: 0
@@ -29023,10 +29025,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7286924769512551288, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 9152127734781310046, guid: eb77da874f3db7042b0aa1a9bb5d1ed5, type: 3}
       propertyPath: m_Name
       value: PointCanvas
@@ -30017,6 +30015,8 @@ MonoBehaviour:
   hitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
   moveWalls: []
   isBossRoom: 0
+  playerInput: {fileID: 0}
+  stageCtrl: {fileID: 0}
   warpPoint:
   - {fileID: 1171002801}
   - {fileID: 1172965562}
@@ -30738,6 +30738,7 @@ MonoBehaviour:
   exAttacArea: {fileID: 1101828618}
   shake: {fileID: 621046455}
   InvincibleTime: 100
+  playerOpe: 0
 --- !u!114 &8444808323574041525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30778,14 +30779,6 @@ PrefabInstance:
     - target: {fileID: 8622814929294617238, guid: ed8b4e7cef5ef90428e47fc0d2f3d12a, type: 3}
       propertyPath: m_Name
       value: ResultCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8622814929294617238, guid: ed8b4e7cef5ef90428e47fc0d2f3d12a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8622814929294617242, guid: ed8b4e7cef5ef90428e47fc0d2f3d12a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8622814929294617243, guid: ed8b4e7cef5ef90428e47fc0d2f3d12a, type: 3}
       propertyPath: m_Pivot.x

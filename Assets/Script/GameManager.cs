@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool isPlayerExSkill { get; private set; }
+    //ステージコントローラ
+    [SerializeField, Header("ステージコントローラ")]
+    StageCtrl stageCtrl;
+
     private void Awake()
     {
         if (Instance == null)
@@ -112,6 +116,11 @@ public class GameManager : MonoBehaviour
         }
 
         canPause = true;
+
+        if(stageCtrl != null)
+        {
+            stageCtrl.playTimeStart();
+        }
     }
 
     //プレイヤー停止処理
@@ -149,12 +158,13 @@ public class GameManager : MonoBehaviour
 
     public void Result_Start(int StageID)
     {
+        if (stageCtrl != null)
+            stageCtrl.playTimeStop();
         player.canMove = false;
         canPause = false;
         Result.Instance.Result_Set(StageID, 
             PointParam.Instance.GetPoint(), maxCombo, killEnemy);
 
-        if( StageID != 3 )
         StartCoroutine(Result_True());
     }
 
