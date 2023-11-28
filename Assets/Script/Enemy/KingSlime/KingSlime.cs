@@ -522,7 +522,7 @@ public class KingSlime : Enemy
             HPBar.ReductionHP();
         }
 
-        if (hp <= 0)
+        if (hp <= 0 && !isDestroy)
         {
             PointParam.Instance.SetPoint(PointParam.Instance.GetPoint() + enemyData.score);
             OnDestroyMode();

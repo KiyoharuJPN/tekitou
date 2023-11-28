@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
 using DG.Tweening;
+using UnityEditor;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     //吹っ飛び角度
     protected float forceAngle;
-    protected Vector2 forceDirection = new Vector3(1.0f, 1.0f);
+    protected Vector2 forceDirection = new Vector3(1.0f, 1.0f), buffForceDirection = new Vector3(1.0f, 1.0f);
     protected float speed = 15f;     //吹っ飛び速度
     //吹っ飛び中の煙エフェクト
     private GameObject smokeEffect;
@@ -43,9 +44,10 @@ public class Enemy : MonoBehaviour
     private float effectInterval = 0.5f;
     protected float rotateSpeed = 10f;//吹っ飛び回転速度
 
-    //反射回数
+    //反射回数＆反射関連
     int maxReflexNum;
     internal int reflexNum;
+    float rad, minRad, maxRad;
 
     protected GameObject player;
 
@@ -114,6 +116,11 @@ public class Enemy : MonoBehaviour
         }
 
         stopState = EnemyGeneratar.instance.stopState;
+
+        // 入力された角度をラジアンに変換
+        rad = forceAngle * Mathf.Deg2Rad;
+        minRad = (forceAngle - 10) * Mathf.Deg2Rad;
+        maxRad = (forceAngle + 10) * Mathf.Deg2Rad;
     }
 
     virtual protected void OnColEnter2D(Collider2D col)
@@ -149,6 +156,7 @@ public class Enemy : MonoBehaviour
                 if (_EnemyBuff) _EnemyBuff._Destroy();
                 Destroy(gameObject);
             }
+            //EnemyReflection(collision);
         }
     }
 
@@ -416,12 +424,24 @@ public class Enemy : MonoBehaviour
     {
         if(_EnemyBuff != null)
         {
-            forceDirection = enemyRb.velocity.normalized;
+            buffForceDirection = enemyRb.velocity.normalized;
             // 向きと力の計算
-            Vector2 force = (speed + BuffBlowingSpeed()) * forceDirection;
+            Vector2 force = (speed + BuffBlowingSpeed()) * buffForceDirection;
             // 力を加えるメソッド
             enemyRb.velocity = force;
         }
+    }
+
+    protected void EnemyReflection(Collision2D collision)
+    {
+        Debug.Log(collision.GetContact(0).point);
+        Debug.Log(transform.position);
+
+        forceDirection = collision.relativeVelocity.normalized;
+        // 向きと力の計算
+        Vector2 force = (speed + BuffBlowingSpeed()) * forceDirection;
+        // 力を加えるメソッド
+        enemyRb.velocity = force;
     }
 
     //吹っ飛び中回転
@@ -451,8 +471,6 @@ public class Enemy : MonoBehaviour
 
     protected void CalcForceDirection()
     {
-        // 入力された角度をラジアンに変換
-        float rad = forceAngle * Mathf.Deg2Rad;
 
         //オブジェクトを取得
         player = serchTag(gameObject, "Player");
