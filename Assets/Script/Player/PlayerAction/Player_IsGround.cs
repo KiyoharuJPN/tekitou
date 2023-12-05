@@ -31,13 +31,13 @@ public class Player_IsGround : MonoBehaviour
     //物理判定の更新毎に呼ぶ必要がある
     public bool IsGround()
     {
-        if (isGroundEnter || isGroundStay)
-        {
-            isGround = true;
-        }
-        else if (isGroundExit)
+        if (isGroundExit)
         {
             isGround = false;
+        }
+        else if (isGroundEnter || isGroundStay)
+        {
+            isGround = true;
         }
 
         isGroundEnter = false;
