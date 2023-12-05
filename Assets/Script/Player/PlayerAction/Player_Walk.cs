@@ -61,17 +61,17 @@ public class Player_Walk : MonoBehaviour
         {
             xSpeed = 0;
         }
-        else if(moveInput > 0.8) 
+        else if(moveInput > 0.3) 
         {
             transform.localScale = new Vector3(1, 1, 1);
             xSpeed = player.moveData.maxSpeed;
         }
-        else if(moveInput < -0.8)
+        else if(moveInput < -0.3)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             xSpeed = -player.moveData.maxSpeed;
         }
 
-        player.isMoving = (moveInput <= -0.8) || (moveInput >= 0.8);
+        player.isMoving = (moveInput <= -0.2) || (moveInput >= 0.2);
     }
 }
