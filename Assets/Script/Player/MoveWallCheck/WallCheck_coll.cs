@@ -12,7 +12,7 @@ public class WallCheck_coll : MonoBehaviour
         if (collision.gameObject.tag == "Stage")
         {
             isWall = true;
-            //Debug.Log("CheckWall" + transform.position + isWall);
+            Debug.Log("CheckWall" + transform.position + isWall);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -20,7 +20,7 @@ public class WallCheck_coll : MonoBehaviour
         if (collision.gameObject.tag == "Stage")
         {
             isWall = true;
-            //Debug.Log("CheckWall" + transform.position + isWall);
+            Debug.Log("CheckWall" + transform.position + isWall);
         }
     }
 
@@ -29,7 +29,7 @@ public class WallCheck_coll : MonoBehaviour
         if (collision.gameObject.tag == "Stage")
         {
             isWall = false;
-            //Debug.Log("CheckWall" + transform.position + isWall);
+            Debug.Log("CheckWall" + transform.position + isWall);
         }
     }
 }

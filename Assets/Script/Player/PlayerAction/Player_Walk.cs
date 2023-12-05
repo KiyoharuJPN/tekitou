@@ -57,21 +57,21 @@ public class Player_Walk : MonoBehaviour
             player.rb.velocity = (new Vector2(0, player.rb.velocity.y));
         }
 
-        if(moveInput == 0)
+        if(moveInput <= 0.3&&moveInput>=-0.3)
         {
             xSpeed = 0;
         }
-        else if(moveInput > 0.8) 
+        else if(moveInput > 0.3) 
         {
             transform.localScale = new Vector3(1, 1, 1);
             xSpeed = player.moveData.maxSpeed;
         }
-        else if(moveInput < -0.8)
+        else if(moveInput < -0.3)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             xSpeed = -player.moveData.maxSpeed;
         }
 
-        player.isMoving = (moveInput <= -0.8) || (moveInput >= 0.8);
+        player.isMoving = (moveInput <= -0.3) || (moveInput >= 0.3);
     }
 }
