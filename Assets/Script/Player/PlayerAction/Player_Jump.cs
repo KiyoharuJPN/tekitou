@@ -50,12 +50,12 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Ú’nó‘Ô‚ğ“¾‚é
-        isGround = ground.IsGround();
-        isHead = head.IsGround();
 
         //’â~
         if (player.isExAttack || player.isWarpDoor) return;
+
+        //Ú’nó‘Ô‚ğ“¾‚é
+        isGround = ground.IsGround();
 
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 
