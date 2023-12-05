@@ -101,6 +101,11 @@ public class PlayerController : MonoBehaviour
     internal bool isNomalAttack = false;
     internal bool canNomalAttack = true;
 
+    enum PlayerState
+    {
+
+    }
+
     //技関係Bool関連（is:その技中か　can:その技が使用可能か）
     internal bool isUpAttack = false;
     internal bool canUpAttack = true;
