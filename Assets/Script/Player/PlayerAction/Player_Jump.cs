@@ -25,7 +25,7 @@ public class Player_Jump : MonoBehaviour
     internal float jumpPos;
 
     internal const float upAttackHight = 2f;
-    internal bool isUpAttack = false;
+    internal bool isUpAttack = false,isgroundpreb = false;
 
     //カメラ揺れ（突き刺し終了時に使用）
     [System.Serializable]
@@ -56,6 +56,7 @@ public class Player_Jump : MonoBehaviour
 
         //接地状態を得る
         isGround = ground.IsGround();
+        if(isGround != isgroundpreb) { isgroundpreb = isGround;Debug.Log(isGround + "and" + isgroundpreb); }
 
         player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 

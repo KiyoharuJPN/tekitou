@@ -19,7 +19,7 @@ public class Player_IsGround : MonoBehaviour
     private string platformTag = "PlatFormStage";
     //接地判定フラグ
     public bool isGround = false;
-    private bool isGroundEnter, isGroundStay, isGroundExit;
+    private bool isGroundEnter, isGroundStay, isGroundExit, stageLandingCheck = false;
 
     void Start()
     {
@@ -72,6 +72,8 @@ public class Player_IsGround : MonoBehaviour
         {
             isGroundStay = true;
         }
+
+        if (!player.isUpAttack && stageLandingCheck && !player.isGround) { Landingoff(); }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -83,6 +85,8 @@ public class Player_IsGround : MonoBehaviour
             player.isGround = false;
             jumpData.FarstJump = false;
             jumpData.canSecondJump = true;
+            //地面に降りないバグ用チェック関数
+            stageLandingCheck = false;
         }
         else if (checkPlatformGroud && collision.tag == platformTag)
         {
@@ -90,6 +94,8 @@ public class Player_IsGround : MonoBehaviour
             player.isGround = false;
             jumpData.FarstJump = false;
             jumpData.canSecondJump = true;
+            //地面に降りないバグ用チェック関数
+            stageLandingCheck = false;
         }
     }
 
@@ -111,14 +117,18 @@ public class Player_IsGround : MonoBehaviour
             if (player.isDropAttack)
             {
                 jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
-                player.isGround = true;
-                Invoke("Landingoff", 0.18f);
+                Landingoff();
+                Debug.Log("dropattack");
+                //player.isGround = true;
+                //Invoke("Landingoff", 0.18f);
             }
             else
             {
                 Landingoff();
+                Debug.Log("Nomalland");
             }
         }
+        stageLandingCheck = true;
     }
 
     void Landingoff()
