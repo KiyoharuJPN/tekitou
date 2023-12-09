@@ -122,38 +122,38 @@ public class TutorialPlayer : PlayerController
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && canTUpAttack/* || Input.GetKey(KeyCode.I) && canTUpAttack*/)
         // || rsv >= 0.8)
         {
-            AttackAction("UpAttack");
+            AttackAction("UpAttack"); return;
         }
         //—‰ºUŒ‚UŒ‚
         if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canTDownAttack/* || Input.GetKey(KeyCode.K) && canTDownAttack*/)
         // || rsv <= -0.8)
         {
-            AttackAction("DawnAttack");
+            AttackAction("DawnAttack"); return;
         }
         //‰¡ˆÚ“®UŒ‚
         if (inputMoveAxis.x >= 0.9 && isSkillAttackKay && canTSideAttack/* || Input.GetKey(KeyCode.L) && canTSideAttack*/)
         // || rsh >= 0.8)
         {
-            AttackAction("SideAttack_right");
+            AttackAction("SideAttack_right"); return;
         }
         else if(inputMoveAxis.x <= -0.9 && isSkillAttackKay && canTSideAttack/* || Input.GetKey(KeyCode.J) && canTSideAttack*/)
         // || rsh <= -0.8)
         {
-            AttackAction("SideAttack_left");
+            AttackAction("SideAttack_left"); return;
         }
         //•KE‹Z
         if (exAttack_L.IsPressed() && exAttack_R.IsPressed()/* || Input.GetKey(KeyCode.E)*/)
         {
             if (canTExAttack) 
             {
-                AttackAction("ExAttack");
+                AttackAction("ExAttack"); return;
             }
         }
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
         if (nomalAttack.WasPressedThisFrame() && canNomalAttack && canTAttack)
         {
             //’ÊíUŒ‚“ü—Í
-            AttackAction("NomalAttack");
+            AttackAction("NomalAttack"); return;
         }
     }
 

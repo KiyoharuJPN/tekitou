@@ -308,31 +308,37 @@ public class PlayerController : MonoBehaviour
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         {
             AttackAction("UpAttack");
+            return;
         }
         //—‰ºUŒ‚UŒ‚
         if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
         {
             AttackAction("DawnAttack");
+            return;
         }
         //‰¡ˆÚ“®UŒ‚
         if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_right");
+            return;
         }
         else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_left");
+            return;
         }
         //•KE‹Z
         if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
         {
             AttackAction("ExAttack");
+            return;
         }
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
         if (nomalAttack.WasPressedThisFrame())
         {
             //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack");
+            return;
         }
     }
 
