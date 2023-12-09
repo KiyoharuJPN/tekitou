@@ -208,9 +208,10 @@ public class Enemy : MonoBehaviour
     {
         if (!HadAttack)
         {
+            //プレイヤーの攻撃を食らっている最中に攻撃できなくする
+            if (isDamege) return;
             //一時使用停止
             //攻撃クールダウンタイム
-            if (isDestroy) return;
             HadAttack = true;
             StartCoroutine(HadAttackReset());
 
@@ -223,6 +224,7 @@ public class Enemy : MonoBehaviour
     //ダメージ処理呼出し
     public virtual void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        isDamege = true;
         if (!_isHitStoped)
         {
             _isHitStoped = true;
@@ -366,6 +368,7 @@ public class Enemy : MonoBehaviour
 
             _isHitStoped = false;
         }
+        isDamege = false;
     }
 
     protected void EnemyMove()
