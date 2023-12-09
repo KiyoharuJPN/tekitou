@@ -17,7 +17,7 @@ public class Toge : MonoBehaviour
         {
 
             collision.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * knockBackValue);
-            collision.gameObject.GetComponent<PlayerController>()._Damage(damage);
+            collision.gameObject.GetComponent<PlayerController>().Damage(damage);
         }
     }
 }

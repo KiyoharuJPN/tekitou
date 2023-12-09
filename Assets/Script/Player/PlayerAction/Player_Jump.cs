@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerController;
 
@@ -25,7 +21,7 @@ public class Player_Jump : MonoBehaviour
     internal float jumpPos;
 
     internal const float upAttackHight = 2f;
-    internal bool isUpAttack = false,isgroundpreb = false;
+    internal bool isUpAttack = false;
 
     //カメラ揺れ（突き刺し終了時に使用）
     [System.Serializable]
@@ -50,38 +46,41 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //停止
-        if (player.isExAttack || player.isWarpDoor) return;
+        if (player.playerState == PlayerState.Event) return;
 
         //接地状態を得る
         isGround = ground.IsGround();
-        if(isGround != isgroundpreb) { isgroundpreb = isGround;Debug.Log(isGround + "and" + isgroundpreb); }
-
-        player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
 
         if(player.isUpAttack && !isSecondJump) canSecondJump = true;
 
-        //ジャンプキー取得
-        if (player.canMove && !player.isAttack) JumpBottan();
-        
+        //プレイヤーがイベント・攻撃中以外の処理
+        if (player.playerState == PlayerState.Idle)
+        {
+            //落下状態取得
+            player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
+
+            //ジャンプキー取得
+            JumpBottan();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (player.isExAttack) return;
-        if (isUpAttack || !player.canDropAttack || player.isSideAttack || player.isWarpDoor)
+        //プレイヤーがイベント・攻撃中以外の処理
+        if (player.playerState == PlayerState.Idle || 
+            player.playerState == PlayerState.Event ||
+            player.playerState == PlayerState.NomalAttack)
         {
-            isjump = false;
-            return;
+            Jump();
+            Gravity();
         }
-        Jump();
-        Gravity();
-        if (isjump && player.isAttack)
+        if(isjump &&
+            player.playerState != PlayerState.Idle)
         {
             isjump = false;
             jumpTime = 0;
-        };
+        }
     }
 
     void JumpBottan()
@@ -119,7 +118,6 @@ public class Player_Jump : MonoBehaviour
         //ジャンプ1段目
         if (FarstJump && !canSecondJump && isGround)
         {
-            
             player.isSquatting = true;
             FarstJump = false;
             player.animator.SetBool("IsSquatting", player.isSquatting);
@@ -171,8 +169,7 @@ public class Player_Jump : MonoBehaviour
         {
             if (isUpAttack)
             {
-                UpAttack.UpAttackEnd(player, this);
-                return distance * 0.1f;
+                return distance * 0.3f;
             }
             else
             {

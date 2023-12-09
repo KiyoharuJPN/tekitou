@@ -10,7 +10,7 @@ public class EnemyBirdAttack : MonoBehaviour
             {
                 GetComponentInParent<Enemy_Bird>().SetPlayerAttacked(false);
                 collision.GetComponent<PlayerController>().KnockBack(transform.position, GetComponentInParent<Enemy_Bird>().GetKnockBackForce());
-                collision.GetComponent<PlayerController>()._Damage(GetComponentInParent<Enemy_Bird>().GetDamage());
+                collision.GetComponent<PlayerController>().Damage(GetComponentInParent<Enemy_Bird>().GetDamage());
             }
         }
     }

@@ -78,7 +78,7 @@ public class Wizard_MagicBall : Projectile
         //    StartCoroutine(WHadAttackReset());
         //ダメージとノックバック
         col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * knockBackValue);
-        col.gameObject.GetComponent<PlayerController>()._Damage(attackPower);
+        col.gameObject.GetComponent<PlayerController>().Damage(attackPower);
         //}
     }
 

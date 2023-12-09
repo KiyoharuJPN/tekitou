@@ -1,5 +1,3 @@
-
-using System;
 using Gamepara;
 
 public class SceneData

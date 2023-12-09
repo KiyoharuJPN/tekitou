@@ -7,7 +7,7 @@ public class Player_Demo : PlayerController
 {
     public bool playerOpe = false;
 
-    protected override void InputKay()
+    protected override void AttacKInputKay()
     {
         if (playerOpe)
         {
@@ -25,9 +25,9 @@ public class Player_Demo : PlayerController
 
         if (nomalAttack.IsPressed())
         {
-            isAttackKay = true;
+            isNomalAttackKay = true;
         }
-        else { isAttackKay = false; }
+        else { isNomalAttackKay = false; }
         if (skillAttack.IsPressed())
         {
             isSkillAttackKay = true;
@@ -86,28 +86,28 @@ public class Player_Demo : PlayerController
 
         if (nomalAttack.IsPressed())
         {
-            isAttackKay = true;
+            isNomalAttackKay = true;
         }
-        else { isAttackKay = false; }
+        else { isNomalAttackKay = false; }
 
         //ã¸UŒ‚
-        if (inputMoveAxis.y >= 0.9 && !(inputMoveAxis.x >= 0.5 || inputMoveAxis.x <= -0.5) && isAttackKay)
+        if (inputMoveAxis.y >= 0.9 && !(inputMoveAxis.x >= 0.5 || inputMoveAxis.x <= -0.5) && isNomalAttackKay)
         //rsv >= 0.8
         {
             AttackAction("UpAttack");
         }
         //—‰ºUŒ‚UŒ‚
-        if (inputMoveAxis.y <= -0.9 && isAttackKay)
+        if (inputMoveAxis.y <= -0.9 && isNomalAttackKay)
         //rsv <= -0.8
         {
             AttackAction("DawnAttack");
         }
         //‰¡ˆÚ“®UŒ‚
-        if (inputMoveAxis.x >= 0.9 && isAttackKay)
+        if (inputMoveAxis.x >= 0.9 && isNomalAttackKay)
         {
             AttackAction("SideAttack_right");
         }
-        else if (inputMoveAxis.x <= -0.9 && isAttackKay)
+        else if (inputMoveAxis.x <= -0.9 && isNomalAttackKay)
         {
             AttackAction("SideAttack_left");
         }
@@ -132,7 +132,7 @@ public class Player_Demo : PlayerController
         }
     }
 
-    public override void _Damage(int power)
+    public override void Damage(int power)
     {
         if (gameObject.GetComponent<InvinciblBuff>()) { return; }
         if (!inInvincibleTimeLife)

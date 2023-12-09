@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Processors;
+using PlayerData;
+using Cysharp.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -12,6 +14,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] internal Rigidbody2D rb;
     [SerializeField] internal Animator animator;
+
     internal PlayerSE playerSE;
     internal Player_Jump jump;
 
@@ -77,9 +80,18 @@ public class PlayerController : MonoBehaviour
         //public float invincibiltyTime;
     }
 
-    //[SerializeField]
-    //[Header("プレイヤーステータス")]
-    //private int HP;
+    internal enum PlayerState
+    {
+        Idle,
+        NomalAttack,
+        UpAttack,
+        SideAttack,
+        DownAttack,
+        ExAttack,
+        Event
+    }
+    
+    internal PlayerState playerState;
 
     [SerializeField]
     [Header("移動ステータス")]
@@ -101,20 +113,15 @@ public class PlayerController : MonoBehaviour
     internal bool isNomalAttack = false;
     internal bool canNomalAttack = true;
 
-    enum PlayerState
-    {
-
-    }
-
-    //技関係Bool関連（is:その技中か　can:その技が使用可能か）
-    internal bool isUpAttack = false;
+    //技関係Bool関連（can:その技が使用可能か）
     internal bool canUpAttack = true;
-    internal bool isDropAttack = false;
     internal bool canDropAttack = true;
-    internal bool isSideAttack = false;
     internal bool canSideAttack = true;
     internal bool isExAttack = false;
     internal bool canExAttack = false;
+
+    internal bool isUpAttack = false;
+    internal bool isSideAttack = false;
 
     //KnockBack関連
     internal Vector2 knockBackDir;   //ノックバックされる方向
@@ -127,12 +134,12 @@ public class PlayerController : MonoBehaviour
 
     //入力キー
     internal bool isAttack = false;
-    internal bool isAttackKay = false;
+    internal bool isNomalAttackKay = false;
     internal bool isSkillAttackKay = false;
 
-    //必殺技時に取得する・保存する為のEnemyList
+    //攻撃時・必殺技時に使用する為のEnemyList
     [SerializeField, Header("exAttackArea")]
-    private ExAttackArea exAttacArea;
+    internal ExAttackArea exAttacArea;
     internal List<GameObject> enemylist = new List<GameObject>();
     internal List<GameObject> exAttackEnemylist = new List<GameObject>();
 
@@ -148,7 +155,7 @@ public class PlayerController : MonoBehaviour
     internal bool isLanding = false;
     internal bool isSquatting = false;
     internal bool isWarpDoor = false;
-    internal int attckType;
+
     internal bool isGround = false;
     internal float animSpeed = 1f;
 
@@ -189,14 +196,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!canMove) return;
-        if (isExAttack || isWarpDoor)
+        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsRun", isRun);
+        animator.SetBool("IsFalling", isFalling);
+        animator.SetBool("IsJumping", isJumping);
+        animator.SetBool("IsSquatting", isSquatting);
+        animator.SetBool("IsLanding", isLanding);
+        animator.SetBool("IsGround", isGround);
+
+        if (playerState == PlayerState.Event)
         {
             rb.velocity = Vector2.zero;
             gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+            return;
         }
 
-        if (isGround != isgroundpreb) { isgroundpreb = isGround; Debug.Log("player" + isGround + "and" + isgroundpreb); }
+        if (isGround != isgroundpreb) { isgroundpreb = isGround;}
         //Debug.Log(isgroundpreb);
 
         //ノックバック処理
@@ -219,19 +234,8 @@ public class PlayerController : MonoBehaviour
         {
             canMovingCounter -= Time.deltaTime;
         }
-        if (!isLanding) { InputKay(); }
-        
 
-        BackgroundScroll();
-
-        animator.SetBool("IsMoving", isMoving);
-        animator.SetBool("IsRun", isRun);
-        animator.SetBool("IsFalling", isFalling);
-        animator.SetBool("IsJumping", isJumping);
-        animator.SetBool("IsSquatting", isSquatting);
-        animator.SetBool("IsLanding", isLanding);
-        animator.SetBool("IsDropAttack", isDropAttack);
-        animator.SetBool("IsGround", isGround);
+        AttacKInputKay();
     }
 
     public void Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
@@ -254,7 +258,7 @@ public class PlayerController : MonoBehaviour
         HeelEffect();
     }
 
-    public virtual void _Damage(int power)
+    public virtual void Damage(int power)
     {
 
         if (gameObject.GetComponent<InvinciblBuff>()) { return; }
@@ -277,6 +281,7 @@ public class PlayerController : MonoBehaviour
     public void PlayerDead()
     {
         if(isDead) { return; }
+        playerState = PlayerState.Event;
         isDead = true;
         this.tag = "DeadPlayer";
         gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
@@ -288,64 +293,51 @@ public class PlayerController : MonoBehaviour
     }
 
     //技入力検知
-    protected virtual void InputKay()
+    protected virtual void AttacKInputKay()
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
 
         if (nomalAttack.IsPressed())
         {
-            isAttackKay = true;
+            isNomalAttackKay = true;
         }
-        else { isAttackKay = false; }
+        else { isNomalAttackKay = false; }
         if (skillAttack.IsPressed())
         {
             isSkillAttackKay = true;
         }
         else { isSkillAttackKay = false; }
 
+        if (playerState != PlayerState.Idle || playerState == PlayerState.Event) return;
+
         //上昇攻撃
-        //if (inputMoveAxis.y >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.I))
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
-        //rsv >= 0.8
         {
             AttackAction("UpAttack");
         }
         //落下攻撃攻撃
-        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack)
-        //if (inputMoveAxis.y <= -0.9 && isSkillAttackKay && canDropAttack || Input.GetKey(KeyCode.K))
-        //rsv <= -0.8
+        if (inputMoveAxis.y <= -0.9 && isSkillAttackKay)
         {
             AttackAction("DawnAttack");
         }
         //横移動攻撃
-        //if (inputMoveAxis.x >= 0.9 && isSkillAttackKay || Input.GetKey(KeyCode.L))
         if (inputMoveAxis.x >= 0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_right");
         }
-        //else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay || Input.GetKey(KeyCode.J))
         else if (inputMoveAxis.x <= -0.9 && isSkillAttackKay)
         {
             AttackAction("SideAttack_left");
         }
         //必殺技
         if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
-        //if (exAttack_L.IsPressed() && exAttack_R.IsPressed() || Input.GetKeyDown(KeyCode.E))
         {
-            if (!isAttack && canExAttack)
-            {
-                AttackAction("ExAttack");
-            }
+            AttackAction("ExAttack");
         }
         //手動攻撃：攻撃ボタンが押されせたとき
-        if (nomalAttack.WasPressedThisFrame() && canNomalAttack)
+        if (nomalAttack.WasPressedThisFrame())
         {
             //通常攻撃入力
-            AttackAction("NomalAttack");
-        }
-        if (nomalAttack.IsPressed() && canNomalAttack)
-        {
-            //通常攻撃長押し中
             AttackAction("NomalAttack");
         }
     }
@@ -353,46 +345,80 @@ public class PlayerController : MonoBehaviour
     //アクション実行
     internal void AttackAction(string actionName)
     {
-        if (isExAttack || isAttack) return;
         switch (actionName)
         {
             case "UpAttack":
-                if (isAttack || !canUpAttack) break;
+                if (!canUpAttack) return; 
+                playerState = PlayerState.UpAttack;
+                canUpAttack = false;
                 UpAttack.UpAttackStart(this, jump,this);
                 break;
 
             case "DawnAttack":
-                if (isAttack || !canDropAttack) break;
+                if (!canDropAttack) return;
+                playerState = PlayerState.DownAttack;
+                canDropAttack = false;
                 DropAttack.DropAttackStart(this,this);
                 break;
 
             case "SideAttack_right":
-                if(isAttack || !canSideAttack) break;
+                if (!canSideAttack) return;
+                playerState = PlayerState.SideAttack;
+                canSideAttack = false;
                 SideAttack.SideAttackStart(this, true, this);
                 break;
 
             case "SideAttack_left":
-                if (isAttack || !canSideAttack) break;
+                if (!canSideAttack) return;
+                playerState = PlayerState.SideAttack;
+                canSideAttack = false;
                 SideAttack.SideAttackStart(this, false, this);
                 break;
 
             case "ExAttack":
-                if (isAttack || !canExAttack) break;
-                exAttackEnemylist.Clear();
-                isAttack = true;
-                isExAttack = true;
+                if(!canExAttack) return;
+                playerState = PlayerState.ExAttack;
                 canExAttack = false;
-                animator.SetBool("IsExAttack", isExAttack);
-                ExAttackParam.Instance._EXAttack();
-                GameManager.Instance.PlayerExAttack_Start();
-                exAttacArea.ExAttackEnemySet();
-                ExAttackCutIn.Instance.StartCoroutine("_ExAttackCutIn", this.GetComponent<PlayerController>());
+                ExAttack.ExAttackStart(this);
                 break;
+
             case "NomalAttack":
-                if(isAttack || !canNomalAttack || isNomalAttack) break;
+                playerState = PlayerState.NomalAttack;
                 NomalAttack.NomalAttackStart(this,this);
                 break;
         }
+    }
+
+    //攻撃終了時の処理
+    internal async void AttackEnd()
+    {
+        switch (playerState)
+        {
+            case PlayerState.Event: break;
+            case PlayerState.ExAttack:
+                animator.SetBool("IsExAttack", false);
+                exAttackEnemylist.Clear();
+                break;
+            case PlayerState.SideAttack:
+                animator.SetBool("IsSideAttack", false);
+                break;
+            case PlayerState.UpAttack:
+                animator.SetBool("IsUpAttack", false);
+                break;
+            case PlayerState.DownAttack:
+                animator.Play("Hero_DropAttack_End");
+                animator.SetBool("IsDropAttack", false);
+                await UniTask.Delay(270);
+                break;
+            case PlayerState.NomalAttack:
+                animator.SetBool("IsNomalAttackBool", false);
+                break;
+        }
+        if(playerState != PlayerState.Event) 
+        {
+            playerState = PlayerState.Idle;
+        }
+        enemylist.Clear();
     }
 
     //KnockBackされたときの処理
@@ -437,7 +463,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //必殺技
-    internal void CanExAttackCheck() //必殺技が使用できるかチェック
+    internal void CanExAttackCheck() //必殺技使用可能チェック
     {
         if (ExAttackParam.Instance.GetCanExAttack)
         {
@@ -481,12 +507,10 @@ public class PlayerController : MonoBehaviour
     //必殺技で使用したEnemyをリセット
     public void ExAttackEnd()
     {
-        isExAttack = false;
-        isAttack = false;
         exAttackEnemylist.Clear();
         NomalPlayer();
-        animator.SetBool("IsExAttack", isExAttack);
         GameManager.Instance.PlayerExAttack_End();
+        AttackEnd();
     }
     //---------------------------------------
 
@@ -506,6 +530,17 @@ public class PlayerController : MonoBehaviour
     {
         isAttack = false;
         enemylist.Clear();
+    }
+
+    //イベント開始
+    public void EventStart()
+    {
+        playerState = PlayerState.Event;
+    }
+    //イベント終了
+    public void EventEnd()
+    {
+        playerState = PlayerState.Idle;
     }
 
     //砂埃エフェクト生成
@@ -577,18 +612,26 @@ public class PlayerController : MonoBehaviour
 
     public void SetCanMove(bool cM)
     {
+        rb.velocity = Vector2.zero;
+        if(cM)
+        {
+            playerState = PlayerState.Idle;
+        }
+        else if(!cM) 
+        {
+            playerState = PlayerState.Event;
+        }
         canMove = cM;
-        isDropAttack = false;
         isUpAttack = false;
         isSideAttack = false;
         isNomalAttack = false;
         canDropAttack = true;
-        animator.SetBool("IsDropAttack", isDropAttack);
+        animator.SetBool("IsDropAttack", false);
+        AttackEnd();
     }
 
     internal void WarpDoor(Transform door)
     {
-        isWarpDoor = true;
         isRun = false;
         isMoving = false;
         isJumping = false;
@@ -604,7 +647,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);
         this.transform.position = new Vector3(doorPosX, doorPosY, transform.position.z);
         this.rb.velocity = new Vector2 (0, 0);
-        animator.SetBool("IsWarpDoor", isWarpDoor);
+        animator.SetBool("IsWarpDoor", true);
         gameObject.layer = LayerMask.NameToLayer("PlayerAction");
         animator.SetTrigger("WarpDoor");
     }
@@ -612,9 +655,7 @@ public class PlayerController : MonoBehaviour
     internal void WarpDoorEnd()
     {
         gameObject.layer = LayerMask.NameToLayer("Player");
-        isWarpDoor = false;
-        animator.SetBool("IsWarpDoor", isWarpDoor);
-        NomalPlayer();
+        animator.SetBool("IsWarpDoor", false);
     }
 
     internal void GoolDoor(Transform door)

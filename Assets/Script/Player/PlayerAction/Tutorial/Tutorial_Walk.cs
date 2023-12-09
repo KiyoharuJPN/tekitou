@@ -28,32 +28,30 @@ public class Tutorial_Walk : MonoBehaviour
 
     private void Update()
     {
-        if (player.isSideAttack || !player.canDropAttack
-            || player.isExAttack || player.isWarpDoor || player.isUpAttack)
+        if (player.playerState == PlayerController.PlayerState.Idle ||
+            player.playerState == PlayerController.PlayerState.NomalAttack)
         {
-            return;
-        }
-
-        if (player.canTWalk)
-        {
-            MoveKay();
+            if (player.canTWalk)
+            {
+                MoveKay();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        if (player.isSideAttack || !player.canDropAttack || player.isExAttack || player.isWarpDoor)
+        if (player.playerState == PlayerController.PlayerState.Idle ||
+            player.playerState == PlayerController.PlayerState.NomalAttack)
         {
-            return;
-        }
-
-        if (player.canMovingCounter <= 0)
-        {
-            //プレイヤーの左右の移動
-            player.rb.velocity = new Vector2(xSpeed, player.rb.velocity.y);
-            if (player.parallaxBackground != null)
+            if (player.canMovingCounter <= 0)
             {
-                player.parallaxBackground.StartScroll(player.transform.position);
+                //プレイヤーの左右の移動
+                player.rb.velocity = new Vector2(xSpeed, player.rb.velocity.y);
+
+                if (player.parallaxBackground != null)
+                {
+                    player.parallaxBackground.StartScroll(player.transform.position);
+                }
             }
         }
     }

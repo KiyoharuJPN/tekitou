@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static PlayerController.PlayerState;
 
 public class Player_IsGround : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Player_IsGround : MonoBehaviour
     private string platformTag = "PlatFormStage";
     //接地判定フラグ
     public bool isGround = false;
-    private bool isGroundEnter, isGroundStay, isGroundExit, stageLandingCheck = false;
+    private bool isGroundEnter, isGroundStay, isGroundExit;
 
     void Start()
     {
@@ -31,13 +32,13 @@ public class Player_IsGround : MonoBehaviour
     //物理判定の更新毎に呼ぶ必要がある
     public bool IsGround()
     {
-        if (isGroundExit)
-        {
-            isGround = false;
-        }
-        else if (isGroundEnter || isGroundStay)
+        if (isGroundEnter || isGroundStay)
         {
             isGround = true;
+        }
+        else if (isGroundExit)
+        {
+            isGround = false;
         }
 
         isGroundEnter = false;
@@ -72,8 +73,6 @@ public class Player_IsGround : MonoBehaviour
         {
             isGroundStay = true;
         }
-
-        if (!player.isUpAttack && stageLandingCheck && !player.isGround) { Landingoff(); }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -85,8 +84,6 @@ public class Player_IsGround : MonoBehaviour
             player.isGround = false;
             jumpData.FarstJump = false;
             jumpData.canSecondJump = true;
-            //地面に降りないバグ用チェック関数
-            stageLandingCheck = false;
         }
         else if (checkPlatformGroud && collision.tag == platformTag)
         {
@@ -94,51 +91,54 @@ public class Player_IsGround : MonoBehaviour
             player.isGround = false;
             jumpData.FarstJump = false;
             jumpData.canSecondJump = true;
-            //地面に降りないバグ用チェック関数
-            stageLandingCheck = false;
         }
     }
 
     //stage着地処理
     void StageLanding(Collider2D collision)
     {
-        if (!player.isUpAttack)
+        player.isSquatting = false;
+        player.isJumping = false;
+
+        jumpData.jumpTime = 0;
+
+        jumpData.canSecondJump = false;
+        jumpData.isSecondJump = false;
+        player.canUpAttack = true;
+
+        switch (player.playerState)
         {
-            player.isSquatting = false;
-            player.isJumping = false;
+            case PlayerController.PlayerState.Event:
+            case Idle:
+                player.canUpAttack = true;
+                Landingoff();
+                break;
 
-            jumpData.jumpTime = 0;
-            player.canUpAttack = true;
-
-            jumpData.canSecondJump = false;
-            jumpData.isSecondJump = false;
-
-            //突き刺し攻撃終わり
-            if (player.isDropAttack)
-            {
+            case DownAttack:
                 jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
-                Landingoff();
-                Debug.Log("dropattack");
-                //player.isGround = true;
-                //Invoke("Landingoff", 0.18f);
-            }
-            else
-            {
-                Landingoff();
-                Debug.Log("Nomalland");
-            }
+                player.AttackEnd();
+                player.isGround = true;
+                jumpData.FarstJump = true;
+                player.isLanding = false;
+                player.isFalling = false;
+
+                player.canDropAttack = true;
+                break;
+
+            case PlayerController.PlayerState.NomalAttack:
+                player.AttackEnd();
+                player.isGround = true;
+                jumpData.FarstJump = true;
+                player.isLanding = false;
+                player.isFalling = false;
+                break;
         }
-        stageLandingCheck = true;
     }
 
     void Landingoff()
     {
         player.isGround = true;
-        player.isNomalAttack = false;
-        player.animator.SetBool("IsNomalAttack_1", player.isNomalAttack);
         jumpData.FarstJump = true;
         player.isLanding = false;
-        
-        player.isAttack = false;
     }
 }

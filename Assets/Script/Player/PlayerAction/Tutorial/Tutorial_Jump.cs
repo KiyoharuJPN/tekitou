@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tutorial_Jump : Player_Jump
@@ -16,34 +14,40 @@ public class Tutorial_Jump : Player_Jump
     // Update is called once per frame
     void Update()
     {
+        //停止
+        if (tutroialPlayer.playerState == PlayerController.PlayerState.Event) return;
+
         //接地状態を得る
         isGround = ground.IsGround();
 
-        //停止
-        if (tutroialPlayer.isExAttack || tutroialPlayer.isWarpDoor) return;
-
-        tutroialPlayer.isFalling = tutroialPlayer.rb.velocity.y < -FALL_VELOCITY;
-
         if (tutroialPlayer.isUpAttack && !isSecondJump) canSecondJump = true;
 
-        //ジャンプキー取得
-        if (tutroialPlayer.canMove && !tutroialPlayer.isAttack && tutroialPlayer.canTJump) JumpBottan();
+        //プレイヤーがイベント・攻撃中以外の処理
+        if (tutroialPlayer.playerState == PlayerController.PlayerState.Idle)
+        {
+            //落下状態取得
+            tutroialPlayer.isFalling = tutroialPlayer.rb.velocity.y < -FALL_VELOCITY;
 
-
+            if (tutroialPlayer.canTJump)
+            {
+                //ジャンプキー取得
+                JumpBottan();
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        if (tutroialPlayer.isExAttack) return;
-        if (isUpAttack || !tutroialPlayer.canDropAttack || tutroialPlayer.isSideAttack)
+        //プレイヤーがイベント・攻撃中以外の処理
+        if (tutroialPlayer.playerState == PlayerController.PlayerState.Idle ||
+            tutroialPlayer.playerState == PlayerController.PlayerState.Event ||
+            tutroialPlayer.playerState == PlayerController.PlayerState.NomalAttack)
         {
-            isjump = false;
-            return;
+            Jump();
+            Gravity();
         }
-        Jump();
-        Gravity();
 
-        if (isjump && player.isAttack)
+        if (isjump && tutroialPlayer.playerState != PlayerController.PlayerState.Idle)
         {
             isjump = false;
             jumpTime = 0;

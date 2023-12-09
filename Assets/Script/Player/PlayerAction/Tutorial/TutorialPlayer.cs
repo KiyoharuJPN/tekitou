@@ -1,7 +1,9 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -45,17 +47,16 @@ public class TutorialPlayer : PlayerController
 
     void Update()
     {
-        if (!canMove) return;
-
         if (!canTExGageGet)
         {
             ExAttackParam.Instance.SetGage(0);
         }
 
-        if (isExAttack || isWarpDoor)
+        if (playerState == PlayerState.Event)
         {
             rb.velocity = Vector2.zero;
             gameObject.layer = LayerMask.NameToLayer("PlayerAction");
+            return;
         }
 
         //ノックバック処理
@@ -78,10 +79,8 @@ public class TutorialPlayer : PlayerController
         {
             canMovingCounter -= Time.deltaTime;
         }
-        if (!isLanding) { _Skill(); }
-        
 
-        BackgroundScroll();
+        AttacKInputKay();
 
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsRun", isRun);
@@ -89,7 +88,6 @@ public class TutorialPlayer : PlayerController
         animator.SetBool("IsJumping", isJumping);
         animator.SetBool("IsSquatting", isSquatting);
         animator.SetBool("IsLanding", isLanding);
-        animator.SetBool("IsDropAttack", isDropAttack);
         animator.SetBool("IsGround", isGround);
     }
     public void Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
@@ -110,19 +108,22 @@ public class TutorialPlayer : PlayerController
     }
 
     //技入力検知
-    void _Skill()
+    protected override void AttacKInputKay()
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
+
         if (nomalAttack.IsPressed())
         {
-            isAttackKay = true;
+            isNomalAttackKay = true;
         }
-        else { isAttackKay = false; }
+        else { isNomalAttackKay = false; }
         if (skillAttack.IsPressed())
         {
             isSkillAttackKay = true;
         }
         else { isSkillAttackKay = false; }
+
+        if (playerState != PlayerState.Idle || playerState == PlayerState.Event) return;
 
         //上昇攻撃
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && canTUpAttack/* || Input.GetKey(KeyCode.I) && canTUpAttack*/)
@@ -150,7 +151,7 @@ public class TutorialPlayer : PlayerController
         //必殺技
         if (exAttack_L.IsPressed() && exAttack_R.IsPressed()/* || Input.GetKey(KeyCode.E)*/)
         {
-            if (!isAttack && canExAttack && canTExAttack && !isExAttack) 
+            if (canTExAttack) 
             {
                 AttackAction("ExAttack");
             }
@@ -161,14 +162,9 @@ public class TutorialPlayer : PlayerController
             //通常攻撃入力
             AttackAction("NomalAttack");
         }
-        if (nomalAttack.IsPressed() && canNomalAttack && canTAttack)
-        {
-            //通常攻撃長押し中
-            AttackAction("NomalAttack");
-        }
     }
 
-    //KnockBackされたときの処理
+    //KnockBack処理
     void KnockingBack()
     {
         
@@ -201,13 +197,11 @@ public class TutorialPlayer : PlayerController
     //チュートリアルExAttack終了時
     public new void ExAttackEnd()
     {
-        isExAttack = false;
-        isAttack = false;
         exAttackEnemylist.Clear();
         NomalPlayer();
-        animator.SetBool("IsExAttack", isExAttack);
         GameManager.Instance.PlayerExAttack_End();
         tExAttackActivCheck = true;
+        AttackEnd();
     }
 
     //背景スクロール処理

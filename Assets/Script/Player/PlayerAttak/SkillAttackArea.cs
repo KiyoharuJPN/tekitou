@@ -5,6 +5,20 @@ public class SkillAttackArea : MonoBehaviour
     [SerializeField]
     PlayerController player;
 
+    Skill upAttack;
+    Skill downAttack;
+    Skill sideAttack;
+
+    Skill setSkill;
+    float damage;
+
+    private void Start()
+    {
+        upAttack = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
+        downAttack = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
+        sideAttack = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
+    }
+
     //çUåÇîÕàÕÇ…ì¸Ç¡ÇΩéû
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -17,22 +31,23 @@ public class SkillAttackArea : MonoBehaviour
 
     void HitDamage(Collider2D Enemy)
     {
-        //çUåÇ
-        if (player.isUpAttack)//è„è∏çUåÇ
+        switch (player.playerState)
         {
-            Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.UpAttack);
-            player.Attack(Enemy, skill.damage, skill, true);
+            case PlayerController.PlayerState.UpAttack:
+                damage = upAttack.damage;
+                setSkill = upAttack;
+                break;
+            case PlayerController.PlayerState.DownAttack:
+                damage = downAttack.damage;
+                setSkill = downAttack;
+                break;
+            case PlayerController.PlayerState.SideAttack:
+                damage = sideAttack.damage;
+                setSkill = sideAttack;
+                break;
         }
-        if (player.isSideAttack)//â°çUåÇ
-        {
-            Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
-            player.Attack(Enemy, skill.damage, skill, true);
-        }
-        if (player.isDropAttack)//â∫çUåÇ
-        {
-            Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
-            player.Attack(Enemy, skill.damage, skill, true);
-        }
+
+        player.Attack(Enemy, damage, setSkill, true);
         ExAttackParam.Instance.AddGauge();
     }
 }
