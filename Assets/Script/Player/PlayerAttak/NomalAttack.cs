@@ -13,6 +13,7 @@ public class NomalAttack
     {
         player.enemylist.Clear();
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
+        player.animator.SetBool("IsNomalAttackBool", true);
         player.animator.SetTrigger("IsNomalAttack");
         isAirAttack = false;
         mono.StartCoroutine(NomalAttackInterval(player, mono));

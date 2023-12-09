@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (isGround != isgroundpreb) { isgroundpreb = isGround; Debug.Log("player" + isGround + "and" + isgroundpreb); }
+        if (isGround != isgroundpreb) { isgroundpreb = isGround;}
         //Debug.Log(isgroundpreb);
 
         //ノックバック処理
@@ -236,8 +236,6 @@ public class PlayerController : MonoBehaviour
         }
 
         AttacKInputKay();
-
-        
     }
 
     public void Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
@@ -412,10 +410,12 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("IsDropAttack", false);
                 await UniTask.Delay(270);
                 break;
+            case PlayerState.NomalAttack:
+                animator.SetBool("IsNomalAttackBool", false);
+                break;
         }
         if(playerState != PlayerState.Event) 
         {
-            Debug.Log("アイドルに移行");
             playerState = PlayerState.Idle;
         }
         enemylist.Clear();

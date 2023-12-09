@@ -41,7 +41,7 @@ public class UpAttack
             }
             yield return null;
         }
-        player.rb.velocity = new Vector2(0, 0);
+        player.rb.velocity = new Vector2(player.rb.velocity.x, player.rb.velocity.y / 3);
         player.AttackEnd();
     }
 

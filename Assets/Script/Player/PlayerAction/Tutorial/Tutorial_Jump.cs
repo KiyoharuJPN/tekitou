@@ -40,13 +40,14 @@ public class Tutorial_Jump : Player_Jump
     {
         //プレイヤーがイベント・攻撃中以外の処理
         if (tutroialPlayer.playerState == PlayerController.PlayerState.Idle ||
+            tutroialPlayer.playerState == PlayerController.PlayerState.Event ||
             tutroialPlayer.playerState == PlayerController.PlayerState.NomalAttack)
         {
             Jump();
             Gravity();
         }
 
-        if (isjump && tutroialPlayer.isAttack)
+        if (isjump && tutroialPlayer.playerState != PlayerController.PlayerState.Idle)
         {
             isjump = false;
             jumpTime = 0;

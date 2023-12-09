@@ -75,7 +75,7 @@ public class Player_Jump : MonoBehaviour
             Jump();
             Gravity();
         }
-        else if(isjump &&
+        if(isjump &&
             player.playerState != PlayerState.Idle)
         {
             isjump = false;
@@ -118,7 +118,6 @@ public class Player_Jump : MonoBehaviour
         //ƒWƒƒƒ“ƒv1’i–Ú
         if (FarstJump && !canSecondJump && isGround)
         {
-            
             player.isSquatting = true;
             FarstJump = false;
             player.animator.SetBool("IsSquatting", player.isSquatting);
@@ -170,7 +169,6 @@ public class Player_Jump : MonoBehaviour
         {
             if (isUpAttack)
             {
-                UpAttack.UpAttackEnd(player, this);
                 return distance * 0.3f;
             }
             else

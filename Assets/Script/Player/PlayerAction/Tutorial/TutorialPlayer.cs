@@ -123,7 +123,7 @@ public class TutorialPlayer : PlayerController
         }
         else { isSkillAttackKay = false; }
 
-        if (playerState != PlayerState.Idle) return;
+        if (playerState != PlayerState.Idle || playerState == PlayerState.Event) return;
 
         //ã¸UŒ‚
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && canTUpAttack/* || Input.GetKey(KeyCode.I) && canTUpAttack*/)
