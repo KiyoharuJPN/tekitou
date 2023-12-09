@@ -210,8 +210,9 @@ public class Enemy : MonoBehaviour
         {
             //一時使用停止
             //攻撃クールダウンタイム
-            //HadAttack = true;
-            //StartCoroutine(HadAttackReset());
+            if (isDestroy) return;
+            HadAttack = true;
+            StartCoroutine(HadAttackReset());
 
             //ダメージとノックバック
             col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);

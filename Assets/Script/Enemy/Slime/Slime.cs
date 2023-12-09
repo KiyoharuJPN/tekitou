@@ -160,14 +160,4 @@ public class Slime : Enemy
         enemyRb.velocity = new Vector2 (eveloX, enemyRb.velocity.y);
         base.TurnAround();
     }
-
-    public float GetBossHP()
-    {
-        return hp;
-    }
-
-    public float GetBossFullHP()
-    {
-        return enemyData.hp;
-    }
 }
