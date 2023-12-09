@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
     internal bool canMove = true;
 
     //死亡判定
-    bool isDead = false;
+    bool isDead = false, isgroundpreb = false;
     public bool GetIsDead {  get { return isDead; } }
 
     //InputSystem
@@ -210,6 +210,9 @@ public class PlayerController : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("PlayerAction");
             return;
         }
+
+        if (isGround != isgroundpreb) { isgroundpreb = isGround; Debug.Log("player" + isGround + "and" + isgroundpreb); }
+        //Debug.Log(isgroundpreb);
 
         //ノックバック処理
         if (knockBack.canKnockBack)

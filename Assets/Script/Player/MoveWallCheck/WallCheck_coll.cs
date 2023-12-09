@@ -9,27 +9,27 @@ public class WallCheck_coll : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Stage")
+        if (collision.gameObject.tag == "Stage" || collision.gameObject.tag == "MoveWall")
         {
             isWall = true;
-            Debug.Log("CheckWall" + transform.position + isWall);
+            //Debug.Log("CheckWall" + transform.position + isWall);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Stage")
+        if (collision.gameObject.tag == "Stage" || collision.gameObject.tag == "MoveWall")
         {
             isWall = true;
-            Debug.Log("CheckWall" + transform.position + isWall);
+            //Debug.Log("CheckWall" + transform.position + isWall);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Stage")
+        if (collision.gameObject.tag == "Stage" || collision.gameObject.tag == "MoveWall")
         {
             isWall = false;
-            Debug.Log("CheckWall" + transform.position + isWall);
+            //Debug.Log("CheckWall" + transform.position + isWall);
         }
     }
 }

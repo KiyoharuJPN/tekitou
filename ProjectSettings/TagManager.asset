@@ -12,6 +12,7 @@ TagManager:
   - InvinciblePlayer
   - DeadPlayer
   - PlatFormStage
+  - MoveWall
   layers:
   - Default
   - TransparentFX
