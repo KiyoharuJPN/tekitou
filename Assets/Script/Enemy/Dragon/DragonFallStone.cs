@@ -34,7 +34,7 @@ public class DragonFallStone : MonoBehaviour
             //プレイヤーに対する攻撃
             //ダメージとノックバック
             collision.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * 4);
-            collision.gameObject.GetComponent<PlayerController>()._Damage(2);
+            collision.gameObject.GetComponent<PlayerController>().Damage(2);
         }
 
         if(isActiveAndEnabled && (collision.CompareTag("Stage") || collision.CompareTag("PlatFormStage")))

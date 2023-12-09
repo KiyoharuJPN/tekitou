@@ -8,7 +8,7 @@ public class Attack : MonoBehaviour
         {
             GetComponentInParent<Enemy>().SetPlayerAttacked(false);
             collision.GetComponent<PlayerController>().KnockBack(transform.position, GetComponentInParent<Enemy>().GetKnockBackForce());
-            collision.GetComponent<PlayerController>()._Damage(GetComponentInParent<Enemy>().GetDamage());
+            collision.GetComponent<PlayerController>().Damage(GetComponentInParent<Enemy>().GetDamage());
         }
     }
 }

@@ -7,35 +7,21 @@ public class NomalAttack
     //空中時のクールタイム
     const float airCoolTime = 0.1f;
 
+    static bool isAirAttack;
+
     public static void NomalAttackStart(PlayerController player, MonoBehaviour mono)
     {
+        player.enemylist.Clear();
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
-        player.canNomalAttack = false;
-        player.isNomalAttack = true;
-        player.animator.SetBool("IsNomalAttack_1", player.isNomalAttack);
         player.animator.SetTrigger("IsNomalAttack");
-        
-        player.isAttack = true;
-        AttackCool(player, mono);
-    }
-
-    public static void AttackCool(PlayerController player, MonoBehaviour mono)
-    {
-        if (player.isFalling || player.isJumping) //空中通常攻撃の場合
-        {
-            mono.StartCoroutine(_NomalAttackInterval(airCoolTime + AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Jump), player));
-        }
-        else
-        {
-            mono.StartCoroutine(_NomalAttackInterval(AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Stage), player));
-        }
+        isAirAttack = false;
+        mono.StartCoroutine(NomalAttackInterval(player, mono));
     }
 
     //クールタイム用コルーチン
-    static IEnumerator _NomalAttackInterval(float coolTime, PlayerController player)
+    static IEnumerator NomalAttackInterval(PlayerController player, MonoBehaviour mono)
     {
-        player.enemylist.Clear();
-        float time = coolTime;
+        float time = AttackCoolTime(player);
 
         while (time > 0)
         {
@@ -43,9 +29,26 @@ public class NomalAttack
             yield return null;
         }
 
+        if (player.isNomalAttackKay && !isAirAttack)//アタック再使用確認
+        {
+            NomalAttackStart(player, mono);
+        }
+        else
+        {
+            player.AttackEnd();
+        }
+    }
 
-        player.isAttack = false;
-        player.isNomalAttack = false; 
-        player.canNomalAttack = true;
+    public static float AttackCoolTime(PlayerController player)
+    {
+        if (player.isFalling || player.isJumping) //空中通常攻撃の場合
+        {
+            isAirAttack = true;
+            return airCoolTime + AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Jump);
+        }
+        else
+        {
+            return AnimationCipsTime.GetAnimationTime(player.animator, AnimationCipsTime.ClipType.NomalAttack_Stage);
+        }
     }
 }

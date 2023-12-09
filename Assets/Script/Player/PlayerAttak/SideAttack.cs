@@ -1,89 +1,111 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class SideAttack:MonoBehaviour
+public class SideAttack
 {
-    //横攻撃発生必要時間
-    const float dashingTime = 0.2f;
+    //射程
+    const float range = 8f;
+
+    private static float firstPos_x;
+    private static float movePos_x;
+
+    private static Vector2 moveVec;
 
     public static void SideAttackStart(PlayerController player, bool sideJudge, MonoBehaviour p_behaviour)
     {
-        p_behaviour.StartCoroutine(SideAttackMove(player, sideJudge));
-    } 
-
-    //横攻撃処理
-    static IEnumerator SideAttackMove(PlayerController player, bool sideJudge)
-    {
         //アニメーションセット
-        player.canSideAttack = false;
-        player.isAttack = true;
-        player.isSideAttack = true;
-        player.animator.SetBool("IsSideAttack", player.isSideAttack);
+        player.animator.SetBool("IsSideAttack", true);
         player.animator.Play("Hero_SideAttack_Start");
 
-        float originalGravity = player.rb.gravityScale;
-        player.rb.gravityScale = 0f;
+        //originalGravity = player.rb.gravityScale;
+        //player.rb.gravityScale = 0f;
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.SideAttack);
-        SideJudge(skill, player, sideJudge);
 
-        yield return new WaitForSeconds(dashingTime);
-        player.rb.gravityScale = originalGravity;
-        player.isSideAttack = false;
-        player.animator.SetBool("IsSideAttack", player.isSideAttack);
-        player.enemylist.Clear();
-        yield return new WaitForSeconds(skill.coolTime);
-        player.isAttack = false;
+        p_behaviour.StartCoroutine(SideAttackMove(player, skill, sideJudge));
+    }
+
+    static IEnumerator SideAttackMove(PlayerController player, Skill skill, bool sideJudge)
+    {
+        firstPos_x = player.transform.position.x;
+
+
+        Vector2 moveVec = SideJudge(skill, player, sideJudge);
+        Slashing(player, sideJudge);
+
+        float activeTime = skill.activeTime;
+
+        while (activeTime > 0)
+        {
+            player.rb.velocity = moveVec;
+            activeTime -= Time.deltaTime;
+
+            if (player.transform.position.x > movePos_x && sideJudge)
+            {
+                break;
+            }
+            if (player.transform.position.x < movePos_x && !sideJudge)
+            {   
+                break;
+            }
+
+            //イベント時は終了
+            if (player.playerState == PlayerController.PlayerState.Event)
+            {
+                player.animator.SetBool("IsSideAttack", false);
+                break;
+            }
+
+            yield return null;
+        };
+
+        player.rb.velocity = Vector2.zero;
+        activeTime = skill.coolTime;
+
+        player.AttackEnd();
+
+        while (activeTime > 0)
+        {
+            activeTime -= Time.deltaTime;
+            yield return null;
+        }
+
         player.canSideAttack = true;
     }
 
     //横攻撃左右判定
-    public static void SideJudge(Skill skill, PlayerController player, bool sideJudge)
+    static Vector2 SideJudge(Skill skill, PlayerController player, bool sideJudge)
     {
         Vector3 localScale = player.transform.localScale;
-        if (player.transform.localScale.x > 0)
+
+        if (sideJudge)
         {
-            if (sideJudge)
-            {
-                player.rb.velocity = new Vector2(player.transform.localScale.x * skill.distance, 0f);
-                
-            }
-            else if (!sideJudge)
-            {
-                player.rb.velocity = new Vector2(-player.transform.localScale.x * skill.distance, 0f);
-                localScale.x *= -1f;
-                player.transform.localScale = localScale;
-            }
+            movePos_x = firstPos_x + range;
+            localScale.x = 1f;
+            player.transform.localScale = localScale;
+            
         }
-        else if (player.transform.localScale.x < 0)
+        else if (!sideJudge)
         {
-            if (sideJudge)
-            {
-                player.rb.velocity = new Vector2(-player.transform.localScale.x * skill.distance, 0f);
-                localScale.x *= -1f;
-                player.transform.localScale = localScale;
-            }
-            else if (!sideJudge)
-            {
-                player.rb.velocity = new Vector2(player.transform.localScale.x * skill.distance, 0f);
-            }
+            movePos_x = firstPos_x - range;
+            localScale.x = -1f;
+            player.transform.localScale = localScale;
         }
-        Slashing(player, sideJudge);
+        return new Vector2((player.transform.localScale.x * skill.distance), 0f);
     }
 
     //追加斬撃
     private static void Slashing(PlayerController player, bool sideJudge)
     {
+        if (!player.gameObject.GetComponent<SlashingBuff>()) return;
+
         if (sideJudge)
         {
-            if (player.gameObject.GetComponent<SlashingBuff>())
-                player.gameObject.GetComponent<SlashingBuff>().Slashing(SlashingBuff.SlashingType.sideAttack_Right, player.gameObject);
+            player.gameObject.GetComponent<SlashingBuff>().Slashing(SlashingBuff.SlashingType.sideAttack_Right, player.gameObject);
         }
         else if(!sideJudge) 
         {
-            if (player.gameObject.GetComponent<SlashingBuff>())
-                player.gameObject.GetComponent<SlashingBuff>().Slashing(SlashingBuff.SlashingType.sideAttack_Left, player.gameObject);
+            player.gameObject.GetComponent<SlashingBuff>().Slashing(SlashingBuff.SlashingType.sideAttack_Left, player.gameObject);
         }
     } 
 }

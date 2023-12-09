@@ -17,10 +17,8 @@ public class DropAttack
     static IEnumerator DropAttackMove(PlayerController player)
     {
         float time = 0;
-        player.isAttack = true;
-        player.isDropAttack = true;
-        player.animator.SetBool("IsDropAttack", player.isDropAttack);
-        player.canDropAttack = false;
+        player.animator.SetBool("IsDropAttack", true);
+        player.animator.Play("Hero_DropAttack_Start");
         player.rb.velocity = new Vector2(0, 0);
         Skill skill = SkillGenerater.instance.SkillSet(Skill.Type.DropAttack);
 
@@ -35,6 +33,7 @@ public class DropAttack
         }
 
         player.rb.velocity = Vector2.zero;
+
         while (!player.isGround)
         {
             time += Time.deltaTime;
@@ -43,16 +42,12 @@ public class DropAttack
 
             if(time > 3f)
             {
+                player.animator.Play("Hero_DropAttack_End");
+                player.canDropAttack = true;
+                player.AttackEnd();
                 break;
             }
         }
-        player.animator.Play("Hero_DropAttack_End");
-        yield return new WaitForSeconds(0.18f);
 
-        player.enemylist.Clear();
-        player.isAttack = false;
-        player.isDropAttack = false;
-        player.animator.SetBool("IsDropAttack", player.isDropAttack);
-        player.canDropAttack = true;
     }
 }

@@ -14,19 +14,30 @@ public class Skill
         ExAttack     //必殺技
     }
 
-    public Type type;     　 // 種類
+    public Type type;       // 種類
+
+    [SerializeField, Header("ダメージ")]
     public float damage;　　 // ダメージ(攻撃力)
+
+    [SerializeField, Header("発生時間")]
+    public float activeTime;
+
+    [SerializeField,Header("移動距離")]
     public float distance;   // 移動距離
+
+    [SerializeField, Header("スキルの説明")]
     public String skillText; // スキルの説明文
-    [SerializeField]
-    public int hitEffectAngle;//ヒットエフェクト発生角度
+
+    [SerializeField,Header("ヒットエフェクト生成角度")]
+    public int hitEffectAngle;
 
     public float coolTime;
 
-    public Skill(Type type, float damage, float distance, String skillTxet, int hitEffectAngle, float coolTime)
+    public Skill(Type type, float damage,float activeTime, float distance, String skillTxet, int hitEffectAngle, float coolTime)
     {
         this.type = type;
         this.damage = damage;
+        this.activeTime = activeTime;
         this.distance = distance;
         this.skillText = skillTxet;
         this.hitEffectAngle = hitEffectAngle;

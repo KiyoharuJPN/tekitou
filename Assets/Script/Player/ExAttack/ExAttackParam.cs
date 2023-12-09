@@ -50,7 +50,7 @@ public class ExAttackParam : MonoBehaviour
     }
 
     //•KE‹Z‚ğ”­“®‚µ‚½ÛŒÄ‚Ô
-    public void _EXAttack()
+    public void EXAttack()
     {
         exAttackText.GetComponent<Image>().enabled = false;
         exGauge.fillAmount = 0f;

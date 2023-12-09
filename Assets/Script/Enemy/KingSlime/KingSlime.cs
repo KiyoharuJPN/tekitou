@@ -429,7 +429,7 @@ public class KingSlime : Enemy
             StartCoroutine(HadAttackReset());
             //ダメージとノックバック
             col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * enemyData.knockBackValue);
-            col.gameObject.GetComponent<PlayerController>()._Damage(enemyData.attackPower);
+            col.gameObject.GetComponent<PlayerController>().Damage(enemyData.attackPower);
         }
     }
     public bool GetSkillTurnAround()

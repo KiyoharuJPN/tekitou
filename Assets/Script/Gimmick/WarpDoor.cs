@@ -139,7 +139,6 @@ public class WarpDoor : MonoBehaviour
             player.GetComponent<PlayerController>().SetCanMove(true);
         }
 
-
         GameManager.Instance.PlayTimeStart();
     }
 

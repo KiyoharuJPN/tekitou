@@ -679,7 +679,7 @@ public class DemonKing : Enemy
 
                 //CrushAttackのダメージとノックバック
                 collider.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 50);
-                collider.gameObject.GetComponent<PlayerController>()._Damage(2);
+                collider.gameObject.GetComponent<PlayerController>().Damage(2);
             }
 
             if(isSummonAttack && isLH)
@@ -690,7 +690,7 @@ public class DemonKing : Enemy
 
                 //isSummonAttackのダメージとノックバック
                 collider.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 40);
-                collider.gameObject.GetComponent<PlayerController>()._Damage(1);
+                collider.gameObject.GetComponent<PlayerController>().Damage(1);
             }
 
             if(isPincerAttack)
@@ -701,7 +701,7 @@ public class DemonKing : Enemy
 
                 //isPincerAttackのダメージとノックバック
                 collider.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 50);
-                collider.gameObject.GetComponent<PlayerController>()._Damage(2);
+                collider.gameObject.GetComponent<PlayerController>().Damage(2);
             }
         }
     }

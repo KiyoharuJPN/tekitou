@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static PlayerController.PlayerState;
 
 public class Player_IsGround : MonoBehaviour
 {
@@ -96,39 +97,48 @@ public class Player_IsGround : MonoBehaviour
     //stageíÖínèàóù
     void StageLanding(Collider2D collision)
     {
-        if (!player.isUpAttack)
+        player.isSquatting = false;
+        player.isJumping = false;
+
+        jumpData.jumpTime = 0;
+
+        jumpData.canSecondJump = false;
+        jumpData.isSecondJump = false;
+        player.canUpAttack = true;
+
+        switch (player.playerState)
         {
-            player.isSquatting = false;
-            player.isJumping = false;
-
-            jumpData.jumpTime = 0;
-            player.canUpAttack = true;
-
-            jumpData.canSecondJump = false;
-            jumpData.isSecondJump = false;
-
-            //ìÀÇ´éhÇµçUåÇèIÇÌÇË
-            if (player.isDropAttack)
-            {
-                jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
-                player.isGround = true;
-                Invoke("Landingoff", 0.18f);
-            }
-            else
-            {
+            case PlayerController.PlayerState.Event:
+            case Idle:
+                player.canUpAttack = true;
                 Landingoff();
-            }
+                break;
+
+            case DownAttack:
+                jumpData.shake.Shake(jumpData._shakeInfo.Duration, jumpData._shakeInfo.Strength, false, true);
+                player.AttackEnd();
+                player.isGround = true;
+                jumpData.FarstJump = true;
+                player.isLanding = false;
+                player.isFalling = false;
+
+                player.canDropAttack = true;
+                break;
+
+            case PlayerController.PlayerState.NomalAttack:
+                player.AttackEnd();
+                player.isGround = true;
+                jumpData.FarstJump = true;
+                player.isLanding = false;
+                player.isFalling = false;
+                break;
         }
     }
 
     void Landingoff()
     {
         player.isGround = true;
-        player.isNomalAttack = false;
-        player.animator.SetBool("IsNomalAttack_1", player.isNomalAttack);
         jumpData.FarstJump = true;
         player.isLanding = false;
-        
-        player.isAttack = false;
     }
 }

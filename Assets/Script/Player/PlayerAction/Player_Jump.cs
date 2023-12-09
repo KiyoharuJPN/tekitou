@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerController;
 
@@ -50,37 +46,41 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //停止
-        if (player.isExAttack || player.isWarpDoor) return;
+        if (player.playerState == PlayerState.Event) return;
 
         //接地状態を得る
         isGround = ground.IsGround();
 
-        player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
-
         if(player.isUpAttack && !isSecondJump) canSecondJump = true;
 
-        //ジャンプキー取得
-        if (player.canMove && !player.isAttack) JumpBottan();
-        
+        //プレイヤーがイベント・攻撃中以外の処理
+        if (player.playerState == PlayerState.Idle)
+        {
+            //落下状態取得
+            player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
+
+            //ジャンプキー取得
+            JumpBottan();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (player.isExAttack) return;
-        if (isUpAttack || !player.canDropAttack || player.isSideAttack || player.isWarpDoor)
+        //プレイヤーがイベント・攻撃中以外の処理
+        if (player.playerState == PlayerState.Idle || 
+            player.playerState == PlayerState.Event ||
+            player.playerState == PlayerState.NomalAttack)
         {
-            isjump = false;
-            return;
+            Jump();
+            Gravity();
         }
-        Jump();
-        Gravity();
-        if (isjump && player.isAttack)
+        else if(isjump &&
+            player.playerState != PlayerState.Idle)
         {
             isjump = false;
             jumpTime = 0;
-        };
+        }
     }
 
     void JumpBottan()
@@ -171,7 +171,7 @@ public class Player_Jump : MonoBehaviour
             if (isUpAttack)
             {
                 UpAttack.UpAttackEnd(player, this);
-                return distance * 0.1f;
+                return distance * 0.3f;
             }
             else
             {

@@ -126,11 +126,11 @@ public class GameManager : MonoBehaviour
     //プレイヤー停止処理
     public void PlayerStop()
     {
-        player.canMove = false;
+        player.playerState = PlayerController.PlayerState.Event;
     }
     public void PlayerMove()
     {
-        player.canMove = true;
+        player.playerState = PlayerController.PlayerState.Idle;
     }
 
     //プレイヤー死亡時処理
@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
     {
         if (stageCtrl != null)
             stageCtrl.playTimeStop();
-        player.canMove = false;
+        player.SetCanMove(false);
         canPause = false;
         Result.Instance.Result_Set(StageID, 
             PointParam.Instance.GetPoint(), maxCombo, killEnemy);
@@ -360,7 +360,8 @@ public class GameManager : MonoBehaviour
     {
 
         GameManager.Instance.PlayTimeStop();
-        player.canMove = false;
+        player.AttackEnd();
+        player.SetCanMove(false);
         Time.timeScale = 0.3f;
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1f;

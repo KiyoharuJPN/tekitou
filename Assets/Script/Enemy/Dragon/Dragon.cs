@@ -729,7 +729,7 @@ public class Dragon : Enemy
                 StartCoroutine(HadAttackReset());
                 //FlameBracingのダメージとノックバック
                 col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 30);
-                col.gameObject.GetComponent<PlayerController>()._Damage(2);
+                col.gameObject.GetComponent<PlayerController>().Damage(2);
             }
 
             if (isSlewAttacking)
@@ -739,7 +739,7 @@ public class Dragon : Enemy
                 StartCoroutine(HadAttackReset());
                 //SlewAttackingのダメージとノックバック
                 col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 30);
-                col.gameObject.GetComponent<PlayerController>()._Damage(2);
+                col.gameObject.GetComponent<PlayerController>().Damage(2);
             }
 
             if (isJumpingAttacking)
@@ -749,7 +749,7 @@ public class Dragon : Enemy
                 StartCoroutine(HadAttackReset());
                 //SlewAttackingのダメージとノックバック
                 col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * 30);
-                col.gameObject.GetComponent<PlayerController>()._Damage(2);
+                col.gameObject.GetComponent<PlayerController>().Damage(2);
             }
         }
     }

@@ -110,7 +110,8 @@ public class TutorialScene : StageCtrl
                     return TutorialClear();
                 break;
             case 3:
-                if (player.isNomalAttack && player.isGround)
+                if (player.playerState == PlayerController.PlayerState.NomalAttack
+                    && player.isGround)
                 {
                     isAttackPlay = true;
                 }
@@ -127,7 +128,8 @@ public class TutorialScene : StageCtrl
                 if (isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 4:
-                if (player.isNomalAttack && player.isJumping)
+                if (player.playerState == PlayerController.PlayerState.NomalAttack
+                    && player.isJumping)
                 {
                     isAttackPlay = true;
                 }
@@ -143,19 +145,19 @@ public class TutorialScene : StageCtrl
                 if (isAttackPlay && panelEnemyDaeth) return TutorialClear();
                 break;
             case 5:
-                if (player.isSideAttack)
+                if (player.playerState == PlayerController.PlayerState.SideAttack)
                 {
                     return TutorialClear();
                 }
                 break;
             case 6:
-                if (player.isUpAttack)
+                if (player.playerState == PlayerController.PlayerState.UpAttack)
                 {
                     return TutorialClear();
                 }
                 break;
             case 7:
-                if (player.isDropAttack)
+                if (player.playerState == PlayerController.PlayerState.DownAttack)
                 {
                     return TutorialClear();
                 }

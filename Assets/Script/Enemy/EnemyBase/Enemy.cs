@@ -215,7 +215,7 @@ public class Enemy : MonoBehaviour
 
             //ダメージとノックバック
             col.gameObject.GetComponent<PlayerController>().KnockBack(this.transform.position, 15 * enemyData.knockBackValue);
-            col.gameObject.GetComponent<PlayerController>()._Damage((int)enemyData.power);
+            col.gameObject.GetComponent<PlayerController>().Damage((int)enemyData.power);
         }
     }
 
