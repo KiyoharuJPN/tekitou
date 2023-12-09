@@ -44,8 +44,8 @@ public class BossHPBar : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         //èâä˙âª
-        BossFullHP = GetComponentInParent<Enemy>().GetEnemyFullHP();
-        BossHP = GetComponentInParent<Enemy>().GetEnemyHP();
+        BossFullHP = GetComponentInParent<Enemy>(true).GetEnemyFullHP();
+        BossHP = GetComponentInParent<Enemy>(true).GetEnemyHP();
         StartAnimation = false;
         ReductionHP();
     }
