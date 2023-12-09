@@ -304,6 +304,12 @@ public class PlayerController : MonoBehaviour
 
         if (playerState != PlayerState.Idle || playerState == PlayerState.Event) return;
 
+        //•KE‹Z
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
+        {
+            AttackAction("ExAttack");
+            return;
+        }
         //ã¸UŒ‚
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay)
         {
@@ -327,12 +333,7 @@ public class PlayerController : MonoBehaviour
             AttackAction("SideAttack_left");
             return;
         }
-        //•KE‹Z
-        if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
-        {
-            AttackAction("ExAttack");
-            return;
-        }
+        
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
         if (nomalAttack.WasPressedThisFrame())
         {

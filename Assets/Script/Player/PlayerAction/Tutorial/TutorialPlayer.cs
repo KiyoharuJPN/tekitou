@@ -118,6 +118,14 @@ public class TutorialPlayer : PlayerController
 
         if (playerState != PlayerState.Idle || playerState == PlayerState.Event) return;
 
+        //•KŽE‹Z
+        if (exAttack_L.IsPressed() && exAttack_R.IsPressed()/* || Input.GetKey(KeyCode.E)*/)
+        {
+            if (canTExAttack)
+            {
+                AttackAction("ExAttack"); return;
+            }
+        }
         //ã¸UŒ‚
         if (inputMoveAxis.y >= 0.9 && isSkillAttackKay && canTUpAttack/* || Input.GetKey(KeyCode.I) && canTUpAttack*/)
         // || rsv >= 0.8)
@@ -140,14 +148,6 @@ public class TutorialPlayer : PlayerController
         // || rsh <= -0.8)
         {
             AttackAction("SideAttack_left"); return;
-        }
-        //•KŽE‹Z
-        if (exAttack_L.IsPressed() && exAttack_R.IsPressed()/* || Input.GetKey(KeyCode.E)*/)
-        {
-            if (canTExAttack) 
-            {
-                AttackAction("ExAttack"); return;
-            }
         }
         //Žè“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
         if (nomalAttack.WasPressedThisFrame() && canNomalAttack && canTAttack)
