@@ -688,6 +688,11 @@ public class Enemy : MonoBehaviour
     }
     public float GetEnemyFullHP()
     {
+        if (enemyData == null)
+        {
+            enemyData = EnemyGeneratar.instance.EnemySet(id);
+            hp = enemyData.hp;
+        }
         return enemyData.hp;
     }
 
