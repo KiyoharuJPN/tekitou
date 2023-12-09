@@ -132,6 +132,20 @@ public class Player_IsGround : MonoBehaviour
                 player.isLanding = false;
                 player.isFalling = false;
                 break;
+
+            case PlayerController.PlayerState.SideAttack:
+                player.isGround = true;
+                jumpData.FarstJump = true;
+                player.isLanding = false;
+                player.isFalling = false;
+                break;
+
+            case PlayerController.PlayerState.UpAttack:
+                player.isGround = true;
+                jumpData.FarstJump = true;
+                player.isLanding = false;
+                player.isFalling = false;
+                break;
         }
     }
 

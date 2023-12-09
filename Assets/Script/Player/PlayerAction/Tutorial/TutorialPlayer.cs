@@ -52,13 +52,6 @@ public class TutorialPlayer : PlayerController
             ExAttackParam.Instance.SetGage(0);
         }
 
-        if (playerState == PlayerState.Event)
-        {
-            rb.velocity = Vector2.zero;
-            gameObject.layer = LayerMask.NameToLayer("PlayerAction");
-            return;
-        }
-
         //ノックバック処理
         if (knockBack.canKnockBack)
         {
