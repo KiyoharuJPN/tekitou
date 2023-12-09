@@ -615,6 +615,7 @@ public class PlayerController : MonoBehaviour
         {
             playerState = PlayerState.Event;
         }
+        isNomalAttackKay = false;
         canMove = cM;
         isUpAttack = false;
         isSideAttack = false;

@@ -358,7 +358,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator _PlyerDeath()
     {
-
         GameManager.Instance.PlayTimeStop();
         player.AttackEnd();
         player.SetCanMove(false);
