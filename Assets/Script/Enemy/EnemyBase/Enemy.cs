@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     protected float hp;
 
     //êÅÇ¡îÚÇ—äpìx
+    protected Vector2 BlowingSpeedPreb = Vector2.zero;
     protected float forceAngle;
     protected Vector2 forceDirection = new Vector3(1.0f, 1.0f), buffForceDirection = new Vector3(1.0f, 1.0f);
     protected float speed = 15f;     //êÅÇ¡îÚÇ—ë¨ìx
@@ -655,6 +656,7 @@ public class Enemy : MonoBehaviour
         if (enemyRb != null)
         {
             isPlayerExAttack = true;
+            if (isDestroy) { BlowingSpeedPreb = enemyRb.velocity; }
             enemyRb.velocity = Vector2.zero;
         }
         if(animator != null)
@@ -682,6 +684,7 @@ public class Enemy : MonoBehaviour
         {
             animator.speed = 1;
         }
+        if (isDestroy) { enemyRb.velocity = BlowingSpeedPreb; }
         isPlayerExAttack = false;
     }
 
