@@ -870,6 +870,12 @@ public class DemonKing : Enemy
     {
         isDestroy = true;
         IsBlowing = true;
+        //—¼è‚Ì“–‚½‚è”»’è‚ğÁ‚·
+        var children = GetComponentsInChildren<HandScript>();
+        foreach (var child in children)
+        {
+            child.DemonDead();
+        }
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);

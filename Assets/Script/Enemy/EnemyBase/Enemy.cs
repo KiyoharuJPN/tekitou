@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     protected float hp;
 
     //吹っ飛び角度
+    protected Vector2 BlowingSpeedPreb = Vector2.zero;
     protected float forceAngle;
     protected Vector2 forceDirection = new Vector3(1.0f, 1.0f), buffForceDirection = new Vector3(1.0f, 1.0f);
     protected float speed = 15f;     //吹っ飛び速度
@@ -208,9 +209,10 @@ public class Enemy : MonoBehaviour
     {
         if (!HadAttack)
         {
+            //プレイヤーの攻撃を食らっている最中に攻撃できなくする
+            if (isDamege) return;
             //一時使用停止
             //攻撃クールダウンタイム
-            if (isDestroy) return;
             HadAttack = true;
             StartCoroutine(HadAttackReset());
 
@@ -223,6 +225,7 @@ public class Enemy : MonoBehaviour
     //ダメージ処理呼出し
     public virtual void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        isDamege = true;
         if (!_isHitStoped)
         {
             _isHitStoped = true;
@@ -366,6 +369,7 @@ public class Enemy : MonoBehaviour
 
             _isHitStoped = false;
         }
+        isDamege = false;
     }
 
     protected void EnemyMove()
@@ -652,6 +656,7 @@ public class Enemy : MonoBehaviour
         if (enemyRb != null)
         {
             isPlayerExAttack = true;
+            if (isDestroy) { BlowingSpeedPreb = enemyRb.velocity; }
             enemyRb.velocity = Vector2.zero;
         }
         if(animator != null)
@@ -679,6 +684,7 @@ public class Enemy : MonoBehaviour
         {
             animator.speed = 1;
         }
+        if (isDestroy) { enemyRb.velocity = BlowingSpeedPreb; }
         isPlayerExAttack = false;
     }
 

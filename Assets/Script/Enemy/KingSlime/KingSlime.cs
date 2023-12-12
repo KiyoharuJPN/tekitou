@@ -91,7 +91,6 @@ public class KingSlime : Enemy
             }
             
         }
-        //if (Input.GetKeyDown(KeyCode.K)) shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         if (!IsBlowing)
         {
             //攻撃関連
@@ -100,13 +99,6 @@ public class KingSlime : Enemy
             if (IsMoving && !inExSkillCheck)KingSlimeMoving();
         }
         
-        //倒されることを確認しているのはEnemyのメイン関数で行われています
-        if (isDestroy && !IsBlowing)
-        {   //倒されたら他のレイヤーの影響を受けないようにするDeadBossLayer
-            IsBlowing = true;
-            gameObject.layer = LayerMask.NameToLayer("DeadBoss");
-            //KingSlimeBlowing();   //特別の動きをするために用意した関数 
-        }
         //アニメーション関数の代入
         animator.SetBool("IsMoving", IsMoving);
         animator.SetInteger("AttackMode", AttackMode);
@@ -182,59 +174,6 @@ public class KingSlime : Enemy
         gameObject.layer = LayerMask.NameToLayer("Enemy");
 
         int i = 0;
-        //while(i < 1)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //attackCheckArea.offset = new Vector2(0, -0.2f);
-        //attackCheckArea.size = new Vector2(6.86f, 3.8f);
-        //while (i < 6)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //attackCheckArea.offset = new Vector2(0, 0.05f);
-        //attackCheckArea.size = new Vector2(8f, 4.3f);
-        //while (i < 11)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //attackCheckArea.offset = new Vector2(0, 1.55f);
-        //attackCheckArea.size = new Vector2(8f, 7.3f);
-        //while (i < 21)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //attackCheckArea.offset = new Vector2(0, -0.1f);
-        //attackCheckArea.size = new Vector2(7f, 4f);
-        //while (i < 25)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //attackCheckArea.offset = new Vector2(0, -0.1f);
-        //attackCheckArea.size = new Vector2(9f, 4f);
-        //while (i < 29)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //while (i < 33)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //attackCheckArea.offset = new Vector2(0, -0.1f);
-        //attackCheckArea.size = new Vector2(10f, 4f);
-        //while (i < 37)
-        //{
-        //    i++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //attackCheckArea.enabled = false;
         while (i < 51)
         {
             i++;
@@ -382,22 +321,6 @@ public class KingSlime : Enemy
             }
         }
     }
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (GetComponent<KingSlime>().enabled)
-    //    {
-    //        if (collision.CompareTag("Player"))
-    //        {
-    //            //攻撃クールダウンタイム
-    //            HadAttack = true;
-    //            StartCoroutine(HadAttackReset());
-    //            //ダメージとノックバック
-    //            collision.GetComponent<PlayerController>().KnockBack(this.transform.position, 30 * enemyData.knockBackValue);
-    //            collision.GetComponent<PlayerController>()._Damage(enemyData.attackPower * 4);
-    //        }
-    //    }
-    //}
-
 
 
     //外部修正用変数をここに
@@ -457,6 +380,9 @@ public class KingSlime : Enemy
     protected override void OnDestroyMode()
     {
         isDestroy = true;
+        IsBlowing = true;
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        gameObject.tag = "DeadBoss";
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = true;

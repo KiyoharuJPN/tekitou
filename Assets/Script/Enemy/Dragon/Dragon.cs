@@ -769,7 +769,8 @@ public class Dragon : Enemy
     {
         isDestroy = true;
         GameManager.Instance.AddKillEnemy();
-        gameObject.layer = LayerMask.NameToLayer("DeadBoss"); 
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        gameObject.tag = "DeadBoss";
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
     }
 
