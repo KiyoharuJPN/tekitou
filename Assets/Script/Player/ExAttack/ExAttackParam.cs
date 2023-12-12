@@ -18,7 +18,13 @@ public class ExAttackParam : MonoBehaviour
     [SerializeField]
     Image exGauge;
     [SerializeField]
+    Image exGaugeFrame;
+    [SerializeField]
+    Sprite exMaxGaugeFrame;
+    [SerializeField]
     GameObject exAttackText;
+
+    private Sprite exNomalFrame;
 
     private bool canExAttack;
 
@@ -56,6 +62,7 @@ public class ExAttackParam : MonoBehaviour
         exGauge.fillAmount = 0f;
         _exAttack = 0;
         canExAttack = false;
+        exGaugeFrame.sprite = exNomalFrame;
     }
 
     public void AddGauge()
@@ -66,8 +73,7 @@ public class ExAttackParam : MonoBehaviour
 
         if (gauge == _exAttack)
         {
-            exAttackText.GetComponent<Image>().enabled = true;
-            canExAttack = true;
+            MaxGage();
         }
         player.CanExAttackCheck();
     }
@@ -85,26 +91,16 @@ public class ExAttackParam : MonoBehaviour
 
         if (gauge == _exAttack)
         {
-            exAttackText.GetComponent<Image>().enabled = true;
-            canExAttack = true;
+            MaxGage();
         }
         player.CanExAttackCheck();
     }
 
-    IEnumerator _SetGage(int i) 
+    private void MaxGage()
     {
-        for (int j = 0;j < i; j++)
-        {
-            if (_exAttack >= gauge) break;
-            exGauge.fillAmount += 1f / gauge;
-            _exAttack++;
-
-            if (gauge == _exAttack)
-            {
-                exAttackText.GetComponent<Image>().enabled = true;
-                canExAttack = true;
-            }
-            yield return null;
-        }
+        exAttackText.GetComponent<Image>().enabled = true;
+        canExAttack = true;
+        exNomalFrame = exGaugeFrame.sprite;
+        exGaugeFrame.sprite = exMaxGaugeFrame;
     }
 }

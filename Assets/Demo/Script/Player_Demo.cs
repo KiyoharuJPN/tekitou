@@ -142,7 +142,7 @@ public class Player_Demo : PlayerController
             StartCoroutine(InvincibleLife());
 
             //ƒ‰ƒCƒtŒvŽZ
-            hpparam.DamageHP(hpparam.GetHP() - power);
+            hpparam.SetHP(hpparam.GetHP() - power);
             shake.Shake(0.2f, 0.8f, true, true);
             if (hpparam.GetHP() <= 0)
             {

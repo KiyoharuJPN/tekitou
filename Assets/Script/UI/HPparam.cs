@@ -5,35 +5,49 @@ using UnityEngine.UI;
 
 public class HPparam : MonoBehaviour
 {
+    [SerializeField, Header("ãƒãƒ¼ãƒˆPrefab")]
+    GameObject HeartObj;
     [SerializeField]
     Image hpGage;
     private int heals;
     private int hp_preb;
 
+    private const int OneHeartHp = 2;
+
     [System.Serializable]
     struct HPStatus
     {
-        [Tooltip("HP‘—Ê")]
+        [Tooltip("HPä¸Šé™")]
         public int FullHP;
-        [Tooltip("‰æ–Ê‚Ì‰º‚©‚çƒn[ƒg‚Ü‚Å‚Ì‹——£"), Range(0, 1)]
-        public float HeartHight;
-        [Tooltip("‰æ–Ê‚Ì¶‚©‚çƒn[ƒg‚Ü‚Å‚Ì‹——£"), Range(0, 0.1f)]
-        public float HeartWidth;
-        [Tooltip("‰æ–Ê‚Ì¶‚©‚çƒn[ƒg‚Ü‚Å‚Ì‹——£"), Range(0, 0.1f)]
-        public float HeartLeftJustified;
-        //ŒöŠJStatus’Ç‰Á—p
+        [Tooltip("æœ€åˆã®ãƒãƒ¼ãƒˆPos")]
+        public Vector2 fastHeartPos;
+        [Tooltip("ãƒãƒ¼ãƒˆé–“éš”")]
+        public Vector3 heartSpace;
     }
     [SerializeField]
-    [Header("HPƒXƒe[ƒ^ƒX")]
-    HPStatus HPstatus = new HPStatus { FullHP = 10, HeartHight = 0.7f, HeartWidth = 0.04f, HeartLeftJustified = 0.03f};
+    [Header("HPã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹")]
+    HPStatus HPstatus = new HPStatus { FullHP = 6};
+
+    
+    public GameObject[] heartList;
+    private Image[] heartImageList;
+
+    private void Awake()
+    {
+        heals = HPstatus.FullHP;
+        heartImageList = new Image[heartList.Length];
+        
+        for (int i = 0; i < heartImageList.Length; i++)
+        {
+            heartImageList[i] = heartList[i].transform.Find("HP_Heart").GetComponent<Image>();
+        }
+    }
 
     private void Start()
     {
         heals = HPstatus.FullHP;
-        hpGage.fillAmount = 1;
     }
 
-    //HP‚Ìget&setŠÖ”
     public int GetHP()
     {
         return heals;
@@ -42,15 +56,51 @@ public class HPparam : MonoBehaviour
     public void SetHP(int hp)
     {
         heals = hp;
-        if (heals > HPstatus.FullHP) { heals = HPstatus.FullHP; }
-        hpGage.fillAmount = (float) heals / HPstatus.FullHP;
-    }
-
-    public void DamageHP(int hp)
-    {
-        heals = hp;
         if (heals < 0) { heals = 0; }
-        hpGage.fillAmount = (float) heals / HPstatus.FullHP;
+        if (heals > HPstatus.FullHP) { heals = HPstatus.FullHP; }
+        SetHPBar();
     }
 
+    public void SetHPBar()
+    {
+        switch (heals)
+        {
+            case 6:
+                for(int i = 0; i<heartImageList.Length; i++)
+                {
+                    heartImageList[i].fillAmount = 1;
+                }
+                break;
+            case 5:
+                heartImageList[0].fillAmount = 1;
+                heartImageList[1].fillAmount = 1;
+                heartImageList[2].fillAmount = 0.5f;
+                break;
+            case 4:
+                heartImageList[0].fillAmount = 1;
+                heartImageList[1].fillAmount = 1;
+                heartImageList[2].fillAmount = 0f;
+                break;
+            case 3:
+                heartImageList[0].fillAmount = 1;
+                heartImageList[1].fillAmount = 0.5f;
+                heartImageList[2].fillAmount = 0;
+                break;
+            case 2:
+                heartImageList[0].fillAmount = 1;
+                heartImageList[1].fillAmount = 0;
+                heartImageList[2].fillAmount = 0f;
+                break;
+            case 1:
+                heartImageList[0].fillAmount = 0.5f;
+                heartImageList[1].fillAmount = 0;
+                heartImageList[2].fillAmount = 0;
+                break;
+            case 0:
+                heartImageList[0].fillAmount = 0;
+                heartImageList[1].fillAmount = 0;
+                heartImageList[2].fillAmount = 0;
+                break;
+        }
+    }
 }
