@@ -13,6 +13,7 @@ TagManager:
   - DeadPlayer
   - PlatFormStage
   - MoveWall
+  - DeadBoss
   layers:
   - Default
   - TransparentFX
