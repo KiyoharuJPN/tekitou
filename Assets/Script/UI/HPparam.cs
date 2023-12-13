@@ -63,44 +63,25 @@ public class HPparam : MonoBehaviour
 
     public void SetHPBar()
     {
-        switch (heals)
+        var remainder = heals % OneHeartHp;
+        var changeHeart = heals / OneHeartHp;
+
+        for (int i = 0; i < heartImageList.Length; i++)
         {
-            case 6:
-                for(int i = 0; i<heartImageList.Length; i++)
-                {
-                    heartImageList[i].fillAmount = 1;
-                }
-                break;
-            case 5:
-                heartImageList[0].fillAmount = 1;
-                heartImageList[1].fillAmount = 1;
-                heartImageList[2].fillAmount = 0.5f;
-                break;
-            case 4:
-                heartImageList[0].fillAmount = 1;
-                heartImageList[1].fillAmount = 1;
-                heartImageList[2].fillAmount = 0f;
-                break;
-            case 3:
-                heartImageList[0].fillAmount = 1;
-                heartImageList[1].fillAmount = 0.5f;
-                heartImageList[2].fillAmount = 0;
-                break;
-            case 2:
-                heartImageList[0].fillAmount = 1;
-                heartImageList[1].fillAmount = 0;
-                heartImageList[2].fillAmount = 0f;
-                break;
-            case 1:
-                heartImageList[0].fillAmount = 0.5f;
-                heartImageList[1].fillAmount = 0;
-                heartImageList[2].fillAmount = 0;
-                break;
-            case 0:
-                heartImageList[0].fillAmount = 0;
-                heartImageList[1].fillAmount = 0;
-                heartImageList[2].fillAmount = 0;
-                break;
+            if (changeHeart > 0)
+            {
+                heartImageList[i].fillAmount = 1;
+                changeHeart--;
+            }
+            else if(changeHeart == 0)
+            {
+                heartImageList[i].fillAmount = 0;
+            }
+        }
+
+        if (remainder > 0)
+        {
+            heartImageList[heals / OneHeartHp].fillAmount = 0.5f;
         }
     }
 }

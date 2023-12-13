@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WarpDoor : MonoBehaviour
+public class WarpDoor : MonoBehaviour, IEventStart
 {
     [SerializeField] internal Animator animator;
     [SerializeField] FadeImage fade;
@@ -20,35 +20,24 @@ public class WarpDoor : MonoBehaviour
     bool bossDoor;
     GameObject warpPoint;
 
-    Collider2D player;
-    bool canDoor = true;
+    Collider2D m_Player;
+    private bool canDoor = true;
 
-    InputAction  move;
     private void Start()
     {
         warpPoint = transform.Find("WarpPoint").gameObject;
         isBottonUi = false;
-
-        var playerInput = GetComponent<PlayerInput>();
-        move = playerInput.actions["Move"];
     }
 
-    private void Update()
+    public void EventStart(PlayerController player)
     {
-        if (player == null) return;
-
-        float lsv = move.ReadValue<Vector2>().y;
-        if (lsv >= 0.8 && canDoor)
-        {
-            canDoor = false;
-            Destroy(bottonUiPrefab);
-            bottonUiPrefab = null;
-            animator.SetTrigger("DoorOpen");
-            SoundManager.Instance.PlaySE(SESoundData.SE.Door);
-            player.GetComponent<PlayerController>().WarpDoor(inPoint.transform);
-            StartCoroutine(PlayerWarp(1.0f, player));
-        }
-
+        canDoor = false;
+        Destroy(bottonUiPrefab);
+        bottonUiPrefab = null;
+        animator.SetTrigger("DoorOpen");
+        SoundManager.Instance.PlaySE(SESoundData.SE.Door);
+        player.WarpDoor(inPoint.transform);
+        StartCoroutine(PlayerWarp(1.0f, player));
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -58,13 +47,13 @@ public class WarpDoor : MonoBehaviour
         {
             if(collision.GetComponent<PlayerController>().isGround)
             {
-                player = collision;
+                m_Player = collision;
                 isBottonUi = true;
                 _BottonUi(collision);
             }
             else if (!collision.GetComponent<PlayerController>().isGround)
             {
-                player = null;
+                m_Player = null;
                 Destroy(bottonUiPrefab);
                 bottonUiPrefab = null;
                 isBottonUi = false;
@@ -74,13 +63,13 @@ public class WarpDoor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        player = null;
+        m_Player = null;
         Destroy(bottonUiPrefab);
         bottonUiPrefab = null;
         isBottonUi = false;
     }
 
-    void _BottonUi(Collider2D player)
+    private void _BottonUi(Collider2D player)
     {
         if (bottonUiPrefab != null) return;
         bottonUiPrefab =
@@ -89,12 +78,12 @@ public class WarpDoor : MonoBehaviour
         bottonUiPrefab.transform.parent = player.transform;
     }
 
-    IEnumerator PlayerWarp(float delay,Collider2D player)
+    IEnumerator PlayerWarp(float delay, PlayerController player)
     {
         GameManager.Instance.PlayTimeStop();
         //死んでいるEnemy強制削除
-        DaedEnemyDestroy();
-        player.GetComponent<PlayerController>().SetCanMove(false);
+        DaedEnemyDelete();
+        player.SetCanMove(false);
         yield return new WaitForSeconds(delay);//渡された時間待機
 
         //フェードアウト開始
@@ -107,7 +96,7 @@ public class WarpDoor : MonoBehaviour
 
         //フェードアウト終了
         ComboParam.Instance.ResetTime();
-        player.transform.position = warpPoint.transform.position;
+        m_Player.transform.position = warpPoint.transform.position;
         if (SceneData.Instance.referer != "Tutorial" && bossDoor) camera.ChengeCameraArea_Boss();
 
         yield return new WaitForSeconds(1f);//渡された時間待機
@@ -131,19 +120,19 @@ public class WarpDoor : MonoBehaviour
             }
         }
 
-        player.GetComponent<PlayerController>().WarpDoorEnd();
+        player.WarpDoorEnd();
 
         yield return new WaitForSeconds(1f);
         if (!bossDoor)
         {
-            player.GetComponent<PlayerController>().SetCanMove(true);
+            player.SetCanMove(true);
         }
 
         GameManager.Instance.PlayTimeStart();
     }
 
     //死んでいるEnemy強制削除
-    void DaedEnemyDestroy()
+    void DaedEnemyDelete()
     {
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
 

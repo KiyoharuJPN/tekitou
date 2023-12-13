@@ -73,7 +73,7 @@ public class TutorialPlayer : PlayerController
             canMovingCounter -= Time.deltaTime;
         }
 
-        AttacKInputKay();
+        InputKay();
 
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsRun", isRun);
@@ -101,7 +101,7 @@ public class TutorialPlayer : PlayerController
     }
 
     //‹Z“ü—ÍŒŸ’m
-    protected override void AttacKInputKay()
+    protected override void InputKay()
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
 

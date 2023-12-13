@@ -174,6 +174,8 @@ public class PlayerController : MonoBehaviour
     //InputSystem
     internal InputAction move, jumpKay, nomalAttack, skillAttack, exAttack_L, exAttack_R;
 
+    private IEventStart eventObj;
+
     void Start()
     {
         playerSE = GetComponent<PlayerSE>();
@@ -229,7 +231,18 @@ public class PlayerController : MonoBehaviour
             canMovingCounter -= Time.deltaTime;
         }
 
-        AttacKInputKay();
+        InputKay();
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        collision.gameObject.TryGetComponent<IEventStart>(out eventObj);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<IEventStart>() != null)
+        {
+            eventObj = null;
+        }
     }
 
     public void Attack(Collider2D enemy, float powar, Skill skill, bool isHitStop)
@@ -286,8 +299,8 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.PlayerDeath();
     }
 
-    //技入力検知
-    protected virtual void AttacKInputKay()
+    //技・イベント入力検知
+    protected virtual void InputKay()
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
 
@@ -340,6 +353,13 @@ public class PlayerController : MonoBehaviour
             //通常攻撃入力
             AttackAction("NomalAttack");
             return;
+        }
+
+        //イベント入力
+        if(eventObj != null && isGround == true
+            && inputMoveAxis.y >= 0.9)
+        {
+            eventObj.EventStart(this);
         }
     }
 
