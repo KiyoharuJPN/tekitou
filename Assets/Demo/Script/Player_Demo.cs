@@ -7,7 +7,7 @@ public class Player_Demo : PlayerController
 {
     public bool playerOpe = false;
 
-    protected override void AttacKInputKay()
+    protected override void InputKay()
     {
         if (playerOpe)
         {

@@ -158,7 +158,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   BottonUi: {fileID: 87303157342926741, guid: bc7f0420d10f2dc4bb67de688497038f, type: 3}
   inPoint: {fileID: 796944763906367910}
-  bossDoor: 0
+  bossDoor: 1
 --- !u!61 &6014549292647765880
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.15}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 4.86}
+  m_Size: {x: 3, y: 5}
   m_EdgeRadius: 0
 --- !u!114 &4835819590636245753
 MonoBehaviour:
