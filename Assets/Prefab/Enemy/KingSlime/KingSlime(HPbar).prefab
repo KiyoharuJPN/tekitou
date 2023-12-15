@@ -282,7 +282,6 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 770070126950840485}
   id: 8
   HadContactDamage: 1
-  speed: 15
   moveHeightForce: 3
   moveWidthForce: 3
   AttackHeight: 8

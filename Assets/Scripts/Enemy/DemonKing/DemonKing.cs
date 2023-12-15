@@ -716,6 +716,7 @@ public class DemonKing : Enemy
     //外部関数
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         //ヒットストップ
         StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
     }
@@ -870,6 +871,9 @@ public class DemonKing : Enemy
     {
         isDestroy = true;
         IsBlowing = true;
+        //必殺技ヒットエフェクト消す
+        BossCheckOnCamera = false;
+        OnCamera = false;
         //両手の当たり判定を消す
         var children = GetComponentsInChildren<HandScript>();
         foreach (var child in children)

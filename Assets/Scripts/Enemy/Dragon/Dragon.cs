@@ -609,6 +609,7 @@ public class Dragon : Enemy
     //外部関数
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         //ヒットストップ
         StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
     }
@@ -698,7 +699,7 @@ public class Dragon : Enemy
         //dragonAttackCheckArea.size = new Vector2(9.6f, 3.18f);
         dragonAttackCheckArea.offset = new Vector2(0.5f, -1.2f);
         dragonAttackCheckArea.size = new Vector2(12f, 3.9f);
-        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        gameObject.layer = LayerMask.NameToLayer("NoColliderEnemy");
         dragonAttackCheckArea.gameObject.SetActive(true);
 
         //ドラゴンジャンプ
@@ -768,9 +769,11 @@ public class Dragon : Enemy
     protected override void OnDestroyMode()
     {
         isDestroy = true;
+        //必殺技ヒットエフェクト消す
+        BossCheckOnCamera = false;
+        OnCamera = false;
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
-        gameObject.tag = "DeadBoss";
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
     }
 
