@@ -448,6 +448,17 @@ public partial class @StandardKeyBind : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1eff35cb-10ad-4dc2-b863-0a9ac73072e1"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e122768a-56a6-4ccd-8f2b-2057dc44aa9b"",
                     ""path"": ""<XInputController>/leftStick"",
                     ""interactions"": """",
