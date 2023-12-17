@@ -381,6 +381,10 @@ public class KingSlime : Enemy
     {
         isDestroy = true;
         IsBlowing = true;
+        //必殺技ヒットエフェクト消す
+        BossCheckOnCamera = false;
+        OnCamera = false;
+        GameManager.Instance.PlayerStop();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;

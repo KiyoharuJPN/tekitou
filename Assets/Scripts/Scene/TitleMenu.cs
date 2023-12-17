@@ -80,20 +80,6 @@ public class TitleMenu : MonoBehaviour
             return;
         }
 
-        //seika
-        //if (!InputKeyCheck.GetAnyKey())
-        //{
-        //    demoTimer += Time.deltaTime;
-        //    if (demoTimer >= demoVideoMoveTime)
-        //        isDemoVideo = true;
-        //}
-        //else if(InputKeyCheck.GetAnyKey())
-        //{
-        //    demoTimer = 0;
-        //}
-
-        
-        BackGroundMove();
         //調整キーの設定
         if(!upDownLock) StickerChangePointer();
         
@@ -188,7 +174,7 @@ public class TitleMenu : MonoBehaviour
     private void BackGroundMove()
     {
 
-        backGround.transform.position -= new Vector3(Time.deltaTime * 10f, 0);
+        //backGround.transform.position -= new Vector3(Time.deltaTime * 10f, 0);
     }
 
     //メニューの動き
