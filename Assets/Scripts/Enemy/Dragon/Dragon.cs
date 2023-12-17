@@ -769,6 +769,9 @@ public class Dragon : Enemy
     protected override void OnDestroyMode()
     {
         isDestroy = true;
+        //必殺技ヒットエフェクト消す
+        BossCheckOnCamera = false;
+        OnCamera = false;
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
