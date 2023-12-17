@@ -768,6 +768,7 @@ public class Dragon : Enemy
     protected override void OnDestroyMode()
     {
         isDestroy = true;
+        GameManager.Instance.PlayerStop();
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         gameObject.tag = "DeadBoss";

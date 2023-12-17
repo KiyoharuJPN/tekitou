@@ -381,6 +381,7 @@ public class KingSlime : Enemy
     {
         isDestroy = true;
         IsBlowing = true;
+        GameManager.Instance.PlayerStop();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         gameObject.tag = "DeadBoss";
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);

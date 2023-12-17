@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -57,38 +58,37 @@ public class LoadScene : MonoBehaviour
         System.GC.Collect();
         Cursor.visible = false;
         loadSceneTextBox.sprite = null;
-        if (SceneData.Instance.referer == "Title")
+        switch (SceneData.Instance.referer)
         {
-            obj = (GameObject)Instantiate(loadSceneImage[0], BackGround.transform.position, Quaternion.identity);
-            obj.transform.parent = BackGround.transform;
-            loadSceneTextBox.sprite = loadSceneText[0];
-            loadScene = "Level_Tutorial";
-            //チュートリアルスキップ画像を表示
-            time = 2f;
-            tutorialSkipObj.SetActive(true);
-            var playerInput = GetComponent<PlayerInput>();
-            decision = playerInput.actions["Decision"];
-        }
-        else if (SceneData.Instance.referer == "Tutorial")
-        {
-            obj = (GameObject)Instantiate(loadSceneImage[1], BackGround.transform.position, Quaternion.identity);
-            obj.transform.parent = BackGround.transform;
-            loadSceneTextBox.sprite = loadSceneText[1];
-            loadScene = "Level_Stage1";
-        }
-        else if (SceneData.Instance.referer == "Stage1")
-        {
-            obj = (GameObject)Instantiate(loadSceneImage[2], BackGround.transform.position, Quaternion.identity);
-            obj.transform.parent = BackGround.transform;
-            loadSceneTextBox.sprite = loadSceneText[2];
-            loadScene = "Level_Stage2";
-        }
-        else if (SceneData.Instance.referer == "Stage2")
-        {
-            obj = (GameObject)Instantiate(loadSceneImage[3], BackGround.transform.position, Quaternion.identity);
-            obj.transform.parent = BackGround.transform;
-            loadSceneTextBox.sprite = loadSceneText[3];
-            loadScene = "Stage3";
+            case "Title":
+                obj = (GameObject)Instantiate(loadSceneImage[0], BackGround.transform.position, Quaternion.identity);
+                obj.transform.parent = BackGround.transform;
+                loadSceneTextBox.sprite = loadSceneText[0];
+                loadScene = "Level_Tutorial";
+                //チュートリアルスキップ画像を表示
+                time = 2f;
+                tutorialSkipObj.SetActive(true);
+                var playerInput = GetComponent<PlayerInput>();
+                decision = playerInput.actions["Decision"];
+                break;
+            case "Tutorial":
+                obj = (GameObject)Instantiate(loadSceneImage[1], BackGround.transform.position, Quaternion.identity);
+                obj.transform.parent = BackGround.transform;
+                loadSceneTextBox.sprite = loadSceneText[1];
+                loadScene = "Level_Stage1";
+                break;
+            case "Stage1":
+                obj = (GameObject)Instantiate(loadSceneImage[2], BackGround.transform.position, Quaternion.identity);
+                obj.transform.parent = BackGround.transform;
+                loadSceneTextBox.sprite = loadSceneText[2];
+                loadScene = "Level_Stage2";
+                break;
+            case "Stage2":
+                obj = (GameObject)Instantiate(loadSceneImage[3], BackGround.transform.position, Quaternion.identity);
+                obj.transform.parent = BackGround.transform;
+                loadSceneTextBox.sprite = loadSceneText[3];
+                loadScene = "Stage3";
+                break;
         }
 
         stockImg.sprite = stockImgs[SceneData.Instance.stock];

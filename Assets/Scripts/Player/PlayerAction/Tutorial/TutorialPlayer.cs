@@ -109,7 +109,6 @@ public class TutorialPlayer : PlayerController
     {
         if (collision.gameObject.GetComponent<IEventStart>() != null)
         {
-            Debug.Log("é¿çs");
             eventObj = null;
         }
     }

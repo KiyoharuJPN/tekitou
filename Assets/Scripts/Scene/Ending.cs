@@ -30,8 +30,8 @@ public class Ending : MonoBehaviour
         Cursor.visible = false;
         
         PlayTimeSet(playTime_Stage[0], SceneData.Instance.stage1Time);
-        PlayTimeSet(playTime_Stage[1], SceneData.Instance.stage1Time);
-        PlayTimeSet(playTime_Stage[2], SceneData.Instance.stage1Time);
+        PlayTimeSet(playTime_Stage[1], SceneData.Instance.stage2Time);
+        PlayTimeSet(playTime_Stage[2], SceneData.Instance.stage3Time);
 
         //トータルタイム表示
         PlayTimeSet(totalTime,
