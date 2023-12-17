@@ -54,6 +54,9 @@ public class FinishMenu : MonoBehaviour
         move = playerInput.actions["Move"];
 
         SceneData.Instance.playTime = 0f;
+
+        System.GC.Collect();
+        Resources.UnloadUnusedAssets();
     }
 
 
@@ -146,6 +149,9 @@ public class FinishMenu : MonoBehaviour
         switch (pointer)
         {
             case 0:
+
+                System.GC.Collect();
+                Resources.UnloadUnusedAssets();
                 TryAgain();
                 break;
             case 1:
