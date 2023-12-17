@@ -685,7 +685,7 @@ public class Enemy : MonoBehaviour
         {
             animator.speed = 1;
         }
-        if (isDestroy) { enemyRb.velocity = BlowingSpeedPreb == Vector2.zero && OnCamera ? new Vector2(10,10) : BlowingSpeedPreb; }
+        if (isDestroy) { enemyRb.velocity = BlowingSpeedPreb == Vector2.zero && !OnCamera ? new Vector2(10,10) : BlowingSpeedPreb; }
         isPlayerExAttack = false;
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonFallStone : MonoBehaviour
+public class DragonFallStone : Projectile
 {
     Rigidbody2D rb;
     BoxCollider2D bc;
@@ -63,4 +63,28 @@ public class DragonFallStone : MonoBehaviour
         bc.enabled = false;
         animator.SetBool("IsBroken", true);
     }
+
+    //äOïîä÷êî
+    public override void EnemyStop()
+    {
+        isPlayerExAttack = true;
+        primarySpeed = rb.velocity;
+        rb.velocity = Vector2.zero;
+        if (animator != null)
+        {
+            animator.speed = 0;
+        }
+    }
+    public override void Stop_End()
+    {
+        isPlayerExAttack = false;
+        if (animator != null)
+        {
+            animator.speed = 1;
+        }
+        rb.velocity = primarySpeed;
+        isPlayerExAttack = false;
+        Debug.Log("enemyStopEnd");
+    }
+
 }

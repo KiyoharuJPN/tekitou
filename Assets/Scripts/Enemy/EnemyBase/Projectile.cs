@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
 
     protected bool isPlayerExAttack = false;
+    protected Vector2 primarySpeed;
     public virtual void EnemyStop()
     {
         //isPlayerExAttack = true;
