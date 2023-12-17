@@ -880,6 +880,8 @@ public class DemonKing : Enemy
         {
             child.DemonDead();
         }
+
+        GameManager.Instance.PlayerStop();
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);

@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
             && Input.GetKey(KeyCode.LeftShift)
             && !debugMenu_StageSelect.PauseCheck())
         {
+            player.SetCanMove(false);
             debugMenu_StageSelect.PauseStart();
         }
         else if (Input.GetKeyDown(KeyCode.Escape)
@@ -90,6 +91,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                player.SetCanMove(true);
                 debugMenu_StageSelect.BackGame();
             }
         }
@@ -106,11 +108,12 @@ public class GameManager : MonoBehaviour
         {
             if (!pauseMenu.PauseCheck())
             {
-                player.canMove = false;
+                player.SetCanMove(false);
                 pauseMenu.PauseStart();
             }
             else if (pauseMenu.PauseCheck())
             {
+                player.SetCanMove(true);
                 pauseMenu.BackGame();
             }
         }
@@ -460,7 +463,7 @@ public class GameManager : MonoBehaviour
 
     internal void PauseBack()
     {
-        player.canMove = true;
+        player.SetCanMove(true);
     }
 
     /// <summary>

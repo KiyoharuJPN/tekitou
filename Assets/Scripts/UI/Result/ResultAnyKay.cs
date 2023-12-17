@@ -30,14 +30,9 @@ public class ResultAnyKay : MonoBehaviour
             || Input.GetKeyDown("joystick button 3"))
             //|| Input.GetKeyDown(KeyCode.Space))//
         {
-            if (loadScene == "Stage3")
+            if (loadScene == "Stage2")
             {
                 SceneManager.LoadScene("Ending");
-                return;
-            }
-            if (loadScene == "Seika_Stage1")
-            {
-                SceneManager.LoadScene("Seika_Ending");
                 return;
             }
             if (loadScene == "Demo")

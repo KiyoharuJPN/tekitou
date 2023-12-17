@@ -270,7 +270,9 @@ public class PlayerController : MonoBehaviour
     public virtual void Damage(int power)
     {
 
-        if (gameObject.GetComponent<InvinciblBuff>()) { return; }
+        if (gameObject.GetComponent<InvinciblBuff>()
+            || playerState == PlayerState.Event
+            || playerState == PlayerState.ExAttack) { return; }
         if (!inInvincibleTimeLife)
         {
             //–³“GŽžŠÔ‚ÌŒvŽZ
