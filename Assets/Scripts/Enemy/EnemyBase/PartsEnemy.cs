@@ -14,6 +14,7 @@ public class PartsEnemy : MonoBehaviour
     //ダメージ処理呼出し
     public virtual void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         enemyParents.Damage(power, skill, isHitStop, exSkill);
     }
 }

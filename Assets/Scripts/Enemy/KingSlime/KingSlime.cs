@@ -157,7 +157,7 @@ public class KingSlime : Enemy
         enemyRb.velocity = Vector2.zero;
         yield return new WaitForSeconds(0.8f);
         NoGravity = false;
-        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        gameObject.layer = LayerMask.NameToLayer("NoColliderEnemy");
         NormalAttackAnimation++;
         enemyRb.AddForce(new Vector2(0, -40),ForceMode2D.Impulse);
         knockbackAttackCircle.enabled = true;
@@ -381,9 +381,7 @@ public class KingSlime : Enemy
     {
         isDestroy = true;
         IsBlowing = true;
-        GameManager.Instance.PlayerStop();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
-        gameObject.tag = "DeadBoss";
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
@@ -391,6 +389,7 @@ public class KingSlime : Enemy
 
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         //É_ÉÅÅ[ÉWèàóù
         StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
     }

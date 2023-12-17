@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
     protected moveType type;
 
     internal bool isDestroy = false;
-    internal bool OnCamera = false;
+    internal bool OnCamera = false, BossCheckOnCamera = true;
 
     protected Transform _transform;
 
@@ -225,6 +225,7 @@ public class Enemy : MonoBehaviour
     //ダメージ処理呼出し
     public virtual void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         isDamege = true;
         if (!_isHitStoped)
         {
@@ -539,7 +540,7 @@ public class Enemy : MonoBehaviour
     //画面に入ったどうかをチェック
     protected void OnBecameVisible()
     {
-        OnCamera = true;
+        if(BossCheckOnCamera) OnCamera = true;
     }
     protected void OnBecameInvisible()
     {
@@ -684,7 +685,7 @@ public class Enemy : MonoBehaviour
         {
             animator.speed = 1;
         }
-        if (isDestroy) { enemyRb.velocity = BlowingSpeedPreb; }
+        if (isDestroy) { enemyRb.velocity = BlowingSpeedPreb == Vector2.zero && OnCamera ? new Vector2(10,10) : BlowingSpeedPreb; }
         isPlayerExAttack = false;
     }
 

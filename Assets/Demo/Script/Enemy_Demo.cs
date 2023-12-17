@@ -51,6 +51,7 @@ public class Enemy_Demo : Enemy
 
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
+        if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         var obj = Instantiate<GameObject>(damageUI, this.transform.position + new Vector3(0,1.5f,0), Quaternion.identity);
         string SpriteText = power.ToString();
         obj.GetComponent<DamageUI>().damageText.text = SpriteText;

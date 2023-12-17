@@ -49,13 +49,17 @@ public class HandScript : Enemy
     public void DemonDead()
     {
         isDestroy = true;
-        gameObject.tag = "DeadBoss";
+        //必殺技ヒットエフェクト消す
+        BossCheckOnCamera = false;
+        OnCamera = false;
+        gameObject.layer = LayerMask.NameToLayer("DeadBoss");
     }
 
     //ダメージ処理呼出し
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
-        if(isDestroy) return;
+        if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
+        if (isDestroy) return;
         demonKing.Damage(power, skill, isHitStop, exSkill);
         StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
     }
