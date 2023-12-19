@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
             && Input.GetKey(KeyCode.LeftShift)
             && !debugMenu_StageSelect.PauseCheck())
         {
-            player.SetCanMove(false);
             debugMenu_StageSelect.PauseStart();
         }
         else if (Input.GetKeyDown(KeyCode.Escape)
