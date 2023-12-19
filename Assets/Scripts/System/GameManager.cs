@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                player.SetCanMove(true);
                 debugMenu_StageSelect.BackGame();
             }
         }
@@ -108,12 +107,10 @@ public class GameManager : MonoBehaviour
         {
             if (!pauseMenu.PauseCheck())
             {
-                player.SetCanMove(false);
                 pauseMenu.PauseStart();
             }
             else if (pauseMenu.PauseCheck())
             {
-                player.SetCanMove(true);
                 pauseMenu.BackGame();
             }
         }
