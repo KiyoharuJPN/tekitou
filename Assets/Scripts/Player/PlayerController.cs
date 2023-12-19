@@ -205,7 +205,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsLanding", isLanding);
         animator.SetBool("IsGround", isGround);
 
-
         if (isGround != isgroundpreb) { isgroundpreb = isGround;}
         //Debug.Log(isgroundpreb);
 
