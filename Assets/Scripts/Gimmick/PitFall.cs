@@ -8,7 +8,7 @@ public class PitFall : MonoBehaviour
         if (collision.transform.CompareTag("Player") || collision.transform.CompareTag("InvinciblePlayer"))
         {
             SoundManager.Instance.PlaySE(SESoundData.SE.PlayerDead);
-            GameManager.Instance.PlayerDeath();
+            collision.gameObject.GetComponent<PlayerController>().PlayerDead();
         }
         else
         {
