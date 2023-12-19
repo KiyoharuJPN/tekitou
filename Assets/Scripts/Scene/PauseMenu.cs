@@ -146,7 +146,6 @@ public class PauseMenu : MonoBehaviour
         isPauseMenu = false;
         this.GetComponent<Canvas>().enabled = false;
         Time.timeScale = 1;
-        GameManager.Instance.PauseBack();
     }
 
     //ƒƒjƒ…[‚É–ß‚é

@@ -78,7 +78,6 @@ public class StageSelect : MonoBehaviour
         menuTextObj.enabled = false;
         isSelectMenu = false;
         Time.timeScale = 1;
-        GameManager.Instance.PauseBack();
     }
 
     void ChangePointer(int pointer)
