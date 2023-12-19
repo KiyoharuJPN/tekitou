@@ -82,7 +82,6 @@ public class KingSlime : Enemy
             ExSkillFalling = enemyRb.velocity != Vector2.zero;
             if (ExSkillFalling)
             {
-                StopAllCoroutines();
                 return;
             }
             else
