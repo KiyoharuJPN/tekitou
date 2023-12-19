@@ -83,16 +83,15 @@ public class GameSystem : MonoBehaviour
         {
             if(isTKey) 
             {
-
+                SceneManager.LoadScene("Title");
                 System.GC.Collect();
                 Resources.UnloadUnusedAssets();
-                SceneManager.LoadScene("Title");
             }
             if(isSKey)
             {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 System.GC.Collect();
                 Resources.UnloadUnusedAssets();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             if(isEKey) 
             {
