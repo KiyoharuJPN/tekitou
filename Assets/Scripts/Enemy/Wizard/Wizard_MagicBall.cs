@@ -18,7 +18,6 @@ public class Wizard_MagicBall : Projectile
     //アニメーター（エクススキル用）
     Animator animator;
 
-    Vector2 primarySpeed;
     bool clearWMB = true;
 
     Coroutine wmbClear;
@@ -133,6 +132,7 @@ public class Wizard_MagicBall : Projectile
         }
         WMBRb.velocity = primarySpeed;
         isPlayerExAttack = false;
+        Debug.Log("enemyStopEnd");
     }
 
     public void RestoreToPool()

@@ -44,7 +44,7 @@ TagManager:
   - DestroyStage
   - PinBallEnemy_now
   - EnemyHouse
-  - 
+  - NoColliderEnemy
   - 
   - 
   m_SortingLayers:

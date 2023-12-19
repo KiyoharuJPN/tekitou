@@ -366,6 +366,16 @@ public class KingSlime : Enemy
 
 
     //常に動くけど触らなくてもいいコードをここに
+    //停止処理解除
+    public override void Stop_End()
+    {
+        isPlayerExAttack = false;
+        if (animator != null)
+        {
+            animator.speed = 1;
+        }
+        isPlayerExAttack = false;
+    }
     //重力関連
     protected override void FixedUpdate()
     {

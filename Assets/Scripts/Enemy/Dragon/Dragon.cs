@@ -766,6 +766,16 @@ public class Dragon : Enemy
 
 
     //“à•”ŠÖ”
+    //’â~ˆ—‰ğœ
+    public override void Stop_End()
+    {
+        isPlayerExAttack = false;
+        if (animator != null)
+        {
+            animator.speed = 1;
+        }
+        isPlayerExAttack = false;
+    }
     protected override void OnDestroyMode()
     {
         isDestroy = true;

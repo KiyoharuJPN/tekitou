@@ -80,7 +80,7 @@ public class BossHPBar : MonoBehaviour
     {
         while(BossHPBackGauge.fillAmount > BossHPGauge.fillAmount)
         {
-            if((BossHPBackGauge.fillAmount - DecreaseSpeed) >= BossHPGauge.fillAmount)
+            if((BossHPBackGauge.fillAmount - DecreaseSpeed) > BossHPGauge.fillAmount)
             {
                 BossHPBackGauge.fillAmount -= DecreaseSpeed;
             }
@@ -90,7 +90,7 @@ public class BossHPBar : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
-        
+
         HPdecreasing = false;
     }
 
