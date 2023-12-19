@@ -470,6 +470,10 @@ public class PlayerController : MonoBehaviour
     //KnockBack‚³‚ê‚½‚çŒÄ‚ÔŠÖ”
     public void KnockBack(Vector3 position, float force)
     {
+        if (gameObject.GetComponent<InvinciblBuff>()
+            || playerState == PlayerState.Event
+            || playerState == PlayerState.ExAttack) { return; }
+
         if (!inInvincibleTimeKnockBack)
         {
             // –³“GŠÔ‚ÌŒvZ
