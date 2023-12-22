@@ -104,6 +104,10 @@ public class Dragon : Enemy
         //BoxColthis = GetComponent<BoxCollider2D>();
     }
 
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 0 && enemyRb.velocity.y > -0.1)

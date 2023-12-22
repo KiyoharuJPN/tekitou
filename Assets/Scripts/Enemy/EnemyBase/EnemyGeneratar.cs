@@ -4,6 +4,8 @@ public class EnemyGeneratar : MonoBehaviour
 {
     [SerializeField]
     EnemyListEntity EnemyListEntity;
+    [SerializeField]
+    EnemyDestroyBlink EnemyDestroyBlink;
 
     [SerializeField, Header("êÅÇ¡îÚÇ—ë¨ìx")]
     public float speed = 15f;
@@ -54,5 +56,10 @@ public class EnemyGeneratar : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void DestroyBlinkSpeedSet(out float[] speed)
+    {
+        speed = EnemyDestroyBlink.DestroyBlinkSpeed.destroyBlinkSpeed;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using System.Collections;
 using DG.Tweening;
 using UnityEditor;
+using Unity.Mathematics;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -49,6 +50,10 @@ public class Enemy : MonoBehaviour
     int maxReflexNum;
     internal int reflexNum;
     float rad, minRad, maxRad;
+    //反射点滅
+    Coroutine destroyBlinkCoroutine;
+    [SerializeField]
+    float[] destroyBlinkSpeed; 
 
     protected GameObject player;
 
@@ -80,12 +85,16 @@ public class Enemy : MonoBehaviour
     //ヒットストップステータス
     internal EnemyGeneratar.HitStopState stopState;
     //ヒットストップバフ
-    bool _isDestroyed = false, _isHitStoped = false, hadEnemyBuff = false;
+    bool _isHitStoped = false, hadEnemyBuff = false;
 
     protected Tween tween;
 
     protected virtual void Start()
     {
+        //外からスピードを導入する
+        EnemyGeneratar.instance.DestroyBlinkSpeedSet(out destroyBlinkSpeed);
+        Debug.Log(destroyBlinkSpeed.Length);
+        if (destroyBlinkSpeed.Length == 0) destroyBlinkSpeed[0] = 0.01f;
         //idで指定した敵データ読込
         enemyData = EnemyGeneratar.instance.EnemySet(id);
         hp = enemyData.hp;
@@ -136,10 +145,20 @@ public class Enemy : MonoBehaviour
         if (col.gameObject.CompareTag("Stage") && isDestroy)
         {
             reflexNum--;
-            Debug.Log(reflexNum);
             if (reflexNum == 0)
             {
                 EnemyNomalDestroy();
+                return;
+            }
+            if (reflexNum <= destroyBlinkSpeed.Length)
+            {
+                if (destroyBlinkCoroutine == null)
+                    destroyBlinkCoroutine = StartCoroutine(DestroyBlinking( destroyBlinkSpeed[reflexNum - 1]));
+                else
+                {
+                    StopCoroutine(destroyBlinkCoroutine);
+                    StartCoroutine(DestroyBlinking(destroyBlinkSpeed[reflexNum - 1]));
+                }
             }
         }
     }
@@ -156,6 +175,17 @@ public class Enemy : MonoBehaviour
 
                 if (_EnemyBuff) _EnemyBuff._Destroy();
                 Destroy(gameObject);
+                return;
+            }
+            if (reflexNum <= destroyBlinkSpeed.Length)
+            {
+                if (destroyBlinkCoroutine == null)
+                    destroyBlinkCoroutine = StartCoroutine(DestroyBlinking(destroyBlinkSpeed[reflexNum - 1]));
+                else
+                {
+                    StopCoroutine(destroyBlinkCoroutine);
+                    StartCoroutine(DestroyBlinking(destroyBlinkSpeed[reflexNum - 1]));
+                }
             }
             //EnemyReflection(collision);
         }
@@ -347,6 +377,13 @@ public class Enemy : MonoBehaviour
 
             //反射回数リセット
             reflexNum = maxReflexNum;
+            //反射点滅
+            if(destroyBlinkCoroutine != null)
+            {
+                StopCoroutine(destroyBlinkCoroutine);
+                destroyBlinkCoroutine = null;
+                DefaultColor();
+            }
 
             //吹き飛び処理
             BlownAway();
@@ -439,12 +476,9 @@ public class Enemy : MonoBehaviour
 
     protected void EnemyReflection(Collision2D collision)
     {
-        Debug.Log(collision.GetContact(0).point);
-        Debug.Log(transform.position);
-
-        forceDirection = collision.relativeVelocity.normalized;
+        Vector2 forceDir = collision.relativeVelocity.normalized;
         // 向きと力の計算
-        Vector2 force = (speed + BuffBlowingSpeed()) * forceDirection;
+        Vector2 force = (speed + BuffBlowingSpeed()) * forceDir;
         // 力を加えるメソッド
         enemyRb.velocity = force;
     }
@@ -639,6 +673,45 @@ public class Enemy : MonoBehaviour
         sprite.color = new Color(1, 1, 1);
         hadDamaged = false;
     }
+
+    protected IEnumerator DestroyBlinking(float waitsec)
+    {
+        bool check = true;
+        while(true)
+        {
+            if (check)
+            {
+                sprite.color = new Color(1, .3f, .3f);
+                check = false;
+            }
+            else
+            {
+                sprite.color = new Color(1, 1, 1);
+                check = true;
+            }
+            yield return new WaitForSeconds(waitsec);
+        }
+    }
+    //protected float CalcDBInterval(int refNum)
+    //{
+    //    return destroyBlinkSpeed[refNum - 1];
+
+    //    //switch (refNum)
+    //    //{
+    //    //    case 5:
+    //    //        return 0.1f;
+    //    //    case 4:
+    //    //        return 0.08f;
+    //    //    case 3:
+    //    //        return 0.06f;
+    //    //    case 2:
+    //    //        return 0.04f;
+    //    //    case 1:
+    //    //        return 0.03f;
+    //    //    default:
+    //    //        return 0;
+    //    //}
+    //}
 
     protected void DefaultColor()
     {

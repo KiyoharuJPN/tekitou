@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyListEntity: {fileID: 11400000, guid: 78d3070f88e1daa4387ae71b08156675, type: 2}
+  EnemyDestroyBlink: {fileID: 11400000, guid: 49648bd7a91338b4ab9801659ca32287, type: 2}
   speed: 15
   smokeEffect: {fileID: 4681276365246036701, guid: 29af5ee6789868749b2c2245dc780e3c, type: 3}
   effectInterval: 0.5
