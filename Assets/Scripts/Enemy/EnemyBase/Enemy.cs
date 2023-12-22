@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour
     float rad, minRad, maxRad;
     //反射点滅
     Coroutine destroyBlinkCoroutine;
-    [SerializeField]
     float[] destroyBlinkSpeed; 
 
     protected GameObject player;
@@ -93,7 +92,6 @@ public class Enemy : MonoBehaviour
     {
         //外からスピードを導入する
         EnemyGeneratar.instance.DestroyBlinkSpeedSet(out destroyBlinkSpeed);
-        Debug.Log(destroyBlinkSpeed.Length);
         if (destroyBlinkSpeed.Length == 0) destroyBlinkSpeed[0] = 0.01f;
         //idで指定した敵データ読込
         enemyData = EnemyGeneratar.instance.EnemySet(id);
