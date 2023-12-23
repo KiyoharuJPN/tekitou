@@ -80,8 +80,19 @@ public class TitleMenu : MonoBehaviour
             return;
         }
 
+        if (!InputKeyCheck.GetAnyKey())
+        {
+            demoTimer += Time.deltaTime;
+            if (demoTimer >= demoVideoMoveTime)
+                isDemoVideo = true;
+        }
+        else if (InputKeyCheck.GetAnyKey())
+        {
+            demoTimer = 0;
+        }
+
         //調整キーの設定
-        if(!upDownLock) StickerChangePointer();
+        if (!upDownLock) StickerChangePointer();
         
         //ポインターが変わった時の設定
         if (pointer != pointerpreb)//変更されたときの作業
@@ -158,8 +169,6 @@ public class TitleMenu : MonoBehaviour
             }
             inlineVolumeChecking = false;
         }
-
-        
     }
 
     private void DemoMove()
@@ -173,7 +182,6 @@ public class TitleMenu : MonoBehaviour
 
     private void BackGroundMove()
     {
-
         //backGround.transform.position -= new Vector3(Time.deltaTime * 10f, 0);
     }
 
@@ -222,7 +230,7 @@ public class TitleMenu : MonoBehaviour
         yield return new WaitForSeconds(2.4f);
 
         fade.StartFadeOut();
-        SceneData.Instance.DataReset();
+        SceneData.Instance.StageDataReset();
 
         while (!fade.IsFadeOutComplete()) 
         {

@@ -89,9 +89,9 @@ public class StageSelect : MonoBehaviour
 
     private void Scene_Start()
     {
-        SceneData.Instance.DataReset();
+        SceneData.Instance.StageDataReset();
 
-        SceneData.Instance.PlayTimeReset();
+        SceneData.Instance.PlayTimeDelete();
 
         switch (selectStage) 
         {

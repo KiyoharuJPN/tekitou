@@ -23,7 +23,6 @@ public class WarpDoor_MoveWall : MonoBehaviour, IEventStart
     Collider2D m_Player;
     bool canDoor = true;
 
-    InputAction move;
     private void Start()
     {
         warpPoint = transform.Find("WarpPoint").gameObject;
@@ -44,7 +43,7 @@ public class WarpDoor_MoveWall : MonoBehaviour, IEventStart
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") ||
-            collision.gameObject.CompareTag("InvinciblePlayer") && canDoor)
+            collision.gameObject.CompareTag("InvinciblePlayer"))
         {
             if (collision.GetComponent<PlayerController>().isGround)
             {

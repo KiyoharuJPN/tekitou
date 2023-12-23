@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D))]

@@ -30,7 +30,7 @@ public class ResultAnyKay : MonoBehaviour
             || Input.GetKeyDown("joystick button 3"))
             //|| Input.GetKeyDown(KeyCode.Space))//
         {
-            if (loadScene == "Stage2")
+            if (loadScene == "Stage3")
             {
                 SceneManager.LoadScene("Ending");
                 return;
@@ -41,7 +41,7 @@ public class ResultAnyKay : MonoBehaviour
                 return;
             }
 
-            SceneManager.LoadScene("Load");
+            SceneManager.LoadScene("StageSelect");
         }
     }
 }

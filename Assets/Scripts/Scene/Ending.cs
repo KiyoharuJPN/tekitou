@@ -28,16 +28,19 @@ public class Ending : MonoBehaviour
     {
         playTime = SceneData.Instance.playTime;
         Cursor.visible = false;
-        
-        PlayTimeSet(playTime_Stage[0], SceneData.Instance.stage1Time);
-        PlayTimeSet(playTime_Stage[1], SceneData.Instance.stage2Time);
-        PlayTimeSet(playTime_Stage[2], SceneData.Instance.stage3Time);
+
+        var playTimes = SceneData.Instance.PlayTimeGet;
+
+        for (int i = 0; i < playTimes.Length; i++)
+        {
+            PlayTimeSet(playTime_Stage[i], playTimes[i]);
+        }
 
         //トータルタイム表示
         PlayTimeSet(totalTime,
-            Mathf.Floor(SceneData.Instance.stage1Time) +
-            Mathf.Floor(SceneData.Instance.stage2Time) +
-            Mathf.Floor(SceneData.Instance.stage3Time));
+            Mathf.Floor(playTimes[0]) +
+            Mathf.Floor(playTimes[1]) +
+            Mathf.Floor(playTimes[2]));
     }
 
     void Update()
@@ -64,10 +67,7 @@ public class Ending : MonoBehaviour
                 anyKeyDownImage.SetActive(true);
                 if (Input.anyKeyDown)
                 {
-
-                    SceneData.Instance.stage1Time = 0;
-                    SceneData.Instance.stage2Time = 0f;
-                    SceneData.Instance.stage3Time = 0f;
+                    SceneData.Instance.PlayTimeReset();
                     SceneManager.LoadScene("Title");
                 }
             }

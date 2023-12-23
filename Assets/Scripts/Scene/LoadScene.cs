@@ -139,8 +139,9 @@ public class LoadScene : MonoBehaviour
         //スキップに必要な時間分入力されていればチュートリアルスキップ
         if (inputTime > skipTime)
         {
-            loadScene = "Load";
+            loadScene = "StageSelect";
             SceneData.Instance.referer = "Tutorial";
+            SceneData.Instance.StageStateSet(Gamepara.StageType.Tutorial);
         }
 
         SceneManager.LoadScene(loadScene);

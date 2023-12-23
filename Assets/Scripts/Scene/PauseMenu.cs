@@ -200,7 +200,7 @@ public class PauseMenu : MonoBehaviour
         yield return new WaitForSeconds(2.4f);
 
         fade.StartFadeOut();
-        SceneData.Instance.DataReset();
+        SceneData.Instance.StageDataReset();
 
         while (!fade.IsFadeOutComplete())
         {
