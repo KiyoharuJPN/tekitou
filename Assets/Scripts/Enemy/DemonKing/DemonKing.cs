@@ -945,4 +945,9 @@ public class DemonKing : Enemy
     {
         RHanimator.speed = LHanimator.speed = animator.speed = 1;
     }
+
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+
+    }
 }
