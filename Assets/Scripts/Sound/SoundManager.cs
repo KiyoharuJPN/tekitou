@@ -133,7 +133,8 @@ public class BGMSoundData
         Invincibility,
         Stage3,
         Stage3_Boss_intro,
-        Stage3_Boss_roop
+        Stage3_Boss_roop,
+        StageSelect
     }
 
     public BGM bgm;
