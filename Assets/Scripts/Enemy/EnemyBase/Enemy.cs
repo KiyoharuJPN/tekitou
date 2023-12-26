@@ -144,14 +144,18 @@ public class Enemy : MonoBehaviour
                 EnemyNomalDestroy();
                 return;
             }
-            if (reflexNum <= destroyBlinkSpeed.Length)
+            if (reflexNum <= 6)
             {
                 if (destroyBlinkCoroutine == null)
-                    destroyBlinkCoroutine = StartCoroutine(DestroyBlinking( destroyBlinkSpeed[reflexNum - 1]));
+                {
+                    destroyBlinkCoroutine = DestroyBlinking(calcdbinterval(reflexNum));
+                    StartCoroutine(destroyBlinkCoroutine);
+                }
                 else
                 {
                     StopCoroutine(destroyBlinkCoroutine);
-                    StartCoroutine(DestroyBlinking(destroyBlinkSpeed[reflexNum - 1]));
+                    destroyBlinkCoroutine = DestroyBlinking(calcdbinterval(reflexNum));
+                    StartCoroutine(destroyBlinkCoroutine);
                 }
             }
         }
