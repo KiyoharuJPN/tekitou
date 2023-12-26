@@ -12,6 +12,8 @@ public class BossHPBar : MonoBehaviour
     [SerializeField]
     Image BossHPBackGauge;
 
+    Coroutine hpDecreasingCoro;
+
     float BossFullHP = 0, BossHP = 0;              //ボスのFullHP、ボスのHP仮記録用、HPの偏差値
 
     bool StartAnimation = false, HPdecreasing = false;      //開始アニメーションが流されているかどうかを確認、HPを変更するコルーチンが動いているかどうかの確認
@@ -57,7 +59,11 @@ public class BossHPBar : MonoBehaviour
         {
             var currentHP = GetComponentInParent<Enemy>().GetEnemyHP();
             //殺される瞬間にHPゲージを消す
-            if(currentHP<=0)gameObject.SetActive(false);
+            if(currentHP <= 0)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
             //HPが変わった場合は今のHPを表示して、減少アニメーションを流す。
             if (currentHP != BossHP)
             {
@@ -67,9 +73,8 @@ public class BossHPBar : MonoBehaviour
                 //HP減少アニメーションを流す
                 if (!HPdecreasing)
                 {
-                    HPdecreasing = true;
-                    //バグログ対応
-                    if (currentHP>0) StartCoroutine(DecreaseHP());
+                    if(hpDecreasingCoro!=null)StopCoroutine(hpDecreasingCoro);
+                    hpDecreasingCoro = StartCoroutine(DecreaseHP());
                 }
             }
         }
@@ -78,6 +83,8 @@ public class BossHPBar : MonoBehaviour
     //HPの背景部分のアニメーション
     IEnumerator DecreaseHP()
     {
+        yield return new WaitForSeconds(0.7f);
+        HPdecreasing = true;
         while(BossHPBackGauge.fillAmount > BossHPGauge.fillAmount)
         {
             if((BossHPBackGauge.fillAmount - DecreaseSpeed) > BossHPGauge.fillAmount)
@@ -90,9 +97,6 @@ public class BossHPBar : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
-
         HPdecreasing = false;
     }
-
-
 }

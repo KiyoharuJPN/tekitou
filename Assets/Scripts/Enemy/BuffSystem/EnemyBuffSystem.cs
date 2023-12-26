@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -93,7 +91,7 @@ public class EnemyBuffSystem : MonoBehaviour
         if (!BuffAttackCheckText.gameObject.activeSelf)
         {
             canSetBuffType = false;
-            BuffAttackCheck = GetBuffAcquisitionCount();
+            BuffAttackCheck = GetBuffAcquisitionCount() > 10 ? 10: GetBuffAcquisitionCount();
             BuffAttackCheckText.color = GetColorByType();
             BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
             BuffAttackCheckText.gameObject.SetActive(true);
@@ -133,7 +131,7 @@ public class EnemyBuffSystem : MonoBehaviour
     public void SetEXAttackDecrease(int exa)
     {
         //EXAttack = exa;
-        BuffAttackCheck -= exa;
+        BuffAttackCheck -= Mathf.Abs(exa);
     }
     //public bool GetEXAttack()
     //{
@@ -257,6 +255,7 @@ public class EnemyBuffSystem : MonoBehaviour
         return new Color(1, 1, 0, 1);
     }
 
+    //èÌÇ…égÇ§ÇØÇ«èCê≥ÇÕÇ»Ç¢ä÷êî
     public void _Destroy()
     {
         Destroy(BuffAttackCheckText.gameObject);

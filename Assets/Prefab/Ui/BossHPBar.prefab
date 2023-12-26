@@ -345,8 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9cdc709f5122c74498dd45c584b6155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FillSpeed: 1
-  DecreaseSpeed: 1
+  FillSpeed: 10
+  DecreaseSpeed: 4
   BossHPGauge: {fileID: 2936893315004441463}
   BossHPBackGauge: {fileID: 2918004964053266536}
 --- !u!1 &8551372812591125778
