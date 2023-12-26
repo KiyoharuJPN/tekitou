@@ -16,14 +16,8 @@ public class SpeedUp : MonoBehaviour
     {
         speed = PlayerBuff.Instance.GetSpeed();
         gameObject.GetComponent<StaticAfterImageEffect2DPlayer>().enabled = true;
-        spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         AddBuff();
-        
-        if (!gameObject.GetComponent<InvinciblBuff>() && !gameObject.GetComponent<SlashingBuff>())
-        {
-            spriteGlow.GlowColor = color;
-        }
     }
 
     public void AddBuff()

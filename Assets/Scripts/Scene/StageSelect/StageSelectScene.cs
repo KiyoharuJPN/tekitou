@@ -163,8 +163,8 @@ public class StageSelectScene : MonoBehaviour
         {
             if (!eathStageData[i].isClear && !eathStageData[i].openStage)
             {
-                movePos[i-1].IsPlayPoint = true;
-                movePos[i-1].PointImage.sprite = pointSprites[1];
+                movePos[i-1].IsPlayPoint = false;
+                movePos[i-1].PointImage.sprite = pointSprites[0];
             }
             else
             if (eathStageData[i].openStage)

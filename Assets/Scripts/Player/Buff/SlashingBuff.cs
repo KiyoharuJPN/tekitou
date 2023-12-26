@@ -33,7 +33,6 @@ public class SlashingBuff : MonoBehaviour
     {
         slashing = PlayerBuff.Instance.GetSlashing();
         buffTime = slashing.firstSetTime;
-        spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         //残り時間のバー表示・設定
         timeBar = GameObject.Find("PlayerBuffTime").GetComponent<BuffTimer>();
@@ -41,11 +40,6 @@ public class SlashingBuff : MonoBehaviour
         timeBar.GetComponent<Canvas>().enabled = true;
 
         waveSpeed = slashing.slashingSpeed;
-
-        if (!gameObject.GetComponent<InvinciblBuff>())
-        {
-            spriteGlow.GlowColor = color;
-        }
 
         StartCoroutine(SlashingMode());
     }
