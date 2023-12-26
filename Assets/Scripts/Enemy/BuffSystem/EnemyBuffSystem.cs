@@ -257,6 +257,7 @@ public class EnemyBuffSystem : MonoBehaviour
         return new Color(1, 1, 0, 1);
     }
 
+    //í‚Ég‚¤‚¯‚ÇC³‚Í‚È‚¢ŠÖ”
     public void _Destroy()
     {
         Destroy(BuffAttackCheckText.gameObject);

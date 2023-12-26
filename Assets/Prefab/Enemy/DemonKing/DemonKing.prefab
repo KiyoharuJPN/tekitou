@@ -575,7 +575,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 1542707258, guid: 3aadb172ef5b04e418ea4f928bf5837b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -674,8 +674,8 @@ MonoBehaviour:
     handSpeed: 5
     handFrequency: 2
   crushAttckStatus:
-    dropSpeed: 30
-    attackHeight: 8
+    dropSpeed: 60
+    attackHeight: 11.5
     furthermoreAttackHeight: 2
     leftCrushMaxPosX: 0
     rightCrushMaxPosX: 0
@@ -683,15 +683,15 @@ MonoBehaviour:
     summonMonster: {fileID: 8030852523938475196, guid: 175093faae49156498f3e3f196476cbd, type: 3}
     summonHeightLimit: 0
     summonHandSpeed: 10
-    dropSpeed: 0
+    dropSpeed: 55
     LeftUpPoint: {x: 0, y: 0}
     RightDownPoint: {x: 0, y: 0}
   pincerAttackStatus:
     downMass: 0
-    BackMass: 3
+    BackMass: 1.5
     maxFollowSpeed: 20
     bottomLimit: -15.5
-    attackSpeed: 20
+    attackSpeed: 35
   Pattern1: 01000000000000000200000001000000000000000300000000000000
   Pattern2: 01000000010000000000000002000000010000000000000003000000
   Pattern3: 02000000000000000300000001000000000000000300000000000000
@@ -980,14 +980,6 @@ PrefabInstance:
     - target: {fileID: 8312298754847659851, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
       propertyPath: m_Name
       value: BossHPBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 8312298754847659851, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9056471604131598449, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
-      propertyPath: FillSpeed
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}

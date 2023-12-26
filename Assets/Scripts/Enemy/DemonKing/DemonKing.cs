@@ -44,6 +44,8 @@ public class DemonKing : Enemy
         public float dropSpeed, attackHeight, furthermoreAttackHeight;
         [Tooltip("左の上限、右の上限")]
         public float leftCrushMaxPosX, rightCrushMaxPosX;
+        [Tooltip("上の上限")]
+        public float upCrushMaxPosY;
     }
     [SerializeField] CrushAttckStatus crushAttckStatus = new CrushAttckStatus { dropSpeed = 30, attackHeight = 8, furthermoreAttackHeight = 2 };
 
@@ -130,7 +132,6 @@ public class DemonKing : Enemy
     {
         base.Start();
         BossLayer = LayerMask.NameToLayer("BossEnemy");
-        //Debug.Log(LayerMask.NameToLayer("BossEnemy"));
 
         //idle関係
         if (idleStatus.handSpeed == 0) idleStatus.handSpeed = 1;
@@ -144,7 +145,7 @@ public class DemonKing : Enemy
         //crushAttack関係
         if (crushAttckStatus.leftCrushMaxPosX == 0) { crushAttckStatus.leftCrushMaxPosX = transform.position.x - 10; } else { crushAttckStatus.leftCrushMaxPosX = transform.position.x - crushAttckStatus.leftCrushMaxPosX; }
         if (crushAttckStatus.rightCrushMaxPosX == 0) { crushAttckStatus.rightCrushMaxPosX = transform.position.x + 10; } else { crushAttckStatus.leftCrushMaxPosX = transform.position.x + crushAttckStatus.rightCrushMaxPosX; }
-
+        if (crushAttckStatus.upCrushMaxPosY == 0) { crushAttckStatus.upCrushMaxPosY = transform.position.y + 10; } else { crushAttckStatus.upCrushMaxPosY += transform.position.y; }
         //sommonAttack関係
         if (summonAttackStatus.summonHandSpeed == 0) { summonAttackStatus.summonHandSpeed = 0.01f; } else { summonAttackStatus.summonHandSpeed *= 0.01f; }
         if (summonAttackStatus.summonHeightLimit == 0) { summonAttackStatus.summonHeightLimit = LeftHand.transform.position.y + 5; } else { summonAttackStatus.summonHeightLimit += LeftHand.transform.position.y; }
@@ -192,14 +193,6 @@ public class DemonKing : Enemy
             {
                 EnemyPattern = Random.Range(0, 999) % 3;
             }
-
-            //デバッグ用
-            //EnemyPattern = 0;
-            //Debug.Log(EnemyPattern);
-            //if (!(EnemyPattern < 3 && EnemyPattern >= 0))
-            //{
-            //    Debug.Log("ドラゴンのランダム関数にエラーが出ました、計算式をチェックしてください。");
-            //}
 
             //次回同じものを選ばれないように先に代入をする
             EnemyPatternPreb = EnemyPattern;
@@ -293,8 +286,6 @@ public class DemonKing : Enemy
             RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + RHSpeed);
 
             if (LeftHand.transform.position.y >= LHOriginalPos.y - idleStatus.handSpeed/2&& LeftHand.transform.position.y <= LHOriginalPos.y + idleStatus.handSpeed / 2) Frequency++;
-            //Debug.Log(LeftHand.transform.position.y);
-            //Debug.Log(LHOriginalPos.y);
             if (LHSpeed > 0 && LeftHand.transform.position.y > idleStatus.upLimit) LHSpeed *= -1;
             if (LHSpeed < 0 && LeftHand.transform.position.y < idleStatus.downLimit) LHSpeed *= -1;
             if (RHSpeed > 0 && RightHand.transform.position.y > idleStatus.upLimit) RHSpeed *= -1;
@@ -316,50 +307,60 @@ public class DemonKing : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
     IEnumerator CrushAttackAnim()
     {
-        //Debug.Log(LayerMask.NameToLayer("BossEnemy"));
         Physics2D.IgnoreLayerCollision(BossLayer, BossLayer);
         AnimationController = 1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
 
         //一次移動用プレイヤーの位置と速度の算出
-        Vector2 PlayerPos = Player.transform.position+new Vector3(0, crushAttckStatus.attackHeight, 0);
-        var attackMoveSpeed = Vector2.Distance(PlayerPos, RightHand.transform.position);
+        float CheckMaxY = crushAttckStatus.upCrushMaxPosY - crushAttckStatus.attackHeight;
+        Vector2 HandPos;
+        if (Player.transform.position.y > CheckMaxY)
+            HandPos = new Vector3(Player.transform.position.x, crushAttckStatus.upCrushMaxPosY, Player.transform.position.z);
+        else
+            HandPos = Player.transform.position + new Vector3(0, crushAttckStatus.attackHeight, 0);
+
+        var attackMoveSpeed = Vector2.Distance(HandPos, RightHand.transform.position);
         attackMoveSpeed /= 25;
 
         //一旦手をプレイヤーの上に移動する
         var i = 0;
         while(i < 25)
         {
-            RightHand.transform.position = Vector2.MoveTowards(RightHand.transform.position, PlayerPos, attackMoveSpeed);
+            RightHand.transform.position = Vector2.MoveTowards(RightHand.transform.position, HandPos, attackMoveSpeed);
             i++;
             yield return new WaitForEndOfFrame();
         }
 
-        ////レイヤーを地形やプレイやの前に移動させる
-        //RightHand.GetComponent<SpriteRenderer>().sortingOrder = 11;
         //手を3秒間プレイヤーの頭の上に残す
         i = 0;
-        while (i < 180)
+        while (i < 120)
         {
             if(Player.transform.position.x < crushAttckStatus.leftCrushMaxPosX )
             {
-                RightHand.transform.position = new Vector2(crushAttckStatus.leftCrushMaxPosX, Player.transform.position.y + crushAttckStatus.attackHeight);
+                if (Player.transform.position.y > CheckMaxY)
+                    RightHand.transform.position = new Vector2(crushAttckStatus.leftCrushMaxPosX, crushAttckStatus.upCrushMaxPosY);
+                else
+                    RightHand.transform.position = new Vector2(crushAttckStatus.leftCrushMaxPosX, Player.transform.position.y + crushAttckStatus.attackHeight);
             }
             else if(Player.transform.position.x > crushAttckStatus.rightCrushMaxPosX)
             {
-
-                RightHand.transform.position = new Vector2(crushAttckStatus.rightCrushMaxPosX, Player.transform.position.y + crushAttckStatus.attackHeight);
+                if (Player.transform.position.y > CheckMaxY)
+                    RightHand.transform.position = new Vector2(crushAttckStatus.rightCrushMaxPosX, crushAttckStatus.upCrushMaxPosY);
+                else
+                    RightHand.transform.position = new Vector2(crushAttckStatus.rightCrushMaxPosX, Player.transform.position.y + crushAttckStatus.attackHeight);
             }
             else
             {
-                RightHand.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + crushAttckStatus.attackHeight);
+                if (Player.transform.position.y > CheckMaxY)
+                    RightHand.transform.position = new Vector2(Player.transform.position.x, crushAttckStatus.upCrushMaxPosY);
+                else
+                    RightHand.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + crushAttckStatus.attackHeight);
             }
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -372,7 +373,10 @@ public class DemonKing : Enemy
         {
             if (i > 5)
             {
-                RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + attackMoveSpeed);
+                if (RightHand.transform.position.y > crushAttckStatus.upCrushMaxPosY)
+                    RightHand.transform.position = new Vector2(RightHand.transform.position.x, crushAttckStatus.upCrushMaxPosY);
+                else
+                    RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + attackMoveSpeed);
             }
             i++;
             yield return new WaitForSeconds(0.01f);
@@ -385,11 +389,7 @@ public class DemonKing : Enemy
     IEnumerator CrushAttackAnim2()
     {
         Physics2D.IgnoreLayerCollision(BossLayer, BossLayer,false);
-        yield return new WaitForSeconds(3);
-
-        ////レイヤーの位置を戻す
-        //RightHand.GetComponent<SpriteRenderer>().sortingOrder = 0;
-
+        yield return new WaitForSeconds(2);
 
         //手を戻す
         var attackMoveSpeed = Vector2.Distance(RHOriginalPos, RightHand.transform.position);
@@ -421,7 +421,6 @@ public class DemonKing : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -441,12 +440,9 @@ public class DemonKing : Enemy
         StartAnimatorLH();
         isSummonAttack = true;
         enemyLHRb.AddForce(new Vector2(0,-summonAttackStatus.dropSpeed),ForceMode2D.Impulse);
-
-
     }
     IEnumerator SummonAttackAnim2()
     {
-
         yield return new WaitForSeconds(1.5f);
         //一人目
         Vector2 summonPos = new Vector2(Random.Range(summonAttackStatus.LeftUpPoint.x,summonAttackStatus.RightDownPoint.x),Random.Range(summonAttackStatus.LeftUpPoint.y,summonAttackStatus.RightDownPoint.y));
@@ -461,7 +457,7 @@ public class DemonKing : Enemy
         newEnemy = Instantiate(summonAttackStatus.summonMonster, summonPos, Quaternion.identity);
         newEnemy.GetComponentInChildren<EnemyBuffSystem>().SetBuffTypeByScript(GetSummonProbability());
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.0f);
 
         //手を戻す
         var backMoveSpeed = Vector2.Distance(LHOriginalPos, LeftHand.transform.position);
@@ -493,7 +489,6 @@ public class DemonKing : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -502,7 +497,6 @@ public class DemonKing : Enemy
         AnimationController = 3;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-
 
         //手を横の下方向へ移動
         var attackMoveSpeed = Vector2.Distance(LeftHand.transform.position, pincerReservePosLH);
@@ -550,10 +544,6 @@ public class DemonKing : Enemy
         isPincerAttack = true;
         enemyLHRb.velocity = new Vector2 (pincerAttackStatus.attackSpeed, 0);
         enemyRHRb.velocity = new Vector2(-pincerAttackStatus.attackSpeed, 0);
-
-
-
-        
     }
     IEnumerator PincerAttackAnim2()
     {
@@ -579,10 +569,8 @@ public class DemonKing : Enemy
             yield return new WaitForSeconds(0.01f);
         }
 
-
         LeftHand.transform.position = LHOriginalPos;
         RightHand.transform.position = RHOriginalPos;
-
 
         //アニメの終わり（必須）
         //パターンアニメーション関連
@@ -595,7 +583,6 @@ public class DemonKing : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -604,7 +591,6 @@ public class DemonKing : Enemy
         AnimationController = 0;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-
 
         yield return new WaitForSeconds(1f);
 
@@ -630,7 +616,6 @@ public class DemonKing : Enemy
             yield return new WaitForSeconds(0.01f);
         }
 
-
         LeftHand.transform.position = LHOriginalPos;
         RightHand.transform.position = RHOriginalPos;
 
@@ -648,7 +633,6 @@ public class DemonKing : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -658,9 +642,6 @@ public class DemonKing : Enemy
         if (isCrushAttack)  enemyRHRb.AddForce(new Vector2(0, -5));
         if (isSummonAttack) enemyLHRb.AddForce(new Vector2(0, -5));
     }
-
-
-
 
 
 
@@ -727,13 +708,6 @@ public class DemonKing : Enemy
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         ComboParam.Instance.ResetTime();
 
-        ////ヒットエフェクト生成
-        //if (skill != null)
-        //{
-        //    HitEfect(this.transform, skill.hitEffectAngle);
-        //}
-        //else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
-
         //ヒットストップ処理
         if (isHitStop)
         {
@@ -759,7 +733,6 @@ public class DemonKing : Enemy
                 });
             yield return new WaitForSeconds(stopTime + 0.01f);
         }
-
 
         hp -= power;
 

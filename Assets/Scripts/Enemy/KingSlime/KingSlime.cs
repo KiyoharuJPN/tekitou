@@ -173,7 +173,7 @@ public class KingSlime : Enemy
         gameObject.layer = LayerMask.NameToLayer("Enemy");
 
         int i = 0;
-        while (i < 51)
+        while (i < 35)
         {
             i++;
             yield return new WaitForSeconds(0.01f);

@@ -61022,6 +61022,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP+ExAttackCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5574219494436211645, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5574219494818623029, guid: 94f57672f26ebf7449e01fa10d7a3e2d, type: 3}
       propertyPath: heartList.Array.size
       value: 3

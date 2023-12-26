@@ -51,9 +51,7 @@ public class Enemy : MonoBehaviour
     internal int reflexNum;
     float rad, minRad, maxRad;
     //反射点滅
-    Coroutine destroyBlinkCoroutine;
-    [SerializeField]
-    float[] destroyBlinkSpeed; 
+    IEnumerator destroyBlinkCoroutine;
 
     protected GameObject player;
 
@@ -91,10 +89,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        //外からスピードを導入する
-        EnemyGeneratar.instance.DestroyBlinkSpeedSet(out destroyBlinkSpeed);
-        Debug.Log(destroyBlinkSpeed.Length);
-        if (destroyBlinkSpeed.Length == 0) destroyBlinkSpeed[0] = 0.01f;
         //idで指定した敵データ読込
         enemyData = EnemyGeneratar.instance.EnemySet(id);
         hp = enemyData.hp;
@@ -135,7 +129,7 @@ public class Enemy : MonoBehaviour
 
     virtual protected void OnColEnter2D(Collider2D col)
     {
-        if (!isDestroy && HadContactDamage)
+/*        if (!isDestroy && HadContactDamage)
         {
             if (col.gameObject.CompareTag("Player"))
             {
@@ -161,7 +155,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-    }
+*/    }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
@@ -177,14 +171,18 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
                 return;
             }
-            if (reflexNum <= destroyBlinkSpeed.Length)
+            if (reflexNum <= 6)
             {
                 if (destroyBlinkCoroutine == null)
-                    destroyBlinkCoroutine = StartCoroutine(DestroyBlinking(destroyBlinkSpeed[reflexNum - 1]));
+                {
+                    destroyBlinkCoroutine = DestroyBlinking(calcdbinterval(reflexNum));
+                    StartCoroutine(destroyBlinkCoroutine);
+                }
                 else
                 {
                     StopCoroutine(destroyBlinkCoroutine);
-                    StartCoroutine(DestroyBlinking(destroyBlinkSpeed[reflexNum - 1]));
+                    destroyBlinkCoroutine = DestroyBlinking(calcdbinterval(reflexNum));
+                    StartCoroutine(destroyBlinkCoroutine);
                 }
             }
             //EnemyReflection(collision);
@@ -381,7 +379,7 @@ public class Enemy : MonoBehaviour
             if(destroyBlinkCoroutine != null)
             {
                 StopCoroutine(destroyBlinkCoroutine);
-                destroyBlinkCoroutine = null;
+                //destroyBlinkCoroutine = null;
                 DefaultColor();
             }
 
@@ -681,7 +679,7 @@ public class Enemy : MonoBehaviour
         {
             if (check)
             {
-                sprite.color = new Color(1, .3f, .3f);
+                sprite.color = new Color(1, 0, 0);
                 check = false;
             }
             else
@@ -692,26 +690,26 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(waitsec);
         }
     }
-    //protected float CalcDBInterval(int refNum)
-    //{
-    //    return destroyBlinkSpeed[refNum - 1];
-
-    //    //switch (refNum)
-    //    //{
-    //    //    case 5:
-    //    //        return 0.1f;
-    //    //    case 4:
-    //    //        return 0.08f;
-    //    //    case 3:
-    //    //        return 0.06f;
-    //    //    case 2:
-    //    //        return 0.04f;
-    //    //    case 1:
-    //    //        return 0.03f;
-    //    //    default:
-    //    //        return 0;
-    //    //}
-    //}
+    protected float calcdbinterval(int refnum)
+    {
+        switch (refnum)
+        {
+            case 6:
+                return 0.3f;
+            case 5:
+                return 0.25f;
+            case 4:
+                return 0.2f;
+            case 3:
+                return 0.1f;
+            case 2:
+                return 0.05f;
+            case 1:
+                return 0.05f;
+            default:
+                return 0;
+        }
+    }
 
     protected void DefaultColor()
     {
