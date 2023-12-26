@@ -5,20 +5,13 @@ public class EnemyBuffSystem : MonoBehaviour
 {
     [SerializeField, Tooltip("基本追撃回数")]
     int initialBuffAttackCheck = 3;
-    int BuffAttackCheck;
+    int BuffAttackCheck　= 0;
 
-    TextMeshProUGUI BuffAttackCheckText;
+    //表示オブジェクトと置きキャンバス
+    SpriteRenderer BuffAttackCheckText;
     GameObject BuffCanvas;
-
+    //ぶっ飛び加速度とゲーム中バフ修正できるためのブール関数
     bool checkBlowingUp = false, canSetBuffType = true;
-
-    //表示時(暫定)
-    public enum DisplayType
-    {
-        EnemyLive,
-        EnemyDead,
-        Alltime,
-    }
 
     //バフ種類
     public enum SetBuffType
@@ -30,17 +23,28 @@ public class EnemyBuffSystem : MonoBehaviour
         NoBuff,
         RandomSet,
     }
+    [SerializeField, Tooltip("追撃表示イラスト")]
+    Sprite[] sprites;
 
-    //Enemy enemy;
-    //public DisplayType displayType = DisplayType.Alltime;
+    //表示時高さオフセット、DefaultBuff、死亡時エフェクト、TextPrefabとCanvasPrefab
     public Vector3 intervalPos;
     public SetBuffType buffType = SetBuffType.NoBuff;
     public GameObject[] DeadEffect;
-    public GameObject TextObject,CanvasObject;
+    public GameObject TextObject, CanvasObject;
+
+    ////表示時(暫定)
+    //public enum DisplayType
+    //{
+    //    EnemyLive,
+    //    EnemyDead,
+    //    Alltime,
+    //}
+    //Enemy enemy;
+    //public DisplayType displayType = DisplayType.Alltime;
 
     private void Awake()
     {
-        if(buffType == SetBuffType.RandomSet)
+        if (buffType == SetBuffType.RandomSet)
         {
             var newbuffType = (int)Random.Range(0, (float)SetBuffType.NoBuff);
             buffType = (SetBuffType)newbuffType;
@@ -59,7 +63,7 @@ public class EnemyBuffSystem : MonoBehaviour
             BuffCanvas = Instantiate(CanvasObject);
             BuffCanvas.name = "BuffCanvas";
         }
-        BuffAttackCheckText = Instantiate(TextObject,BuffCanvas.transform).GetComponent<TextMeshProUGUI>();
+        BuffAttackCheckText = Instantiate(TextObject,BuffCanvas.transform).GetComponent<SpriteRenderer>();
         BuffAttackCheckText.gameObject.SetActive(false);
         BuffAttackCheck = initialBuffAttackCheck;
         //enemy = GetComponentInParent<Enemy>();
@@ -73,17 +77,6 @@ public class EnemyBuffSystem : MonoBehaviour
         }
     }
 
-    //最初に表示されるアタック必要数のセット
-    public void SetBuffAttackCheckCount(int count)
-    {
-        BuffAttackCheck = count;
-    }
-    //アタック必要数のゲット関数
-    public int GetBuffAttackCheckCount()
-    {
-        return BuffAttackCheck;
-    }
-
     //現在残りのアタック必要数表示
     public void ShowAttackChecking()
     {
@@ -92,22 +85,23 @@ public class EnemyBuffSystem : MonoBehaviour
         {
             canSetBuffType = false;
             BuffAttackCheck = GetBuffAcquisitionCount() > 10 ? 10: GetBuffAcquisitionCount();
-            BuffAttackCheckText.color = GetColorByType();
-            BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
+            if (BuffAttackCheck <= 0)
+                Debug.Log("ゼロ以上の値を入れてください。");
+            else
+                BuffAttackCheckText.sprite = sprites[BuffAttackCheck-- - 1 + (int)buffType * 10];
+            Debug.Log(BuffAttackCheck);
             BuffAttackCheckText.gameObject.SetActive(true);
             return;
         }
 
-        //if (EXAttack)
-        //{
-        //    BuffAttackCheck = BuffAttackCheck - 7;
-        //    EXAttack = false;
-        //}
 
         //カウントを減らして表示する
-        BuffAttackCheckText.text = "" + BuffAttackCheck-- + "";
-
-        if(BuffAttackCheck < 0)
+        if (BuffAttackCheck > 0)
+            BuffAttackCheckText.sprite = sprites[BuffAttackCheck-- - 1 + (int)buffType * 10];
+        else
+            BuffAttackCheck--;
+        Debug.Log(BuffAttackCheck);
+        if (BuffAttackCheck < 0)
         {
             if (!checkBlowingUp)
             {
@@ -123,8 +117,19 @@ public class EnemyBuffSystem : MonoBehaviour
                 checkBlowingUp = false;
             }
             _Destroy();
+            return;
         }
+    }
 
+    //最初に表示されるアタック必要数のセット
+    public void SetBuffAttackCheckCount(int count)
+    {
+        BuffAttackCheck = count;
+    }
+    //アタック必要数のゲット関数
+    public int GetBuffAttackCheckCount()
+    {
+        return BuffAttackCheck;
     }
 
     //エクストラスキル当たられたときに追撃回数を指定回数減らす
@@ -154,6 +159,7 @@ public class EnemyBuffSystem : MonoBehaviour
     //取得回数を外で取得する
     public int GetBuffAcquisitionCount()
     {
+        if (BuffAttackCheck == 0) BuffAttackCheck = initialBuffAttackCheck;
         int count = 0;
         switch (buffType)
         {
@@ -173,7 +179,7 @@ public class EnemyBuffSystem : MonoBehaviour
                 count = 0;
                 break;
         }
-        return initialBuffAttackCheck + (count / 2);
+        return BuffAttackCheck + (count / 2);
     }
 
     //吹っ飛び速度を外で取得する
@@ -258,7 +264,7 @@ public class EnemyBuffSystem : MonoBehaviour
     //常に使うけど修正はない関数
     public void _Destroy()
     {
-        Destroy(BuffAttackCheckText.gameObject);
+        //Destroy(BuffAttackCheckText.gameObject);
     }
 
     private void OnDisable()

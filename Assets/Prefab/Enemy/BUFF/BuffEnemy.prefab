@@ -45,6 +45,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialBuffAttackCheck: 3
+  sprites:
+  - {fileID: 2065034869, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1652365687, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1556692385, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 854982401, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 572227263, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1847908325, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1239403514, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1459884383, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1786138536, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -2044670523, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -610369573, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 351330541, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1981173165, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1111463754, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1690914660, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -777258034, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 2096164760, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -139143322, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -2138887631, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1360351523, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1296951431, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1165832517, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1360795596, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1080311826, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -869644661, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1372257833, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1787331309, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1551886170, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -604263591, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1718240941, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1765638668, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1508176359, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -642097819, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -1593930770, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 742304846, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -2134126984, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 481883167, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: 1758078009, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -803382899, guid: ffe6998509e05b445b511748512dbe61, type: 3}
+  - {fileID: -188693711, guid: ffe6998509e05b445b511748512dbe61, type: 3}
   intervalPos: {x: 0, y: 0, z: 0}
   buffType: 1
   DeadEffect:
@@ -52,5 +93,5 @@ MonoBehaviour:
   - {fileID: 6218705236146345145, guid: 824af580d6ad7af43b2a918a3893831c, type: 3}
   - {fileID: 2792287369258332466, guid: cfa075d31f296084f8cce50f9dbfa701, type: 3}
   - {fileID: 705040123156049523, guid: 6a361e43aedbb3f4f9ed50c7a90be44c, type: 3}
-  TextObject: {fileID: 6365502916847825346, guid: a22d4b3af5fe88b4380aca91801726aa, type: 3}
+  TextObject: {fileID: 297915015198612002, guid: 767850e0bf104f443ad8ec7e4a91a87b, type: 3}
   CanvasObject: {fileID: 8953866380580369088, guid: 50cecbd389797154ebf778d2cdb93d2d, type: 3}
