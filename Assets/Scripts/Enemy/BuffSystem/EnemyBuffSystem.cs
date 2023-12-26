@@ -89,7 +89,6 @@ public class EnemyBuffSystem : MonoBehaviour
                 Debug.Log("É[Éçà»è„ÇÃílÇì¸ÇÍÇƒÇ≠ÇæÇ≥Ç¢ÅB");
             else
                 BuffAttackCheckText.sprite = sprites[BuffAttackCheck-- - 1 + (int)buffType * 10];
-            Debug.Log(BuffAttackCheck);
             BuffAttackCheckText.gameObject.SetActive(true);
             return;
         }
@@ -100,7 +99,6 @@ public class EnemyBuffSystem : MonoBehaviour
             BuffAttackCheckText.sprite = sprites[BuffAttackCheck-- - 1 + (int)buffType * 10];
         else
             BuffAttackCheck--;
-        Debug.Log(BuffAttackCheck);
         if (BuffAttackCheck < 0)
         {
             if (!checkBlowingUp)
