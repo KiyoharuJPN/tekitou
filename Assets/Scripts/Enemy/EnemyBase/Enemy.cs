@@ -129,7 +129,7 @@ public class Enemy : MonoBehaviour
 
     virtual protected void OnColEnter2D(Collider2D col)
     {
-/*        if (!isDestroy && HadContactDamage)
+        if (!isDestroy && HadContactDamage)
         {
             if (col.gameObject.CompareTag("Player"))
             {
@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-*/    }
+    }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
@@ -379,7 +379,7 @@ public class Enemy : MonoBehaviour
             if(destroyBlinkCoroutine != null)
             {
                 StopCoroutine(destroyBlinkCoroutine);
-                //destroyBlinkCoroutine = null;
+                destroyBlinkCoroutine = null;
                 DefaultColor();
             }
 
