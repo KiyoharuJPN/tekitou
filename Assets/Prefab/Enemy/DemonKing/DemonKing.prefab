@@ -173,6 +173,7 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 0}
   id: 
   HadContactDamage: 1
+  isLeftHand: 0
 --- !u!58 &7423475831113800516
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -180,7 +181,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855283743400643419}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -362,6 +363,7 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 0}
   id: 
   HadContactDamage: 1
+  isLeftHand: 1
 --- !u!58 &8021194688162350430
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -369,7 +371,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3133106018706546476}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -669,9 +671,9 @@ MonoBehaviour:
     Duration: 1.5
     Strength: 0.5
   idleStatus:
-    upLimit: 2
-    downLimit: 2
-    handSpeed: 5
+    upLimit: 10
+    downLimit: 10
+    handSpeed: 1
     handFrequency: 2
   crushAttckStatus:
     dropSpeed: 60
@@ -679,6 +681,7 @@ MonoBehaviour:
     furthermoreAttackHeight: 2
     leftCrushMaxPosX: 0
     rightCrushMaxPosX: 0
+    upCrushMaxPosY: 12
   summonAttackStatus:
     summonMonster: {fileID: 8030852523938475196, guid: 175093faae49156498f3e3f196476cbd, type: 3}
     summonHeightLimit: 0
@@ -688,10 +691,11 @@ MonoBehaviour:
     RightDownPoint: {x: 0, y: 0}
   pincerAttackStatus:
     downMass: 0
-    BackMass: 1.5
+    BackMass: 4.5
     maxFollowSpeed: 20
     bottomLimit: -15.5
     attackSpeed: 35
+    effectObject: {fileID: 5161496231172733106, guid: b29b188902755754a9d0c02de11cfd03, type: 3}
   Pattern1: 01000000000000000200000001000000000000000300000000000000
   Pattern2: 01000000010000000000000002000000010000000000000003000000
   Pattern3: 02000000000000000300000001000000000000000300000000000000
@@ -715,6 +719,10 @@ MonoBehaviour:
   _shakeInfo:
     Duration: 1.5
     Strength: 0.5
+  _entryEffect:
+    frequency: 4
+    interval: 0.2
+    entryEffectObject: {fileID: 1401736371145855719, guid: 0b190d12498fcf047a8e760fea457e31, type: 3}
   waitSecond: 1.5
   animator: {fileID: 8092157013531573884}
   animatorL: {fileID: 3772082375846338006}
