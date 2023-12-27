@@ -165,7 +165,9 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Stage") && isDestroy)
         {
+            //Debug.Log(enemyRb.velocity + "\n" + collision.contacts[0].normal);
             reflexNum--;
+            //EnemyReflection(collision.contacts[0].normal);
             if (reflexNum == 0)
             {
                 SoundManager.Instance.PlaySE(SESoundData.SE.MonsterDead);
@@ -476,25 +478,40 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void EnemyReflection(Collision2D collision)
+    protected void EnemyReflection(Vector3 surfaceNormal)
     {
-        Vector2 forceDir = collision.relativeVelocity.normalized;
-        // 向きと力の計算
-        Vector2 force = (speed + BuffBlowingSpeed()) * forceDir;
-        // 力を加えるメソッド
-        enemyRb.velocity = force;
+        // 反射方向の計算
+        forceDirection = Vector3.Reflect(forceDirection, surfaceNormal).normalized;
+        //// 反射角度の計算
+        //float bounceAngle = Mathf.Atan2(forceDirection.y, forceDirection.x) * Mathf.Rad2Deg;
+
+        ////// 反射角度を一定範囲内に収める
+        ////bounceAngle = Mathf.Clamp(bounceAngle, 45, 135);
+
+        //// 物体の向きを反射方向にする
+        //transform.rotation = Quaternion.Euler(0f, 0f, bounceAngle);
+
+        // スピードを正規化にする
+        enemyRb.velocity = forceDirection * (speed + BuffBlowingSpeed());
+        Debug.Log(enemyRb.velocity);
+
+        //Vector2 forceDir = collision.relativeVelocity.normalized;
+        //// 向きと力の計算
+        //Vector2 force = (speed + BuffBlowingSpeed()) * forceDir;
+        //// 力を加えるメソッド
+        //enemyRb.velocity = force;
     }
 
     //吹っ飛び中回転
     private void EnemyRotate()
     {
         //右方向に動いている
-        if (enemyRb.velocity.x > 0.1)
+        if (enemyRb.velocity.x > 0)
         {
             this.transform.Rotate(0, 0, -rotateSpeed);
         }
         //左方向に動いている
-        else if (enemyRb.velocity.x < -0.1)
+        else/* if (enemyRb.velocity.x < -0.1)*/
         {
             this.transform.Rotate(0, 0, rotateSpeed);
         }

@@ -991,8 +991,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UI_ChaseNumbers_10_36: 1787331309
-      UI_ChaseNumbers_10_33: -1080311826
-      UI_ChaseNumbers_10_27: 1758078009
+      UI_ChaseNumbers_10_21: 1508176359
+      UI_ChaseNumbers_10_15: -777258034
       UI_ChaseNumbers_10_22: -642097819
       UI_ChaseNumbers_10_29: -188693711
       UI_ChaseNumbers_10_12: 1981173165
@@ -1019,17 +1019,17 @@ TextureImporter:
       UI_ChaseNumbers_10_10: -610369573
       UI_ChaseNumbers_10_32: 1360795596
       UI_ChaseNumbers_10_5: 1847908325
-      UI_ChaseNumbers_10_11: 351330541
-      UI_ChaseNumbers_10_15: -777258034
-      UI_ChaseNumbers_10_0: 2065034869
       UI_ChaseNumbers_10_16: 2096164760
-      UI_ChaseNumbers_10_8: 1786138536
-      UI_ChaseNumbers_10_20: 1765638668
-      UI_ChaseNumbers_10_13: 1111463754
-      UI_ChaseNumbers_10_4: 572227263
-      UI_ChaseNumbers_10_1: 1652365687
-      UI_ChaseNumbers_10_21: 1508176359
       UI_ChaseNumbers_10_26: 481883167
+      UI_ChaseNumbers_10_0: 2065034869
+      UI_ChaseNumbers_10_11: 351330541
+      UI_ChaseNumbers_10_27: 1758078009
+      UI_ChaseNumbers_10_8: 1786138536
+      UI_ChaseNumbers_10_33: -1080311826
+      UI_ChaseNumbers_10_13: 1111463754
+      UI_ChaseNumbers_10_20: 1765638668
+      UI_ChaseNumbers_10_1: 1652365687
+      UI_ChaseNumbers_10_4: 572227263
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
