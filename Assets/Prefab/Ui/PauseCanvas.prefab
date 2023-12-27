@@ -501,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8801034263684971757}
+  backScene: StageSelect
   menuobj:
   - {fileID: 8801034263726170558}
   - {fileID: 8801034263135242284}
@@ -514,6 +515,7 @@ MonoBehaviour:
   actionExpoObj: {fileID: 8801034263884436769}
   player: {fileID: 0}
   fade: {fileID: 0}
+  playerInput: {fileID: 0}
 --- !u!1 &8801034262584831035
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,7 +908,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BACK TITELE
+  m_Text: 'STAGE SELECT
+
+'
 --- !u!1 &8801034263356489086
 GameObject:
   m_ObjectHideFlags: 0

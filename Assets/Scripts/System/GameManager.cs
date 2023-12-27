@@ -468,21 +468,8 @@ public class GameManager : MonoBehaviour
     public void SetBuff(int id)
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.BuffGet);
-        switch (id)
-        {
-            case 0:
-                PlayerBuff.Instance.ExAttackGageUp();
-                break;
-            case 1:
-                PlayerBuff.Instance.SpeedUp();
-                break;
-            case 2:
-                PlayerBuff.Instance.SlashingBuff();
-                break;
-            case 3:
-                PlayerBuff.Instance.InvincibleBuff();
-                break;
-        }
+        
+        PlayerBuff.Instance.BuffSet(id);
     }
 
     //ƒfƒ‚ŒÀ’è‹@”\

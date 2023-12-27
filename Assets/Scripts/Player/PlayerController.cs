@@ -350,7 +350,7 @@ public class PlayerController : MonoBehaviour
         }
         
         //手動攻撃：攻撃ボタンが押されせたとき
-        if (nomalAttack.WasPressedThisFrame())
+        if (nomalAttack.WasPressedThisFrame() && playerState == PlayerState.Idle)
         {
             //通常攻撃入力
             AttackAction("NomalAttack");
@@ -368,6 +368,7 @@ public class PlayerController : MonoBehaviour
     //アクション実行
     internal void AttackAction(string actionName)
     {
+        
         switch (actionName)
         {
             case "UpAttack":

@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     [Tooltip("今の選択を示すポインターです"), Header("トライアングルポインター")]
     public GameObject target;
 
+    public string backScene;
+
     public GameObject[] menuobj;            //メニュー画面のオブジェクト
     //残り残機画像
     public Image stockImage;
@@ -39,16 +41,17 @@ public class PauseMenu : MonoBehaviour
     bool volumeChecking = false, inlineVolumeChecking = false, hideKeyChecking = false, pointerCheck = true, upDownLock = false;
 
     //InputSystem
+    public PlayerInput playerInput;
     internal InputAction back, decision, move;
 
     private void Start()
     {
         pointer = 0;            //ポインターの初期化
 
-        var playerInput = GameManager.Instance.playerInput;
-        back = playerInput.actions["Back"];
-        decision = playerInput.actions["Decision"]; 
-        move = playerInput.actions["Move"];
+        var input = playerInput;
+        back = input.actions["Back"];
+        decision = input.actions["Decision"]; 
+        move = input.actions["Move"];
     }
 
     public bool PauseCheck()
@@ -166,12 +169,11 @@ public class PauseMenu : MonoBehaviour
         isActionExpo = true;
     }
 
-    //タイトルを戻る
     void Exit()
     {
         upDownLock = true;
         Time.timeScale = 1;
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene(backScene);
     }
 
     void StickerChangePointer()

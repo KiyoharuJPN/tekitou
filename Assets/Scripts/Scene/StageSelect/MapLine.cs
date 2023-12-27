@@ -22,16 +22,17 @@ public class MapLine : MonoBehaviour
         await UniTask.Delay(500);
         for (int i = 0; i < linePoint.Length; i++)
         {
-            linePoint[i].transform.DOScale(
+            _ = linePoint[i].transform.DOScale(
                 Vector3.one,
                 appTime
                 );
             await UniTask.Delay(appInterval);
         }
-        mapImage.transform.DOScale(
+        await mapImage.transform.DOScale(
                 Vector3.one,
                 popTime
                 );
+        selectScene.IsEvent = false;
     }
 
     //フェード中にマップ配置

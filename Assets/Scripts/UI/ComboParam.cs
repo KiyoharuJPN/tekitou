@@ -241,7 +241,8 @@ public class ComboParam : MonoBehaviour
     {
         while (time < comboStatus.Distime)
         {
-            if (player.playerState == PlayerController.PlayerState.ExAttack || comboStop)
+            if (player.playerState == PlayerController.PlayerState.ExAttack || comboStop ||
+                player.isExAttack || player.isWarpDoor || !player.canMove)
             {
                 yield return null;
             }

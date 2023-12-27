@@ -125,10 +125,13 @@ public class DebugPlayer : DebugBase
         //速度バフ付与
         if (Input.GetKeyDown(KeyCode.U))
         {
-            PlayerBuff.Instance.ExAttackGageUp();
-            PlayerBuff.Instance.SpeedUp();
-            PlayerBuff.Instance.SlashingBuff();
-            PlayerBuff.Instance.InvincibleBuff();
+            PlayerBuff.Instance.BuffSet(0);
+
+            PlayerBuff.Instance.BuffSet(1);
+
+            PlayerBuff.Instance.BuffSet(2);
+
+            PlayerBuff.Instance.BuffSet(3);
             Debug.Log("バフ付与");
         }
         //バフリセット

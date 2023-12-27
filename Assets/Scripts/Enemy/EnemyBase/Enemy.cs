@@ -265,12 +265,12 @@ public class Enemy : MonoBehaviour
         {
             _isHitStoped = true;
             //ダメージ処理開始
-            StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
+            DamegeProcess(power, skill, isHitStop, exSkill);
         }
     }
     
     //ダメージ処理（ヒットストップの関係でコルーチンに変更）
-    protected virtual IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
+    protected virtual async void DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
     {
         //ヒット時SE・コンボ時間リセット
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
@@ -283,29 +283,12 @@ public class Enemy : MonoBehaviour
         }
         else HitEfect(this.transform, UnityEngine.Random.Range(0, 360));
 
+        //
+
         //ヒットストップ処理
         if (isHitStop)
         {
-            isHitStop = true;
-            Vector3 initialPos = this.transform.position;//初期位置保存
-            Time.timeScale = 0;
-
-            var stopTime = power * stopState.shakTime;
-            if (stopTime > stopState.shakTimeMax)
-            {
-                stopTime = stopState.shakTimeMax;
-            }
-            //ヒットストップ処理開始
-            tween = transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
-                .SetUpdate(true)
-                .OnComplete(() =>
-                {
-                    //アニメーションが終了したら時間を戻す
-                    Time.timeScale = 1;
-                    //初期位置に戻す
-                    this.transform.position = initialPos;
-                });
-            yield return new WaitForSeconds(stopTime);
+            await EnemyGeneratar.instance.HitStopProcess(power, this.transform);
         }
 
         //ヒット時演出（敵点滅）
@@ -354,28 +337,11 @@ public class Enemy : MonoBehaviour
                     }
 
                     Destroy(gameObject);
-
-                    yield break;
-                    //if (_isHitStoped)
-                    //{
-                    //    _isDestroyed = true;
-                    //    OnCamera = false;
-                    //    gameObject.SetActive(false);
-                    //}
-                    //else
-                    //{
-                    //    if (tween != null)
-                    //    {
-                    //        tween.Kill();
-                    //        //アニメーションが終了したら時間を戻す
-                    //        Time.timeScale = 1;
-                    //    }
-                    //    Destroy(gameObject);
-                    //}
                 }
             }
             else if(_EnemyBuff == null && hadEnemyBuff)
             {
+                //削除処理
                 Destroy(gameObject);
             }
 
@@ -391,7 +357,6 @@ public class Enemy : MonoBehaviour
 
             //吹き飛び処理
             BlownAway();
-            yield break;
         }
         //死亡時ではない場合
         else if (!isDestroy)
@@ -829,7 +794,7 @@ public class Enemy : MonoBehaviour
         GameObject prefab =
         Instantiate(GameManager.Instance.hitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
         prefab.transform.Rotate(new Vector3(0, 0, angle));
-        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Hit);
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         _EfectDestroy(prefab, 0.2f);
     }
     //エフェクト削除

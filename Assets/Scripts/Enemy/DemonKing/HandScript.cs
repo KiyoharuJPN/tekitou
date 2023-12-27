@@ -74,11 +74,11 @@ public class HandScript : Enemy
         if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         if (isDestroy) return;
         demonKing.Damage(power, skill, isHitStop, exSkill);
-        StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
+        DamegeProcess(power, skill, isHitStop, exSkill);
     }
 
     //ダメージ処理（ヒットストップの関係でコルーチンに変更）
-    protected override IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
+    protected override void DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
     {
         //ヒットエフェクト生成
         if (skill != null)
@@ -94,8 +94,6 @@ public class HandScript : Enemy
             StartCoroutine(HadDamagedHand());
             hadDamaged = true;
         }
-
-        yield return null;
     }
 
 

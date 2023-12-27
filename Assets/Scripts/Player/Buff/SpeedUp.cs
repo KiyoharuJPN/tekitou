@@ -19,7 +19,7 @@ public class SpeedUp : MonoBehaviour
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         AddBuff();
-        
+
         if (!gameObject.GetComponent<InvinciblBuff>() && !gameObject.GetComponent<SlashingBuff>())
         {
             spriteGlow.GlowColor = color;

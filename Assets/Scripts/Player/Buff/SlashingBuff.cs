@@ -88,7 +88,7 @@ public class SlashingBuff : MonoBehaviour
 
         obj.GetComponent<SpriteRenderer>().flipX = flipX;
 
-        obj.GetComponent <Rigidbody2D>().velocity = velocity;
+        obj.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     public void SlashingWaveRemove()
@@ -124,7 +124,7 @@ public class SlashingBuff : MonoBehaviour
     {
         time = buffTime;
 
-        while(time > 0)
+        while (time > 0)
         {
             if (this.gameObject.GetComponent<PlayerController>().canMove)
             {
@@ -138,7 +138,7 @@ public class SlashingBuff : MonoBehaviour
         {
             spriteGlow.GlowColor = Color.cyan;
         }
-        if(!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
+        if (!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
         {
             spriteGlow.EnableInstancing = true;
         }

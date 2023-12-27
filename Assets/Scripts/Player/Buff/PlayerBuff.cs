@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,6 +8,7 @@ using static PBF.PlayerBuffBase;
 public class PlayerBuff : MonoBehaviour
 {
     public PlayerController player;
+    private SpriteGlow.SpriteGlowEffect p_GlowEffect;
 
     //-------------------------------------------
     //各バフに関する変数
@@ -60,6 +62,30 @@ public class PlayerBuff : MonoBehaviour
         }
 
         FirstBuffKeep();
+        p_GlowEffect = player.GetComponent<SpriteGlow.SpriteGlowEffect>();
+    }
+
+    /// <summary>
+    /// バフ付与
+    /// </summary>
+    /// <param name="buffID"></param>
+    public void BuffSet(int buffID)
+    {
+        switch (buffID)
+        {
+            case 1:
+                SpeedUp();
+                break;
+            case 2:
+                SlashingBuff();
+                break;
+            case 3:
+                InvincibleBuff();
+                break;
+            case 0:
+                ExAttackGageUp();
+                break;
+        }
     }
 
     /// <summary>
@@ -68,7 +94,7 @@ public class PlayerBuff : MonoBehaviour
     public void ExAttackGageUp()
     {
         GetBuffUIPop(0);
-        player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
+        p_GlowEffect.EnableInstancing = false;
         //ゲージ追加（獲得量 - (獲得毎減少 × 獲得回数)
         int getExGage = exGage.setBuffNum - (exGage.setBuffDown * exGage.getBuffCount);
         if(getExGage < 5)
@@ -84,8 +110,8 @@ public class PlayerBuff : MonoBehaviour
             !player.gameObject.GetComponent<SlashingBuff>() && 
             !player.gameObject.GetComponent<InvinciblBuff>())
         {
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().GlowColor = new Color(1f, 0.05f, 0, 1);
+            p_GlowEffect.EnableInstancing = false;
+            p_GlowEffect.GlowColor = new Color(1f, 0.05f, 0, 1);
             StartCoroutine(ColorChenge());
         }
     }
@@ -98,11 +124,11 @@ public class PlayerBuff : MonoBehaviour
             yield return null;
         }
 
-        if (!player.gameObject.GetComponent<SpeedUp>() ||
-            !player.gameObject.GetComponent<SlashingBuff>() ||
+        if (!player.gameObject.GetComponent<SpeedUp>() &&
+            !player.gameObject.GetComponent<SlashingBuff>() &&
             !player.gameObject.GetComponent<InvinciblBuff>())
         {
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = true;
+            p_GlowEffect.EnableInstancing = true;
         }
     }
 
@@ -120,7 +146,7 @@ public class PlayerBuff : MonoBehaviour
         else
         {
             //プレイヤー（gameObject)にスピードアップスクリプトを追加
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
+            p_GlowEffect.EnableInstancing = false;
             player.gameObject.AddComponent<SpeedUp>();
         }
     }
@@ -142,7 +168,7 @@ public class PlayerBuff : MonoBehaviour
         else 
         {
             //プレイヤー（gameObject)に斬撃追加スクリプトを追加
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
+            p_GlowEffect.EnableInstancing = false;
             player.gameObject.AddComponent<SlashingBuff>();
         } 
         slashing.getBuffCount++;
@@ -179,7 +205,7 @@ public class PlayerBuff : MonoBehaviour
         {
             //プレイヤー（gameObject)に無敵化スクリプトを追加
             SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Invincibility, BGMSoundData.BGM.none);
-            player.GetComponent<SpriteGlow.SpriteGlowEffect>().EnableInstancing = false;
+            p_GlowEffect.EnableInstancing = false;
             player.gameObject.AddComponent<InvinciblBuff>();
         }
         invincible.getBuffCount++;

@@ -27,6 +27,8 @@ namespace PBF
             internal int setBuffDown;
             //スピードアップバフ獲得回数
             internal int getBuffCount;
+            [SerializeField, Header("バフ色")]
+            internal Color color;
         };
 
         //移動速度増加バフパラメータ
@@ -43,6 +45,8 @@ namespace PBF
             internal float attackSpeedNum;
             //スピードアップバフ獲得回数
             internal int getBuffCount;
+            [SerializeField, Header("バフ色")]
+            internal Color color;
         };
 
         //斬撃追加バフパラメータ
@@ -63,6 +67,8 @@ namespace PBF
             internal GameObject slashingObj;
             //スピードアップバフ獲得回数
             internal int getBuffCount;
+            [SerializeField, Header("バフ色")]
+            internal Color color;
         };
 
         //無敵化バフパラメータ
@@ -79,6 +85,8 @@ namespace PBF
             internal float maxBuffTime;
             //スピードアップバフ獲得回数
             internal int getBuffCount;
+            [SerializeField, Header("バフ色")]
+            internal Color color;
         };
         //----------------------------------------------
 

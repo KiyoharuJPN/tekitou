@@ -1,3 +1,7 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
+using System.Collections;
 using System.Drawing;
 using UnityEngine;
 
@@ -35,6 +39,10 @@ public class EnemyGeneratar : MonoBehaviour
     [SerializeField, Header("ヒットストップ")]
     public HitStopState stopState;
 
+    private Enemy DamgeEnemy;
+    private Coroutine m_Corutine;
+    private Tween tween;
+
     private void Awake()
     {
         if (instance == null)
@@ -57,4 +65,27 @@ public class EnemyGeneratar : MonoBehaviour
         return null;
     }
 
+    //敵のダメージ処理
+    public async UniTask HitStopProcess(float power, Transform transform)
+    {
+        Vector3 initialPos = transform.position;//初期位置保存
+        Time.timeScale = 0;
+
+        var stopTime = power * stopState.shakTime;
+        if (stopTime > stopState.shakTimeMax)
+        {
+            stopTime = stopState.shakTimeMax;
+        }
+
+        //ヒットストップ処理開始
+        await transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                //アニメーションが終了したら時間を戻す
+                Time.timeScale = 1;
+                //初期位置に戻す
+                transform.position = initialPos;
+            });
+    }
 }

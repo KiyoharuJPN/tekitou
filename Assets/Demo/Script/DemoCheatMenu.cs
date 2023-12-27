@@ -157,7 +157,7 @@ public class DemoCheatMenu : MonoBehaviour
                 if (!sW_OnOff)
                 {
                     sW_OnOff = true;
-                    PlayerBuff.Instance.SlashingBuff();
+                    PlayerBuff.Instance.BuffSet(1);
                     return "•t—^ON";
                 }
                 break;
