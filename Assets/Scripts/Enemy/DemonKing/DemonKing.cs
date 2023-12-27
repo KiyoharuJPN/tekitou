@@ -72,6 +72,8 @@ public class DemonKing : Enemy
         public float maxFollowSpeed, bottomLimit;
         [Tooltip("プレイヤーへ攻撃時スピード")]
         public float attackSpeed;
+        [Tooltip("当たりエフェクトオブジェクト")]
+        public GameObject effectObject;
     }
     [SerializeField] PincerAttackStatus pincerAttackStatus = new PincerAttackStatus { downMass = 0, BackMass = 3, maxFollowSpeed = 2, bottomLimit = 0, attackSpeed = 10};
     Vector2 pincerReservePosLH, pincerReservePosRH;
@@ -101,7 +103,7 @@ public class DemonKing : Enemy
     //プレイヤーのオブジェクト
     GameObject Player;
     //攻撃パタンを記録する関数
-    int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1;
+    int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1, SkillAnimationController = -1;
     int BossLayer;
 
     //アニメチェック、パターンチェック
@@ -271,6 +273,9 @@ public class DemonKing : Enemy
     //動き部分
     IEnumerator IdleAnim()
     {
+        SkillAnimationController = 0;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         AnimationController = 0;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
@@ -313,6 +318,9 @@ public class DemonKing : Enemy
     IEnumerator CrushAttackAnim()
     {
         Physics2D.IgnoreLayerCollision(BossLayer, BossLayer);
+        SkillAnimationController = 0;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         AnimationController = 1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
@@ -385,10 +393,15 @@ public class DemonKing : Enemy
         //下降攻撃
         isCrushAttack = true;
         enemyRHRb.AddForce(new Vector2(0, -crushAttckStatus.dropSpeed),ForceMode2D.Impulse);
+        SkillAnimationController = 1;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
     }
     IEnumerator CrushAttackAnim2()
     {
-        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer,false);
+        SkillAnimationController = 2;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         yield return new WaitForSeconds(2);
 
         //手を戻す
@@ -409,9 +422,13 @@ public class DemonKing : Enemy
         }
 
         RightHand.transform.position = RHOriginalPos;
+        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer, false);
 
         //アニメの終わり（必須）
         //パターンアニメーション関連
+        SkillAnimationController = -1;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
@@ -426,10 +443,13 @@ public class DemonKing : Enemy
 
     IEnumerator SummonAttackAnim()
     {
+        SkillAnimationController = 0;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         AnimationController = 2;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-
+        
         //上昇上限まで上昇する
         while (LeftHand.transform.position.y < summonAttackStatus.summonHeightLimit)
         {
@@ -437,12 +457,17 @@ public class DemonKing : Enemy
             yield return new WaitForSeconds(0.01f);
         }
         enemyLHRb.velocity = Vector3.zero;
-        StartAnimatorLH();
         isSummonAttack = true;
         enemyLHRb.AddForce(new Vector2(0,-summonAttackStatus.dropSpeed),ForceMode2D.Impulse);
+        SkillAnimationController = 1;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
     }
     IEnumerator SummonAttackAnim2()
     {
+        SkillAnimationController = 2;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         yield return new WaitForSeconds(1.5f);
         //一人目
         Vector2 summonPos = new Vector2(Random.Range(summonAttackStatus.LeftUpPoint.x,summonAttackStatus.RightDownPoint.x),Random.Range(summonAttackStatus.LeftUpPoint.y,summonAttackStatus.RightDownPoint.y));
@@ -480,6 +505,9 @@ public class DemonKing : Enemy
 
         //アニメの終わり（必須）
         //パターンアニメーション関連
+        SkillAnimationController = -1;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
@@ -494,9 +522,13 @@ public class DemonKing : Enemy
 
     IEnumerator PincerAttackAnim()
     {
+        SkillAnimationController = 0;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         AnimationController = 3;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        yield return new WaitForEndOfFrame();
 
         //手を横の下方向へ移動
         var attackMoveSpeed = Vector2.Distance(LeftHand.transform.position, pincerReservePosLH);
@@ -544,9 +576,17 @@ public class DemonKing : Enemy
         isPincerAttack = true;
         enemyLHRb.velocity = new Vector2 (pincerAttackStatus.attackSpeed, 0);
         enemyRHRb.velocity = new Vector2(-pincerAttackStatus.attackSpeed, 0);
+        SkillAnimationController = 1;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
     }
     IEnumerator PincerAttackAnim2()
     {
+        SkillAnimationController = 2;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        var effectPos = new Vector2(LeftHand.transform.position.x + 5.1f, LeftHand.transform.position.y);
+        Instantiate(pincerAttackStatus.effectObject, effectPos, Quaternion.identity);
         yield return new WaitForSeconds(3);
 
         //手を戻す
@@ -574,6 +614,9 @@ public class DemonKing : Enemy
 
         //アニメの終わり（必須）
         //パターンアニメーション関連
+        SkillAnimationController = -1;
+        LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
+        RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
@@ -688,6 +731,10 @@ public class DemonKing : Enemy
     }
 
     //外部関数
+    public int GetSkillAnimationController()
+    {
+        return SkillAnimationController;
+    }
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
         if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
@@ -891,7 +938,6 @@ public class DemonKing : Enemy
     {
         RHanimator.speed = LHanimator.speed = animator.speed = 1;
     }
-
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
 

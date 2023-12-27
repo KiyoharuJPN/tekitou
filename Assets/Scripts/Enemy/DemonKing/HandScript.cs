@@ -8,6 +8,7 @@ public class HandScript : Enemy
 {
     DemonKing demonKing;
     Renderer spritehand;
+    public bool isLeftHand;
 
     protected override void Start()
     {
@@ -41,9 +42,21 @@ public class HandScript : Enemy
     }
 
     //“®‚«ŠÖ˜A
-    private void StopHandAnimation()
+    void StopHandAnimation()
     {
         GetComponent<Animator>().speed = 0;
+    }
+    void SetSummonOffset()
+    {
+        transform.position = new Vector2(transform.position.x, transform.position.y + 2.55f);
+    }
+    void SetPincerAttackOffset()
+    {
+        if (demonKing.GetSkillAnimationController() == 0)
+        {
+            if (isLeftHand) transform.position = new Vector2(transform.position.x - 3.1f, transform.position.y);
+            else transform.position = new Vector2(transform.position.x + 3.1f, transform.position.y);
+        }
     }
 
     public void DemonDead()

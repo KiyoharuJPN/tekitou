@@ -20,6 +20,21 @@ public class DemonKingSummonAnimation : MonoBehaviour
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
+    //エフェクト関連
+    [System.Serializable]
+    public struct EntryEffect
+    {
+        [Tooltip("再生回数")]
+        public int frequency;
+        [Tooltip("再生間隔")]
+        public float interval;
+        [Tooltip("再生オブジェクト")]
+        public GameObject entryEffectObject;
+    }
+    [SerializeField]
+    [Header("エントリエフェクトに関する")]
+    public EntryEffect _entryEffect = new EntryEffect { frequency = 4, interval = 0.2f };
+
     //召喚関連
     public float waitSecond;
     bool summon = true;
@@ -28,7 +43,7 @@ public class DemonKingSummonAnimation : MonoBehaviour
     public Animator animator, animatorL, animatorR;
     public RuntimeAnimatorController entryAnimationL , entryAnimationR;
     bool IsAnimation = true;//, StageCheck = false, anim3 = true, anim4 = true;
-
+    
     [Header("HPGaugeの表示")]
     [SerializeField]
     GameObject HPBar;
@@ -64,14 +79,21 @@ public class DemonKingSummonAnimation : MonoBehaviour
     //ボス登場アニメーション
     protected void BossSummonAnim1()
     {
-
+        
         SoundManager.Instance.PlaySE(SESoundData.SE.DemonkingShout);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         //Debug.Log(shake);
         HPBar.SetActive(true);
+        for (int i = 1; i <= _entryEffect.frequency; i++)
+        {
+            Invoke("BossEntryEffect", (_entryEffect.interval*i));
+        }
 
     }
-
+    protected void BossEntryEffect()
+    {
+        Instantiate(_entryEffect.entryEffectObject, gameObject.transform.position, Quaternion.identity.normalized);
+    }
 
     //初見召喚部分
     IEnumerator BossSummon()
