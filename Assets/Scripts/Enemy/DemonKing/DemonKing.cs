@@ -687,22 +687,15 @@ public class DemonKing : Enemy
         }
     }
 
-
-
-
-
-
-
-
     //外部関数
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
     {
         if (gameObject.layer == LayerMask.NameToLayer("DeadBoss")) return;
         //ヒットストップ
-        StartCoroutine(DamegeProcess(power, skill, isHitStop, exSkill));
+        DamegeProcess(power, skill, isHitStop, exSkill);
     }
 
-    protected override IEnumerator DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
+    protected override async void DamegeProcess(float power, Skill skill, bool isHitStop, bool exSkill)
     {
         //ヒット時SE・コンボ時間リセット
         SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
@@ -711,27 +704,7 @@ public class DemonKing : Enemy
         //ヒットストップ処理
         if (isHitStop)
         {
-            Vector3 initialPos = this.transform.position;//初期位置保存
-            Time.timeScale = 0;
-
-            var stopTime = power * stopState.shakTime;
-            if (stopTime > stopState.shakTimeMax)
-            {
-                stopTime = stopState.shakTimeMax;
-            }
-
-            //ヒットストップ処理開始
-            tween = transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
-                .SetUpdate(true)
-                .OnComplete(() =>
-                {
-                    //アニメーションが終了したら時間を戻す
-                    Time.timeScale = 1;
-                    //初期位置に戻す
-                    this.transform.position = initialPos;
-
-                });
-            yield return new WaitForSeconds(stopTime + 0.01f);
+            await EnemyGeneratar.instance.HitStopProcess(power, this.transform);
         }
 
         hp -= power;
