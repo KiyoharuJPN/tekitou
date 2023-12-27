@@ -213,7 +213,11 @@ public class SESoundData
         Seika_Jump,
         Seika_AirJump,
 
-        TimeResult
+        TimeResult,
+
+        //ステージセレクト
+        StageSelect_Move,    //移動
+        StageSelect_Decision //決定
     }
 
     public SE se;

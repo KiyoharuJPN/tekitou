@@ -794,7 +794,7 @@ public class Enemy : MonoBehaviour
         GameObject prefab =
         Instantiate(GameManager.Instance.hitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
         prefab.transform.Rotate(new Vector3(0, 0, angle));
-        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_Hit);
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
         _EfectDestroy(prefab, 0.2f);
     }
     //エフェクト削除

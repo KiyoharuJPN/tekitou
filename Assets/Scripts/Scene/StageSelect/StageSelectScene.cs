@@ -9,7 +9,7 @@ using DG.Tweening;
 
 public class StageSelectScene : MonoBehaviour
 {
-
+    public PauseMenu pauseMenu;
     [SerializeField, Header("プレイヤーアイコン")]
     GameObject playerIcon;
     Animator p_Animator;
@@ -58,7 +58,8 @@ public class StageSelectScene : MonoBehaviour
     public bool IsEvent { set { isEvent = value; } }
     private int openStageID;
 
-    private InputAction move, decision;
+    private InputAction move, decision, option;
+    public bool canPause = true;
 
     private void Awake()
     {
@@ -73,23 +74,48 @@ public class StageSelectScene : MonoBehaviour
 
         var playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions["Move"];
+        option = playerInput.actions["Option"];
         decision = playerInput.actions["Decision"];
 
         StagePointSet();
+
+        canPause = true;
     }
 
     private void Update()
     {
-        if (!fade.IsFadeInComplete() || !fade.IsFadeOutComplete()) return;
+        if (!fade.IsFadeInComplete() || !fade.IsFadeOutComplete() ||fade.IsFadeEnRoute() || isEvent) return;
+
+        //ポーズ画面
+        if (option.WasPressedThisFrame() && canPause)
+        {
+            if (!pauseMenu.PauseCheck())
+            {
+                pauseMenu.PauseStart();
+            }
+            else if (pauseMenu.PauseCheck())
+            {
+                pauseMenu.BackGame();
+            }
+        }
+        if (pauseMenu.PauseCheck())
+        {
+            pauseMenu.MenuUpdata();
+            return;
+        }
+
         InputKey();
 
         //デバッグ用操作
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            isEvent = true;
+            movePos[1].IsPlayPoint = true;
             mapList[0].MapFirstSet(this);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            movePos[2].IsPlayPoint = true;
             mapList[1].MapFirstSet(this);
         }
     }
@@ -130,7 +156,7 @@ public class StageSelectScene : MonoBehaviour
             isMove = false;
             return;
         }
-        SoundManager.Instance.PlaySE(SESoundData.SE.Jump);
+        SoundManager.Instance.PlaySE(SESoundData.SE.StageSelect_Move);
         movePos[(int)selectStage].transform.localScale = Vector3.one;
         selectStage += pointer;
         playerIcon.transform.position = movePos[(int)selectStage].GetPos + new Vector2(0, 0.7f);
@@ -139,7 +165,7 @@ public class StageSelectScene : MonoBehaviour
         p_Animator.Play("Select_Jump");
         await UniTask.Delay(210);
 
-        playerIcon.transform.DOPunchPosition(shakeInfo.swingWigth, shakeInfo.duration, shakeInfo.vibrato, shakeInfo.randomness);
+        _ = playerIcon.transform.DOPunchPosition(shakeInfo.swingWigth, shakeInfo.duration, shakeInfo.vibrato, shakeInfo.randomness);
         movePos[(int)selectStage].StartShake(shakeInfo.swingWigth, shakeInfo.duration, shakeInfo.vibrato, shakeInfo.randomness);
 
         await UniTask.Delay(200);
@@ -191,7 +217,7 @@ public class StageSelectScene : MonoBehaviour
 
         if(isEvent)
         {
-            mapList[openStageID].MapFirstSet(this);
+           mapList[openStageID].MapFirstSet(this);
         }
     }
 
@@ -211,7 +237,7 @@ public class StageSelectScene : MonoBehaviour
         }
 
         p_Animator.Play("Select_Start");
-        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_CutIn);
+        SoundManager.Instance.PlaySE(SESoundData.SE.StageSelect_Decision);
         yield return new WaitForSeconds(1.2f);
 
         fade.StartFadeOut();

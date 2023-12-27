@@ -68231,6 +68231,14 @@ PrefabInstance:
       propertyPath: exGage.color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1469513550354978303, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
+      propertyPath: seSoundDatas.Array.data[13].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469513550354978303, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
+      propertyPath: seSoundDatas.Array.data[13].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0d5333a986960d4e8631d867bb2661a, type: 3}
     - target: {fileID: 6498813624578379856, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -68285,6 +68293,17 @@ PrefabInstance:
       objectReference: {fileID: 289387085}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
+--- !u!114 &1198945509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 51629665, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
+  m_PrefabInstance: {fileID: 1198945508}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1201236309
 GameObject:
   m_ObjectHideFlags: 0
@@ -122625,6 +122644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResultCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8622814929294617242, guid: ed8b4e7cef5ef90428e47fc0d2f3d12a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8622814929294617243, guid: ed8b4e7cef5ef90428e47fc0d2f3d12a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -122727,10 +122750,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2134018524}
-    - target: {fileID: 8801034262499123334, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 8801034262499123333, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1198945509}
     - target: {fileID: 8801034262499123337, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -122818,10 +122841,6 @@ PrefabInstance:
     - target: {fileID: 8801034262499123338, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801034263884436769, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
