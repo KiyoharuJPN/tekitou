@@ -61,6 +61,9 @@ public class StageSelectScene : MonoBehaviour
     private InputAction move, decision, option;
     public bool canPause = true;
 
+    //プレイヤーアイコンずらし幅
+    const float IconShift = 0.7f;
+
     private void Awake()
     {
         p_Animator = playerIcon.GetComponent<Animator>();
@@ -70,7 +73,7 @@ public class StageSelectScene : MonoBehaviour
     {
         System.GC.Collect();
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.none, BGMSoundData.BGM.StageSelect);
-        playerIcon.transform.position = movePos[(int)selectStage].GetPos + new Vector2(0, 0.7f);
+        
 
         var playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions["Move"];
@@ -127,8 +130,9 @@ public class StageSelectScene : MonoBehaviour
         var inputMoveAxis = move.ReadValue<Vector2>();
 
         //決定キー
-        if (decision.WasPerformedThisFrame())
+        if (decision.WasPerformedThisFrame() && !isEvent)
         {
+            isEvent = true;
             StartCoroutine(StageStart());
             return;
         }
@@ -177,6 +181,24 @@ public class StageSelectScene : MonoBehaviour
         //ステージ状態設定
         var eathStageData = SceneData.Instance.GetEachStageState;
 
+        switch (SceneData.Instance.referer)
+        {
+            case "Tutorial":
+                selectStage = SelectStageID.Stage1;
+                break;
+            case "Stage1":
+                selectStage = SelectStageID.Stage1;
+                break;
+            case "Stage2": 
+                selectStage = SelectStageID.Stage2;
+                break;
+            case "Stage3":
+                selectStage = SelectStageID.Stage3;
+                break;
+        }
+
+        playerIcon.transform.position = movePos[(int)selectStage].GetPos + new Vector2(0, IconShift);
+
         //for (int i = 0; i < eathStageData.Length; i++)
         //{
         //    Debug.Log("isClea：stege" + i + eathStageData[i].isClear);
@@ -206,6 +228,7 @@ public class StageSelectScene : MonoBehaviour
             //ステージオープンが初回の場合
             if (eathStageData[i].firstOpen)
             {
+                SceneData.Instance.StagePlay(i);
                 openStageID = i - mapList.Length;
                 isEvent = true;
             }

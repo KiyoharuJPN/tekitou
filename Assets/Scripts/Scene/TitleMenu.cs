@@ -54,6 +54,7 @@ public class TitleMenu : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         SceneData.Instance.referer = "Title";
+        SceneData.Instance.StageStateReset();
         pointer = 0;            //ポインターの初期化
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
         videoImage.enabled = false;
