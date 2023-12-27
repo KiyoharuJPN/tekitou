@@ -42,7 +42,7 @@ public class SceneData
 
         stageStates[stageId].isClear = true;
 
-        if (stageId < stageStates.Length)
+        if (stageId < stageStates.Length - 1)
         {
             stageId++;
             //次のステージが遊べる状態でなければ変更
