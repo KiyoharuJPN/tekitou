@@ -36,7 +36,7 @@ public class SceneData
     public bool wayPoint_1 = false;
     public bool wayPoint_2 = false;
 
-    public void StageStateSet(StageType stageType)
+    public void StageOpen(StageType stageType)
     {
         int stageId = (int)stageType;
 
@@ -52,11 +52,17 @@ public class SceneData
                 stageStates[stageId].firstOpen = true;
                 stageFirstOpen[stageId] = false;
             }
-            else
-            {
-                stageStates[stageId].firstOpen = false;
-            }
         }
+    }
+    public void StagePlay(int stageId)
+    {
+        stageStates[stageId].firstOpen = false;
+    }
+
+    public void StageStateReset()
+    {
+        stageStates = new EachStageState[Enum.GetNames(typeof(StageType)).Length];
+        stageFirstOpen = new bool[4] { false, false, true, true };
     }
 
     //ステージ状態リセット

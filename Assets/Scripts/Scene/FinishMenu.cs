@@ -89,32 +89,7 @@ public class FinishMenu : MonoBehaviour
     //実行項目
     void TryAgain()
     {
-        //Debug.Log(SystemController.Instance.GetLastScene());
-        if (SceneData.Instance.referer == "Tutorial")
-        {
-            SceneManager.LoadScene("Level_Tutorial");
-        }
-        else if (SceneData.Instance.referer == "Stage1")
-        {
-            SceneManager.LoadScene("Level_Stage1");
-        }
-        else if (SceneData.Instance.referer == "Stage2")
-        {
-            SceneManager.LoadScene("Level_Stage2");
-        }
-        else if (SceneData.Instance.referer == "Stage3")
-        {
-            SceneManager.LoadScene("Stage3");
-        }
-        //TODO セイカフェス限定コード
-        else if (SceneData.Instance.referer == "Seika_Tutorial")
-        {
-            SceneManager.LoadScene("Seika_Tutorial");
-        }
-        else if (SceneData.Instance.referer == "Seika_Stage1")
-        {
-            SceneManager.LoadScene("Seika_Stage1");
-        }
+        SceneManager.LoadScene("StageSelect");
         SceneData.Instance.stock = 2;
         SceneData.Instance.wayPoint_1 = false;
         SceneData.Instance.wayPoint_2 = false;

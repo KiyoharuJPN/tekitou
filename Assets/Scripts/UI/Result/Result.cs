@@ -183,19 +183,19 @@ public class Result : MonoBehaviour
         switch (SceneData.Instance.referer)
         {
             case "Tutorial":
-                SceneData.Instance.StageStateSet(Gamepara.StageType.Tutorial);
+                SceneData.Instance.StageOpen(Gamepara.StageType.Tutorial);
                 break;
 
             case "Stage1":
-                SceneData.Instance.StageStateSet(Gamepara.StageType.stage1);
+                SceneData.Instance.StageOpen(Gamepara.StageType.stage1);
                 break;
 
             case "Stage2":
-                SceneData.Instance.StageStateSet(Gamepara.StageType.stage2);
+                SceneData.Instance.StageOpen(Gamepara.StageType.stage2);
                 break;
 
             case "Stage3":
-                SceneData.Instance.StageStateSet(Gamepara.StageType.stage3);
+                SceneData.Instance.StageOpen(Gamepara.StageType.stage3);
                 break;
         }
         StartCoroutine(AnyKey());

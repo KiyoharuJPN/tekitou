@@ -1189,7 +1189,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 1642989327}
   videoImage: {fileID: 1642989328}
   preeskey: {fileID: 814439037}
-  demoVideoMoveTime: 40
+  demoVideoMoveTime: 5
   demoVideoTime: 30
 --- !u!114 &1507483620
 MonoBehaviour:
@@ -1560,7 +1560,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642989323}
   m_Enabled: 0
-  m_VideoClip: {fileID: 32900000, guid: 187e9c8883da7744d8cab4c7217fc969, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: d71e8efa443a33249b1428450d7aa245, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 279554558}
@@ -1570,14 +1570,14 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 5
-  m_DataSource: 0
+  m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 0
-  m_Url: 
+  m_Url: https://drive.google.com/file/d/196uPGnUdQ0NoAMVgVSNvozBAafZF__CB/view?usp=drive_link
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
