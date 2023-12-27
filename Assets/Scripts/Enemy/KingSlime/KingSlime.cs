@@ -388,11 +388,12 @@ public class KingSlime : Enemy
 
     protected override void OnDestroyMode()
     {
-        isDestroy = true;
-        IsBlowing = true;
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
+
+        isDestroy = true;
+        IsBlowing = true;
         GameManager.Instance.PlayerStop();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);

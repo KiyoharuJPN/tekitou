@@ -226,7 +226,7 @@ public class Enemy : MonoBehaviour
         if (!isDestroy)
             return;
         //吹っ飛び中の処理
-        if (isDestroy)
+        if (isDestroy && BossCheckOnCamera)
         {
             EnemyRotate();//回転
         }
@@ -789,7 +789,7 @@ public class Enemy : MonoBehaviour
     }
 
     //ヒットエフェクト生成
-    internal void HitEfect(Transform enemy, int angle)
+    virtual internal void HitEfect(Transform enemy, int angle)
     {
         GameObject prefab =
         Instantiate(GameManager.Instance.hitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
@@ -798,7 +798,7 @@ public class Enemy : MonoBehaviour
         _EfectDestroy(prefab, 0.2f);
     }
     //エフェクト削除
-    void _EfectDestroy(GameObject prefab, float time)
+    protected void _EfectDestroy(GameObject prefab, float time)
     {
         Destroy(prefab, time);
     }

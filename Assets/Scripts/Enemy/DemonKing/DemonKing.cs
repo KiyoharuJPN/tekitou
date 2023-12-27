@@ -103,7 +103,7 @@ public class DemonKing : Enemy
     //プレイヤーのオブジェクト
     GameObject Player;
     //攻撃パタンを記録する関数
-    int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1, SkillAnimationController = -1;
+    int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1, SkillAnimationController = -1, AnimationControllerPreb = -1/*新アニメーション用*/;
     int BossLayer;
 
     //アニメチェック、パターンチェック
@@ -188,7 +188,7 @@ public class DemonKing : Enemy
         if (isDestroy) return;
 
         //敵のパターンをランダムで選択
-        if (PatternOver || NotInAnim)
+        if (PatternOver && NotInAnim)
         {
             //ランダムで敵のパターンを選ぶ
             while (EnemyPattern == EnemyPatternPreb)
@@ -279,18 +279,19 @@ public class DemonKing : Enemy
         AnimationController = 0;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        AnimationControllerPreb = 0;
 
-
+        var speed = idleStatus.handSpeed * 0.01f;
+        int Frequency = 1;
         LeftHand.transform.position = LHOriginalPos;
         RightHand.transform.position = RHOriginalPos;
 
-        int Frequency = 0;
-        while(Frequency < HandMoveFrequency)
+        while (Frequency < HandMoveFrequency)
         {
             LeftHand.transform.position = new Vector2(LeftHand.transform.position.x, LeftHand.transform.position.y + LHSpeed);
             RightHand.transform.position = new Vector2(RightHand.transform.position.x, RightHand.transform.position.y + RHSpeed);
 
-            if (LeftHand.transform.position.y >= LHOriginalPos.y - idleStatus.handSpeed/2&& LeftHand.transform.position.y <= LHOriginalPos.y + idleStatus.handSpeed / 2) Frequency++;
+            if (LeftHand.transform.position.y >= LHOriginalPos.y - speed / 2&& LeftHand.transform.position.y <= LHOriginalPos.y + speed / 2) Frequency++;
             if (LHSpeed > 0 && LeftHand.transform.position.y > idleStatus.upLimit) LHSpeed *= -1;
             if (LHSpeed < 0 && LeftHand.transform.position.y < idleStatus.downLimit) LHSpeed *= -1;
             if (RHSpeed > 0 && RightHand.transform.position.y > idleStatus.upLimit) RHSpeed *= -1;
@@ -324,6 +325,8 @@ public class DemonKing : Enemy
         AnimationController = 1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        //魔王新アニメーションオフセット用
+        AnimationControllerPreb = 1;
 
         //一次移動用プレイヤーの位置と速度の算出
         float CheckMaxY = crushAttckStatus.upCrushMaxPosY - crushAttckStatus.attackHeight;
@@ -432,6 +435,8 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        //魔王新アニメーションオフセット用
+        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -449,7 +454,9 @@ public class DemonKing : Enemy
         AnimationController = 2;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        
+        //魔王新アニメーションオフセット用
+        AnimationControllerPreb = 2;
+
         //上昇上限まで上昇する
         while (LeftHand.transform.position.y < summonAttackStatus.summonHeightLimit)
         {
@@ -511,6 +518,8 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        //魔王新アニメーションオフセット用
+        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -528,6 +537,8 @@ public class DemonKing : Enemy
         AnimationController = 3;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        //新アニメーションオフセット用
+        AnimationControllerPreb = 3;
         yield return new WaitForEndOfFrame();
 
         //手を横の下方向へ移動
@@ -620,6 +631,8 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        //魔王新アニメーションオフセット用
+        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -634,7 +647,6 @@ public class DemonKing : Enemy
         AnimationController = 0;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-
         yield return new WaitForSeconds(1f);
 
         //手の位置と戻るための速度を計算する
@@ -670,6 +682,8 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
+        //魔王新アニメーションオフセット用
+        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -731,6 +745,10 @@ public class DemonKing : Enemy
     }
 
     //外部関数
+    public int GetAnimCtrlPreb()
+    {
+        return AnimationControllerPreb;
+    }
     public int GetSkillAnimationController()
     {
         return SkillAnimationController;
@@ -862,11 +880,12 @@ public class DemonKing : Enemy
 
     protected override void OnDestroyMode()
     {
-        isDestroy = true;
-        IsBlowing = true;
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
+
+        isDestroy = true;
+        IsBlowing = true;
         //両手の当たり判定を消す
         var children = GetComponentsInChildren<HandScript>();
         foreach (var child in children)

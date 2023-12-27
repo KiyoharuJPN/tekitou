@@ -40,11 +40,60 @@ public class HandScript : Enemy
             demonKing.OnHandTriggerExit2D(collision);
         }
     }
-
+    
     //動き関連
     void StopHandAnimation()
     {
         GetComponent<Animator>().speed = 0;
+    }
+    void ResetHandOffect()
+    {
+        Vector2 posos = GetResetOffsetByPattern(demonKing.GetAnimCtrlPreb());
+        transform.position = new Vector2(transform.position.x + posos.x, transform.position.y + posos.y);
+    }
+    Vector2 GetResetOffsetByPattern(int pt)
+    {
+        Vector2 offset = Vector2.zero;
+        if(isLeftHand)
+        {
+            switch(pt)
+            {
+                case -1:
+                case 0:
+                case 1:
+                    break;
+                case 2:
+                    offset.y = -2.55f;
+                    break;
+                case 3:
+                    offset.x = 3.1f;
+                    break;
+                default:
+                    Debug.Log("有り得ないパターンが読み込まれました、もう一度チェックしてください");
+                    break;
+            }
+        }
+        else
+        {
+            switch (pt)
+            {
+                case -1:
+                case 0:
+                    break;
+                case 1:
+                    offset.y = -2.55f;
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    offset.x = -3.1f;
+                    break;
+                default:
+                    Debug.Log("有り得ないパターンが読み込まれました、もう一度チェックしてください");
+                    break;
+            }
+        }
+        return offset;
     }
     void SetSummonOffset()
     {
@@ -61,10 +110,11 @@ public class HandScript : Enemy
 
     public void DemonDead()
     {
-        isDestroy = true;
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
+
+        isDestroy = true;
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
     }
 
@@ -95,7 +145,16 @@ public class HandScript : Enemy
             hadDamaged = true;
         }
     }
-
+    //ヒットエフェクト生成
+    override internal void HitEfect(Transform enemy, int angle)
+    {
+        Vector2 PosOffset = GetResetOffsetByPattern(demonKing.GetAnimCtrlPreb());
+        GameObject prefab =
+        Instantiate(GameManager.Instance.hitEffect, new Vector2(enemy.position.x + PosOffset.x, enemy.position.y + PosOffset.y), Quaternion.identity);
+        prefab.transform.Rotate(new Vector3(0, 0, angle));
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterGetHit);
+        _EfectDestroy(prefab, 0.2f);
+    }
 
     //プレイヤーが攻撃エリアに要る時の動き（AttackCheckAreaから呼ばれる）
     public override bool PlayerInAttackArea()
