@@ -33,6 +33,7 @@ public class SlashingBuff : MonoBehaviour
     {
         slashing = PlayerBuff.Instance.GetSlashing();
         buffTime = slashing.firstSetTime;
+        spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
         //残り時間のバー表示・設定
         timeBar = GameObject.Find("PlayerBuffTime").GetComponent<BuffTimer>();
@@ -40,6 +41,11 @@ public class SlashingBuff : MonoBehaviour
         timeBar.GetComponent<Canvas>().enabled = true;
 
         waveSpeed = slashing.slashingSpeed;
+
+        if (!gameObject.GetComponent<InvinciblBuff>())
+        {
+            spriteGlow.GlowColor = color;
+        }
 
         StartCoroutine(SlashingMode());
     }
@@ -82,7 +88,7 @@ public class SlashingBuff : MonoBehaviour
 
         obj.GetComponent<SpriteRenderer>().flipX = flipX;
 
-        obj.GetComponent <Rigidbody2D>().velocity = velocity;
+        obj.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     public void SlashingWaveRemove()
@@ -118,7 +124,7 @@ public class SlashingBuff : MonoBehaviour
     {
         time = buffTime;
 
-        while(time > 0)
+        while (time > 0)
         {
             if (this.gameObject.GetComponent<PlayerController>().canMove)
             {
@@ -132,7 +138,7 @@ public class SlashingBuff : MonoBehaviour
         {
             spriteGlow.GlowColor = Color.cyan;
         }
-        if(!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
+        if (!gameObject.GetComponent<SpeedUp>() && !gameObject.GetComponent<InvinciblBuff>())
         {
             spriteGlow.EnableInstancing = true;
         }

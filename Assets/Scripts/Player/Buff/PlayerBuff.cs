@@ -124,8 +124,8 @@ public class PlayerBuff : MonoBehaviour
             yield return null;
         }
 
-        if (!player.gameObject.GetComponent<SpeedUp>() ||
-            !player.gameObject.GetComponent<SlashingBuff>() ||
+        if (!player.gameObject.GetComponent<SpeedUp>() &&
+            !player.gameObject.GetComponent<SlashingBuff>() &&
             !player.gameObject.GetComponent<InvinciblBuff>())
         {
             p_GlowEffect.EnableInstancing = true;
@@ -137,8 +137,6 @@ public class PlayerBuff : MonoBehaviour
     /// </summary>
     public void SpeedUp()
     {
-
-        Debug.Log("バフ付与：スピード");
         GetBuffUIPop(1);
         speed.getBuffCount++;
         if (player.gameObject.GetComponent<SpeedUp>())
