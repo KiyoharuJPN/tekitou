@@ -50,7 +50,6 @@ public class Devil : Enemy
     protected override void Update()
     {
         base.Update();
-        //Debug.Log(GetYFromX(transform.position.x));
 
         animator.SetBool("IsBlowing", isDestroy);
         animator.SetBool("IsMoving", IsMoving);
@@ -105,21 +104,10 @@ public class Devil : Enemy
         Movement();
 
         float newX = transform.position.x + moveSpeed;
-        //Debug.Log(moveSpeed);
-        //Debug.Log(transform.position.x);
-        //Debug.Log(newX);
-
-        //Debug.Log(newX);
         transform.position = new Vector2 (newX, GetYFromX(newX));
     }
     void NotMoving()
     {
-        ////ê√é~Ç∑ÇÈéûÇÃä÷êî
-        //if (enemyRb.velocity != Vector2.zero)
-        //{
-        //    enemyRb.velocity = Vector2.zero;
-        //}
-
         if (!UseLoopToResetTimer)
         {
             
@@ -266,9 +254,6 @@ public class Devil : Enemy
             MidPosition = new Vector2(transform.position.x - 2.5f, transform.position.y - 5f);
         if (EndPosition == Vector2.zero)
             EndPosition = new Vector2(transform.position.x - 5f, transform.position.y);
-        //Debug.Log(StartPosition);
-        //Debug.Log(MidPosition);
-        //Debug.Log(EndPosition);
     }
     //ìÒéüä÷êîÇÃåvéZ
     void FindQuadraticEquation()

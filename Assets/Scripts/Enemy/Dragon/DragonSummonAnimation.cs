@@ -74,7 +74,6 @@ public class DragonSummonAnimation : MonoBehaviour
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         IsAnimation = false;
         animator.SetBool("IsAnimation", IsAnimation);
-        //Debug.Log("++++++++++++++++++++++++++++++++++++++++++");
         //壁のチェック
         if(WallCheck!=null)WallCheck.SetActive(true);
         gameObject.GetComponent<DragonSummonAnimation>().enabled = false;

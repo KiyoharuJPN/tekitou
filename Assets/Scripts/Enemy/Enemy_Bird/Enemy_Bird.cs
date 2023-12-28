@@ -87,14 +87,6 @@ public class Enemy_Bird : Enemy
 
         //攻撃するときの動き
         SoundManager.Instance.PlaySE(SESoundData.SE.BirdChirping);
-
-        //55
-        //AttackChecking = true;
-        //BirdAttackArea.SetActive(true);
-
-        //66
-        //IsAttacking = false;
-        //IsMoving = true;
     }
     
     public void StartAttack()
@@ -139,21 +131,5 @@ public class Enemy_Bird : Enemy
         }
         return false;
     }
-
-
-    /*    //飛ばされるときにコライダーを変えるとかの操作
-        protected override void _Destroy()
-        {
-            //反射用のコライダーに変更
-            this.GetComponent<BoxCollider2D>().enabled = false;
-            this.GetComponent<CircleCollider2D>().enabled = true;
-            enemyRb.bodyType = RigidbodyType2D.Dynamic;
-            enemyRb.constraints = RigidbodyConstraints2D.None;
-            CalcForceDirection();
-            //吹っ飛び開始
-            BoostSphere();
-            isDestroy = true;
-            gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
-        }*/
 
 }
