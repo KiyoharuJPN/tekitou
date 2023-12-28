@@ -54,6 +54,7 @@ MonoBehaviour:
     setBuffDown: 0.5
     maxBuffNum: 10
     attackSpeedNum: 0.1
+    maxAttackSpeed: 1.5
     color: {r: 0, g: 0, b: 0, a: 0}
   slashing:
     firstSetTime: 30

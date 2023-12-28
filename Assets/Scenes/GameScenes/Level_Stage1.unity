@@ -68219,6 +68219,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 176392272}
+    - target: {fileID: 2030806890, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
+      propertyPath: speed.maxAttackSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1469513550354978303, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
       propertyPath: masterVolume
       value: 21.93
