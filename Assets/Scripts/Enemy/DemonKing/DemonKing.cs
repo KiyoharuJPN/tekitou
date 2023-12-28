@@ -530,6 +530,7 @@ public class DemonKing : Enemy
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
         yield return new WaitForEndOfFrame();
+        Physics2D.IgnoreLayerCollision(BossLayer, BossLayer, false);
 
         //Žè‚ð‰¡‚Ì‰º•ûŒü‚ÖˆÚ“®
         var attackMoveSpeed = Vector2.Distance(LeftHand.transform.position, pincerReservePosLH);
