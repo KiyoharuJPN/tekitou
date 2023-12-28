@@ -196,15 +196,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(animSpeed);
-        animator.SetBool("IsMoving", isMoving);
-        animator.SetBool("IsRun", isRun);
-        animator.SetBool("IsFalling", isFalling);
-        animator.SetBool("IsJumping", isJumping);
-        animator.SetBool("IsSquatting", isSquatting);
-        animator.SetBool("IsLanding", isLanding);
-        animator.SetBool("IsGround", isGround);
-
         if (isGround != isgroundpreb) { isgroundpreb = isGround;}
         //Debug.Log(isgroundpreb);
 
@@ -231,6 +222,14 @@ public class PlayerController : MonoBehaviour
 
         if (Time.timeScale == 0) return;
         InputKay();
+
+        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsRun", isRun);
+        animator.SetBool("IsFalling", isFalling);
+        animator.SetBool("IsJumping", isJumping);
+        animator.SetBool("IsSquatting", isSquatting);
+        animator.SetBool("IsLanding", isLanding);
+        animator.SetBool("IsGround", isGround);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -667,7 +666,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         animator.SetBool("IsDropAttack", false);
         await AttackEnd();
-        animator.Play("Idle");
+        if(!isDead) animator.Play("Idle");
     }
 
     internal void WarpDoor(Transform door)
