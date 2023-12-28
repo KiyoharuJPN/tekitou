@@ -228,6 +228,7 @@ public class PlayerController : MonoBehaviour
             canMovingCounter -= Time.deltaTime;
         }
 
+        if (Time.timeScale == 0) return;
         InputKay();
     }
 

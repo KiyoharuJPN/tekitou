@@ -20,8 +20,9 @@ public class Player_Walk : MonoBehaviour
 
     private void Update()
     {
-        if (player.playerState == PlayerState.Idle ||
+        if ((player.playerState == PlayerState.Idle ||
             player.playerState == PlayerState.NomalAttack)
+            && Time.timeScale != 0)
         {
             MoveKay();
         }

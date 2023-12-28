@@ -34,8 +34,6 @@ public class Slime : Enemy
     {
         //敵のscriptに基づく
         base.Update();
-        
-
 
         //アニメーターの設定
         animator.SetInteger("MovingAnim", MovingAnim);
