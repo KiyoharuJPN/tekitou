@@ -778,8 +778,8 @@ public class DemonKing : Enemy
         if (enemyRb != null)
         {
             isPlayerExAttack = true;
-            if (MovementCoroutine != null)
-            {
+            //if (MovementCoroutine != null)
+            //{
                 StopAllCoroutines();
 
                 //í‚é~ópí≤êÆ
@@ -787,7 +787,7 @@ public class DemonKing : Enemy
                 if (isCrushAttack) isCrushAttack = false;
                 if (isPincerAttack) isPincerAttack = false;
                 if (isSummonAttack) isSummonAttack = false;
-            }
+            //}
             enemyRb.velocity = enemyLHRb.velocity = enemyRHRb.velocity = Vector2.zero;
         }
         if (animator != null)
