@@ -797,7 +797,7 @@ public class Enemy : MonoBehaviour
     }
 
     //ヒットエフェクト生成
-    virtual internal void HitEfect(Transform enemy, int angle)
+    internal void HitEfect(Transform enemy, int angle)
     {
         GameObject prefab =
         Instantiate(GameManager.Instance.hitEffect, new Vector2(enemy.position.x, enemy.position.y), Quaternion.identity);
@@ -806,7 +806,7 @@ public class Enemy : MonoBehaviour
         _EfectDestroy(prefab, 0.2f);
     }
     //エフェクト削除
-    protected void _EfectDestroy(GameObject prefab, float time)
+    void _EfectDestroy(GameObject prefab, float time)
     {
         Destroy(prefab, time);
     }

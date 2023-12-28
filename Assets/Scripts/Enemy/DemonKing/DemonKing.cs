@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DemonKing : Enemy
@@ -103,7 +104,7 @@ public class DemonKing : Enemy
     //プレイヤーのオブジェクト
     GameObject Player;
     //攻撃パタンを記録する関数
-    int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1, SkillAnimationController = -1, AnimationControllerPreb = -1/*新アニメーション用*/;
+    int EnemyAnim = -1, EnemyPattern = -1, EnemyPatternPreb = -1, AnimationController = -1, SkillAnimationController = -1;
     int BossLayer;
 
     //アニメチェック、パターンチェック
@@ -174,6 +175,7 @@ public class DemonKing : Enemy
         //両手の最初の位置を覚える
         LHOriginalPos = LeftHand.transform.position;
         RHOriginalPos = RightHand.transform.position;
+        Debug.Log(LeftHand.transform.position);
         //カメラ揺れ
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
@@ -279,10 +281,9 @@ public class DemonKing : Enemy
         AnimationController = 0;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        AnimationControllerPreb = 0;
 
         var speed = idleStatus.handSpeed * 0.01f;
-        int Frequency = 1;
+        int Frequency = 0;
         LeftHand.transform.position = LHOriginalPos;
         RightHand.transform.position = RHOriginalPos;
 
@@ -325,16 +326,14 @@ public class DemonKing : Enemy
         AnimationController = 1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        //魔王新アニメーションオフセット用
-        AnimationControllerPreb = 1;
 
         //一次移動用プレイヤーの位置と速度の算出
         float CheckMaxY = crushAttckStatus.upCrushMaxPosY - crushAttckStatus.attackHeight;
         Vector2 HandPos;
         if (Player.transform.position.y > CheckMaxY)
-            HandPos = new Vector3(Player.transform.position.x, crushAttckStatus.upCrushMaxPosY, Player.transform.position.z);
+            HandPos = new Vector2(Player.transform.position.x, crushAttckStatus.upCrushMaxPosY);
         else
-            HandPos = Player.transform.position + new Vector3(0, crushAttckStatus.attackHeight, 0);
+            HandPos = new Vector2(Player.transform.position.x, Player.transform.position.y + crushAttckStatus.attackHeight);
 
         var attackMoveSpeed = Vector2.Distance(HandPos, RightHand.transform.position);
         attackMoveSpeed /= 25;
@@ -435,8 +434,6 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        //魔王新アニメーションオフセット用
-        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -454,8 +451,6 @@ public class DemonKing : Enemy
         AnimationController = 2;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        //魔王新アニメーションオフセット用
-        AnimationControllerPreb = 2;
 
         //上昇上限まで上昇する
         while (LeftHand.transform.position.y < summonAttackStatus.summonHeightLimit)
@@ -518,8 +513,6 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        //魔王新アニメーションオフセット用
-        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -537,8 +530,6 @@ public class DemonKing : Enemy
         AnimationController = 3;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        //新アニメーションオフセット用
-        AnimationControllerPreb = 3;
         yield return new WaitForEndOfFrame();
 
         //手を横の下方向へ移動
@@ -596,7 +587,7 @@ public class DemonKing : Enemy
         SkillAnimationController = 2;
         LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
-        var effectPos = new Vector2(LeftHand.transform.position.x + 5.1f, LeftHand.transform.position.y);
+        var effectPos = new Vector2(LeftHand.transform.position.x + 2.2f, LeftHand.transform.position.y);
         Instantiate(pincerAttackStatus.effectObject, effectPos, Quaternion.identity);
         yield return new WaitForSeconds(3);
 
@@ -631,8 +622,6 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        //魔王新アニメーションオフセット用
-        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -682,8 +671,6 @@ public class DemonKing : Enemy
         AnimationController = -1;        //animator調整（必須）
         LHanimator.SetInteger("AnimationController", AnimationController);
         RHanimator.SetInteger("AnimationController", AnimationController);
-        //魔王新アニメーションオフセット用
-        AnimationControllerPreb = -1;
         //パターンループ関連
         NotInAnim = true;                   //次の動きに移せるようにする
         if (patternover)                    //パターンが終わる時に呼ばれる関数
@@ -745,10 +732,6 @@ public class DemonKing : Enemy
     }
 
     //外部関数
-    public int GetAnimCtrlPreb()
-    {
-        return AnimationControllerPreb;
-    }
     public int GetSkillAnimationController()
     {
         return SkillAnimationController;

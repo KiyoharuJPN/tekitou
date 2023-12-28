@@ -173,7 +173,6 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 0}
   id: 
   HadContactDamage: 1
-  isLeftHand: 0
 --- !u!58 &7423475831113800516
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -363,7 +362,6 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 0}
   id: 
   HadContactDamage: 1
-  isLeftHand: 1
 --- !u!58 &8021194688162350430
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -673,7 +671,7 @@ MonoBehaviour:
   idleStatus:
     upLimit: 2
     downLimit: 2
-    handSpeed: 10
+    handSpeed: 5
     handFrequency: 2
   crushAttckStatus:
     dropSpeed: 60
@@ -691,7 +689,7 @@ MonoBehaviour:
     RightDownPoint: {x: 0, y: 0}
   pincerAttackStatus:
     downMass: 0
-    BackMass: 4.5
+    BackMass: 1.5
     maxFollowSpeed: 20
     bottomLimit: -15.5
     attackSpeed: 35
