@@ -89,6 +89,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     IEnumerator Animation_4()
     {
         yield return new WaitForSeconds(0.1f);
+        HPBar.SetActive(true);
         enemyRb.AddForce(new Vector2(0, 30), ForceMode2D.Impulse);
         yield return new WaitForSeconds(1f);
         enemyRb.AddForce(new Vector2(0, -30), ForceMode2D.Impulse);
@@ -100,7 +101,6 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     //“®‰æ‚ªI‚í‚Á‚½‚ç•’Ê‚Ì“GScript‚ÉˆÚ‚·B
     void AnimationPlayed()
     {
-        HPBar.SetActive(true);
         gameObject.GetComponent<KingSlime>().enabled = true;
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         GameManager.Instance.canPause = true;

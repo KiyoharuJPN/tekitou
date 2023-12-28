@@ -76,9 +76,8 @@ public class DragonSummonAnimation : MonoBehaviour
         yield return new WaitForSeconds(1);
         SoundManager.Instance.PlaySE(SESoundData.SE.DragonRoar);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-        yield return new WaitForSeconds(2);
         HPBar.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(2.1f);
         AnimationPlayed();
 
     }
