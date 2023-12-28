@@ -169,7 +169,6 @@ public class Enemy : MonoBehaviour
         {
             //Debug.Log(enemyRb.velocity + "\n" + collision.contacts[0].normal);
             reflexNum--;
-            Debug.Log(reflexNum);
             //EnemyReflection(collision.contacts[0].normal);
             if (reflexNum == 0)
             {
