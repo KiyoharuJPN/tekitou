@@ -83,7 +83,10 @@ public class EnemyGeneratar : MonoBehaviour
             .OnComplete(() =>
             {
                 //アニメーションが終了したら時間を戻す
-                Time.timeScale = 1;
+                if(!GameManager.Instance.PauseCheck)
+                {
+                    Time.timeScale = 1;
+                }
                 //初期位置に戻す
                 transform.position = initialPos;
             });

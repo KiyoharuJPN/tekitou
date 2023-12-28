@@ -15,6 +15,22 @@ public class GameManager : MonoBehaviour
     PauseMenu pauseMenu;
     StageSelect debugMenu_StageSelect;
 
+    public bool PauseCheck
+    {
+        get
+        {
+            if (pauseMenu.PauseCheck())
+            {
+                return true;
+            }
+            else if (debugMenu_StageSelect.PauseCheck())
+            {
+                return true;
+            }
+            else return false;
+        }
+    }
+
     GameObject[] enemys;
     List<GameObject> enemyList = new List<GameObject>();
 
