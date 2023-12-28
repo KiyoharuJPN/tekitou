@@ -12,9 +12,13 @@ public class SpeedUp : MonoBehaviour
     //バフ中に光る色
     Color32 color = Color.cyan;//水色
 
-    void Start()
+    private void Awake()
     {
         speed = PlayerBuff.Instance.GetSpeed();
+    }
+
+    void Start()
+    {
         gameObject.GetComponent<StaticAfterImageEffect2DPlayer>().enabled = true;
         spriteGlow = gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>();
 
