@@ -65,6 +65,10 @@ public class SoundManager : MonoBehaviour
             {
                 bgmAudioSource.loop = false;
             }
+            else
+            {
+                bgmAudioSource.loop = true;
+            }
             bgmAudioSource.volume = bgmMasterVolume;
             bgmAudioSource.clip = data.audioClip;
             bgmAudioSource.Play();
@@ -155,8 +159,6 @@ public class BGMSoundData
     [Range(0, 1)]
     public float volume = 0.4f;
 }
-
-
 
 //SEƒŠƒXƒg
 [System.Serializable]

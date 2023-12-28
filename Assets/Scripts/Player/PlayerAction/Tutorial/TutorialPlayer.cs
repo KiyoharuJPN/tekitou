@@ -32,6 +32,8 @@ public class TutorialPlayer : PlayerController
 
         animator.SetFloat("Speed", animSpeed);
 
+        sprite = GetComponent<SpriteRenderer>();
+
         //InputSystem
         var playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions["Move"];
@@ -118,6 +120,8 @@ public class TutorialPlayer : PlayerController
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
 
+        if (playerState == PlayerState.Event) isNomalAttackKay = false;
+
         if (nomalAttack.IsPressed())
         {
             isNomalAttackKay = true;
@@ -129,7 +133,7 @@ public class TutorialPlayer : PlayerController
         }
         else { isSkillAttackKay = false; }
 
-        if (playerState != PlayerState.Idle || playerState == PlayerState.Event) return;
+        if (playerState != PlayerState.Idle) return;
 
         //•KE‹Z
         if (exAttack_L.IsPressed() && exAttack_R.IsPressed()/* || Input.GetKey(KeyCode.E)*/)
@@ -163,7 +167,7 @@ public class TutorialPlayer : PlayerController
             AttackAction("SideAttack_left"); return;
         }
         //è“®UŒ‚FUŒ‚ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚¹‚½‚Æ‚«
-        if (nomalAttack.WasPressedThisFrame() && canNomalAttack && canTAttack)
+        if (nomalAttack.WasPressedThisFrame() && canNomalAttack && canTAttack@&& playerState == PlayerState.Idle)
         {
             //’ÊíUŒ‚“ü—Í
             AttackAction("NomalAttack"); return;
@@ -214,7 +218,12 @@ public class TutorialPlayer : PlayerController
         NomalPlayer();
         GameManager.Instance.PlayerExAttack_End();
         tExAttackActivCheck = true;
-        AttackEnd();
+        animator.SetBool("IsExAttack", false);
+        if (playerState != PlayerState.Event)
+        {
+            playerState = PlayerState.Idle;
+        }
+        enemylist.Clear();
     }
 
     //”wŒiƒXƒNƒ[ƒ‹ˆ—
