@@ -671,9 +671,9 @@ MonoBehaviour:
     Duration: 1.5
     Strength: 0.5
   idleStatus:
-    upLimit: 10
-    downLimit: 10
-    handSpeed: 1
+    upLimit: 2
+    downLimit: 2
+    handSpeed: 10
     handFrequency: 2
   crushAttckStatus:
     dropSpeed: 60
