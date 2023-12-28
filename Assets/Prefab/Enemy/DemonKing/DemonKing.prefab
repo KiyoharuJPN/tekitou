@@ -675,11 +675,11 @@ MonoBehaviour:
     handFrequency: 2
   crushAttckStatus:
     dropSpeed: 60
-    attackHeight: 11.5
+    attackHeight: 10
     furthermoreAttackHeight: 2
     leftCrushMaxPosX: 0
     rightCrushMaxPosX: 0
-    upCrushMaxPosY: 12
+    upCrushMaxPosY: 9
   summonAttackStatus:
     summonMonster: {fileID: 8030852523938475196, guid: 175093faae49156498f3e3f196476cbd, type: 3}
     summonHeightLimit: 0
