@@ -160,8 +160,6 @@ public class BGMSoundData
     public float volume = 0.4f;
 }
 
-
-
 //SEƒŠƒXƒg
 [System.Serializable]
 public class SESoundData

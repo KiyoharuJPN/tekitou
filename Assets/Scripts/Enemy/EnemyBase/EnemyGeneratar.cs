@@ -80,6 +80,7 @@ public class EnemyGeneratar : MonoBehaviour
         //ヒットストップ処理開始
         await transform.DOShakePosition(stopTime, stopState.shakPowar, stopState.shakNum, stopState.shakRand)
             .SetUpdate(true)
+            .SetLink(transform.gameObject)
             .OnComplete(() =>
             {
                 //アニメーションが終了したら時間を戻す
