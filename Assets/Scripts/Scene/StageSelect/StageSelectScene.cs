@@ -72,7 +72,7 @@ public class StageSelectScene : MonoBehaviour
     private void Start()
     {
         System.GC.Collect();
-        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.none, BGMSoundData.BGM.StageSelect);
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.StageSelect, BGMSoundData.BGM.none);
         
 
         var playerInput = GetComponent<PlayerInput>();

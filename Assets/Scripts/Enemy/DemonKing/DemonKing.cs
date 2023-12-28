@@ -175,7 +175,6 @@ public class DemonKing : Enemy
         //両手の最初の位置を覚える
         LHOriginalPos = LeftHand.transform.position;
         RHOriginalPos = RightHand.transform.position;
-        Debug.Log(LeftHand.transform.position);
         //カメラ揺れ
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
