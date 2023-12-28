@@ -8,6 +8,7 @@ public class SpeedUp : MonoBehaviour
     SpeedBuff speed;
     SpriteGlow.SpriteGlowEffect spriteGlow;
     PlayerController player;
+    float attackSpeedpreb = 0;
 
     //バフ中に光る色
     Color32 color = Color.cyan;//水色
@@ -46,10 +47,13 @@ public class SpeedUp : MonoBehaviour
         player.moveData.jumpFirstSpeed += speed.setBuffNum;
 
         //攻撃速度増加
-        player.animSpeed += speed.attackSpeedNum;
         if(player.animSpeed > speed.maxAttackSpeed) 
         { 
             player.animSpeed = speed.maxAttackSpeed;
+        }
+        else
+        {
+            player.animSpeed += speed.attackSpeedNum;
         }
         player.animator.SetFloat("Speed", player.animSpeed);
     }
