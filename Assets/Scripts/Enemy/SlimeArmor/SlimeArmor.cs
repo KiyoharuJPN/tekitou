@@ -97,7 +97,17 @@ public class SlimeArmor : Enemy
     protected override void FixedUpdate()
     {
         if (isPlayerExAttack) return;
-        if (isDestroy) return;
+        if (isDestroy)
+        {
+            //吹っ飛び中の煙エフェクト
+            if (effectTime > effectInterval)
+            {
+                BlowAwayEffect();
+                effectTime = 0;
+            }
+            else effectTime += Time.deltaTime;
+            return;
+        }
 
         if (enemyRb.velocity.y < -1)
         {

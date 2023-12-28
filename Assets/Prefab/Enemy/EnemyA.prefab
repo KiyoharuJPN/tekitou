@@ -126,7 +126,6 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 7399963332902919765}
   id: 4
   HadContactDamage: 1
-  speed: 15
 --- !u!50 &4186489159880560722
 Rigidbody2D:
   serializedVersion: 4

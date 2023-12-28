@@ -55,7 +55,7 @@ public class Player_Jump : MonoBehaviour
         if(player.isUpAttack && !isSecondJump) canSecondJump = true;
 
         //プレイヤーがイベント・攻撃中以外の処理
-        if (player.playerState == PlayerState.Idle)
+        if (player.playerState == PlayerState.Idle && Time.timeScale != 0)
         {
             //落下状態取得
             player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;

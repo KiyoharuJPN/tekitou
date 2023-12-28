@@ -15,7 +15,7 @@ public class NomalAttack
         player.enemylist.Clear();
         skill = SkillGenerater.instance.SkillSet(Skill.Type.NormalAttack);
         player.animator.SetBool("IsNomalAttackBool", true);
-        //player.animator.SetTrigger("IsNomalAttack");
+        player.animator.SetTrigger("IsNomalAttack");
         isAirAttack = false;
         mono.StartCoroutine(NomalAttackInterval(player, mono));
     }
@@ -44,21 +44,14 @@ public class NomalAttack
 
     public static float AttackCoolTime(PlayerController player)
     {
-        if (player.isFalling || player.isJumping || !player.isGround) //ãÛíÜí èÌçUåÇÇÃèÍçá
+        if (player.isFalling || player.isJumping) //ãÛíÜí èÌçUåÇÇÃèÍçá
         {
-            player.animator.Play("NomalAttack_Jump");
             isAirAttack = true;
-            return airCoolTime + GetAnimationClipTime.GetAnimationTime(player.animator, GetAnimationClipTime.ClipType.NomalAttack_Jump);
-        }
-        else if(player.isGround && player.isMoving)
-        {
-            player.animator.Play("NomalAttack_Run");
-            return GetAnimationClipTime.GetAnimationTime(player.animator, GetAnimationClipTime.ClipType.NomalAttack_Stage);
+            return airCoolTime + GetAnimationClipTime.GetAnimationTime(player.animator, GetAnimationClipTime.ClipType.NomalAttack_Jump) / player.animSpeed;
         }
         else
         {
-            player.animator.Play("NomalAttack_Stage");
-            return GetAnimationClipTime.GetAnimationTime(player.animator, GetAnimationClipTime.ClipType.NomalAttack_Stage);
+            return GetAnimationClipTime.GetAnimationTime(player.animator, GetAnimationClipTime.ClipType.NomalAttack_Stage) / player.animSpeed;
         }
     }
 }
