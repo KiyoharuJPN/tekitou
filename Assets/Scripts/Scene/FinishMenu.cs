@@ -40,7 +40,7 @@ public class FinishMenu : MonoBehaviour
     FadeOutOption fadeOutOption = new() { waitSecondTry = 1f, wateSecondTitle = 1f, fadeOutSpeedTry = 10f, fadeOutSpeedTitle = 10f};
 
     //InputSystem
-    internal InputAction decision, option, move;
+    internal InputAction decision, move;
 
     private void Start()
     {
@@ -48,26 +48,18 @@ public class FinishMenu : MonoBehaviour
         Cursor.visible = false;
         Time.timeScale = 1f;
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver_intro, BGMSoundData.BGM.GameOver_roop);
+
         var playerInput = GetComponent<PlayerInput>();
         decision = playerInput.actions["Decision"];
-
-        option = playerInput.actions["Option"];
         move = playerInput.actions["Move"];
 
         SceneData.Instance.playTime = 0f;
-
-        System.GC.Collect();
-        Resources.UnloadUnusedAssets();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (option.WasPressedThisFrame())
-        {
-            SceneManager.LoadScene("Title");
-        }
         //調整キーの設定
         if (canChangePointer)
         {
@@ -99,12 +91,7 @@ public class FinishMenu : MonoBehaviour
     {
         if (SceneName != "") SceneManager.LoadScene("Title");
     }
-    /*IEnumerator PointerMoveWait()
-    {
-        yield return new WaitForSecondsRealtime(mouseMoveWait);
-        pointerCheck = true;
-        //Debug.Log("=========================================================================================");
-    }*/
+
     IEnumerator Wait(int pointer, float waitSecond, float fadeOutSpeed)
     {
         OnSelected(Finishobj[pointer]);
@@ -120,23 +107,17 @@ public class FinishMenu : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log(pointer);
-
         switch (pointer)
         {
             case 0:
-
+                TryAgain();
                 System.GC.Collect();
                 Resources.UnloadUnusedAssets();
-                TryAgain();
                 break;
             case 1:
-                Debug.Log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
                 BackTitle();
                 break;
             default:
-                Debug.Log("新しい項目の追加はプログラマに頼んでください。");
                 break;
         }
     }
