@@ -83,13 +83,15 @@ public class EnemyGeneratar : MonoBehaviour
             .SetLink(transform.gameObject)
             .OnComplete(() =>
             {
-                //アニメーションが終了したら時間を戻す
-                if(!GameManager.Instance.PauseCheck)
-                {
-                    Time.timeScale = 1;
-                }
+                
                 //初期位置に戻す
                 transform.position = initialPos;
             });
+
+        //アニメーションが終了したら時間を戻す
+        if (!GameManager.Instance.PauseCheck)
+        {
+            Time.timeScale = 1;
+        }
     }
 }
