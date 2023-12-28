@@ -32,7 +32,7 @@ public class FinishMenu : MonoBehaviour
 
     //float timeCount;
     //ポインター
-    int pointer = 0, pointerpreb = -1;
+    int pointer = 0, pointerpreb = -10;
 
 
     [SerializeField]
@@ -44,6 +44,7 @@ public class FinishMenu : MonoBehaviour
 
     private void Start()
     {
+        if (pointer == -1) Debug.Log("bug!!!!!");
         Cursor.visible = false;
         Time.timeScale = 1f;
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.GameOver_intro, BGMSoundData.BGM.GameOver_roop);
