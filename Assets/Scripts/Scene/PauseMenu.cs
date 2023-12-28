@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public string backScene;
 
     public GameObject[] menuobj;            //メニュー画面のオブジェクト
+    public GameObject[] soundMenuobj;            //メニュー画面のオブジェクト
     //残り残機画像
     public Image stockImage;
     public Sprite[] stockImages;
@@ -24,6 +25,9 @@ public class PauseMenu : MonoBehaviour
     private bool isMenuText = true;
     public GameObject actionExpoObj;
     private bool isActionExpo = false;
+    public GameObject soundSettingObj;
+    private bool isSoundSetting = false;
+    internal bool IsSoundSetting {  get { return isSoundSetting; } }
 
     [SerializeField]
     Animator player;
@@ -43,6 +47,8 @@ public class PauseMenu : MonoBehaviour
     //InputSystem
     public PlayerInput playerInput;
     internal InputAction back, decision, move;
+
+    public float sliderMoveSpeed = 0.5f;
 
     private void Start()
     {
@@ -69,6 +75,11 @@ public class PauseMenu : MonoBehaviour
 
     public void MenuUpdata()
     {
+        if(isSoundSetting)
+        {
+            return;
+        }
+
         //調整キーの設定
         if (!upDownLock) StickerChangePointer();
 
@@ -102,6 +113,11 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    private void SoundSettingUpdata()
+    {
+
+    }
+
     private void SelectMenu()
     {
         if (menuobj[0].activeSelf && !hideKeyChecking && isMenuText)//Menu
@@ -116,6 +132,9 @@ public class PauseMenu : MonoBehaviour
                     ActionExpo();
                     //OnDeselected(menuobj[pointer]);
                     break;
+                //case 2:
+                //    SoundSetting(); 
+                //    break;
                 case 2:
                     Exit();
                     break;
@@ -169,6 +188,14 @@ public class PauseMenu : MonoBehaviour
         isActionExpo = true;
     }
 
+    private void SoundSetting()
+    {
+        menuTextObj.SetActive(false);
+        soundSettingObj.SetActive(true);
+        isMenuText = false;
+        isSoundSetting = true;
+    }
+
     void Exit()
     {
         upDownLock = true;
@@ -195,21 +222,6 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    IEnumerator Scene_Start()
-    {
-        player.SetTrigger("Start");
-        SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_CutIn);
-        yield return new WaitForSeconds(2.4f);
-
-        fade.StartFadeOut();
-        SceneData.Instance.StageDataReset();
-
-        while (!fade.IsFadeOutComplete())
-        {
-            yield return null;
-        }
-    }
-
     //内部動き
     void OnSelected(GameObject obj)
     {
@@ -220,4 +232,9 @@ public class PauseMenu : MonoBehaviour
         obj.GetComponent<Image>().color = new Color(255, 255, 255); //色を戻す
     }
 
+}
+
+interface MenuUpdate
+{
+    public void PauseMenuUpdate();
 }

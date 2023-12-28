@@ -14,9 +14,19 @@ public class SoundManager : MonoBehaviour
     [SerializeField] List<BGMSoundData> bgmSoundDatas;
     [SerializeField] List<SESoundData> seSoundDatas;
 
-    public float masterVolume;
-    public float bgmMasterVolume;
-    public float seMasterVolume;
+    [Range(0, 1)]
+    private float bgmMasterVolume = 1;
+    public float SetBGMVolume { set { 
+            bgmMasterVolume = value; 
+            bgmAudioSource.volume = bgmMasterVolume;
+        } }
+
+    [Range(0, 1)]
+    private float seMasterVolume = 1;
+    public float SetSEVolume { set {
+            seMasterVolume = value;
+            seAudioSource.volume = seMasterVolume;
+        } }
 
     public static SoundManager Instance { get; private set; }
 
@@ -53,7 +63,7 @@ public class SoundManager : MonoBehaviour
             {
                 bgmAudioSource.loop = false;
             }
-            bgmAudioSource.volume = bgmMasterVolume * masterVolume;
+            bgmAudioSource.volume = bgmMasterVolume;
             bgmAudioSource.clip = data.audioClip;
             bgmAudioSource.Play();
         }
@@ -65,7 +75,7 @@ public class SoundManager : MonoBehaviour
             introAudioSource.clip = data_intro.audioClip;
             loopAudioSource.clip = data_loop.audioClip;
 
-            bgmAudioSource.volume = bgmMasterVolume * masterVolume;
+            bgmAudioSource.volume = bgmMasterVolume;
             bgmAudioSource.loop = true;
             bgmAudioSource.Play();
             bgmAudioSource.PlayScheduled(AudioSettings.dspTime + loopAudioSource.clip.length);
@@ -99,7 +109,7 @@ public class SoundManager : MonoBehaviour
         //    seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
         //    seAudioSource.PlayOneShot(data.audioClip);
         //}
-        seAudioSource.volume = seMasterVolume * masterVolume;
+        seAudioSource.volume = seMasterVolume;
         seAudioSource.PlayOneShot(data.audioClip);
     }
 

@@ -31,7 +31,7 @@ public class NomalAttack
             yield return null;
         }
 
-        if (player.isNomalAttackKay && !isAirAttack)//アタック再使用確認
+        if (player.isNomalAttackKay)//アタック再使用確認
         {
             NomalAttackStart(player, mono);
         }
