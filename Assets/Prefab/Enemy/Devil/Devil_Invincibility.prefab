@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: buffType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3173908005842791307, guid: fab7ba5b1dfeb794281dc588de6e8dbe, type: 3}
+      propertyPath: intervalPos.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7747173658008363968, guid: fab7ba5b1dfeb794281dc588de6e8dbe, type: 3}
       propertyPath: m_RootOrder
       value: 1
