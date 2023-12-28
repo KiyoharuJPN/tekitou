@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
     //無敵時間
     internal bool inInvincibleTimeKnockBack = false, inInvincibleTimeLife = false;
     public float InvincibleTime = 20;
-    SpriteRenderer sprite;
+    internal SpriteRenderer sprite;
 
     //boss判定用
     internal bool canMove = true;
@@ -537,7 +537,6 @@ public class PlayerController : MonoBehaviour
     //必殺技で使用したEnemyをリセット
     public void ExAttackEnd()
     {
-        Debug.Log("必殺技終了");
         exAttackEnemylist.Clear();
         NomalPlayer();
         GameManager.Instance.PlayerExAttack_End();
@@ -667,7 +666,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         animator.SetBool("IsDropAttack", false);
         await AttackEnd();
-        animator.Play("Hero_anim_1");
+        animator.Play("Idle");
     }
 
     internal void WarpDoor(Transform door)
