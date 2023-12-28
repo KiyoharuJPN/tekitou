@@ -126,11 +126,11 @@ public class Player_IsGround : MonoBehaviour
                 break;
 
             case PlayerController.PlayerState.NomalAttack:
-                player.AttackEnd();
                 player.isGround = true;
                 jumpData.FarstJump = true;
                 player.isLanding = false;
                 player.isFalling = false;
+                player.AttackEnd();
                 break;
 
             case PlayerController.PlayerState.SideAttack:

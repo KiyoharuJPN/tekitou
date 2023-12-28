@@ -68219,26 +68219,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 176392272}
-    - target: {fileID: 2030806890, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
-      propertyPath: exGage.color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030806890, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
-      propertyPath: exGage.color.g
-      value: 0.43137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 2030806890, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
-      propertyPath: exGage.color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1469513550354978303, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
-      propertyPath: seSoundDatas.Array.data[13].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1469513550354978303, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
-      propertyPath: seSoundDatas.Array.data[13].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b0d5333a986960d4e8631d867bb2661a, type: 3}
     - target: {fileID: 6498813624578379856, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
       propertyPath: m_RootOrder
       value: 9

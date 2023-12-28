@@ -48,11 +48,13 @@ MonoBehaviour:
   exGage:
     setBuffNum: 20
     setBuffDown: 5
+    color: {r: 1, g: 0.43137255, b: 0, a: 0}
   speed:
     setBuffNum: 2
     setBuffDown: 0.5
     maxBuffNum: 10
     attackSpeedNum: 0.1
+    color: {r: 0, g: 0, b: 0, a: 0}
   slashing:
     firstSetTime: 30
     buffSetTime: 20
@@ -60,11 +62,13 @@ MonoBehaviour:
     maxBuffTime: 0
     slashingSpeed: 20
     slashingObj: {fileID: 3530464263404757012, guid: 765956a0ebd94f44088ad40beb2a73aa, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 0}
   invincible:
     firstSetTime: 10
     buffSetTime: 5
     buffTimeDown: 1
     maxBuffTime: 30
+    color: {r: 0, g: 0, b: 0, a: 0}
   buffImages:
   - {fileID: 1006572492, guid: 745d6d001d23d8e4dac6a30e81c9d0f0, type: 3}
   - {fileID: 1898415155, guid: 745d6d001d23d8e4dac6a30e81c9d0f0, type: 3}
@@ -157,6 +161,7 @@ MonoBehaviour:
   moveWalls: []
   isBossRoom: 0
   playerInput: {fileID: 51629665}
+  stageCtrl: {fileID: 0}
   warpPoint: []
 --- !u!114 &51629665
 MonoBehaviour:
@@ -199,6 +204,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[13].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644327851198925013, guid: 210c189e3a01e004abffd297da01202a, type: 3}
+      propertyPath: seSoundDatas.Array.data[13].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0d5333a986960d4e8631d867bb2661a, type: 3}
     - target: {fileID: 5644327851198925019, guid: 210c189e3a01e004abffd297da01202a, type: 3}
       propertyPath: m_RootOrder
       value: 1
