@@ -420,7 +420,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //çUåÇèIóπéûÇÃèàóù
-    internal async void AttackEnd()
+    internal async UniTask AttackEnd()
     {
         switch (playerState)
         {
@@ -646,7 +646,7 @@ public class PlayerController : MonoBehaviour
         Destroy(prefab, time);
     }
 
-    public void SetCanMove(bool cM)
+    public async void SetCanMove(bool cM)
     {
         rb.velocity = Vector2.zero;
         if(cM)
@@ -663,8 +663,11 @@ public class PlayerController : MonoBehaviour
         isSideAttack = false;
         isNomalAttack = false;
         canDropAttack = true;
+        isFalling = false;
+        isMoving = false;
         animator.SetBool("IsDropAttack", false);
-        AttackEnd();
+        await AttackEnd();
+        animator.Play("Hero_anim_1");
     }
 
     internal void WarpDoor(Transform door)

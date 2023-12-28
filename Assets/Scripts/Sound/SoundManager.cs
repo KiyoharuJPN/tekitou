@@ -36,8 +36,8 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
 
-            introAudioSource = bgmAudioSource;
-            loopAudioSource = bgmAudioSource;
+            introAudioSource = gameObject.AddComponent<AudioSource>();
+            loopAudioSource = gameObject.AddComponent<AudioSource>();
 
             introAudioSource.loop = false;
             introAudioSource.playOnAwake = false;
@@ -58,6 +58,8 @@ public class SoundManager : MonoBehaviour
     {
         if(bgm_loop == BGMSoundData.BGM.none)
         {
+            introAudioSource.Stop();
+            loopAudioSource.Stop();
             BGMSoundData data = bgmSoundDatas.Find(data => data.bgm == bgm_intro);
             if(bgm_intro == BGMSoundData.BGM.Result)
             {
@@ -69,16 +71,17 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            BGMSoundData data_intro = bgmSoundDatas.Find(data => data.bgm == bgm_intro);
-            BGMSoundData data_loop = bgmSoundDatas.Find(data => data.bgm == bgm_loop);
+            bgmAudioSource.Stop();
+            AudioClip data_intro = bgmSoundDatas.Find(data => data.bgm == bgm_intro).audioClip;
+            AudioClip data_loop = bgmSoundDatas.Find(data => data.bgm == bgm_loop).audioClip;
 
-            introAudioSource.clip = data_intro.audioClip;
-            loopAudioSource.clip = data_loop.audioClip;
+            introAudioSource.clip = data_intro;
+            loopAudioSource.clip = data_loop;
 
             bgmAudioSource.volume = bgmMasterVolume;
             bgmAudioSource.loop = true;
-            bgmAudioSource.Play();
-            bgmAudioSource.PlayScheduled(AudioSettings.dspTime + loopAudioSource.clip.length);
+            introAudioSource.Play();
+            loopAudioSource.PlayScheduled(AudioSettings.dspTime + introAudioSource.clip.length);
         }
     }
 
