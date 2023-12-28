@@ -68,7 +68,8 @@ public class KingSlimeSummonAnimation : MonoBehaviour
             if (animationControler == 4 && anim4)
             {
                 anim4 = false;
-                Invoke("AnimationPlayed", 0.2f);
+                HPBar.SetActive(true);
+                Invoke("AnimationPlayed", 0.4f);
             }
         }
     }
@@ -100,7 +101,6 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     //“®‰æ‚ªI‚í‚Á‚½‚ç•’Ê‚Ì“GScript‚ÉˆÚ‚·B
     void AnimationPlayed()
     {
-        HPBar.SetActive(true);
         gameObject.GetComponent<KingSlime>().enabled = true;
         GameObject.Find("Hero").GetComponent<PlayerController>().SetCanMove(true);
         GameManager.Instance.canPause = true;
