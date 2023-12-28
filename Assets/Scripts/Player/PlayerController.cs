@@ -307,6 +307,8 @@ public class PlayerController : MonoBehaviour
     {
         var inputMoveAxis = move.ReadValue<Vector2>();
 
+        if (playerState == PlayerState.Event) isNomalAttackKay = false;
+
         if (nomalAttack.IsPressed())
         {
             isNomalAttackKay = true;
@@ -318,7 +320,10 @@ public class PlayerController : MonoBehaviour
         }
         else { isSkillAttackKay = false; }
 
-        if (playerState != PlayerState.Idle || playerState == PlayerState.Event) return;
+        if (playerState != PlayerState.Idle)
+        {
+            return;
+        }
 
         //•KE‹Z
         if (exAttack_L.IsPressed() && exAttack_R.IsPressed())
@@ -420,10 +425,6 @@ public class PlayerController : MonoBehaviour
         switch (playerState)
         {
             case PlayerState.Event: break;
-            case PlayerState.ExAttack:
-                animator.SetBool("IsExAttack", false);
-                exAttackEnemylist.Clear();
-                break;
             case PlayerState.SideAttack:
                 animator.SetBool("IsSideAttack", false);
                 break;
@@ -536,10 +537,16 @@ public class PlayerController : MonoBehaviour
     //•KE‹Z‚Åg—p‚µ‚½Enemy‚ğƒŠƒZƒbƒg
     public void ExAttackEnd()
     {
+        Debug.Log("•KE‹ZI—¹");
         exAttackEnemylist.Clear();
         NomalPlayer();
         GameManager.Instance.PlayerExAttack_End();
-        AttackEnd();
+        animator.SetBool("IsExAttack", false);
+        if (playerState != PlayerState.Event)
+        {
+            playerState = PlayerState.Idle;
+        }
+        enemylist.Clear();
     }
     //---------------------------------------
 

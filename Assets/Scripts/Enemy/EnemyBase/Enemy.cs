@@ -502,7 +502,6 @@ public class Enemy : MonoBehaviour
 
     protected void CalcForceDirection()
     {
-
         //オブジェクトを取得
         player = serchTag(gameObject, "Player");
         if (player == null)

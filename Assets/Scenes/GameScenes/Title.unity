@@ -1190,7 +1190,7 @@ MonoBehaviour:
   videoImage: {fileID: 1642989328}
   preeskey: {fileID: 814439037}
   demoVideoMoveTime: 40
-  demoVideoTime: 30
+  demoVideoTime: 27
 --- !u!114 &1507483620
 MonoBehaviour:
   m_ObjectHideFlags: 0
