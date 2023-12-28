@@ -20,11 +20,6 @@ public class Dragon : Enemy
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
-/*    //Platformを擦りぬく
-    [SerializeField, Tooltip("Platformのオブジェクト名")]
-    string Platformname;
-    BoxCollider2D BoxColthis;*/
-
     //ジャンプ関連
     [System.Serializable]
     public struct DragonJumpingAttackData
@@ -99,9 +94,6 @@ public class Dragon : Enemy
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
-        
-        //すり抜く関係
-        //BoxColthis = GetComponent<BoxCollider2D>();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -134,15 +126,6 @@ public class Dragon : Enemy
             {
                 EnemyPattern = Random.Range(0, 999) % 3;
             }
-
-            //デバッグ用
-            //EnemyPattern = 0;
-            //Debug.Log(EnemyPattern);
-            //if (!(EnemyPattern < 3 && EnemyPattern >= 0))
-            //{
-            //    Debug.Log("ドラゴンのランダム関数にエラーが出ました、計算式をチェックしてください。");
-            //}
-
             //次回同じものを選ばれないように先に代入をする
             EnemyPatternPreb = EnemyPattern;
             //選んだら二階選べないようにする
@@ -233,7 +216,6 @@ public class Dragon : Enemy
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        //Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
         //アニメの終わり（必須）
         animator.SetInteger("AnimationController", -1);
@@ -242,7 +224,6 @@ public class Dragon : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -258,7 +239,6 @@ public class Dragon : Enemy
             transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
             yield return new WaitForSeconds(0.01f);
         }
-        //Debug.Log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 
         animator.SetInteger("AnimationController", -1);
         NotInAnim = true;
@@ -289,7 +269,6 @@ public class Dragon : Enemy
             animator.SetInteger("AnimationController", AnimationController);
 
             yield return new WaitForSeconds(0.3f);
-            //Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         }
 
         animator.SetInteger("AnimationController", -1);
@@ -298,7 +277,6 @@ public class Dragon : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -324,109 +302,11 @@ public class Dragon : Enemy
             yield return new WaitForSeconds(0.01f);
         }
         ResetAttackCheckArea();
-        //dragonAttackCheckArea.gameObject.SetActive(true);
-        while (animcheck < 86)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea1();
-        while (animcheck < 93)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea2();
-        while (animcheck < 100)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea3();
-        while (animcheck < 107)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea4();
-        while (animcheck < 114)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea5();
-        while (animcheck < 121)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea1();
-        while (animcheck < 128)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea2();
-        while (animcheck < 135)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea3();
-        while (animcheck < 142)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea4();
-        while (animcheck < 149)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea5();
-        while (animcheck < 156)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea1();
-        while (animcheck < 163)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea2();
-        while (animcheck < 170)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea3();
-        while (animcheck < 177)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea4();
-        while (animcheck < 177)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckArea5();
-        while (animcheck < 184)
-        {
-            animcheck++;
-            yield return new WaitForSeconds(0.01f);
-        }
-        //AttackCheckAreaOver();
         while (animcheck < 210)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        //dragonAttackCheckArea.gameObject.SetActive(false);
 
         isFlameBracing = false;
 
@@ -438,7 +318,6 @@ public class Dragon : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -448,11 +327,6 @@ public class Dragon : Enemy
         animator.SetInteger("AnimationController", AnimationController);
 
         isSlewAttacking = true;
-        ////攻撃力とノックバックを変える
-        //var attackdam = enemyData.power;
-        //enemyData.power = 2;
-        //var knockbackval = enemyData.knockBackValue;
-        //enemyData.knockBackValue = 100;
 
         float animcheck = 0;
         while(animcheck < 90)
@@ -460,45 +334,21 @@ public class Dragon : Enemy
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        //ドラゴンコライダー
-        //EnemyCollider.offset = new Vector2(0.67f, -1.6f);
-        //EnemyCollider.size = new Vector2(7.3f, 3.18f);
-        //攻撃チェックArea
-        //dragonAttackCheckArea.offset = new Vector2(1.34f, -1.2f);
-        //dragonAttackCheckArea.size = new Vector2(9.3f, 4f);
-        //dragonAttackCheckArea.offset = new Vector2(0.9f, -1f);
-        //dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
-        //dragonAttackCheckArea.gameObject.SetActive(true);
         while(animcheck < 96)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        //EnemyCollider.offset = new Vector2(-3.3f, -1.6f);
-        //EnemyCollider.size = new Vector2(7, 3.18f);
-        //攻撃チェックArea
-        //dragonAttackCheckArea.offset = new Vector2(-3.9f, -1.2f);
-        //dragonAttackCheckArea.size = new Vector2(10, 4f);
-        //dragonAttackCheckArea.offset = new Vector2(-4.2f, -1f);
-        //dragonAttackCheckArea.size = new Vector2(11f, 4.45f);
         while (animcheck < 104)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        //EnemyCollider.offset = new Vector2(-1.7f, -1.6f);
-        //EnemyCollider.size = new Vector2(6.65f, 3.18f);
-        //攻撃チェックArea
-        //dragonAttackCheckArea.offset = new Vector2(-4.9f, -1.2f);
-        //dragonAttackCheckArea.size = new Vector2(8.2f, 4f);
-        //dragonAttackCheckArea.offset = new Vector2(-3.5f, -1f);
-        //dragonAttackCheckArea.size = new Vector2(12.35f, 4.45f);
         while (animcheck < 112)
         {
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        //dragonAttackCheckArea.gameObject.SetActive(false);
         ResetAttackCheckArea();
         ResetBoxCollider2D();
         while (animcheck < 150)
@@ -506,9 +356,6 @@ public class Dragon : Enemy
             animcheck++;
             yield return new WaitForSeconds(0.01f);
         }
-        ////攻撃力とノックバックを戻す
-        //enemyData.power = attackdam;
-        //enemyData.knockBackValue = knockbackval;
         isSlewAttacking = false;
 
         //アニメの終わり（必須）
@@ -518,7 +365,6 @@ public class Dragon : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -529,59 +375,18 @@ public class Dragon : Enemy
         isJumpingAttacking = true;
 
         yield return new WaitForEndOfFrame();
-        //アニメーションの時間を図って、アニメーションの関数でジャンプした次第、
-        //接地するとアニメーションが流される関数に変える
-        //var animcheck = 0;
-        //while (animcheck < 51)
-        //{
-        //    animcheck++;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
     }
     IEnumerator JumpAttackAnimPlus()
     {
         //地面に降りるアニメーション
         JumpAttackAnimCtrl = 1;
         animator.SetInteger("JumpAttackAnimCtrl", JumpAttackAnimCtrl);
-        //コライダーと攻撃範囲の調整
-        ////dragonAttackCheckArea.gameObject.SetActive(false);
-        //dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
-        //dragonAttackCheckArea.size = new Vector2(10f, 3.5f);
         gameObject.layer = LayerMask.NameToLayer("BossEnemy");
         ResetAttackCheckArea();
         //落下後の画面揺れ
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
 
         var animcheck = 0;
-        while (animcheck < 5)
-        {
-            animcheck++;
-            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
-            yield return new WaitForSeconds(0.01f);
-        }
-        //dragonAttackCheckArea.offset = new Vector2(0f, -1.45f);
-        //dragonAttackCheckArea.size = new Vector2(11.5f, 3.5f);
-        while (animcheck < 10)
-        {
-            animcheck++;
-            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
-            yield return new WaitForSeconds(0.01f);
-        }
-        //dragonAttackCheckArea.offset = new Vector2(0f, -1f);
-        //dragonAttackCheckArea.size = new Vector2(13f, 4.6f);
-        while (animcheck < 15)
-        {
-            animcheck++;
-            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
-            yield return new WaitForSeconds(0.01f);
-        }
-        while (animcheck < 20)
-        {
-            animcheck++;
-            transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * 0.1f), transform.position.y);
-            yield return new WaitForSeconds(0.01f);
-        }
-        //dragonAttackCheckArea.gameObject.SetActive(false);
         while (animcheck < 50)
         {
             animcheck++;
@@ -606,7 +411,6 @@ public class Dragon : Enemy
         {
             PatternOver = patternover;
             patternover = false;
-            //Debug.Log("Pattern Over");
         }
     }
 
@@ -678,9 +482,6 @@ public class Dragon : Enemy
     // アニメータで呼ばれるジャンプアニメーションが流されるときにジャンプする関数
     public void BossJAJump()
     {
-        //コライダー設定
-        //dragonAttackCheckArea.offset = new Vector2(0, -1.6f);
-        //dragonAttackCheckArea.size = new Vector2(9.6f, 3.18f);
         dragonAttackCheckArea.offset = new Vector2(0.5f, -1.2f);
         dragonAttackCheckArea.size = new Vector2(12f, 3.9f);
         gameObject.layer = LayerMask.NameToLayer("NoColliderEnemy");
@@ -695,8 +496,6 @@ public class Dragon : Enemy
         {
             jumpWidth = _dragonJumpingAttackData.DragonJARightPos.x - transform.position.x;
         }
-        //すり抜く関係
-        //BoxColthis.isTrigger = true;
         enemyRb.AddForce(new Vector2(jumpWidth * 0.5f, _dragonJumpingAttackData.DragonJAHeight),ForceMode2D.Impulse);
 
         //接地する時に次のアニメーションを流せるようにif文の判断要素にする

@@ -32,16 +32,6 @@ public class EnemyBuffSystem : MonoBehaviour
     public GameObject[] DeadEffect;
     public GameObject TextObject, CanvasObject;
 
-    ////表示時(暫定)
-    //public enum DisplayType
-    //{
-    //    EnemyLive,
-    //    EnemyDead,
-    //    Alltime,
-    //}
-    //Enemy enemy;
-    //public DisplayType displayType = DisplayType.Alltime;
-
     private void Awake()
     {
         if (buffType == SetBuffType.RandomSet)
@@ -66,7 +56,6 @@ public class EnemyBuffSystem : MonoBehaviour
         BuffAttackCheckText = Instantiate(TextObject,BuffCanvas.transform).GetComponent<SpriteRenderer>();
         BuffAttackCheckText.gameObject.SetActive(false);
         BuffAttackCheck = initialBuffAttackCheck;
-        //enemy = GetComponentInParent<Enemy>();
     }
 
     private void Update()
@@ -136,10 +125,6 @@ public class EnemyBuffSystem : MonoBehaviour
         //EXAttack = exa;
         BuffAttackCheck -= Mathf.Abs(exa);
     }
-    //public bool GetEXAttack()
-    //{
-    //    return EXAttack;
-    //}
 
     //BuffTypeを外から取得
     public SetBuffType GetBuffType()
@@ -206,7 +191,7 @@ public class EnemyBuffSystem : MonoBehaviour
     }
 
     //Buff対応の色を外から取得
-    public Color GetColorByType(/*SetBuffType type*/)
+    public Color GetColorByType()
     {
         Color color = new Color(0,0,0,0);
         switch (buffType)
@@ -240,22 +225,18 @@ public class EnemyBuffSystem : MonoBehaviour
     //Buff色設定
     Color HeroExSkillGaugeUpOrange()
     {
-        //return new Color(243, 152, 0, 255);
         return new Color(0.95f, 0.53f, 0, 1);
     }
     Color HeroSpeedUpBlue()
     {
-        //return new Color(0, 0, 255, 255);
         return new Color(0, 0, 1, 1);
     }
     Color HeroSlashingBuffGreen()
     {
-        //return new Color(0, 255, 0, 255);
         return new Color(0, 1, 0, 1);
     }
     Color HeroinvincibleBuffYello()
     {
-        //return new Color(255, 255, 0, 255);
         return new Color(1, 1, 0, 1);
     }
 

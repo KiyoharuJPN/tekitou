@@ -54,7 +54,6 @@ public class DragonFallStone : Projectile
     //ì‡ïîä÷êî
     void DestroyThis()
     {
-        //ObjectPool.Instance.PushObject(gameObject);
         Destroy(gameObject);
     }
 

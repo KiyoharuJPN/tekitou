@@ -145,7 +145,6 @@ public class Bat : Enemy
             Direction = 2;
             transform.localScale = transform.localScale = new Vector2(-1, 1);
             enemyRb.velocity = RightSpeed;
-            //check= false;
         }
     }
 
