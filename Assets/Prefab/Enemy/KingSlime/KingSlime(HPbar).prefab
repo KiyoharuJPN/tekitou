@@ -608,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056471604131598449, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
       propertyPath: FillSpeed
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9056471604131598449, guid: d083c4a937b19394db86bcd86a71d9ac, type: 3}
       propertyPath: DecreaseSpeed

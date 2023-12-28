@@ -68,7 +68,8 @@ public class KingSlimeSummonAnimation : MonoBehaviour
             if (animationControler == 4 && anim4)
             {
                 anim4 = false;
-                Invoke("AnimationPlayed", 0.2f);
+                HPBar.SetActive(true);
+                Invoke("AnimationPlayed", 0.4f);
             }
         }
     }
@@ -89,7 +90,6 @@ public class KingSlimeSummonAnimation : MonoBehaviour
     IEnumerator Animation_4()
     {
         yield return new WaitForSeconds(0.1f);
-        HPBar.SetActive(true);
         enemyRb.AddForce(new Vector2(0, 30), ForceMode2D.Impulse);
         yield return new WaitForSeconds(1f);
         enemyRb.AddForce(new Vector2(0, -30), ForceMode2D.Impulse);

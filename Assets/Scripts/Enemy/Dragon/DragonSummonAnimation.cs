@@ -19,6 +19,22 @@ public class DragonSummonAnimation : MonoBehaviour
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
+    //エフェクト関連
+    [System.Serializable]
+    public struct EntryEffect
+    {
+        [Tooltip("再生回数")]
+        public int frequency;
+        [Tooltip("再生間隔")]
+        public float interval;
+        [Tooltip("再生オブジェクト")]
+        public GameObject entryEffectObject;
+    }
+    [SerializeField]
+    [Header("エントリエフェクトに関する")]
+    public EntryEffect _entryEffect = new EntryEffect { frequency = 4, interval = 0.2f };
+
+
     //召喚関連
     public float waitSecond;
     bool summon = true;
@@ -77,9 +93,18 @@ public class DragonSummonAnimation : MonoBehaviour
         SoundManager.Instance.PlaySE(SESoundData.SE.DragonRoar);
         shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         HPBar.SetActive(true);
+        for (int i = 1; i <= _entryEffect.frequency; i++)
+        {
+            Invoke("BossEntryEffect", (_entryEffect.interval * i));
+        }
         yield return new WaitForSeconds(2.1f);
         AnimationPlayed();
 
+    }
+    protected void BossEntryEffect()
+    {
+        Vector2 sumPos = new Vector2(gameObject.transform.position.x - 4, gameObject.transform.position.y - 2); ;
+        Instantiate(_entryEffect.entryEffectObject, sumPos, Quaternion.identity.normalized);
     }
 
 

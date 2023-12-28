@@ -173,6 +173,10 @@ MonoBehaviour:
   _shakeInfo:
     Duration: 2
     Strength: 0.5
+  _entryEffect:
+    frequency: 4
+    interval: 0.2
+    entryEffectObject: {fileID: 1401736371145855719, guid: 0b190d12498fcf047a8e760fea457e31, type: 3}
   waitSecond: 1
   WallCheck: {fileID: 0}
   HPBar: {fileID: 78672566138135562}
