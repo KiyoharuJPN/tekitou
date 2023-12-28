@@ -43,6 +43,8 @@ namespace PBF
             internal float maxBuffNum;
             [SerializeField, Header("攻撃速度上昇量")]
             internal float attackSpeedNum;
+            [SerializeField, Header("攻撃速度上限")]
+            internal float maxAttackSpeed;
             //スピードアップバフ獲得回数
             internal int getBuffCount;
             [SerializeField, Header("バフ色")]

@@ -75,7 +75,8 @@ public class PauseMenu : MonoBehaviour
 
     public void MenuUpdata()
     {
-        if(isSoundSetting)
+        Time.timeScale = 0;
+        if (isSoundSetting)
         {
             return;
         }
