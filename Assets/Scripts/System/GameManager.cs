@@ -373,7 +373,6 @@ public class GameManager : MonoBehaviour
             {
                 BGMStart_BossRoom();
             }
-
         }
         else if(!isBossRoom)
         {
