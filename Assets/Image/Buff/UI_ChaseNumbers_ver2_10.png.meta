@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,10 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -991,25 +991,25 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UI_ChaseNumbers_ver2_10_0: -1103097932
-      UI_ChaseNumbers_ver2_10_5: 136202333
-      UI_ChaseNumbers_ver2_10_4: 580320766
-      UI_ChaseNumbers_ver2_10_7: 1835603022
       UI_ChaseNumbers_ver2_10_9: -1989829802
-      UI_ChaseNumbers_ver2_10_12: 618126897
+      UI_ChaseNumbers_ver2_10_7: 1835603022
+      UI_ChaseNumbers_ver2_10_36: -790139730
+      UI_ChaseNumbers_ver2_10_10: -1129482018
+      UI_ChaseNumbers_ver2_10_15: 1370516724
       UI_ChaseNumbers_ver2_10_8: 453460467
       UI_ChaseNumbers_ver2_10_13: 128746078
-      UI_ChaseNumbers_ver2_10_10: -1129482018
-      UI_ChaseNumbers_ver2_10_36: -790139730
-      UI_ChaseNumbers_ver2_10_15: 1370516724
+      UI_ChaseNumbers_ver2_10_38: 459627581
+      UI_ChaseNumbers_ver2_10_12: 618126897
       UI_ChaseNumbers_ver2_10_18: 1287380766
+      UI_ChaseNumbers_ver2_10_2: -1931762332
       UI_ChaseNumbers_ver2_10_11: -547841830
       UI_ChaseNumbers_ver2_10_23: -216981870
       UI_ChaseNumbers_ver2_10_16: -2011315777
       UI_ChaseNumbers_ver2_10_27: -509507485
+      UI_ChaseNumbers_ver2_10_3: -1429384873
       UI_ChaseNumbers_ver2_10_31: 453911747
       UI_ChaseNumbers_ver2_10_24: 1221044592
       UI_ChaseNumbers_ver2_10_19: -571629374
-      UI_ChaseNumbers_ver2_10_38: 459627581
       UI_ChaseNumbers_ver2_10_25: 662321026
       UI_ChaseNumbers_ver2_10_29: 617196188
       UI_ChaseNumbers_ver2_10_33: -182088759
@@ -1028,8 +1028,8 @@ TextureImporter:
       UI_ChaseNumbers_ver2_10_30: -586349153
       UI_ChaseNumbers_ver2_10_28: -1119727623
       UI_ChaseNumbers_ver2_10_35: 1348018931
-      UI_ChaseNumbers_ver2_10_2: -1931762332
-      UI_ChaseNumbers_ver2_10_3: -1429384873
+      UI_ChaseNumbers_ver2_10_5: 136202333
+      UI_ChaseNumbers_ver2_10_4: 580320766
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

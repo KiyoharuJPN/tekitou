@@ -196,6 +196,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(animSpeed);
         animator.SetBool("IsMoving", isMoving);
         animator.SetBool("IsRun", isRun);
         animator.SetBool("IsFalling", isFalling);

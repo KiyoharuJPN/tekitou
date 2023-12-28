@@ -67,7 +67,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+        System.GC.Collect();
+        Resources.UnloadUnusedAssets();
     }
 
     void Start()
@@ -407,7 +408,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator _PlyerDeath()
     {
         GameManager.Instance.PlayTimeStop();
-        player.AttackEnd();
+        _ = player.AttackEnd();
         player.SetCanMove(false);
         Time.timeScale = 0.3f;
         yield return new WaitForSeconds(0.5f);

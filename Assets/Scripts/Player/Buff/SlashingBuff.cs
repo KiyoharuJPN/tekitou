@@ -21,6 +21,9 @@ public class SlashingBuff : MonoBehaviour
     BuffTimer timeBar;
     float time;
 
+    //ç≈í·éûä‘
+    const float miniTime = 10f;
+
     public enum SlashingType
     {
         sideAttack_Right,
@@ -112,7 +115,15 @@ public class SlashingBuff : MonoBehaviour
     internal void AddBuff(int count)
     {
         timeBar = GameObject.Find("PlayerBuffTime").GetComponent<BuffTimer>();
-        float addTime = slashing.buffSetTime - slashing.buffTimeDown * count;
+        float addTime;
+        if (miniTime > slashing.buffSetTime - slashing.buffTimeDown * count)
+        {
+            addTime = miniTime;
+        }
+        else
+        {
+            addTime = slashing.buffSetTime - slashing.buffTimeDown * count;
+        }
         buffTime += addTime;
         time += addTime;
 

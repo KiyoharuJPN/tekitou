@@ -46,13 +46,10 @@ public class SpeedUp : MonoBehaviour
         player.moveData.jumpFirstSpeed += speed.setBuffNum;
 
         //UŒ‚‘¬“x‘‰Á
+        player.animSpeed += speed.attackSpeedNum;
         if(player.animSpeed > speed.maxAttackSpeed) 
         { 
             player.animSpeed = speed.maxAttackSpeed;
-        }
-        else
-        {
-            player.animSpeed += speed.attackSpeedNum;
         }
         player.animator.SetFloat("Speed", player.animSpeed);
     }
