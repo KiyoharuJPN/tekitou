@@ -64,7 +64,16 @@ public class Bat : Enemy
             }
         }
 
-
+        //吹っ飛び中の煙エフェクト
+        if (isDestroy)
+        {
+            if (effectTime > effectInterval)
+            {
+                BlowAwayEffect();
+                effectTime = 0;
+            }
+            else effectTime += Time.deltaTime;
+        }
     }
 
     //敵の動きや関数

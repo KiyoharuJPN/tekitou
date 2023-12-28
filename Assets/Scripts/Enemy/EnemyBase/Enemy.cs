@@ -44,8 +44,8 @@ public class Enemy : MonoBehaviour
     private GameObject smokeEffect;
     //消滅時エフェクト
     private GameObject deathEffect;
-    private float effectInterval = 0.5f;
-    private float effectTime = 0f;
+    protected float effectInterval = 0.5f;
+    internal float effectTime = 0f;
     protected float rotateSpeed = 10f;//吹っ飛び回転速度
 
     //反射回数＆反射関連
@@ -238,6 +238,8 @@ public class Enemy : MonoBehaviour
     {
         if (isPlayerExAttack) return;
         Gravity();
+
+        //吹っ飛び中の煙エフェクト
         if (isDestroy)
         {
             if (effectTime > effectInterval)
@@ -421,9 +423,6 @@ public class Enemy : MonoBehaviour
 
         if (_EnemyBuff != null)
             _EnemyBuff.ShowAttackChecking();
-
-        //if(smokeEffect != null)
-        //    StartCoroutine(BlowAwayEffect());
     }
 
     //吹き飛び処理
@@ -494,11 +493,10 @@ public class Enemy : MonoBehaviour
     }
 
     //吹き飛び中のエフェクト生成
-    private async void BlowAwayEffect()
+    protected async void BlowAwayEffect()
     {
         GameObject obj =  Instantiate(smokeEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
-        Debug.Log((int)(effectInterval * 1000));
-        await UniTask.Delay((int)(effectInterval * 100));
+        await UniTask.Delay((int)(effectInterval * 1000));
         Destroy(obj);
     }
 
