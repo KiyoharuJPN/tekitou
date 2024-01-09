@@ -28,19 +28,26 @@ public class KingSlime : Enemy
     [Header("‰æ–Ê—h‚ê‚ÉŠÖ‚·‚é")]
     public ShakeInfo _shakeInfo;
     CameraShake shake;
-    //public int BossDownShake;
-    //public struct BossDownShake
-    //{
-    //    [Tooltip("—h‚ê‚ÌŽžŠÔ")]
-    //    public float ShakeTime;
-    //    [Tooltip("—h‚ê‚Ì‹­‚³")]
-    //    public float ShakePower;
-    //    [Tooltip("U“®”")]
-    //    public int ShakeNum;
-    //    [Tooltip("—h‚ê‚Ìƒ‰ƒ“ƒ_ƒ€«")]
-    //    public int ShakeRand;
-    //}
-    //public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 0.15f, ShakePower = 1.2f, ShakeNum = 40, ShakeRand = 90 };
+
+    [System.Serializable]
+    public struct BossDownShake
+    {
+        [Tooltip("—h‚ê‚ÌŽžŠÔ")]
+        public float ShakeTime;
+        [Tooltip("—h‚ê‚Ì‹­‚³")]
+        public float ShakePower;
+        [Tooltip("ƒXƒgƒbƒv’·‚³i•K‚¸—h‚êŽžŠÔ‚æ‚è¬‚³‚¢‚æ‚¤‚ÉÝ’è‚µ‚Ä‚­‚¾‚³‚¢j")]
+        public float StopTime;
+        [Tooltip("‰ñ•œ‘¬“xi0.5‚æ‚è¬‚³‚¢‚æ‚¤‚ÉÝ’è‚µ‚Ä‚­‚¾‚³‚¢j")]
+        public float RecoverySpeed;
+        //[Tooltip("U“®”")]
+        //public int ShakeNum;
+        //[Tooltip("—h‚ê‚Ìƒ‰ƒ“ƒ_ƒ€«")]
+        //public int ShakeRand;
+    }
+    [SerializeField]
+    [Header("ƒ{ƒX‚ª“|‚³‚ê‚½‚Æ‚«‚Ì—h‚ê")]
+    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 1f, ShakePower = 1.2f, StopTime = 0.3f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
 
     float movingHeight, movingWidth, summonPosX, summonPosY;            //ˆÚ“®‚ÉŠÖ‚·‚é“à•”ŠÖ”
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
@@ -424,14 +431,15 @@ public class KingSlime : Enemy
     public async UniTask BossDownProcess()
     {
         //BossDown‰æ–Ê—h‚ê
-        shake.BossShake(1f, _shakeInfo.Strength, true, true);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.3), ignoreTimeScale: true);
-        int i = 70;
+        shake.BossShake(bossDownShake.ShakeTime, bossDownShake.ShakePower, true, true);
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.StopTime), ignoreTimeScale: true);
+        int i = (int)((bossDownShake.ShakeTime - bossDownShake.StopTime) / bossDownShake.RecoverySpeed);
+        Debug.Log(i);
         while (i > 0)
         {
             Time.timeScale += 1/i;
             i--;
-            await UniTask.Delay(TimeSpan.FromSeconds(0.01), ignoreTimeScale: true);
+            await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.RecoverySpeed), ignoreTimeScale: true);
         }
         if (Time.timeScale != 1) Time.timeScale = 1;
         //GameManager.Instance.PlayerExAttack_End();
