@@ -1,7 +1,7 @@
 using System.Collections;
 using System;
 using UnityEngine;
-using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 public class KingSlime : Enemy
 {
@@ -28,6 +28,19 @@ public class KingSlime : Enemy
     [Header("画面揺れに関する")]
     public ShakeInfo _shakeInfo;
     CameraShake shake;
+    //public int BossDownShake;
+    //public struct BossDownShake
+    //{
+    //    [Tooltip("揺れの時間")]
+    //    public float ShakeTime;
+    //    [Tooltip("揺れの強さ")]
+    //    public float ShakePower;
+    //    [Tooltip("振動数")]
+    //    public int ShakeNum;
+    //    [Tooltip("揺れのランダム性")]
+    //    public int ShakeRand;
+    //}
+    //public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 0.15f, ShakePower = 1.2f, ShakeNum = 40, ShakeRand = 90 };
 
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
@@ -386,19 +399,71 @@ public class KingSlime : Enemy
         enemyRb.AddForce(new Vector2(0, -10f));
     }
 
-    protected override void OnDestroyMode()
+    //ダメージ関連
+    protected override async void OnDestroyMode()
     {
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
 
+
+        //OnDestroy時の流れ
         isDestroy = true;
         IsBlowing = true;
         GameManager.Instance.PlayerStop();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
-        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
+        //BossDown効果音
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+
+        //GameManager.Instance.PlayerExAttack_Start();
+        Time.timeScale = 0;
+        await BossDownProcess();
+    }
+    public async UniTask BossDownProcess()
+    {
+        //BossDown画面揺れ
+        shake.BossShake(1f, _shakeInfo.Strength, true, true);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3), ignoreTimeScale: true);
+        int i = 70;
+        while (i > 0)
+        {
+            Time.timeScale += 1/i;
+            i--;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01), ignoreTimeScale: true);
+        }
+        if (Time.timeScale != 1) Time.timeScale = 1;
+        //GameManager.Instance.PlayerExAttack_End();
+
+
+        //    Vector3 initialPos = transform.position;//初期位置保存
+        //    Time.timeScale = 0;
+
+        //    //BossDown効果音
+        //    SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+        //    //ヒットストップ処理開始
+        //    await transform.DOShakePosition(bossDownShake.ShakeTime, bossDownShake.ShakePower, bossDownShake.ShakeNum, bossDownShake.ShakeRand)
+        //        .SetUpdate(true)
+        //        .SetLink(gameObject)
+        //        .OnComplete(() =>
+        //        {
+        //            //初期の位置に戻す
+        //            transform.position = initialPos;
+        //        });
+        //    //アニメーションが終了したら時間を戻す
+        //    if (!GameManager.Instance.PauseCheck)
+        //    {
+        //        Time.timeScale = 1;
+        //    }
+
+        //    //OnDestroy時の流れ
+        //    isDestroy = true;
+        //    IsBlowing = true;
+        //    GameManager.Instance.PlayerStop();
+        //    gameObject.layer = LayerMask.NameToLayer("DeadBoss");
+        //    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        //    gameObject.GetComponent<CircleCollider2D>().enabled = true;
     }
 
     public override void Damage(float power, Skill skill, bool isHitStop, bool exSkill = false)
@@ -447,6 +512,7 @@ public class KingSlime : Enemy
         }
     }
 
+    //修正しない関数
     void ClearCoroutines()
     {
         if (inKSBossAtack1)
