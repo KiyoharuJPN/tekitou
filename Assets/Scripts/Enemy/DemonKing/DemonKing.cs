@@ -895,7 +895,7 @@ public class DemonKing : Enemy
     public async UniTask BossDownProcess()
     {
         //BossDown‰æ–Ê—h‚ê
-        shake.BossShake(1f, _shakeInfo.Strength, true, true);
+        shake.BossShake(1f, 1.7f, true, true);
         await UniTask.Delay(TimeSpan.FromSeconds(0.3), ignoreTimeScale: true);
         int i = 70;
         while (i > 0)
