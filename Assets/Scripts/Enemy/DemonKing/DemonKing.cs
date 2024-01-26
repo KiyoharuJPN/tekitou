@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,6 +21,7 @@ public class DemonKing : Enemy
     [SerializeField]
     [Header("画面揺れに関する")]
     public ShakeInfo _shakeInfo;
+    public int bossDownTime = 320;
     CameraShake shake;
     Animator LHanimator, RHanimator;
 
@@ -194,7 +197,7 @@ public class DemonKing : Enemy
             //ランダムで敵のパターンを選ぶ
             while (EnemyPattern == EnemyPatternPreb)
             {
-                EnemyPattern = Random.Range(0, 999) % 3;
+                EnemyPattern = UnityEngine.Random.Range(0, 999) % 3;
             }
 
             //次回同じものを選ばれないように先に代入をする
@@ -471,15 +474,15 @@ public class DemonKing : Enemy
         RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         yield return new WaitForSeconds(1.5f);
         //一人目
-        Vector2 summonPos = new Vector2(Random.Range(summonAttackStatus.LeftUpPoint.x,summonAttackStatus.RightDownPoint.x),Random.Range(summonAttackStatus.LeftUpPoint.y,summonAttackStatus.RightDownPoint.y));
+        Vector2 summonPos = new Vector2(UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.x,summonAttackStatus.RightDownPoint.x),UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.y,summonAttackStatus.RightDownPoint.y));
         var newEnemy = Instantiate(summonAttackStatus.summonMonster, summonPos, Quaternion.identity);
         newEnemy.GetComponentInChildren<EnemyBuffSystem>().SetBuffTypeByScript(GetSummonProbability());
         //二人目
-        summonPos = new Vector2(Random.Range(summonAttackStatus.LeftUpPoint.x, summonAttackStatus.RightDownPoint.x), Random.Range(summonAttackStatus.LeftUpPoint.y, summonAttackStatus.RightDownPoint.y));
+        summonPos = new Vector2(UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.x, summonAttackStatus.RightDownPoint.x), UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.y, summonAttackStatus.RightDownPoint.y));
         newEnemy = Instantiate(summonAttackStatus.summonMonster, summonPos, Quaternion.identity);
         newEnemy.GetComponentInChildren<EnemyBuffSystem>().SetBuffTypeByScript(GetSummonProbability());
         //三人目
-        summonPos = new Vector2(Random.Range(summonAttackStatus.LeftUpPoint.x, summonAttackStatus.RightDownPoint.x), Random.Range(summonAttackStatus.LeftUpPoint.y, summonAttackStatus.RightDownPoint.y));
+        summonPos = new Vector2(UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.x, summonAttackStatus.RightDownPoint.x), UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.y, summonAttackStatus.RightDownPoint.y));
         newEnemy = Instantiate(summonAttackStatus.summonMonster, summonPos, Quaternion.identity);
         newEnemy.GetComponentInChildren<EnemyBuffSystem>().SetBuffTypeByScript(GetSummonProbability());
 
@@ -861,7 +864,7 @@ public class DemonKing : Enemy
         GameManager.Instance.Result_Start(3);
     }
 
-    protected override void OnDestroyMode()
+    protected override async void OnDestroyMode()
     {
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
@@ -880,9 +883,32 @@ public class DemonKing : Enemy
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
-        animator.SetBool("IsDestroy", isDestroy);
+        animator.SetBool("IsDestroy", isDestroy); 
         LHanimator.SetBool("IsDestroy", isDestroy);
         RHanimator.SetBool("IsDestroy", isDestroy);
+
+        ////BossDown画面揺れ
+        //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
+        Time.timeScale = 0;
+        await BossDownProcess();
+    }
+    public async UniTask BossDownProcess()
+    {
+        //BossDown画面揺れ
+        shake.BossShake(1f, 1.7f, true, true);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3), ignoreTimeScale: true);
+        int i = 70;
+        while (i > 0)
+        {
+            Time.timeScale += 1 / i;
+            i--;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01), ignoreTimeScale: true);
+        }
+        if (Time.timeScale != 1) Time.timeScale = 1;
+        //Time.timeScale = 0.3f;
+
+        //await UniTask.Delay(bossDownTime);
+        //Time.timeScale = 1;
     }
     int GetSummonProbability()
     {

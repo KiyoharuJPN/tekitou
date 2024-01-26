@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -124,7 +126,7 @@ public class Dragon : Enemy
             //ランダムで敵のパターンを選ぶ
             while(EnemyPattern == EnemyPatternPreb)
             {
-                EnemyPattern = Random.Range(0, 999) % 3;
+                EnemyPattern = UnityEngine.Random.Range(0, 999) % 3;
             }
             //次回同じものを選ばれないように先に代入をする
             EnemyPatternPreb = EnemyPattern;
@@ -559,7 +561,7 @@ public class Dragon : Enemy
         }
         isPlayerExAttack = false;
     }
-    protected override void OnDestroyMode()
+    protected override async void OnDestroyMode()
     {
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
@@ -569,6 +571,29 @@ public class Dragon : Enemy
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+
+        ////BossDown画面揺れ
+        //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
+        Time.timeScale = 0;
+        await BossDownProcess();
+    }
+    public async UniTask BossDownProcess()
+    {
+        //BossDown画面揺れ
+        shake.BossShake(1f, _shakeInfo.Strength, true, true);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3), ignoreTimeScale: true);
+        int i = 70;
+        while (i > 0)
+        {
+            Time.timeScale += 1 / i;
+            i--;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01), ignoreTimeScale: true);
+        }
+        if (Time.timeScale != 1) Time.timeScale = 1;
+        //Time.timeScale = 0.3f;
+
+        //await UniTask.Delay(320);
+        //Time.timeScale = 1;
     }
 
     protected override void Gravity()
@@ -629,11 +654,11 @@ public class Dragon : Enemy
         {
             if(i == 0)
             {
-                subDistanceRdm[i] = Random.Range(0f, subDistance);
+                subDistanceRdm[i] = UnityEngine.Random.Range(0f, subDistance);
             }
             else
             {
-                subDistanceRdm[i] = Random.Range(2.5f, subDistance);
+                subDistanceRdm[i] = UnityEngine.Random.Range(2.5f, subDistance);
             }
         }
         subDistance = 0;

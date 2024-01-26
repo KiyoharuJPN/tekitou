@@ -132,7 +132,6 @@ public class Wizard_MagicBall : Projectile
         }
         WMBRb.velocity = primarySpeed;
         isPlayerExAttack = false;
-        Debug.Log("enemyStopEnd");
     }
 
     public void RestoreToPool()
