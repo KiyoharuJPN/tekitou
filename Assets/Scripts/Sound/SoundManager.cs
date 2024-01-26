@@ -17,8 +17,10 @@ public class SoundManager : MonoBehaviour
     [Range(0, 1)]
     private float bgmMasterVolume = 1;
     public float SetBGMVolume { set { 
-            bgmMasterVolume = value; 
+            bgmMasterVolume = value;
             bgmAudioSource.volume = bgmMasterVolume;
+            introAudioSource.volume = bgmMasterVolume;
+            loopAudioSource.volume = bgmMasterVolume;
         } }
 
     [Range(0, 1)]
@@ -88,8 +90,6 @@ public class SoundManager : MonoBehaviour
             loopAudioSource.PlayScheduled(AudioSettings.dspTime + introAudioSource.clip.length);
         }
     }
-
-    
 
     public void StopBGM()
     {

@@ -98,7 +98,7 @@ public class StageSelectScene : MonoBehaviour
             }
             else if (pauseMenu.PauseCheck())
             {
-                pauseMenu.BackGame();
+                pauseMenu.Back();
             }
         }
         if (pauseMenu.PauseCheck())

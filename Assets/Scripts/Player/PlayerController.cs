@@ -196,6 +196,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsRun", isRun);
+        animator.SetBool("IsFalling", isFalling);
+        animator.SetBool("IsJumping", isJumping);
+        animator.SetBool("IsSquatting", isSquatting);
+        animator.SetBool("IsLanding", isLanding);
+        animator.SetBool("IsGround", isGround);
+
         if (isGround != isgroundpreb) { isgroundpreb = isGround;}
         //Debug.Log(isgroundpreb);
 
@@ -222,14 +230,6 @@ public class PlayerController : MonoBehaviour
 
         if (Time.timeScale == 0) return;
         InputKay();
-
-        animator.SetBool("IsMoving", isMoving);
-        animator.SetBool("IsRun", isRun);
-        animator.SetBool("IsFalling", isFalling);
-        animator.SetBool("IsJumping", isJumping);
-        animator.SetBool("IsSquatting", isSquatting);
-        animator.SetBool("IsLanding", isLanding);
-        animator.SetBool("IsGround", isGround);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -581,8 +581,13 @@ public class PlayerController : MonoBehaviour
     //砂埃エフェクト生成
     public void _RunEffect()
     {
+        var x = -0.5f;
+        if (gameObject.transform.localScale.x < 0)
+        {
+            x *= -1;
+        }
         GameObject prefab = 
-        Instantiate(RunEffect, new Vector2(this.transform.position.x, this.transform.position.y - 0.8f), Quaternion.identity);
+        Instantiate(RunEffect, new Vector2(this.transform.position.x + x, this.transform.position.y - 0.3f), Quaternion.identity);
         if(gameObject.transform.localScale.x < 0)
         {
             Vector2 scale = prefab.transform.localScale;

@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
 
     public FadeImage fade;
     public PlayerController player;
-    PauseMenu pauseMenu;
+    [SerializeField] private PauseMenu pauseMenu;
+    MenuSystem openMenu;
     StageSelect debugMenu_StageSelect;
 
     public bool PauseCheck
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     //InputSystem
     public PlayerInput playerInput;
-    internal InputAction option;
+    internal InputAction option, back;
 
     [HideInInspector]
     public bool isPlayerExSkill { get; private set; }
@@ -81,7 +82,9 @@ public class GameManager : MonoBehaviour
         }
         var playerInput = GetComponent<PlayerInput>();
         option = playerInput.actions["Option"];
+        back = playerInput.actions["Back"];
 
+        SetMenu(pauseMenu);
     }
 
     private void Update()
@@ -121,19 +124,34 @@ public class GameManager : MonoBehaviour
         //ポーズ画面
         if (option.WasPressedThisFrame() && canPause) 
         {
-            if (!pauseMenu.PauseCheck())
+            if (!openMenu.PauseCheck())
             {
-                pauseMenu.PauseStart();
+                openMenu.InputSet(playerInput);
             }
-            else if (pauseMenu.PauseCheck())
+            else if (openMenu.PauseCheck())
             {
-                pauseMenu.BackGame();
+                MenuBack();
             }
         }
-        if (pauseMenu.PauseCheck())
+        if (openMenu.PauseCheck())
         {
-            pauseMenu.MenuUpdata();
+            openMenu.MenuUpdata();
         }
+    }
+
+    public void SetMenu(MenuSystem menu)
+    {
+        openMenu = menu;
+    }
+
+    public void MenuBack()
+    {
+        openMenu = openMenu.Back();
+        if (openMenu != null)
+        {
+            openMenu.InputSet(playerInput);
+        }
+        else openMenu = pauseMenu;
     }
 
     public void PlayStart(int ID)
@@ -387,11 +405,6 @@ public class GameManager : MonoBehaviour
                     BGMStart_Stage2(); break;
                 case "Stage3":
                     BGMStart_Stage3(); break;
-                //TODO セイカフェス限定コード
-                case "Seika_Tutorial":
-                    BGMStart_Tutorial(); break;
-                case "Seika_Stage1":
-                    BGMStart_Stage1(); break;
             }
         }
     }

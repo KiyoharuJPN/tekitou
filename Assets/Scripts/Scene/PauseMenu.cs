@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour, MenuSystem
 {
     [Tooltip("今の選択を示すポインターです"), Header("トライアングルポインター")]
     public GameObject target;
@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     public string backScene;
 
     public GameObject[] menuobj;            //メニュー画面のオブジェクト
-    public GameObject[] soundMenuobj;            //メニュー画面のオブジェクト
+    public SoundSetting soundSetting;            //メニュー画面のオブジェクト
     //残り残機画像
     public Image stockImage;
     public Sprite[] stockImages;
@@ -53,11 +53,24 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         pointer = 0;            //ポインターの初期化
+    }
 
+    public void InputSet(PlayerInput playerInput)
+    {
+        this.playerInput = playerInput;
         var input = playerInput;
         back = input.actions["Back"];
-        decision = input.actions["Decision"]; 
+        decision = input.actions["Decision"];
         move = input.actions["Move"];
+
+        Time.timeScale = 0;
+        isPauseMenu = true;
+        isSoundSetting = false;
+        stockImage.sprite = stockImages[SceneData.Instance.stock];
+        this.GetComponent<Canvas>().enabled = true;
+        menuTextObj.SetActive(true);
+        isMenuText = true;
+        GameManager.Instance.SetMenu(this);
     }
 
     public bool PauseCheck()
@@ -106,17 +119,10 @@ public class PauseMenu : MonoBehaviour
         {
             SelectMenu();
         }
-
-        //戻るキーの設定
         if (back.WasPressedThisFrame())
         {
-            BackMenu();
+            GameManager.Instance.MenuBack();
         }
-    }
-
-    private void SoundSettingUpdata()
-    {
-
     }
 
     private void SelectMenu()
@@ -126,17 +132,17 @@ public class PauseMenu : MonoBehaviour
             switch (pointer)
             {
                 case 0:
-                    BackGame();
+                    GameManager.Instance.MenuBack();
                     //OnDeselected(menuobj[pointer]);
                     break;
                 case 1:
                     ActionExpo();
                     //OnDeselected(menuobj[pointer]);
                     break;
-                //case 2:
-                //    SoundSetting(); 
-                //    break;
                 case 2:
+                    SoundSetting();
+                    break;
+                case 3:
                     Exit();
                     break;
                 default:
@@ -160,7 +166,7 @@ public class PauseMenu : MonoBehaviour
         hideKeyChecking = false;
     }
 
-    public void BackGame()
+    public MenuSystem Back()
     {
         actionExpoObj.SetActive(false);
         menuTextObj.SetActive(true);
@@ -169,6 +175,8 @@ public class PauseMenu : MonoBehaviour
         isPauseMenu = false;
         this.GetComponent<Canvas>().enabled = false;
         Time.timeScale = 1;
+
+        return null;
     }
 
     //メニューに戻る
@@ -195,6 +203,7 @@ public class PauseMenu : MonoBehaviour
         soundSettingObj.SetActive(true);
         isMenuText = false;
         isSoundSetting = true;
+        soundSetting.InputSet(playerInput);
     }
 
     void Exit()
@@ -233,9 +242,4 @@ public class PauseMenu : MonoBehaviour
         obj.GetComponent<Image>().color = new Color(255, 255, 255); //色を戻す
     }
 
-}
-
-interface MenuUpdate
-{
-    public void PauseMenuUpdate();
 }
