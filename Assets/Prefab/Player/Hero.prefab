@@ -524,10 +524,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1102989637}
   animator: {fileID: 4075973575706176914}
-  RunEffect: {fileID: 2273230203940035460, guid: f46ef36528a7b554a8c416e33d0db47b, type: 3}
+  RunEffect: {fileID: 2273230203940035460, guid: 556684af381b99a4787331a3898da9a1, type: 3}
   JumpEffect: {fileID: 8371524048519115905, guid: 77b9677fcc866eb4fb4a85fbca4099cc, type: 3}
   heelEffect: {fileID: 487145958102457482, guid: 35615297eb00c5a48aa0f77bbf1310e4, type: 3}
-  ExAttackHitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
+  ExAttackHitEffect: {fileID: 5039635841490244628, guid: e6cab25ef4a214f43bd569b331a651d1, type: 3}
   ExAttackLastEffect: {fileID: 4126853831982605864, guid: eaca4da37c1a35449968f0c7f926d495, type: 3}
   moveData:
     firstSpeed: 4

@@ -68,6 +68,7 @@ public class Ending : MonoBehaviour
                 if (Input.anyKeyDown)
                 {
                     SceneData.Instance.PlayTimeReset();
+                    SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.stock);
                     SceneManager.LoadScene("Title");
                 }
             }

@@ -68292,6 +68292,10 @@ PrefabInstance:
       value: Manager
       objectReference: {fileID: 0}
     - target: {fileID: 6498813625237054182, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 8801034262978766448}
+    - target: {fileID: 6498813625237054182, guid: 3986c9771df998544b8301bd4753fe6f, type: 3}
       propertyPath: stageCtrl
       value: 
       objectReference: {fileID: 289387085}
@@ -122750,6 +122754,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 787591354}
     m_Modifications:
+    - target: {fileID: 892180162293565183, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 892180162293565183, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 892180162293565183, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 892180162293565183, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 892180162293565183, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1127039322988016820, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -122976,3 +123000,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+--- !u!114 &8801034262978766448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8801034262499123333, guid: f1e508b190f21af45add24d4f18b5250, type: 3}
+  m_PrefabInstance: {fileID: 8801034262978766447}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72094305fb3b21d4682a20edc19e6918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

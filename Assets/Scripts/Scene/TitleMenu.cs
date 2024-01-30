@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using System.Reflection;
 
 public class TitleMenu : MonoBehaviour
 {
@@ -12,7 +13,23 @@ public class TitleMenu : MonoBehaviour
     [Tooltip("今の選択を示すポインターです"),Header("トライアングルポインター")]
     public GameObject target;
 
-    public GameObject[] menuobj;            //メニュー画面のオブジェクト
+    [SerializeField] private OptionMenu optionMenu;
+    [SerializeField] private StartConfirmUI startCfmUI;
+    private MenuSystem openMenu;
+
+    enum SelectMenu
+    {
+        START = 0,
+        OPTION = 1,
+        EXIT = 2,
+        FIRST = 3, //最初から
+        CONTD = 4　//続きから
+    }
+    private SelectMenu selectMenu = 0;
+
+    public Text[] menuObj;            //メニュー画面のオブジェクト
+    public GameObject titleObj;
+    public GameObject startObj;            //スタート画面のオブジェクト
 
     [SerializeField]
     GameObject backGround;
@@ -25,11 +42,8 @@ public class TitleMenu : MonoBehaviour
 
     bool canStart = true;
 
-    //ポインターと一個前のポインター
-    int pointer;
-    int pointerpreb;
-
-    bool volumeChecking = false, inlineVolumeChecking = false, hideKeyChecking = false, pointerCheck = true, upDownLock = false;//各種チェック用関数
+    private bool isStartMenu = false;
+    private bool isPointerMove = true, upDownLock = false;//各種チェック用関数
 
     //デモムービー再生状態
     [SerializeField, Header("videoPlayer")]
@@ -47,7 +61,22 @@ public class TitleMenu : MonoBehaviour
     float demoTimer;
 
     //InputSystem
+    private PlayerInput playerInput;
     internal InputAction back, decision, move;
+
+    private Color color = new Color(255, 69, 0);
+
+    SeveData seveData;
+
+    private void Awake()
+    {
+        SettingData settingData = SeveSystem.Instance.SettingLoad();
+
+        if(settingData != null)
+        {
+            SceneData.Instance.SetVolume(settingData.bgmValum, settingData.seValum);
+        }
+    }
 
     private void Start()
     {
@@ -55,23 +84,28 @@ public class TitleMenu : MonoBehaviour
         Cursor.visible = false;
         SceneData.Instance.referer = "Title";
         SceneData.Instance.StageStateReset();
-        pointer = 0;            //ポインターの初期化
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Title, BGMSoundData.BGM.none);
         videoImage.enabled = false;
         videoPlayer.enabled = false;
 
-        var playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         decision = playerInput.actions["Decision"];
         back = playerInput.actions["Back"];
         move = playerInput.actions["Move"];
+
     }
 
     private void Update()
     {
-
         if (!SoundManager.Instance.isPlayBGM())
         {
             StartCoroutine(PlayBGM());
+        }
+
+        if (openMenu != null)
+        {
+            openMenu.MenuUpdata();
+            return;
         }
 
         //デモムービー中
@@ -80,7 +114,6 @@ public class TitleMenu : MonoBehaviour
             DemoMove();
             return;
         }
-
         if (!InputKeyCheck.GetAnyKey())
         {
             demoTimer += Time.deltaTime;
@@ -94,82 +127,68 @@ public class TitleMenu : MonoBehaviour
 
         //調整キーの設定
         if (!upDownLock) StickerChangePointer();
-        
-        //ポインターが変わった時の設定
-        if (pointer != pointerpreb)//変更されたときの作業
-        {
-            demoTimer = 0;
-            if (menuobj[0].activeSelf)//Menu
-            {
-                if (pointer < 0) pointer = 0;// menuobj.Length - 1;
-                if (pointer > menuobj.Length - 1) pointer = menuobj.Length - 1;// 0;//上限調整
 
-                target.transform.position = new Vector2(target.transform.position.x, menuobj[pointer].transform.position.y);
-                //OnSelected(menuobj[pointer]);
-                //if(pointer !=pointerpreb && pointerpreb != -1) OnDeselected(menuobj[pointerpreb]);
-            }
-
-            //ポインターの修正
-            pointerpreb = pointer;
-        }
-
-        if (!fade.IsFadeInComplete())
-        {
-            return;
-        }
+        if (!fade.IsFadeInComplete()) return; //フェード中は以下の処理は行わない
 
         //選択キーの設定
         if (decision.WasPressedThisFrame())
         {
-            if (menuobj[0].activeSelf && !hideKeyChecking)//Menu
-            {
-                switch (pointer)
-                {
-                    case 0:
-                        GameStart();
-                        //OnDeselected(menuobj[pointer]);
-                        break;
-                    case 1:
-                        Exit();
-                        //OnDeselected(menuobj[pointer]);
-                        break;
-                    default:
-                        if (pointer < menuobj.Length - 1)
-                        {
-                            //OnDeselected(menuobj[pointer]);
-                        }
-                        break;
-                }
-                hideKeyChecking = true;
-            }
-
-            //ポインターの復元
-            if (!volumeChecking&&!inlineVolumeChecking)
-            {
-                pointer = 0;
-                pointerpreb = -1;
-            }
-            inlineVolumeChecking = false;
-            hideKeyChecking = false;
+            SelectMenuProcess();
         }
+    }
 
-        //戻るキーの設定
-        if (back.WasPressedThisFrame())
+    public void SetMenu(MenuSystem menu)
+    {
+        openMenu = menu;
+        if(openMenu != null)
         {
-            //menu
-            if (menuobj[0].activeSelf)
-            {
-                pointer = 0;
-            }
-
-            //ポインターの復元
-            if (!inlineVolumeChecking)
-            {
-                pointer = 0;
-                pointerpreb = -1;
-            }
-            inlineVolumeChecking = false;
+            openMenu.InputSet(playerInput);
         }
+    }
+
+    public void MenuBack()
+    {
+        openMenu = openMenu.Back();
+        if (openMenu != null)
+        {
+            openMenu.InputSet(playerInput);
+        }
+        else openMenu = optionMenu;
+    }
+
+    private void SelectMenuProcess()
+    {
+        switch (selectMenu)
+        {
+            case SelectMenu.START:
+                StartModeCheck();
+                break;
+            case SelectMenu.OPTION:
+                optionMenu.gameObject.SetActive(true);
+                SetMenu(optionMenu);
+                break;
+            case SelectMenu.EXIT:
+                Exit();
+                break;
+            case SelectMenu.FIRST:
+                startCfmUI.gameObject.SetActive(true);
+                SetMenu(startCfmUI);
+                break;
+            case SelectMenu.CONTD:
+                StageSelectStart();
+                break;
+        }
+    }
+
+    public void TitelMenuOpen()
+    {
+        openMenu = null;
+        isStartMenu = false;
+        OnDeselected((int)selectMenu);
+        selectMenu = SelectMenu.START;
+        OnSelected((int)selectMenu);
+        startObj.SetActive(false);
+        titleObj.SetActive(true);
     }
 
     private void DemoMove()
@@ -181,17 +200,40 @@ public class TitleMenu : MonoBehaviour
         }
     }
 
-    private void BackGroundMove()
+    //スタート状態選択の処理（初めから・続きから）
+    void StartModeCheck()
     {
-        //backGround.transform.position -= new Vector3(Time.deltaTime * 10f, 0);
+        seveData = SeveSystem.Instance.seveDataLoad();
+        if (seveData != null)
+        {
+            isStartMenu = true;
+            OnDeselected((int)selectMenu);
+            selectMenu = SelectMenu.FIRST;
+            OnSelected((int)selectMenu);
+            titleObj.SetActive(false);
+            startObj.SetActive(isStartMenu);
+        }
+        else //セーブデータがなかった場合
+        {
+            GameStart();
+        }
     }
 
     //メニューの動き
-    void GameStart()
+    public void GameStart()
     {
         if (!canStart) return;
         upDownLock = true;
-        StartCoroutine(Scene_Start());
+        StartCoroutine(Scene_Start(gameScene));
+        canStart = false;
+    }
+    public void StageSelectStart()
+    {
+        SceneData.Instance.GetEachStageState = seveData.stageState;
+        SceneData.Instance.stock = seveData.remain;
+
+        upDownLock = true;
+        StartCoroutine(Scene_Start("StageSelect"));
         canStart = false;
     }
 
@@ -208,23 +250,49 @@ public class TitleMenu : MonoBehaviour
     void StickerChangePointer()
     {
         var input = move.ReadValue<Vector2>().y;
-        if (input > 0 && pointerCheck)
+
+        if (!isStartMenu) //スタートメニューが開いていない時
         {
-            pointerCheck = false;
-            pointer--;
+            if (input > 0.3f && (int)selectMenu > 0 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(-1);
+            }
+            if (input < -0.3f && (int)selectMenu < 2 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(1);
+            }
         }
-        if (input < 0 && pointerCheck)
+        else if (isStartMenu)
         {
-            pointerCheck = false;
-            pointer++;
+            if (input > 0.3f && (int)selectMenu > 3 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(-1);
+            }
+            if (input < -0.3f && (int)selectMenu < 4 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(1);
+            }
         }
+
+        
         if (input == 0)
         {
-            pointerCheck = true;
+            isPointerMove = true;
         }
     }
 
-    IEnumerator Scene_Start()
+    void ChangePointer(int pointer)
+    {
+        OnDeselected((int)selectMenu);
+        selectMenu += pointer;
+        OnSelected((int)selectMenu);
+    }
+
+    IEnumerator Scene_Start(string sceneName)
     {
         player.SetTrigger("Start");
         SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_CutIn);
@@ -238,17 +306,18 @@ public class TitleMenu : MonoBehaviour
             yield return null;
         }
 
-        if (gameScene != "") SceneManager.LoadScene(gameScene);
+        if (sceneName != "") SceneManager.LoadScene(sceneName);
     }
 
-    //内部動き
-    void OnSelected(GameObject obj)
+    void OnSelected(int objNum)
     {
-        obj.GetComponent<Image>().color = Color.grey;               //UIの色修正
+        target.transform.position = new Vector2(target.transform.position.x, menuObj[objNum].transform.position.y);
+
+        menuObj[objNum].color = color;    //UIの色変更
     }
-    void OnDeselected(GameObject obj)
+    void OnDeselected(int objNum)
     {
-        obj.GetComponent<Image>().color = new Color(255, 255, 255); //色を戻す
+        menuObj[objNum].color = Color.white; //色を戻す
     }
 
     IEnumerator PlayBGM()
