@@ -15,19 +15,23 @@ public class SoundManager : MonoBehaviour
     [SerializeField] List<SESoundData> seSoundDatas;
 
     [Range(0, 1)]
-    private float bgmMasterVolume = 1;
+    private float bgmMasterVolume;
     public float SetBGMVolume { set { 
             bgmMasterVolume = value;
             bgmAudioSource.volume = bgmMasterVolume;
             introAudioSource.volume = bgmMasterVolume;
             loopAudioSource.volume = bgmMasterVolume;
+
+            SceneData.Instance.SetVolume(bgmMasterVolume, seMasterVolume);
         } }
 
     [Range(0, 1)]
-    private float seMasterVolume = 1;
+    private float seMasterVolume;
     public float SetSEVolume { set {
             seMasterVolume = value;
             seAudioSource.volume = seMasterVolume;
+
+            SceneData.Instance.SetVolume(bgmMasterVolume, seMasterVolume);
         } }
 
     public static SoundManager Instance { get; private set; }
@@ -51,7 +55,14 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+    }
+
+    private void Start()
+    {
+        SetBGMVolume = SceneData.Instance.getBGMVolume;
+        SetSEVolume = SceneData.Instance.getSEVolume;
+
+        Debug.Log(SceneData.Instance.getSEVolume);
     }
 
     //playBGM

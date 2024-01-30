@@ -89,6 +89,7 @@ public class FinishMenu : MonoBehaviour
     }
     void BackTitle()
     {
+        SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.stock);
         if (SceneName != "") SceneManager.LoadScene("Title");
     }
 

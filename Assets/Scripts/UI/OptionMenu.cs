@@ -12,8 +12,10 @@ public class OptionMenu : MonoBehaviour, MenuSystem
 
     [SerializeField] private SoundSetting soundSetting;
 
+    [SerializeField] private DataLoadUI dataSystem;
+
     //セーブ機能（未実装)
-    [SerializeField] private GameObject saveSystem;
+    [SerializeField] private GameObject dataObj;
 
     //クレジット
     [SerializeField] private GameObject credit;
@@ -41,7 +43,7 @@ public class OptionMenu : MonoBehaviour, MenuSystem
     private bool isOpenMenu = false;
     private Color color = new Color(255, 69, 0); //色
 
-    public void InputSet(PlayerInput playerInput)
+    public void InputSet(PlayerInput playerInput, MenuBasic menuBasic = null)
     {
         var input = playerInput;
         back = input.actions["Back"];
@@ -126,7 +128,8 @@ public class OptionMenu : MonoBehaviour, MenuSystem
         switch (selectMenu)
         {
             case SelectMenu.SAVE:
-                Debug.Log("この機能は未実装です");
+                dataObj.SetActive(true);
+                titleMenu.SetMenu(dataSystem);
                 break;
             case SelectMenu.SOUND:
                 soundSetting.gameObject.SetActive(true);

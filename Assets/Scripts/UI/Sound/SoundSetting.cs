@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class SoundSetting : MonoBehaviour, MenuSystem
 {
     [SerializeField] public PauseMenu BackMenu;
+    private MenuBasic basic;
     [SerializeField, Header("トライアングルポインター")]
     private GameObject target;
 
@@ -26,6 +27,7 @@ public class SoundSetting : MonoBehaviour, MenuSystem
     const float defaultValue = 0.5f;
 
     //InputSystem
+    private PlayerInput input;
     public InputAction back, decision, move;
     private bool isPointerMove = true;
 
@@ -34,15 +36,22 @@ public class SoundSetting : MonoBehaviour, MenuSystem
     internal bool isPauseMenu = false;
     private Color color = new Color(255, 69, 0);
 
-    public virtual void InputSet(PlayerInput playerInput)
+    private void Start()
+    {
+        BGMSlider.SetValue(SceneData.Instance.getBGMVolume);
+        SESlider.SetValue(SceneData.Instance.getSEVolume);
+    }
+
+    public virtual void InputSet(PlayerInput playerInput, MenuBasic menuBasic = null)
     {
         isPauseMenu = true;
-        var input = playerInput;
+        input = playerInput;
         back = input.actions["Back"];
         decision = input.actions["Decision"];
         move = input.actions["Move"];
 
-        GameManager.Instance.SetMenu(this);
+        basic = menuBasic;
+        basic.SetMenu(this);
 
         OnSelected((int)selectMenu);
     }
@@ -71,7 +80,7 @@ public class SoundSetting : MonoBehaviour, MenuSystem
 
         if (back.WasPressedThisFrame())
         {
-            GameManager.Instance.MenuBack();
+            basic.MenuBack();
         }
     }
 
@@ -123,7 +132,6 @@ public class SoundSetting : MonoBehaviour, MenuSystem
 
     internal virtual void SelectMenuProcess()
     {
-        
         switch (selectMenu)
         {
             case SelectMenu.BGM:
@@ -138,7 +146,7 @@ public class SoundSetting : MonoBehaviour, MenuSystem
                 SoundValueReset();
                 break;
             case SelectMenu.BACK:
-                GameManager.Instance.MenuBack();
+                basic.MenuBack();
                 break;
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using System.Reflection;
 
 public class TitleMenu : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TitleMenu : MonoBehaviour
     public GameObject target;
 
     [SerializeField] private OptionMenu optionMenu;
+    [SerializeField] private StartConfirmUI startCfmUI;
     private MenuSystem openMenu;
 
     enum SelectMenu
@@ -20,10 +22,14 @@ public class TitleMenu : MonoBehaviour
         START = 0,
         OPTION = 1,
         EXIT = 2,
+        FIRST = 3, //最初から
+        CONTD = 4　//続きから
     }
     private SelectMenu selectMenu = 0;
 
     public Text[] menuObj;            //メニュー画面のオブジェクト
+    public GameObject titleObj;
+    public GameObject startObj;            //スタート画面のオブジェクト
 
     [SerializeField]
     GameObject backGround;
@@ -36,6 +42,7 @@ public class TitleMenu : MonoBehaviour
 
     bool canStart = true;
 
+    private bool isStartMenu = false;
     private bool isPointerMove = true, upDownLock = false;//各種チェック用関数
 
     //デモムービー再生状態
@@ -59,6 +66,18 @@ public class TitleMenu : MonoBehaviour
 
     private Color color = new Color(255, 69, 0);
 
+    SeveData seveData;
+
+    private void Awake()
+    {
+        SettingData settingData = SeveSystem.Instance.SettingLoad();
+
+        if(settingData != null)
+        {
+            SceneData.Instance.SetVolume(settingData.bgmValum, settingData.seValum);
+        }
+    }
+
     private void Start()
     {
         Time.timeScale = 1f;
@@ -73,6 +92,7 @@ public class TitleMenu : MonoBehaviour
         decision = playerInput.actions["Decision"];
         back = playerInput.actions["Back"];
         move = playerInput.actions["Move"];
+
     }
 
     private void Update()
@@ -138,11 +158,10 @@ public class TitleMenu : MonoBehaviour
 
     private void SelectMenuProcess()
     {
-
         switch (selectMenu)
         {
             case SelectMenu.START:
-                GameStart();
+                StartModeCheck();
                 break;
             case SelectMenu.OPTION:
                 optionMenu.gameObject.SetActive(true);
@@ -151,7 +170,25 @@ public class TitleMenu : MonoBehaviour
             case SelectMenu.EXIT:
                 Exit();
                 break;
+            case SelectMenu.FIRST:
+                startCfmUI.gameObject.SetActive(true);
+                SetMenu(startCfmUI);
+                break;
+            case SelectMenu.CONTD:
+                StageSelectStart();
+                break;
         }
+    }
+
+    public void TitelMenuOpen()
+    {
+        openMenu = null;
+        isStartMenu = false;
+        OnDeselected((int)selectMenu);
+        selectMenu = SelectMenu.START;
+        OnSelected((int)selectMenu);
+        startObj.SetActive(false);
+        titleObj.SetActive(true);
     }
 
     private void DemoMove()
@@ -163,12 +200,40 @@ public class TitleMenu : MonoBehaviour
         }
     }
 
+    //スタート状態選択の処理（初めから・続きから）
+    void StartModeCheck()
+    {
+        seveData = SeveSystem.Instance.seveDataLoad();
+        if (seveData != null)
+        {
+            isStartMenu = true;
+            OnDeselected((int)selectMenu);
+            selectMenu = SelectMenu.FIRST;
+            OnSelected((int)selectMenu);
+            titleObj.SetActive(false);
+            startObj.SetActive(isStartMenu);
+        }
+        else //セーブデータがなかった場合
+        {
+            GameStart();
+        }
+    }
+
     //メニューの動き
-    void GameStart()
+    public void GameStart()
     {
         if (!canStart) return;
         upDownLock = true;
-        StartCoroutine(Scene_Start());
+        StartCoroutine(Scene_Start(gameScene));
+        canStart = false;
+    }
+    public void StageSelectStart()
+    {
+        SceneData.Instance.GetEachStageState = seveData.stageState;
+        SceneData.Instance.stock = seveData.remain;
+
+        upDownLock = true;
+        StartCoroutine(Scene_Start("StageSelect"));
         canStart = false;
     }
 
@@ -186,16 +251,34 @@ public class TitleMenu : MonoBehaviour
     {
         var input = move.ReadValue<Vector2>().y;
 
-        if (input > 0.3f && (int)selectMenu > 0 && isPointerMove)
+        if (!isStartMenu) //スタートメニューが開いていない時
         {
-            isPointerMove = false;
-            ChangePointer(-1);
+            if (input > 0.3f && (int)selectMenu > 0 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(-1);
+            }
+            if (input < -0.3f && (int)selectMenu < 2 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(1);
+            }
         }
-        if (input < -0.3f && (int)selectMenu < 3 && isPointerMove)
+        else if (isStartMenu)
         {
-            isPointerMove = false;
-            ChangePointer(1);
+            if (input > 0.3f && (int)selectMenu > 3 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(-1);
+            }
+            if (input < -0.3f && (int)selectMenu < 4 && isPointerMove)
+            {
+                isPointerMove = false;
+                ChangePointer(1);
+            }
         }
+
+        
         if (input == 0)
         {
             isPointerMove = true;
@@ -209,7 +292,7 @@ public class TitleMenu : MonoBehaviour
         OnSelected((int)selectMenu);
     }
 
-    IEnumerator Scene_Start()
+    IEnumerator Scene_Start(string sceneName)
     {
         player.SetTrigger("Start");
         SoundManager.Instance.PlaySE(SESoundData.SE.ExAttack_CutIn);
@@ -223,7 +306,7 @@ public class TitleMenu : MonoBehaviour
             yield return null;
         }
 
-        if (gameScene != "") SceneManager.LoadScene(gameScene);
+        if (sceneName != "") SceneManager.LoadScene(sceneName);
     }
 
     void OnSelected(int objNum)

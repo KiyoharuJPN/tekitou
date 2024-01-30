@@ -7,9 +7,10 @@ using System.Collections;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class StageSelectScene : MonoBehaviour
+public class StageSelectScene : MonoBehaviour, MenuBasic
 {
-    public PauseMenu pauseMenu;
+    [SerializeField] private PauseMenu pauseMenu;
+    MenuSystem openMenu;
     [SerializeField, Header("プレイヤーアイコン")]
     GameObject playerIcon;
     Animator p_Animator;
@@ -58,6 +59,7 @@ public class StageSelectScene : MonoBehaviour
     public bool IsEvent { set { isEvent = value; } }
     private int openStageID;
 
+    private PlayerInput playerInput;
     private InputAction move, decision, option;
     public bool canPause = true;
 
@@ -73,9 +75,8 @@ public class StageSelectScene : MonoBehaviour
     {
         System.GC.Collect();
         SoundManager.Instance.PlayBGM(BGMSoundData.BGM.StageSelect, BGMSoundData.BGM.none);
-        
 
-        var playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions["Move"];
         option = playerInput.actions["Option"];
         decision = playerInput.actions["Decision"];
@@ -83,6 +84,7 @@ public class StageSelectScene : MonoBehaviour
         StagePointSet();
 
         canPause = true;
+        SetMenu(pauseMenu);
     }
 
     private void Update()
@@ -92,35 +94,37 @@ public class StageSelectScene : MonoBehaviour
         //ポーズ画面
         if (option.WasPressedThisFrame() && canPause)
         {
-            if (!pauseMenu.PauseCheck())
+            if (!openMenu.PauseCheck())
             {
-                pauseMenu.PauseStart();
+                openMenu.InputSet(playerInput, this);
             }
-            else if (pauseMenu.PauseCheck())
+            else if (openMenu.PauseCheck())
             {
-                pauseMenu.Back();
+                MenuBack();
             }
         }
-        if (pauseMenu.PauseCheck())
+        if (openMenu.PauseCheck())
         {
-            pauseMenu.MenuUpdata();
+            openMenu.MenuUpdata();
             return;
         }
 
         InputKey();
+    }
 
-        //デバッグ用操作
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+    public void SetMenu(MenuSystem menu)
+    {
+        openMenu = menu;
+    }
+
+    public void MenuBack()
+    {
+        openMenu = openMenu.Back();
+        if (openMenu != null)
         {
-            isEvent = true;
-            movePos[1].IsPlayPoint = true;
-            mapList[0].MapFirstSet(this);
+            openMenu.InputSet(playerInput);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            movePos[2].IsPlayPoint = true;
-            mapList[1].MapFirstSet(this);
-        }
+        else openMenu = pauseMenu;
     }
 
     private void InputKey()

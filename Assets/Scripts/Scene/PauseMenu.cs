@@ -16,6 +16,8 @@ public class PauseMenu : MonoBehaviour, MenuSystem
     //残り残機画像
     public Image stockImage;
     public Sprite[] stockImages;
+
+    private MenuBasic basic;
     
 
     //メニュー表示確認Bool
@@ -55,10 +57,15 @@ public class PauseMenu : MonoBehaviour, MenuSystem
         pointer = 0;            //ポインターの初期化
     }
 
-    public void InputSet(PlayerInput playerInput)
+    public void InputSet(PlayerInput playerInput, MenuBasic menuBasic)
     {
-        this.playerInput = playerInput;
-        var input = playerInput;
+        if(playerInput != null)
+        {
+            this.playerInput = playerInput;
+        }
+        basic = menuBasic;
+
+        var input = this.playerInput;
         back = input.actions["Back"];
         decision = input.actions["Decision"];
         move = input.actions["Move"];
@@ -70,7 +77,7 @@ public class PauseMenu : MonoBehaviour, MenuSystem
         this.GetComponent<Canvas>().enabled = true;
         menuTextObj.SetActive(true);
         isMenuText = true;
-        GameManager.Instance.SetMenu(this);
+        basic.SetMenu(this);
     }
 
     public bool PauseCheck()
@@ -121,7 +128,7 @@ public class PauseMenu : MonoBehaviour, MenuSystem
         }
         if (back.WasPressedThisFrame())
         {
-            GameManager.Instance.MenuBack();
+            basic.MenuBack();
         }
     }
 
@@ -132,7 +139,7 @@ public class PauseMenu : MonoBehaviour, MenuSystem
             switch (pointer)
             {
                 case 0:
-                    GameManager.Instance.MenuBack();
+                    basic.MenuBack();
                     //OnDeselected(menuobj[pointer]);
                     break;
                 case 1:
@@ -203,13 +210,14 @@ public class PauseMenu : MonoBehaviour, MenuSystem
         soundSettingObj.SetActive(true);
         isMenuText = false;
         isSoundSetting = true;
-        soundSetting.InputSet(playerInput);
+        soundSetting.InputSet(playerInput, basic);
     }
 
     void Exit()
     {
         upDownLock = true;
         Time.timeScale = 1;
+        SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.stock);
         SceneManager.LoadScene(backScene);
     }
 

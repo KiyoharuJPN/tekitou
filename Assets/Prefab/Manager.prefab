@@ -157,8 +157,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 0}
   player: {fileID: 0}
+  pauseMenu: {fileID: 0}
   canPause: 0
-  hitEffect: {fileID: 5039635841490244628, guid: 6b758d6d2cd526c4f9869cea09ec86be, type: 3}
+  hitEffect: {fileID: 5039635841490244628, guid: e6cab25ef4a214f43bd569b331a651d1, type: 3}
   moveWalls: []
   isBossRoom: 0
   playerInput: {fileID: 51629665}

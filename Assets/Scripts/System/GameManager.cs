@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, MenuBasic
 {
 
     public FadeImage fade;
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         {
             if (!openMenu.PauseCheck())
             {
-                openMenu.InputSet(playerInput);
+                openMenu.InputSet(playerInput, this);
             }
             else if (openMenu.PauseCheck())
             {

@@ -8,7 +8,7 @@ public class TitleSoundSetting : SoundSetting
     [SerializeField] public OptionMenu backMenu;
     [SerializeField] public TitleMenu titleMenu;
 
-    public override void InputSet(PlayerInput playerInput)
+    public override void InputSet(PlayerInput playerInput, MenuBasic menuBasic = null)
     {
         isPauseMenu = true;
         var input = playerInput;

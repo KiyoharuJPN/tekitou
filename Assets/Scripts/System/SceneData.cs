@@ -2,17 +2,18 @@ using Gamepara;
 using System;
 using System.Diagnostics;
 
+[System.Serializable]
+public struct EachStageState
+{
+    public bool openStage; //ステージが遊べるか
+    public bool isClear;   //クリア確認
+    public bool firstOpen; //開くのが初めてか 
+    public float clearTime; //クリアタイム
+}
+
 public class SceneData
 {
     public readonly static SceneData Instance = new();
-
-    public struct EachStageState
-    {
-        public bool openStage;　//ステージが遊べるか
-        public bool isClear;  　//クリア確認
-        public bool firstOpen;　//開くのが初めてか 
-        public float clearTime; //クリアタイム
-    }
 
     //シーンの名前記録
     public string referer = string.Empty;
@@ -23,6 +24,20 @@ public class SceneData
     public EachStageState[] GetEachStageState
     {
         get { return this.stageStates; }
+        set { this.stageStates = value; }
+    }
+
+    //音量
+    private float bgmVolume;
+    private float seVolume;
+
+    public float getBGMVolume => bgmVolume;
+    public float getSEVolume => seVolume;
+
+    public void SetVolume(float bgmVolume, float seVolume)
+    {
+        this.bgmVolume = bgmVolume;
+        this.seVolume = seVolume;
     }
 
     //プレイヤー残機
