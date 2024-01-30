@@ -103,7 +103,7 @@ MonoBehaviour:
     speed: 15
   - id: 8
     charName: "\u30AD\u30F3\u30B0\u30B9\u30E9\u30A4\u30E0"
-    hp: 80
+    hp: 8
     score: 5000
     attackPower: 2
     power: 1

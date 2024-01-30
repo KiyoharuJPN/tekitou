@@ -26,6 +26,10 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
+            while (Time.timeScale <= 0)
+            {
+                yield return null;
+            }
             var x = pos.x;
             var y = pos.y;
 
@@ -35,7 +39,7 @@ public class CameraShake : MonoBehaviour
             }
             if (horizontal)
             {
-                y = pos.y + Random.Range(-1f, -1f) * magnitude;
+                y = pos.y + Random.Range(-1f, 1f) * magnitude;
             }
 
             transform.localPosition = new Vector3(x, y, pos.z);
@@ -72,7 +76,7 @@ public class CameraShake : MonoBehaviour
             }
             if (horizontal)
             {
-                y = pos.y + Random.Range(-1f, -1f) * magnitude;
+                y = pos.y + Random.Range(-1f, 1f) * magnitude;
             }
 
             transform.localPosition = new Vector3(x, y, pos.z);
