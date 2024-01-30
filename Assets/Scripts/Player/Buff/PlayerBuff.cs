@@ -75,15 +75,19 @@ public class PlayerBuff : MonoBehaviour
         {
             case 1:
                 SpeedUp();
+                speed.getBuffCount++;
                 break;
             case 2:
                 SlashingBuff();
+                slashing.getBuffCount++;
                 break;
             case 3:
                 InvincibleBuff();
+                invincible.getBuffCount++;
                 break;
             case 0:
                 ExAttackGageUp();
+                exGage.getBuffCount++;
                 break;
         }
     }
@@ -104,7 +108,6 @@ public class PlayerBuff : MonoBehaviour
         for (int i = 0; i < getExGage; i++) {
             ExAttackParam.Instance.AddGauge();
         }
-        exGage.getBuffCount++;
 
         if(!player.gameObject.GetComponent<SpeedUp>() && 
             !player.gameObject.GetComponent<SlashingBuff>() && 
@@ -138,7 +141,7 @@ public class PlayerBuff : MonoBehaviour
     public void SpeedUp()
     {
         GetBuffUIPop(1);
-        speed.getBuffCount++;
+        
         if (player.gameObject.GetComponent<SpeedUp>())
         {
             player.gameObject.GetComponent<SpeedUp>().AddBuff();
@@ -171,7 +174,7 @@ public class PlayerBuff : MonoBehaviour
             p_GlowEffect.EnableInstancing = false;
             player.gameObject.AddComponent<SlashingBuff>();
         } 
-        slashing.getBuffCount++;
+        
     }
 
     public void SlashingBuffRemove()
@@ -208,7 +211,7 @@ public class PlayerBuff : MonoBehaviour
             p_GlowEffect.EnableInstancing = false;
             player.gameObject.AddComponent<InvinciblBuff>();
         }
-        invincible.getBuffCount++;
+        
     }
 
     public InvincibleBuff GetInvincible()

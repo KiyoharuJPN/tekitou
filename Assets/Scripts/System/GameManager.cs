@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour, MenuBasic
         openMenu = openMenu.Back();
         if (openMenu != null)
         {
-            openMenu.InputSet(playerInput);
+            openMenu.InputSet(playerInput, this);
         }
         else openMenu = pauseMenu;
     }
@@ -213,9 +213,18 @@ public class GameManager : MonoBehaviour, MenuBasic
 
     public void AddMaxComobo(int combo)
     {
+
         if( combo > maxCombo)
         {
             maxCombo = combo;
+
+            //steamŽÀÑŠm”F
+            if (combo >= 50)
+            {
+                Accmplisment.Instance.AchvOpen("Combo1");
+            }
+            else if (combo >= 100) Accmplisment.Instance.AchvOpen("Combo2");
+            else if(combo >= 500) Accmplisment.Instance.AchvOpen("Combo2");
         }
     }
 

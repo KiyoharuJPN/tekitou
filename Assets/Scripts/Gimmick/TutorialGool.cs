@@ -10,6 +10,7 @@ public class TutorialGool : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "InvinciblePlayer") 
         {
+            Accmplisment.Instance.AchvOpen("Tutorial");
             StartCoroutine(Result(collision));
         }
     }
