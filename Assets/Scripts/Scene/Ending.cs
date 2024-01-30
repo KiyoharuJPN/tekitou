@@ -41,6 +41,12 @@ public class Ending : MonoBehaviour
             Mathf.Floor(playTimes[0]) +
             Mathf.Floor(playTimes[1]) +
             Mathf.Floor(playTimes[2]));
+
+        //プレイタイム実績
+        if(Mathf.Floor(playTimes[0]) + Mathf.Floor(playTimes[1]) + Mathf.Floor(playTimes[2]) <= 300)
+        {
+            Accmplisment.Instance.AchvOpen("PlayTime");
+        }
     }
 
     void Update()

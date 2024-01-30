@@ -21,7 +21,7 @@ public class DataLoadUI : MonoBehaviour, MenuSystem
 
     public Text[] menuObj;            //メニュー画面のオブジェクト
 
-    //説明文TextBox
+    //説明文TextBox/
     [SerializeField] private TextMeshProUGUI expoText;
     [SerializeField] private GameObject yesObj;
     [SerializeField] private GameObject noObj;

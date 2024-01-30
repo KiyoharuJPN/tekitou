@@ -71,6 +71,7 @@ public class TitleMenu : MonoBehaviour
     private void Awake()
     {
         SettingData settingData = SeveSystem.Instance.SettingLoad();
+        Debug.Log(settingData.bgmValum + ":" + settingData.seValum);
 
         if(settingData != null)
         {
