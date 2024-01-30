@@ -217,6 +217,7 @@ public class Devil : Enemy
                 effectTime = 0;
             }
             else effectTime += Time.deltaTime;
+
             return;
         }
 

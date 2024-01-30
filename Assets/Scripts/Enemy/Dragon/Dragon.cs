@@ -1,9 +1,11 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static KingSlime;
 
 public class Dragon : Enemy
 {
@@ -21,6 +23,40 @@ public class Dragon : Enemy
     [Header("画面揺れに関する")]
     public ShakeInfo _shakeInfo;
     CameraShake shake;
+
+    [System.Serializable]
+    public struct BossDownShake
+    {
+        [Tooltip("揺れの時間")]
+        public float ShakeTime;
+        [Tooltip("揺れの強さ")]
+        public float ShakePower;
+        [Tooltip("アニメーション長さ")]
+        public float StopingTime;
+        [Tooltip("ストップ長さ（必ず揺れ時間より小さいように設定してください）")]
+        public float StopTime;
+        [Tooltip("回復速度（0.5より小さいように設定してください）")]
+        public float RecoverySpeed;
+        //[Tooltip("振動数")]
+        //public int ShakeNum;
+        //[Tooltip("揺れのランダム性")]
+        //public int ShakeRand;
+    }
+    [SerializeField]
+    [Header("ボスが倒されたときの揺れ")]
+    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 1f, ShakePower = 1.2f, StopingTime = 1f, StopTime = 0.3f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
+
+    //倒されたときの白い幕
+    [System.Serializable]
+    public struct WhiteCanvas
+    {
+        public Image bossDownImage;
+        public float defaultAlpha, duration, stoptime;
+    }
+    [SerializeField]
+    [Header("ボスが倒された時の白幕")]
+    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.6f, duration = 1f, stoptime = 1f };
+    public float bossDownToResult = 1;
 
     //ジャンプ関連
     [System.Serializable]
@@ -94,6 +130,13 @@ public class Dragon : Enemy
 
         //カメラ揺れ
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        if (whiteCanvas.bossDownImage == null)
+        {
+            if (GameObject.Find("BossDownImage") != null)
+                whiteCanvas.bossDownImage = GameObject.Find("BossDownImage").GetComponent<Image>();
+            else
+                Debug.Log("EnemyUICanvasをシーンに追加してください");
+        }
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
     }
@@ -541,11 +584,16 @@ public class Dragon : Enemy
     }
 
     //ドラゴン死亡時に呼ぶ関数
+    //Boss死亡時に呼ぶ関数
     virtual public void Boss_Down()
+    {
+        Invoke("SetResult", bossDownToResult);
+    }
+    void SetResult()
     {
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();
-        GameManager.Instance.Result_Start(2);
+        GameManager.Instance.Result_Start(1);
     }
 
 
@@ -571,23 +619,55 @@ public class Dragon : Enemy
         GameManager.Instance.AddKillEnemy();
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+        GameManager.Instance.PlayerStop();
 
         ////BossDown画面揺れ
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         Time.timeScale = 0;
         await BossDownProcess();
     }
-    public async UniTask BossDownProcess()
+    public async UniTask BossDownWhiteCanvas()
     {
-        //BossDown画面揺れ
-        shake.BossShake(1f, _shakeInfo.Strength, true, true);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.3), ignoreTimeScale: true);
-        int i = 70;
+        whiteCanvas.bossDownImage.color = new Color(1, 1, 1, whiteCanvas.defaultAlpha);
+        whiteCanvas.bossDownImage.enabled = true;
+
+        await UniTask.Delay(TimeSpan.FromSeconds(whiteCanvas.stoptime), ignoreTimeScale: true);
+        int i = (int)(whiteCanvas.duration * 100);
+        float unitSpeed = whiteCanvas.defaultAlpha / i;
         while (i > 0)
         {
-            Time.timeScale += 1 / i;
+            float alpha = whiteCanvas.bossDownImage.color.a;
+            alpha -= unitSpeed;
+            whiteCanvas.bossDownImage.color = new Color(1, 1, 1, alpha);
             i--;
+
             await UniTask.Delay(TimeSpan.FromSeconds(0.01), ignoreTimeScale: true);
+        }
+
+        whiteCanvas.bossDownImage.color = new Color(1, 1, 1, 0);
+        whiteCanvas.bossDownImage.enabled = false;
+    }
+    public async UniTask BossDownProcess()
+    {
+        //Debug.Log(Time.unscaledDeltaTime + "and" + Time.realtimeSinceStartup);
+        //BossDown効果音
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+
+        //GameManager.Instance.PlayerExAttack_Start();
+        Time.timeScale = 0;
+        var _ = BossDownWhiteCanvas();
+
+        //BossDown画面揺れ
+        shake.BossShake(bossDownShake.ShakeTime, bossDownShake.ShakePower, true, true);
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.StopTime), ignoreTimeScale: true);
+        //時間を徐々に戻す
+        int i = (int)((bossDownShake.StopingTime - bossDownShake.StopTime) / bossDownShake.RecoverySpeed);
+        float unitSpeed = 1.0f / i;
+        while (i > 0)
+        {
+            Time.timeScale += unitSpeed;
+            i--;
+            await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.RecoverySpeed), ignoreTimeScale: true);
         }
         if (Time.timeScale != 1) Time.timeScale = 1;
         //Time.timeScale = 0.3f;

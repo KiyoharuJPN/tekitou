@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 271889356, guid: 4526b4c12b4993e468f879a20c92d1d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -169,6 +169,8 @@ MonoBehaviour:
   EnemyColliderArea: {fileID: 8415487706837510907}
   id: 15
   HadContactDamage: 1
+  effectOffect: 1.8
+  effectScale: 1
   IdleTime: 3.6
   UseLoopToResetTimer: 0
   Frequency: 3

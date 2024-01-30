@@ -233,12 +233,17 @@ public class GameManager : MonoBehaviour, MenuBasic
         killEnemy++;
     }
 
+    public void SetCanPause(bool bl) {
+        canPause = bl;
+    }
+    public bool GetCanPause() { 
+        return canPause;
+    }
     public void Result_Start(int StageID)
     {
         if (stageCtrl != null)
             stageCtrl.playTimeStop();
         player.SetCanMove(false);
-        canPause = false;
         Result.Instance.Result_Set(StageID, 
             PointParam.Instance.GetPoint(), maxCombo, killEnemy);
 

@@ -63,10 +63,9 @@ public class Bat : Enemy
                 //Debug.Log(3);
             }
         }
-
-        //吹っ飛び中の煙エフェクト
-        if (isDestroy)
+        else
         {
+            //吹っ飛び中の煙エフェクト
             if (effectTime > effectInterval)
             {
                 BlowAwayEffect();
@@ -74,6 +73,8 @@ public class Bat : Enemy
             }
             else effectTime += Time.deltaTime;
         }
+
+        
     }
 
     //敵の動きや関数

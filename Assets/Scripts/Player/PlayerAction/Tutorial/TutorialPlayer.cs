@@ -55,7 +55,7 @@ public class TutorialPlayer : PlayerController
         //ノックバック処理
         if (knockBack.canKnockBack)
         {
-            if (isKnockingBack)
+            if (isKnockingBack && Time.timeScale > 0)
             {
                 KnockingBack();
                 animator.SetBool("IsknockBack", isKnockingBack);

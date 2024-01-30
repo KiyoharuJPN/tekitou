@@ -2,6 +2,10 @@ using System.Collections;
 using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
+using static KingSlime;
+using Unity.Mathematics;
+using System.Threading;
 
 public class KingSlime : Enemy
 {
@@ -27,7 +31,7 @@ public class KingSlime : Enemy
     [SerializeField]
     [Header("画面揺れに関する")]
     public ShakeInfo _shakeInfo;
-    CameraShake shake;
+    protected CameraShake shake;
 
     [System.Serializable]
     public struct BossDownShake
@@ -36,6 +40,8 @@ public class KingSlime : Enemy
         public float ShakeTime;
         [Tooltip("揺れの強さ")]
         public float ShakePower;
+        [Tooltip("アニメーション長さ")]
+        public float StopingTime;
         [Tooltip("ストップ長さ（必ず揺れ時間より小さいように設定してください）")]
         public float StopTime;
         [Tooltip("回復速度（0.5より小さいように設定してください）")]
@@ -47,7 +53,51 @@ public class KingSlime : Enemy
     }
     [SerializeField]
     [Header("ボスが倒されたときの揺れ")]
-    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 1f, ShakePower = 1.2f, StopTime = 0.3f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
+    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 1f, ShakePower = 1.2f, StopingTime = 1f, StopTime = 0.3f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
+
+    //倒されたときの白い幕
+    [System.Serializable]
+    public struct WhiteCanvas
+    {
+        public Image bossDownImage;
+        public float defaultAlpha, duration, stoptime;
+    }
+    [SerializeField]
+    [Header("ボスが倒された時の白幕")]
+    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.6f, duration = 1f, stoptime = 1f};
+    public float bossDownToResult = 1;
+
+    //爆発演出
+    [System.Serializable]
+    public struct ExplosionEffect
+    {
+        public GameObject explosionObj;
+        [Tooltip("SlowMotionの進行速度（0=Pause 1=進行）、爆発間隔")]
+        public float slowMotion, explosionInterval;
+        [Tooltip("繰り返す回数")]
+        public int repeat;
+        [Tooltip("爆発アニメーションの位置(BOSSデフォルト位置からの視点)")]
+        public Vector2[] explosionPosition;
+    }
+    [SerializeField, Header("爆発演出関連")]
+    public ExplosionEffect explodeEffect = new ExplosionEffect() { slowMotion = 0.6f, explosionInterval = 0.5f, repeat = 2 };
+    CancellationTokenSource cts;
+
+    //消滅演出
+    [System.Serializable]
+    public struct BossDisappearParam
+    {
+        public GameObject bossDisappearObj;
+        public float explosionScale;
+        public bool camaraShake;
+        [Tooltip("揺れ時間")]
+        public float Duration;
+        [Tooltip("揺れの強さ")]
+        public float Strength;
+    }
+    [SerializeField, Header("消滅演出関連")]
+    public BossDisappearParam bossDisappearParam = new BossDisappearParam() { explosionScale = 1f, camaraShake = false, Duration = 0.2f, Strength = 0.9f };
+
 
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
     bool KSmovingCheck = true, KSattackingCheck = true, KSNormalAttackLanding = false
@@ -67,6 +117,13 @@ public class KingSlime : Enemy
         summonPosX = -5f;
         summonPosY = 1;
         if (shake == null) shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        if (whiteCanvas.bossDownImage == null)
+        {
+            if (GameObject.Find("BossDownImage") != null)
+                whiteCanvas.bossDownImage = GameObject.Find("BossDownImage").GetComponent<Image>();
+            else
+                Debug.Log("EnemyUICanvasをシーンに追加してください");
+        }
         base.Start();
     }
 
@@ -287,6 +344,10 @@ public class KingSlime : Enemy
     //Boss死亡時に呼ぶ関数
     virtual public void Boss_Down()
     {
+        //Invoke("SetResult", bossDownToResult);
+    }
+    void SetResult()
+    {
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();
         GameManager.Instance.Result_Start(1);
@@ -421,29 +482,91 @@ public class KingSlime : Enemy
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
+        await BossDownProcess();
+    }
+    public async UniTask BossDownWhiteCanvas()
+    {
+        whiteCanvas.bossDownImage.color = new Color(1, 1, 1, whiteCanvas.defaultAlpha);
+        whiteCanvas.bossDownImage.enabled = true;
+
+        await UniTask.Delay(TimeSpan.FromSeconds(whiteCanvas.stoptime), ignoreTimeScale: true);
+        int i = (int)(whiteCanvas.duration*100);
+        float unitSpeed = whiteCanvas.defaultAlpha / i;
+        while (i>0)
+        {
+            float alpha = whiteCanvas.bossDownImage.color.a;
+            alpha -= unitSpeed;
+            whiteCanvas.bossDownImage.color = new Color(1,1,1,alpha);
+            i--;
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01), ignoreTimeScale: true);
+        }
+
+        whiteCanvas.bossDownImage.color = new Color(1,1,1,0);
+        whiteCanvas.bossDownImage.enabled = false;
+    }
+    public async UniTask ExplosionEffectProcess()
+    {
+        for(int i = 0; i < explodeEffect.repeat; i++)
+        {
+            for (int j = 0; j < explodeEffect.explosionPosition.Length; j++)
+            {
+                var pos = explodeEffect.explosionPosition[j] + (Vector2)gameObject.transform.position;
+                Instantiate(explodeEffect.explosionObj, pos, quaternion.identity);
+                var _ = BossDownBlink(cts.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(explodeEffect.explosionInterval), ignoreTimeScale: true);
+                ResetBossBlinkToken();
+
+            }
+        }
+    }
+    public async UniTask BossDownAnim()
+    {
+        var scale = new Vector3(bossDisappearParam.explosionScale, bossDisappearParam.explosionScale, bossDisappearParam.explosionScale);
+        Time.timeScale = 1f;
+        if(bossDisappearParam.camaraShake)
+            shake.Shake(bossDisappearParam.Duration, bossDisappearParam.Strength, true, true);
+        Instantiate(bossDisappearParam.bossDisappearObj,gameObject.transform.position,quaternion.identity).transform.localScale = scale;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.05f));
+        gameObject.SetActive(false);
+    }
+    public virtual async UniTask BossDownProcess()
+    {
+        //Debug.Log(Time.unscaledDeltaTime + "and" + Time.realtimeSinceStartup);
         //BossDown効果音
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
 
         //GameManager.Instance.PlayerExAttack_Start();
         Time.timeScale = 0;
-        await BossDownProcess();
-    }
-    public async UniTask BossDownProcess()
-    {
+        var _ = BossDownWhiteCanvas();
         //BossDown画面揺れ
         shake.BossShake(bossDownShake.ShakeTime, bossDownShake.ShakePower, true, true);
         await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.StopTime), ignoreTimeScale: true);
-        int i = (int)((bossDownShake.ShakeTime - bossDownShake.StopTime) / bossDownShake.RecoverySpeed);
-        Debug.Log(i);
+        //爆発演出
+        cts = new CancellationTokenSource();
+        var __ = ExplosionEffectProcess();
+
+        //時間を徐々に戻す
+        int i = (int)((bossDownShake.StopingTime - bossDownShake.StopTime) / bossDownShake.RecoverySpeed);
+        float unitSpeed = explodeEffect.slowMotion / i;
         while (i > 0)
         {
-            Time.timeScale += 1/i;
+            Time.timeScale += unitSpeed;
             i--;
+            
             await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.RecoverySpeed), ignoreTimeScale: true);
         }
-        if (Time.timeScale != 1) Time.timeScale = 1;
-        //GameManager.Instance.PlayerExAttack_End();
+        if (Time.timeScale != explodeEffect.slowMotion) Time.timeScale = explodeEffect.slowMotion;
 
+
+        await BossDownAnim();
+
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDownToResult));
+        SetResult();
+
+        //Invoke("SetResult", bossDownToResult);
+
+        //GameManager.Instance.PlayerExAttack_End();
 
         //    Vector3 initialPos = transform.position;//初期位置保存
         //    Time.timeScale = 0;
@@ -616,5 +739,14 @@ public class KingSlime : Enemy
             case 9:
                 return 3;
         }
+    }
+
+
+    //unitask用
+    void ResetBossBlinkToken()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        cts = new CancellationTokenSource();
     }
 }

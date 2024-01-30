@@ -31,6 +31,7 @@ public class GoblinArmor : Enemy
         if (isPlayerExAttack) return;
         if (isDestroy)
         {
+            
             //吹っ飛び中の煙エフェクト
             if (effectTime > effectInterval)
             {
@@ -38,6 +39,7 @@ public class GoblinArmor : Enemy
                 effectTime = 0;
             }
             else effectTime += Time.deltaTime;
+
             return;
         }
 

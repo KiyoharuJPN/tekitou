@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
         //ノックバック処理
         if (knockBack.canKnockBack)
         {
-            if (isKnockingBack)
+            if (isKnockingBack && Time.timeScale > 0)
             {
                 KnockingBack();
                 animator.SetBool("IsknockBack", isKnockingBack);
@@ -473,7 +473,8 @@ public class PlayerController : MonoBehaviour
     {
         if (gameObject.GetComponent<InvinciblBuff>()
             || playerState == PlayerState.Event
-            || playerState == PlayerState.ExAttack) { return; }
+            || playerState == PlayerState.ExAttack
+            || Time.timeScale <= 0) { return; }
 
         if (!inInvincibleTimeKnockBack)
         {

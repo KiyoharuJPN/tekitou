@@ -130,12 +130,9 @@ public class Slime : Enemy
         //‰æ–Ê“à‚É‚ ‚é
         if (OnCamera)
         {
-            //Debug.Log(moveWidth);
             //”ò‚Î‚³‚ê‚Ä‚È‚¢ŒÀ‚è
             if (!IsBlowing) SlimeMove();
         }
-        //TestTime += Time.deltaTime;
-        //Debug.Log("moving:" + IsMoving + "\nsecond:" + TestTime);
         Gravity();
     }
 

@@ -7,6 +7,8 @@ using DG.Tweening;
 using UnityEditor;
 using Unity.Mathematics;
 using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -106,6 +108,7 @@ public class Enemy : MonoBehaviour
         _prevPosition = _transform.position;
         speed = enemyData.speed;
         smokeEffect = EnemyGeneratar.instance.smokeEffect;
+
         effectInterval = EnemyGeneratar.instance.effectInterval;
 
         //消滅時に使用
@@ -128,6 +131,7 @@ public class Enemy : MonoBehaviour
         minRad = (forceAngle - 10) * Mathf.Deg2Rad;
         maxRad = (forceAngle + 10) * Mathf.Deg2Rad;
     }
+
 
     virtual protected void OnColEnter2D(Collider2D col)
     {
@@ -240,7 +244,7 @@ public class Enemy : MonoBehaviour
         Gravity();
 
         //吹っ飛び中の煙エフェクト
-        if (isDestroy)
+        if (isDestroy && BossCheckOnCamera)
         {
             if (effectTime > effectInterval)
             {
@@ -385,6 +389,9 @@ public class Enemy : MonoBehaviour
 
                 //死亡時処理
                 OnDestroyMode();
+
+                BlowAwayEffect();
+
             }
 
             _isHitStoped = false;
@@ -493,13 +500,17 @@ public class Enemy : MonoBehaviour
     }
 
     //吹き飛び中のエフェクト生成
-    protected async void BlowAwayEffect()
+    protected void BlowAwayEffect()
     {
-        GameObject obj =  Instantiate(smokeEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
-        await UniTask.Delay((int)(effectInterval * 1000));
-        Destroy(obj);
+        Instantiate(smokeEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+
+        //記録用
+        //GameObject obj = Instantiate(smokeEffect, new Vector2(enemyRb.position.x, enemyRb.position.y), Quaternion.identity);
+        //await UniTask.Delay((int)(effectInterval * 1000));
+        //Destroy(obj);
     }
 
+    //ぶっ飛ぶ方向を決める
     protected void CalcForceDirection()
     {
         //オブジェクトを取得
@@ -649,6 +660,7 @@ public class Enemy : MonoBehaviour
         HadAttack = false;
     }
 
+    //　攻撃されたときの点滅
     protected IEnumerator HadDamaged()
     {
         sprite.color = new Color(1, .3f, .3f);
@@ -665,6 +677,7 @@ public class Enemy : MonoBehaviour
         hadDamaged = false;
     }
 
+    // ぶっ飛んでいる最中に消えかける時の点滅
     protected IEnumerator DestroyBlinking(float waitsec)
     {
         bool check = true;
@@ -810,6 +823,10 @@ public class Enemy : MonoBehaviour
         Destroy(prefab, time);
     }
 
+    void BossDownCantPause()
+    {
+        GameManager.Instance.SetCanPause(false);
+    }
     //バフによる吹き飛び速度変更
     float BuffBlowingSpeed()
     {
@@ -837,6 +854,20 @@ public class Enemy : MonoBehaviour
                 return 6.2f;
             default:
                 return 8f;
+        }
+    }
+
+    //Unitask用
+    //使うときに色を戻すのを忘れないで！
+    public async UniTask BossDownBlink(CancellationToken ct)
+    {
+        while (true)
+        {
+            sprite.color = new Color(1, .3f, .3f);
+            await UniTask.Delay(TimeSpan.FromSeconds(.05f), ignoreTimeScale: true, PlayerLoopTiming.Update, ct);
+            sprite.color = new Color(1, 1, 1);
+            await UniTask.Delay(TimeSpan.FromSeconds(.1f), ignoreTimeScale: true, PlayerLoopTiming.Update, ct);
+
         }
     }
 }
