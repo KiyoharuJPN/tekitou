@@ -611,6 +611,12 @@ public class Dragon : Enemy
     }
     protected override async void OnDestroyMode()
     {
+#if UNITY_EDITOR
+#else
+        //スチームChallenge
+        Accmplisment.Instance.AchvOpen("Stage2");
+#endif
+        GameManager.Instance.ResultStopTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;

@@ -243,7 +243,10 @@ public class SESoundData
 
         //ステージセレクト
         StageSelect_Move,    //移動
-        StageSelect_Decision //決定
+        StageSelect_Decision,//決定
+
+        BossDownExplosion,      //ボス撃破爆発
+
     }
 
     public SE se;

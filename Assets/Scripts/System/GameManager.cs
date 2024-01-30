@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour, MenuBasic
         openMenu = openMenu.Back();
         if (openMenu != null)
         {
-            openMenu.InputSet(playerInput);
+            openMenu.InputSet(playerInput, this);
         }
         else openMenu = pauseMenu;
     }
@@ -232,13 +232,16 @@ public class GameManager : MonoBehaviour, MenuBasic
     }
     public void Result_Start(int StageID)
     {
-        if (stageCtrl != null)
-            stageCtrl.playTimeStop();
         player.SetCanMove(false);
         Result.Instance.Result_Set(StageID, 
             PointParam.Instance.GetPoint(), maxCombo, killEnemy);
 
         StartCoroutine(Result_True());
+    }
+    public void ResultStopTime()
+    {
+        if (stageCtrl != null)
+            stageCtrl.playTimeStop();
     }
 
     public void EnemyStop_Start()
