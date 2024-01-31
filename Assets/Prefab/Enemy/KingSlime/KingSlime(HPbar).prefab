@@ -300,20 +300,20 @@ MonoBehaviour:
   bossDownShake:
     ShakeTime: 0.8
     ShakePower: 0.4
-    StopingTime: 5
-    StopTime: 1.8
+    StopingTime: 3
+    StopTime: 1.5
     RecoverySpeed: 0.01
   whiteCanvas:
     bossDownImage: {fileID: 0}
     defaultAlpha: 0.7
     duration: 0.3
     stoptime: 1.35
-  bossDownToResult: 1
+  bossDownToResult: 1.6
   explodeEffect:
     explosionObj: {fileID: 160789508359129509, guid: 8bb024ee6d22e7c419f203b9d99bd66e, type: 3}
-    slowMotion: 0.6
-    explosionInterval: 1
-    repeat: 2
+    slowMotion: 0.7
+    explosionInterval: 0.15
+    repeat: 5
     explosionPosition:
     - {x: -2, y: 1}
     - {x: 1.5, y: -1}
@@ -321,10 +321,11 @@ MonoBehaviour:
     - {x: -1, y: -0.75}
   bossDisappearParam:
     bossDisappearObj: {fileID: 9154329713119241770, guid: 8a94318f973429f439255977a869362d, type: 3}
-    explosionScale: 1
+    explosionScale: 3
+    explosionToDisappear: 3.3
     camaraShake: 1
-    Duration: 0.2
-    Strength: 0.9
+    Duration: 0.8
+    Strength: 1.1
 --- !u!114 &6259610633585901153
 MonoBehaviour:
   m_ObjectHideFlags: 0

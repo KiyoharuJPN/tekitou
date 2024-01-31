@@ -7,6 +7,7 @@ using static KingSlime;
 using Unity.Mathematics;
 using System.Threading;
 
+
 public class KingSlime : Enemy
 {
     [Header("移動する時の高さと距離")]
@@ -89,6 +90,8 @@ public class KingSlime : Enemy
     {
         public GameObject bossDisappearObj;
         public float explosionScale;
+        [Tooltip("爆発演出からの間隔")]
+        public float explosionToDisappear;
         public bool camaraShake;
         [Tooltip("揺れ時間")]
         public float Duration;
@@ -96,7 +99,7 @@ public class KingSlime : Enemy
         public float Strength;
     }
     [SerializeField, Header("消滅演出関連")]
-    public BossDisappearParam bossDisappearParam = new BossDisappearParam() { explosionScale = 1f, camaraShake = false, Duration = 0.2f, Strength = 0.9f };
+    public BossDisappearParam bossDisappearParam = new BossDisappearParam() { explosionScale = 1f, explosionToDisappear = 1, camaraShake = false, Duration = 0.2f, Strength = 0.9f };
 
 
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
@@ -111,6 +114,10 @@ public class KingSlime : Enemy
 
     protected override void Start()
     {
+#if UNITY_EDITOR
+        SoundManager.Instance.SetBGMVolume = 0.5f;
+        SoundManager.Instance.SetSEVolume = 0.5f;
+#endif
         playerObj = GameObject.Find("Hero");    //プレイヤーオブジェクト
         movingHeight = moveHeightForce;
         movingWidth = -moveWidthForce;
@@ -124,6 +131,7 @@ public class KingSlime : Enemy
             else
                 Debug.Log("EnemyUICanvasをシーンに追加してください");
         }
+        
         base.Start();
     }
 
@@ -470,7 +478,6 @@ public class KingSlime : Enemy
     //ダメージ関連
     protected override async void OnDestroyMode()
     {
-        Accmplisment.Instance.AchvOpen("Stage1");
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
@@ -482,12 +489,15 @@ public class KingSlime : Enemy
         gameObject.layer = LayerMask.NameToLayer("DeadBoss");
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = true;
+
         await BossDownProcess();
     }
     public async UniTask BossDownWhiteCanvas()
     {
         whiteCanvas.bossDownImage.color = new Color(1, 1, 1, whiteCanvas.defaultAlpha);
         whiteCanvas.bossDownImage.enabled = true;
+        //コンボを消す
+        GameObject.Find("ComboCanvas").SetActive(false);
 
         await UniTask.Delay(TimeSpan.FromSeconds(whiteCanvas.stoptime), ignoreTimeScale: true);
         int i = (int)(whiteCanvas.duration*100);
@@ -514,19 +524,22 @@ public class KingSlime : Enemy
                 var pos = explodeEffect.explosionPosition[j] + (Vector2)gameObject.transform.position;
                 Instantiate(explodeEffect.explosionObj, pos, quaternion.identity);
                 var _ = BossDownBlink(cts.Token);
-                await UniTask.Delay(TimeSpan.FromSeconds(explodeEffect.explosionInterval), ignoreTimeScale: true);
+                await UniTask.Delay(TimeSpan.FromSeconds(explodeEffect.explosionInterval));
                 ResetBossBlinkToken();
 
             }
         }
+        var __ = BossDownBlink(cts.Token);
     }
     public async UniTask BossDownAnim()
     {
         var scale = new Vector3(bossDisappearParam.explosionScale, bossDisappearParam.explosionScale, bossDisappearParam.explosionScale);
         Time.timeScale = 1f;
-        if(bossDisappearParam.camaraShake)
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDisappearParam.explosionToDisappear));
+        if (bossDisappearParam.camaraShake)
             shake.Shake(bossDisappearParam.Duration, bossDisappearParam.Strength, true, true);
         Instantiate(bossDisappearParam.bossDisappearObj,gameObject.transform.position,quaternion.identity).transform.localScale = scale;
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         await UniTask.Delay(TimeSpan.FromSeconds(0.05f));
         gameObject.SetActive(false);
     }

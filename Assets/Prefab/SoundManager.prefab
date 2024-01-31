@@ -461,6 +461,9 @@ MonoBehaviour:
   - se: 40
     audioClip: {fileID: 8300000, guid: 8f5c9a3e3d7f639419d241fed1ed1b88, type: 3}
     volume: 1
+  - se: 46
+    audioClip: {fileID: 8300000, guid: 9a86ed8a238333043a1bb8df055f8598, type: 3}
+    volume: 1
 --- !u!1 &5644327851398467931
 GameObject:
   m_ObjectHideFlags: 0
