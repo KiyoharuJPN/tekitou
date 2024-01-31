@@ -90,6 +90,8 @@ public class PlayerBuff : MonoBehaviour
                 exGage.getBuffCount++;
                 break;
         }
+
+        BuffAccmplismentChaek();
     }
 
     /// <summary>
@@ -282,5 +284,14 @@ public class PlayerBuff : MonoBehaviour
     {
         var resultObj = Instantiate(getBuffUI, player.gameObject.transform.position + new Vector3(0f, 1.5f), Quaternion.identity);
         resultObj.GetComponent<GetBuffUI>().BuffImageSet(buffImages[getBuffNum]);
+    }
+
+    void BuffAccmplismentChaek()
+    {
+        //スピードアップ実績確認
+        if(GetBuffCount(BuffType.SpeedUp) >= 10)
+        {
+            Accmplisment.Instance.AchvOpen("Speed");
+        }
     }
 }

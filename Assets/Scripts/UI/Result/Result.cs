@@ -53,6 +53,8 @@ public class Result : MonoBehaviour
     private bool canAnyKey;
     ResultAnyKay anyKay;
 
+    [SerializeField] private GameObject newTextObj;
+
     public bool getCanAnyKey { get { return canAnyKey; } }
 
     [System.Serializable]
@@ -158,7 +160,18 @@ public class Result : MonoBehaviour
         //ƒvƒŒƒCŽžŠÔ•\Ž¦
         if (numList.crearTime_Bar != null)
         {
-            numList.crearTime_Bar.text = getTimeString(SceneData.Instance.playTime);
+            var playTime = SceneData.Instance.playTime;
+
+            if(SceneData.Instance.NewPlayTimeCheck(clearStageID, playTime))
+            {
+                newTextObj.SetActive(true);
+            }
+            else
+            {
+                newTextObj.SetActive(false);
+            }
+
+            numList.crearTime_Bar.text = getTimeString(playTime);
         }
 
         var clearScore = score + combo * 10 + killScore * 100 + GetTimeBonus();

@@ -1,6 +1,7 @@
 using Gamepara;
 using System;
 using System.Diagnostics;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public struct EachStageState
@@ -9,6 +10,7 @@ public struct EachStageState
     public bool isClear;   //クリア確認
     public bool firstOpen; //開くのが初めてか 
     public float clearTime; //クリアタイム
+    public bool newClearTime; //クリアタイムを更新したか
 }
 
 public class SceneData
@@ -121,6 +123,26 @@ public class SceneData
                 break;
         }
     }
+
+    //現在のセーブデータにてプレイタイムを更新したか
+    public bool NewPlayTimeCheck(int stageId, float playTime)
+    {
+        if (stageStates[stageId].clearTime == 0) {
+            stageStates[stageId].newClearTime = true;
+            return true; 
+        }
+
+        if(stageStates[stageId].clearTime > playTime)
+        {
+            stageStates[stageId].newClearTime = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     //指定したステージのプレイ時間リセット
     public void PlayTimeDelete()
     {

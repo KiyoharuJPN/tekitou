@@ -470,10 +470,10 @@ public class KingSlime : Enemy
     //ダメージ関連
     protected override async void OnDestroyMode()
     {
+        Accmplisment.Instance.AchvOpen("Stage1");
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
-
 
         //OnDestroy時の流れ
         isDestroy = true;
