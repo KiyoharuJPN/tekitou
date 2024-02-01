@@ -478,6 +478,9 @@ public class KingSlime : Enemy
     //ダメージ関連
     protected override async void OnDestroyMode()
     {
+        //スチームChallenge
+        Accmplisment.Instance.AchvOpen("Stage1");
+        GameManager.Instance.ResultStopTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;

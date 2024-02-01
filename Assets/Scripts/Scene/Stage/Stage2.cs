@@ -28,6 +28,5 @@ public class Stage2 : StageCtrl
     public override void playTimeStop()
     {
         base.playTimeStop();
-        SceneData.Instance.PlayTimeSeve(Gamepara.StageType.stage2);
     }
 }

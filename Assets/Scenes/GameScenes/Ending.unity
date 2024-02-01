@@ -246,6 +246,10 @@ MonoBehaviour:
   - {fileID: 2024288106}
   - {fileID: 474991577}
   - {fileID: 916474185}
+  newTimeText:
+  - {fileID: 609271744}
+  - {fileID: 222529955}
+  - {fileID: 1193355064}
   totalTime: {fileID: 1560499040}
 --- !u!1 &222529955
 GameObject:
@@ -264,7 +268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &222529956
 RectTransform:
   m_ObjectHideFlags: 0
@@ -805,7 +809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &580294943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,7 +916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &609271745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2271,7 +2275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1193355065
 RectTransform:
   m_ObjectHideFlags: 0

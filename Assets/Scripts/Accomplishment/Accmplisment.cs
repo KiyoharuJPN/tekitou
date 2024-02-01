@@ -24,5 +24,6 @@ public class Accmplisment : MonoBehaviour
     public void AchvOpen(string api)
     {
         SteamUserStats.SetAchievement(api);
+        SteamUserStats.StoreStats();
     }
 }

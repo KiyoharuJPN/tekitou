@@ -743,6 +743,7 @@ MonoBehaviour:
     Kill_Bar: {fileID: 8622814929989681210}
     crearTime_Bar: {fileID: 6301466765295931284}
   PreesAnyKey: {fileID: 8622814929632985938}
+  newTextObj: {fileID: 2946636034781293230}
   timeBonusList:
   - time: 110
     bonus: 5000

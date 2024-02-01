@@ -160,18 +160,33 @@ public class Result : MonoBehaviour
         //プレイ時間表示
         if (numList.crearTime_Bar != null)
         {
-            var playTime = SceneData.Instance.playTime;
 
-            if(SceneData.Instance.NewPlayTimeCheck(clearStageID, playTime))
+            var playTime = SceneData.Instance.playTime;
+            var isNewTime = SceneData.Instance.NewPlayTimeCheck(clearStageID, playTime);
+
+            if (isNewTime)
             {
                 newTextObj.SetActive(true);
             }
-            else
+            else if(!isNewTime)
             {
                 newTextObj.SetActive(false);
             }
 
             numList.crearTime_Bar.text = getTimeString(playTime);
+
+            switch (clearStageID)
+            {
+                case 1:
+                    SceneData.Instance.PlayTimeSeve(Gamepara.StageType.stage1);
+                    break;
+                case 2:
+                    SceneData.Instance.PlayTimeSeve(Gamepara.StageType.stage2);
+                    break;
+                case 3:
+                    SceneData.Instance.PlayTimeSeve(Gamepara.StageType.stage3);
+                    break;
+            }
         }
 
         var clearScore = score + combo * 10 + killScore * 100 + GetTimeBonus();
@@ -179,15 +194,22 @@ public class Result : MonoBehaviour
         if (clearScore >= RANK_S)
         {
             RankBox.sprite = RankImageList[0];
+            SceneData.Instance.SetClearRank(clearStageID, Gamepara.ClearRank.S); 
         }
         else if (clearScore >= RANK_A)
         {
             RankBox.sprite = RankImageList[1];
+            SceneData.Instance.SetClearRank(clearStageID, Gamepara.ClearRank.A);
         }
         else
         {
             RankBox.sprite = RankImageList[2];
+            SceneData.Instance.SetClearRank(clearStageID, Gamepara.ClearRank.B);
         }
+
+        //オールS実績確認
+        if (SceneData.Instance.ClearRankCheck())
+            Accmplisment.Instance.AchvOpen("PlayLank");
     }
 
     public void Result_Start()
