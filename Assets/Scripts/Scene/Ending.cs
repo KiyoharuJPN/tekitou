@@ -19,6 +19,8 @@ public class Ending : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI[] playTime_Stage;
     [SerializeField]
+    private GameObject[] newTimeText;
+    [SerializeField]
     private TextMeshProUGUI totalTime;
 
     float toBeConTime = 5;
@@ -30,10 +32,13 @@ public class Ending : MonoBehaviour
         Cursor.visible = false;
 
         var playTimes = SceneData.Instance.PlayTimeGet;
+        var isNewTime = SceneData.Instance.NewPlayTimeBoolGet;
 
         for (int i = 0; i < playTimes.Length; i++)
         {
             PlayTimeSet(playTime_Stage[i], playTimes[i]);
+
+            newTimeText[i].SetActive(isNewTime[i]);
         }
 
         //トータルタイム表示

@@ -1,6 +1,7 @@
 using Gamepara;
 using System;
 using System.Diagnostics;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public struct EachStageState
@@ -9,6 +10,8 @@ public struct EachStageState
     public bool isClear;   //クリア確認
     public bool firstOpen; //開くのが初めてか 
     public float clearTime; //クリアタイム
+    public bool newClearTime; //クリアタイムを更新したか
+    public ClearRank clearRank; //クリアランク
 }
 
 public class SceneData
@@ -103,6 +106,17 @@ public class SceneData
             return clearTimes;
         }
     }
+    public bool[] NewPlayTimeBoolGet
+    {
+        get
+        {
+            bool[] clearTimes = new bool[]
+            {
+                stageStates[1].newClearTime, stageStates[2].newClearTime, stageStates[3].newClearTime
+            };
+            return clearTimes;
+        }
+    }
     //プレイ時間記録
     public void PlayTimeSeve(StageType stageType)
     {
@@ -121,6 +135,27 @@ public class SceneData
                 break;
         }
     }
+
+    //現在のセーブデータにてプレイタイムを更新したか
+    public bool NewPlayTimeCheck(int stageId, float playTime)
+    {
+        if (stageStates[stageId].clearTime == 0) {
+            stageStates[stageId].newClearTime = true;
+            return true; 
+        }
+
+        if(stageStates[stageId].clearTime > playTime)
+        {
+            stageStates[stageId].newClearTime = true;
+            return true;
+        }
+        else
+        {
+            stageStates[stageId].newClearTime = false;
+            return false;
+        }
+    }
+
     //指定したステージのプレイ時間リセット
     public void PlayTimeDelete()
     {
@@ -146,6 +181,24 @@ public class SceneData
         stageStates[2].clearTime = 0;
         stageStates[3].clearTime = 0;
     }
+
+    //クリアランク記録
+    public void SetClearRank(int stageId, ClearRank rank)
+    {
+        stageStates[stageId].clearRank = rank;
+    }
+
+    //実績用のクリアランクチェック
+    public bool ClearRankCheck()
+    {
+        if (stageStates[1].clearRank == ClearRank.S &&
+            stageStates[2].clearRank == ClearRank.S &&
+            stageStates[3].clearRank == ClearRank.S)
+        {
+            return true;
+        }
+        else { return false; }
+    }
 }
 
 namespace Gamepara
@@ -154,6 +207,13 @@ namespace Gamepara
     {
         Tutorial,
         stage1, stage2, stage3
+    }
+
+    public enum ClearRank 
+    {
+        B = 0,
+        A = 1,
+        S = 2,
     }
 
     public struct StagePlayTimes

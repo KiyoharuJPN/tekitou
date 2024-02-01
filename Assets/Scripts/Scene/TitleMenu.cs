@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using System.Reflection;
+using Steamworks;
 
 public class TitleMenu : MonoBehaviour
 {
@@ -77,6 +78,9 @@ public class TitleMenu : MonoBehaviour
         {
             SceneData.Instance.SetVolume(settingData.bgmValum, settingData.seValum);
         }
+
+        SteamUserStats.ResetAllStats(true);
+        SteamUserStats.RequestCurrentStats();
     }
 
     private void Start()
