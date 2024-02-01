@@ -74,6 +74,7 @@ public class DemonKingSummonAnimation : MonoBehaviour
         {
             SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Invincibility, BGMSoundData.BGM.none);
         }
+        GameManager.Instance.StartRecordTime();
     }
 
     //ボス登場アニメーション

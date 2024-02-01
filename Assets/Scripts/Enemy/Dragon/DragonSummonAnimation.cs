@@ -81,6 +81,7 @@ public class DragonSummonAnimation : MonoBehaviour
         {
             SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Invincibility, BGMSoundData.BGM.none);
         }
+        GameManager.Instance.StartRecordTime();
     }
 
     //ボス登場アニメーション
@@ -102,7 +103,7 @@ public class DragonSummonAnimation : MonoBehaviour
     }
     protected void BossEntryEffect()
     {
-        Vector2 sumPos = new Vector2(gameObject.transform.position.x - 4, gameObject.transform.position.y - 2); ;
+        Vector2 sumPos = new Vector2(gameObject.transform.position.x - 4, gameObject.transform.position.y - 0.3f); ;
         Instantiate(_entryEffect.entryEffectObject, sumPos, Quaternion.identity.normalized);
     }
 

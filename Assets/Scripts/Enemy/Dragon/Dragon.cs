@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static KingSlime;
+using System.Threading;
+using static Dragon;
 
 public class Dragon : Enemy
 {
@@ -24,6 +26,8 @@ public class Dragon : Enemy
     public ShakeInfo _shakeInfo;
     CameraShake shake;
 
+
+    //ボス撃破されたときの揺れ
     [System.Serializable]
     public struct BossDownShake
     {
@@ -44,7 +48,7 @@ public class Dragon : Enemy
     }
     [SerializeField]
     [Header("ボスが倒されたときの揺れ")]
-    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 1f, ShakePower = 1.2f, StopingTime = 1f, StopTime = 0.3f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
+    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 0.8f, ShakePower = 0.4f, StopingTime = 3f, StopTime = 1.5f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
 
     //倒されたときの白い幕
     [System.Serializable]
@@ -55,8 +59,42 @@ public class Dragon : Enemy
     }
     [SerializeField]
     [Header("ボスが倒された時の白幕")]
-    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.6f, duration = 1f, stoptime = 1f };
-    public float bossDownToResult = 1;
+    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.7f, duration = 0.3f, stoptime = 1.35f };
+    public float bossDownToResult = 1.6f;
+
+    //爆発演出
+    [System.Serializable]
+    public struct ExplosionEffect
+    {
+        public GameObject explosionObj;
+        [Tooltip("SlowMotionの進行速度（0=Pause 1=進行）、爆発間隔")]
+        public float slowMotion, explosionInterval;
+        [Tooltip("繰り返す回数")]
+        public int repeat;
+        [Tooltip("爆発アニメーションの位置(BOSSデフォルト位置からの視点)")]
+        public Vector2[] explosionPosition;
+    }
+    [SerializeField, Header("爆発演出関連")]
+    public ExplosionEffect explodeEffect = new ExplosionEffect() { slowMotion = 0.7f, explosionInterval = 0.15f, repeat = 5 };
+    CancellationTokenSource cts;
+
+    //消滅演出
+    [System.Serializable]
+    public struct BossDisappearParam
+    {
+        public GameObject bossDisappearObj;
+        public float explosionScale;
+        [Tooltip("爆発演出からの間隔")]
+        public float explosionToDisappear;
+        public bool camaraShake;
+        [Tooltip("揺れ時間")]
+        public float Duration;
+        [Tooltip("揺れの強さ")]
+        public float Strength;
+    }
+    [SerializeField, Header("消滅演出関連")]
+    public BossDisappearParam bossDisappearParam = new BossDisappearParam() { explosionScale = 3f, explosionToDisappear = 3.3f, camaraShake = true, Duration = 0.8f, Strength = 1.1f };
+
 
     //ジャンプ関連
     [System.Serializable]
@@ -137,6 +175,7 @@ public class Dragon : Enemy
             else
                 Debug.Log("EnemyUICanvasをシーンに追加してください");
         }
+
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
     }
@@ -147,9 +186,10 @@ public class Dragon : Enemy
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 0 && enemyRb.velocity.y > -0.1)
+        if (collision.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 1 && enemyRb.velocity.y > -0.1)
         {
-            JumpAttackAnimCtrl = 1;
+            Debug.Log("on stage");
+            JumpAttackAnimCtrl = 2;
             StartCoroutine(JumpAttackAnimPlus());
         }
     }
@@ -241,11 +281,11 @@ public class Dragon : Enemy
     //アニメの修正はここで実行するようにしよう
     void FixedAnim()
     {
-        if(enemyRb.velocity.y < 0.2f && JumpAttackAnimCtrl == 2)
+        if(enemyRb.velocity.y < 0.3f && JumpAttackAnimCtrl == 0)
         {
-            JumpAttackAnimCtrl = 0;
-
-            enemyRb.AddForce(new Vector2(1, -_dragonJumpingAttackData.DragonJAHeight), ForceMode2D.Impulse);
+            JumpAttackAnimCtrl = 1;
+            animator.SetInteger("JumpAttackAnimCtrl", JumpAttackAnimCtrl);
+            enemyRb.AddForce(new Vector2(1, -_dragonJumpingAttackData.DragonJAHeight+0.3f), ForceMode2D.Impulse);
         }
     }
 
@@ -424,7 +464,7 @@ public class Dragon : Enemy
     IEnumerator JumpAttackAnimPlus()
     {
         //地面に降りるアニメーション
-        JumpAttackAnimCtrl = 1;
+        JumpAttackAnimCtrl = 2;
         animator.SetInteger("JumpAttackAnimCtrl", JumpAttackAnimCtrl);
         gameObject.layer = LayerMask.NameToLayer("BossEnemy");
         ResetAttackCheckArea();
@@ -544,7 +584,7 @@ public class Dragon : Enemy
         enemyRb.AddForce(new Vector2(jumpWidth * 0.5f, _dragonJumpingAttackData.DragonJAHeight),ForceMode2D.Impulse);
 
         //接地する時に次のアニメーションを流せるようにif文の判断要素にする
-        JumpAttackAnimCtrl = 2;
+        JumpAttackAnimCtrl = 0;
     }
 
     public void PlayerInAttackArea(Collider2D col)
@@ -587,7 +627,7 @@ public class Dragon : Enemy
     //Boss死亡時に呼ぶ関数
     virtual public void Boss_Down()
     {
-        Invoke("SetResult", bossDownToResult);
+        //Invoke("SetResult", bossDownToResult);
     }
     void SetResult()
     {
@@ -616,7 +656,7 @@ public class Dragon : Enemy
         //スチームChallenge
         Accmplisment.Instance.AchvOpen("Stage2");
 #endif
-        GameManager.Instance.ResultStopTime();
+        GameManager.Instance.StopRecordTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
@@ -636,6 +676,8 @@ public class Dragon : Enemy
     {
         whiteCanvas.bossDownImage.color = new Color(1, 1, 1, whiteCanvas.defaultAlpha);
         whiteCanvas.bossDownImage.enabled = true;
+        //コンボを消す
+        GameObject.Find("ComboCanvas").SetActive(false);
 
         await UniTask.Delay(TimeSpan.FromSeconds(whiteCanvas.stoptime), ignoreTimeScale: true);
         int i = (int)(whiteCanvas.duration * 100);
@@ -653,7 +695,36 @@ public class Dragon : Enemy
         whiteCanvas.bossDownImage.color = new Color(1, 1, 1, 0);
         whiteCanvas.bossDownImage.enabled = false;
     }
-    public async UniTask BossDownProcess()
+    public async UniTask ExplosionEffectProcess()
+    {
+        for (int i = 0; i < explodeEffect.repeat; i++)
+        {
+            for (int j = 0; j < explodeEffect.explosionPosition.Length; j++)
+            {
+                var pos = explodeEffect.explosionPosition[j] + (Vector2)gameObject.transform.position;
+                Instantiate(explodeEffect.explosionObj, pos, Quaternion.identity);
+                var _ = BossDownBlink(cts.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(explodeEffect.explosionInterval));
+                ResetBossBlinkToken();
+
+            }
+        }
+        var __ = BossDownBlink(cts.Token);
+    }
+    public async UniTask BossDownAnim()
+    {
+        var scale = new Vector3(bossDisappearParam.explosionScale, bossDisappearParam.explosionScale, bossDisappearParam.explosionScale);
+        Time.timeScale = 1f;
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDisappearParam.explosionToDisappear));
+        if (bossDisappearParam.camaraShake)
+            shake.Shake(bossDisappearParam.Duration, bossDisappearParam.Strength, true, true);
+        Instantiate(bossDisappearParam.bossDisappearObj, gameObject.transform.position, Quaternion.identity).transform.localScale = scale;
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.05f));
+        gameObject.SetActive(false);
+        ResetBossBlinkToken();
+    }
+    public virtual async UniTask BossDownProcess()
     {
         //Debug.Log(Time.unscaledDeltaTime + "and" + Time.realtimeSinceStartup);
         //BossDown効果音
@@ -662,24 +733,30 @@ public class Dragon : Enemy
         //GameManager.Instance.PlayerExAttack_Start();
         Time.timeScale = 0;
         var _ = BossDownWhiteCanvas();
-
         //BossDown画面揺れ
         shake.BossShake(bossDownShake.ShakeTime, bossDownShake.ShakePower, true, true);
         await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.StopTime), ignoreTimeScale: true);
+        //爆発演出
+        cts = new CancellationTokenSource();
+        var __ = ExplosionEffectProcess();
+
         //時間を徐々に戻す
         int i = (int)((bossDownShake.StopingTime - bossDownShake.StopTime) / bossDownShake.RecoverySpeed);
-        float unitSpeed = 1.0f / i;
+        float unitSpeed = explodeEffect.slowMotion / i;
         while (i > 0)
         {
             Time.timeScale += unitSpeed;
             i--;
+
             await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.RecoverySpeed), ignoreTimeScale: true);
         }
-        if (Time.timeScale != 1) Time.timeScale = 1;
-        //Time.timeScale = 0.3f;
+        if (Time.timeScale != explodeEffect.slowMotion) Time.timeScale = explodeEffect.slowMotion;
 
-        //await UniTask.Delay(320);
-        //Time.timeScale = 1;
+
+        await BossDownAnim();
+
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDownToResult));
+        SetResult();
     }
 
     protected override void Gravity()
@@ -762,5 +839,21 @@ public class Dragon : Enemy
     void PlayDragonRoarSE()
     {
         SoundManager.Instance.PlaySE(SESoundData.SE.DragonRoar);
+    }
+    void PlayDragonFrameSE()
+    {
+        SoundManager.Instance.PlaySE(SESoundData.SE.DragonBlaze);
+    }
+    void PlayDragonLandSE()
+    {
+        SoundManager.Instance.PlaySE(SESoundData.SE.KingSlimeLanding);
+    }
+
+    //unitask用
+    void ResetBossBlinkToken()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        cts = new CancellationTokenSource();
     }
 }

@@ -427,7 +427,10 @@ public class Enemy : MonoBehaviour
 
         //吹っ飛び開始
         BlownAway();
-
+        CheckBuff();
+    }
+    protected void CheckBuff()
+    {
         if (_EnemyBuff != null)
             _EnemyBuff.ShowAttackChecking();
     }
@@ -859,7 +862,7 @@ public class Enemy : MonoBehaviour
 
     //Unitask用
     //使うときに色を戻すのを忘れないで！
-    public async UniTask BossDownBlink(CancellationToken ct)
+    public virtual async UniTask BossDownBlink(CancellationToken ct)
     {
         while (true)
         {

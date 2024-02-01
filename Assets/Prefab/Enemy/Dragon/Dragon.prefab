@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1274636803, guid: 55647bfb3fa79ee42b7bcb2b54503054, type: 3}
+  m_Sprite: {fileID: 1509424430, guid: 6c0613ffb2ca17747832daa9be5ea844, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,10 +145,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.6}
+  m_Offset: {x: 0, y: -0.01}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 12.8, y: 6.4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -174,7 +174,7 @@ MonoBehaviour:
     Duration: 2
     Strength: 0.5
   _entryEffect:
-    frequency: 4
+    frequency: 8
     interval: 0.2
     entryEffectObject: {fileID: 1401736371145855719, guid: 0b190d12498fcf047a8e760fea457e31, type: 3}
   waitSecond: 1
@@ -198,6 +198,35 @@ MonoBehaviour:
   _shakeInfo:
     Duration: 0.5
     Strength: 0.5
+  bossDownShake:
+    ShakeTime: 0.8
+    ShakePower: 0.4
+    StopingTime: 3
+    StopTime: 1.5
+    RecoverySpeed: 0.01
+  whiteCanvas:
+    bossDownImage: {fileID: 0}
+    defaultAlpha: 0.7
+    duration: 0.3
+    stoptime: 1.35
+  bossDownToResult: 1.8
+  explodeEffect:
+    explosionObj: {fileID: 160789508359129509, guid: 8bb024ee6d22e7c419f203b9d99bd66e, type: 3}
+    slowMotion: 0.7
+    explosionInterval: 0.15
+    repeat: 5
+    explosionPosition:
+    - {x: -2, y: 1}
+    - {x: 1.5, y: -1}
+    - {x: 1, y: 0.5}
+    - {x: -1, y: -0.75}
+  bossDisappearParam:
+    bossDisappearObj: {fileID: 9154329713119241770, guid: 8a94318f973429f439255977a869362d, type: 3}
+    explosionScale: 3
+    explosionToDisappear: 3.3
+    camaraShake: 1
+    Duration: 0.8
+    Strength: 1.1
   _dragonJumpingAttackData:
     DragonJAHeight: 15
     DragonJALeftPos: {x: 297, y: 29.7}

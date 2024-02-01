@@ -126,9 +126,9 @@ public class WarpDoor : MonoBehaviour, IEventStart
         if (!bossDoor)
         {
             player.SetCanMove(true);
+            GameManager.Instance.PlayTimeStart();
         }
 
-        GameManager.Instance.PlayTimeStart();
     }
 
     //死んでいるEnemy強制削除

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class DemonKing : Enemy
 {
@@ -24,6 +25,8 @@ public class DemonKing : Enemy
     CameraShake shake;
     Animator LHanimator, RHanimator;
 
+
+    //ボス撃破されたときの揺れ
     [System.Serializable]
     public struct BossDownShake
     {
@@ -44,7 +47,7 @@ public class DemonKing : Enemy
     }
     [SerializeField]
     [Header("ボスが倒されたときの揺れ")]
-    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 1f, ShakePower = 1.2f, StopingTime = 1f, StopTime = 0.3f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
+    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 0.8f, ShakePower = 0.4f, StopingTime = 3f, StopTime = 1.5f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
 
     //倒されたときの白い幕
     [System.Serializable]
@@ -55,8 +58,63 @@ public class DemonKing : Enemy
     }
     [SerializeField]
     [Header("ボスが倒された時の白幕")]
-    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.6f, duration = 1f, stoptime = 1f };
-    public float bossDownToResult = 1;
+    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.7f, duration = 0.3f, stoptime = 1.35f };
+    public float bossDownToResult = 1.6f;
+
+    //爆発演出
+    [System.Serializable]
+    public struct ExplosionEffect
+    {
+        public bool checkExplosionEveryTime;
+        public GameObject explosionObj;
+        public GameObject handExplosionObj;
+        [Tooltip("SlowMotionの進行速度（0=Pause 1=進行）、爆発間隔")]
+        public float slowMotion, explosionInterval;
+        [Tooltip("繰り返す回数")]
+        public int repeat;
+        [Tooltip("爆発演出の大きさ")]
+        public float explosionScale;
+        [Tooltip("爆発アニメーションの位置(BOSSデフォルト位置からの視点/三つ目の値をゼロにするとその回の爆発演出をなしとする)")]
+        public Vector3[] explosionPosition;
+        [Tooltip("爆発アニメーションの位置(左手/回数は顔の回数と同じ回数にしてください。/三つ目の値をゼロにするとその回の爆発演出をなしとする)")]
+        public Vector3[] explosionPositionLH;
+        [Tooltip("爆発アニメーションの位置(右手/回数は顔の回数と同じ回数にしてください。/三つ目の値をゼロにするとその回の爆発演出をなしとする)")]
+        public Vector3[] explosionPositionRH;
+    }
+    [SerializeField, Header("爆発演出関連")]
+    public ExplosionEffect explodeEffect = new ExplosionEffect() { checkExplosionEveryTime = false, slowMotion = 0.7f, explosionInterval = 0.15f, repeat = 5, explosionScale = 1.5f };
+    CancellationTokenSource cts;
+
+    //消滅演出
+    [System.Serializable]
+    public struct BossDisappearParam
+    {
+        public GameObject bossDisappearObj;
+        public float explosionScale;
+        [Tooltip("爆発演出からの間隔")]
+        public float explosionToDisappear;
+        public bool camaraShake;
+        [Tooltip("揺れ時間")]
+        public float Duration;
+        [Tooltip("揺れの強さ")]
+        public float Strength;
+        //デーモンキング追加設定
+        [Tooltip("手の爆発の大きさ")]
+        public float handExplosionScale;
+    }
+    [SerializeField, Header("消滅演出関連")]
+    public BossDisappearParam bossDisappearParam = new BossDisappearParam() { explosionScale = 3f, explosionToDisappear = 3.3f, camaraShake = true, Duration = 0.8f, Strength = 1.1f, handExplosionScale = 1f };
+
+    //ボスが倒されたとき召喚された敵の動きを止める（攻撃しないようにする）
+    [System.Serializable]
+    public struct StopEnemyMoveWhenDead
+    {
+        public bool stopEnemyWhenDead;
+        [HideInInspector]
+        public List<GameObject> summonEnemyObj;
+    }
+    [SerializeField, Header("敵の動きを止める")]
+    public StopEnemyMoveWhenDead stopEnemyMoveWhenDead = new StopEnemyMoveWhenDead() { stopEnemyWhenDead = false };
 
 
 
@@ -221,6 +279,12 @@ public class DemonKing : Enemy
                 whiteCanvas.bossDownImage = GameObject.Find("BossDownImage").GetComponent<Image>();
             else
                 Debug.Log("EnemyUICanvasをシーンに追加してください");
+        }
+
+        //敵の動きを止める
+        if (stopEnemyMoveWhenDead.stopEnemyWhenDead)
+        {
+            stopEnemyMoveWhenDead.summonEnemyObj.Clear();
         }
         //使用方法
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
@@ -515,18 +579,28 @@ public class DemonKing : Enemy
         LHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         RHanimator.SetInteger("SkillAnimationController", SkillAnimationController);
         yield return new WaitForSeconds(1.5f);
+
         //一人目
         Vector2 summonPos = new Vector2(UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.x,summonAttackStatus.RightDownPoint.x),UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.y,summonAttackStatus.RightDownPoint.y));
         var newEnemy = Instantiate(summonAttackStatus.summonMonster, summonPos, Quaternion.identity);
         newEnemy.GetComponentInChildren<EnemyBuffSystem>().SetBuffTypeByScript(GetSummonProbability());
+        newEnemy.GetComponent<GoblinArmor>().BossSummonEnemy(1, this);
+        //敵の動きを止める
+        stopEnemyMoveWhenDead.summonEnemyObj.Add(newEnemy);
         //二人目
         summonPos = new Vector2(UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.x, summonAttackStatus.RightDownPoint.x), UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.y, summonAttackStatus.RightDownPoint.y));
         newEnemy = Instantiate(summonAttackStatus.summonMonster, summonPos, Quaternion.identity);
         newEnemy.GetComponentInChildren<EnemyBuffSystem>().SetBuffTypeByScript(GetSummonProbability());
+        newEnemy.GetComponent<GoblinArmor>().BossSummonEnemy(1, this);
+        //敵の動きを止める
+        stopEnemyMoveWhenDead.summonEnemyObj.Add(newEnemy);
         //三人目
         summonPos = new Vector2(UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.x, summonAttackStatus.RightDownPoint.x), UnityEngine.Random.Range(summonAttackStatus.LeftUpPoint.y, summonAttackStatus.RightDownPoint.y));
         newEnemy = Instantiate(summonAttackStatus.summonMonster, summonPos, Quaternion.identity);
         newEnemy.GetComponentInChildren<EnemyBuffSystem>().SetBuffTypeByScript(GetSummonProbability());
+        newEnemy.GetComponent<GoblinArmor>().BossSummonEnemy(1, this);
+        //敵の動きを止める
+        stopEnemyMoveWhenDead.summonEnemyObj.Add(newEnemy);
 
         yield return new WaitForSeconds(1.0f);
 
@@ -917,7 +991,7 @@ public class DemonKing : Enemy
         //スチームChallenge
         Accmplisment.Instance.AchvOpen("Stage3");
 #endif
-        GameManager.Instance.ResultStopTime();
+        GameManager.Instance.StopRecordTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
@@ -938,7 +1012,8 @@ public class DemonKing : Enemy
         animator.SetBool("IsDestroy", isDestroy); 
         LHanimator.SetBool("IsDestroy", isDestroy);
         RHanimator.SetBool("IsDestroy", isDestroy);
-
+        //敵を攻撃できないようにする
+        BossIsDead();
         ////BossDown画面揺れ
         //shake.Shake(_shakeInfo.Duration, _shakeInfo.Strength, true, true);
         StopAllCoroutines();
@@ -949,6 +1024,8 @@ public class DemonKing : Enemy
     {
         whiteCanvas.bossDownImage.color = new Color(1, 1, 1, whiteCanvas.defaultAlpha);
         whiteCanvas.bossDownImage.enabled = true;
+        //コンボを消す
+        GameObject.Find("ComboCanvas").SetActive(false);
 
         await UniTask.Delay(TimeSpan.FromSeconds(whiteCanvas.stoptime), ignoreTimeScale: true);
         int i = (int)(whiteCanvas.duration * 100);
@@ -966,7 +1043,90 @@ public class DemonKing : Enemy
         whiteCanvas.bossDownImage.color = new Color(1, 1, 1, 0);
         whiteCanvas.bossDownImage.enabled = false;
     }
-    public async UniTask BossDownProcess()
+    public async UniTask ExplosionEffectProcess()
+    {
+        var scale = new Vector3(explodeEffect.explosionScale, explodeEffect.explosionScale, explodeEffect.explosionScale);
+        for (int i = 0; i < explodeEffect.repeat; i++)
+        {
+            for (int j = 0; j < explodeEffect.explosionPosition.Length; j++)
+            {
+                if (explodeEffect.checkExplosionEveryTime)
+                {
+                    //エフェクトをするかどうか
+                    if (explodeEffect.explosionPosition[j].z != 0)
+                    {
+                        var pos = (Vector2)explodeEffect.explosionPosition[j] + (Vector2)gameObject.transform.position;
+                        Instantiate(explodeEffect.explosionObj, pos, Quaternion.identity).transform.localScale = scale;
+                    }
+                    //音あるエフェクトかエフェクトしてないか音がないエフェクトかをチェック
+                    if (explodeEffect.explosionPositionLH[j].z == 0) { }
+                    else if (explodeEffect.explosionPositionLH[j].z != 0 && explodeEffect.explosionPosition[j].z == 0)
+                    {
+                        var posLH = (Vector2)explodeEffect.explosionPositionLH[j] + (Vector2)LeftHand.transform.position;
+                        Instantiate(explodeEffect.explosionObj, posLH, Quaternion.identity).transform.localScale = scale;
+                    }
+                    else
+                    {
+                        var posLH = (Vector2)explodeEffect.explosionPositionLH[j] + (Vector2)LeftHand.transform.position;
+                        Instantiate(explodeEffect.handExplosionObj, posLH, Quaternion.identity).transform.localScale = scale;
+                    }
+                    //音あるエフェクトかエフェクトしてないか音がないエフェクトかをチェック
+                    if (explodeEffect.explosionPositionRH[j].z == 0) { }
+                    else if (explodeEffect.explosionPositionRH[j].z != 0 && explodeEffect.explosionPositionLH[j].z == 0 || explodeEffect.explosionPositionRH[j].z != 0 && explodeEffect.explosionPosition[j].z == 0)
+                    {
+                        var posRH = (Vector2)explodeEffect.explosionPositionRH[j] + (Vector2)RightHand.transform.position;
+                        Instantiate(explodeEffect.explosionObj, posRH, Quaternion.identity).transform.localScale = scale;
+                    }
+                    else
+                    {
+                        var posRH = (Vector2)explodeEffect.explosionPositionRH[j] + (Vector2)RightHand.transform.position;
+                        Instantiate(explodeEffect.handExplosionObj, posRH, Quaternion.identity).transform.localScale = scale;
+                    }
+
+                }
+                else
+                {
+                    if (explodeEffect.explosionPosition[j].z != 0)
+                    {
+                        var pos = (Vector2)explodeEffect.explosionPosition[j] + (Vector2)gameObject.transform.position;
+                        Instantiate(explodeEffect.explosionObj, pos, Quaternion.identity).transform.localScale = scale;
+                    }
+                    if (explodeEffect.explosionPositionLH[j].z != 0)
+                    {
+                        var posLH = (Vector2)explodeEffect.explosionPositionLH[j] + (Vector2)LeftHand.transform.position;
+                        Instantiate(explodeEffect.handExplosionObj, posLH, Quaternion.identity).transform.localScale = scale;
+                    }
+                    if (explodeEffect.explosionPositionRH[j].z != 0)
+                    {
+                        var posRH = (Vector2)explodeEffect.explosionPositionRH[j] + (Vector2)RightHand.transform.position;
+                        Instantiate(explodeEffect.handExplosionObj, posRH, Quaternion.identity).transform.localScale = scale;
+                    }
+                }
+                //点滅関連
+                var _ = BossDownBlink(cts.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(explodeEffect.explosionInterval));
+                ResetBossBlinkToken();
+            }
+        }
+        var __ = BossDownBlink(cts.Token);
+    }
+    public async UniTask BossDownAnim()
+    {
+        var scale = new Vector3(bossDisappearParam.explosionScale, bossDisappearParam.explosionScale, bossDisappearParam.explosionScale);
+        var scaleH = new Vector3(bossDisappearParam.handExplosionScale, bossDisappearParam.handExplosionScale, bossDisappearParam.handExplosionScale);
+        Time.timeScale = 1f;
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDisappearParam.explosionToDisappear));
+        if (bossDisappearParam.camaraShake)
+            shake.Shake(bossDisappearParam.Duration, bossDisappearParam.Strength, true, true);
+        Instantiate(bossDisappearParam.bossDisappearObj, gameObject.transform.position, Quaternion.identity).transform.localScale = scale;
+        Instantiate(bossDisappearParam.bossDisappearObj, LeftHand.transform.position, Quaternion.identity).transform.localScale = scaleH;
+        Instantiate(bossDisappearParam.bossDisappearObj, RightHand.transform.position, Quaternion.identity).transform.localScale = scaleH;
+        SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.05f));
+        gameObject.SetActive(false);
+        ResetBossBlinkToken();
+    }
+    public virtual async UniTask BossDownProcess()
     {
         //Debug.Log(Time.unscaledDeltaTime + "and" + Time.realtimeSinceStartup);
         //BossDown効果音
@@ -975,35 +1135,30 @@ public class DemonKing : Enemy
         //GameManager.Instance.PlayerExAttack_Start();
         Time.timeScale = 0;
         var _ = BossDownWhiteCanvas();
-
         //BossDown画面揺れ
         shake.BossShake(bossDownShake.ShakeTime, bossDownShake.ShakePower, true, true);
         await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.StopTime), ignoreTimeScale: true);
+        //爆発演出
+        cts = new CancellationTokenSource();
+        var __ = ExplosionEffectProcess();
+
         //時間を徐々に戻す
         int i = (int)((bossDownShake.StopingTime - bossDownShake.StopTime) / bossDownShake.RecoverySpeed);
-        float unitSpeed = 1.0f / i;
+        float unitSpeed = explodeEffect.slowMotion / i;
         while (i > 0)
         {
             Time.timeScale += unitSpeed;
             i--;
+
             await UniTask.Delay(TimeSpan.FromSeconds(bossDownShake.RecoverySpeed), ignoreTimeScale: true);
         }
-        if (Time.timeScale != 1) Time.timeScale = 1;
-        ////BossDown画面揺れ
-        //shake.BossShake(1f, 1.7f, true, true);
-        //await UniTask.Delay(TimeSpan.FromSeconds(0.3), ignoreTimeScale: true);
-        //int i = 70;
-        //while (i > 0)
-        //{
-        //    Time.timeScale += 1 / i;
-        //    i--;
-        //    await UniTask.Delay(TimeSpan.FromSeconds(0.01), ignoreTimeScale: true);
-        //}
-        //if (Time.timeScale != 1) Time.timeScale = 1;
-        //Time.timeScale = 0.3f;
+        if (Time.timeScale != explodeEffect.slowMotion) Time.timeScale = explodeEffect.slowMotion;
 
-        //await UniTask.Delay(bossDownTime);
-        //Time.timeScale = 1;
+
+        await BossDownAnim();
+
+        await UniTask.Delay(TimeSpan.FromSeconds(bossDownToResult));
+        SetResult();
     }
     int GetSummonProbability()
     {
@@ -1064,5 +1219,55 @@ public class DemonKing : Enemy
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
 
+    }
+
+
+    //unitask用
+    void ResetBossBlinkToken()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        cts = new CancellationTokenSource();
+    }
+    public override async UniTask BossDownBlink(CancellationToken ct)
+    {
+        var sp = GetComponent<SpriteRenderer>();
+        var spLH = LeftHand.GetComponent<SpriteRenderer>();
+        var spRH = RightHand.GetComponent<SpriteRenderer>();
+        while (true)
+        {
+            sp.color = new Color(1, .3f, .3f);
+            spLH.color = new Color(1, .3f, .3f);
+            spRH.color = new Color(1, .3f, .3f);
+            await UniTask.Delay(TimeSpan.FromSeconds(.05f), ignoreTimeScale: true, PlayerLoopTiming.Update, ct);
+            sp.color = new Color(1, 1f, 1f);
+            spLH.color = new Color(1, 1f, 1f);
+            spRH.color = new Color(1, 1f, 1f);
+            await UniTask.Delay(TimeSpan.FromSeconds(.1f), ignoreTimeScale: true, PlayerLoopTiming.Update, ct);
+
+        }
+    }
+
+
+
+
+
+    //敵の動きを止める関連
+    public bool EnemyIsDead(GameObject obj)
+    {
+        if (!isDestroy)
+        {
+            stopEnemyMoveWhenDead.summonEnemyObj.Remove(obj);
+            return true;
+        }
+        return false;
+    }
+    void BossIsDead()
+    {
+        foreach(var Enemy in stopEnemyMoveWhenDead.summonEnemyObj)
+        {
+            if(Enemy!=null) 
+                Enemy.GetComponent<GoblinArmor>().BossSummonEnemy(2);
+        }
     }
 }

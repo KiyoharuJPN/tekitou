@@ -8,6 +8,9 @@ public class GoblinArmor : Enemy
     [Tooltip("待ち時間の設定")]
     public float idleTime = 2.4f;
 
+    //ボスが死ぬのと共に召喚された敵の動きを止める
+    int enemyType = 0;      //0は普通のモンスター、1は召喚されたモンスター、2は止まるモンスター
+    DemonKing BossObj;
 
     protected override void Start()
     {
@@ -19,9 +22,7 @@ public class GoblinArmor : Enemy
         //アニメ
         animator.SetBool("IsAttacking", IsAttacking);
         animator.SetBool("IsMoving", IsMoving);
-        animator.SetBool("IsBlowing", IsBlowing);
-        //状態の変更
-        IsBlowing = isDestroy;
+        animator.SetBool("IsBlowing", isDestroy);
         //敵のscriptに基づく
         base.Update();
     }
@@ -43,9 +44,8 @@ public class GoblinArmor : Enemy
             return;
         }
 
-
         //画面内にある
-        if (OnCamera)
+        if (OnCamera && enemyType != 2)
         {
             //飛ばされてない限り
             if (!isDestroy)
@@ -113,5 +113,46 @@ public class GoblinArmor : Enemy
     public override void SetPlayerAttacked(bool PNA)
     {
         PlayerNotAttacked = PNA;
+    }
+
+    //ボスが倒された時に止まる関連
+    //死亡時処理
+    protected override void OnDestroyMode()
+    {
+        if (this.gameObject.GetComponent<MonsterHouse_Enemy>())
+        {
+            this.gameObject.GetComponent<MonsterHouse_Enemy>().Destroy();
+        }
+        //死亡状態に変更
+        if (enemyType == 1) BossObj.EnemyIsDead(gameObject);
+        isDestroy = true;
+        //死亡SE再生
+        SoundManager.Instance.PlaySE(SESoundData.SE.MonsterKnock);
+        //敵討伐数追加
+        GameManager.Instance.AddKillEnemy();
+        //反射用の設定に変更
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        this.GetComponent<CircleCollider2D>().enabled = true;
+        enemyRb.bodyType = RigidbodyType2D.Dynamic;
+        enemyRb.gravityScale = 0;
+        enemyRb.constraints = RigidbodyConstraints2D.None;
+        gameObject.layer = LayerMask.NameToLayer("PinBallEnemy");
+
+        //吹っ飛び開始
+        BlownAway();
+        CheckBuff();
+    }
+
+
+    public void BossSummonEnemy(int i,DemonKing BObj = null)
+    {
+        enemyType = i;
+        if (BObj != null)
+            BossObj = BObj;
+        if(i == 2)
+        {
+            IsMoving = false;
+            IsAttacking = false;
+        }
     }
 }

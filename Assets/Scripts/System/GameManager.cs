@@ -247,10 +247,18 @@ public class GameManager : MonoBehaviour, MenuBasic
 
         StartCoroutine(Result_True());
     }
-    public void ResultStopTime()
+    public void StopRecordTime()
     {
         if (stageCtrl != null)
             stageCtrl.playTimeStop();
+        else UnityEngine.Debug.Log("ステージコントローラーを追加してください");
+    }
+    public void StartRecordTime()
+    {
+
+        if (stageCtrl != null)
+            stageCtrl.playTimeStart();
+        else UnityEngine.Debug.Log("ステージコントローラーを追加してください");
     }
 
     public void EnemyStop_Start()

@@ -113,6 +113,7 @@ public class KingSlimeSummonAnimation : MonoBehaviour
         {
             SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Invincibility, BGMSoundData.BGM.none);
         }
+        GameManager.Instance.StartRecordTime();
     }
 
     private void FixedUpdate()

@@ -34,6 +34,7 @@ public class KingSlime : Enemy
     public ShakeInfo _shakeInfo;
     protected CameraShake shake;
 
+    //ボス撃破されたときの揺れ
     [System.Serializable]
     public struct BossDownShake
     {
@@ -54,7 +55,7 @@ public class KingSlime : Enemy
     }
     [SerializeField]
     [Header("ボスが倒されたときの揺れ")]
-    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 1f, ShakePower = 1.2f, StopingTime = 1f, StopTime = 0.3f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
+    public BossDownShake bossDownShake = new BossDownShake() { ShakeTime = 0.8f, ShakePower = 0.4f, StopingTime = 3f, StopTime = 1.5f, RecoverySpeed = 0.01f/*ShakeNum = 40, ShakeRand = 90*/ };
 
     //倒されたときの白い幕
     [System.Serializable]
@@ -65,8 +66,8 @@ public class KingSlime : Enemy
     }
     [SerializeField]
     [Header("ボスが倒された時の白幕")]
-    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.6f, duration = 1f, stoptime = 1f};
-    public float bossDownToResult = 1;
+    public WhiteCanvas whiteCanvas = new WhiteCanvas() { defaultAlpha = 0.7f, duration = 0.3f, stoptime = 1.35f};
+    public float bossDownToResult = 1.6f;
 
     //爆発演出
     [System.Serializable]
@@ -81,7 +82,7 @@ public class KingSlime : Enemy
         public Vector2[] explosionPosition;
     }
     [SerializeField, Header("爆発演出関連")]
-    public ExplosionEffect explodeEffect = new ExplosionEffect() { slowMotion = 0.6f, explosionInterval = 0.5f, repeat = 2 };
+    public ExplosionEffect explodeEffect = new ExplosionEffect() { slowMotion = 0.7f, explosionInterval = 0.15f, repeat = 5 };
     CancellationTokenSource cts;
 
     //消滅演出
@@ -99,7 +100,7 @@ public class KingSlime : Enemy
         public float Strength;
     }
     [SerializeField, Header("消滅演出関連")]
-    public BossDisappearParam bossDisappearParam = new BossDisappearParam() { explosionScale = 1f, explosionToDisappear = 1, camaraShake = false, Duration = 0.2f, Strength = 0.9f };
+    public BossDisappearParam bossDisappearParam = new BossDisappearParam() { explosionScale = 3f, explosionToDisappear = 3.3f, camaraShake = true, Duration = 0.8f, Strength = 1.1f };
 
 
     float movingHeight, movingWidth, summonPosX, summonPosY;            //移動に関する内部関数
@@ -131,7 +132,7 @@ public class KingSlime : Enemy
             else
                 Debug.Log("EnemyUICanvasをシーンに追加してください");
         }
-        
+
         base.Start();
     }
 
@@ -483,7 +484,7 @@ public class KingSlime : Enemy
         //スチームChallenge
         Accmplisment.Instance.AchvOpen("Stage1");
 #endif
-        GameManager.Instance.ResultStopTime();
+        GameManager.Instance.StopRecordTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
         OnCamera = false;
@@ -549,6 +550,7 @@ public class KingSlime : Enemy
         SoundManager.Instance.PlaySE(SESoundData.SE.BossDown);
         await UniTask.Delay(TimeSpan.FromSeconds(0.05f));
         gameObject.SetActive(false);
+        ResetBossBlinkToken();
     }
     public virtual async UniTask BossDownProcess()
     {
