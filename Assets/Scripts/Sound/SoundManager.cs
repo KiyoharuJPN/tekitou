@@ -114,6 +114,19 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void StopSE()
+    {
+        if (seAudioSource == null)
+        {
+            return;
+        }
+
+        if (seAudioSource.isPlaying)
+        {
+            seAudioSource.Stop();
+        }
+    }
+
     public void PlaySE(SESoundData.SE se)
     {
         SESoundData data = seSoundDatas.Find(data => data.se == se);

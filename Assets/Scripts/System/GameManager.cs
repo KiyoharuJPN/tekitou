@@ -389,7 +389,7 @@ public class GameManager : MonoBehaviour, MenuBasic
     }
     public void BGMStart_BossRoom()
     {
-        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_intro, BGMSoundData.BGM.KingSlimeBoss_roop);
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.KingSlimeBoss_roop, BGMSoundData.BGM.none);
     }
     public void BGMStart_BossRoom2()
     {
