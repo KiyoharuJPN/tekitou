@@ -127,10 +127,12 @@ public class GameManager : MonoBehaviour, MenuBasic
             if (!openMenu.PauseCheck())
             {
                 openMenu.InputSet(playerInput, this);
+                SoundManager.Instance.PauseSE();
             }
             else if (openMenu.PauseCheck())
             {
                 MenuBack();
+                SoundManager.Instance.UnPauseSE();
             }
         }
         if (openMenu.PauseCheck())

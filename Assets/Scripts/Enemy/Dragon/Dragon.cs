@@ -188,7 +188,6 @@ public class Dragon : Enemy
     {
         if (collision.gameObject.CompareTag("Stage") && JumpAttackAnimCtrl == 1 && enemyRb.velocity.y > -0.1)
         {
-            Debug.Log("on stage");
             JumpAttackAnimCtrl = 2;
             StartCoroutine(JumpAttackAnimPlus());
         }
