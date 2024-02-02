@@ -221,12 +221,9 @@ public class GameManager : MonoBehaviour, MenuBasic
             maxCombo = combo;
 
             //steamŽÀÑŠm”F
-            if (combo >= 50)
-            {
-                Accmplisment.Instance.AchvOpen("Combo1");
-            }
+            if (combo >= 500) Accmplisment.Instance.AchvOpen("Combo2");
             else if (combo >= 100) Accmplisment.Instance.AchvOpen("Combo2");
-            else if(combo >= 500) Accmplisment.Instance.AchvOpen("Combo2");
+            else if (combo >= 50) Accmplisment.Instance.AchvOpen("Combo1");
         }
     }
 

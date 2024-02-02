@@ -79,8 +79,11 @@ public class TitleMenu : MonoBehaviour
             SceneData.Instance.SetVolume(settingData.bgmValum, settingData.seValum);
         }
 
-        SteamUserStats.ResetAllStats(true);
-        SteamUserStats.RequestCurrentStats();
+        if (Accmplisment.Instance.GameStart())
+        {
+            SteamUserStats.ResetAllStats(true);
+            SteamUserStats.RequestCurrentStats();
+        }
     }
 
     private void Start()

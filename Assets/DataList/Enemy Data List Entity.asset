@@ -103,7 +103,7 @@ MonoBehaviour:
     speed: 15
   - id: 8
     charName: "\u30AD\u30F3\u30B0\u30B9\u30E9\u30A4\u30E0"
-    hp: 8
+    hp: 80
     score: 5000
     attackPower: 2
     power: 1
@@ -147,7 +147,7 @@ MonoBehaviour:
     speed: 15
   - id: 12
     charName: "\u30C9\u30E9\u30B4\u30F3"
-    hp: 10
+    hp: 100
     score: 6000
     attackPower: 1
     power: 1
@@ -191,7 +191,7 @@ MonoBehaviour:
     speed: 15
   - id: 16
     charName: "\u9B54\u738B"
-    hp: 3
+    hp: 300
     score: 8000
     attackPower: 1
     power: 1

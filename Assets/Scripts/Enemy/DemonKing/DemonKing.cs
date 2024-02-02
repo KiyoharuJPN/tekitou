@@ -986,11 +986,9 @@ public class DemonKing : Enemy
 
     protected override async void OnDestroyMode()
     {
-#if UNITY_EDITOR
-#else
         //スチームChallenge
         Accmplisment.Instance.AchvOpen("Stage3");
-#endif
+
         GameManager.Instance.StopRecordTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;
