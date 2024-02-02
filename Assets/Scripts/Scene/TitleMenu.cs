@@ -72,7 +72,6 @@ public class TitleMenu : MonoBehaviour
     private void Awake()
     {
         SettingData settingData = SeveSystem.Instance.SettingLoad();
-        Debug.Log(settingData.bgmValum + ":" + settingData.seValum);
 
         if(settingData != null)
         {
@@ -81,8 +80,9 @@ public class TitleMenu : MonoBehaviour
 
         if (Accmplisment.Instance.GameStart())
         {
-            SteamUserStats.ResetAllStats(true);
             SteamUserStats.RequestCurrentStats();
+
+            SteamUserStats.ResetAllStats(true);
         }
     }
 
