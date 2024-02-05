@@ -7,7 +7,7 @@ public class SoundSetting : MonoBehaviour, MenuSystem
     [SerializeField] public PauseMenu BackMenu;
     private MenuBasic basic;
     [SerializeField, Header("トライアングルポインター")]
-    private GameObject target;
+    internal GameObject target;
 
     internal enum SelectMenu
     {
@@ -28,18 +28,18 @@ public class SoundSetting : MonoBehaviour, MenuSystem
 
     //InputSystem
     private PlayerInput input;
-    public InputAction back, decision, move;
+    public InputAction back, decision, move, optionKey;
     private bool isPointerMove = true;
 
     public float sliderMoveSpeed = 0.1f;
     //メニュー表示確認Bool
     internal bool isPauseMenu = false;
-    private Color color = new Color(255, 69, 0);
+    internal Color color = new Color(255, 69, 0);
 
     private void Start()
     {
-        BGMSlider.SetValue(SceneData.Instance.getBGMVolume);
-        SESlider.SetValue(SceneData.Instance.getSEVolume);
+        BGMSlider.SetValue(SceneData.Instance.GetSetBGMVolume);
+        SESlider.SetValue(SceneData.Instance.GetSetSEVolume);
     }
 
     public virtual void InputSet(PlayerInput playerInput, MenuBasic menuBasic = null)
@@ -49,6 +49,7 @@ public class SoundSetting : MonoBehaviour, MenuSystem
         back = input.actions["Back"];
         decision = input.actions["Decision"];
         move = input.actions["Move"];
+        optionKey = input.actions["Option"];
 
         basic = menuBasic;
         basic.SetMenu(this);
@@ -78,7 +79,7 @@ public class SoundSetting : MonoBehaviour, MenuSystem
              SelectMenuProcess();
         }
 
-        if (back.WasPressedThisFrame())
+        if (back.WasPressedThisFrame() || optionKey.WasPressedThisFrame())
         {
             basic.MenuBack();
         }
@@ -116,9 +117,13 @@ public class SoundSetting : MonoBehaviour, MenuSystem
             switch (selectMenu)
             {
                 case SelectMenu.SE:
-                    SoundManager.Instance.SetSEVolume = value; break;
+                    SoundManager.Instance.SetSEVolume = value;
+                    SceneData.Instance.GetSetSEVolume = value;
+                    break;
                 case SelectMenu.BGM:
-                    SoundManager.Instance.SetBGMVolume = value; break;
+                    SoundManager.Instance.SetBGMVolume = value; 
+                    SceneData.Instance.GetSetBGMVolume = value;
+                    break;
             }
         }
     }
@@ -157,7 +162,9 @@ public class SoundSetting : MonoBehaviour, MenuSystem
         SESlider.SetValue(defaultValue);
 
         SoundManager.Instance.SetSEVolume = defaultValue;
+        SceneData.Instance.GetSetSEVolume = defaultValue;
         SoundManager.Instance.SetBGMVolume = defaultValue;
+        SceneData.Instance.GetSetBGMVolume = defaultValue;
     }
 
     public virtual MenuSystem Back()
@@ -166,6 +173,7 @@ public class SoundSetting : MonoBehaviour, MenuSystem
         {
             selectSlider.Active(false);
             selectSlider = null;
+            SeveSystem.Instance.SettingSeve(SceneData.Instance.GetSetBGMVolume,SceneData.Instance.GetSetSEVolume);
 
             return this;
         }
@@ -178,16 +186,15 @@ public class SoundSetting : MonoBehaviour, MenuSystem
         }
     }
 
-    internal void OnSelected(int objNum)
+    internal virtual void OnSelected(int objNum)
     {
         if (objNum > 1)
         {
-            target.SetActive(true);
-            target.transform.position = new Vector2(target.transform.position.x, menuObj[objNum].transform.position.y);
+            target.transform.position = new Vector2(650, menuObj[objNum].transform.position.y);
         }
-        else if(objNum < 2)
+        else
         {
-            target.SetActive(false);
+            target.transform.position = new Vector2(350, menuObj[objNum].transform.position.y);
         }
         
         menuObj[objNum].color = color;    //UIの色変更

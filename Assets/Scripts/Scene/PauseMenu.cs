@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour, MenuSystem
 {
+    [SerializeField] string sceneName = "none";
     [Tooltip("今の選択を示すポインターです"), Header("トライアングルポインター")]
     public GameObject target;
 
@@ -18,7 +19,6 @@ public class PauseMenu : MonoBehaviour, MenuSystem
     public Sprite[] stockImages;
 
     private MenuBasic basic;
-    
 
     //メニュー表示確認Bool
     private bool isPauseMenu = false;
@@ -124,11 +124,13 @@ public class PauseMenu : MonoBehaviour, MenuSystem
         //選択キーの設定
         if (decision.WasPressedThisFrame())
         {
-            SelectMenu();
+            if (isActionExpo) BackMenu();
+            else SelectMenu();
         }
         if (back.WasPressedThisFrame())
         {
-            basic.MenuBack();
+            if (isActionExpo) BackMenu();
+            else basic.MenuBack();
         }
     }
 
@@ -175,15 +177,23 @@ public class PauseMenu : MonoBehaviour, MenuSystem
 
     public MenuSystem Back()
     {
-        actionExpoObj.SetActive(false);
-        menuTextObj.SetActive(true);
-        isMenuText = true;
-        isActionExpo = false;
-        isPauseMenu = false;
-        this.GetComponent<Canvas>().enabled = false;
-        Time.timeScale = 1;
+        if (isActionExpo)
+        {
+            BackMenu();
+            return this;
+        }
+        else
+        {
+            actionExpoObj.SetActive(false);
+            menuTextObj.SetActive(true);
+            isMenuText = true;
+            isActionExpo = false;
+            isPauseMenu = false;
+            this.GetComponent<Canvas>().enabled = false;
+            Time.timeScale = 1;
 
-        return null;
+            return null;
+        }
     }
 
     //メニューに戻る
@@ -217,7 +227,10 @@ public class PauseMenu : MonoBehaviour, MenuSystem
     {
         upDownLock = true;
         Time.timeScale = 1;
-        SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.stock);
+        if(sceneName != "Tutorial")
+        {
+            SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.GetSetStageFirstOpen, SceneData.Instance.stock);
+        }
         SceneManager.LoadScene(backScene);
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,7 @@ public class TitleSoundSetting : SoundSetting
         back = input.actions["Back"];
         decision = input.actions["Decision"];
         move = input.actions["Move"];
+        optionKey = input.actions["Option"];
 
         OnSelected((int)selectMenu);
     }
@@ -36,7 +38,7 @@ public class TitleSoundSetting : SoundSetting
             SelectMenuProcess();
         }
 
-        if (back.WasPressedThisFrame())
+        if (back.WasPressedThisFrame() || optionKey.WasPressedThisFrame())
         {
             titleMenu.MenuBack();
         }
@@ -44,7 +46,6 @@ public class TitleSoundSetting : SoundSetting
 
     internal override void SelectMenuProcess()
     {
-
         switch (selectMenu)
         {
             case SelectMenu.BGM:
@@ -70,6 +71,7 @@ public class TitleSoundSetting : SoundSetting
         {
             selectSlider.Active(false);
             selectSlider = null;
+            SeveSystem.Instance.SettingSeve(SceneData.Instance.GetSetBGMVolume, SceneData.Instance.GetSetSEVolume);
 
             return this;
         }
@@ -80,5 +82,19 @@ public class TitleSoundSetting : SoundSetting
 
             return backMenu;
         }
+    }
+
+    internal override void OnSelected(int objNum)
+    {
+        if (objNum > 1)
+        {
+            target.transform.position = new Vector2(700, menuObj[objNum].transform.position.y);
+        }
+        else
+        {
+            target.transform.position = new Vector2(400, menuObj[objNum].transform.position.y);
+        }
+
+        menuObj[objNum].color = color;    //UIÇÃêFïœçX
     }
 }

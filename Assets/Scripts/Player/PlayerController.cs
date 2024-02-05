@@ -651,7 +651,7 @@ public class PlayerController : MonoBehaviour
         Destroy(prefab, time);
     }
 
-    public async void SetCanMove(bool cM)
+    public void SetCanMove(bool cM)
     {
         rb.velocity = Vector2.zero;
         if(cM)
@@ -664,15 +664,15 @@ public class PlayerController : MonoBehaviour
         }
         isNomalAttackKay = false;
         canMove = cM;
-        isUpAttack = false;
-        isSideAttack = false;
-        isNomalAttack = false;
-        canDropAttack = true;
-        isFalling = false;
-        isMoving = false;
-        animator.SetBool("IsDropAttack", false);
-        await AttackEnd();
-        if(!isDead) animator.Play("Idle");
+        //isUpAttack = false;
+        //isSideAttack = false;
+        //isNomalAttack = false;
+        //canDropAttack = true;
+        //isFalling = false;
+        //isMoving = false;
+        //animator.SetBool("IsDropAttack", false);
+        //await AttackEnd();
+        //if(!isDead) animator.Play("Idle");
     }
 
     internal void WarpDoor(Transform door)

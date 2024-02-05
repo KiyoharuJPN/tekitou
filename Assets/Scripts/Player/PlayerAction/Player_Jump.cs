@@ -46,9 +46,8 @@ public class Player_Jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //停止
-        if (player.playerState == PlayerState.Event) return;
-
+        //落下状態取得
+        player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
         //接地状態を得る
         isGround = ground.IsGround();
 
@@ -57,9 +56,6 @@ public class Player_Jump : MonoBehaviour
         //プレイヤーがイベント・攻撃中以外の処理
         if (player.playerState == PlayerState.Idle && Time.timeScale != 0)
         {
-            //落下状態取得
-            player.isFalling = player.rb.velocity.y < -FALL_VELOCITY;
-
             //ジャンプキー取得
             JumpBottan();
         }

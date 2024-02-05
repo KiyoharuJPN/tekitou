@@ -21,17 +21,14 @@ public class SoundManager : MonoBehaviour
             bgmAudioSource.volume = bgmMasterVolume;
             introAudioSource.volume = bgmMasterVolume;
             loopAudioSource.volume = bgmMasterVolume;
-
-            SceneData.Instance.SetVolume(bgmMasterVolume, seMasterVolume);
         } }
 
     [Range(0, 1)]
     private float seMasterVolume = 0.5f;
+    public float GetMasterSEVolume => seMasterVolume;
     public float SetSEVolume { set {
             seMasterVolume = value;
             seAudioSource.volume = seMasterVolume;
-
-            SceneData.Instance.SetVolume(bgmMasterVolume, seMasterVolume);
         } }
 
     public static SoundManager Instance { get; private set; }
@@ -55,9 +52,12 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-        SetBGMVolume = SceneData.Instance.getBGMVolume;
-        SetSEVolume = SceneData.Instance.getSEVolume;
+    private void Start()
+    {
+        SetBGMVolume = SceneData.Instance.GetSetBGMVolume;
+        SetSEVolume = SceneData.Instance.GetSetSEVolume;
     }
 
     //playBGM

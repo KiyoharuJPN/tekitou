@@ -1,8 +1,7 @@
 using Gamepara;
 using System;
 using System.Diagnostics;
-using Unity.VisualScripting;
-
+using Unity;
 [System.Serializable]
 public struct EachStageState
 {
@@ -30,12 +29,26 @@ public class SceneData
         set { this.stageStates = value; }
     }
 
-    //音量
-    private float bgmVolume;
-    private float seVolume;
+    public bool[] GetSetStageFirstOpen
+    {
+        get { return this.stageFirstOpen; }
+        set { stageFirstOpen = value; }
+    }
 
-    public float getBGMVolume => bgmVolume;
-    public float getSEVolume => seVolume;
+    //音量
+    private float bgmVolume = 0.5f;
+    private float seVolume = 0.5f;
+
+    public float GetSetBGMVolume
+    {
+        get { return bgmVolume; }
+        set { bgmVolume = value; }
+    }
+    public float GetSetSEVolume
+    {
+        get { return seVolume; }
+        set { seVolume = value; }
+    }
 
     public void SetVolume(float bgmVolume, float seVolume)
     {
@@ -54,7 +67,7 @@ public class SceneData
     public bool wayPoint_1 = false;
     public bool wayPoint_2 = false;
 
-    public void StageOpen(StageType stageType)
+    public void StageClear(StageType stageType)
     {
         int stageId = (int)stageType;
 
@@ -72,6 +85,7 @@ public class SceneData
             }
         }
     }
+
     public void StagePlay(int stageId)
     {
         stageStates[stageId].firstOpen = false;
@@ -117,36 +131,20 @@ public class SceneData
             return clearTimes;
         }
     }
-    //プレイ時間記録
-    public void PlayTimeSeve(StageType stageType)
-    {
-        switch (stageType)
-        {
-            case StageType.stage1:
-                stageStates[1].clearTime = playTime;
-                break;
-
-            case StageType.stage2:
-                stageStates[2].clearTime = playTime;
-                break;
-
-            case StageType.stage3:
-                stageStates[3].clearTime = playTime;
-                break;
-        }
-    }
 
     //現在のセーブデータにてプレイタイムを更新したか
     public bool NewPlayTimeCheck(int stageId, float playTime)
     {
         if (stageStates[stageId].clearTime == 0) {
             stageStates[stageId].newClearTime = true;
+            stageStates[stageId].clearTime = playTime; //記録
             return true; 
         }
 
         if(stageStates[stageId].clearTime > playTime)
         {
             stageStates[stageId].newClearTime = true;
+            stageStates[stageId].clearTime = playTime;　//記録
             return true;
         }
         else
@@ -175,11 +173,11 @@ public class SceneData
         }
     }
     //全ステージのプレイ時間リセット
-    public void PlayTimeReset()
+    public void NewClearTimeReset()
     {
-        stageStates[1].clearTime = 0;
-        stageStates[2].clearTime = 0;
-        stageStates[3].clearTime = 0;
+        stageStates[1].newClearTime = false;
+        stageStates[2].newClearTime = false;
+        stageStates[3].newClearTime = false;
     }
 
     //クリアランク記録
@@ -191,6 +189,7 @@ public class SceneData
     //実績用のクリアランクチェック
     public bool ClearRankCheck()
     {
+        
         if (stageStates[1].clearRank == ClearRank.S &&
             stageStates[2].clearRank == ClearRank.S &&
             stageStates[3].clearRank == ClearRank.S)

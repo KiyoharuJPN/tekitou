@@ -78,8 +78,8 @@ public class Ending : MonoBehaviour
                 anyKeyDownImage.SetActive(true);
                 if (Input.anyKeyDown)
                 {
-                    SceneData.Instance.PlayTimeReset();
-                    SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.stock);
+                    SceneData.Instance.NewClearTimeReset();
+                    SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.GetSetStageFirstOpen, SceneData.Instance.stock);
                     SceneManager.LoadScene("Title");
                 }
             }

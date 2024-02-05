@@ -293,5 +293,14 @@ public class PlayerBuff : MonoBehaviour
         {
             Accmplisment.Instance.AchvOpen("Speed");
         }
+
+        //パワーアップマスター実績確認
+        if(GetBuffCount(BuffType.ExGage) > 0 &&
+            GetBuffCount(BuffType.SpeedUp) > 0 &&
+            GetBuffCount(BuffType.Slashing) > 0 &&
+            GetBuffCount(BuffType.Invincible) > 0)
+        {
+            Accmplisment.Instance.AchvOpen("ALLBuff");
+        }
     }
 }

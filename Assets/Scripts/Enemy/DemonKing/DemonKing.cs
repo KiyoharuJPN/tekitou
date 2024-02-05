@@ -981,7 +981,7 @@ public class DemonKing : Enemy
     {
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();
-        GameManager.Instance.Result_Start(1);
+        GameManager.Instance.Result_Start(3);
     }
 
     protected override async void OnDestroyMode()
@@ -989,6 +989,7 @@ public class DemonKing : Enemy
         //スチームChallenge
         Accmplisment.Instance.AchvOpen("Stage3");
 
+        GameManager.Instance.PlayerSetCanMeve(false);
         GameManager.Instance.StopRecordTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;

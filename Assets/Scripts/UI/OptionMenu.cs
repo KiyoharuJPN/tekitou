@@ -36,7 +36,7 @@ public class OptionMenu : MonoBehaviour, MenuSystem
     public Text[] menuObj;            //メニュー画面のオブジェクト
 
     //InputSystem
-    public InputAction back, decision, move;
+    public InputAction back, decision, move, optionKey;
     private bool isPointerMove = true;
 
     //メニュー表示確認Bool
@@ -49,6 +49,7 @@ public class OptionMenu : MonoBehaviour, MenuSystem
         back = input.actions["Back"];
         decision = input.actions["Decision"];
         move = input.actions["Move"];
+        optionKey = input.actions["Option"];
 
         option.SetActive(true);
 
@@ -72,7 +73,7 @@ public class OptionMenu : MonoBehaviour, MenuSystem
             }
         }
 
-        if (back.WasPressedThisFrame())
+        if (back.WasPressedThisFrame() || optionKey.WasPressedThisFrame())
         {
             if (isOpenMenu)
             {

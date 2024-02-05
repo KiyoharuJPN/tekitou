@@ -141,7 +141,7 @@ public class LoadScene : MonoBehaviour
         {
             loadScene = "StageSelect";
             SceneData.Instance.referer = "Tutorial";
-            SceneData.Instance.StageOpen(Gamepara.StageType.Tutorial);
+            SceneData.Instance.StageClear(Gamepara.StageType.Tutorial);
         }
 
         SceneManager.LoadScene(loadScene);

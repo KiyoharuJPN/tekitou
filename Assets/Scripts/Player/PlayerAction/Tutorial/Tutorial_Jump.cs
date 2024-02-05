@@ -1,4 +1,5 @@
 using UnityEngine;
+using static PlayerController;
 
 public class Tutorial_Jump : Player_Jump
 {
@@ -23,7 +24,7 @@ public class Tutorial_Jump : Player_Jump
         if (tutroialPlayer.isUpAttack && !isSecondJump) canSecondJump = true;
 
         //プレイヤーがイベント・攻撃中以外の処理
-        if (tutroialPlayer.playerState == PlayerController.PlayerState.Idle)
+        if (tutroialPlayer.playerState == PlayerController.PlayerState.Idle && Time.timeScale != 0)
         {
             //落下状態取得
             tutroialPlayer.isFalling = tutroialPlayer.rb.velocity.y < -FALL_VELOCITY;

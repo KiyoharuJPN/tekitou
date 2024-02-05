@@ -632,7 +632,7 @@ public class Dragon : Enemy
     {
         ComboParam.Instance.ComboStop();
         GameManager.Instance.PlayerExAttack_Start();
-        GameManager.Instance.Result_Start(1);
+        GameManager.Instance.Result_Start(2);
     }
 
 
@@ -653,6 +653,7 @@ public class Dragon : Enemy
         //スチームChallenge
         Accmplisment.Instance.AchvOpen("Stage2");
 
+        GameManager.Instance.PlayerSetCanMeve(false);
         GameManager.Instance.StopRecordTime();
         //必殺技ヒットエフェクト消す
         BossCheckOnCamera = false;

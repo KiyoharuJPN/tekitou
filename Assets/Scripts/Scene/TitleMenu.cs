@@ -64,6 +64,7 @@ public class TitleMenu : MonoBehaviour
     //InputSystem
     private PlayerInput playerInput;
     internal InputAction back, decision, move;
+    private bool canInput = true;
 
     private Color color = new Color(255, 69, 0);
 
@@ -77,12 +78,9 @@ public class TitleMenu : MonoBehaviour
         {
             SceneData.Instance.SetVolume(settingData.bgmValum, settingData.seValum);
         }
-
-        if (Accmplisment.Instance.GameStart())
+        else
         {
-            SteamUserStats.RequestCurrentStats();
-
-            SteamUserStats.ResetAllStats(true);
+            SeveSystem.Instance.SettingSeve(SceneData.Instance.GetSetBGMVolume, SceneData.Instance.GetSetSEVolume);
         }
     }
 
@@ -101,6 +99,7 @@ public class TitleMenu : MonoBehaviour
         back = playerInput.actions["Back"];
         move = playerInput.actions["Move"];
 
+        menuObj[0].color = color;    //UIの色変更
     }
 
     private void Update()
@@ -134,14 +133,19 @@ public class TitleMenu : MonoBehaviour
         }
 
         //調整キーの設定
-        if (!upDownLock) StickerChangePointer();
+        if (canInput) StickerChangePointer();
 
         if (!fade.IsFadeInComplete()) return; //フェード中は以下の処理は行わない
 
         //選択キーの設定
-        if (decision.WasPressedThisFrame())
+        if (decision.WasPressedThisFrame() && canInput)
         {
             SelectMenuProcess();
+        }
+
+        if(back.WasPressedThisFrame() && isStartMenu)
+        {
+            StartModeBack();
         }
     }
 
@@ -152,6 +156,8 @@ public class TitleMenu : MonoBehaviour
         {
             openMenu.InputSet(playerInput);
         }
+        else { canInput = true; }
+        
     }
 
     public void MenuBack()
@@ -161,11 +167,16 @@ public class TitleMenu : MonoBehaviour
         {
             openMenu.InputSet(playerInput);
         }
-        else openMenu = optionMenu;
+        else
+        {
+            openMenu = optionMenu;
+            
+        }
     }
 
     private void SelectMenuProcess()
     {
+        canInput = false;
         switch (selectMenu)
         {
             case SelectMenu.START:
@@ -190,6 +201,7 @@ public class TitleMenu : MonoBehaviour
 
     public void TitelMenuOpen()
     {
+        canInput = true;
         openMenu = null;
         isStartMenu = false;
         OnDeselected((int)selectMenu);
@@ -220,11 +232,22 @@ public class TitleMenu : MonoBehaviour
             OnSelected((int)selectMenu);
             titleObj.SetActive(false);
             startObj.SetActive(isStartMenu);
+            canInput = true;
         }
         else //セーブデータがなかった場合
         {
             GameStart();
         }
+    }
+    void StartModeBack()
+    {
+        isStartMenu = false;
+        OnDeselected((int)selectMenu);
+        selectMenu = SelectMenu.START;
+        OnSelected((int)selectMenu);
+        startObj.SetActive(isStartMenu);
+        titleObj.SetActive(true);
+        canInput = true;
     }
 
     //メニューの動き
@@ -238,6 +261,7 @@ public class TitleMenu : MonoBehaviour
     public void StageSelectStart()
     {
         SceneData.Instance.GetEachStageState = seveData.stageState;
+        SceneData.Instance.GetSetStageFirstOpen = seveData.stageFirstOpen;
         SceneData.Instance.stock = seveData.remain;
 
         upDownLock = true;

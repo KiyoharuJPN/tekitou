@@ -28,8 +28,9 @@ public class DataLoadUI : MonoBehaviour, MenuSystem
     [SerializeField] private GameObject backObj;
 
     //InputSystem
-    public InputAction back, decision, move;
+    public InputAction back, decision, move, optionKey;
     private bool isPointerMove = true;
+    private bool canInput = true;
     //メニュー表示確認Bool
     internal bool isPauseMenu = false;
     private Color color = new Color(255, 69, 0);
@@ -41,6 +42,7 @@ public class DataLoadUI : MonoBehaviour, MenuSystem
         back = input.actions["Back"];
         decision = input.actions["Decision"];
         move = input.actions["Move"];
+        optionKey = input.actions["Option"];
 
         expoText.text = "セーブデータを削除しますか?";
         ObjSet(true);
@@ -59,13 +61,16 @@ public class DataLoadUI : MonoBehaviour, MenuSystem
         StickerChangePointer();
 
         //選択キーの設定
-        if (decision.WasPressedThisFrame())
+        if (decision.WasPressedThisFrame() && canInput)
         {
             SelectMenuProcess();
         }
 
-        if (back.WasPressedThisFrame())
+        if (optionKey.WasPressedThisFrame() && canInput)
         {
+            OnDeselected((int)selectMenu);
+            selectMenu = SelectMenu.YES;
+            titleMenu.MenuBack();
         }
     }
 
@@ -100,18 +105,24 @@ public class DataLoadUI : MonoBehaviour, MenuSystem
 
     internal virtual void SelectMenuProcess()
     {
+        canInput = false;
         switch (selectMenu)
         {
             case SelectMenu.YES:
                 SeveDataDelete();
                 break;
             case SelectMenu.NO:
+                OnDeselected((int)selectMenu);
+                selectMenu = SelectMenu.YES;
                 titleMenu.MenuBack();
                 break;
             case SelectMenu.BACK:
+                OnDeselected((int)selectMenu);
+                selectMenu = SelectMenu.YES;
                 titleMenu.MenuBack();
                 break;
         }
+        canInput = true;
     }
 
     private void SeveDataDelete()

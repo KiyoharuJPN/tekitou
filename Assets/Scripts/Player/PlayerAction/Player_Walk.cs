@@ -26,6 +26,11 @@ public class Player_Walk : MonoBehaviour
         {
             MoveKay();
         }
+        if (!player.canMove)
+        {
+            moveInput = 0;
+            player.isMoving = false;
+        }
     }
 
     private void FixedUpdate()

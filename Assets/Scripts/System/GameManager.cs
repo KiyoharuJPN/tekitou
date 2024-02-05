@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour, MenuBasic
             maxCombo = combo;
 
             //steamŽÀÑŠm”F
-            if (combo >= 500) Accmplisment.Instance.AchvOpen("Combo2");
+            if (combo >= 500) Accmplisment.Instance.AchvOpen("Combo3");
             else if (combo >= 100) Accmplisment.Instance.AchvOpen("Combo2");
             else if (combo >= 50) Accmplisment.Instance.AchvOpen("Combo1");
         }
@@ -440,6 +440,11 @@ public class GameManager : MonoBehaviour, MenuBasic
         Result.Instance.Result_Start();
 
         BGMStart_Result();
+    }
+
+    public void PlayerSetCanMeve(bool isMove)
+    {
+        player.SetCanMove(isMove);
     }
 
     private IEnumerator _PlyerDeath()

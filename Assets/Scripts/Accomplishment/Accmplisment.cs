@@ -4,10 +4,8 @@ using UnityEngine;
 public class Accmplisment : MonoBehaviour
 {
     public readonly static Accmplisment Instance = new();
-    void Start()
-    {
-        
-    }
+
+    private bool isInitialized = false;
 
     public bool GameStart()
     {
@@ -15,11 +13,13 @@ public class Accmplisment : MonoBehaviour
         {
             //‰Šú‰»‚ª¬Œ÷‚µ‚½‚çAppID‚ğ•\¦(480‚ÍƒTƒ“ƒvƒ‹‚ÌID)
             Debug.Log($"Steam‚Ì‰Šú‰»¬Œ÷, AppID : {SteamUtils.GetAppID()}");
+            isInitialized = true;
             return true;
         }
         else
         {
             Debug.Log("Steam‚Ì‰Šú‰»¸”s");
+            isInitialized = false;
             return false;
         }
     }
@@ -30,7 +30,10 @@ public class Accmplisment : MonoBehaviour
     /// <param name="api">api–¼</param>
     public void AchvOpen(string api)
     {
-        SteamUserStats.SetAchievement(api);
-        SteamUserStats.StoreStats();
+        if (isInitialized)
+        {
+            SteamUserStats.SetAchievement(api);
+            SteamUserStats.StoreStats();
+        }
     }
 }

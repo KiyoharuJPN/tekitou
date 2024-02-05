@@ -91,6 +91,13 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
     {
         if (!fade.IsFadeInComplete() || !fade.IsFadeOutComplete() ||fade.IsFadeEnRoute() || isEvent) return;
 
+        //ポーズ画面起動中
+        if (openMenu.PauseCheck())
+        {
+            openMenu.MenuUpdata();
+            return;
+        }
+
         //ポーズ画面
         if (option.WasPressedThisFrame() && canPause)
         {
@@ -103,11 +110,7 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
                 MenuBack();
             }
         }
-        if (openMenu.PauseCheck())
-        {
-            openMenu.MenuUpdata();
-            return;
-        }
+        
 
         InputKey();
     }
@@ -122,7 +125,7 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
         openMenu = openMenu.Back();
         if (openMenu != null)
         {
-            openMenu.InputSet(playerInput);
+            openMenu.InputSet(playerInput, this);
         }
         else openMenu = pauseMenu;
     }
@@ -164,6 +167,7 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
             isMove = false;
             return;
         }
+
         SoundManager.Instance.PlaySE(SESoundData.SE.StageSelect_Move);
         movePos[(int)selectStage].transform.localScale = Vector3.one;
         selectStage += pointer;
@@ -203,16 +207,10 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
 
         playerIcon.transform.position = movePos[(int)selectStage].GetPos + new Vector2(0, IconShift);
 
-        //for (int i = 0; i < eathStageData.Length; i++)
-        //{
-        //    Debug.Log("isClea：stege" + i + eathStageData[i].isClear);
-
-        //    Debug.Log("isOpen：stege" + i + eathStageData[i].openStage);
-        //}
-
         //ポイント色変更
         for (int i = 1; i <= movePos.Length; i++)
         {
+            
             if (!eathStageData[i].isClear && !eathStageData[i].openStage)
             {
                 movePos[i-1].IsPlayPoint = false;
@@ -234,6 +232,7 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
             {
                 SceneData.Instance.StagePlay(i);
                 openStageID = i - mapList.Length;
+
                 isEvent = true;
             }
             else if(i >= mapList.Length && eathStageData[i].openStage)
@@ -246,6 +245,8 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
         {
            mapList[openStageID].MapFirstSet(this);
         }
+
+        SeveSystem.Instance.GameDataSeve(SceneData.Instance.GetEachStageState, SceneData.Instance.GetSetStageFirstOpen, SceneData.Instance.stock);
     }
 
     private IEnumerator StageStart()

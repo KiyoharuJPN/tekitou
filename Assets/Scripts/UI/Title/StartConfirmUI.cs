@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,6 +25,7 @@ public class StartConfirmUI : MonoBehaviour, MenuSystem
     //InputSystem
     public InputAction back, decision, move;
     private bool isPointerMove = true;
+    private bool canInput = true;
     //メニュー表示確認Bool
     internal bool isPauseMenu = false;
     private Color color = new Color(255, 69, 0);
@@ -47,10 +49,10 @@ public class StartConfirmUI : MonoBehaviour, MenuSystem
 
     public virtual void MenuUpdata()
     {
-        StickerChangePointer();
+        if(canInput) StickerChangePointer();
 
         //選択キーの設定
-        if (decision.WasPressedThisFrame())
+        if (decision.WasPressedThisFrame() && canInput)
         {
             SelectMenuProcess();
         }
@@ -87,6 +89,7 @@ public class StartConfirmUI : MonoBehaviour, MenuSystem
 
     internal virtual void SelectMenuProcess()
     {
+        canInput = false;
         switch (selectMenu)
         {
             case SelectMenu.YES:
@@ -96,6 +99,10 @@ public class StartConfirmUI : MonoBehaviour, MenuSystem
                 isPauseMenu = false;
                 this.gameObject.SetActive(false);
                 titleMenu.TitelMenuOpen();
+                OnDeselected((int)selectMenu);
+                selectMenu = 0;
+                OnSelected((int)selectMenu);
+                canInput = true;
                 break;
         }
     }

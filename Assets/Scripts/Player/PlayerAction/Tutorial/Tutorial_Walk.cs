@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerController;
 
 public class Tutorial_Walk : MonoBehaviour
 {
@@ -28,8 +29,9 @@ public class Tutorial_Walk : MonoBehaviour
 
     private void Update()
     {
-        if (player.playerState == PlayerController.PlayerState.Idle ||
-            player.playerState == PlayerController.PlayerState.NomalAttack)
+        if ((player.playerState == PlayerController.PlayerState.Idle ||
+            player.playerState == PlayerController.PlayerState.NomalAttack) &&
+             Time.timeScale != 0)
         {
             if (player.canTWalk)
             {

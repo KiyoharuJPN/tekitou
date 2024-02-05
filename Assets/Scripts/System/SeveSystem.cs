@@ -7,6 +7,8 @@ public class SeveData
 {
     //ステージのクリア状態のデータ
     public EachStageState[] stageState;
+    //ステージのオープン状態
+    public bool[] stageFirstOpen;
     //残機数
     public int remain;
 }
@@ -56,11 +58,12 @@ public class SeveSystem
     /// </summary>
     /// <param name="stageState"></param>
     /// <param name="remain"></param>
-    public void GameDataSeve(EachStageState[] stageState, int remain)
+    public void GameDataSeve(EachStageState[] stageState, bool[] stageFirstOpen, int remain)
     {
         SeveData seveData = new SeveData()
         {
             stageState = stageState,
+            stageFirstOpen = stageFirstOpen,
             remain = remain
         };
 

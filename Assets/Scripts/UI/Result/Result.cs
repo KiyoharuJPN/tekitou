@@ -1,3 +1,4 @@
+using Gamepara;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -160,7 +161,6 @@ public class Result : MonoBehaviour
         //ƒvƒŒƒCŽžŠÔ•\Ž¦
         if (numList.crearTime_Bar != null)
         {
-
             var playTime = SceneData.Instance.playTime;
             var isNewTime = SceneData.Instance.NewPlayTimeCheck(clearStageID, playTime);
 
@@ -174,19 +174,6 @@ public class Result : MonoBehaviour
             }
 
             numList.crearTime_Bar.text = getTimeString(playTime);
-
-            switch (clearStageID)
-            {
-                case 1:
-                    SceneData.Instance.PlayTimeSeve(Gamepara.StageType.stage1);
-                    break;
-                case 2:
-                    SceneData.Instance.PlayTimeSeve(Gamepara.StageType.stage2);
-                    break;
-                case 3:
-                    SceneData.Instance.PlayTimeSeve(Gamepara.StageType.stage3);
-                    break;
-            }
         }
 
         var clearScore = score + combo * 10 + killScore * 100 + GetTimeBonus();
@@ -218,19 +205,19 @@ public class Result : MonoBehaviour
         switch (SceneData.Instance.referer)
         {
             case "Tutorial":
-                SceneData.Instance.StageOpen(Gamepara.StageType.Tutorial);
+                SceneData.Instance.StageClear(Gamepara.StageType.Tutorial);
                 break;
 
             case "Stage1":
-                SceneData.Instance.StageOpen(Gamepara.StageType.stage1);
+                SceneData.Instance.StageClear(Gamepara.StageType.stage1);
                 break;
 
             case "Stage2":
-                SceneData.Instance.StageOpen(Gamepara.StageType.stage2);
+                SceneData.Instance.StageClear(Gamepara.StageType.stage2);
                 break;
 
             case "Stage3":
-                SceneData.Instance.StageOpen(Gamepara.StageType.stage3);
+                SceneData.Instance.StageClear(Gamepara.StageType.stage3);
                 break;
         }
         StartCoroutine(AnyKey());

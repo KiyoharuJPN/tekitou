@@ -126645,6 +126645,7 @@ MonoBehaviour:
     Kill_Bar: {fileID: 8622814928901070838}
     crearTime_Bar: {fileID: 0}
   PreesAnyKey: {fileID: 8622814930700639390}
+  newTextObj: {fileID: 0}
   timeBonusList: []
 --- !u!114 &8622814930366478152
 MonoBehaviour:
@@ -127455,6 +127456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72094305fb3b21d4682a20edc19e6918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Tutorial
   target: {fileID: 169498832}
   backScene: Title
   menuobj:
