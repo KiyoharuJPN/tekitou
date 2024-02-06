@@ -68,6 +68,9 @@ public class StageSelectScene : MonoBehaviour, MenuBasic
 
     private void Awake()
     {
+        System.GC.Collect();
+        Resources.UnloadUnusedAssets();
+
         p_Animator = playerIcon.GetComponent<Animator>();
     }
 
