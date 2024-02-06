@@ -82,6 +82,8 @@ public class TitleMenu : MonoBehaviour
         {
             SeveSystem.Instance.SettingSeve(SceneData.Instance.GetSetBGMVolume, SceneData.Instance.GetSetSEVolume);
         }
+
+        Accmplisment.Instance.GameStart();
     }
 
     private void Start()
