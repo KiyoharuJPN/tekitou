@@ -1277,9 +1277,9 @@ MonoBehaviour:
   loadSceneTextBox: {fileID: 2110327447}
   loadSceneText:
   - {fileID: 21300000, guid: b301c0a3df0c38b4bbe3fad69138350e, type: 3}
-  - {fileID: 21300000, guid: 61ebac88e3923a64fb7d9fa981766244, type: 3}
-  - {fileID: 21300000, guid: cecb192579a506c45b8789404b78b6ba, type: 3}
-  - {fileID: 21300000, guid: 26c9e49e259d4dd4698248e37ac3e91b, type: 3}
+  - {fileID: 95486477, guid: 21841bee2b18a144fb5b6e48c0103a7a, type: 3}
+  - {fileID: -1528739709, guid: 21841bee2b18a144fb5b6e48c0103a7a, type: 3}
+  - {fileID: 1484972247, guid: 21841bee2b18a144fb5b6e48c0103a7a, type: 3}
   BackGround: {fileID: 2130746578}
   loadSceneImage:
   - {fileID: 6642811417903670798, guid: 5827f937b9eb02e4caa99b35b63dbaa0, type: 3}
@@ -1367,7 +1367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1170880230396755602, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1170880230396755606, guid: f820f72fdb43b7b418d0ebeadc7de760, type: 3}
       propertyPath: m_Pivot.x

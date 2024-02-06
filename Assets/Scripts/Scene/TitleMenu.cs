@@ -145,7 +145,7 @@ public class TitleMenu : MonoBehaviour
             SelectMenuProcess();
         }
 
-        if(back.WasPressedThisFrame() && isStartMenu)
+        if(back.WasPressedThisFrame() && isStartMenu && canInput)
         {
             StartModeBack();
         }

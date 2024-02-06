@@ -5040,7 +5040,7 @@ MonoBehaviour:
   videoImage: {fileID: 1642989328}
   preeskey: {fileID: 814439037}
   demoVideoMoveTime: 40
-  demoVideoTime: 27
+  demoVideoTime: 25
 --- !u!114 &1507483620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5779,7 +5779,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642989323}
   m_Enabled: 0
-  m_VideoClip: {fileID: 32900000, guid: d71e8efa443a33249b1428450d7aa245, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 4b7edbd8191e487439415e477681aab7, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 279554558}
